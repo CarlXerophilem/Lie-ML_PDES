@@ -1,0 +1,207 @@
+\documentclass[20pt, a0paper, portrait, margin=10mm, innermargin=14mm,
+               blockverticalspace=10mm, colspace=12mm, subcolspace=8mm]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{array}
+
+\usetheme{Default}
+\usecolorstyle{Britain}
+
+\title{\parbox{0.96\linewidth}{\centering CCS-SYM\textsuperscript{+}: Convergence-Certified,
+       Symmetry-Reduced, Semi-Analytical $+$ ML Solving of PDEs}}
+\author{LieML project \ $\cdot$\ math 4890}
+\institute{\textbf{Reduce $\cdot$ Close $\cdot$ Certify $\cdot$ Correct} ---
+           exact-anchored PDE solutions \emph{with proofs}, on a laptop CPU \qquad (June 2026)}
+
+\begin{document}
+\maketitle
+
+%================================ ROW A ================================
+\begin{columns}
+
+\column{0.5}
+\block{1\ \ The gap (why now)}{
+\large
+Machine learning for PDEs is powerful but \textbf{over-claimed}, and classical
+semi-analytics is \textbf{under-certified}:
+\begin{itemize}
+  \item \textbf{Weak baselines.} McGreivy \& Hakim (\emph{Nat.\ Mach.\ Intell.}\ 2024):
+        $\sim$79\% of ML-for-PDE papers beat only weak baselines.
+  \item \textbf{Numerics still win.} Grossmann et al.\ (2024): FEM beats PINNs in time
+        \emph{and} accuracy by 1--6 orders on standard problems.
+  \item \textbf{Symmetry losses can be empty.} Point-symmetry PINN/PINO losses
+        ``oftentimes give \emph{no training signal}'' (Akhound-Sadegh, NeurIPS 2023;
+        ``Generalized Lie Symmetries in PINOs'', arXiv:2502.00373).
+  \item \textbf{HAM convergence is asserted, not proven.} The cleanest theory
+        (Turkyilmazoglu 2010) is only \emph{conditional}; Liao lists a-priori
+        convergence as open.
+\end{itemize}
+\vspace{4mm}
+\textbf{Opportunity:} fuse Lie \emph{reduction} $+$ semi-analytics $+$ a \emph{small}
+ML correction, and ship a \emph{runtime certificate} --- the piece every lineage lacks.
+}
+
+\column{0.5}
+\block{2\ \ Our direction: CCS-SYM\textsuperscript{+}}{
+\large
+A reduction-first hybrid whose \textbf{headline is rigorous error control}, not raw accuracy.
+Four coupled stages, each carrying the symmetry group as a hard inductive bias:
+\vspace{3mm}
+
+\textbf{REDUCE.} Solve the linear determining system
+$\mathrm{pr}^{(k)}X(\Delta)\!\mid_{\Delta=0}=0$ for the Lie algebra; reduce the PDE to a
+low-dimensional ODE $N[U]=0$ in an invariant variable $z$ (nonclassical / approximate-BGI
+fallback where point symmetry is barren).
+
+\textbf{CLOSE.} Homotopy-analysis series $U_M(z;\hbar)=\sum_{m=0}^{M}u_m(z)$ ---
+interpretable, data-free.
+
+\textbf{CERTIFY {\normalsize(the novelty)}.} A theorem-backed triple:
+(a) ratio $\rho_k=\lVert u_{k+1}\rVert/\lVert u_k\rVert<r<1$ with a geometric-tail bound;
+(b) a closedness lemma so convergence $\Rightarrow N[U_\infty]=0$;
+(c) a \emph{computable} a-posteriori bound $\lVert U-U_M\rVert\le C\,\lVert N[U_M]\rVert$.
+
+\textbf{CORRECT.} A \emph{tiny} symmetry-invariant network in invariant coordinates,
+$u_\theta=\Lambda(z)\,N_\theta(z)+U_M(z;\hbar^\ast)$ --- exactly equivariant, CPU-trained.
+}
+\end{columns}
+
+%================================ ROW B (full width) ================================
+\begin{columns}
+\column{1}
+\block{3\ \ CCS-SYM\textsuperscript{+} vs.\ the popular methods, up to June 2026}{
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{>{\raggedright\arraybackslash}p{11cm}
+                >{\raggedright\arraybackslash}p{18.5cm}
+                >{\raggedright\arraybackslash}p{18.5cm}
+                >{\raggedright\arraybackslash}p{21cm}}
+\hline
+\textbf{Family (representative)} & \textbf{Core idea \& strength} &
+\textbf{Key limitation (June 2026)} & \textbf{Contrast with CCS-SYM\textsuperscript{+}} \\ \hline
+
+\textbf{Classical numerics} \newline FEM / FDM / spectral &
+Discretize on a mesh; mature, gold-standard accuracy, complex geometry, a-posteriori control. &
+Curse of dimensionality; per-problem meshing; no closed-form insight; sharp fronts need adaptivity. &
+We avoid discretizing the full domain via symmetry: analytic reduced solution $+$ explicit bounds --- when symmetry exists (else FEM is the fallback). \\ \hline
+
+\textbf{PINNs} \newline Raissi et al.\ 2019; XPINN / causal &
+NN minimizes PDE residual by autodiff collocation; mesh-free, inverse problems, no data. &
+Hard optimization; no general convergence/error guarantee; GPU-heavy; accuracy $\sim10^{-2}$--$10^{-3}$. &
+A \emph{tiny} invariant corrector on a \emph{certified} analytic backbone; theorem-backed error; trains on a CPU. \\ \hline
+
+\textbf{Neural operators} \newline FNO (Li 2021), DeepONet (Lu 2021) &
+Learn function-space maps for instant amortized many-query inference; resolution-invariant. &
+Large data \& compute; weak out-of-distribution extrapolation; no per-instance certificate; opaque. &
+Different regime: operators win at amortized high-D fields; we give \emph{single certified} solutions with $\approx$ no data. \\ \hline
+
+\textbf{PDE foundation models} \newline Poseidon (2405.19101), DPOT (ICML 2024), PDEformer-2 (2507.15409) &
+Massive multi-physics pretraining; broad few-/zero-shot transfer across PDE families. &
+Enormous pretraining cost; unpredictable accuracy; no guarantees; reproducibility/audit concerns. &
+Opposite philosophy: \emph{proof-within-a-niche on a laptop} vs.\ breadth-without-proof. \\ \hline
+
+\textbf{Generative / diffusion} \newline DiffusionPDE (2406.17763) &
+Score/diffusion over solution fields; UQ, partial observation, stochastic/ill-posed problems. &
+Very data/compute-intensive; sampling latency; no deterministic accuracy guarantee; can hallucinate. &
+Deterministic and \emph{certified}, not generative; we do not target stochastic field-completion. \\ \hline
+
+\textbf{Symmetry-informed ML} \newline equivariant nets; symmetry-loss PINNs/PINO &
+Bake symmetry into architecture/loss; better data efficiency, physics-consistency. &
+Symmetry is a \emph{soft prior}, still black-box \& uncertified; many point generators give no signal; no convergence theorem. &
+\textbf{Nearest neighbor:} we use symmetry to \emph{analytically reduce} (not just regularize) and \emph{certify}; ML is a bounded corrector. \\ \hline
+
+\textbf{Plain semi-analytical} \newline HAM (Liao); ADM / VIM / DTM &
+Closed-form series; interpretable, cheap, no data. &
+Convergence \emph{assumed} not proven; far-field / strong-nonlinearity degradation; hand-tuned parameters. &
+Semi-analytics done \emph{rigorously}: principled Lie reduction $+$ convergence/error \emph{theorems} $+$ a learned range extension. \\ \hline
+\end{tabular}
+}
+\end{columns}
+
+%================================ ROW C ================================
+\begin{columns}
+
+\column{0.52}
+\block{4\ \ Already runs --- verified on a laptop CPU}{
+\large
+\texttt{sympy 1.14 / numpy / scipy / torch 2.12+cpu}; seconds; no GPU. Every claim re-executed.
+\vspace{2mm}
+\begin{itemize}
+  \item \textbf{Burgers} $u_t+uu_x=\nu u_{xx}$: 5-generator algebra, invariance residual
+        $\equiv0$; travelling wave $\to$ exact $\tanh$ shock (residual 0).
+  \item \textbf{Porous medium} $u_t=(u^mu_x)_x$: scaling $a=2b-me$; Barenblatt self-similar
+        profile verified for $m=1,2,3$.
+  \item \textbf{Fisher--KPP} (non-integrable front): a \emph{genuine} HAM deformation series
+        with an \textbf{$\hbar$-dependent} Turkyilmazoglu certificate --- diverges at
+        $\hbar=-1$, \emph{certifies} at $\hbar=-0.3,-0.6$; order-wise rel-$L^2$
+        $1.0\!\times\!10^{-1}\!\to\!4.5\!\times\!10^{-2}\!\to\!2.0\!\times\!10^{-2}$.
+  \item \textbf{ML corrector (S4):} a \textbf{321-parameter} MLP, \textbf{0.13\,s} CPU,
+        \textbf{rel-$L^2=8.7\!\times\!10^{-4}$} vs.\ the exact Ablowitz--Zeppetella front.
+  \item \textbf{$\hbar^\ast$ selection} recovers the exact value to $1.7\!\times\!10^{-7}$.
+\end{itemize}
+$\Rightarrow$ the convergence certificate is a \emph{real, falsifiable} object, not a tautology.
+}
+
+\column{0.48}
+\block{5\ \ Honest scope}{
+\large
+\textbf{Where we win}
+\begin{itemize}
+  \item Symmetry-rich PDEs with self-similar / invariant structure (scaling, blow-up, fronts).
+  \item Trust-critical settings: certified error bounds, not just empirical accuracy.
+  \item Low-resource / reproducible: laptop CPU, zero datasets, fully auditable.
+  \item Interpretability-first: a closed-form reduced solution beats a black box.
+  \item Sample-starved problems where data-hungry models cannot be trained.
+\end{itemize}
+\vspace{2mm}
+\textbf{Where we do \emph{not} compete} (and say so)
+\begin{itemize}
+  \item High-D PDEs with \emph{no} exploitable symmetry --- nothing to collapse.
+  \item Full-field operator learning / amortized many-query --- FNO/DeepONet own this.
+  \item Arbitrary geometry / general BCs --- classical FEM/FVM remain right.
+  \item Stochastic, ill-posed, field-completion / UQ-by-sampling --- diffusion models.
+  \item Broad cross-family transfer --- the foundation-model regime.
+\end{itemize}
+}
+\end{columns}
+
+%================================ ROW D (full width) ================================
+\begin{columns}
+\column{1}
+\block{6\ \ Contributions \& selected references}{
+\large
+\textbf{Pillars.}
+\textbf{(R)educe} symmetry collapses the PDE to a low-dim ODE $\cdot$
+\textbf{(C)lose} interpretable HAM series $\cdot$
+\textbf{(C)ertify} theorem-backed convergence \emph{and} error bounds $\cdot$
+\textbf{(C)orrect} bounded symmetry-invariant ML remainder $\cdot$
+\textbf{(F)rugal} laptop-CPU, zero-dataset, reproducible.
+\vspace{3mm}
+
+{\small
+\textbf{Refs.}\ \
+Raissi, Perdikaris, Karniadakis, \emph{PINNs}, JCP 2019 $\cdot$
+Li et al., \emph{Fourier Neural Operator}, ICLR 2021 (arXiv:2010.08895) $\cdot$
+Lu et al., \emph{DeepONet}, Nat.\ Mach.\ Intell.\ 2021 $\cdot$
+Herde et al., \emph{Poseidon}, NeurIPS 2024 (arXiv:2405.19101) $\cdot$
+Hao et al., \emph{DPOT}, ICML 2024 $\cdot$
+\emph{PDEformer-2}, 2025 (arXiv:2507.15409) $\cdot$
+Huang et al., \emph{DiffusionPDE}, NeurIPS 2024 (arXiv:2406.17763) $\cdot$
+Akhound-Sadegh et al., \emph{Lie Point Symmetry \& PINNs}, NeurIPS 2023 $\cdot$
+\emph{Generalized Lie Symmetries in PINOs}, 2025 (arXiv:2502.00373) $\cdot$
+McGreivy \& Hakim, \emph{Weak baselines}, Nat.\ Mach.\ Intell.\ 2024 $\cdot$
+Grossmann et al., \emph{Can PINNs beat the FEM?}, 2024 $\cdot$
+Liao, \emph{Homotopy Analysis Method}, 2012 $\cdot$
+Turkyilmazoglu, \emph{HAM convergence}, 2010 $\cdot$
+Olver, \emph{Applications of Lie Groups to DEs}, 1993 $\cdot$
+Bluman, Cheviakov, Anco, 2010.
+}
+\vspace{2mm}
+
+\centerline{\textbf{Companion artifacts:}\ \ \texttt{plan.txt} (full phased plan)\ \ $\cdot$\ \
+\texttt{intro.tex} (beginner map)\ \ $\cdot$\ \ \texttt{symm/} (runnable verified demos).}
+}
+\end{columns}
+
+\end{document}
