@@ -1,0 +1,21 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# TeX build intermediates (source .tex and published PDFs remain tracked)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Local Claude/Codex runtime state; project skills and workflows remain tracked
+.claude/session-log.md
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+
+# The PDF extraction workspace is large and intentionally stays local.
+pdf2md/
