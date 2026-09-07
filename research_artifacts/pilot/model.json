@@ -1,0 +1,41 @@
+{
+  "feature_schema": [
+    "independent_count",
+    "field_count",
+    "equation_count",
+    "max_jet_order",
+    "inequation_count",
+    "assumption_count",
+    "expression_nodes",
+    "candidate_orbit_rank",
+    "candidate_invariant",
+    "candidate_index",
+    "candidate_xi_nonzero",
+    "candidate_phi_nonzero",
+    "candidate_expression_nodes",
+    "system_guard_count",
+    "system_equation_nodes"
+  ],
+  "model_fingerprint": "1eee8fa1bb24af539f18f5c2a3ca800c2533b8dde129147607ecea863ebd6b86",
+  "model_name": "empirical-probability-depth-limited-tree-v1",
+  "positive_rows": 19,
+  "schema_version": "lieml.experiment.tree/1",
+  "training_rows": 21,
+  "tree": {
+    "feature": "candidate_invariant",
+    "kind": "split",
+    "left": {
+      "count": 2,
+      "kind": "leaf",
+      "positive": 0,
+      "probability": 0.0
+    },
+    "right": {
+      "count": 19,
+      "kind": "leaf",
+      "positive": 19,
+      "probability": 1.0
+    },
+    "threshold": 0.5
+  }
+}

@@ -19,3 +19,6 @@ __pycache__/
 
 # The PDF extraction workspace is large and intentionally stays local.
 pdf2md/
+
+# knowledge base pdfs
+ref/kb

@@ -1,0 +1,13 @@
+{
+  "schema_version": "lieml.experiment/1",
+  "instance_type": "SA9.8XLARGE64",
+  "vcpus": 32,
+  "memory_gib": 64,
+  "exact_workers": 4,
+  "ml_vcpus": 12,
+  "reserved_vcpus": 8,
+  "disk_gib": 200,
+  "budget_hours": 10,
+  "gpu_required": false,
+  "rss_hard_limit_bytes": 1800000000
+}
