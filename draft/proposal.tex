@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+%The proposal should clearly outline the research problem, objectives, methodology, and expected outcomes, along with relevant references. The document should be 4–6 pages, typed in Times New Roman (12 pt, double-spaced)
+% Compile with XeLaTeX or LuaLaTeX for Times New Roman.
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\doublespacing
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\title{\textbf{[Project Title]}\\[0.5em]
+\large Research Proposal}
+\author{[Your Name]\\
+\textit{MATH 4890: [Course/Instructor Name]}}
+\date{[Submission Date]}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+Briefly summarize the research problem, proposed approach, and anticipated contribution
+in approximately 150--200 words. This abstract should be understandable without reading
+the full proposal. 
+%The proposal should clearly outline the research problem, objectives, methodology, and expected outcomes, along with relevant references.
+
+\end{abstract}
+
+\section{Introduction and Research Problem}
+Introduce the broad mathematical or computational area and explain why the topic is
+important. State the specific problem this project will address, including the relevant
+context and limitations of existing work. Conclude with a concise problem statement.
+
+\subsection{Research Questions}
+This project will investigate the following questions:
+
+\section{Objectives and Significance}
+State the project's overall aim and explain how it addresses the research problem.
+Use measurable objectives.
+
+
+Explain the expected significance of the work for the relevant mathematical field,
+machine learning application, or broader research community.
+
+\section{Background and Related Work}
+Provide the definitions, notation, and theory needed to understand the proposal.
+Summarize the most relevant literature and identify the gap that this project will fill.
+For example, cite foundational work using \citet{refFoundational}, recent methods using
+\citet{refRecent}, and any directly related results using \citep{refRelated}. Explain
+how the proposed project differs from or builds on these contributions.
+
+\section{Methodology}
+Describe the planned work in sufficient detail that its feasibility can be assessed.
+
+\subsection{Mathematical or Conceptual Framework}
+Define the objects, assumptions, variables, and notation used in the study. State any
+conjectures, hypotheses, propositions, or theoretical claims that will guide the work.
+
+\subsection{Data, Models, or Materials}
+Describe the data sources, datasets, software, algorithms, or mathematical examples
+that will be used. Explain selection criteria, preprocessing, and any ethical or
+reproducibility considerations, as applicable.
+
+\subsection{Procedure and Analysis}
+List the project steps in order:
+
+Specify evaluation metrics and explain how the results will answer each research
+question. Include equations, diagrams, or pseudocode here if they clarify the method.
+
+\section{Expected Outcomes}
+Describe the anticipated results, such as a proved result, algorithm, model,
+implementation, dataset analysis, or set of visualizations. Explain what would count as
+a successful outcome and how the results will contribute to the stated objectives.
+Distinguish expected contributions from results that remain uncertain.
+
+\section{Limitations and Risk Management}
+Identify assumptions, scope constraints, anticipated technical difficulties, and possible
+sources of error. For each substantial risk, state a mitigation strategy or alternative
+approach. Explain which aspects of the project may be left for future work.
+
+\section{Timeline}
+\begin{center}
+\begin{tabular}{p{0.22\textwidth}p{0.65\textwidth}}
+\toprule
+\textbf{Period} & \textbf{Milestone} \\
+\midrule
+Weeks 1--2 & Literature review, scope, and research questions finalized. \\
+Weeks 3--4 & Framework, derivations, or implementation completed. \\
+Weeks 5--8 & Experiments, proofs, or case studies conducted. \\
+Weeks 8 & Analysis, revisions, and validation completed. \\
+Weeks 9 & Final report and presentation prepared. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Conclusion}
+Restate the research problem, proposed contribution, and expected value of the project
+in one or two focused paragraphs.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+\bibitem[Author(Year)]{refFoundational}
+Author, A. A. (Year). \textit{Title of foundational work}. Publisher or Journal, volume(issue), pages.
+
+\bibitem[Author(Year)]{refRecent}
+Author, B. B. (Year). Title of recent related work. \textit{Journal or Conference}, volume(issue), pages.
+
+\bibitem[Author(Year)]{refRelated}
+Author, C. C. (Year). Title of directly related result. \textit{Journal or Conference}, volume(issue), pages.
+\end{thebibliography}
+
+\end{document}
