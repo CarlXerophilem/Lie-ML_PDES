@@ -1,117 +1,175 @@
-\documentclass[12pt]{article}
-%The proposal should clearly outline the research problem, objectives, methodology, and expected outcomes, along with relevant references. The document should be 4–6 pages, typed in Times New Roman (12 pt, double-spaced)
-% Compile with XeLaTeX or LuaLaTeX for Times New Roman.
+% Fixed title and eight-week 2027 scope; core record: research_record.md.
+% Compile twice with XeLaTeX. Earlier proposals are preserved in proposal_support/archive/.
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
-\doublespacing
-\usepackage{amsmath,amssymb}
-\usepackage{booktabs}
-\usepackage{enumitem}
+\usepackage{amsmath,amssymb,setspace,enumitem,titlesec}
 \usepackage[hidelinks]{hyperref}
-\usepackage{natbib}
-
-\title{\textbf{[Project Title]}\\[0.5em]
-\large Research Proposal}
-\author{[Your Name]\\
-\textit{MATH 4890: [Course/Instructor Name]}}
-\date{[Submission Date]}
-
+\newcommand{\E}{\mathcal E}
+\doublespacing
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=0pt,parsep=0pt,topsep=2pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\hypersetup{pdftitle={Lie-Symmetry Reduction and Taylor-PINN Approximation of a Lagrangian Shallow-Water Equation},pdfauthor={Carl}}
+\input{proposal_support/lagrange_evidence/pilot_values.tex}
 \begin{document}
 
-\maketitle
-
-\begin{abstract}
-\noindent
-Briefly summarize the research problem, proposed approach, and anticipated contribution
-in approximately 150--200 words. This abstract should be understandable without reading
-the full proposal. 
-%The proposal should clearly outline the research problem, objectives, methodology, and expected outcomes, along with relevant references.
-
-\end{abstract}
-
-\section{Introduction and Research Problem}
-Introduce the broad mathematical or computational area and explain why the topic is
-important. State the specific problem this project will address, including the relevant
-context and limitations of existing work. Conclude with a concise problem statement.
-
-\subsection{Research Questions}
-This project will investigate the following questions:
-
-\section{Objectives and Significance}
-State the project's overall aim and explain how it addresses the research problem.
-Use measurable objectives.
-
-
-Explain the expected significance of the work for the relevant mathematical field,
-machine learning application, or broader research community.
-
-\section{Background and Related Work}
-Provide the definitions, notation, and theory needed to understand the proposal.
-Summarize the most relevant literature and identify the gap that this project will fill.
-For example, cite foundational work using \citet{refFoundational}, recent methods using
-\citet{refRecent}, and any directly related results using \citep{refRelated}. Explain
-how the proposed project differs from or builds on these contributions.
-
-\section{Methodology}
-Describe the planned work in sufficient detail that its feasibility can be assessed.
-
-\subsection{Mathematical or Conceptual Framework}
-Define the objects, assumptions, variables, and notation used in the study. State any
-conjectures, hypotheses, propositions, or theoretical claims that will guide the work.
-
-\subsection{Data, Models, or Materials}
-Describe the data sources, datasets, software, algorithms, or mathematical examples
-that will be used. Explain selection criteria, preprocessing, and any ethical or
-reproducibility considerations, as applicable.
-
-\subsection{Procedure and Analysis}
-List the project steps in order:
-
-Specify evaluation metrics and explain how the results will answer each research
-question. Include equations, diagrams, or pseudocode here if they clarify the method.
-
-\section{Expected Outcomes}
-Describe the anticipated results, such as a proved result, algorithm, model,
-implementation, dataset analysis, or set of visualizations. Explain what would count as
-a successful outcome and how the results will contribute to the stated objectives.
-Distinguish expected contributions from results that remain uncertain.
-
-\section{Limitations and Risk Management}
-Identify assumptions, scope constraints, anticipated technical difficulties, and possible
-sources of error. For each substantial risk, state a mitigation strategy or alternative
-approach. Explain which aspects of the project may be left for future work.
-
-\section{Timeline}
 \begin{center}
-\begin{tabular}{p{0.22\textwidth}p{0.65\textwidth}}
-\toprule
-\textbf{Period} & \textbf{Milestone} \\
-\midrule
-Weeks 1--2 & Literature review, scope, and research questions finalized. \\
-Weeks 3--4 & Framework, derivations, or implementation completed. \\
-Weeks 5--8 & Experiments, proofs, or case studies conducted. \\
-Weeks 8 & Analysis, revisions, and validation completed. \\
-Weeks 9 & Final report and presentation prepared. \\
-\bottomrule
-\end{tabular}
+\textbf{Lie-Symmetry Reduction and Taylor--PINN Approximation\\
+of a Lagrangian Shallow-Water Equation}\\
+Eight-week undergraduate research project, 2027\\
+Carl \quad WKU MATH 4890\\
+Proposed supervisor: Dr. Puneet Rana
 \end{center}
 
-\section{Conclusion}
-Restate the research problem, proposed contribution, and expected value of the project
-in one or two focused paragraphs.
+\section{Research Problem}
+The starting point is the printed Lagrangian master equation of Paliathanasis, Leon and Leach \cite{lagrange}:
+\begin{equation}
+\E_m[\phi]:=
+\partial_t\left(\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2}\right)
+-g\beta\partial_s\left(\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right)=0.
+\label{eq:master}
+\end{equation}
+Here $\phi(t,s)$ is fluid-particle position, $u=\phi_t>0$ and $h=1/\phi_s>0$. Fix $(m,g,\beta)=(3,1,0.1)$. The source's cubic symmetry gives
+\[
+X_5=t\partial_t-2s\partial_s,\qquad \phi(t,s)=F(\sigma),\quad \sigma=st^2.
+\]
+The specific problem is to approximate the reduced profile IVP on $I=[1,3/2]$:
+\begin{equation}
+a(\sigma,F')F'''+b(\sigma,F',F'')=0,\qquad
+(F,F',F'')(1)=\left(K,\frac K3,-\frac{2K}{9}(1+\delta)\right),
+\label{eq:problem}
+\end{equation}
+where $K=\sqrt[3]{45}$ and $\delta=0,0.01$. The coefficients are given below. This varies profile curvature data, not the flux exponent. Compare Taylor, numerical and neural approximations by profile error, residual and cost.
 
-\bibliographystyle{plainnat}
-\begin{thebibliography}{9}
-\bibitem[Author(Year)]{refFoundational}
-Author, A. A. (Year). \textit{Title of foundational work}. Publisher or Journal, volume(issue), pages.
+\section{Objectives}
+\begin{enumerate}
+\item Verify the reduction and retain the printed-model reconstruction audit.
+\item Derive a conditional regular-branch residual-to-profile error bound.
+\item Test two Taylor--PINN trials against exact and classical numerical controls.
+\end{enumerate}
 
-\bibitem[Author(Year)]{refRecent}
-Author, B. B. (Year). Title of recent related work. \textit{Journal or Conference}, volume(issue), pages.
+\newpage
+\section{Methodology}
+\subsection{Model Scope and Source Verification}
+Equation~\eqref{eq:master} is the research target, not an assumed equivalent form of the physical Eulerian system. The source uses $\beta=mA_g\xi$ for bedload flux $A_gu^m$ and porosity factor $\xi$. Only the selected cubic symmetry and reduction are needed; a complete Lie classification is outside scope.
 
-\bibitem[Author(Year)]{refRelated}
-Author, C. C. (Year). Title of directly related result. \textit{Journal or Conference}, volume(issue), pages.
-\end{thebibliography}
+For the usual bed pullback $\widetilde B(t,s)=B(t,\phi(t,s))$,
+\[
+\partial_x=\phi_s^{-1}\partial_s,\qquad
+(\partial_t)_x=(\partial_t)_s-\frac{\phi_t}{\phi_s}\partial_s.
+\]
+Consequently the Eulerian Exner equation transforms to
+\begin{equation}
+\widetilde B_t-\frac{\phi_t}{\phi_s}\widetilde B_s+
+\beta\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}=0.
+\label{eq:physical}
+\end{equation}
+The transport term is absent from the source's printed Equation (6). Define
+\[
+A=\phi_s\phi_{tt}-g\phi_{ss}/\phi_s^2,\qquad
+q=\phi_t^{m-1}\phi_{ts}/\phi_s.
+\]
+The printed pair is $\widetilde B_s=-A/g$, $\widetilde B_t=-\beta q$.
+Its compatibility condition $A_t-g\beta q_s=0$ is precisely the master equation. On a simply connected regular region this reconstructs a printed-system bed up to a constant, but does not establish \eqref{eq:physical}.
 
+The publisher PDF has been checked against the supplied file. Adopted invariants, the power-law control and the working ODE are verified by direct calculation. The full manuscript records proofs and an exact counterexample to unrestricted Eulerian equivalence. Physical-model correction is a separate project, not a prerequisite to this study.
+
+\newpage
+\subsection{Reduction and Conditional Error Bound}
+The characteristic invariant of $X_5$ is $\sigma=st^2$ \cite{olver}. With $r=F'$ and $v=F''$, direct substitution gives
+\begin{equation}
+\E_3[F(st^2)]=t^{-1}R[F],\qquad R[F]=aF'''+b,
+\label{eq:lift}
+\end{equation}
+where
+\[
+\begin{aligned}
+a&=8(1-g\beta)\sigma^3r-2g\sigma/r^2,\\
+b&=4\sigma(1-4g\beta)r^2+8\sigma^2(3-5g\beta)rv\\
+ &\quad+[8\sigma^3(1-g\beta)+4g\sigma/r^3]v^2.
+\end{aligned}
+\]
+Require $r>0$ and $a\ne0$. Then $Y=(F,r,v)$ satisfies the regular ODE
+\[
+Y'=G(\sigma,Y)=(r,v,f),\qquad f=-b/a.
+\]
+For the fixed parameters, exact rational interval arithmetic verifies
+\[
+|a|\ge\frac{24217}{7225},\qquad \|D_YG\|_\infty\le15
+\]
+on $I\times\mathcal B$, with
+$\mathcal B=[17/20,5/4]\times[-17/20,-7/20]$ for $(r,v)$.
+
+\textbf{Conditional theorem.} Let a $C^3$ trial $\widehat F$ match the three initial data. Suppose $(\widehat F',\widehat F'')$ stays inside $\mathcal B$ with uniform boundary margin $\eta>0$, and
+\[
+\sup_I|\widehat F'''-f(\sigma,\widehat F',\widehat F'')|\le\varepsilon,
+\qquad
+\Delta=\frac{\varepsilon}{15}(e^{15/2}-1)<\eta.
+\]
+Then the exact reduced IVP exists on $I$ and
+$\|\widehat Y-Y\|_{\infty,I}\le\Delta$. A Gronwall estimate and first-exit argument prove the statement. Uniform residual and margin bounds are required; samples do not suffice. A trained-network certificate is a stretch outcome, not an assumed result.
+
+On $\Omega=\{(t,s):1\le t\le5/4,\ st^2\in I\}$, the exact lift also gives
+$\|\E_3\|_{\infty,\Omega}\le\|R\|_{\infty,I}$. This is not an Eulerian solution-error theorem.
+
+\newpage
+\subsection{Taylor--PINN Construction and Comparison}
+Let $z=\sigma-1$. Compute
+\[
+P_2=F_*+r_*z+\tfrac12v_*z^2,\qquad
+P_4=P_2+\tfrac16 f_*z^3+
+\tfrac1{24}(f_\sigma+f_rv+f_vf)_*z^4.
+\]
+The subscript $*$ denotes evaluation at the initial state. Compare
+\[
+\widehat F_{\theta,N}=P_N(z)+z^{N+1}n_\theta(4z-1),\qquad N=2,4.
+\]
+Both trials enforce the same three initial data. Higher $N$ changes the Taylor information and remainder factor, so an advantage cannot be attributed to Taylor order alone. Taylor--neural remainders are established prior art \cite{taylor}; our scalar third-order implementation is not their full state-system method.
+
+Use two 16-unit tanh hidden layers and a scalar output, totaling 321 parameters. Train without solution labels using the PINN loss \cite{pinn}
+\[
+\mathcal L_N(\theta)=\frac1{128}\sum_{j=1}^{128}
+\left[\widehat F_{\theta,N}'''(\sigma_j)+
+\frac{b(\sigma_j,\widehat F_{\theta,N}',\widehat F_{\theta,N}'')}
+{a(\sigma_j,\widehat F_{\theta,N}')}\right]^2.
+\]
+Differentiate the single output, check raw $R$ as well as $R/a$, and mark sampled $F'\le0$, $|a|<10^{-6}$ or nonfinite values as failed runs.
+
+For each $\delta$, compare $P_2/P_4$, DOP853 and both neural trials using seeds $0,1,2$. Use 128 training points and 1001 distinct evaluation midpoints. Fix 5000 Adam steps, then at most 200 L-BFGS iterations, on float64 CPU. Report every seed, function evaluations, derivative errors, residuals, regularity margins and training/evaluation cost.
+
+Symmetry-informed losses and transformed collocation have prior art \cite{liepinn,shah}. Compare against a practically tuned numerical baseline at matched accuracy \cite{baselines}; neither literature nor a low training loss establishes neural superiority.
+
+\newpage
+\subsection{Feasibility and Eight-Week Schedule}
+The source's exact cubic family supplies
+\[
+F_0=K\sigma^{1/3},\qquad
+K^3=\frac{27g}{1-4g\beta}=45,\qquad
+a(\sigma,F_0')=2K\sigma^{7/3}>0.
+\]
+The master residual and arbitrary-profile lift are symbolically checked. On 501 points, the classical exact-control state error is $\LagrangeControlError$. For the perturbed data, refinement differs by $\LagrangeRefinement$ and Radau by $\LagrangeOracle$. These are sampled diagnostics, not interval-certified solution errors.
+
+Preparatory CPU tests on 12 September 2026 ran both neural trials with one seed and 400 Adam steps. Profile errors were about $1.09\times10^{-5}$ for $N=2$ and $1.09\times10^{-4}$ for $N=4$; normalized residuals were about $6.39\times10^{-2}$ and $1.32\times10^{-2}$. The rankings disagree. These runs establish bounded feasibility, not a formal comparison or a certified network.
+
+The mathematical focus is one reduced IVP, not general PDE solving. The two-month undergraduate study in \textbf{2027} is scheduled as:
+\begin{enumerate}
+\item Weeks 1--2: source audit, coordinates, symmetry and reduction.
+\item Weeks 3--4: Taylor profiles, conditional bound and numerical controls.
+\item Weeks 5--6: declared multi-seed neural experiments and cost measurements.
+\item Weeks 7--8: error--cost analysis, reproducibility checks and final writing.
+\end{enumerate}
+No arbitrary boundary data, shocks, new symmetry classification or physical-model correction is promised. Exact calendar dates remain to be set.
+
+\section{Expected Outcomes}
+Deliver a formula-based problem statement, checked reduction and proof, a reproducible classical/neural benchmark, and a submission-style manuscript. A classical-solver advantage or inconclusive certificate is an admissible outcome. Core claims, limitations and method details remain in the research record; stronger claims require verified evidence. The 2026 preparatory results are not presented as completed 2027 research.
+
+\newpage
+\input{proposal_support/references_2027.tex}
 \end{document}

@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "six_pages": true,
+    "requested_heading_structure": true,
+    "primary_source_cited": true,
+    "no_unresolved_markers": true,
+    "one_references_heading": true,
+    "12_tex_pt_times_new_roman_body": true,
+    "double_spaced_body_baselines": true,
+    "no_text_outside_content_bounds": true,
+    "clean_latex_log": true,
+    "evidence_source_hash_matches": true,
+    "current_pilot_passed": true,
+    "legacy_pilot_not_imported": true
+  },
+  "pdf_sha256": "ac8694c7b9798532844b4b6efddd405c393a3506b2b1d014d2482f464df8f67b",
+  "tex_sha256": "db3bb9810f9e656c8f87cf198868ed9817a9e00274b027728fa77f3258ade452",
+  "pilot_report_sha256": "9e3b1cb4dc78b0044077346e45cd6e12e3a4ec9353d2aa94906d5fea2244726c",
+  "reference_pdf_sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5",
+  "primary_doi": "10.3390/math14030433",
+  "page_count": 6,
+  "headings": [
+    "1. Research Problem",
+    "2. Objectives",
+    "3. Methodology",
+    "4. Expected Outcomes",
+    "References"
+  ],
+  "body_font_size_pdf_points": [
+    11.96
+  ],
+  "median_body_baseline_pdf_points": 23.90800000000001,
+  "latex_warnings": [],
+  "out_of_bounds": []
+}

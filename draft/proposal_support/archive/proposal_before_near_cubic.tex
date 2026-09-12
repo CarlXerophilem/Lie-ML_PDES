@@ -1,0 +1,459 @@
+%The proposal should clearly outline the research problem, objectives, methodology, and expected outcomes, along with relevant references. The document should be 4–6 pages, typed in Times New Roman (12 pt, double-spaced).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Semi-Analytical and Learning Methods for Solving PDEs Using Lie Symmetry Analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% GPT-6-Astra: COAUTHOR ANNOTATIONS -- 11 September 2026.
+%% Source: lie_pde_brainstorming_summary.md and the current project discussion.
+%% Earlier annotations use %% comments; printable wording was revised on 11 September.
+%% Revision uses Carl's proposal(1).tex, preserves his structure, and explains terminology.
+%% Read each annotation as: question -> object -> assumptions -> evidence.
+%% Labels: [SCOPE] priority; [OBJECT] mathematical entity; [QUESTION] task;
+%% [CHECK] acceptance condition; [DECISION] an unresolved implementation choice.
+%%
+%% [SCOPE] Progression: verified SVE reduction -> series/neural comparison ->
+%% Hopf/Galois exploration and eight neighboring PDE targets -> one proposed
+%% weak perturbation and a hierarchy of compatible correction profiles.
+%% The weak-drag specialization is a working recommendation, not a completed
+%% analysis or a user-confirmed replacement of every objective in this draft.
+%% The model audit already in this manuscript takes priority over expansion.
+%% No completed training, branch existence proof, error theorem, or verified
+%% novelty claim should be inferred from the brainstorming calculations.
+%%
+%% [SCOPE] Minimum: one verified model, one admissible nontrivial reduction,
+%% one conventional reference, and a fair test of neural approximation.
+%% Proposed focused extension: cubic transport plus weak linear drag, with
+%% a first-order similarity correction and explicit compatibility checks.
+%% Later: higher-order perturbations, moment--Exner models, shocks/dry fronts,
+%% full-PDE stability, and useful Hopf/Galois diagnostics if a need is shown.
+%%
+%% [QUESTION] The object to study is a specified PDE WITH parameters, domain,
+%% solution class, and branch-selection data, not an equation name alone.
+%% Fix the equations, perturbation, smooth solution regime, and research question.
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Lie-Theoretic Reduction and Semi-Analytical Neural Approximation of Symmetry-Constrained Nonlinear PDEs: A Saint--Venant--Exner-Informed Study}}
+\doublespacing
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{6pt}{0pt}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{6pt}{0pt}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0pt,parsep=0pt,topsep=0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{plain}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\pr}{\operatorname{pr}}
+\begin{document}
+
+\begin{center}
+%% [SCOPE] Keep this broad title while the model audit is unresolved. A possible
+%% narrower title is: Perturbation-Consistent Similarity Reduction and Neural
+%% Correction for a Weakly Damped Saint--Venant--Exner Model.
+%% If adopted later, synchronize the printed title and pdftitle metadata.
+\textbf{Lie-Theoretic Reduction and Semi-Analytical Neural Approximation of Symmetry-Constrained Nonlinear PDEs: A Saint--Venant--Exner-Informed Study}
+
+Research proposal skeleton\\
+{Carl} \quad WKU MATH 4890\\
+Proposed supervisor: Dr. Puneet Rana
+\end{center}
+% TODO: Confirm the administrative details above before submission.
+
+\section{Research problem and rationale}
+%% [QUESTION] Deconstruct the motivating question into separate claims:
+%% Q1: Which coupled model and coordinate representations are equivalent?
+%% Q2: Which symmetry and compatible data select a nonconstant solution family?
+%% Q3: If weak drag is adopted, can this family support first-order corrections?
+%% Q4: What can be established about compatibility, residual order, and error?
+%% Q5: Does a neural approximation improve accuracy versus computational cost?
+%% Q1--Q4 are mathematical tasks; Q5 is an empirical comparison. Success in one
+%% does not establish the others. Each needs its own deliverable and baseline.
+Nonlinear fluid equations often resist explicit solution, while numerical approximations can obscure the analytical structure of selected solution families. Lie symmetry offers a mature and systematic route from a PDE to a symmetry-preserving solution form (an \emph{ansatz}) and an equation in fewer variables. My project asks how that analytical structure can also guide a neural approximation whose contribution is measurable.
+
+The starting model is a one-space, one-time Saint--Venant--Exner (SVE) system coupling shallow-water motion to sediment-bed evolution. Paliathanasis et al.\ \cite{sve} study symmetries in coordinates that follow moving water elements (material coordinates), including an exceptional exponent $m=3$. The shear-flow study \cite{shear} provides a methodological reference for linearized perturbations.
+%% [OBJECT] Keep three source objects separate: the physical coupled SVE
+%% balances, the reference's printed scalar equation, and any linearized
+%% shear-flow system. A symmetry of one is not automatically a symmetry of
+%% another. The exceptional m=3 claim must be tied to the equation actually
+%% verified; do not transfer it through an unverified elimination step.
+
+The proposed research problem is to establish a verified SVE-informed reduction and determine whether an analytical-series-plus-neural representation improves approximation on smooth solution families selected by a symmetry. The working hypothesis is that encoding an exact symmetry and a local series reduces the approximation burden. Improved accuracy or efficiency will be tested, not presumed. ``Symmetry-constrained'' means restricted to a chosen symmetry-preserving family; it is not a material property or a claim about every PDE solution.
+%% [QUESTION] If the perturbation extension is retained, a precise question is:
+%% Can similarity-based correction equations approximate one specified weakly
+%% damped SVE family with predictable residual order, and does a neural solver
+%% approximate those corrections more effectively than conventional methods?
+%% [CHECK] A solution-error order requires additional estimates. Do not replace
+%% "residual order" with "solution-error order" without such evidence.
+%% [SCOPE] The possible contribution is verified compatibility and evaluation
+%% for this model/family. Lie reduction, series ansatze, approximate symmetries,
+%% and symmetry-informed PINNs are existing ideas, not separate novelty claims.
+
+\newpage
+\section{Model, scope, and objectives}
+%% [OBJECT] Model specification to fix: unknown fields (h,u,B); independent
+%% variables (t,x); constants (g,A_g,m,chi); domain; data; regularity class;
+%% physical admissibility; and the numerical comparison interval.
+%% This printed system is the unperturbed baseline, not yet the proposed
+%% weakly damped specialization. Keep the two visibly distinguished.
+For smooth fields, the initial model is
+\begin{equation}
+\begin{aligned}
+h_t+(hu)_x&=0,\\
+u_t+uu_x+g(h_x+B_x)&=0,\\
+B_t+\chi\,\partial_x(A_g u^m)&=0,
+\end{aligned}
+\label{eq:sve}
+\end{equation}
+where $h>0$ is depth, $u$ velocity, $B$ bed elevation, $g>0$ gravity, $A_g>0$ a transport coefficient, and $\chi=(1-p)^{-1}$ accounts for bed porosity $0\leq p<1$. The initial analysis uses $u>0$ so arbitrary real powers are well defined. Dimensional scales and parameter domains will be stated before numerical comparisons. Sediment-transport formulations motivate the model \cite{hudson}; $m=3$ is a modeling and symmetry choice, not an empirically fitted result of this project.
+%% [DECISION RESOLVED] Porosity is now p, a=1-p=chi^{-1}; reserve
+%% epsilon_d for weak drag. Material coordinates are a coordinate choice,
+%% not a separate 'material-constrained' solution class.
+%% Also reserve rho for the Lie-group parameter, since s is the material label;
+%% delta for an initial-data perturbation; theta for network weights; N for
+%% local Taylor order; and K for physical perturbation truncation order.
+%% None of p, epsilon_d, rho, delta, N, and K should be identified implicitly.
+%%
+%% [SCOPE] Proposed specialization, after nondimensionalization:
+%% h_t+(hu)_x=0;
+%% u_t+u*u_x+g(h+B)_x=-epsilon_d*u;
+%% a*B_t+(A_g*u^3)_x=0.
+%% Linear drag is a controlled physical perturbation, not a universal friction
+%% law. State its scaling, parameter range, and why this closure is sufficient
+%% to study the chosen symmetry-breaking mechanism. Do not perturb porosity
+%% at the same time unless a separate scientific question requires it.
+%%
+%% [CHECK] Proposed initial regime: one smooth characteristic branch with
+%% h>=h_min>0, a strictly hyperbolic state region, and a fixed compact domain
+%% away from t=0; for drag corrections require |epsilon_d*T| << 1.
+%% Strict hyperbolicity concerns distinct real characteristic speeds. It does
+%% NOT imply that the similarity-profile derivative matrix is invertible.
+%% [DECISION] Specify actual parameter values, branch interval, and consistent
+%% data before training. An arbitrary set of endpoint values can overdetermine
+%% a characteristic or differential-algebraic correction problem.
+
+The objectives are to:
+\begin{enumerate}
+\item Verify the material-coordinate formulation and any scalar elimination against the coupled balances.
+%% [CHECK Q1] Deliver the coordinate identities, transformed balances, domains
+%% of validity, and reconstruction conditions; distinguish equivalence from
+%% the weaker implication that a scalar solution passes one residual check.
+\item Identify Lie point symmetries and obtain at least one admissible reduction from two independent variables to one.
+%% [CHECK Q2] Deliver X, its finite/local action where useful, invariant-surface
+%% conditions, the reduced equation, admissible data, and a nonconstant branch.
+%% A maximal classification is optional if it does not advance this branch.
+\item Derive an exact benchmark and local series where available, recording regularity and reconstruction conditions.
+%% [CHECK Q3--Q4] For the proposed extension, add the zeroth/first correction
+%% equations and their compatibility conditions. Exact benchmark, Taylor
+%% expansion, and physical-perturbation expansion are distinct objects.
+\item Test a neural series remainder against analytical and numerical baselines on a selected nontrivial branch.
+%% [CHECK Q5] Name exactly what the network learns: a baseline profile remainder
+%% or a perturbation-correction remainder. Do not switch objects between the
+%% numerical baseline, loss definition, and reported errors.
+\end{enumerate}
+Physical initial measurements are unnecessary for symmetry classification. Later computations will fix compatible local constants or boundary conditions to select reproducible branches. Global shock dynamics and fractional-derivative models lie outside the initial scope.
+%% [OBJECT] Physical model parameters specify the equation. Integration
+%% constants and boundary/initial data select a solution. Measured observations
+%% are optional for this forward study, but mathematical data are not optional.
+%% The symmetry group of the PDE can exceed the subgroup preserving the data.
+%% A perturbation expansion must expand or match the data consistently too.
+% TODO: State nondimensional parameters and branch-selection data after analysis.
+
+%\newpage
+\section{Methodology}
+%% [QUESTION Q1] What exactly is being transformed: a parcel position, a water
+%% field, or a bed field evaluated along the parcel? Introduce distinct symbols
+%% before differentiating. Here s is a normalized mass label, not a spatial
+%% coordinate interchangeable with x and not a group parameter.
+%% [READING] Eulerian = observe fixed locations; material/Lagrangian = follow
+%% labelled water elements. An ansatz is a proposed functional form; here the
+%% form is derived from a verified symmetry rather than guessed arbitrarily.
+\subsection*{I: verification and Lie reduction}
+
+Let $x=\phi(t,s)$ give the position at time $t$ of the water element labelled $s$ (the parcel map). Choose $s$ as a water-mass coordinate per unit width, so $\phi_t=u(t,\phi)$ and $\phi_s=1/h(t,\phi)>0$. A field is \emph{pulled back} by evaluating it at this moving position: $\widehat B(t,s)=B(t,\phi(t,s))$. The chain rule gives
+\begin{equation}
+\partial_x=\phi_s^{-1}\partial_s,\qquad
+(\partial_t)_x=(\partial_t)_s-\frac{\phi_t}{\phi_s}\partial_s.
+\end{equation}
+The first task is to check every transport term after this coordinate change, then verify that eliminating and reconstructing $B$ preserves the coupled balances. A printed scalar equation will remain a separate mathematical benchmark unless equivalence to \eqref{eq:sve} is established.
+%% [CHECK] The earlier suspected discrepancy remains an audit hypothesis until the
+%% reference's definitions and derivation are checked; do not present it as a
+%% demonstrated error merely because the preliminary reading suggests one.
+%% Direct bookkeeping target: let Bhat(t,s)=B(t,phi(t,s)). The bed equation
+%% pulled back from the printed coupled system must then read
+%% Bhat_t - (phi_t/phi_s)*Bhat_s
+%%          + (chi/phi_s)*partial_s[A_g*(phi_t)^m] = 0.
+%% The term involving Bhat_s accounts for evaluating the bed along a moving
+%% water parcel; an Eulerian bed balance is not automatically material advection.
+%% Momentum becomes phi_tt + g[-phi_ss/(phi_s)^3 + Bhat_s/phi_s]=0;
+%% for the proposed drag perturbation, the right side is -epsilon_d*phi_t.
+%% Check these identities before elimination; record any lost constants,
+%% compatibility conditions, and positivity requirements during reconstruction.
+
+For a verified equation $F=0$, determine the coefficients of
+%% [OBJECT] X acts on the independent/dependent variable space. Its prolongation
+%% acts on derivative coordinates (jets). The PDE is a constraint in that jet
+%% space. Solving determining equations identifies which X preserves it.
+\begin{equation}
+X=\tau(t,s,\phi)\partial_t+\xi(t,s,\phi)\partial_s
+  +\eta(t,s,\phi)\partial_\phi
+\end{equation}
+using $\pr^{(n)}X(F)|_{F=0}=0$ \cite{olver}. Candidate translations and scalings will be checked before attempting a maximal classification. Generic exponents and $m=3$ will be distinguished. Commutators and the adjoint action will organize equivalent one-dimensional subalgebras, with exceptional parameter cases recorded.
+%% [OBJECT] Three derivatives to distinguish: Lie derivative L_X (motion along
+%% a group action); Frechet derivative DF[W] (linearization of a PDE in its
+%% unknown field); and gradient dL/dtheta (training). They answer different
+%% questions even when all occur in the same calculation.
+%% [CHECK] "Symmetry-closed" can mean algebraic closure under commutators,
+%% compatibility of a reduction with the data, or consistency to a retained
+%% perturbation order. State and test the intended meaning, rather than assume
+%% that repeated differentiation automatically generates useful submodels.
+%% More symmetry constraints usually restrict the solution family; higher
+%% perturbation order may improve fidelity. Neither adds new physical closure.
+%% [SCOPE] U(g), with Delta(X)=X tensor 1 + 1 tensor X, organizes product rules
+%% for known generators. X^2 is generally not a new point-symmetry generator.
+%% Differential Galois groups act on specified differential-field extensions;
+%% they are not synonymous with the PDE's point-symmetry group. Keep these
+%% algebraic topics optional unless a concrete reduced-equation task needs them.
+
+Select a generator whose action on the independent variables has rank one and admits an invariant solution graph. Solve for invariants and impose $\eta-\tau\phi_t-\xi\phi_s=0$ to obtain an ODE. Pure field translation fails this graph test. For $m=3$, a concrete Eulerian scaling gives $u=xv(t)$, $h=x^2H(t)$, $B=x^2C(t)$, reducing the system to $H_t=-3vH$, $v_t=-v^2-2g(H+C)$, and $C_t=-3\chi A_gv^3$. An explicit solution and local series will check this reduction. Reconstruct $h,u,B$ and verify the original balances before interpreting it physically.
+%% [CHECK Q2] This condition selects invariant solutions; it is not a condition
+%% satisfied by all solutions. Verify orbit rank, transversality, denominators,
+%% domain invariance, and data compatibility on the actual branch.
+%% A material traveling coordinate s-c*t is not the Eulerian coordinate x-c*t.
+%% In the simplest inviscid Eulerian SVE traveling-wave trial, continuity and
+%% momentum can give U=c+J/H and B=C-H-J^2/(2*g*H^2); the Exner closure can
+%% then leave an algebraic constraint. Check that a nonconstant profile exists
+%% before selecting it as a neural task; exceptions and hydrostatic states
+%% require separate treatment. This does not reject every material reduction.
+%%
+%% [SCOPE / Q3] OPTIONAL FIRST-ORDER ROUTE FROM THE BRAINSTORMING SUMMARY.
+%% The following calculation is in Eulerian (t,x), not material (t,s).
+%% It provides a direct coupled-system route while the scalar audit proceeds;
+%% it is not a proof that the reference scalar equation is equivalent.
+%% Let W=(h,u,B)^T and W_t+M(W)*W_x=epsilon_d*S(W), where for m=3
+%% M(W)=[[u,h,0],[g,u,g],[0,3*chi*A_g*u^2,0]], S(W)=(0,-u,0)^T.
+%% Baseline scaling: (t,x)->(lambda*t,lambda*x) with W unchanged.
+%% For epsilon_d fixed and nonzero this scaling is broken. Extending it by
+%% epsilon_d->epsilon_d/lambda gives an EQUIVALENCE of parameterized equations,
+%% not an exact symmetry of one fixed damped equation.
+%% Set z=x/t, sigma=epsilon_d*t, W=V(z,sigma). Direct substitution yields
+%% (M(V)-z*I)*V_z + sigma*V_sigma = sigma*S(V).
+%% This still has TWO independent variables; only the additional expansion
+%% V=W_0(z)+sigma*W_1(z)+O(sigma^2) yields profile equations order by order:
+%% (M(W_0)-z*I)*W_0'=0;
+%% (M(W_0)-z*I)*W_1' + DM(W_0)[W_1]*W_0' + W_1 = S(W_0).
+%% Here prime=d/dz. The plus signs separate three terms in the first-order
+%% equation; DM(W_0)[W_1] is a matrix derivative, not a new symmetry action.
+%% If W_j=(H_j,U_j,B_j), then
+%% DM(W_0)[W_1]=[[U_1,H_1,0],[0,0,0],[0,6*chi*A_g*U_0*U_1,0]].
+%% On a nonconstant characteristic branch M(W_0)-z*I is singular. For each
+%% left-null vector ell, impose the necessary compatibility condition
+%% ell^T*[S(W_0)-W_1-DM(W_0)[W_1]*W_0']=0.
+%% Do not invert this matrix blindly or assume the resulting problem is an
+%% explicit ODE. Establish consistent data and a suitable differential-
+%% algebraic formulation first. This formal hierarchy is not yet an existence
+%% theorem, a boundary-value solution, or an approximate-symmetry classification.
+%% [UPDATE] The companion worked example uses the cubic spatial scaling
+%% X=x*d_x+u*d_u+2*h*d_h+2*B*d_B. Its three profile ODEs are regular, and
+%% that scaling survives weak linear drag. This gives a simpler demonstrated
+%% route than the characteristic x/t expansion above; they are distinct ansatze.
+%% See sve_worked_example.md for every step and numerical controls.
+%% [DECISION] Choose a demonstrated route as the main
+%% demonstration; do not promise two full pipelines within the minimum scope.
+%% [PROGRESS] The cubic spatial generator, invariant field shapes, and ODEs
+%% are now verified in sve_worked_example.md. Extend only after this control
+%% and the nearby-data comparison have been reviewed.
+
+
+\subsection*{II: semi-analytical neural approximation}
+%% [OBJECT] Separate four approximation objects: the exact selected profile;
+%% its Taylor polynomial in z; the retained physical-perturbation coefficients;
+%% and the trainable remainder. State which profile y denotes in this section.
+%% For the proposed first-order route, y may be a component of W_1, and the
+%% final field is W_0(x/t)+epsilon_d*t*W_{1,theta}(x/t), not y alone.
+For a regular reduced profile $y(z)$, let $P_N(z)=\sum_{k=0}^{N}a_kz^k$ be a series about $z=0$, with coefficients obtained from the reduced equation and chosen local constants. Use
+\begin{equation}
+y_\theta(z)=P_N(z)+z^{N+1}\mathcal{N}_\theta(z).
+\label{eq:trial}
+\end{equation}
+A smooth feedforward network $\mathcal{N}_\theta$ learns the remainder; it preserves the series derivatives through order $N$ at the expansion point. Constrained neural trial functions have established precedents \cite{lagaris}; residual training follows the physics-informed framework reviewed in the open-access journal article \cite{pinn}. The proposed contribution is the verified Lie reduction and its evaluation with series structure, not the trial-function idea alone.
+%% [CHECK] Center at a regular z_0 if zero is singular, using powers of z-z_0.
+%% Derive coefficient recurrences from all reduced equations and algebraic
+%% compatibility conditions. They need not determine every coefficient uniquely.
+%% Derivative matching does not prove convergence of the Taylor series, global
+%% accuracy of the remainder, or admissibility across a singular endpoint.
+%% Do not confuse Taylor order N with perturbation order K: increasing one
+%% does not automatically improve the other, and both differ from network size.
+%%
+%% [OBJECT / Q3] Generic recursive construction, for field w:
+%% F_d[w]=F_0[w]+d*F_1[w], w=w_0+d*w_1+d^2*w_2+...;
+%% F_0[w_0]=0;
+%% DF_0[w_0]*w_1=-F_1[w_0];
+%% DF_0[w_0]*w_2=-0.5*D^2F_0[w_0](w_1,w_1)-DF_1[w_0]*w_1.
+%% Here d denotes epsilon_d only within this generic formula. Each coefficient
+%% problem also inherits expanded data and solvability conditions. This is
+%% recursive perturbation, not automatic creation of new physical submodels.
+%% Newton/defect correction DF[w_k]*Delta w_k=-F[w_k] is a different iteration.
+
+Let $\mathcal{R}[y]=0$ denote the reduced ODE. Train on collocation points with a nondimensional loss such as
+\begin{equation}
+\mathcal{L}(\theta)=
+\frac{1}{N_c}\sum_{i=1}^{N_c}|\mathcal{R}[y_\theta](z_i)|^2
++\lambda_b\mathcal{L}_{\mathrm{branch}}.
+\end{equation}
+The second term enforces any branch conditions not already built into \eqref{eq:trial}. Derivatives will be computed by automatic differentiation. Reconstruction into the original fields supplies an additional validation test.
+%% [CHECK / Q4] If F_d[w_0+d*w_1]=d*r_1+O(d^2), the full squared residual is
+%% d^2*||r_1||^2+O(d^3). Small d can hide a poor correction. Prefer training on
+%% the coefficient residual r_1, with consistently scaled data and compatibility
+%% terms, rather than declaring success because the original loss is small.
+%% If R is vector-valued or differential-algebraic, include every component and
+%% define nondimensional weights. Automatic differentiation evaluates the trial
+%% function's derivatives; it does not validate the model or prove accuracy.
+%% Exact ansatz constraints need no duplicate soft penalty. Positivity and any
+%% verified conservation law require an explicit enforcement or checking rule.
+
+No measured solution data are required for this forward approximation: collocation locations provide evaluation points, and the equation supplies residual targets. Independent numerical solutions are reserved for evaluation. The first experiment will use fixed parameters and a compact regular interval. A parameter-conditioned extension will be considered only after the single-branch comparison succeeds. Neither the architecture nor the loss guarantees positivity or global convergence; these properties require explicit checks.
+%% [QUESTION Q5] What is learned? A function on reduced coordinates, selected
+%% by equations and data. Collocation points are not observed solution labels.
+%% If reference values are later used for training or hyperparameter selection,
+%% disclose that use and retain a genuinely independent evaluation set.
+%% An inverse problem for friction or bedload parameters is a different task;
+%% it would require data and identifiability assumptions, not just more neurons.
+% TODO: Fix network size, series order, sampling, optimizer, and trial budget.
+
+\newpage
+\section{Evaluation, expected outcomes, and work plan}
+%% [QUESTION] Deconstruct "works" into: correct equations; an admissible
+%% branch; a converged conventional reference; accurate approximation;
+%% predicted perturbation behavior; and useful computational cost. Report each.
+Compare four methods on the same branch: a truncated series, an adaptive classical ODE solver, a neural ODE approximation without the series term, and the hybrid representation. An exact solution will test implementation; a non-closed-form branch will test practical value. A full-PDE PINN comparison is optional and requires compatible domain and boundary data.
+%% [CHECK] Use a suitable DAE solver or a proved regular parameterization if
+%% the proposed correction problem is singular; an explicit ODE solver is not
+%% automatically an admissible reference. Closed form is not the only strong
+%% baseline: a separable equation may already be cheaply solved by quadrature.
+%% Choose the same mathematical solution, data, error target, and parameter
+%% regime for every comparison. A trivial benchmark can check implementation
+%% without serving as the main evidence that neural approximation is useful.
+
+Evaluation will report relative $L^2$ and maximum solution errors, residuals of the reconstructed original balances, branch-condition errors, admissibility violations, and computational cost. Training time and inference time will be separated. Numerical reference accuracy will be checked by tolerance refinement. Networks will use matched budgets, multiple initializations, and evaluation points distinct from training points. Series-order and architecture ablations will distinguish analytical contributions from network capacity.
+%% [OBJECT / Q4] Separate physical-perturbation truncation error, local-series
+%% truncation error, neural approximation/optimization error, reference error,
+%% and errors introduced by coordinate reconstruction. Name the norm and domain.
+%% For first-order perturbation tests use a fixed t in [t_0,T], t_0>0, and fixed
+%% compatible data; the formal PDE-residual target is O(epsilon_d^2), with
+%% constants depending on the domain. In the similarity variables the neglected
+%% terms scale with sigma=epsilon_d*t. Uniform long-time validity is not implied.
+%% Approximate W_0 and W_1 accurately enough that solver error does not mask the
+%% epsilon_d scaling. Do not vary Taylor order, domain, and epsilon_d together
+%% when estimating a perturbation rate unless the coupling is explicitly studied.
+%% [CHECK] Residual decay is not a proved solution-error bound. Such a bound
+%% needs stability/conditioning estimates and control of initial/boundary errors.
+%% Near-zero reference norms require an absolute or mixed error metric.
+%%
+%% [OBJECT] Stability is a separate question: w=w_*+delta*v perturbs a solution
+%% of a fixed PDE, whereas epsilon_d changes the PDE. Full perturbations need
+%% not lie in the invariant ansatz. Reduced-family stability cannot establish
+%% full-PDE stability. Distinguish linear/spectral evidence from nonlinear
+%% estimates; compare modulo translation phase for an orbital-stability claim.
+%% Conservation alone is not stability, and a PDE symmetry is not automatically
+%% a Noether conservation law without the required variational structure.
+
+Expected outputs are a documented model audit, verified generators and reductions, an exact or local-series benchmark, reproducible approximation code, and a comparison identifying when the neural remainder helps or fails. A negative result remains informative if it establishes that classical integration is preferable on the tested branches. Novelty will require a focused literature review; no global regularity or unrestricted PDE-solving claim is intended.
+%% [SCOPE] The eight earlier PDE targets were a research landscape, not eight
+%% certified unsolved equations or eight promised applications. Retain moment
+%% morphodynamics, roll-wave stability, two-layer flow, SGN interactions and
+%% shorelines, rotating flow, viscous SVE, and bed-slope transport as a backlog.
+%% [CHECK] Do not claim a Navier--Stokes breakthrough on the basis of the attached
+%% document; that document was not assessed as evidence in the brainstorming.
+%% [QUESTION] A defensible result may be a verified compatibility obstruction,
+%% a usable correction branch, or a fair negative neural comparison. Distinguish
+%% new findings from reproduced known reductions and formal calculations.
+
+An indicative twelve-week sequence is: weeks 1--3, formulation and source verification; weeks 4--6, Lie reduction and reconstruction; weeks 7--8, series and numerical benchmarks; weeks 9--10, neural experiments; weeks 11--12, evaluation and writing. The analytical milestones come first. If model equivalence or branch regularity remains unresolved, the scope will narrow to verified reductions before expanding the ML component.
+%% [SCOPE] Separate the TWO-DAY PROPOSAL-ASSEMBLY deadline from this indicative
+%% twelve-week research schedule. The former fixes a credible plan; it does not
+%% require completed numerical experiments or proofs within two days.
+%% Day 1: fix the model/question/regime, audit identities, and describe one
+%% reduction with its data and first-order compatibility if that route is used.
+%% Day 2: specify baselines/metrics, resolve scope wording, and finalize the
+%% 4--6 page, Times New Roman 12 pt, double-spaced submission with references.
+%% [DECISION] Before claiming a fully specified experiment, record: generator or
+%% equivalence action; nonconstant branch; physical parameters; local/matching
+%% data; regular domain; epsilon_d range; solver type; and comparison budget.
+%% [CHECK] Method dependency: model/data -> verified symmetry -> chosen branch
+%% -> correction hierarchy -> compatibility/data check -> conventional solve
+%% -> neural approximation -> reconstruction -> residual/error/cost evaluation.
+%% If compatibility fails, revise the branch/data/ansatz before training.
+%% Earlier comments alone did not alter pagination; the current terminology
+%% revision changes printable text, so the 4--6-page layout needs rechecking.
+% TODO: Replace the indicative schedule with the agreed project duration.
+% TODO: State the precise novelty claim only after the targeted literature review.
+
+\newpage
+\begin{thebibliography}{9}
+%% [REFERENCES] Targeted additions to consider if the perturbation/neural scope
+%% is adopted; these are commented suggestions, not new printable citations.
+%% Approximate-symmetry precedent: R. Di Salvo, M. Gorgone, F. Oliveri,
+%% "A consistent approach to approximate Lie symmetries of differential
+%% equations," Nonlinear Dynamics 91, 371--386 (2018).
+%% https://doi.org/10.1007/s11071-017-3875-5 ; https://arxiv.org/abs/2108.02169
+%% Distinguish the 2018 publication from the later arXiv posting date.
+%% Symmetry-informed neural precedent: T. Akhound-Sadegh et al.,
+%% "Lie Point Symmetry and Physics Informed Networks," NeurIPS 2023.
+%% https://arxiv.org/abs/2311.04293
+%% Optional background: B. Blazquez-Sanz, J. J. Morales-Ruiz, J.-A. Weil,
+%% "Differential Galois Theory and Lie Symmetries" (2015).
+%% https://arxiv.org/abs/1503.09023
+%% [CHECK] A targeted novelty audit must compare the exact model, perturbation,
+%% chosen solution family, compatibility treatment, and numerical evaluation.
+%% Earlier search summaries do not establish that a precise problem is still
+%% open. Add references only where they support a claim in the final text.
+\setlength{\itemsep}{3pt}
+\setlength{\parskip}{0pt}
+\bibitem{sve}
+A. Paliathanasis, G. Leon, and P. G. L. Leach.
+``Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables.''
+\emph{Mathematics}, 14(3), 433, 2026.
+\href{https://doi.org/10.3390/math14030433}{doi:10.3390/math14030433}.
+
+\bibitem{shear}
+S. Mandal, S. Sil, and S. Ghosh.
+``On the Lie symmetry analysis of three-dimensional perturbed shear flows.''
+\emph{Chaos, Solitons \& Fractals}, 191, 115875, 2025.
+\href{https://doi.org/10.1016/j.chaos.2024.115875}{doi:10.1016/j.chaos.2024.115875}.
+
+\bibitem{hudson}
+J. Hudson and P. K. Sweby.
+``Formulations for Numerically Approximating Hyperbolic Systems Governing Sediment Transport.''
+\emph{Journal of Scientific Computing}, 19, 225--252, 2003.
+\href{https://doi.org/10.1023/A:1025304008907}{doi:10.1023/A:1025304008907}.
+
+\bibitem{olver}
+P. J. Olver. \emph{Applications of Lie Groups to Differential Equations}.
+Second edition, Springer, 1993.
+\href{https://doi.org/10.1007/978-1-4612-4350-2}{doi:10.1007/978-1-4612-4350-2}.
+
+\bibitem{lagaris}
+I. E. Lagaris, A. Likas, and D. I. Fotiadis.
+``Artificial Neural Networks for Solving Ordinary and Partial Differential Equations.''
+\emph{IEEE Transactions on Neural Networks}, 9(5), 987--1000, 1998.
+\href{https://doi.org/10.1109/72.712178}{doi:10.1109/72.712178}.
+
+%% Use \cite{pinn} for this bibliography entry; \ref{pinn} is not a citation.
+\bibitem{pinn}
+S. Cuomo et al.
+``Scientific Machine Learning Through Physics--Informed Neural Networks: Where we are and What's Next.''
+\emph{Journal of Scientific Computing}, 92, 88, 2022.
+\href{https://doi.org/10.1007/s10915-022-01939-z}{doi:10.1007/s10915-022-01939-z} (open access).
+\end{thebibliography}
+\end{document}

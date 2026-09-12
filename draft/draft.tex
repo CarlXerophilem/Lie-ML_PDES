@@ -1,296 +1,672 @@
-\documentclass[11pt]{article}
-
+% Submission-style pre-study manuscript, 12 September 2026.
+% Core claim/history register: research_record.md. Preserve claims and evidence.
+% Earlier manuscript retained verbatim in proposal_support/archive/before_2027_submit_writeup/.
+\documentclass[11pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amssymb, amsfonts, amsthm}
-\usepackage{enumitem}
-\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
-
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{amsmath,amssymb,amsthm,booktabs,enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlist{itemsep=2pt,topsep=3pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\g}{\mathfrak{g}}
-
-\title{\bf Symmetry as Reduction, Not Bias:\\
-a certified, resumable symmetry engine and a\\
-reducibility index for partial differential equations}
-\author{LieML project --- working draft}
-\date{2026-06-26}
-
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathcal E}
+\newcommand{\norm}[1]{\left\|#1\right\|_\infty}
+\makeatletter
+\let\tableinput\@@input
+\makeatother
+\input{proposal_support/lagrange_evidence/pilot_values.tex}
+\title{Lie-Symmetry Reduction and Taylor--PINN Approximation\\
+of a Lagrangian Shallow-Water Equation}
+\author{Carl\\WKU MATH 4890}
+\date{Pre-study manuscript for an eight-week undergraduate project in 2027\\
+Preparatory evidence: 12 September 2026}
+\hypersetup{pdftitle={Lie-Symmetry Reduction and Taylor-PINN Approximation of a Lagrangian Shallow-Water Equation},pdfauthor={Carl}}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Modern surveys of PDE solvers compare classical, machine-learning (ML), and hybrid families across
-cost, mesh-dependence, uncertainty quantification, nonlinearity, and theory guarantees, and conclude
-that every family is limited on some axis. We make two observations. First, \emph{exact analytical
-reduction by Lie symmetry is absent from that taxonomy} --- it is mesh-free, data-free,
-dimension-reducing, and provably exact, precisely where numerical and ML methods are weak, yet it is
-not treated as a solver family. Second, the existing ``Lie${+}$ML'' literature is bottlenecked by a
-single design choice: it uses symmetry as an \emph{ML inductive bias} (a loss penalty, an
-equivariant architecture, or a canonicalization), which produces dead training signals, non-compact
-group costs, and a data-versus-structure ambiguity that the papers themselves concede. We argue for
-using symmetry the classical way --- as a \emph{reduction and coordinate device} --- and we
-operationalize it as a \emph{resumable, iterative differential-elimination engine} that
-auto-discovers a scalar PDE's point-symmetry algebra, emits residual-zero reductions to ODEs, and
-saves \emph{every} outcome, including ``no symmetry,'' as a reproducible \emph{reducibility record}.
-The record carries an exact, basis-independent dimension and algebra type (genuine invariants) and a
-metric \emph{defect} and \emph{reducibility index} (a reproducible diagnostic relative to a declared
-parameter tuple). We give precise, implementation-independent definitions of these quantities, place
-the engine inside a reduce--close--certify--correct pipeline, and state a falsifiable validation
-gate against closed-form similarity solutions. The contribution is a positioning and a precise,
-verifiable construction; empirical results are forthcoming.
+We study a selected invariant family of the third-order Lagrangian master equation introduced by Paliathanasis, Leon and Leach (2026). For cubic sediment-flux exponent, the invariant $\sigma=st^2$ reduces the printed equation to a regular third-order profile ODE away from an explicit leading-coefficient zero set. We derive the reduction directly, prove an exact residual-lifting identity, and give a conditional a-posteriori continuation and error estimate. Exact rational interval arithmetic establishes a state Lipschitz constant of 15 on a specified slope--curvature box. These results support a comparison of Taylor polynomials, adaptive integration and hard-initial-data Taylor--PINN profiles. Preparatory symbolic checks, a classical numerical pilot and two short CPU neural runs are reported separately from the planned 2027 multi-seed study. The neural runs show different rankings for profile error and residual, so neither higher Taylor order nor lower sampled residual establishes superior approximation. A chain-rule audit also distinguishes the printed master equation from the usual Eulerian sediment-transport model: an exact solution of the former need not satisfy the latter. The contribution is a source-specific, reproducible reduction and verification study, not a new symmetry classification, general PDE solver or established neural performance advantage.
 \end{abstract}
 
-\tableofcontents
+\section{Introduction and Mathematical Problem}\label{sec:problem}
+Lie symmetry reduction restricts a PDE to solutions unchanged by a selected continuous transformation. Its benefit is exact removal of an independent variable; its limitation is restriction to a special solution family \cite{olver}. We use this classical operation before numerical approximation. The project is deliberately limited to one equation, one principal reduction and one small family of profile data.
 
-\section{Introduction}
+Our primary source is Paliathanasis, Leon and Leach \cite{lagrange}. Its printed Equation (7), with dimensionless fixed parameters $g,\beta>0$, is
+\begin{equation}
+\E_m[\phi]:=
+\partial_t\left(\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2}\right)
+-g\beta\partial_s\left(\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right)=0.
+\label{eq:master}
+\end{equation}
+Here $\phi(t,s)$ is particle position, $t$ is time and $s$ is a fluid-mass label. On a regular positive branch,
+\begin{equation}
+x=\phi(t,s),\qquad u=\phi_t>0,\qquad h=\phi_s^{-1}>0.
+\label{eq:map}
+\end{equation}
+The source parameter is $\beta=mA_g\xi$, not $A_g\xi$, for sediment flux $Q=A_gu^m$. We fix $m=3$, $g=1$ and $\beta=1/10$ in all principal numerical experiments.
 
-A partial differential equation (PDE) is hard for two structural reasons: it has many independent
-variables, and an enormous solution space. Numerical methods (finite elements, finite volumes,
-spectral methods) discretize that space; machine-learning methods (physics-informed networks,
-neural operators) regress it. A recent critical synthesis catalogues these families across the axes
-\emph{computational cost}, \emph{mesh-adaptivity}, \emph{uncertainty quantification (UQ)},
-\emph{nonlinearity handling}, and \emph{theory guarantees}, and argues that the field divides
-epistemologically: classical methods are \emph{deductive} (they carry a-priori and a-posteriori
-error bounds derived from PDE regularity, but suffer the curse of dimensionality, mesh-generation
-cost, and the need to know the physics in advance), while ML methods are \emph{inductive} (flexible
-and mesh-free, but lacking certified bounds, data-hungry, and prone to out-of-distribution failure).
-Every family is limited on some axis.
+\paragraph{Specific problem.}
+Using the source's cubic scaling $X_5=t\partial_t-2s\partial_s$, seek
+\begin{equation}
+\phi(t,s)=F(\sigma),\qquad \sigma=st^2,\qquad
+\sigma\in I=[1,3/2].
+\label{eq:ansatz}
+\end{equation}
+The profile satisfies the reduced initial-value problem
+\begin{equation}
+a(\sigma,F')F'''+b(\sigma,F',F'')=0,\qquad
+\bigl(F,F',F''\bigr)(1)=
+\left(K,\frac K3,-\frac{2K}{9}(1+\delta)\right),
+\quad K=\sqrt[3]{45},
+\label{eq:ivp}
+\end{equation}
+with $\delta=0$ as an exact control and $\delta=0.01$ as a perturbed-profile test. Coefficients $a,b$ are derived in Section~\ref{sec:reduction}. The symbol $\delta$ changes curvature data, not the exponent $m$. These are profile initial data on the similarity coordinate, not arbitrary time-initial or boundary data for the full PDE.
 
-This paper starts from a single conspicuous absence in that taxonomy and a single recurring
-bottleneck in the literature that tries to repair it.
+For reconstruction define
+\begin{equation}
+\Omega=\{(t,s):1\le t\le5/4,\ 1\le st^2\le3/2\}.
+\label{eq:domain}
+\end{equation}
+For an approximation $\widehat F$, the quantities to distinguish are
+\begin{equation}
+e_F=\|\widehat F-F_{\rm ref}\|_{\infty,I},\quad
+e_Y=\|(\widehat F,\widehat F',\widehat F'')-Y_{\rm ref}\|_{\infty,I},
+\quad
+\rho=\|\E_3[\widehat F(st^2)]\|_{\infty,\Omega}.
+\label{eq:metrics}
+\end{equation}
+A grid maximum is denoted explicitly as sampled; it is not substituted for any supremum in a theorem. The research question is whether a small Taylor--PINN trial improves a declared error--cost trade-off over finite Taylor polynomials and classical integration, while maintaining regularity. The answer may be negative.
 
-\paragraph{The missing column.} Classical \emph{analytical reduction} by Lie symmetry --- the
-systematic art of using a continuous symmetry to remove an independent variable and collapse a PDE
-to an ordinary differential equation (ODE) --- does not appear as a solver family in the survey. The
-only ``Lie'' entry concerns geometric integrators, i.e.\ integration \emph{on} a Lie group, not
-symmetry reduction \emph{of} the PDE. Yet reduction inverts nearly every weakness in the table: it
-is mesh-free, introduces no discretization error, requires no data, reduces dimension, and yields
-\emph{provably exact} solutions even for strongly nonlinear equations. Its honest catch is
-narrowness: it reaches only \emph{special}, group-invariant solutions, and only when a compatible
-symmetry exists.
+\paragraph{Evidence and scope.}
+The selected scaling and power-law family are prior work. We independently verify the formulas needed here, rather than adopting every printed reduction or the completeness of the source's classification. The main target remains the printed equation~\eqref{eq:master}, as approved for this project. Physical-model correction, shock treatment, maximal symmetry discovery and general PDE well-posedness are outside the eight-week scope.
 
-\paragraph{The recurring bottleneck.} A body of recent work fuses Lie symmetry with ML. Read
-carefully, its limitations all stem from one design choice --- treating symmetry as an \emph{ML
-inductive bias}:
-\begin{itemize}[nosep]
-  \item \textbf{Dead training signal.} Lie-point-symmetry loss terms frequently collapse to $0$ or
-        a multiple of the PDE residual, providing no gradient; the proposed evolutionary-symmetry
-        repair is stated as a hypothesis and tested on a handful of equations
-        \cite{akhound,genlie}.
-  \item \textbf{Non-compact groups.} Equivariant operators are built for compact/finite groups
-        \cite{gfno}; the PDE-relevant groups (scaling, Galilean, conformal) are non-compact, and the
-        one method that handles arbitrary groups pays a $5\text{--}30\times$ inference cost with
-        in-distribution regressions \cite{lielac}.
-  \item \textbf{Data versus structure.} The same accuracy gains are reachable ``by increasing the
-        sample size,'' a point conceded as a limitation \cite{akhound}; whether symmetry is a
-        \emph{fundamental} advantage or a \emph{data proxy} is unresolved.
-  \item \textbf{No certificates, narrow coverage.} The fusion papers test few PDEs and ship no error
-        bound, and crucially \emph{none automates the prerequisite analytic derivation of the
-        symmetry}.
-\end{itemize}
+\section{Relationship to Prior Work}\label{sec:prior}
+Nagesh et al.~\cite{taylor} construct Taylor-model PINNs by combining Taylor expansions with neural remainders and deriving remainder dynamics. Their Section 3.1 and Theorems 4--6 provide direct methodological precedent. Their implementation works with an ODE state and avoids the higher neural derivatives used in our scalar third-order residual. Consequently our construction is not a reproduction of their complete method, and their error guarantees do not automatically transfer. Their reported longer-horizon deterioration and additional per-epoch cost also preclude an assumed advantage.
 
-\paragraph{Thesis.} Use symmetry the classical way. As a \emph{reduction and coordinate device},
-symmetry sidesteps the entire bottleneck cluster: there is no symmetry-loss term to collapse, no
-equivariant layer to pay for, and no data. What remains is to \emph{automate} the one step every
-fusion paper leaves manual --- discovering the symmetry and performing the reduction --- and to be
-honest about reduction's own narrowness by \emph{quantifying} it. We contribute:
-\begin{enumerate}[nosep]
-  \item a \emph{resumable, iterative differential-elimination engine} that auto-discovers a scalar
-        $(1{+}1)$ PDE's Lie point-symmetry algebra and emits residual-zero reductions
-        (Section~\ref{sec:engine});
-  \item a \emph{reducibility record} that saves every outcome --- including ``unsolvable'' --- as a
-        structured object, turning ``no symmetry'' into a \emph{position} rather than a failure
-        (Section~\ref{sec:record});
-  \item precise, implementation-independent definitions of a \emph{defect} and a \emph{reducibility
-        index}, separating exact invariants from a reproducible metric diagnostic
-        (Section~\ref{sec:defs});
-  \item a falsifiable validation gate against closed-form similarity solutions
-        (Section~\ref{sec:validation}).
-\end{enumerate}
+Residual collocation follows the standard PINN framework \cite{pinn}. Akhound-Sadegh et al.~\cite{liepinn} introduce symmetry-informed losses and discuss useful, zero and redundant generator contributions in specific experiments. Shah et al.~\cite{shah} instead transform collocation points for Burgers-type problems. Neither source supports the assertion that all symmetry-informed learning fails. Our distinction is narrower: an invariant representation is fixed analytically before a profile is learned.
 
-\section{Background: reduction, and the inductive-bias bottleneck}
-\label{sec:background}
+McGreivy and Hakim \cite{baselines} motivate efficient classical baselines, matched-accuracy comparisons and transparent training costs. They do not require exclusively closed-form references or prohibit numerical reference solutions. We therefore separate an exact control, a highly accurate cross-checked reference, and a practically tuned integration baseline. Combining established ingredients is not, by itself, evidence of novelty.
 
-\paragraph{Lie symmetry reduction in one paragraph.} A one-parameter symmetry of a PDE is generated
-by a vector field $X=\tau\,\partial_t+\xi\,\partial_x+\varphi\,\partial_u$. Prolonging $X$ to act on
-derivatives and demanding it preserve the solution set gives the infinitesimal criterion
-$\mathrm{pr}^{(k)}X(\Delta)\big|_{\Delta=0}=0$, which, split on the free jet monomials, becomes a
-linear, overdetermined \emph{determining system} for $(\tau,\xi,\varphi)$. Its solution space is the
-finite-dimensional symmetry algebra $\g$. Each generator supplies invariants --- a similarity
-variable $z$ and a dependent invariant --- whose substitution collapses the PDE to an ODE, recovering
-travelling-wave and self-similar solutions exactly. The output is closed-form and mesh-free; the
-structure is exact, not discretized.
+\section{Model Audit and Bed Reconstruction}\label{sec:audit}
+For comparison only, the source's Eulerian equations on $h>0$ can be written
+\begin{equation}
+h_t+(hu)_x=0,\qquad
+u_t+uu_x+g(h+B)_x=0,\qquad
+B_t+\beta u^{m-1}u_x=0.
+\label{eq:euler}
+\end{equation}
+The primitive momentum equation is equivalent to the printed conservative momentum balance when mass conservation and $h>0$ hold. Let the usual bed pullback be $\widetilde B(t,s)=B(t,\phi(t,s))$. The chain rule gives
+\begin{equation}
+\partial_x=\phi_s^{-1}\partial_s,\qquad
+(\partial_t)_x=(\partial_t)_s-\frac{\phi_t}{\phi_s}\partial_s.
+\label{eq:chain}
+\end{equation}
+Thus the physical Exner equation becomes
+\begin{equation}
+\widetilde B_t-\frac{\phi_t}{\phi_s}\widetilde B_s+
+\beta\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}=0.
+\label{eq:physicalbed}
+\end{equation}
+The transport term is absent from printed Equation (6) of \cite{lagrange}. This is a precise inconsistency under the stated pullback, not a conclusion about an unspecified alternative transformed bed variable.
+Appendix~\ref{app:sve2d} gives the corresponding physical system with two horizontal spatial coordinates and derives its Eulerian--Lagrangian transformation. It is background for this audit, not an expansion of the principal research problem.
 
-\paragraph{Why the ML fusion stalls.} The bottlenecks of Section~1 are not incidental: they follow
-from inserting symmetry into a \emph{statistical} learner. A symmetry-loss penalty is only as useful
-as its gradient, which vanishes exactly when the prolonged generator annihilates the residual; an
-equivariant architecture must represent the group action in its weights, which is tractable for
-compact groups and expensive or impossible otherwise; data augmentation by symmetry is, by
-construction, a way to manufacture more samples. Reduction has none of these failure modes because it
-never enters the learner: it acts on the \emph{equation}, in closed form, before any model is
-trained.
+Set
+\begin{equation}
+A=\phi_s\phi_{tt}-g\phi_{ss}/\phi_s^2,\qquad
+q=\phi_t^{m-1}\phi_{ts}/\phi_s.
+\label{eq:Aq}
+\end{equation}
+The printed momentum and bed equations specify
+\begin{equation}
+\widetilde B_s=-A/g,\qquad \widetilde B_t=-\beta q.
+\label{eq:printedpair}
+\end{equation}
 
-\section{Symmetry as reduction: the engine}
-\label{sec:engine}
-
-We realize reduction as a small, auditable engine with one trustworthy rule: \emph{correctness is the
-symbolic residual-zero check, never a learned heuristic.}
-
-\paragraph{Iterative differential elimination.} From the generic generator with
-$\tau,\xi,\varphi$ polynomial in $(x,t,u)$ of degree $\le D$, the prolongation and the on-shell
-substitution (solve $\Delta=0$ for the leading time derivative) produce a residual that is
-\emph{linear} in the ansatz coefficients $c$. Splitting it on the free jet monomials yields the
-\emph{determining matrix} $A$ over $\Q$. The algebra is $\ker_\Q A$; the engine computes it by exact
-rational elimination and \emph{iterates the degree} $D$ until the dimension stabilizes. The
-differential content lives in forming the determining system (prolongation and jet-monomial
-splitting); the solving is exact elimination. A full step-by-step Rosenfeld--Gr\"obner reduction and
-a computer-algebra hand-off remain the documented escape hatch for systems beyond the engine's scope.
-
-\paragraph{Resumability.} The engine is a deterministic state machine that checkpoints after every
-degree step, serializing its symbolic state exactly. An interrupted run resumes from the last
-checkpoint and reproduces the uninterrupted result bit-for-bit. The same mechanism that makes the
-engine resumable also makes the ``unsolvable'' outcome a first-class saved object: the final
-checkpoint \emph{is} the reducibility record.
-
-\paragraph{Reduction.} For each discovered generator the engine integrates the characteristic system
-$dt/\tau=dx/\xi=du/\varphi$ to obtain invariants, substitutes the resulting ansatz into the PDE, and
-\emph{accepts the reduction only if the residual is identically zero}. Translation combinations give
-travelling waves; scaling generators give self-similar profiles.
-
-\section{The reducibility record}
-\label{sec:record}
-
-Every run terminates in a record, never a bare failure. Beyond the exact algebra and the
-residual-zero reductions, the record carries a \emph{signature} (dimension, algebra type, structure
-constants), a \emph{defect}, a \emph{reducibility index}, a \emph{status}
-(\textsc{certified}/\textsc{partial}/\textsc{latent-only}), and the parameter tuple under which the
-metric quantities were computed. A barren PDE is saved as \textsc{latent-only} with a recorded defect
-and index --- available later as labelled training data for a learned ranker. ``Unsolvable'' becomes
-a coordinate, not a discard. This realizes a deliberate stance: \emph{never label a problem
-``unsolved''; position it.}
-
-\section{Definitions: defect and reducibility index}
-\label{sec:defs}
-
-We separate what is an exact invariant from what is a reproducible diagnostic.
-
-\paragraph{Setup.} Fix the ansatz degree $D$; the coefficient vector $c\in\R^{p}$,
-$p=3\binom{D+3}{3}$, parametrizes $(\tau,\xi,\varphi)$. The on-shell symmetry residual $R(X)$ is
-linear in $c$; expanded on the base and free-jet monomials it gives the determining equations and the
-matrix $A\in\Q^{N\times p}$ with $A_{\alpha i}=\partial P_\alpha/\partial c_i$.
-
-\begin{definition}[Exact part --- invariants]
-$\dim_D=p-\operatorname{rank}_\Q(A)$ (exact rational rank, no tolerance), and the algebra type
-(abelian/nilpotent/solvable/semisimple, with the derived-dimension sequence) read off the structure
-constants of $\ker_\Q A$. Both are basis-independent invariants.
-\end{definition}
-
-\begin{definition}[Metric part --- the defect]
-With symmetric positive-definite inner products $W_V$ on $\R^{p}$ and $W_E$ on $\R^{N}$, set
-$\hat A=W_E^{1/2}AW_V^{-1/2}$ and
+\begin{proposition}[Reconstruction for the printed pair]\label{prop:bed}
+Let $U$ be a simply connected open region and $\phi\in C^3(U)$ with $\phi_s>0$ and $\phi_t>0$. Then $\E_m[\phi]=0$ if and only if the one-form
 \[
-\delta=\frac{\sigma_{\min}(\hat A)}{\sigma_{\max}(\hat A)}\in[0,1],
+\omega=-\beta q\,dt-(A/g)\,ds
 \]
-the reciprocal $2$-norm condition number. Here $\sigma_{\min}(\hat A)=\min_{\|c\|_{W_V}=1}\|\hat A
-c\|_{W_E}$ is the residual of the best normalized near-symmetry generator; $\delta=0$ iff an exact
-symmetry exists, and $\delta\in(0,1]$ measures distance to the nearest symmetry for a barren PDE.
-$\delta$ is invariant under $\Delta\mapsto\lambda\Delta$ and $X\mapsto\mu X$; with the Bombieri inner
-product it is additionally invariant under orthogonal changes of variables.
-\end{definition}
+is closed. In that case there exists a $C^2$ function $\widetilde B$ satisfying~\eqref{eq:printedpair}, unique up to an additive constant on $U$.
+\end{proposition}
+\begin{proof}
+The coefficient of $dt\wedge ds$ in $d\omega$ is
+$-A_t/g+\beta q_s=-\E_m/g$. Closedness is therefore exactly the master equation. A closed continuously differentiable one-form on a simply connected region is exact, giving $d\widetilde B=\omega$. Two such potentials have zero differential and differ by a constant.
+\end{proof}
 
-\begin{definition}[Reducibility index]
-With target depth $d^\ast$ (default $2$ for scalar $(1{+}1)$),
+\begin{remark}
+This proposition reconstructs the printed pair, not~\eqref{eq:physicalbed}. Restoring transport yields the different compatibility equation
 \[
-\rho=
-\begin{cases}
-0.5+0.5\,\min(\dim_D/d^\ast,1), & \dim_D\ge1 \quad(\text{reducible},\ \rho\in[0.5,1]),\\
-0.5\,(1-\delta), & \dim_D=0 \quad(\text{barren},\ \rho\in[0,0.5)).
-\end{cases}
+\E_m[\phi]-\partial_s(\phi_tA/\phi_s)=0.
 \]
-The value $0.5$ marks ``has an exact symmetry.'' Reducible $\rho$ is exact; only the barren branch
-uses the metric $\delta$.
-\end{definition}
-
-\begin{remark}[Invariant vs.\ diagnostic, stated honestly]
-$\dim_D$ and the algebra type are genuine invariants. The defect $\delta$ (hence the barren $\rho$)
-is a \emph{reproducible diagnostic relative to} the declared tuple
-$\pi=(D,\ \text{on-shell rule},\ W_V,\ W_E,\ d^\ast)$ --- not yet a PDE invariant, because it depends
-on the ansatz and metric. The route to a genuine invariant is explicit: the Bombieri inner product
-plus the $D\to\infty$ stabilization limit.
+Its use would require a separate model/reduction study. A small nonzero master residual also does not itself guarantee a path-independent approximate bed.
 \end{remark}
 
-\section{Pipeline context}
-\label{sec:pipeline}
+\subsection{Exact Negative Control}\label{sec:negative}
+For $m=3$, $g=\beta=1$, take
+\begin{equation}
+\phi=-\log(2-s-t),\qquad
+\widetilde B=s-\frac{1}{2(2-s-t)^2},\qquad 0\le s+t\le1.
+\label{eq:wave}
+\end{equation}
+Direct differentiation shows $\phi_s=\phi_t=(2-s-t)^{-1}>0$ and all three printed residuals, including~\eqref{eq:master}, vanish. In Eulerian coordinates this gives
+\begin{equation}
+h=e^{-x},\qquad u=e^x,\qquad
+B=2-t-e^{-x}-\tfrac12e^{2x}.
+\end{equation}
+Mass and momentum residuals in~\eqref{eq:euler} are zero, but
+\begin{equation}
+B_t+u^2u_x=e^{3x}-1\not\equiv0.
+\label{eq:counterexample}
+\end{equation}
+The verification script checks each expression symbolically. This negative result is retained throughout the study.
 
-The engine is the front end of a four-stage programme: \textbf{reduce} the PDE by symmetry to an ODE;
-\textbf{close} the reduced ODE with a homotopy-analysis series when it is not elementary;
-\textbf{certify} the series with a theorem-backed convergence-and-error certificate on the reduced
-equation; and \textbf{correct} the remainder with a small symmetry-invariant network expressed in
-invariant coordinates. Working in invariant coordinates is what makes the network equivariant by
-construction --- the dead-signal pathology of the inductive-bias approaches is \emph{structurally
-absent}, not penalized. The reducibility record is the contract between the front end and the rest of
-the pipeline: \textsc{certified} hands a clean ODE downstream, \textsc{latent-only} flags an
-out-of-scope problem honestly.
+\section{Cubic Symmetry Reduction}\label{sec:reduction}
+\begin{proposition}[Selected cubic symmetry]\label{prop:symmetry}
+The transformation generated by $X_5=t\partial_t-2s\partial_s$ preserves~\eqref{eq:master} at $m=3$, wherever both transformed and original expressions are defined. Its invariant profiles on $t,s>0$ have the form~\eqref{eq:ansatz}.
+\end{proposition}
+\begin{proof}
+The graph action is $(T_\epsilon\phi)(t,s)=\phi(e^{-\epsilon}t,e^{2\epsilon}s)$. The first term in~\eqref{eq:master} gains factor $e^{-\epsilon}$, and the second gains $e^{(2-m)\epsilon}$. At $m=3$ both factors agree, so
+$\E_3[T_\epsilon\phi]=e^{-\epsilon}T_\epsilon(\E_3[\phi])$.
+The invariant-surface condition $t\phi_t-2s\phi_s=0$ has characteristic invariant $st^2$, giving $\phi=F(st^2)$.
+\end{proof}
+We verify this particular source symmetry; no maximality statement is needed. The finite experimental domain~\eqref{eq:domain} is a restriction of the invariant family, not a claim that every group element preserves its boundary.
 
-\section{Validation plan}
-\label{sec:validation}
+\begin{theorem}[Exact profile reduction and residual lift]\label{thm:reduction}
+Let $F\in C^3(I)$, $r=F'>0$, $v=F''$, $t>0$ and $\sigma=st^2\in I$. Define
+\begin{align}
+a(\sigma,r)&=8(1-g\beta)\sigma^3r-\frac{2g\sigma}{r^2},\label{eq:a}\\
+b(\sigma,r,v)&=4\sigma(1-4g\beta)r^2
++8\sigma^2(3-5g\beta)rv
++\left(8\sigma^3(1-g\beta)+\frac{4g\sigma}{r^3}\right)v^2.
+\label{eq:b}
+\end{align}
+Then
+\begin{equation}
+\E_3[F(st^2)]=t^{-1}R[F],\qquad R[F]=a(\sigma,F')F'''+b(\sigma,F',F'').
+\label{eq:lift}
+\end{equation}
+If $a\ne0$, the reduced equation is the regular state system
+\begin{equation}
+Y'=G(\sigma,Y),\qquad Y=(F,r,v),\qquad
+G=(r,v,f),\qquad f=-b/a.
+\label{eq:state}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Differentiation gives
+\[
+\phi_s=t^2r,\quad \phi_t=2\sigma r/t,\quad
+\phi_{ss}=t^4v,\quad \phi_{tt}=(2\sigma r+4\sigma^2v)/t^2,\quad
+\phi_{ts}=2t(r+\sigma v).
+\]
+Hence $A=2\sigma r^2+4\sigma^2rv-gv/r^2$ and
+$q=t^{-3}C$, where $C=8\sigma^2r(r+\sigma v)$.
+At fixed $s$, $\partial_tA=2\sigma A'/t$; at fixed $t$,
+$\partial_sq=C'/t$. Therefore
+$t\E_3=2\sigma A'-g\beta C'$. Expanding and collecting the coefficient of
+$v'=F'''$ yields exactly~\eqref{eq:a}--\eqref{eq:b}. Dividing by $a$ is legitimate only on the declared regular branch.
+\end{proof}
 
-We adopt a falsifiable gate (``M1''): from scratch, the engine must recover the Burgers
-five-dimensional point-symmetry algebra and the porous-medium scaling family, emit residual-zero
-reductions, reject a non-symmetry, and resume after an interruption to a bit-identical record. An
-independent numerical cross-check (singular-value nullity of $\hat A$) must agree with the exact
-rational dimension; a disagreement is reported as a completeness flag rather than hidden. All claims
-are validated against \emph{closed-form} oracles --- the Cole--Hopf tanh kink for Burgers, the
-Barenblatt profile for the porous medium, the Ablowitz--Zeppetella front for Fisher--KPP --- never
-against self-generated numerical reference solutions, following the strong-baseline discipline urged
-by recent critiques of the ML-for-PDE literature. Empirical results are reported in a companion
-once the engine passes the gate.
+The excluded set is explicit:
+\begin{equation}
+a=0\quad\Longleftrightarrow\quad
+4(1-g\beta)\sigma^2r^3=g.
+\label{eq:rankdrop}
+\end{equation}
+It must not be removed by cancellation or crossed without a new analysis.
 
-\section{Related work}
-\label{sec:related}
+\begin{proposition}[Positive power-law control]\label{prop:control}
+If $g\beta<1/4$, then, for any constant $C_0$,
+\[
+F_0=C_0+K\sigma^{1/3},\qquad K^3=\frac{27g}{1-4g\beta},\quad K>0,
+\]
+satisfies $R[F_0]=0$, $F_0'>0$, and
+\begin{equation}
+a(\sigma,F_0')=2K\sigma^{7/3}>0\qquad(\sigma>0).
+\label{eq:exacta}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Substitution gives
+$R[F_0]=-4(4K^3g\beta-K^3+27g)/(81K\sigma^{1/3})$,
+which vanishes by the root relation. The slope is
+$K\sigma^{-2/3}/3$. Substituting this slope into~\eqref{eq:a}
+and using the same root relation gives~\eqref{eq:exacta}.
+\end{proof}
+The family and root relation occur in \cite[Section 3.4]{lagrange}.
+Equation~\eqref{eq:exacta} records the regularity required for our chosen control. This smooth positive-domain calculation is not a shock construction.
 
-Symmetry methods for differential equations are classical \cite{olver,hydon}; differential
-elimination for determining systems is well developed \cite{boulier}. The ML side spans
-data-augmentation \cite{lpsda}, symmetry-loss penalties \cite{akhound,genlie}, equivariant operators
-\cite{gfno}, and canonicalization \cite{lielac}; we have argued these share an inductive-bias
-bottleneck. Solvers that build exact symmetry solutions and fit only the data --- closest in spirit
-to this work --- exist for linear homogeneous PDEs \cite{liesolver}, but require a seed solution and
-do not automate symmetry discovery or quantify reducibility. To our knowledge, packaging a
-\emph{reducibility index} that positions any PDE on a continuum from exactly reducible to
-structureless, with an exact invariant backbone, is new.
+\section{Conditional Error Control}\label{sec:theory}
+All state norms in this section are infinity norms. The mathematical result is an application of classical ODE theory, not a new general error theorem.
 
-\section{Limitations and outlook}
-\label{sec:limits}
+\begin{proposition}[Conditional residual estimate]\label{prop:gronwall}
+Let an exact solution $Y$ of~\eqref{eq:state} and a trial
+$\widehat Y=(\widehat F,\widehat F',\widehat F'')$, $\widehat F\in C^3(I)$,
+remain in a common region on which $G$ is uniformly $L$-Lipschitz in the state. Suppose
+\[
+\|\widehat Y(1)-Y(1)\|_\infty\le e_0,\qquad
+|\widehat F'''-f(\sigma,\widehat F',\widehat F'')|\le\varepsilon
+\quad\hbox{for every }\sigma\in I.
+\]
+Then, for $z=\sigma-1$,
+\begin{equation}
+\|\widehat Y(\sigma)-Y(\sigma)\|_\infty
+\le e_0e^{Lz}+\varepsilon\frac{e^{Lz}-1}{L},
+\label{eq:gronwall}
+\end{equation}
+with the quotient interpreted as $z$ when $L=0$.
+\end{proposition}
+\begin{proof}
+The trial state satisfies $\widehat Y'=G(\sigma,\widehat Y)+(0,0,d)$ with $|d|\le\varepsilon$. Subtracting the integral equations yields
+$\|\widehat Y-Y\|\le e_0+\int_1^\sigma(L\|\widehat Y-Y\|+\varepsilon)\,d\rho$.
+The integral Gronwall inequality gives~\eqref{eq:gronwall}.
+\end{proof}
 
-The engine is scoped to scalar $(1{+}1)$ PDEs of low order and \emph{point} symmetries; nonclassical
-and approximate (Baikov--Gazizov--Ibragimov) symmetries, optimal-system classification, and
-$(2{+}1)$-D systems are future work behind stable interfaces. The differential-elimination loop is a
-degree-iterated linear elimination, not a full functional Rosenfeld--Gr\"obner reduction; the latter,
-with a computer-algebra hand-off, is the escape hatch for harder systems. The defect is, for now, a
-parameter-tagged diagnostic rather than a PDE invariant. None of these undercut the central claim:
-reduction is the deductive, mesh-free, data-free column the PDE-solver taxonomy is missing, and it is
-strongest exactly where the inductive-bias approaches are weakest --- provided we automate it and
-quantify, rather than hide, the slice on which it is silent.
+\subsection{A Computable Regularity Box}
+For the numerical parameters, let
+\begin{equation}
+\mathcal B=[17/20,5/4]\times[-17/20,-7/20]
+\quad\hbox{for }(r,v),\qquad I=[1,3/2].
+\label{eq:box}
+\end{equation}
+Here
+\begin{equation}
+f(\sigma,r,v)=
+-\frac{2(3r^5+25\sigma r^4v+9\sigma^2r^3v^2+5v^2)}
+{r(18\sigma^2r^3-5)}.
+\label{eq:rationalf}
+\end{equation}
 
-\begin{thebibliography}{9}
-\bibitem{refFoundational} Foundational references on symmetry reduction for partial differential equations.
-\bibitem{refRecent} Recent literature on machine learning methods for partial differential equations.
-\bibitem{refRelated} Related work combining Lie symmetry methods with machine learning.
-\bibitem{olver} P.~J.~Olver, \emph{Applications of Lie Groups to Differential Equations}, 2nd ed., Springer, 1993.
-\bibitem{hydon} P.~E.~Hydon, \emph{Symmetry Methods for Differential Equations}, Cambridge, 2000.
-\bibitem{boulier} F.~Boulier, D.~Lazard, F.~Ollivier, M.~Petitot, \emph{Representation for the radical of a finitely generated differential ideal} (Rosenfeld--Gr\"obner), ISSAC, 1995.
-\bibitem{akhound} A.~Akhound-Sadegh et al., \emph{Lie Point Symmetry and Physics-Informed Networks}, NeurIPS, 2023.
-\bibitem{genlie} \emph{Generalized Lie Symmetries in Physics-Informed Neural Operators}, arXiv:2502.00373.
-\bibitem{gfno} J.~Helwig et al., \emph{Group Equivariant Fourier Neural Operators for Partial Differential Equations}, arXiv:2306.05697.
-\bibitem{lielac} \emph{Lie Algebra Canonicalization: Equivariant Neural Operators under arbitrary Lie Groups}, arXiv:2410.02698.
-\bibitem{lpsda} J.~Brandstetter, M.~Welling, D.~Worrall, \emph{Lie Point Symmetry Data Augmentation for Neural PDE Solvers}, arXiv:2202.07643.
-\bibitem{liesolver} \emph{LieSolver: A PDE-constrained solver for IBVPs using Lie symmetries} (project corpus).
-\bibitem{synthesis} \emph{Partial Differential Equations in the Age of Machine Learning: A Critical Synthesis of Classical, Machine Learning, and Hybrid Methods} (project corpus).
-\end{thebibliography}
+\begin{proposition}[Verified box constants]\label{prop:box}
+On $I\times\mathcal B$,
+\[
+\frac{24217}{7225}\le a\le\frac{5691}{200},\qquad
+\|D_YG\|_\infty\le15.
+\]
+\end{proposition}
+\begin{proof}
+The derivative $a_r=8(1-g\beta)\sigma^3+4g\sigma/r^3$ is positive, and
+$a_\sigma=24(1-g\beta)\sigma^2r-2g/r^2$ is positive throughout this box.
+Evaluation at its two diagonal corners gives the stated endpoints.
+For the Jacobian, its row sums are $1,1,|f_r|+|f_v|$.
+Appendix~\ref{app:interval} gives the differentiated rational expressions and exact interval procedure. A Cartesian partition into $12^3$ rational boxes yields
+\[
+|f_r|+|f_v|
+\le\frac{7150105171934045737}{506087956699582464}
+<15.
+\]
+All interval operations use exact fractions, with strictly positive denominators. This is an upper enclosure, not a claim that the derivative maximum is attained at that value.
+\end{proof}
 
+\begin{theorem}[Conditional continuation certificate]\label{thm:certificate}
+Let $\widehat F\in C^3(I)$, and suppose its slope--curvature pair lies inside $\mathcal B$, at infinity-distance at least $\eta>0$ from $\partial\mathcal B$ throughout $I$. Suppose its normalized defect is uniformly bounded by $\varepsilon$, and let the desired initial state satisfy
+$\|Y_0-\widehat Y(1)\|_\infty\le e_0$. If
+\begin{equation}
+\Delta=e_0e^{15/2}+\frac{\varepsilon}{15}(e^{15/2}-1)<\eta,
+\label{eq:certificate}
+\end{equation}
+then the IVP with initial data $Y_0$ has a unique solution on $I$,
+its slope--curvature pair remains inside $\mathcal B$, and
+$\|Y-\widehat Y\|_{\infty,I}\le\Delta$.
+\end{theorem}
+\begin{proof}
+The strict inequality puts $Y_0$ in the regular region. Local existence and uniqueness follow from smoothness of~\eqref{eq:rationalf}. Until a hypothetical first exit of $(r,v)$ from $\mathcal B$, convexity of the box and Proposition~\ref{prop:box} permit Proposition~\ref{prop:gronwall} with $L=15$.
+The resulting error is strictly smaller than the trial's boundary margin, contradicting an exit. A solution cannot terminate earlier inside this region: $r,v$ remain bounded, and $F'=r$ bounds $F$ on the finite interval. The usual ODE continuation argument therefore extends the solution to the right endpoint.
+\end{proof}
+
+The matched-initial-data factor is
+$(e^{7.5}-1)/15\approx120.4695$. Thus even this verified constant can yield an unhelpful estimate. Neither a sampled residual nor a sampled margin discharges the theorem's uniform hypotheses. A failure of~\eqref{eq:certificate} is reported as inconclusive, not as proof that the approximation is wrong.
+
+\begin{corollary}[Residual and field reconstruction]\label{cor:lift}
+For a $C^3$ trial with $\widehat F'>0$ on $I$ and
+$\Omega_*=\{(t,s):0<t_{\min}\le t\le t_{\max},\ st^2\in I\}$,
+\[
+\|\E_3[\widehat F(st^2)]\|_{\infty,\Omega_*}
+\le t_{\min}^{-1}\|R[\widehat F]\|_{\infty,I}.
+\]
+If exact and trial slopes share a positive lower bound $r_{\min}$, then at the same labels $(t,s)$,
+\[
+|\widehat h-h|\le
+\frac{|\widehat F'-F'|}{t_{\min}^2r_{\min}^2},\qquad
+|\widehat u-u|\le\frac{2\max I}{t_{\min}}|\widehat F'-F'|.
+\]
+\end{corollary}
+\begin{proof}
+The first estimate is Theorem~\ref{thm:reduction}. The other two follow from
+$h=(t^2F')^{-1}$ and $u=2\sigma F'/t$.
+\end{proof}
+These are neither fixed-Eulerian-location field errors nor bed errors, and they do not certify~\eqref{eq:euler}.
+
+\section{Semi-Analytical Neural Method}\label{sec:method}
+Let $z=\sigma-1$ and write the initial state as $(F_*,r_*,v_*)$.
+The analytically determined Taylor coefficients are
+\begin{align}
+P_2(z)&=F_*+r_*z+\tfrac12v_*z^2,\\
+P_4(z)&=P_2(z)+\tfrac16 f_*z^3+
+\tfrac1{24}(f_\sigma+f_rv+f_vf)_*z^4.
+\label{eq:taylor}
+\end{align}
+Smoothness of $f$ on the regular branch justifies these local derivatives. A finite polynomial comparison is not a claim of convergence of an infinite Taylor series on $I$.
+
+Define the scalar trial
+\begin{equation}
+\widehat F_{\theta,N}=P_N(z)+z^{N+1}n_\theta(4z-1),
+\qquad N\in\{2,4\},
+\label{eq:trial}
+\end{equation}
+where $n_\theta$ has two tanh hidden layers of width 16 and a scalar linear output. It has 321 trainable parameters. Both trials enforce the three initial data exactly; $N=4$ also fixes the next two derivatives to their ODE values. The factors $z^3$ and $z^5$ change optimization conditioning as well as Taylor information. The comparison therefore concerns combined parameterizations, not the isolated causal effect of Taylor order.
+
+For training points $\sigma_j$, the objective is
+\begin{equation}
+\mathcal L_N(\theta)=\frac1{M}\sum_{j=1}^M
+\left[
+\widehat F_{\theta,N}'''(\sigma_j)
++\frac{b(\sigma_j,\widehat F_{\theta,N}',\widehat F_{\theta,N}'')}
+{a(\sigma_j,\widehat F_{\theta,N}')}
+\right]^2,\qquad M=128.
+\label{eq:loss}
+\end{equation}
+No reference solution labels enter this loss. All derivatives are taken from the single output $\widehat F$; independent auxiliary outputs cannot silently replace its derivatives. Both the normalized defect and raw residual $R$ are evaluated, since coefficient normalization changes their relative scales.
+
+\paragraph{Regularity and initialization.}
+The final neural layer is initialized to zero, so the initial trial is precisely $P_N$; hidden layers retain seeded random initialization. Computation uses float64 on one CPU thread. A sampled $F'\le0$, $|a|<10^{-6}$, nonfinite value or nonfinite gradient marks the run as failed. No denominator clipping is used. Such checks protect evaluated points, not the entire continuous interval.
+
+\paragraph{Comparison protocol.}
+The planned study compares $P_2$, $P_4$, DOP853 and the two neural trials for $\delta=0,0.01$. Neural seeds are $0,1,2$. Use 128 uniformly spaced training points and 1001 evaluation midpoints, which are distinct from those training points. Check endpoint initial data separately. Fix 5000 Adam steps with learning rate $10^{-3}$ followed by at most 200 L-BFGS iterations; report actual function evaluations and elapsed time, because identical iteration counts do not imply identical cost.
+
+A high-accuracy DOP853 reference is checked against Radau; an exact formula is available for $\delta=0$. For cost comparison, vary DOP853 tolerances to obtain a practical error--cost curve rather than timing only the over-resolved reference. Report every seed, failures, derivative errors, $e_F$, $e_Y$, raw/normalized residuals, regularity margins and training/evaluation costs \cite{baselines}. A claimed speed benefit must specify accuracy, hardware, and whether training is amortized.
+
+\section{Preparatory Verification Results}\label{sec:results}
+The following computations were performed on 12 September 2026. They do not represent completion of the planned 2027 experiment.
+
+\subsection{Symbolic and Classical Checks}
+The verification package checks the arbitrary-profile identity~\eqref{eq:lift}, the exact power-law control, the printed traveling-wave balances, the Eulerian counterexample and a bounded source discrepancy: $\phi=ct+\Phi(s)$ satisfies the printed master equation for every sufficiently smooth positive-slope $\Phi$, so the quadratic restriction in source Equation (32) is unnecessary for that equation.
+
+For the exact cubic control on 501 points, the maximum sampled state difference from the analytic formula is $\LagrangeControlError$. This near-roundoff observation is not a validated floating-point enclosure. For $\delta=0.01$, changing DOP853 step and tolerance settings gives difference $\LagrangeRefinement$; Radau differs by $\LagrangeOracle$. Sampled minima are $F'=\LagrangeMinR$ and $|a|=\LagrangeMinA$.
+
+Five-point finite differences of the computed state curve, at step sizes $10^{-3}$ and $5\times10^{-4}$, check derivative consistency independently of the ODE right-hand side. This is a state-ODE diagnostic, not direct third differentiation of the interpolated position curve. The PDE lifting identity is separately symbolic. Sampled $P_2$ and $P_4$ profile errors for the perturbed case are $\LagrangeTaylorTwo$ and $\LagrangeTaylorFour$.
+
+\subsection{Bounded Neural Feasibility Test}
+To check operational feasibility, each neural trial was run with seed 0 for 400 Adam steps, without L-BFGS, on the perturbed profile. Table~\ref{tab:smoke} reports midpoint-grid maxima against the classical reference; the different evaluation grid explains the small difference from the preceding polynomial errors.
+\begin{table}[htbp]
+\centering
+\caption{Preparatory single-seed CPU runs; no formal performance conclusion. Time covers training only.}\label{tab:smoke}
+\begin{tabular}{ccccc}
+\toprule
+$N$ & Initial $e_F$ & Final $e_F$ & Final normalized defect & Seconds\\
+\midrule
+\tableinput proposal_support/feasibility_20260912/table.tex
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both runs completed with finite gradients, zero computed initial-jet error and positive sampled slopes. Direct automatic differentiation of the original $(t,s)$ master expression on an $11\times11$ reconstruction grid agreed with the independently evaluated reduced-residual lift to below $3\times10^{-14}$. This verifies consistency of the implementations, not zero residual: the sampled master residuals remained approximately $0.477$ and $0.148$ for $N=2$ and $N=4$.
+
+The $N=2$ run has lower profile error, whereas $N=4$ has lower normalized residual. The single-seed data therefore do not establish a higher-order advantage. The observed defect levels are also too large for the coarse full-interval factor in~\eqref{eq:certificate} to provide a useful containment certificate; uniform defect validation has not been performed. The exact box bound remains valid, while a certified trained-network error remains unestablished.
+
+\section{Eight-Week Study in 2027}\label{sec:plan}
+\begin{enumerate}
+\item \textbf{Weeks 1--2: foundations and source audit.} Explain the mass coordinate, reproduce the selected symmetry and reduction, verify initial data and the retained model caveat.
+\item \textbf{Weeks 3--4: classical approximation and theory.} Reproduce both IVPs, Taylor profiles and the conditional bound; tune practical classical baselines and document failed certificate conditions.
+\item \textbf{Weeks 5--6: registered neural comparison.} Run both parameterizations on both profile cases for all three seeds with the declared schedule. Preserve raw metrics and failures.
+\item \textbf{Weeks 7--8: analysis and write-up.} Produce error--cost comparisons, verify citations and reproducibility, and finalize the manuscript. Uniform validation of a trained network is a stretch task, not a graduation requirement.
+\end{enumerate}
+The core workload requires calculus, elementary ODE theory, one explicit Lie invariant and basic automatic differentiation. It does not require learning full differential elimination, training large operators or reconstructing the source's complete optimal system. Exact calendar dates within 2027 remain to be set.
+
+\section{Limitations and Conclusion}\label{sec:conclusion}
+The retained conclusion is specific: the printed master equation admits a directly verified cubic reduction with a computable regularity region, exact residual lifting and a conditional reduced-IVP certificate. A compact Taylor--PINN experiment is runnable on the available CPU. These facts justify a bounded undergraduate study; they do not establish a new general method or a neural advantage.
+
+The physical conversion issue, restricted invariant family, singular leading coefficient, conditional uniform-bound premises, nonisolated Taylor/envelope comparison and incomplete multi-seed evidence remain explicit. A classical-solver advantage or an inconclusive certificate is an admissible research outcome. Established derivations and negative findings are preserved in the project claim register; stronger claims require additional checked evidence.
+
+\appendix
+\section{Exact Rational Bound Procedure}\label{app:interval}
+Let $D=18\sigma^2r^3-5$. Differentiating~\eqref{eq:rationalf} gives
+\begin{align}
+f_r&=\frac{2(-54r^8\sigma^2+162r^6v^2\sigma^4+60r^5
++375r^4v\sigma+450r^3v^2\sigma^2-25v^2)}{r^2D^2},\\
+f_v&=-\frac{2(25r^4\sigma+18r^3v\sigma^2+10v)}{rD}.
+\end{align}
+The code symbolically checks these against the derivative of $-b/a$.
+Partition the three axes into 12 closed intervals each, with endpoints
+\[
+\sigma_i=1+i/24,\quad r_j=17/20+j/30,\quad v_k=-17/20+k/24,
+\qquad i,j,k=0,\ldots,12.
+\]
+These 1728 subboxes cover the entire declared box, including boundaries.
+Since $r>0$ and $D\ge24217/4000>0$, all interval divisions are valid.
+Addition, multiplication, integer powers and reciprocals use exact rational endpoint bounds. On each subbox, add the absolute upper enclosures for $f_r$ and $f_v$ and take the maximum. The resulting rational number is the one in Proposition~\ref{prop:box}. Unit tests exercise sign-changing powers, negative reciprocals, zero-denominator rejection and the exact partition result. No claim is made that this proves the perturbed trajectory or a neural trial remains inside the box.
+
+\section{Source Attribution and Reproducibility}\label{app:sources}
+The publisher-hosted primary PDF was retrieved and found byte-identical to the supplied local file. Its SHA-256 is recorded in the companion source audit. The adopted source claims are limited to printed Equation (7), the selected cubic generator and invariant, the power-law root relation and the traveling-wave linearization theme. These are checked locally. The complete classification, optimal system and every expanded source ODE are not independently certified.
+
+The methodological source audit records actual PDF sections, identity checks and access limits. Olver is cited as background, not through an invented theorem number. Taylor-model and symmetry-loss results are not generalized beyond their stated methods. Refined numerical references are not misattributed as forbidden by the baseline literature.
+
+The companion claim register and source audit are:
+\begin{quote}\small
+\path{research_record.md}\\
+\path{proposal_support/submission_source_audit.md}
+\end{quote}
+The executable entry points, run from the repository root, are:
+\begin{quote}\small\ttfamily
+python -B draft/proposal\_support/verify\_lagrange.py\\
+python -B draft/proposal\_support/verify\_bounds.py\\
+python -B draft/proposal\_support/pinn\_feasibility.py --steps 400\\
+python -B -m unittest discover -s draft/proposal\_support
+\end{quote}
+The stored classical, exact-bound and neural reports include source hashes and evidence boundaries. Neural timing is machine-dependent. The primary PDE library and production symmetry engine are unchanged. Historical manuscripts and Eulerian near-cubic results remain archived and are not silently reused as current validation.
+
+\clearpage
+\section{Two-Dimensional SVE in Eulerian and Lagrangian Variables}\label{app:sve2d}
+\subsection{What Two-Dimensional Means}
+The \emph{Saint-Venant--Exner (SVE) system} couples shallow-water flow to the evolution of an erodible bed. Here ``two-dimensional'' means two \emph{horizontal spatial} coordinates $(x,y)$, plus time $t$: a $(2+1)$-dimensional PDE system. The vertical coordinate has already been averaged out. The main paper's variables $(t,x)$ or $(t,s)$ describe only \emph{one} spatial dimension, even though there are two independent variables. This appendix states a physical model for context; it neither replaces the printed master equation~\eqref{eq:master} nor claims a two-dimensional extension of its Lie classification.
+
+\subsection{Eulerian Form: Observe Fixed Locations}
+Let $h(t,x,y)>0$ be water depth, $\mathbf u=(u,v)^T$ the depth-averaged horizontal velocity, and $B(t,x,y)$ bed \emph{elevation}, measured upward from a fixed datum. The free-surface elevation is $h+B$. Let $\mathbf q_b=(q_b^x,q_b^y)^T$ be solid-volume bedload flux per unit width, excluding pore volume. For constant sediment porosity $p_b\in[0,1)$, put
+\[
+\xi=\frac{1}{1-p_b},\qquad g>0.
+\]
+The standard bedload-only model, without friction, Coriolis force, rainfall or suspended sediment, is
+\begin{equation}
+\boxed{\begin{aligned}
+h_t+(hu)_x+(hv)_y&=0,\\
+(hu)_t+(hu^2+\tfrac12gh^2)_x+(huv)_y&=-ghB_x,\\
+(hv)_t+(huv)_x+(hv^2+\tfrac12gh^2)_y&=-ghB_y,\\
+B_t+\xi\bigl((q_b^x)_x+(q_b^y)_y\bigr)&=0.
+\end{aligned}}\label{eq:sve2d-euler}
+\end{equation}
+These are water mass conservation, two horizontal momentum balances, and sediment-volume conservation. Equivalently, the last line is $(1-p_b)B_t+\nabla_{\mathbf x}\cdot\mathbf q_b=0$. Thus porosity is included \emph{once}, not both in $\xi$ and in the definition of $\mathbf q_b$.
+
+The Eulerian model is supported by Castro D\'iaz et al.~\cite{sve2d}, Sections 2.1--2.3: Equations (2), (4), (5) and (7) of the repository manuscript. Their water discharges are $(hu,hv)$; their downward bed depth has the opposite sign to our upward elevation $B$. Specifically, $B=z_b-\widetilde H$, where their $\widetilde H$ is fixed substrate depth. We set their friction terms to zero. No Lagrangian formula below is attributed to that paper without derivation.
+
+\paragraph{Closure is part of the model.}
+Equation~\eqref{eq:sve2d-euler} is not closed until a sediment-flux law is specified. The cited paper explicitly uses the cubic Grass law
+\begin{equation}
+\boxed{\mathbf q_b=A_g|\mathbf u|^2\mathbf u,
+\qquad q_b^x=A_g(u^2+v^2)u,\quad q_b^y=A_g(u^2+v^2)v,}
+\qquad A_g>0.
+\label{eq:sve2d-grass}
+\end{equation}
+Here $|\cdot|$ is the Euclidean vector norm. The flux points along the water velocity and includes cross-direction coupling: it is not $A_g(u^3,v^3)^T$. One possible generalized power-law closure is $A_g|\mathbf u|^{m-1}\mathbf u$; that choice is additional modeling, while the directly checked two-dimensional source formula is $m=3$. Other closures, for example threshold or bed-slope-dependent laws, change the system.
+
+For smooth fields with $h>0$, using water mass conservation to divide the momentum equations by $h$ gives
+\begin{equation}
+\begin{aligned}
+h_t+uh_x+vh_y+h(u_x+v_y)&=0,\\
+u_t+uu_x+vu_y+g(h+B)_x&=0,\\
+v_t+uv_x+vv_y+g(h+B)_y&=0.
+\end{aligned}\label{eq:sve2d-primitive}
+\end{equation}
+The last line of~\eqref{eq:sve2d-euler} is unchanged. These smooth-field manipulations are not a definition of shock solutions: products such as $h\nabla B$ require care when the evolving bed is discontinuous.
+
+\subsection{Particle Labels and the Jacobian}
+Eulerian coordinates ask for fields at a fixed place; Lagrangian coordinates follow a fixed water-particle label $\mathbf a=(a,b)^T$. Introduce the particle map
+\begin{equation}
+\mathbf x=\boldsymbol\Phi(t,a,b)
+=\begin{pmatrix}\phi(t,a,b)\\\psi(t,a,b)\end{pmatrix},\qquad
+\boldsymbol\Phi_t=\mathbf u(t,\boldsymbol\Phi(t,a,b)).
+\label{eq:sve2d-map}
+\end{equation}
+All time derivatives of pulled-back fields below hold $(a,b)$ fixed. Define
+\begin{equation}
+M=D_{\mathbf a}\boldsymbol\Phi
+=\begin{pmatrix}\phi_a&\phi_b\\\psi_a&\psi_b\end{pmatrix},\qquad
+J=\det M=\phi_a\psi_b-\phi_b\psi_a>0,
+\label{eq:sve2d-jacobian}
+\end{equation}
+and assume the map is a smooth diffeomorphism onto its image. Positive $J$ guarantees local invertibility, not global one-to-one behavior by itself. Write
+\[
+H=h\circ\boldsymbol\Phi,\qquad
+\widetilde B=B\circ\boldsymbol\Phi,\qquad
+\widetilde{\mathbf q}_b=\mathbf q_b\circ\boldsymbol\Phi,
+\]
+where the composition keeps the same time argument. In this appendix $H$ denotes pulled-back \emph{water depth}, not the downward bed-depth notation of the cited source.
+
+For any smooth scalar $f$, with $\widetilde f=f\circ\boldsymbol\Phi$, the chain rule gives
+\begin{align}
+(\nabla_{\mathbf x}f)\circ\boldsymbol\Phi
+&=M^{-T}\nabla_{\mathbf a}\widetilde f,\label{eq:sve2d-gradient}\\
+f_t\circ\boldsymbol\Phi
+&=\widetilde f_t-\mathbf w\cdot\nabla_{\mathbf a}\widetilde f,
+\qquad \mathbf w=M^{-1}\boldsymbol\Phi_t,\label{eq:sve2d-time}\\
+\bigl(f_t+\mathbf u\cdot\nabla_{\mathbf x}f\bigr)\circ\boldsymbol\Phi
+&=\widetilde f_t.\label{eq:sve2d-material}
+\end{align}
+Thus it is the \emph{material derivative} that becomes a plain label-time derivative, not every Eulerian $\partial_t$. The vector $\mathbf w$ is a coordinate-conversion coefficient; the labels of an individual particle remain constant. Explicitly,
+\[
+\partial_x=\frac{\psi_b\partial_a-\psi_a\partial_b}{J},\qquad
+\partial_y=\frac{-\phi_b\partial_a+\phi_a\partial_b}{J},\qquad
+\begin{pmatrix}w^a\\w^b\end{pmatrix}
+=\frac1J\begin{pmatrix}\psi_b\phi_t-\phi_b\psi_t\\-\psi_a\phi_t+\phi_a\psi_t\end{pmatrix}.
+\]
+The corresponding divergence identity is
+\begin{equation}
+(\nabla_{\mathbf x}\cdot\mathbf q_b)\circ\boldsymbol\Phi
+=\frac1J\nabla_{\mathbf a}\cdot\bigl(JM^{-1}\widetilde{\mathbf q}_b\bigr).
+\label{eq:sve2d-piola}
+\end{equation}
+To see why the inverse rather than inverse transpose occurs here, note that
+\[
+JM^{-1}=\begin{pmatrix}\psi_b&-\phi_b\\-\psi_a&\phi_a\end{pmatrix}.
+\]
+The label divergence of each column vanishes by equality of mixed partials; the remaining terms give~\eqref{eq:sve2d-piola} by the scalar chain rule.
+
+\subsection{Lagrangian Form: Follow the Water}
+The determinant identity and water mass equation give
+\begin{equation}
+J_t=J(\nabla_{\mathbf x}\cdot\mathbf u)\circ\boldsymbol\Phi,
+\qquad (HJ)_t=0,
+\qquad
+\boxed{H(t,a,b)=\frac{\mu(a,b)}{J(t,a,b)}},
+\label{eq:sve2d-mass}
+\end{equation}
+where $\mu=H(t_0,a,b)J(t_0,a,b)>0$ is the initial water volume per label area. For initial-position labels $\boldsymbol\Phi(t_0,a,b)=(a,b)$, one has $J(t_0)=1$ and $\mu=h(t_0,a,b)$, which need not equal one. Locally one may instead choose mass-normalized labels with $\mu=1$, giving $H=1/J$. One cannot in general impose both initial-position labels and $\mu=1$ for nonuniform initial depth.
+
+Substituting~\eqref{eq:sve2d-mass} into the two momentum balances and transforming the Exner balance gives a closed system for $(\phi,\psi,\widetilde B)$:
+\begin{equation}
+\boxed{\begin{aligned}
+\boldsymbol\Phi_{tt}
++gM^{-T}\nabla_{\mathbf a}\left(\frac{\mu}{J}+\widetilde B\right)&=0,\\
+\widetilde B_t-\mathbf w\cdot\nabla_{\mathbf a}\widetilde B
++\frac{\xi}{J}\nabla_{\mathbf a}\cdot
+\left(JM^{-1}\widetilde{\mathbf q}_b\right)&=0,\\
+\widetilde{\mathbf q}_b
+=A_g|\boldsymbol\Phi_t|^2\boldsymbol\Phi_t,\qquad
+\mathbf w=M^{-1}\boldsymbol\Phi_t.&
+\end{aligned}}\label{eq:sve2d-lagrange}
+\end{equation}
+The first line contains two scalar equations. In the generalized power-law variant, replace $|\boldsymbol\Phi_t|^2$ by $|\boldsymbol\Phi_t|^{m-1}$. The main point is that \emph{bed sediment does not follow the water labels as a conserved material scalar}. In particular, the term $-\mathbf w\cdot\nabla_{\mathbf a}\widetilde B$ cannot generally be dropped.
+
+For a completely explicit component form, put $S=\mu/J+\widetilde B$. Then
+\begin{equation}
+\begin{aligned}
+\phi_{tt}+\frac gJ(\psi_bS_a-\psi_aS_b)&=0,\\
+\psi_{tt}+\frac gJ(-\phi_bS_a+\phi_aS_b)&=0,\\
+\widetilde B_t-w^a\widetilde B_a-w^b\widetilde B_b
++\frac{\xi}{J}\Bigl[\partial_a(\psi_b\widetilde q_b^x-\phi_b\widetilde q_b^y)
+&\phantom{{}=0}\\[-6pt]
+\hspace{4em}+\partial_b(-\psi_a\widetilde q_b^x+\phi_a\widetilde q_b^y)\Bigr]&=0.
+\end{aligned}\label{eq:sve2d-components}
+\end{equation}
+Here $\widetilde q_b^x=A_g(\phi_t^2+\psi_t^2)\phi_t$ and
+$\widetilde q_b^y=A_g(\phi_t^2+\psi_t^2)\psi_t$.
+An equivalent label-conservative bed equation is
+\begin{equation}
+\partial_t(J\widetilde B)
++\nabla_{\mathbf a}\cdot\left[
+JM^{-1}\bigl(\xi\widetilde{\mathbf q}_b-\widetilde B\boldsymbol\Phi_t\bigr)
+\right]=0.
+\label{eq:sve2d-bed-conservative}
+\end{equation}
+The additional flux is relative to moving water-particle cells. Expanding this expression and using $J_t=\nabla_{\mathbf a}\cdot(JM^{-1}\boldsymbol\Phi_t)$ recovers the second line of~\eqref{eq:sve2d-lagrange} multiplied by $J$.
+
+\begin{proposition}[Smooth-coordinate equivalence]\label{prop:sve2d-equivalence}
+Fix the cubic closure~\eqref{eq:sve2d-grass} and constant $g,A_g,\xi$. A sufficiently smooth solution of~\eqref{eq:sve2d-euler} with $h>0$, on a region admitting the particle diffeomorphism~\eqref{eq:sve2d-map}, pulls back to~\eqref{eq:sve2d-mass} and~\eqref{eq:sve2d-lagrange}. Conversely, sufficiently smooth $(\boldsymbol\Phi,\widetilde B)$ satisfying~\eqref{eq:sve2d-lagrange}, with $J>0$, a diffeomorphic map, and fixed $\mu>0$, reconstruct an Eulerian solution by
+\[
+h(t,\boldsymbol\Phi)=\mu/J,\qquad
+\mathbf u(t,\boldsymbol\Phi)=\boldsymbol\Phi_t,\qquad
+B(t,\boldsymbol\Phi)=\widetilde B.
+\]
+\end{proposition}
+\begin{proof}
+In the forward direction, water mass conservation gives $(HJ)_t=0$. The material acceleration in~\eqref{eq:sve2d-primitive} becomes $\boldsymbol\Phi_{tt}$ by~\eqref{eq:sve2d-material}, and its pressure gradient transforms by~\eqref{eq:sve2d-gradient}. Equations~\eqref{eq:sve2d-time} and~\eqref{eq:sve2d-piola} transform Exner without discarding transport. In the reverse direction, invert the map, use $H=\mu/J$ to recover mass conservation, and reverse the same identities. Positive $h$ makes primitive and conservative momentum equivalent. The argument is local to a smooth regular coordinate region; it is not a well-posedness or shock-continuation theorem.
+\end{proof}
+
+For an actual IVP one must also give $\boldsymbol\Phi(t_0,\cdot)$, $\boldsymbol\Phi_t(t_0,\cdot)$, $\widetilde B(t_0,\cdot)$ and $\mu$, consistently with the Eulerian initial data. Boundary conditions must be transformed as well. Merely changing coordinates has not reduced the number of independent variables: the equations still depend on $(t,a,b)$ and still couple neighboring labels through spatial derivatives.
+
+\subsection{A Worked Check and the One-Dimensional Limit}
+For a simple exact check, take $g=1$, constant $h=h_c>0$, and any constant $A_g,\xi>0$, with
+\begin{equation}
+B=x+2y,\qquad \mathbf u=(2-t,1-2t)^T.
+\label{eq:sve2d-example-euler}
+\end{equation}
+Water mass is constant, $\mathbf u_t+\nabla B=(-1,-2)^T+(1,2)^T=0$, and $\mathbf q_b$ is spatially constant, so all four Eulerian residuals vanish. For initial-position labels at $t=0$,
+\begin{equation}
+\begin{aligned}
+\boldsymbol\Phi&=(a+2t-t^2/2,\ b+t-t^2)^T,\qquad J=1,\quad \mu=h_c,\\
+\widetilde B&=a+2b+4t-5t^2/2,\qquad \mathbf w=(2-t,1-2t)^T.
+\end{aligned}\label{eq:sve2d-example-lagrange}
+\end{equation}
+Although the bed is stationary at fixed $(x,y)$, a moving water particle sees
+\[
+\widetilde B_t=4-5t,\qquad
+\mathbf w\cdot\nabla_{\mathbf a}\widetilde B=4-5t.
+\]
+They cancel exactly in Exner. Omitting transport would leave the false residual $4-5t$, despite the exact Eulerian solution. This is a local smooth check on a sloping bed, not a specified bounded-domain experiment.
+
+Finally set $a=s$, $\phi=\phi(t,s)$, $\psi=b$, $\widetilde B=\widetilde B(t,s)$, and $\mu=1$. Then
+\[
+J=\phi_s,\quad H=1/\phi_s,\quad
+\mathbf w=(\phi_t/\phi_s,0)^T,
+\]
+and~\eqref{eq:sve2d-lagrange} becomes
+\begin{equation}
+\begin{aligned}
+\phi_{tt}+\frac g{\phi_s}\partial_s\left(\frac1{\phi_s}+\widetilde B\right)&=0,\\
+\widetilde B_t-\frac{\phi_t}{\phi_s}\widetilde B_s
++3\xi A_g\phi_t^2\frac{\phi_{ts}}{\phi_s}&=0.
+\end{aligned}\label{eq:sve2d-one-dimensional}
+\end{equation}
+The transverse momentum equation is identically zero. Thus $\beta=3\xi A_g$ recovers~\eqref{eq:physicalbed} for $m=3$, including its transport term. It does \emph{not} recover the source's printed transport-free bed equation. With a positive-velocity generalized power law, the coefficient becomes $\beta=m\xi A_g$.
+
+The companion \path{proposal_support/test_sve2d.py} checks the gradient, time and divergence transformations on a non-affine two-dimensional map, the mass and relative-bed-flux identities, the conservative/primitive momentum relation, this exact example, and the one-dimensional limit. These are symbolic consistency tests supporting the derivation, not a two-dimensional numerical solver or a new symmetry result. The original eight-week research scope and claims remain unchanged.
+
+\newcommand{\SVEContextReferences}{%
+\bibitem{sve2d}
+M. J. Castro D\'iaz, E. D. Fern\'andez-Nieto, A. M. Ferreiro, and C. Par\'es.
+Two-dimensional sediment transport models in shallow water equations. A second order finite volume approach on unstructured meshes.
+\emph{Computer Methods in Applied Mechanics and Engineering}, 198(33--36), 2520--2538, 2009.
+\href{https://doi.org/10.1016/j.cma.2009.03.001}{doi:10.1016/j.cma.2009.03.001}.
+\href{https://idus.us.es/handle/11441/32144}{University of Seville repository manuscript}.
+}
+\clearpage
+\input{proposal_support/references_2027.tex}
 \end{document}
