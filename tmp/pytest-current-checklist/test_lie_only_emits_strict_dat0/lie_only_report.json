@@ -1,0 +1,115 @@
+{
+  "schema": "lieml.three-layer.lie-only.v1",
+  "created_utc": "2026-10-02T14:40:35.780072+00:00",
+  "status": "verified-baseline",
+  "scope": "supplied local chart and supplied symmetry multiplier; not maximal classification",
+  "model": "printed-lagrangian-SVE",
+  "parameter_convention": {
+    "beta_tr": "m*kappa",
+    "group_parameter": "epsilon"
+  },
+  "versions": {
+    "python": "3.14.2",
+    "sympy": "1.14.0",
+    "numpy": "2.3.5"
+  },
+  "source_sha256": "d15f19a3228e59985a2bfe555cac786551b8b8f4e7943aa2734c1fc01449df8b",
+  "cases": {
+    "m3": {
+      "certificate": {
+        "status": "verified",
+        "checks": {
+          "dimensions": true,
+          "fresh_chart_symbols": true,
+          "point_generator": true,
+          "projectable_generator": true,
+          "chart_dependencies": true,
+          "invariants": true,
+          "base_rank": true,
+          "inverse_chart": true,
+          "affine_fiber": true,
+          "fiber_rank": true,
+          "multiplier_dimensions": true,
+          "multiplier_dependencies": true,
+          "symmetry_identity": true,
+          "invariant_surface": true,
+          "nonzero_factors": true,
+          "orbit_independent_equations": true,
+          "pullback_identity": true,
+          "guard_preservation": true
+        },
+        "residuals": [
+          "0",
+          "0",
+          "0"
+        ],
+        "covered_guards": [
+          "F_x*rho**2",
+          "F_x**3*rho**6",
+          "-rho**2",
+          "rho",
+          "1/rho",
+          "rho**2",
+          "F_x**3"
+        ],
+        "message": "exact local invariant PDE pullback on recorded smooth regular chart; no IBVP or completion claim",
+        "system_fingerprint": "7b1ed358b5736660a0fe189e1c5b743515779b92c19766777b2b51616fd4145e",
+        "configuration_fingerprint": "8a6882dff5de7e072d2ded030e95e476c6857afdd51bc9f27458e8061c919704"
+      },
+      "generator": "X_5 = t*d_t - 2*s*d_s",
+      "flow": {
+        "t": "exp(epsilon)*t",
+        "s": "exp(-2*epsilon)*s",
+        "phi": "phi"
+      },
+      "invariant": "sigma = s*t**2",
+      "reconstruction": "phi(t,s) = F(s*t**2)",
+      "invariant_surface_equation": "Q = -t*phi_t + 2*s*phi_s = 0",
+      "invariant_surface_zero": true,
+      "reduced_equation": "-2*sigma*(24*F_x**5*g*kappa - 2*F_x**5 + 60*F_x**4*F_xx*g*kappa*sigma - 12*F_x**4*F_xx*sigma + 12*F_x**4*F_xxx*g*kappa*sigma**2 - 4*F_x**4*F_xxx*sigma**2 + 12*F_x**3*F_xx**2*g*kappa*sigma**2 - 4*F_x**3*F_xx**2*sigma**2 + F_x*F_xxx*g - 2*F_xx**2*g)/F_x**3",
+      "leading_coefficient": "-2*g*sigma/Derivative(F(sigma), sigma)**2 + sigma**3*(-8*beta_tr*g + 8)*Derivative(F(sigma), sigma)",
+      "regularity_conditions": [
+        "Ne(F_x**3*rho**6, 0)",
+        "Ne(-rho**2, 0)",
+        "Ne(rho, 0)",
+        "Ne(1/rho, 0)",
+        "Ne(rho**2, 0)",
+        "Ne(F_x**3, 0)"
+      ],
+      "lifting_identity": "E_3[F(s*t**2)] = R_0[F](s*t**2)/t",
+      "lifting_identity_zero": true,
+      "exact_control": "F_0 = C + K*sigma**(1/3), K**3 = 27*g/(1-4*g*beta_tr)",
+      "exact_control_zero": true
+    },
+    "m4": {
+      "certificate": {
+        "status": "unsupported",
+        "checks": {
+          "dimensions": true,
+          "fresh_chart_symbols": true,
+          "point_generator": true,
+          "projectable_generator": true,
+          "chart_dependencies": true,
+          "invariants": true,
+          "base_rank": true,
+          "inverse_chart": true,
+          "affine_fiber": true,
+          "fiber_rank": true,
+          "multiplier_dimensions": true,
+          "multiplier_dependencies": true,
+          "symmetry_identity": false
+        },
+        "residuals": [
+          "4*g*kappa*phi_x**2*(-phi_x*phi_xy*phi_yy + phi_y*(phi_x*phi_xyy + 3*phi_xy**2))/phi_y**2"
+        ],
+        "covered_guards": [],
+        "message": "supplied reduction not verified: symmetry_identity",
+        "system_fingerprint": "f1a1743467fd5e585c72afcd6c3c50b952a4bd735974fcd7faedaad98e5dbda7",
+        "configuration_fingerprint": "8a005e2b0320eda0d53566cbd0d97ccf781e04039bb1aa4245fd1153fb24d007"
+      },
+      "generator_tested": "X_5 = t*d_t - 2*s*d_s",
+      "symmetry_identity_zero": false,
+      "interpretation": "failure of this supplied identity, not proof that m=4 has no symmetries"
+    }
+  }
+}

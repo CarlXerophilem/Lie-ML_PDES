@@ -1,5 +1,8 @@
 """Backend-neutral generic PDE-system Lie reduction kernel."""
 
+from .problem import PDEProblem, DataCondition
+from .chart_reduction import ReductionChart, ChartReductionOutcome, reduce_in_chart
+
 from .core import (
     CompletionCertificate,
     DifferentialBranch,
@@ -94,6 +97,7 @@ from .experiment import (
 )
 
 __all__ = [
+    "PDEProblem", "DataCondition", "ReductionChart", "ChartReductionOutcome", "reduce_in_chart",
     "CompletionCertificate",
     "DifferentialBranch",
     "DifferentialRanking",

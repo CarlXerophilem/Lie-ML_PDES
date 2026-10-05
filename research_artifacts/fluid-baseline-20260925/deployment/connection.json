@@ -1,0 +1,11 @@
+{
+  "host_alias": "priestess",
+  "environment": "pinn",
+  "release": "/home/carl/lieml/releases/20260925-fluid-baseline-v1",
+  "remote_server_pid": 833116,
+  "tunnel_pid": 13968,
+  "url": "http://127.0.0.1:8878/",
+  "source_archive_sha256": "5ad0f9a76934d6f9aee34c8b66ad968c948f3bc81425f4976d03e9441826ed44",
+  "source_file_count": 148,
+  "results_archive_sha256": "31dee238a353d03bf5cbd4888628f8b424eb11cbc81d6987de182858a1f8fb84"
+}

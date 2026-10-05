@@ -1,0 +1,53 @@
+{
+  "backend_preflight": {
+    "maple": {
+      "available": false,
+      "executable": null,
+      "name": "maple",
+      "reason": "no supported executable found on PATH"
+    },
+    "reduce": {
+      "available": false,
+      "executable": null,
+      "name": "reduce",
+      "reason": "no supported executable found on PATH"
+    }
+  },
+  "cloud": {
+    "budget_hours": 10,
+    "disk_gib": 200,
+    "exact_workers": 4,
+    "gpu_required": false,
+    "instance_type": "SA9.8XLARGE64",
+    "memory_gib": 64,
+    "ml_vcpus": 12,
+    "reserved_vcpus": 8,
+    "rss_hard_limit_bytes": 1800000000,
+    "schema_version": "lieml.experiment/1",
+    "vcpus": 32
+  },
+  "cloud_fingerprint": "04cf46effff6c5494da3ad542e829acd4b4149672a12ca613e19f72bb5adc037",
+  "external_backend_policy": "Maple/REDUCE are not simulated; unavailable status is preserved",
+  "model_fingerprint": "beb9041e4cb216391071fb4132ae584a729d1cefa80e06b96479eb15f7a9ae1b",
+  "oracle_record_count": 8,
+  "resource_limits": {
+    "hard_memory_bytes": 1800000000,
+    "max_branches": 32,
+    "max_expression_nodes": 250000,
+    "max_jet_order": 6,
+    "max_serialized_bytes": 8000000,
+    "soft_memory_bytes": 1200000000,
+    "timeout_seconds": 30.0
+  },
+  "schema_version": "lieml.experiment/1",
+  "status_counts": {
+    "unsupported": 2,
+    "verified": 6
+  },
+  "system_count": 3,
+  "system_fingerprints": [
+    "281975613ba8dee3a5a905b1fda2d09c6ef6a4acc766563e949c28d29b2e5fab",
+    "9449e47ae423c1359b79c9dd72986992332cdb8d5e868e4ba26e9ee3cfcb20a6",
+    "d26e1d2163e66bfbe2f4bf2071e7cd7046db48ceffff6b9376a6d57d5823895a"
+  ]
+}

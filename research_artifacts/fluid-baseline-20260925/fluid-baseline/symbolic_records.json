@@ -1,0 +1,2158 @@
+{
+  "reductions": {
+    "sve-m2": {
+      "problem": {
+        "system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('t', real=True)",
+              "Symbol('x', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('h', real=True)",
+              "Symbol('u', real=True)",
+              "Symbol('B', real=True)"
+            ],
+            "max_order": 1,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Symbol('h', real=True), Symbol('u_y')), Symbol('h_x'), Mul(Symbol('h_y'), Symbol('u', real=True)))",
+            "Add(Mul(Symbol('B_y'), Symbol('g', positive=True), Symbol('h', real=True)), Mul(Symbol('g', positive=True), Symbol('h', real=True), Symbol('h_y')), Mul(Integer(2), Symbol('h', real=True), Symbol('u', real=True), Symbol('u_y')), Mul(Symbol('h', real=True), Symbol('u_x')), Mul(Symbol('h_x'), Symbol('u', real=True)), Mul(Symbol('h_y'), Pow(Symbol('u', real=True), Integer(2))))",
+            "Add(Symbol('B_x'), Mul(Integer(2), Symbol('kappa', positive=True), Symbol('u', real=True), Symbol('u_y')))"
+          ],
+          "inequations": [
+            "Symbol('h', real=True)"
+          ],
+          "assumptions": [],
+          "name": "Eulerian-SVE-m2"
+        },
+        "parameters": [
+          "Symbol('g', positive=True)",
+          "Symbol('kappa', positive=True)"
+        ],
+        "domain": [
+          "StrictGreaterThan(Symbol('h', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('u', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('x', real=True), Integer(0))"
+        ],
+        "data": []
+      },
+      "supplied_generator": {
+        "xi": [
+          "Integer(0)",
+          "Symbol('x', real=True)"
+        ],
+        "phi": [
+          "Mul(Integer(2), Symbol('h', real=True))",
+          "Symbol('u', real=True)",
+          "Mul(Integer(2), Symbol('B', real=True))"
+        ]
+      },
+      "chart": {
+        "reduced_space": {
+          "independent_variables": [
+            "Symbol('z', real=True)"
+          ],
+          "dependent_fields": [
+            "Symbol('H', real=True)",
+            "Symbol('V', real=True)",
+            "Symbol('C', real=True)"
+          ],
+          "max_order": 1,
+          "ranking": {
+            "derivative_order": "orderly",
+            "field_order": [],
+            "tie_break": "lex",
+            "differentiation_compatible": true
+          }
+        },
+        "orbit_variable": "Symbol('rho', real=True)",
+        "orbit_coordinate": "Symbol('x', real=True)",
+        "invariants": [
+          "Symbol('t', real=True)"
+        ],
+        "inverse_coordinates": [
+          "Symbol('z', real=True)",
+          "Symbol('rho', real=True)"
+        ],
+        "field_reconstruction": [
+          "Mul(Symbol('H', real=True), Pow(Symbol('x', real=True), Integer(2)))",
+          "Mul(Symbol('V', real=True), Symbol('x', real=True))",
+          "Mul(Symbol('C', real=True), Pow(Symbol('x', real=True), Integer(2)))"
+        ],
+        "equation_factors": [
+          "Pow(Symbol('x', real=True), Integer(2))",
+          "Pow(Symbol('x', real=True), Integer(3))",
+          "Pow(Symbol('x', real=True), Integer(2))"
+        ]
+      },
+      "multiplier_matrix": "Matrix([[2, 0, 0], [0, 3, 0], [0, 0, 2]])",
+      "reduction": {
+        "reduced_system": null,
+        "certificate": {
+          "system_fingerprint": "835726f1f60b59c75f8e0f9333a7338b73e6de656636ff55fc8e00bb9f321d6a",
+          "status": "unsupported",
+          "source_branch_id": "branch-0",
+          "checks": [
+            [
+              "dimensions",
+              true
+            ],
+            [
+              "fresh_chart_symbols",
+              true
+            ],
+            [
+              "point_generator",
+              true
+            ],
+            [
+              "projectable_generator",
+              true
+            ],
+            [
+              "chart_dependencies",
+              true
+            ],
+            [
+              "invariants",
+              true
+            ],
+            [
+              "base_rank",
+              true
+            ],
+            [
+              "inverse_chart",
+              true
+            ],
+            [
+              "affine_fiber",
+              true
+            ],
+            [
+              "fiber_rank",
+              true
+            ],
+            [
+              "multiplier_dimensions",
+              true
+            ],
+            [
+              "multiplier_dependencies",
+              true
+            ],
+            [
+              "symmetry_identity",
+              false
+            ]
+          ],
+          "residuals": [
+            "Integer(0)",
+            "Integer(0)",
+            "Mul(Integer(-1), Integer(2), Symbol('kappa', positive=True), Symbol('u', real=True), Symbol('u_y'))"
+          ],
+          "covered_guards": [],
+          "uncovered_branches": [],
+          "message": "supplied reduction not verified: symmetry_identity",
+          "configuration_fingerprint": "a3ab24b84807b035cf86341d1394eead53a492df73c7dfeb51656cac5bf6ce52",
+          "schema_version": "lieml.generic.certificate/1"
+        },
+        "pulled_domain": [],
+        "pulled_inequations": [],
+        "pulled_data": [],
+        "regularity_conditions": [],
+        "data_status": "not-checked"
+      },
+      "translation_ranking": {
+        "schema_version": "lieml.generic.reductor/1",
+        "system_fingerprint": "835726f1f60b59c75f8e0f9333a7338b73e6de656636ff55fc8e00bb9f321d6a",
+        "status": "unsupported",
+        "feature_schema": [
+          "independent_count",
+          "field_count",
+          "equation_count",
+          "max_jet_order",
+          "inequation_count",
+          "assumption_count",
+          "expression_nodes",
+          "candidate_orbit_rank",
+          "candidate_invariant"
+        ],
+        "features": [
+          [
+            "independent_count",
+            2.0
+          ],
+          [
+            "field_count",
+            3.0
+          ],
+          [
+            "equation_count",
+            3.0
+          ],
+          [
+            "max_jet_order",
+            1.0
+          ],
+          [
+            "inequation_count",
+            1.0
+          ],
+          [
+            "assumption_count",
+            0.0
+          ],
+          [
+            "expression_nodes",
+            28.0
+          ],
+          [
+            "candidate_orbit_rank",
+            0.0
+          ],
+          [
+            "candidate_invariant",
+            0.0
+          ]
+        ],
+        "candidates": [
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          }
+        ],
+        "evidence": [
+          [
+            "certificate_status",
+            "unsupported"
+          ],
+          [
+            "certificate_upgrade_by_score",
+            "forbidden"
+          ]
+        ],
+        "model": "deterministic-structure-v1"
+      },
+      "readable_equations": [
+        "h*u_y + h_x + h_y*u",
+        "B_y*g*h + g*h*h_y + 2*h*u*u_y + h*u_x + h_x*u + h_y*u**2",
+        "B_x + 2*kappa*u*u_y"
+      ],
+      "readable_reduced_equations": []
+    },
+    "sve-m3": {
+      "problem": {
+        "system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('t', real=True)",
+              "Symbol('x', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('h', real=True)",
+              "Symbol('u', real=True)",
+              "Symbol('B', real=True)"
+            ],
+            "max_order": 1,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Symbol('h', real=True), Symbol('u_y')), Symbol('h_x'), Mul(Symbol('h_y'), Symbol('u', real=True)))",
+            "Add(Mul(Symbol('B_y'), Symbol('g', positive=True), Symbol('h', real=True)), Mul(Symbol('g', positive=True), Symbol('h', real=True), Symbol('h_y')), Mul(Integer(2), Symbol('h', real=True), Symbol('u', real=True), Symbol('u_y')), Mul(Symbol('h', real=True), Symbol('u_x')), Mul(Symbol('h_x'), Symbol('u', real=True)), Mul(Symbol('h_y'), Pow(Symbol('u', real=True), Integer(2))))",
+            "Add(Symbol('B_x'), Mul(Integer(3), Symbol('kappa', positive=True), Pow(Symbol('u', real=True), Integer(2)), Symbol('u_y')))"
+          ],
+          "inequations": [
+            "Symbol('h', real=True)"
+          ],
+          "assumptions": [],
+          "name": "Eulerian-SVE-m3"
+        },
+        "parameters": [
+          "Symbol('g', positive=True)",
+          "Symbol('kappa', positive=True)"
+        ],
+        "domain": [
+          "StrictGreaterThan(Symbol('h', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('u', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('x', real=True), Integer(0))"
+        ],
+        "data": []
+      },
+      "supplied_generator": {
+        "xi": [
+          "Integer(0)",
+          "Symbol('x', real=True)"
+        ],
+        "phi": [
+          "Mul(Integer(2), Symbol('h', real=True))",
+          "Symbol('u', real=True)",
+          "Mul(Integer(2), Symbol('B', real=True))"
+        ]
+      },
+      "chart": {
+        "reduced_space": {
+          "independent_variables": [
+            "Symbol('z', real=True)"
+          ],
+          "dependent_fields": [
+            "Symbol('H', real=True)",
+            "Symbol('V', real=True)",
+            "Symbol('C', real=True)"
+          ],
+          "max_order": 1,
+          "ranking": {
+            "derivative_order": "orderly",
+            "field_order": [],
+            "tie_break": "lex",
+            "differentiation_compatible": true
+          }
+        },
+        "orbit_variable": "Symbol('rho', real=True)",
+        "orbit_coordinate": "Symbol('x', real=True)",
+        "invariants": [
+          "Symbol('t', real=True)"
+        ],
+        "inverse_coordinates": [
+          "Symbol('z', real=True)",
+          "Symbol('rho', real=True)"
+        ],
+        "field_reconstruction": [
+          "Mul(Symbol('H', real=True), Pow(Symbol('x', real=True), Integer(2)))",
+          "Mul(Symbol('V', real=True), Symbol('x', real=True))",
+          "Mul(Symbol('C', real=True), Pow(Symbol('x', real=True), Integer(2)))"
+        ],
+        "equation_factors": [
+          "Pow(Symbol('x', real=True), Integer(2))",
+          "Pow(Symbol('x', real=True), Integer(3))",
+          "Pow(Symbol('x', real=True), Integer(2))"
+        ]
+      },
+      "multiplier_matrix": "Matrix([[2, 0, 0], [0, 3, 0], [0, 0, 2]])",
+      "reduction": {
+        "reduced_system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('z', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('H', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('C', real=True)"
+            ],
+            "max_order": 1,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Integer(3), Symbol('H', real=True), Symbol('V', real=True)), Symbol('H_x'))",
+            "Add(Mul(Integer(2), Symbol('C', real=True), Symbol('H', real=True), Symbol('g', positive=True)), Mul(Integer(2), Pow(Symbol('H', real=True), Integer(2)), Symbol('g', positive=True)), Mul(Integer(4), Symbol('H', real=True), Pow(Symbol('V', real=True), Integer(2))), Mul(Symbol('H', real=True), Symbol('V_x')), Mul(Symbol('H_x'), Symbol('V', real=True)))",
+            "Add(Symbol('C_x'), Mul(Integer(3), Pow(Symbol('V', real=True), Integer(3)), Symbol('kappa', positive=True)))"
+          ],
+          "inequations": [],
+          "assumptions": [],
+          "reduction_map": {
+            "source_fingerprint": "8902e5a5e8551759e6aaa261d99e8133323bd1c1c2c788585e9436fb096cee47",
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Symbol('x', real=True)"
+              ],
+              "phi": [
+                "Mul(Integer(2), Symbol('h', real=True))",
+                "Symbol('u', real=True)",
+                "Mul(Integer(2), Symbol('B', real=True))"
+              ]
+            },
+            "quotient_variables": [
+              "Symbol('z', real=True)"
+            ],
+            "invariant_dependent_coordinates": [
+              "Symbol('H', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('C', real=True)"
+            ],
+            "invariant_surface_equations": [
+              "Add(Mul(Integer(2), Symbol('h', real=True)), Mul(Integer(-1), Symbol('h_y'), Symbol('x', real=True)))",
+              "Add(Symbol('u', real=True), Mul(Integer(-1), Symbol('u_y'), Symbol('x', real=True)))",
+              "Add(Mul(Integer(2), Symbol('B', real=True)), Mul(Integer(-1), Symbol('B_y'), Symbol('x', real=True)))"
+            ],
+            "pullback_rules": [
+              [
+                "Symbol('h', real=True)",
+                "Mul(Symbol('H', real=True), Pow(Symbol('rho', real=True), Integer(2)))"
+              ],
+              [
+                "Symbol('h_y')",
+                "Mul(Integer(2), Symbol('H', real=True), Symbol('rho', real=True))"
+              ],
+              [
+                "Symbol('h_x')",
+                "Mul(Symbol('H_x'), Pow(Symbol('rho', real=True), Integer(2)))"
+              ],
+              [
+                "Symbol('u', real=True)",
+                "Mul(Symbol('V', real=True), Symbol('rho', real=True))"
+              ],
+              [
+                "Symbol('u_y')",
+                "Symbol('V', real=True)"
+              ],
+              [
+                "Symbol('u_x')",
+                "Mul(Symbol('V_x'), Symbol('rho', real=True))"
+              ],
+              [
+                "Symbol('B', real=True)",
+                "Mul(Symbol('C', real=True), Pow(Symbol('rho', real=True), Integer(2)))"
+              ],
+              [
+                "Symbol('B_y')",
+                "Mul(Integer(2), Symbol('C', real=True), Symbol('rho', real=True))"
+              ],
+              [
+                "Symbol('B_x')",
+                "Mul(Symbol('C_x'), Pow(Symbol('rho', real=True), Integer(2)))"
+              ]
+            ],
+            "reconstruction_rules": [
+              [
+                "Symbol('h', real=True)",
+                "Mul(Symbol('H', real=True), Pow(Symbol('x', real=True), Integer(2)))"
+              ],
+              [
+                "Symbol('u', real=True)",
+                "Mul(Symbol('V', real=True), Symbol('x', real=True))"
+              ],
+              [
+                "Symbol('B', real=True)",
+                "Mul(Symbol('C', real=True), Pow(Symbol('x', real=True), Integer(2)))"
+              ]
+            ],
+            "rank_guards": [
+              "Integer(1)",
+              "Symbol('rho', real=True)",
+              "Pow(Symbol('rho', real=True), Integer(5))"
+            ],
+            "denominator_guards": [
+              "Symbol('rho', real=True)",
+              "Pow(Symbol('rho', real=True), Integer(5))",
+              "Pow(Symbol('rho', real=True), Integer(2))",
+              "Pow(Symbol('rho', real=True), Integer(3))"
+            ]
+          },
+          "source_branch_id": "branch-0"
+        },
+        "certificate": {
+          "system_fingerprint": "8902e5a5e8551759e6aaa261d99e8133323bd1c1c2c788585e9436fb096cee47",
+          "status": "verified",
+          "source_branch_id": "branch-0",
+          "checks": [
+            [
+              "dimensions",
+              true
+            ],
+            [
+              "fresh_chart_symbols",
+              true
+            ],
+            [
+              "point_generator",
+              true
+            ],
+            [
+              "projectable_generator",
+              true
+            ],
+            [
+              "chart_dependencies",
+              true
+            ],
+            [
+              "invariants",
+              true
+            ],
+            [
+              "base_rank",
+              true
+            ],
+            [
+              "inverse_chart",
+              true
+            ],
+            [
+              "affine_fiber",
+              true
+            ],
+            [
+              "fiber_rank",
+              true
+            ],
+            [
+              "multiplier_dimensions",
+              true
+            ],
+            [
+              "multiplier_dependencies",
+              true
+            ],
+            [
+              "symmetry_identity",
+              true
+            ],
+            [
+              "invariant_surface",
+              true
+            ],
+            [
+              "nonzero_factors",
+              true
+            ],
+            [
+              "orbit_independent_equations",
+              true
+            ],
+            [
+              "pullback_identity",
+              true
+            ],
+            [
+              "guard_preservation",
+              true
+            ]
+          ],
+          "residuals": [
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)"
+          ],
+          "covered_guards": [
+            "Mul(Symbol('H', real=True), Pow(Symbol('rho', real=True), Integer(2)))",
+            "Symbol('rho', real=True)",
+            "Pow(Symbol('rho', real=True), Integer(5))",
+            "Pow(Symbol('rho', real=True), Integer(2))",
+            "Pow(Symbol('rho', real=True), Integer(3))"
+          ],
+          "uncovered_branches": [
+            "zeros of recorded chart and denominator guards"
+          ],
+          "message": "exact local invariant PDE pullback on recorded smooth regular chart; no IBVP or completion claim",
+          "configuration_fingerprint": "f6331874dfd3be05f25abdfbd471725453c94240eec98b27742d3bbba174749a",
+          "schema_version": "lieml.generic.certificate/1"
+        },
+        "pulled_domain": [
+          "StrictGreaterThan(Mul(Symbol('H', real=True), Pow(Symbol('rho', real=True), Integer(2))), Integer(0))",
+          "StrictGreaterThan(Mul(Symbol('V', real=True), Symbol('rho', real=True)), Integer(0))",
+          "StrictGreaterThan(Symbol('rho', real=True), Integer(0))"
+        ],
+        "pulled_inequations": [
+          "Mul(Symbol('H', real=True), Pow(Symbol('rho', real=True), Integer(2)))"
+        ],
+        "pulled_data": [],
+        "regularity_conditions": [
+          "Unequality(Symbol('rho', real=True), Integer(0))",
+          "Unequality(Pow(Symbol('rho', real=True), Integer(5)), Integer(0))",
+          "Unequality(Pow(Symbol('rho', real=True), Integer(2)), Integer(0))",
+          "Unequality(Pow(Symbol('rho', real=True), Integer(3)), Integer(0))"
+        ],
+        "data_status": "not-supplied"
+      },
+      "translation_ranking": {
+        "schema_version": "lieml.generic.reductor/1",
+        "system_fingerprint": "8902e5a5e8551759e6aaa261d99e8133323bd1c1c2c788585e9436fb096cee47",
+        "status": "unsupported",
+        "feature_schema": [
+          "independent_count",
+          "field_count",
+          "equation_count",
+          "max_jet_order",
+          "inequation_count",
+          "assumption_count",
+          "expression_nodes",
+          "candidate_orbit_rank",
+          "candidate_invariant"
+        ],
+        "features": [
+          [
+            "independent_count",
+            2.0
+          ],
+          [
+            "field_count",
+            3.0
+          ],
+          [
+            "equation_count",
+            3.0
+          ],
+          [
+            "max_jet_order",
+            1.0
+          ],
+          [
+            "inequation_count",
+            1.0
+          ],
+          [
+            "assumption_count",
+            0.0
+          ],
+          [
+            "expression_nodes",
+            29.0
+          ],
+          [
+            "candidate_orbit_rank",
+            0.0
+          ],
+          [
+            "candidate_invariant",
+            0.0
+          ]
+        ],
+        "candidates": [
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          }
+        ],
+        "evidence": [
+          [
+            "certificate_status",
+            "unsupported"
+          ],
+          [
+            "certificate_upgrade_by_score",
+            "forbidden"
+          ]
+        ],
+        "model": "deterministic-structure-v1"
+      },
+      "readable_equations": [
+        "h*u_y + h_x + h_y*u",
+        "B_y*g*h + g*h*h_y + 2*h*u*u_y + h*u_x + h_x*u + h_y*u**2",
+        "B_x + 3*kappa*u**2*u_y"
+      ],
+      "readable_reduced_equations": [
+        "3*H*V + H_x",
+        "2*C*H*g + 2*H**2*g + 4*H*V**2 + H*V_x + H_x*V",
+        "C_x + 3*V**3*kappa"
+      ]
+    },
+    "sve-m4": {
+      "problem": {
+        "system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('t', real=True)",
+              "Symbol('x', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('h', real=True)",
+              "Symbol('u', real=True)",
+              "Symbol('B', real=True)"
+            ],
+            "max_order": 1,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Symbol('h', real=True), Symbol('u_y')), Symbol('h_x'), Mul(Symbol('h_y'), Symbol('u', real=True)))",
+            "Add(Mul(Symbol('B_y'), Symbol('g', positive=True), Symbol('h', real=True)), Mul(Symbol('g', positive=True), Symbol('h', real=True), Symbol('h_y')), Mul(Integer(2), Symbol('h', real=True), Symbol('u', real=True), Symbol('u_y')), Mul(Symbol('h', real=True), Symbol('u_x')), Mul(Symbol('h_x'), Symbol('u', real=True)), Mul(Symbol('h_y'), Pow(Symbol('u', real=True), Integer(2))))",
+            "Add(Symbol('B_x'), Mul(Integer(4), Symbol('kappa', positive=True), Pow(Symbol('u', real=True), Integer(3)), Symbol('u_y')))"
+          ],
+          "inequations": [
+            "Symbol('h', real=True)"
+          ],
+          "assumptions": [],
+          "name": "Eulerian-SVE-m4"
+        },
+        "parameters": [
+          "Symbol('g', positive=True)",
+          "Symbol('kappa', positive=True)"
+        ],
+        "domain": [
+          "StrictGreaterThan(Symbol('h', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('u', real=True), Integer(0))",
+          "StrictGreaterThan(Symbol('x', real=True), Integer(0))"
+        ],
+        "data": []
+      },
+      "supplied_generator": {
+        "xi": [
+          "Integer(0)",
+          "Symbol('x', real=True)"
+        ],
+        "phi": [
+          "Mul(Integer(2), Symbol('h', real=True))",
+          "Symbol('u', real=True)",
+          "Mul(Integer(2), Symbol('B', real=True))"
+        ]
+      },
+      "chart": {
+        "reduced_space": {
+          "independent_variables": [
+            "Symbol('z', real=True)"
+          ],
+          "dependent_fields": [
+            "Symbol('H', real=True)",
+            "Symbol('V', real=True)",
+            "Symbol('C', real=True)"
+          ],
+          "max_order": 1,
+          "ranking": {
+            "derivative_order": "orderly",
+            "field_order": [],
+            "tie_break": "lex",
+            "differentiation_compatible": true
+          }
+        },
+        "orbit_variable": "Symbol('rho', real=True)",
+        "orbit_coordinate": "Symbol('x', real=True)",
+        "invariants": [
+          "Symbol('t', real=True)"
+        ],
+        "inverse_coordinates": [
+          "Symbol('z', real=True)",
+          "Symbol('rho', real=True)"
+        ],
+        "field_reconstruction": [
+          "Mul(Symbol('H', real=True), Pow(Symbol('x', real=True), Integer(2)))",
+          "Mul(Symbol('V', real=True), Symbol('x', real=True))",
+          "Mul(Symbol('C', real=True), Pow(Symbol('x', real=True), Integer(2)))"
+        ],
+        "equation_factors": [
+          "Pow(Symbol('x', real=True), Integer(2))",
+          "Pow(Symbol('x', real=True), Integer(3))",
+          "Pow(Symbol('x', real=True), Integer(2))"
+        ]
+      },
+      "multiplier_matrix": "Matrix([[2, 0, 0], [0, 3, 0], [0, 0, 2]])",
+      "reduction": {
+        "reduced_system": null,
+        "certificate": {
+          "system_fingerprint": "c4e1a1005d30801724955c00249c5e5d36ae910ebf210bc19a046ad155fe4c58",
+          "status": "unsupported",
+          "source_branch_id": "branch-0",
+          "checks": [
+            [
+              "dimensions",
+              true
+            ],
+            [
+              "fresh_chart_symbols",
+              true
+            ],
+            [
+              "point_generator",
+              true
+            ],
+            [
+              "projectable_generator",
+              true
+            ],
+            [
+              "chart_dependencies",
+              true
+            ],
+            [
+              "invariants",
+              true
+            ],
+            [
+              "base_rank",
+              true
+            ],
+            [
+              "inverse_chart",
+              true
+            ],
+            [
+              "affine_fiber",
+              true
+            ],
+            [
+              "fiber_rank",
+              true
+            ],
+            [
+              "multiplier_dimensions",
+              true
+            ],
+            [
+              "multiplier_dependencies",
+              true
+            ],
+            [
+              "symmetry_identity",
+              false
+            ]
+          ],
+          "residuals": [
+            "Integer(0)",
+            "Integer(0)",
+            "Mul(Integer(4), Symbol('kappa', positive=True), Pow(Symbol('u', real=True), Integer(3)), Symbol('u_y'))"
+          ],
+          "covered_guards": [],
+          "uncovered_branches": [],
+          "message": "supplied reduction not verified: symmetry_identity",
+          "configuration_fingerprint": "e9b6ec78f05327a0506253c8ebb7fd4f649104060fb95a2c7b7efb7923eec910",
+          "schema_version": "lieml.generic.certificate/1"
+        },
+        "pulled_domain": [],
+        "pulled_inequations": [],
+        "pulled_data": [],
+        "regularity_conditions": [],
+        "data_status": "not-checked"
+      },
+      "translation_ranking": {
+        "schema_version": "lieml.generic.reductor/1",
+        "system_fingerprint": "c4e1a1005d30801724955c00249c5e5d36ae910ebf210bc19a046ad155fe4c58",
+        "status": "unsupported",
+        "feature_schema": [
+          "independent_count",
+          "field_count",
+          "equation_count",
+          "max_jet_order",
+          "inequation_count",
+          "assumption_count",
+          "expression_nodes",
+          "candidate_orbit_rank",
+          "candidate_invariant"
+        ],
+        "features": [
+          [
+            "independent_count",
+            2.0
+          ],
+          [
+            "field_count",
+            3.0
+          ],
+          [
+            "equation_count",
+            3.0
+          ],
+          [
+            "max_jet_order",
+            1.0
+          ],
+          [
+            "inequation_count",
+            1.0
+          ],
+          [
+            "assumption_count",
+            0.0
+          ],
+          [
+            "expression_nodes",
+            29.0
+          ],
+          [
+            "candidate_orbit_rank",
+            0.0
+          ],
+          [
+            "candidate_invariant",
+            0.0
+          ]
+        ],
+        "candidates": [
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          }
+        ],
+        "evidence": [
+          [
+            "certificate_status",
+            "unsupported"
+          ],
+          [
+            "certificate_upgrade_by_score",
+            "forbidden"
+          ]
+        ],
+        "model": "deterministic-structure-v1"
+      },
+      "readable_equations": [
+        "h*u_y + h_x + h_y*u",
+        "B_y*g*h + g*h*h_y + 2*h*u*u_y + h*u_x + h_x*u + h_y*u**2",
+        "B_x + 4*kappa*u**3*u_y"
+      ],
+      "readable_reduced_equations": []
+    },
+    "NS-2D": {
+      "problem": {
+        "system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('t', real=True)",
+              "Symbol('x', real=True)",
+              "Symbol('y', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('u', real=True)",
+              "Symbol('v', real=True)",
+              "Symbol('p', real=True)"
+            ],
+            "max_order": 2,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Integer(-1), Symbol('nu', positive=True), Add(Symbol('u_yy'), Symbol('u_zz'))), Symbol('p_y'), Mul(Symbol('u', real=True), Symbol('u_y')), Symbol('u_x'), Mul(Symbol('u_z'), Symbol('v', real=True)))",
+            "Add(Mul(Integer(-1), Symbol('nu', positive=True), Add(Symbol('v_yy'), Symbol('v_zz'))), Symbol('p_z'), Mul(Symbol('u', real=True), Symbol('v_y')), Mul(Symbol('v', real=True), Symbol('v_z')), Symbol('v_x'))",
+            "Add(Symbol('u_y'), Symbol('v_z'))"
+          ],
+          "inequations": [],
+          "assumptions": [],
+          "name": "NS-2D"
+        },
+        "parameters": [
+          "Symbol('nu', positive=True)"
+        ],
+        "domain": [],
+        "data": []
+      },
+      "supplied_generator": {
+        "xi": [
+          "Integer(0)",
+          "Integer(1)",
+          "Integer(0)"
+        ],
+        "phi": [
+          "Integer(0)",
+          "Integer(0)",
+          "Integer(0)"
+        ]
+      },
+      "chart": {
+        "reduced_space": {
+          "independent_variables": [
+            "Symbol('tau', real=True)",
+            "Symbol('z', real=True)"
+          ],
+          "dependent_fields": [
+            "Symbol('U', real=True)",
+            "Symbol('V', real=True)",
+            "Symbol('P', real=True)"
+          ],
+          "max_order": 2,
+          "ranking": {
+            "derivative_order": "orderly",
+            "field_order": [],
+            "tie_break": "lex",
+            "differentiation_compatible": true
+          }
+        },
+        "orbit_variable": "Symbol('rho', real=True)",
+        "orbit_coordinate": "Symbol('x', real=True)",
+        "invariants": [
+          "Symbol('t', real=True)",
+          "Symbol('y', real=True)"
+        ],
+        "inverse_coordinates": [
+          "Symbol('tau', real=True)",
+          "Symbol('rho', real=True)",
+          "Symbol('z', real=True)"
+        ],
+        "field_reconstruction": [
+          "Symbol('U', real=True)",
+          "Symbol('V', real=True)",
+          "Symbol('P', real=True)"
+        ],
+        "equation_factors": [
+          "Integer(1)",
+          "Integer(1)",
+          "Integer(1)"
+        ]
+      },
+      "multiplier_matrix": "Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])",
+      "reduction": {
+        "reduced_system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('tau', real=True)",
+              "Symbol('z', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('U', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('P', real=True)"
+            ],
+            "max_order": 2,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Symbol('U_x'), Mul(Symbol('U_y'), Symbol('V', real=True)), Mul(Integer(-1), Symbol('U_yy'), Symbol('nu', positive=True)))",
+            "Add(Symbol('P_y'), Mul(Symbol('V', real=True), Symbol('V_y')), Symbol('V_x'), Mul(Integer(-1), Symbol('V_yy'), Symbol('nu', positive=True)))",
+            "Symbol('V_y')"
+          ],
+          "inequations": [],
+          "assumptions": [],
+          "reduction_map": {
+            "source_fingerprint": "bb119d600bd32fcd81d0d13cf4a2b8f0e310d5ee1e8050f9bb362b310406c7f5",
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "quotient_variables": [
+              "Symbol('tau', real=True)",
+              "Symbol('z', real=True)"
+            ],
+            "invariant_dependent_coordinates": [
+              "Symbol('U', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('P', real=True)"
+            ],
+            "invariant_surface_equations": [
+              "Mul(Integer(-1), Symbol('u_y'))",
+              "Mul(Integer(-1), Symbol('v_y'))",
+              "Mul(Integer(-1), Symbol('p_y'))"
+            ],
+            "pullback_rules": [
+              [
+                "Symbol('u', real=True)",
+                "Symbol('U', real=True)"
+              ],
+              [
+                "Symbol('u_z')",
+                "Symbol('U_y')"
+              ],
+              [
+                "Symbol('u_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_x')",
+                "Symbol('U_x')"
+              ],
+              [
+                "Symbol('u_zz')",
+                "Symbol('U_yy')"
+              ],
+              [
+                "Symbol('u_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_xz')",
+                "Symbol('U_xy')"
+              ],
+              [
+                "Symbol('u_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_xx')",
+                "Symbol('U_xx')"
+              ],
+              [
+                "Symbol('v', real=True)",
+                "Symbol('V', real=True)"
+              ],
+              [
+                "Symbol('v_z')",
+                "Symbol('V_y')"
+              ],
+              [
+                "Symbol('v_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_x')",
+                "Symbol('V_x')"
+              ],
+              [
+                "Symbol('v_zz')",
+                "Symbol('V_yy')"
+              ],
+              [
+                "Symbol('v_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_xz')",
+                "Symbol('V_xy')"
+              ],
+              [
+                "Symbol('v_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_xx')",
+                "Symbol('V_xx')"
+              ],
+              [
+                "Symbol('p', real=True)",
+                "Symbol('P', real=True)"
+              ],
+              [
+                "Symbol('p_z')",
+                "Symbol('P_y')"
+              ],
+              [
+                "Symbol('p_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_x')",
+                "Symbol('P_x')"
+              ],
+              [
+                "Symbol('p_zz')",
+                "Symbol('P_yy')"
+              ],
+              [
+                "Symbol('p_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_xz')",
+                "Symbol('P_xy')"
+              ],
+              [
+                "Symbol('p_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_xx')",
+                "Symbol('P_xx')"
+              ]
+            ],
+            "reconstruction_rules": [
+              [
+                "Symbol('u', real=True)",
+                "Symbol('U', real=True)"
+              ],
+              [
+                "Symbol('v', real=True)",
+                "Symbol('V', real=True)"
+              ],
+              [
+                "Symbol('p', real=True)",
+                "Symbol('P', real=True)"
+              ]
+            ],
+            "rank_guards": [
+              "Integer(-1)",
+              "Integer(1)",
+              "Integer(1)"
+            ],
+            "denominator_guards": []
+          },
+          "source_branch_id": "branch-0"
+        },
+        "certificate": {
+          "system_fingerprint": "bb119d600bd32fcd81d0d13cf4a2b8f0e310d5ee1e8050f9bb362b310406c7f5",
+          "status": "verified",
+          "source_branch_id": "branch-0",
+          "checks": [
+            [
+              "dimensions",
+              true
+            ],
+            [
+              "fresh_chart_symbols",
+              true
+            ],
+            [
+              "point_generator",
+              true
+            ],
+            [
+              "projectable_generator",
+              true
+            ],
+            [
+              "chart_dependencies",
+              true
+            ],
+            [
+              "invariants",
+              true
+            ],
+            [
+              "base_rank",
+              true
+            ],
+            [
+              "inverse_chart",
+              true
+            ],
+            [
+              "affine_fiber",
+              true
+            ],
+            [
+              "fiber_rank",
+              true
+            ],
+            [
+              "multiplier_dimensions",
+              true
+            ],
+            [
+              "multiplier_dependencies",
+              true
+            ],
+            [
+              "symmetry_identity",
+              true
+            ],
+            [
+              "invariant_surface",
+              true
+            ],
+            [
+              "nonzero_factors",
+              true
+            ],
+            [
+              "orbit_independent_equations",
+              true
+            ],
+            [
+              "pullback_identity",
+              true
+            ],
+            [
+              "guard_preservation",
+              true
+            ]
+          ],
+          "residuals": [
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)"
+          ],
+          "covered_guards": [],
+          "uncovered_branches": [
+            "zeros of recorded chart and denominator guards"
+          ],
+          "message": "exact local invariant PDE pullback on recorded smooth regular chart; no IBVP or completion claim",
+          "configuration_fingerprint": "3a10ccd35d31e0206197565e73fc594d70cbcab7890f236918846a52409888ee",
+          "schema_version": "lieml.generic.certificate/1"
+        },
+        "pulled_domain": [],
+        "pulled_inequations": [],
+        "pulled_data": [],
+        "regularity_conditions": [],
+        "data_status": "not-supplied"
+      },
+      "translation_ranking": {
+        "schema_version": "lieml.generic.reductor/1",
+        "system_fingerprint": "bb119d600bd32fcd81d0d13cf4a2b8f0e310d5ee1e8050f9bb362b310406c7f5",
+        "status": "unsupported",
+        "feature_schema": [
+          "independent_count",
+          "field_count",
+          "equation_count",
+          "max_jet_order",
+          "inequation_count",
+          "assumption_count",
+          "expression_nodes",
+          "candidate_orbit_rank",
+          "candidate_invariant"
+        ],
+        "features": [
+          [
+            "independent_count",
+            3.0
+          ],
+          [
+            "field_count",
+            3.0
+          ],
+          [
+            "equation_count",
+            3.0
+          ],
+          [
+            "max_jet_order",
+            2.0
+          ],
+          [
+            "inequation_count",
+            0.0
+          ],
+          [
+            "assumption_count",
+            0.0
+          ],
+          [
+            "expression_nodes",
+            20.0
+          ],
+          [
+            "candidate_orbit_rank",
+            0.0
+          ],
+          [
+            "candidate_invariant",
+            0.0
+          ]
+        ],
+        "candidates": [
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(1)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(1)",
+                "Integer(0)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          }
+        ],
+        "evidence": [
+          [
+            "certificate_status",
+            "unsupported"
+          ],
+          [
+            "certificate_upgrade_by_score",
+            "forbidden"
+          ]
+        ],
+        "model": "deterministic-structure-v1"
+      },
+      "readable_equations": [
+        "-nu*(u_yy + u_zz) + p_y + u*u_y + u_x + u_z*v",
+        "-nu*(v_yy + v_zz) + p_z + u*v_y + v*v_z + v_x",
+        "u_y + v_z"
+      ],
+      "readable_reduced_equations": [
+        "U_x + U_y*V - U_yy*nu",
+        "P_y + V*V_y + V_x - V_yy*nu",
+        "V_y"
+      ]
+    },
+    "Oseen-2D": {
+      "problem": {
+        "system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('t', real=True)",
+              "Symbol('x', real=True)",
+              "Symbol('y', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('u', real=True)",
+              "Symbol('v', real=True)",
+              "Symbol('p', real=True)"
+            ],
+            "max_order": 2,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Mul(Symbol('a', real=True), Symbol('u_y')), Mul(Symbol('b', real=True), Symbol('u_z')), Mul(Integer(-1), Symbol('nu', positive=True), Add(Symbol('u_yy'), Symbol('u_zz'))), Symbol('p_y'), Symbol('u_x'))",
+            "Add(Mul(Symbol('a', real=True), Symbol('v_y')), Mul(Symbol('b', real=True), Symbol('v_z')), Mul(Integer(-1), Symbol('nu', positive=True), Add(Symbol('v_yy'), Symbol('v_zz'))), Symbol('p_z'), Symbol('v_x'))",
+            "Add(Symbol('u_y'), Symbol('v_z'))"
+          ],
+          "inequations": [],
+          "assumptions": [],
+          "name": "Oseen-2D"
+        },
+        "parameters": [
+          "Symbol('nu', positive=True)",
+          "Symbol('a', real=True)",
+          "Symbol('b', real=True)"
+        ],
+        "domain": [],
+        "data": []
+      },
+      "supplied_generator": {
+        "xi": [
+          "Integer(0)",
+          "Integer(1)",
+          "Integer(0)"
+        ],
+        "phi": [
+          "Integer(0)",
+          "Integer(0)",
+          "Integer(0)"
+        ]
+      },
+      "chart": {
+        "reduced_space": {
+          "independent_variables": [
+            "Symbol('tau', real=True)",
+            "Symbol('z', real=True)"
+          ],
+          "dependent_fields": [
+            "Symbol('U', real=True)",
+            "Symbol('V', real=True)",
+            "Symbol('P', real=True)"
+          ],
+          "max_order": 2,
+          "ranking": {
+            "derivative_order": "orderly",
+            "field_order": [],
+            "tie_break": "lex",
+            "differentiation_compatible": true
+          }
+        },
+        "orbit_variable": "Symbol('rho', real=True)",
+        "orbit_coordinate": "Symbol('x', real=True)",
+        "invariants": [
+          "Symbol('t', real=True)",
+          "Symbol('y', real=True)"
+        ],
+        "inverse_coordinates": [
+          "Symbol('tau', real=True)",
+          "Symbol('rho', real=True)",
+          "Symbol('z', real=True)"
+        ],
+        "field_reconstruction": [
+          "Symbol('U', real=True)",
+          "Symbol('V', real=True)",
+          "Symbol('P', real=True)"
+        ],
+        "equation_factors": [
+          "Integer(1)",
+          "Integer(1)",
+          "Integer(1)"
+        ]
+      },
+      "multiplier_matrix": "Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])",
+      "reduction": {
+        "reduced_system": {
+          "jet_space": {
+            "independent_variables": [
+              "Symbol('tau', real=True)",
+              "Symbol('z', real=True)"
+            ],
+            "dependent_fields": [
+              "Symbol('U', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('P', real=True)"
+            ],
+            "max_order": 2,
+            "ranking": {
+              "derivative_order": "orderly",
+              "field_order": [],
+              "tie_break": "lex",
+              "differentiation_compatible": true
+            }
+          },
+          "equations": [
+            "Add(Symbol('U_x'), Mul(Symbol('U_y'), Symbol('b', real=True)), Mul(Integer(-1), Symbol('U_yy'), Symbol('nu', positive=True)))",
+            "Add(Symbol('P_y'), Symbol('V_x'), Mul(Symbol('V_y'), Symbol('b', real=True)), Mul(Integer(-1), Symbol('V_yy'), Symbol('nu', positive=True)))",
+            "Symbol('V_y')"
+          ],
+          "inequations": [],
+          "assumptions": [],
+          "reduction_map": {
+            "source_fingerprint": "20d5f4aff44973ed323acfdf547cdcb96a1b68a7cbf8182dd64c0652c5d8421d",
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "quotient_variables": [
+              "Symbol('tau', real=True)",
+              "Symbol('z', real=True)"
+            ],
+            "invariant_dependent_coordinates": [
+              "Symbol('U', real=True)",
+              "Symbol('V', real=True)",
+              "Symbol('P', real=True)"
+            ],
+            "invariant_surface_equations": [
+              "Mul(Integer(-1), Symbol('u_y'))",
+              "Mul(Integer(-1), Symbol('v_y'))",
+              "Mul(Integer(-1), Symbol('p_y'))"
+            ],
+            "pullback_rules": [
+              [
+                "Symbol('u', real=True)",
+                "Symbol('U', real=True)"
+              ],
+              [
+                "Symbol('u_z')",
+                "Symbol('U_y')"
+              ],
+              [
+                "Symbol('u_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_x')",
+                "Symbol('U_x')"
+              ],
+              [
+                "Symbol('u_zz')",
+                "Symbol('U_yy')"
+              ],
+              [
+                "Symbol('u_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_xz')",
+                "Symbol('U_xy')"
+              ],
+              [
+                "Symbol('u_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('u_xx')",
+                "Symbol('U_xx')"
+              ],
+              [
+                "Symbol('v', real=True)",
+                "Symbol('V', real=True)"
+              ],
+              [
+                "Symbol('v_z')",
+                "Symbol('V_y')"
+              ],
+              [
+                "Symbol('v_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_x')",
+                "Symbol('V_x')"
+              ],
+              [
+                "Symbol('v_zz')",
+                "Symbol('V_yy')"
+              ],
+              [
+                "Symbol('v_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_xz')",
+                "Symbol('V_xy')"
+              ],
+              [
+                "Symbol('v_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('v_xx')",
+                "Symbol('V_xx')"
+              ],
+              [
+                "Symbol('p', real=True)",
+                "Symbol('P', real=True)"
+              ],
+              [
+                "Symbol('p_z')",
+                "Symbol('P_y')"
+              ],
+              [
+                "Symbol('p_y')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_x')",
+                "Symbol('P_x')"
+              ],
+              [
+                "Symbol('p_zz')",
+                "Symbol('P_yy')"
+              ],
+              [
+                "Symbol('p_yz')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_yy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_xz')",
+                "Symbol('P_xy')"
+              ],
+              [
+                "Symbol('p_xy')",
+                "Integer(0)"
+              ],
+              [
+                "Symbol('p_xx')",
+                "Symbol('P_xx')"
+              ]
+            ],
+            "reconstruction_rules": [
+              [
+                "Symbol('u', real=True)",
+                "Symbol('U', real=True)"
+              ],
+              [
+                "Symbol('v', real=True)",
+                "Symbol('V', real=True)"
+              ],
+              [
+                "Symbol('p', real=True)",
+                "Symbol('P', real=True)"
+              ]
+            ],
+            "rank_guards": [
+              "Integer(-1)",
+              "Integer(1)",
+              "Integer(1)"
+            ],
+            "denominator_guards": []
+          },
+          "source_branch_id": "branch-0"
+        },
+        "certificate": {
+          "system_fingerprint": "20d5f4aff44973ed323acfdf547cdcb96a1b68a7cbf8182dd64c0652c5d8421d",
+          "status": "verified",
+          "source_branch_id": "branch-0",
+          "checks": [
+            [
+              "dimensions",
+              true
+            ],
+            [
+              "fresh_chart_symbols",
+              true
+            ],
+            [
+              "point_generator",
+              true
+            ],
+            [
+              "projectable_generator",
+              true
+            ],
+            [
+              "chart_dependencies",
+              true
+            ],
+            [
+              "invariants",
+              true
+            ],
+            [
+              "base_rank",
+              true
+            ],
+            [
+              "inverse_chart",
+              true
+            ],
+            [
+              "affine_fiber",
+              true
+            ],
+            [
+              "fiber_rank",
+              true
+            ],
+            [
+              "multiplier_dimensions",
+              true
+            ],
+            [
+              "multiplier_dependencies",
+              true
+            ],
+            [
+              "symmetry_identity",
+              true
+            ],
+            [
+              "invariant_surface",
+              true
+            ],
+            [
+              "nonzero_factors",
+              true
+            ],
+            [
+              "orbit_independent_equations",
+              true
+            ],
+            [
+              "pullback_identity",
+              true
+            ],
+            [
+              "guard_preservation",
+              true
+            ]
+          ],
+          "residuals": [
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)",
+            "Integer(0)"
+          ],
+          "covered_guards": [],
+          "uncovered_branches": [
+            "zeros of recorded chart and denominator guards"
+          ],
+          "message": "exact local invariant PDE pullback on recorded smooth regular chart; no IBVP or completion claim",
+          "configuration_fingerprint": "3448552d3884506dff21cafb935b867500ec2199bbbe89287335e63f4c607323",
+          "schema_version": "lieml.generic.certificate/1"
+        },
+        "pulled_domain": [],
+        "pulled_inequations": [],
+        "pulled_data": [],
+        "regularity_conditions": [],
+        "data_status": "not-supplied"
+      },
+      "translation_ranking": {
+        "schema_version": "lieml.generic.reductor/1",
+        "system_fingerprint": "20d5f4aff44973ed323acfdf547cdcb96a1b68a7cbf8182dd64c0652c5d8421d",
+        "status": "unsupported",
+        "feature_schema": [
+          "independent_count",
+          "field_count",
+          "equation_count",
+          "max_jet_order",
+          "inequation_count",
+          "assumption_count",
+          "expression_nodes",
+          "candidate_orbit_rank",
+          "candidate_invariant"
+        ],
+        "features": [
+          [
+            "independent_count",
+            3.0
+          ],
+          [
+            "field_count",
+            3.0
+          ],
+          [
+            "equation_count",
+            3.0
+          ],
+          [
+            "max_jet_order",
+            2.0
+          ],
+          [
+            "inequation_count",
+            0.0
+          ],
+          [
+            "assumption_count",
+            0.0
+          ],
+          [
+            "expression_nodes",
+            20.0
+          ],
+          [
+            "candidate_orbit_rank",
+            0.0
+          ],
+          [
+            "candidate_invariant",
+            0.0
+          ]
+        ],
+        "candidates": [
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(1)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(0)",
+                "Integer(1)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          },
+          {
+            "generator": {
+              "xi": [
+                "Integer(1)",
+                "Integer(0)",
+                "Integer(0)"
+              ],
+              "phi": [
+                "Integer(0)",
+                "Integer(0)",
+                "Integer(0)"
+              ]
+            },
+            "score": 3.0,
+            "invariant": true,
+            "residuals": [
+              "Integer(0)",
+              "Integer(0)",
+              "Integer(0)"
+            ],
+            "rationale": [
+              "prolonged residuals vanish",
+              "projected orbit has positive rank"
+            ]
+          }
+        ],
+        "evidence": [
+          [
+            "certificate_status",
+            "unsupported"
+          ],
+          [
+            "certificate_upgrade_by_score",
+            "forbidden"
+          ]
+        ],
+        "model": "deterministic-structure-v1"
+      },
+      "readable_equations": [
+        "a*u_y + b*u_z - nu*(u_yy + u_zz) + p_y + u_x",
+        "a*v_y + b*v_z - nu*(v_yy + v_zz) + p_z + v_x",
+        "u_y + v_z"
+      ],
+      "readable_reduced_equations": [
+        "U_x + U_y*b - U_yy*nu",
+        "P_y + V_x + V_y*b - V_yy*nu",
+        "V_y"
+      ]
+    }
+  },
+  "exact_controls": {
+    "sve_cubic": [
+      "0",
+      "0",
+      "0"
+    ],
+    "taylor_green": [
+      "0",
+      "0",
+      "0"
+    ],
+    "shear": [
+      "0",
+      "0",
+      "0"
+    ]
+  }
+}

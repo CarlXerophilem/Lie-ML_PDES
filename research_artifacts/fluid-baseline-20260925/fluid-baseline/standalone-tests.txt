@@ -1,0 +1,41 @@
+======================================================================
+ TEST SUITE  --  ml_pde_solver_demo.py
+======================================================================
+
+ T1  determinism given a fixed seed
+   [PASS] T1 same seed -> identical rel_L2  -- 4.620376e-03 == 4.620376e-03
+   [PASS] T1 same seed -> identical res_rms  -- 3.834344e-03
+   [PASS] T1 nparams stable  -- 1341
+
+ T2  the exact AZ oracle solves Fisher-KPP (independent sympy proof)
+   [PASS] T2 full PDE residual of u_exact == 0  -- sympy -> 0
+   [PASS] T2 reduced ODE residual == 0  -- sympy -> 0
+   [PASS] T2 code C == 5/sqrt6  -- C=2.041241
+
+ T3  null-by-default contract
+   [PASS] T3 null_interface flag True
+   [PASS] T3 input dim == 2 (raw x,t)
+   [PASS] T3 data_source disclosed
+   [PASS] T3 coords is identity cat([x,t])
+   [PASS] T3 prior is exactly zero
+   [PASS] T3 symmetry_loss is exactly 0
+   [PASS] T3 certificate is None (null)
+   [PASS] T3 feature_dim == 2
+
+ T4  honesty guard is NON-VACUOUS (fires when a 'null' interface cheats)
+   [PASS] T4 guard fires on smuggled nonzero prior  -- NULL guard 2 FAILED: prior is not exactly zero (smuggled profile)
+   [PASS] T4 guard restored -> null runs clean
+
+ T5  a nonzero prior flows through autograd with its EXACT derivative
+   [PASS] T5 d(prior)/dx contributes exactly 2  -- mean=2.000000
+   [PASS] T5 d(prior)/dt contributes exactly 3  -- mean=3.000000
+
+ T6  pluggability: a 1-D invariant z-chart subclass runs the SAME solver
+   [PASS] T6 symmetry arm ran (in_dim == 1)  -- in_dim=1
+   [PASS] T6 symmetry arm not flagged null
+   [PASS] T6 symmetry arm converged (rel_L2 < 5e-2)  -- rel_L2=1.309e-04
+   [PASS] T6 baseline & symmetry share matched budget (Nf,Nic,Nbc)  -- (4000, 300, 200)
+
+======================================================================
+ RESULT: 22 passed, 0 failed
+======================================================================

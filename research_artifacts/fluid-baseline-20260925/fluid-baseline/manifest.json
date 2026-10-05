@@ -1,0 +1,542 @@
+{
+  "title": "LieML · Fluid evolution baselines",
+  "created_at": "2026-09-25T08:50:28.722292+00:00",
+  "cases": [
+    {
+      "id": "sve-m2-k0.05",
+      "title": "Original SVE · m=2, κ=0.05",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 2,
+        "kappa": 0.05,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m2-k0.05.json",
+      "metrics": {
+        "mass_relative_drift": 1.1102230246251565e-16,
+        "bed_mean_absolute_drift": 6.369687763352339e-19,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.3651093124045502,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.01255424099508673,
+        "refinement_128_256_rms": 0.0003887489106533651,
+        "refinement_256_512_rms": 0.00019995609718933435,
+        "refinement_error_ratio": 1.9441713261950033
+      }
+    },
+    {
+      "id": "sve-m2-k0.1",
+      "title": "Original SVE · m=2, κ=0.1",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 2,
+        "kappa": 0.1,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m2-k0.1.json",
+      "metrics": {
+        "mass_relative_drift": 1.1102230246251565e-16,
+        "bed_mean_absolute_drift": 5.421010862427522e-19,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.36520458823320934,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.012036983971484005,
+        "refinement_128_256_rms": 0.0003857980627171297,
+        "refinement_256_512_rms": 0.00019845138596156508,
+        "refinement_error_ratio": 1.9440431763567971
+      }
+    },
+    {
+      "id": "sve-m3-k0.05",
+      "title": "Original SVE · m=3, κ=0.05",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 3,
+        "kappa": 0.05,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m3-k0.05.json",
+      "metrics": {
+        "mass_relative_drift": 1.1102230246251565e-16,
+        "bed_mean_absolute_drift": 6.098637220230962e-19,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.36506807256525164,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.012063513044267893,
+        "refinement_128_256_rms": 0.00038994478660574206,
+        "refinement_256_512_rms": 0.00020056563398400618,
+        "refinement_error_ratio": 1.9442253334229613
+      }
+    },
+    {
+      "id": "sve-m3-k0.1",
+      "title": "Original SVE · m=3, κ=0.1",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 3,
+        "kappa": 0.1,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m3-k0.1.json",
+      "metrics": {
+        "mass_relative_drift": 2.220446049250313e-16,
+        "bed_mean_absolute_drift": 1.802486111757151e-18,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.3651221949988179,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.012111744028516114,
+        "refinement_128_256_rms": 0.000388169594008388,
+        "refinement_256_512_rms": 0.00019966052103144436,
+        "refinement_error_ratio": 1.9441479567573376
+      }
+    },
+    {
+      "id": "sve-m4-k0.05",
+      "title": "Original SVE · m=4, κ=0.05",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 4,
+        "kappa": 0.05,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m4-k0.05.json",
+      "metrics": {
+        "mass_relative_drift": 1.1102230246251565e-16,
+        "bed_mean_absolute_drift": 8.944667923005412e-19,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.36504124960330275,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.012145697022788227,
+        "refinement_128_256_rms": 0.00039077788938264926,
+        "refinement_256_512_rms": 0.0002009902488751082,
+        "refinement_error_ratio": 1.944262926036137
+      }
+    },
+    {
+      "id": "sve-m4-k0.1",
+      "title": "Original SVE · m=4, κ=0.1",
+      "model": "Eulerian SVE (1 space + time)",
+      "parameters": {
+        "m": 4,
+        "kappa": 0.1,
+        "g": 1,
+        "n": 128,
+        "t_end": 0.4,
+        "boundary": "periodic [0,2pi)"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "Rusanov FV + centered bed source + SSPRK3; smooth positive branch",
+      "reduction": "Full PDE evolution. Cubic scaling is separately verified; these periodic data do not use that scaling.",
+      "evidence": "Mass/bed drift, positive depth, sampled hyperbolicity and three-grid self-convergence checks.",
+      "file": "sve-m4-k0.1.json",
+      "metrics": {
+        "mass_relative_drift": 0.0,
+        "bed_mean_absolute_drift": 1.4501204056993622e-18,
+        "minimum_depth": 0.9700120464055096,
+        "minimum_velocity": 0.3650685726378623,
+        "maximum_characteristic_imaginary_part": 0.0,
+        "steps": 80,
+        "wall_seconds": 0.012234422960318625,
+        "refinement_128_256_rms": 0.0003898274501341932,
+        "refinement_256_512_rms": 0.0002005056392183078,
+        "refinement_error_ratio": 1.9442218765216592
+      }
+    },
+    {
+      "id": "sve-cubic-reduced-k0.05",
+      "title": "Reduced SVE · κ=0.05",
+      "model": "Original cubic SVE invariant family",
+      "parameters": {
+        "m": 3,
+        "kappa": 0.05,
+        "g": 1,
+        "t_start": 1,
+        "t_end": 1.5,
+        "x_window": [
+          0.5,
+          2
+        ],
+        "boundary": "traces of invariant solution"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "DOP853 on 3 profiles; rtol=1e-11, atol=1e-13",
+      "reduction": "h=x²H(t), u=xV(t), B=x²C(t); verified local chart x>0.",
+      "evidence": "Exact original-balance residuals vanish; numerical profiles checked against closed form. The plotted x-window is not a closed periodic domain.",
+      "file": "sve-cubic-reduced-k0.05.json",
+      "metrics": {
+        "exact_profile_max_error": 1.2443379659998755e-12,
+        "minimum_depth": 0.009876543209878358,
+        "nfev": 122,
+        "wall_seconds": 0.0007221110281534493
+      }
+    },
+    {
+      "id": "sve-cubic-reduced-k0.1",
+      "title": "Reduced SVE · κ=0.1",
+      "model": "Original cubic SVE invariant family",
+      "parameters": {
+        "m": 3,
+        "kappa": 0.1,
+        "g": 1,
+        "t_start": 1,
+        "t_end": 1.5,
+        "x_window": [
+          0.5,
+          2
+        ],
+        "boundary": "traces of invariant solution"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "DOP853 on 3 profiles; rtol=1e-11, atol=1e-13",
+      "reduction": "h=x²H(t), u=xV(t), B=x²C(t); verified local chart x>0.",
+      "evidence": "Exact original-balance residuals vanish; numerical profiles checked against closed form. The plotted x-window is not a closed periodic domain.",
+      "file": "sve-cubic-reduced-k0.1.json",
+      "metrics": {
+        "exact_profile_max_error": 1.1540768340978502e-12,
+        "minimum_depth": 0.007407407407408717,
+        "nfev": 122,
+        "wall_seconds": 0.0006063150358386338
+      }
+    },
+    {
+      "id": "sve-cubic-reduced-k0.2",
+      "title": "Reduced SVE · κ=0.2",
+      "model": "Original cubic SVE invariant family",
+      "parameters": {
+        "m": 3,
+        "kappa": 0.2,
+        "g": 1,
+        "t_start": 1,
+        "t_end": 1.5,
+        "x_window": [
+          0.5,
+          2
+        ],
+        "boundary": "traces of invariant solution"
+      },
+      "equations": [
+        "h_t + (h u)_x = 0",
+        "(h u)_t + (h u^2 + g h^2/2)_x + g h B_x = 0",
+        "B_t + kappa (u^m)_x = 0"
+      ],
+      "solver": "DOP853 on 3 profiles; rtol=1e-11, atol=1e-13",
+      "reduction": "h=x²H(t), u=xV(t), B=x²C(t); verified local chart x>0.",
+      "evidence": "Exact original-balance residuals vanish; numerical profiles checked against closed form. The plotted x-window is not a closed periodic domain.",
+      "file": "sve-cubic-reduced-k0.2.json",
+      "metrics": {
+        "exact_profile_max_error": 1.103006574965093e-12,
+        "minimum_depth": 0.002469135802469609,
+        "nfev": 122,
+        "wall_seconds": 0.0005947320023551583
+      }
+    },
+    {
+      "id": "ns-shear-nu0.01",
+      "title": "2D NS · shear · ν=0.01",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.01,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "x-translation invariant shear; V=0, constant P reduces to the heat equation.",
+      "evidence": "Analytic velocity control; divergence and dissipation checks.",
+      "file": "ns-shear-nu0.01.json",
+      "metrics": {
+        "divergence_max": 0.0,
+        "energy_max_increase": -0.00012255547047773652,
+        "enstrophy_max_increase": -0.00012255547047773652,
+        "vorticity_mean_max": 1.1102230246251565e-16,
+        "steps": 120,
+        "wall_seconds": 0.08500792505219579,
+        "exact_velocity_max_error": 6.661338147750939e-16
+      }
+    },
+    {
+      "id": "ns-shear-nu0.1",
+      "title": "2D NS · shear · ν=0.1",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.1,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "x-translation invariant shear; V=0, constant P reduces to the heat equation.",
+      "evidence": "Analytic velocity control; divergence and dissipation checks.",
+      "file": "ns-shear-nu0.1.json",
+      "metrics": {
+        "divergence_max": 0.0,
+        "energy_max_increase": -0.0010259762445091747,
+        "enstrophy_max_increase": -0.0010259762445091747,
+        "vorticity_mean_max": 5.551115123125783e-17,
+        "steps": 200,
+        "wall_seconds": 0.13521214597858489,
+        "exact_velocity_max_error": 9.992007221626409e-16
+      }
+    },
+    {
+      "id": "ns-taylor_green-nu0.01",
+      "title": "2D NS · taylor green · ν=0.01",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.01,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "Full 2D evolution; not an x-invariant reduced solution.",
+      "evidence": "Analytic velocity control; divergence and dissipation checks.",
+      "file": "ns-taylor_green-nu0.01.json",
+      "metrics": {
+        "divergence_max": 1.3911210175539431e-14,
+        "energy_max_increase": -0.00024031749851088913,
+        "enstrophy_max_increase": -0.00048063499702177825,
+        "vorticity_mean_max": 4.363913744254155e-18,
+        "steps": 120,
+        "wall_seconds": 0.08332320296904072,
+        "exact_velocity_max_error": 1.4432899320127035e-15
+      }
+    },
+    {
+      "id": "ns-taylor_green-nu0.1",
+      "title": "2D NS · taylor green · ν=0.1",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.1,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "Full 2D evolution; not an x-invariant reduced solution.",
+      "evidence": "Analytic velocity control; divergence and dissipation checks.",
+      "file": "ns-taylor_green-nu0.1.json",
+      "metrics": {
+        "divergence_max": 1.1943473389200996e-14,
+        "energy_max_increase": -0.0016842071156313032,
+        "enstrophy_max_increase": -0.003368414231262662,
+        "vorticity_mean_max": 6.371381829246847e-18,
+        "steps": 200,
+        "wall_seconds": 0.13507609098451212,
+        "exact_velocity_max_error": 2.7755575615628914e-15
+      }
+    },
+    {
+      "id": "ns-interacting-nu0.01",
+      "title": "2D NS · interacting · ν=0.01",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.01,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "Full 2D evolution; not an x-invariant reduced solution.",
+      "evidence": "64/128 grid and timestep refinement; divergence and dissipation checks. No closed-form reference.",
+      "file": "ns-interacting-nu0.01.json",
+      "metrics": {
+        "divergence_max": 1.5906312860620313e-14,
+        "energy_max_increase": -0.0003281616751591998,
+        "enstrophy_max_increase": -0.0009767486799739933,
+        "vorticity_mean_max": 6.938893903907228e-18,
+        "steps": 120,
+        "wall_seconds": 0.08387705899076536,
+        "refinement_64_128_final_vorticity_rms": 8.81748448111918e-07
+      }
+    },
+    {
+      "id": "ns-interacting-nu0.1",
+      "title": "2D NS · interacting · ν=0.1",
+      "model": "2D incompressible Navier–Stokes",
+      "parameters": {
+        "nu": 0.1,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + u u_x + v u_y + p_x = nu Laplacian(u)",
+        "v_t + u v_x + v v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0"
+      ],
+      "solver": "Fourier vorticity + strict 2/3 dealiasing + RK4; dt<=0.01 plus CFL/diffusion bounds",
+      "reduction": "Full 2D evolution; not an x-invariant reduced solution.",
+      "evidence": "64/128 grid and timestep refinement; divergence and dissipation checks. No closed-form reference.",
+      "file": "ns-interacting-nu0.1.json",
+      "metrics": {
+        "divergence_max": 1.3298625445307428e-14,
+        "energy_max_increase": -0.002033220099172811,
+        "enstrophy_max_increase": -0.005292701371368724,
+        "vorticity_mean_max": 6.7220534694101275e-18,
+        "steps": 200,
+        "wall_seconds": 0.13454080099472776,
+        "refinement_64_128_final_vorticity_rms": 1.2765001187267233e-11
+      }
+    },
+    {
+      "id": "oseen-nu0.01",
+      "title": "2D Oseen · ν=0.01",
+      "model": "2D constant-drift Oseen (linear NS control)",
+      "parameters": {
+        "nu": 0.01,
+        "a": 0.3,
+        "b": -0.2,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + a u_x + b u_y + p_x = nu Laplacian(u)",
+        "v_t + a v_x + b v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0; (a,b) fixed"
+      ],
+      "solver": "Fourier RK4, checked against the independent exact Fourier semigroup",
+      "reduction": "x-translation chart verified symbolically; these full 2D data are not x-invariant.",
+      "evidence": "Exact Fourier propagation control and divergence check.",
+      "file": "oseen-nu0.01.json",
+      "metrics": {
+        "divergence_max": 1.628329508433817e-14,
+        "energy_max_increase": -0.0003287910734974808,
+        "enstrophy_max_increase": -0.0009230028719620087,
+        "vorticity_mean_max": 6.243479854211448e-18,
+        "steps": 120,
+        "wall_seconds": 0.023308813979383558,
+        "exact_vorticity_max_error": 1.6102008615348495e-11
+      }
+    },
+    {
+      "id": "oseen-nu0.1",
+      "title": "2D Oseen · ν=0.1",
+      "model": "2D constant-drift Oseen (linear NS control)",
+      "parameters": {
+        "nu": 0.1,
+        "a": 0.3,
+        "b": -0.2,
+        "n": 64,
+        "t_end": 1,
+        "boundary": "periodic [0,2pi)^2"
+      },
+      "equations": [
+        "u_t + a u_x + b u_y + p_x = nu Laplacian(u)",
+        "v_t + a v_x + b v_y + p_y = nu Laplacian(v)",
+        "u_x + v_y = 0; (a,b) fixed"
+      ],
+      "solver": "Fourier RK4, checked against the independent exact Fourier semigroup",
+      "reduction": "x-translation chart verified symbolically; these full 2D data are not x-invariant.",
+      "evidence": "Exact Fourier propagation control and divergence check.",
+      "file": "oseen-nu0.1.json",
+      "metrics": {
+        "divergence_max": 1.6265026700480914e-14,
+        "energy_max_increase": -0.0020479927559318434,
+        "enstrophy_max_increase": -0.005187342432767583,
+        "vorticity_mean_max": 5.722554591650053e-18,
+        "steps": 200,
+        "wall_seconds": 0.03368514101020992,
+        "exact_vorticity_max_error": 3.064215547965432e-12
+      }
+    }
+  ]
+}

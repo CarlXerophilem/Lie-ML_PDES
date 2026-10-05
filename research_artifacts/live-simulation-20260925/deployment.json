@@ -1,0 +1,98 @@
+{
+  "verified_at": "2026-09-25T11:48:51.569004+00:00",
+  "url": "http://127.0.0.1:8879/",
+  "ssh_host": "priestess",
+  "conda_environment": "pinn",
+  "release_path": "/home/carl/lieml/releases/20260925-live-v1",
+  "state_path": "/home/carl/lieml/live-state",
+  "archive_sha256": "821381450998b8456ba6ecc30ad34edb0f8625670f99f478b31ea1fb491b04d0",
+  "overrides": {
+    "checklist.md": "d9295094f7b24edb30eef1fc412a7cab163b74f2173e94cba177e33a07edddfb",
+    "docs/live_simulation.md": "91d68d1d6ee8ff6340ea2553f7606d55186933db82d3b28cbdc710e13f81dded",
+    "draft/research_record.md": "9ac6e401181c67bb9f27b10fdce5011b38d4d9acc3835fde12d9576e526a1a15",
+    "symm/fluid_baselines/live_dashboard.html": "5bd2c94bd8dbf63e0761738d87d920e0032971239549a95af7dd435d2b1d9159"
+  },
+  "source_verification": {
+    "file_count": 159,
+    "mismatches": [],
+    "passed": true
+  },
+  "service": {
+    "MainPID": "836404",
+    "NRestarts": "1",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/home/carl/miniforge3/envs/pinn/bin/python ; argv[]=/home/carl/miniforge3/envs/pinn/bin/python -B -m symm.fluid_baselines.live_service --state-dir /home/carl/lieml/live-state --port 8879 --n 128 --horizon 100 --wall-interval 0.5 ; ignore_errors=no ; start_time=[Fri 2026-09-25 19:44:11 CST] ; stop_time=[n/a] ; pid=836404 ; code=(null) ; status=0/0 }",
+    "WorkingDirectory": "/home/carl/lieml/releases/20260925-live-v1",
+    "ActiveState": "active",
+    "SubState": "running",
+    "UnitFileState": "enabled"
+  },
+  "linger": "Linger=yes",
+  "python": "/home/carl/miniforge3/envs/pinn/bin/python",
+  "python_version": "3.12.14",
+  "tunnel": {
+    "supervisor_pid": 18220,
+    "ssh_pid": 19032,
+    "port": 8879,
+    "host": "priestess",
+    "started_epoch": 1790336593.2602873
+  },
+  "health": {
+    "service": "ready",
+    "run_id": "20260925T114245Z-02c8bbd0",
+    "time": 41.79999999999976,
+    "running": true,
+    "status": "running",
+    "error": null
+  },
+  "evidence": {
+    "source_manifest": "deployment_manifest.json",
+    "override_manifest": "deployment-overrides.json",
+    "tests": "validation/pytest.xml",
+    "long_time_checks": "validation/long-time.json",
+    "browser_checks": "browser-checks.json",
+    "graceful_restart": "recovery-check.json",
+    "automatic_restart": "automatic-restart-check.json",
+    "tunnel_recovery": "tunnel-recovery-check.json"
+  },
+  "limitations": [
+    "Numerical baseline; no ML speedup or new symmetry theorem claimed.",
+    "Evolution pauses at the configured horizon; service remains available.",
+    "Local tunnel supervisor must be restarted after Windows reboot.",
+    "Long-time diagnostics do not establish a uniform numerical error bound."
+  ],
+  "simulation": {
+    "run_id": "20260925T114245Z-02c8bbd0",
+    "time": 44.44999999999961,
+    "model": "ns",
+    "kind": "interacting",
+    "n": 128,
+    "parameters": {
+      "reference": {
+        "nu": 0.01
+      },
+      "perturbed": {
+        "nu": 0.01
+      }
+    },
+    "horizon": 100.0,
+    "running": true,
+    "status": "running",
+    "error": null,
+    "archive_frames": 89,
+    "checkpoint_time": 43.99999999999964
+  },
+  "verification_summary": {
+    "pytest": [
+      {
+        "tests": "212",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "23.509"
+      }
+    ],
+    "long_time_checks_passed": 9,
+    "long_time_passed": true
+  }
+}

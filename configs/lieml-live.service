@@ -1,0 +1,18 @@
+[Unit]
+Description=LieML live fluid simulation and perturbation laboratory
+
+[Service]
+Type=simple
+WorkingDirectory=/home/carl/lieml/releases/20260925-live-v1
+ExecStart=/home/carl/miniforge3/envs/pinn/bin/python -B -m symm.fluid_baselines.live_service --state-dir /home/carl/lieml/live-state --port 8879 --n 128 --horizon 100 --wall-interval 0.5
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=OMP_NUM_THREADS=1
+Environment=OPENBLAS_NUM_THREADS=1
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+MemoryMax=1G
+
+[Install]
+WantedBy=default.target

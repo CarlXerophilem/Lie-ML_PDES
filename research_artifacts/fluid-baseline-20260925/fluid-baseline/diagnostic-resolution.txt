@@ -1,0 +1,8 @@
+Pre-deployment pilot, 2026-09-25.
+48/96 Fourier grid with dt<=0.01/0.005, interacting vortices at t=1:
+nu=0.01: final vorticity RMS discrepancy 4.854007011115702e-05 (fails preselected 1e-5 gate).
+nu=0.1: 1.0551061379580507e-08.
+64/128 grid:
+nu=0.01: 8.817484481134471e-07.
+nu=0.1: 1.2764973000701714e-11.
+These are self-convergence diagnostics, not errors against an exact solution.

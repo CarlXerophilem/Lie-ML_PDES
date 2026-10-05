@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Fluid baselines · live field laboratory</title>
+  <style>
+    :root { --paper:#f6f5f0; --panel:#fff; --ink:#202e35; --muted:#52646d; --line:#d5dddc; --accent:#14665e; --wash:#eaf3ef; --cursor:#ba4c31; --error:#9b342b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1500px; margin:auto; padding:28px 32px 24px; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font:normal clamp(25px,3vw,36px)/1.2 Georgia,"Times New Roman",serif; letter-spacing:-.6px; }
+    h2 { font-size:17px; font-weight:650; }
+    h3 { font-size:14px; font-weight:650; }
+    header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:20px; }
+    header p { margin-top:8px; color:var(--muted); }
+    .stamp { font:11px/1.6 ui-monospace,Consolas,monospace; color:var(--muted); text-align:right; overflow-wrap:anywhere; max-width:300px; }
+    label,.label { display:block; font-size:12px; font-weight:650; color:var(--muted); margin-bottom:6px; }
+    select,button,input { font:inherit; }
+    select,input[type=number] { width:100%; min-height:40px; padding:7px 10px; border:1px solid #bbc9c7; border-radius:4px; color:var(--ink); background:var(--panel); }
+    button { min-height:40px; padding:7px 13px; border:1px solid #bbc9c7; border-radius:4px; background:var(--panel); color:var(--ink); cursor:pointer; }
+    button:hover:enabled { background:var(--wash); }
+    button.primary { background:var(--accent); border-color:var(--accent); color:white; }
+    button.primary:hover:enabled { background:#104e49; }
+    :focus-visible { outline:3px solid #b96722; outline-offset:3px; }
+    :disabled { opacity:.5; cursor:not-allowed; }
+    input[type=range] { width:100%; accent-color:var(--accent); cursor:pointer; min-height:28px; margin:0; }
+    .mono,output { font-family:ui-monospace,Consolas,monospace; font-variant-numeric:tabular-nums; }
+    .controls { display:grid; grid-template-columns:minmax(170px,.8fr) minmax(250px,1.3fr) minmax(300px,1.7fr); gap:20px; padding:17px 20px; background:var(--panel); border:1px solid var(--line); border-top:3px solid var(--accent); }
+    .row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+    .time-label,.ends { display:flex; justify-content:space-between; gap:8px; }
+    .ends { color:var(--muted); font:10px/1.3 ui-monospace,Consolas,monospace; }
+    .scrubber { flex:1; min-width:120px; }
+    .note { color:var(--muted); font-size:12px; margin-top:7px; }
+    .status { display:flex; align-items:center; gap:8px; min-height:40px; color:var(--muted); font-size:12px; }
+    .status::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none; }
+    .status[data-stale=true]::before { background:var(--error); }
+    .error { background:#fff1eb; color:var(--error); border:1px solid #e2b3a5; padding:12px 16px; margin:0 0 16px; overflow-wrap:anywhere; white-space:pre-wrap; }
+    .error button { margin-top:8px; }
+    .case-heading { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin:6px 0 12px; }
+    .case-heading p { color:var(--muted); font-size:12px; }
+    .plots,.histories { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    figure { margin:0; min-width:0; background:var(--panel); border:1px solid var(--line); }
+    figcaption { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:4px 12px; padding:13px 17px 0; }
+    figcaption span { font-size:11px; color:var(--muted); }
+    .plot { width:100%; height:340px; }
+    .history { height:330px; }
+    .caption { color:var(--muted); font-size:12px; padding:0 17px 13px; }
+    .probe-bar { margin:14px 0; padding:12px 16px; border-left:3px solid var(--cursor); background:#eeeee6; display:flex; align-items:center; flex-wrap:wrap; gap:12px 24px; }
+    .probe-summary { min-width:180px; flex:1; }
+    .probe-control { min-width:130px; width:180px; }
+    .probe-control label { display:flex; justify-content:space-between; gap:12px; margin:0; }
+    .probe-control output { font-weight:normal; }
+    .parameters-panel { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:24px; margin:18px 0; padding:18px 20px; background:var(--panel); border:1px solid var(--line); }
+    fieldset { border:0; padding:0; margin:0; min-width:0; }
+    legend { font-size:14px; font-weight:650; margin-bottom:8px; }
+    .parameter-inputs { display:flex; flex-wrap:wrap; gap:12px; margin:12px 0; }
+    .parameter-inputs>div { flex:1; min-width:130px; max-width:230px; }
+    .parameter-inputs small { display:block; margin-top:3px; color:var(--muted); font-size:11px; }
+    .horizon-row { display:flex; align-items:end; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .horizon-row>div { flex:1; max-width:190px; }
+    .baseline { font-size:12px; margin-top:8px; color:var(--muted); overflow-wrap:anywhere; }
+    details { margin-top:18px; border-top:1px solid var(--line); padding-top:12px; }
+    summary { cursor:pointer; font-weight:650; min-height:30px; }
+    .new-run { padding:12px 0; }
+    .model-inputs { display:grid; grid-template-columns:1.2fr 1fr .6fr; gap:12px; }
+    .equations { margin:10px 0; font:13px/1.9 ui-monospace,Consolas,monospace; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:12px; }
+    table { width:100%; border-collapse:collapse; font-size:12px; table-layout:fixed; }
+    th,td { border-bottom:1px solid var(--line); padding:6px; text-align:left; vertical-align:top; overflow-wrap:anywhere; }
+    th { color:var(--muted); font-weight:500; }
+    td { font-family:ui-monospace,Consolas,monospace; }
+    .events { max-height:240px; overflow:auto; padding:0 0 0 22px; font-size:12px; }
+    .events li { margin:6px 0; overflow-wrap:anywhere; }
+    .diagnostic-selector { padding:8px 17px 0; }
+    .diagnostic-selector select { min-height:34px; font-size:12px; }
+    footer { margin-top:24px; border-top:1px solid var(--line); padding-top:10px; font-size:11px; color:var(--muted); }
+    [hidden] { display:none !important; }
+    #workspace[aria-busy=true] .plots { opacity:.65; }
+    @media(max-width:1000px) { main { padding:22px 20px; } .controls { grid-template-columns:1fr 1fr; gap:14px; } .time-control { grid-column:1/-1; } }
+    @media(max-width:650px) { main { padding:18px 12px; } header,.case-heading { display:block; } .stamp { text-align:left; max-width:none; margin-top:8px; } .controls { padding:12px; grid-template-columns:1fr; } .plots,.histories,.parameters-panel,.metrics,.model-inputs { grid-template-columns:1fr; gap:12px; } .plot { height:300px; } .history { height:330px; } .probe-summary { flex-basis:100%; } .probe-control { flex:1; } .case-heading p { margin-top:4px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1>Fluid baselines <span style="color:var(--accent)">· live</span></h1><p>Follow a reference solution. Change a parameter and watch the second solution diverge.</p></div>
+    <div class="stamp">FIELD LABORATORY<br><span id="run-label">Connecting to the simulation…</span><br><span id="checkpoint-label"></span></div>
+  </header>
+  <section class="controls" aria-label="View and simulation controls">
+    <div><label for="field-select">Field to examine</label><select id="field-select" disabled><option>Waiting for fields…</option></select></div>
+    <div>
+      <span class="label">Simulation time</span>
+      <div class="row"><button id="pause-button" type="button" disabled>Pause simulation</button><button id="resume-button" type="button" disabled>Resume</button><button id="step-button" type="button" disabled>Step</button></div>
+      <p id="simulation-note" class="note">The server advances both solutions.</p>
+    </div>
+    <div class="time-control">
+      <div class="time-label"><label for="frame-slider">Inspect a saved frame</label><output id="time-readout" for="frame-slider">—</output></div>
+      <div class="row"><div class="scrubber"><input id="frame-slider" type="range" min="0" max="0" value="0" step="1" disabled aria-describedby="playback-note"><div class="ends"><span id="frame-start">—</span><span id="frame-end">—</span></div></div><button id="live-button" type="button" class="primary" aria-pressed="true">Live</button></div>
+      <p id="playback-note" class="note">Inspecting a frame does not pause the simulation. Live returns to the newest received state.</p>
+    </div>
+  </section>
+  <p id="status" class="status" role="status" aria-live="polite">Connecting…</p>
+  <div id="error-panel" class="error" role="alert" hidden><p id="error-message"></p><button id="retry-button" type="button">Retry connection</button></div>
+  <p id="action-note" class="note" role="status" aria-live="polite"></p>
+  <p id="resolution-warning" class="error" role="status" hidden></p>
+  <noscript><p class="error">JavaScript is required to display the simulation and send parameter changes.</p></noscript>
+  <section class="parameters-panel" aria-label="Change the current experiment">
+    <form id="perturb-form">
+      <fieldset id="perturb-controls" disabled>
+        <legend>Change the perturbed solution</legend>
+        <p class="note">Apply new parameter values at the current simulation time. The field is preserved; only its future evolution changes. Parameters stay constant between changes: this is an initial-value experiment, with no Lie-symmetry assumption.</p>
+        <div id="perturb-inputs" class="parameter-inputs"></div>
+        <div class="row"><button class="primary" type="submit">Apply perturbation</button><button id="rebase-button" type="button">Reset perturbation to reference</button></div>
+        <p class="note">Reset copies the reference field and parameters into the perturbed solution at the current time.</p>
+      </fieldset>
+    </form>
+    <div>
+      <h3>Reference parameters</h3><p id="baseline-parameters" class="baseline mono">Waiting for the server…</p>
+      <p class="baseline">Current perturbed parameters: <span id="current-parameters" class="mono">—</span></p>
+      <p class="note">Values above come from the server. Form edits stay in place while live updates arrive, including changes made by other viewers.</p>
+      <form id="horizon-form"><fieldset id="horizon-controls" disabled><div class="horizon-row"><div><label for="horizon-input">Run until simulation time</label><input id="horizon-input" type="number" min="0.05" max="1000" step="any" value="100" required></div><button type="submit">Set horizon</button></div></fieldset></form>
+      <p id="horizon-note" class="note">Maximum horizon: 1000. Extending it does not itself press Resume.</p>
+    </div>
+  </section>
+  <section id="workspace" aria-label="Simulation results" aria-busy="true" hidden>
+    <div class="case-heading"><h2 id="case-title"></h2><p id="case-summary"></p></div>
+    <div class="plots">
+      <figure><figcaption><h3>Whole domain · perturbed field</h3><span id="scale-note">Scale expands only when needed</span></figcaption><div id="global-plot" class="plot" role="img" aria-label="Perturbed field over the whole simulated domain"></div><p class="caption">Click a curve or map cell to move the probe. The outline marks its local crop.</p></figure>
+      <figure><figcaption><h3>Whole domain · difference</h3><span>Perturbed − reference</span></figcaption><div id="difference-plot" class="plot" role="img" aria-label="Signed field difference over the whole simulated domain"></div><p class="caption">A symmetric scale around zero, retained across time and expanded when necessary.</p></figure>
+    </div>
+    <section class="probe-bar" aria-label="Probe coordinates">
+      <div class="probe-summary"><h3>Spatial probe</h3><p id="probe-value" class="note mono">—</p></div>
+      <div class="probe-control"><label for="probe-x">Probe x <output id="probe-x-value" for="probe-x"></output></label><input id="probe-x" type="range" min="0" max="0" value="0" step="1" disabled></div>
+      <div id="probe-y-control" class="probe-control" hidden><label for="probe-y">Probe y <output id="probe-y-value" for="probe-y"></output></label><input id="probe-y" type="range" min="0" max="0" value="0" step="1" disabled></div>
+      <button id="center-probe" type="button" disabled>Center probe</button>
+    </section>
+    <div class="plots">
+      <figure><figcaption><h3>Local crop · perturbed field</h3><span>24% of each domain width</span></figcaption><div id="local-plot" class="plot" role="img" aria-label="Perturbed field near the movable spatial probe"></div><p id="crop-note" class="caption"></p></figure>
+      <figure><figcaption><h3>Probe history · since browser connection</h3><span>Reference and perturbed</span></figcaption><div id="probe-history-plot" class="plot" role="img" aria-label="Locally sampled probe values since this browser connected"></div><p id="probe-history-note" class="caption"></p></figure>
+    </div>
+    <div class="histories" style="margin-top:16px">
+      <figure>
+        <figcaption><h3>Global histories</h3><span>Server-recorded · current run</span></figcaption>
+        <div class="diagnostic-selector"><label for="diagnostic-select">Global quantity</label><select id="diagnostic-select"><option value="">No diagnostics yet</option></select></div>
+        <div id="diagnostic-plot" class="plot history" role="img" aria-label="Global reference and perturbed diagnostics and their L2 difference"></div>
+        <p id="diagnostic-note" class="caption">The lower panel is the supplied L² difference. Each panel has its own vertical scale.</p>
+      </figure>
+      <figure><figcaption><h3>Selected time · recorded values</h3><span id="metrics-time">—</span></figcaption><div style="padding:12px 17px"><table aria-label="Diagnostics at the selected time"><thead><tr><th scope="col">Quantity</th><th scope="col">Reference</th><th scope="col">Perturbed</th></tr></thead><tbody id="metrics-body"></tbody></table><p id="difference-value" class="note mono"></p><p id="frame-parameters" class="note"></p></div><p class="caption">Numerical diagnostics describe this computation; they do not certify a PDE theorem or indefinite stability.</p></figure>
+    </div>
+  </section>
+  <details id="new-run-details">
+    <summary>Start a new run · choose a model and initial condition</summary>
+    <form id="new-run-form" class="new-run"><fieldset id="new-run-controls" disabled>
+      <div class="model-inputs">
+        <div><label for="model-select">Model for the new run</label><select id="model-select"><option value="ns">Navier–Stokes · two-dimensional flow</option><option value="sve">Saint-Venant–Exner · water and bed</option><option value="oseen">Oseen · constant-drift flow</option></select></div>
+        <div id="kind-control"><label for="kind-select">Initial condition</label><select id="kind-select"><option value="interacting">Interacting vortices</option><option value="shear">Shear flow</option><option value="taylor_green">Taylor–Green vortices</option></select></div>
+        <div><label for="new-horizon">New run horizon</label><input id="new-horizon" type="number" min="0.05" max="1000" step="any" value="100" required></div>
+      </div>
+      <div id="new-parameters" class="parameter-inputs"></div>
+      <div class="row"><button type="submit">Start new run</button><span id="new-grid-note" class="note"></span></div>
+      <p class="note">This button archives the previous run and starts both solutions with the same field and parameters at t = 0. Changing the model selector alone does not change the current run.</p>
+    </fieldset></form>
+  </details>
+  <details open><summary>Equations and parameter meanings · current model</summary><p id="equations" class="equations">Waiting for the current model…</p><p id="equation-note" class="note"></p></details>
+  <details open><summary>Events · current run</summary><p id="event-note" class="note">Waiting for the server…</p><ol id="events" class="events" aria-label="Server-recorded simulation events"></ol></details>
+  <footer>Live states are requested about once per second. Saved-frame times refresh about every ten seconds. Field scales never shrink within a run; a new run resets them. Probe history stays in this browser and keeps at most 1800 samples for the current probe and run.</footer>
+</main>
+<script src="./plotly.min.js"></script>
+<script>
+"use strict";
+(() => {
+  const $ = id => document.getElementById(id);
+  const finite = value => typeof value === "number" && Number.isFinite(value);
+  const object = value => value !== null && typeof value === "object" && !Array.isArray(value);
+  const fmt = value => !finite(value) ? "—" : value === 0 ? "0" : Math.abs(value) < .001 || Math.abs(value) >= 1e5 ? value.toExponential(4) : String(Number(value.toPrecision(6)));
+  const label = text => String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const TEAL = "#14665e", RUST = "#ba4c31", BLUE = "#5c6895";
+  const MAX_SAMPLES = 1800, MAX_GLOBAL = 2000, POLL_MS = 1000, STALE_MS = 5000;
+  const PARAMS = {
+    nu:{name:"Viscosity ν",min:.0005,max:1,value:.05},
+    a:{name:"Advecting drift in x · a",min:-2,max:2,value:0},
+    b:{name:"Advecting drift in y · b",min:-2,max:2,value:0},
+    m:{name:"Transport exponent m",min:.5,max:6,value:3},
+    kappa:{name:"Sediment transport κ",min:0,max:1,value:.1},
+    g:{name:"Gravity g",min:.1,max:10,value:1}
+  };
+  const MODELS = {
+    ns:{name:"Navier–Stokes",keys:["nu"],fields:["vorticity","u","v","speed"],n:128,
+      equations:"∂ₜU + (U · ∇)U = −∇p + νΔU     ∇ · U = 0\nU = (u, v),     ω = ∂ₓv − ∂ᵧu,     speed = √(u² + v²)",
+      note:"The velocity carries itself through the domain; viscosity ν smooths the flow. The reference keeps its original ν."},
+    oseen:{name:"Oseen",keys:["nu","a","b"],fields:["vorticity","u","v","speed"],n:128,
+      equations:"∂ₜU + a∂ₓU + b∂ᵧU = −∇p + νΔU     ∇ · U = 0\nU = (u, v),     ω = ∂ₓv − ∂ᵧu,     speed = √(u² + v²)",
+      note:"The constant advecting drift (a, b) carries the velocity field; viscosity ν smooths it. The velocity mean stays fixed at (0.3, −0.2). Changing a or b preserves the current field and changes only future transport."},
+    sve:{name:"Saint-Venant–Exner",keys:["m","kappa","g"],fields:["h","u","bed","surface"],n:128,
+      equations:"∂ₜh + ∂ₓ(hu) = 0\n∂ₜ(hu) + ∂ₓ(hu² + gh²/2) = −gh∂ₓB\n∂ₜB + ∂ₓ(κuᵐ) = 0     surface = h + B",
+      note:"h is water depth, u is velocity, and B is bed height. κ controls sediment transport, m its velocity exponent, and g gravity. The power law uses the solver's positive-velocity branch; a stopped or failed computation is shown explicitly."}
+  };
+  const state = window.liveDashboardState = {
+    ready:false,currentrun:null,currentRun:null,run_id:null,time:null,serverTime:null,
+    field:null,error:null,live:true,connected:false,stale:true,sequence:null,
+    dimension:null,probe:null,localSamples:0,frame:null,running:false
+  };
+  const errors = {network:null,action:null,frame:null,render:null,server:null};
+  const config = {responsive:true,displaylogo:false,displayModeBar:false,scrollZoom:false,doubleClick:false,showTips:false,topojsonURL:""};
+  const plotKeys = new Map(), scales = new Map();
+  let latest = null, displayed = null, probe = {ix:0,iy:0}, fields = [];
+  let localSamples = [], lastSampleKey = null, gapPending = false;
+  let connectedAt = null, probeSince = null, lastSuccess = 0;
+  let pollTimer = null, pollController = null, pollEpoch = 0, busy = false;
+  let frameController = null, frameEpoch = 0, frameTimer = null, frameLoading = false;
+  let framesController = null, framesEpoch = 0, frameTimes = [], nextFramesAt = 0;
+  let selectedFrame = null, formsModel = null, syncAfterAction = false;
+  let diagnostic = "", diagnosticNames = [], eventsSignature = "";
+  let renderPending = false, rendering = false, renderScheduled = false, viewRevision = 0, renderedRevision = -1;
+
+  function parametersText(parameters) {
+    return object(parameters) ? Object.entries(parameters).map(([key,value]) => `${key === "nu" ? "ν" : key === "kappa" ? "κ" : key} = ${fmt(value)}`).join(" · ") : "Not supplied";
+  }
+  function updateStatus() {
+    const age = lastSuccess ? Date.now()-lastSuccess : Infinity;
+    state.stale = age > STALE_MS || !!errors.network;
+    state.connected = !!lastSuccess && !state.stale;
+    state.error = Object.values(errors).filter(Boolean).join("\n") || null;
+    state.ready = renderedRevision === viewRevision && !!displayed && !frameLoading && !state.error && !state.stale;
+    $("error-message").textContent = state.error || "";
+    $("error-panel").hidden = !state.error;
+    $("status").dataset.stale = String(state.stale);
+    if (!latest) $("status").textContent = errors.network ? "No live state received. Retrying the connection…" : "Connecting to the simulation…";
+    else {
+      const mode = frameLoading ? "Loading saved frame" : state.live ? "Live view" : "Saved-frame view";
+      const simulation = latest.error ? "Simulation error" : latest.running ? "Simulation running" : "Simulation paused / stopped";
+      const freshness = state.stale ? `STALE · last successful update ${finite(age) ? Math.floor(age/1000)+" s ago" : "unknown"}` : `updated ${Math.floor(age/1000)} s ago`;
+      $("status").textContent = `${mode} · ${simulation} · server t = ${fmt(latest.time)} · ${latest.status || "status not supplied"} · ${freshness}`;
+    }
+    const enabled = !!latest && !busy && !state.stale;
+    for (const id of ["perturb-controls","horizon-controls","new-run-controls"]) $(id).disabled = !enabled;
+    $("pause-button").disabled = !enabled || !latest.running;
+    $("resume-button").disabled = !enabled || !!latest.running;
+    $("step-button").disabled = !enabled || !!latest.running;
+    $("simulation-note").textContent = latest ? `Server t = ${fmt(latest.time)} / ${fmt(latest.horizon)} · one step ≈ ${fmt(latest.capabilities?.frame_dt)} time units` : "The server advances both solutions.";
+    $("live-button").setAttribute("aria-pressed",String(state.live));
+    $("live-button").textContent = state.live ? "Live view" : "Live";
+    $("workspace").setAttribute("aria-busy",String(frameLoading || rendering || renderedRevision !== viewRevision));
+  }
+
+  async function jsonRequest(path, options = {}, controller = new AbortController()) {
+    const timeout = setTimeout(() => controller.abort(),8000);
+    try {
+      const response = await fetch(path,{cache:"no-store",credentials:"same-origin",...options,signal:controller.signal});
+      if (!response.ok) {
+        let detail = "";
+        try { const body = await response.json(); detail = typeof body.error === "string" ? ` ${body.error.slice(0,300)}` : ""; } catch (_) { /* HTTP status remains useful. */ }
+        throw new Error(`${path.split("?")[0]} returned HTTP ${response.status}.${detail}`);
+      }
+      if (response.status === 204) return null;
+      return await response.json();
+    } catch (error) {
+      if (error.name === "AbortError") throw new Error("Request cancelled or timed out after 8 seconds.");
+      throw error;
+    } finally { clearTimeout(timeout); }
+  }
+  function checkAxis(values, name) {
+    if (!Array.isArray(values) || !values.length || !values.every(finite)) throw new Error(`Invalid ${name} coordinates in the server response.`);
+    if (values.length > 1) {
+      const direction = Math.sign(values[1]-values[0]);
+      if (!direction || values.some((value,index) => index && Math.sign(value-values[index-1]) !== direction)) throw new Error(`${name} coordinates must be strictly monotone.`);
+    }
+  }
+  function validateSnapshot(value, model) {
+    if (!object(value) || value.run_id == null || !finite(value.time) || ![1,2].includes(value.dimension)) throw new Error("The server response is missing a run, time or spatial dimension.");
+    checkAxis(value.x,"x");
+    if (value.dimension === 2) checkAxis(value.y,"y");
+    const available = MODELS[model].fields.filter(name => Array.isArray(value.perturbed?.[name]) && Array.isArray(value.reference?.[name]) && Array.isArray(value.difference?.[name]));
+    if (!available.length) throw new Error("No supported fields are present in all three solution views.");
+    for (const branch of ["reference","perturbed","difference"]) for (const name of available) {
+      const rows = value.dimension === 1 ? [value[branch][name]] : value[branch][name];
+      if (value.dimension === 2 && rows.length !== value.y.length) throw new Error(`Invalid ${branch} ${name} row count.`);
+      for (const row of rows) if (!Array.isArray(row) || row.length !== value.x.length || !row.every(v => v === null || finite(v))) throw new Error(`Invalid ${branch} ${name} values. Missing samples must be null.`);
+    }
+    return available;
+  }
+  function parameterInputs(id, prefix, model, values) {
+    $(id).replaceChildren();
+    for (const key of MODELS[model].keys) {
+      const spec = PARAMS[key], wrap = document.createElement("div"), caption = document.createElement("label"), input = document.createElement("input"), hint = document.createElement("small");
+      caption.htmlFor = `${prefix}-${key}`; caption.textContent = spec.name;
+      input.id = `${prefix}-${key}`; input.name = key; input.type = "number"; input.min = String(spec.min); input.max = String(spec.max); input.step = "any"; input.required = true;
+      input.value = String(finite(values?.[key]) ? values[key] : spec.value);
+      hint.textContent = `${spec.min} ≤ ${key === "nu" ? "ν" : key === "kappa" ? "κ" : key} ≤ ${spec.max}`;
+      wrap.append(caption,input,hint); $(id).append(wrap);
+    }
+  }
+  function newModelForm() {
+    const model = $("model-select").value;
+    parameterInputs("new-parameters","new",model,null);
+    $("kind-control").hidden = model === "sve";
+    $("kind-select").disabled = model === "sve";
+    $("new-grid-note").textContent = model === "sve" ? "128 spatial samples · both solutions start equal" : "128 × 128 spatial samples · both solutions start equal";
+  }
+  function syncForms() {
+    const modelChanged = formsModel !== latest.model;
+    if (modelChanged || syncAfterAction) {
+      parameterInputs("perturb-inputs","perturb",latest.model,latest.parameters?.perturbed);
+      $("horizon-input").value = String(latest.horizon ?? 100);
+      formsModel = latest.model; syncAfterAction = false;
+    }
+    if (modelChanged) {
+      $("model-select").value = latest.model; newModelForm();
+      parameterInputs("new-parameters","new",latest.model,latest.parameters?.reference);
+      $("kind-select").value = ["interacting","shear","taylor_green"].includes(latest.kind) ? latest.kind : "interacting";
+    }
+    const max = finite(latest.capabilities?.max_horizon) ? Math.min(1000,latest.capabilities.max_horizon) : 1000;
+    $("horizon-input").max = $("new-horizon").max = String(max);
+    $("horizon-note").textContent = `Current horizon: ${fmt(latest.horizon)}. Maximum: ${fmt(max)}. Extending it does not itself press Resume.`;
+  }
+  function setOptions(id, names, selected, display = value => value) {
+    const select = $(id); select.replaceChildren();
+    for (const name of names) { const option = document.createElement("option"); option.value = name; option.textContent = display(name); select.append(option); }
+    select.value = selected;
+  }
+  function diagnosticKeys(source) {
+    const keys = new Set();
+    const visit = row => { for (const branch of ["reference","perturbed"]) for (const [key,value] of Object.entries(row?.[branch] || {})) if (finite(value)) keys.add(key); };
+    visit(source.diagnostics);
+    for (const row of source.history || []) visit(row);
+    keys.delete("time"); keys.delete("steps");
+    const preferred = source.model === "sve" ? ["mean_depth","minimum_depth","mass_relative_drift","minimum_velocity","mean_bed","bed_mean_absolute_drift"] : ["kinetic_energy","enstrophy","divergence_max","vorticity_mean"];
+    return [...keys].sort((a,b) => (preferred.includes(a) ? preferred.indexOf(a) : 100)-(preferred.includes(b) ? preferred.indexOf(b) : 100) || a.localeCompare(b));
+  }
+  const friendly = name => name.replace(/_/g," ");
+  function updateServerMetadata() {
+    $("run-label").textContent = `Run ${latest.run_id}`;
+    $("checkpoint-label").textContent = finite(latest.checkpoint_time) ? `Checkpoint t = ${fmt(latest.checkpoint_time)}` : "Checkpoint time not supplied";
+    $("baseline-parameters").textContent = parametersText(latest.parameters?.reference);
+    $("current-parameters").textContent = parametersText(latest.parameters?.perturbed);
+    $("equations").textContent = MODELS[latest.model].equations;
+    $("equation-note").textContent = MODELS[latest.model].note;
+    const tails = [];
+    for (const branch of ["reference","perturbed"]) for (const key of ["spectral_tail_ratio","high_mode_tail_ratio"]) {
+      const value = latest.diagnostics?.[branch]?.[key];
+      if (finite(value) && value > 1e-3) tails.push(`${branch}: ${fmt(value)}`);
+    }
+    $("resolution-warning").hidden = !tails.length;
+    $("resolution-warning").textContent = tails.length ? `Resolution warning at live t = ${fmt(latest.time)}: high-frequency spectral tail exceeds 0.001 (${tails.join("; ")}). Fine-scale content may be insufficiently resolved. This indicator does not establish convergence.` : "";
+    const names = diagnosticKeys(latest);
+    if (JSON.stringify(names) !== JSON.stringify(diagnosticNames)) {
+      diagnosticNames = names; diagnostic = names.includes(diagnostic) ? diagnostic : names[0] || "";
+      setOptions("diagnostic-select",names.length ? names : [""],diagnostic,name => name ? friendly(name) : "No diagnostics supplied");
+      $("diagnostic-select").disabled = !names.length;
+    }
+    const events = Array.isArray(latest.events) ? latest.events.slice(-100) : [], signature = JSON.stringify(events);
+    if (signature !== eventsSignature) {
+      eventsSignature = signature; $("events").replaceChildren();
+      for (const event of [...events].reverse()) {
+        const item = document.createElement("li");
+        const extras = Object.entries(event).filter(([key]) => !["time","action"].includes(key)).map(([key,value]) => `${key}: ${object(value) ? JSON.stringify(value) : String(value)}`).join(" · ");
+        item.textContent = `t = ${fmt(event.time)} · ${event.action || "event"}${extras ? " · "+extras : ""}`; $("events").append(item);
+      }
+    }
+    $("event-note").textContent = events.length ? `Newest first · showing ${events.length} of ${latest.events.length} supplied events.` : "No events supplied for this run.";
+  }
+
+  function extendScales(source, available) {
+    for (const name of available) {
+      let low = Infinity, high = -Infinity, absolute = 0;
+      for (const branch of ["reference","perturbed","difference"]) {
+        const rows = source.dimension === 1 ? [source[branch][name]] : source[branch][name];
+        for (const row of rows) for (const value of row) if (finite(value)) {
+          if (branch === "difference") absolute = Math.max(absolute,Math.abs(value));
+          else { low = Math.min(low,value); high = Math.max(high,value); }
+        }
+      }
+      const existing = scales.get(name) || {field:null,difference:1e-9};
+      if (finite(low)) {
+        const pad = Math.max((high-low)*.05,Math.max(Math.abs(low),Math.abs(high))*1e-3,1e-9);
+        if (!existing.field) existing.field = [low-pad,high+pad];
+        else existing.field = [low < existing.field[0] ? low-pad : existing.field[0],high > existing.field[1] ? high+pad : existing.field[1]];
+      }
+      if (absolute > existing.difference) existing.difference = absolute*1.1;
+      scales.set(name,existing);
+    }
+  }
+  const probeValue = (source,branch,name,point) => {
+    const values = source?.[branch]?.[name];
+    const value = source?.dimension === 1 ? values?.[point.ix] : values?.[point.iy]?.[point.ix];
+    return finite(value) ? value : null;
+  };
+  function resetProbeHistory() { localSamples = []; lastSampleKey = null; gapPending = false; probeSince = latest?.time ?? null; }
+  function sampleLive() {
+    if (!latest) return;
+    const key = `${latest.run_id}:${latest.sequence ?? ""}:${latest.time}`;
+    if (key === lastSampleKey) return;
+    if (gapPending && localSamples.length) localSamples.push({time:latest.time,reference:{},perturbed:{},gap:true});
+    const sample = {time:latest.time,reference:{},perturbed:{}};
+    for (const name of fields) for (const branch of ["reference","perturbed"]) sample[branch][name] = probeValue(latest,branch,name,probe);
+    localSamples.push(sample);
+    if (localSamples.length > MAX_SAMPLES) localSamples.splice(0,localSamples.length-MAX_SAMPLES);
+    lastSampleKey = key; gapPending = false; state.localSamples = localSamples.length;
+  }
+  function invalidateFrames() {
+    ++frameEpoch; frameController?.abort(); frameController = null; clearTimeout(frameTimer); frameLoading = false;
+    ++framesEpoch; framesController?.abort(); framesController = null; nextFramesAt = 0; frameTimes = []; selectedFrame = null;
+    $("frame-slider").max = "0"; $("frame-slider").value = "0"; $("frame-slider").disabled = true;
+    $("frame-start").textContent = $("frame-end").textContent = "—";
+    errors.frame = null;
+  }
+  function acceptState(value) {
+    if (!object(value) || !Object.hasOwn(MODELS,value.model)) throw new Error("The server did not supply a supported model.");
+    const available = validateSnapshot(value,value.model);
+    if (!finite(value.sequence) || typeof value.running !== "boolean" || !finite(value.horizon)) throw new Error("The live state is missing sequence, running or horizon values.");
+    if (value.history != null && !Array.isArray(value.history)) throw new Error("Invalid diagnostic history.");
+    if (latest && latest.run_id === value.run_id && value.sequence < latest.sequence) throw new Error("Ignored an out-of-order live state; waiting for a fresh response.");
+    const changedRun = !latest || latest.run_id !== value.run_id;
+    const changedGrid = !latest || latest.model !== value.model || latest.dimension !== value.dimension || JSON.stringify(latest.x) !== JSON.stringify(value.x) || JSON.stringify(latest.y) !== JSON.stringify(value.y);
+    latest = value;
+    if (!connectedAt) connectedAt = new Date();
+    if (changedRun || changedGrid) {
+      state.live = true; invalidateFrames(); scales.clear();
+      probe = {ix:Math.floor((value.x.length-1)/2),iy:value.dimension === 2 ? Math.floor((value.y.length-1)/2) : 0};
+      resetProbeHistory();
+    }
+    fields = available;
+    if (!fields.includes(state.field)) state.field = fields[0];
+    const options = [...$("field-select").options].map(option => option.value);
+    if (JSON.stringify(options) !== JSON.stringify(fields)) setOptions("field-select",fields,state.field);
+    state.currentrun = state.currentRun = state.run_id = value.run_id;
+    state.serverTime = value.time; state.sequence = value.sequence; state.running = value.running;
+    errors.server = value.error ? `Simulation: ${typeof value.error === "string" ? value.error : JSON.stringify(value.error)}` : null;
+    lastSuccess = Date.now(); errors.network = null;
+    extendScales(value,fields); sampleLive(); syncForms(); updateServerMetadata();
+    if (state.live) displayed = value;
+    $("workspace").hidden = false;
+    for (const id of ["field-select","probe-x","probe-y","center-probe"]) $(id).disabled = false;
+    requestRender();
+  }
+  async function poll() {
+    clearTimeout(pollTimer);
+    if (busy || pollController) return;
+    const ticket = ++pollEpoch, controller = new AbortController(); pollController = controller;
+    try {
+      const value = await jsonRequest("/api/state",{},controller);
+      if (ticket !== pollEpoch || busy) return;
+      acceptState(value);
+      if (Date.now() >= nextFramesAt) void refreshFrames();
+    } catch (error) {
+      if (ticket === pollEpoch) { errors.network = `Live state unavailable: ${error.message} Last received plots are retained.`; gapPending = true; }
+    } finally {
+      if (ticket === pollEpoch) { pollController = null; updateStatus(); if (!busy) pollTimer = setTimeout(poll,POLL_MS); }
+    }
+  }
+  async function refreshFrames() {
+    if (!latest || framesController) return;
+    const run = latest.run_id, ticket = ++framesEpoch, controller = new AbortController(); framesController = controller;
+    nextFramesAt = Date.now()+10000;
+    try {
+      const value = await jsonRequest("/api/frames",{},controller);
+      if (ticket !== framesEpoch || latest?.run_id !== run) return;
+      if (!Array.isArray(value?.times) || !value.times.every(finite) || value.times.some((time,index) => index && time < value.times[index-1])) throw new Error("Invalid saved-frame times.");
+      frameTimes = value.times;
+      $("frame-slider").max = String(Math.max(0,frameTimes.length-1)); $("frame-slider").disabled = !frameTimes.length;
+      if (state.live) $("frame-slider").value = String(Math.max(0,frameTimes.length-1));
+      $("frame-start").textContent = frameTimes.length ? fmt(frameTimes[0]) : "No saved frames";
+      $("frame-end").textContent = frameTimes.length ? `${fmt(frameTimes.at(-1))} · ${frameTimes.length} frames` : "";
+      if (errors.frame?.startsWith("Saved-frame list")) errors.frame = null;
+    } catch (error) {
+      if (ticket === framesEpoch) errors.frame = `Saved-frame list unavailable: ${error.message}`;
+    } finally { if (ticket === framesEpoch) { framesController = null; updateStatus(); } }
+  }
+  function selectFrame(index) {
+    if (!latest || !frameTimes.length) return;
+    index = Math.max(0,Math.min(index,frameTimes.length-1));
+    state.live = false; state.ready = false; selectedFrame = index; frameLoading = true; errors.frame = null;
+    ++viewRevision; ++frameEpoch; frameController?.abort(); clearTimeout(frameTimer);
+    $("time-readout").textContent = `Loading t = ${fmt(frameTimes[index])}…`;
+    $("frame-slider").setAttribute("aria-valuetext",`Saved frame ${index+1}, time ${fmt(frameTimes[index])}`);
+    const ticket = frameEpoch, run = latest.run_id, model = latest.model;
+    frameTimer = setTimeout(async () => {
+      const controller = new AbortController(); frameController = controller;
+      try {
+        const value = await jsonRequest(`/api/frame?index=${index}`,{},controller);
+        if (ticket !== frameEpoch || state.live || run !== latest.run_id) return;
+        if (value?.run_id !== run) throw new Error("The saved frame belongs to another run. Return to Live to refresh.");
+        const available = validateSnapshot(value,model);
+        if (!available.includes(state.field)) throw new Error("The selected field is unavailable in this saved frame.");
+        displayed = {...value,model}; extendScales(displayed,available); frameLoading = false; requestRender();
+      } catch (error) {
+        if (ticket === frameEpoch) { errors.frame = `Saved frame unavailable: ${error.message} The previous image is retained.`; frameLoading = false; }
+      } finally { if (ticket === frameEpoch) { frameController = null; updateStatus(); } }
+    },120);
+    updateStatus();
+  }
+  function goLive() {
+    ++frameEpoch; frameController?.abort(); frameController = null; clearTimeout(frameTimer); frameLoading = false; errors.frame = null;
+    state.live = true; selectedFrame = null; displayed = latest;
+    $("frame-slider").value = String(Math.max(0,frameTimes.length-1));
+    requestRender(); updateStatus();
+  }
+  function collectParameters(prefix, model) {
+    const values = {};
+    for (const key of MODELS[model].keys) {
+      const input = $(`${prefix}-${key}`), value = input.valueAsNumber, spec = PARAMS[key];
+      if (!finite(value) || value < spec.min || value > spec.max) throw new Error(`${spec.name} must be between ${spec.min} and ${spec.max}.`);
+      values[key] = value;
+    }
+    return values;
+  }
+  function horizonValue(id) {
+    const value = $(id).valueAsNumber, max = Number($(id).max);
+    if (!finite(value) || value <= 0 || value > max) throw new Error(`The horizon must be greater than zero and at most ${max}.`);
+    return value;
+  }
+  async function control(payload) {
+    if (busy || !latest || state.stale) return;
+    busy = true; errors.action = null;
+    clearTimeout(pollTimer); ++pollEpoch; pollController?.abort(); pollController = null;
+    $("action-note").textContent = "Sending change to the simulation…"; updateStatus();
+    try {
+      const result = await jsonRequest("/api/control",{method:"POST",headers:{"Content-Type":"application/json","X-LieML-Control":"1"},body:JSON.stringify(payload)});
+      if (result?.ok === false) throw new Error(typeof result.error === "string" ? result.error : "The server rejected this change.");
+      syncAfterAction = true; nextFramesAt = 0;
+      $("action-note").textContent = `${({perturb:"Perturbation applied",pause:"Pause requested",resume:"Resume requested",step:"One step requested",rebase:"Perturbation reset to reference",horizon:"Horizon updated",reset:"New run requested"})[payload.action]}. Refreshing the live state…`;
+      if (payload.action === "reset") goLive();
+    } catch (error) {
+      errors.action = `Change not confirmed: ${error.message} Check the next live state before retrying; a timed-out request may already have taken effect.`;
+      $("action-note").textContent = "The change was not confirmed. Refreshing server state.";
+    } finally { busy = false; await poll(); }
+  }
+  function submit(event, form, payload) {
+    event.preventDefault();
+    if (!$(form).reportValidity()) return;
+    try { void control(payload()); } catch (error) { errors.action = error.message; updateStatus(); }
+  }
+
+  const extent = values => [Math.min(values[0],values.at(-1)),Math.max(values[0],values.at(-1))];
+  function padded(values) {
+    if (!values.length) return [0,1];
+    const [low,high] = extent(values), pad = low === high ? Math.max(Math.abs(low),1)*.025 : 0;
+    return [low-pad,high+pad];
+  }
+  function crop(axis,index) {
+    const [low,high] = extent(axis), half = (high-low)*.12;
+    const bounds = low === high ? padded(axis) : [Math.max(low,axis[index]-half),Math.min(high,axis[index]+half)];
+    let first = index, last = index;
+    while (first > 0 && axis[first-1] >= bounds[0] && axis[first-1] <= bounds[1]) first--;
+    while (last+1 < axis.length && axis[last+1] >= bounds[0] && axis[last+1] <= bounds[1]) last++;
+    first = Math.max(0,first-1); last = Math.min(axis.length-1,last+1);
+    return {first,last,bounds,coordinates:axis.slice(first,last+1)};
+  }
+  function axis(title, range) {
+    const result = {title:{text:label(title),standoff:8},fixedrange:true,gridcolor:"#e9edeb",zerolinecolor:"#d5dddc",tickfont:{size:11},automargin:true,linecolor:"#c8d1cf",showline:true};
+    if (range) { result.range = [...range]; result.autorange = false; } else result.autorange = true;
+    return result;
+  }
+  function layoutBase() {
+    return {template:"none",autosize:true,margin:{l:64,r:22,t:24,b:48},font:{family:"system-ui, Segoe UI, sans-serif",size:12,color:"#202e35"},paper_bgcolor:"#ffffff",plot_bgcolor:"#ffffff",showlegend:false,hovermode:"closest",dragmode:false,transition:{duration:0}};
+  }
+  const cursor = time => ({type:"line",xref:"x",yref:"paper",x0:time,x1:time,y0:0,y1:1,line:{color:RUST,width:1,dash:"dot"}});
+  function spatialPlot(snapshot, difference = false, local = false) {
+    const {source,field,point,range,cx,cy} = snapshot, one = source.dimension === 1;
+    const branch = difference ? "difference" : "perturbed", values = source[branch][field];
+    const limits = difference ? [-range.difference,range.difference] : range.field || [-1,1];
+    const xs = local ? cx.coordinates : source.x, ys = one ? null : local ? cy.coordinates : source.y;
+    const title = difference ? `Δ${field}` : field;
+    const trace = one ? {
+      type:"scatter",mode:xs.length === 1 ? "markers" : "lines",x:[...xs],y:local ? values.slice(cx.first,cx.last+1) : [...values],line:{color:difference ? RUST : TEAL,width:2},name:title,connectgaps:false,
+      hovertemplate:`x = %{x:.6g}<br>${label(title)} = %{y:.6g}<extra></extra>`
+    } : {
+      type:"heatmap",x:[...xs],y:[...ys],z:local ? values.slice(cy.first,cy.last+1).map(row => row.slice(cx.first,cx.last+1)) : values.map(row => [...row]),
+      zmin:limits[0],zmax:limits[1],zauto:false,colorscale:difference ? [[0,"#345d87"],[.5,"#f6f5f0"],[1,RUST]] : "Viridis",zsmooth:false,connectgaps:false,hoverongaps:false,
+      colorbar:{thickness:11,len:.9,xpad:6,tickfont:{size:10}},name:title,
+      hovertemplate:`x = %{x:.6g}<br>y = %{y:.6g}<br>${label(title)} = %{z:.6g}<extra></extra>`
+    };
+    const marker = {type:"scatter",mode:"markers",x:[source.x[point.ix]],y:[one ? probeValue(source,branch,field,point) : source.y[point.iy]],marker:{color:RUST,size:9,line:{color:"white",width:1.5},symbol:one ? "circle" : "cross"},hoverinfo:"skip",showlegend:false};
+    const layout = layoutBase();
+    layout.xaxis = axis("x",local ? cx.bounds : padded(source.x));
+    layout.yaxis = axis(one ? title : "y",one ? limits : local ? cy.bounds : padded(source.y));
+    if (!one) { layout.yaxis.scaleanchor = "x"; layout.yaxis.scaleratio = 1; layout.xaxis.constrain = layout.yaxis.constrain = "domain"; layout.margin.r = 66; }
+    layout.shapes = [];
+    if (!local) layout.shapes.push({type:"rect",xref:"x",yref:one ? "paper" : "y",x0:cx.bounds[0],x1:cx.bounds[1],y0:one ? 0 : cy.bounds[0],y1:one ? 1 : cy.bounds[1],line:{color:one || difference ? TEAL : "white",width:1.3,dash:"dot"},fillcolor:"rgba(20,102,94,.03)"});
+    return {traces:[trace,marker],layout};
+  }
+  function series(times,values,name,color,extra = {}) {
+    return {type:"scatter",mode:times.length === 1 ? "markers" : "lines",x:times,y:values,name,line:{color,width:1.8},connectgaps:false,hovertemplate:`t = %{x:.6g}<br>${label(name)} = %{y:.6g}<extra></extra>`,...extra};
+  }
+  function probeHistoryPlot(snapshot) {
+    const samples = snapshot.samples, times = samples.map(sample => sample.time), layout = layoutBase();
+    layout.xaxis = axis("Simulation time",padded(times)); layout.yaxis = axis(snapshot.field,snapshot.range.field || [-1,1]);
+    layout.showlegend = true; layout.legend = {orientation:"h",x:0,y:1.18}; layout.margin.t = 40; layout.shapes = [cursor(snapshot.source.time)];
+    if (!samples.length) layout.annotations = [{xref:"paper",yref:"paper",x:.5,y:.5,text:"Waiting for a live probe sample",showarrow:false}];
+    return {traces:[series(times,samples.map(sample => sample.reference[snapshot.field] ?? null),"Reference",BLUE),series(times,samples.map(sample => sample.perturbed[snapshot.field] ?? null),"Perturbed",TEAL)],layout};
+  }
+  function globalHistoryPlot(snapshot) {
+    const supplied = Array.isArray(snapshot.live.history) ? snapshot.live.history.filter(row => object(row) && finite(row.time)) : [];
+    if (!supplied.length || supplied.at(-1).time !== snapshot.live.time) supplied.push({time:snapshot.live.time,...snapshot.live.diagnostics});
+    else supplied[supplied.length-1] = {...supplied.at(-1),...snapshot.live.diagnostics,time:snapshot.live.time};
+    const rows = supplied.length <= MAX_GLOBAL ? supplied : Array.from({length:MAX_GLOBAL},(_,index) => supplied[Math.round(index*(supplied.length-1)/(MAX_GLOBAL-1))]);
+    const times = rows.map(row => row.time), layout = layoutBase(), quantity = snapshot.diagnostic;
+    layout.margin = {l:66,r:24,t:38,b:45}; layout.showlegend = true; layout.legend = {orientation:"h",x:0,y:1.15};
+    layout.xaxis = {...axis("",padded(times)),domain:[0,1],anchor:"y",showticklabels:false};
+    layout.yaxis = {...axis(quantity ? friendly(quantity) : "Quantity"),domain:[.45,1],anchor:"x"};
+    layout.xaxis2 = {...axis("Simulation time",padded(times)),domain:[0,1],anchor:"y2"};
+    layout.yaxis2 = {...axis("L² difference"),domain:[0,.25],anchor:"x2",rangemode:"tozero"};
+    layout.shapes = [cursor(snapshot.source.time)];
+    const traces = [series(times,rows.map(row => finite(row.difference_l2) ? row.difference_l2 : null),"L² difference",RUST,{xaxis:"x2",yaxis:"y2",showlegend:false})];
+    if (quantity) for (const [branch,color] of [["reference",BLUE],["perturbed",TEAL]]) traces.push(series(times,rows.map(row => finite(row[branch]?.[quantity]) ? row[branch][quantity] : null),branch === "reference" ? "Reference" : "Perturbed",color));
+    else layout.annotations = [{xref:"paper",yref:"paper",x:.5,y:.72,text:"No scalar branch diagnostics supplied",showarrow:false}];
+    return {traces,layout,count:rows.length,total:supplied.length};
+  }
+  function nearest(axis,value) {
+    let result = 0;
+    for (let index=1;index<axis.length;index++) if (Math.abs(axis[index]-value) < Math.abs(axis[result]-value)) result = index;
+    return result;
+  }
+  function moveProbe(ix,iy) {
+    if (!displayed || frameLoading) return;
+    const next = {ix:Math.max(0,Math.min(displayed.x.length-1,ix)),iy:displayed.dimension === 2 ? Math.max(0,Math.min(displayed.y.length-1,iy)) : 0};
+    if (next.ix === probe.ix && next.iy === probe.iy) return;
+    probe = next; resetProbeHistory(); sampleLive(); requestRender();
+  }
+  async function draw(id,plot,key) {
+    const div = $(id), recreate = plotKeys.get(id) !== key;
+    if (recreate) {
+      // Rebuild whenever dimensionality or diagnostic axes change. React can
+      // otherwise retain obsolete axes/scaleanchor references and throw on range.
+      Plotly.purge(div); plotKeys.delete(id);
+      await Plotly.newPlot(div,plot.traces,plot.layout,config);
+      plotKeys.set(id,key);
+      if (["global-plot","difference-plot","local-plot"].includes(id)) div.on("plotly_click",event => {
+        if (!state.ready || !event.points?.length || !displayed) return;
+        const point = event.points[0];
+        if (finite(point.x)) moveProbe(nearest(displayed.x,point.x),displayed.dimension === 2 && finite(point.y) ? nearest(displayed.y,point.y) : 0);
+      });
+    } else await Plotly.react(div,plot.traces,plot.layout,config);
+  }
+  function updateViewReadouts(snapshot) {
+    const {source,point,field,cx,cy} = snapshot;
+    $("case-title").textContent = `${MODELS[source.model].name} · ${state.live ? "live solution" : "saved solution"}`;
+    $("case-summary").textContent = `${source.dimension}D · ${source.x.length}${source.dimension === 2 ? " × "+source.y.length : ""} spatial samples · ${field} at t = ${fmt(source.time)}`;
+    $("time-readout").textContent = `${state.live ? "Live" : "Saved"} t = ${fmt(source.time)}`;
+    $("scale-note").textContent = `${field} · ${snapshot.range.field ? snapshot.range.field.map(fmt).join(" … ") : "no finite samples"}`;
+    $("probe-x").max = String(source.x.length-1); $("probe-x").value = String(point.ix);
+    $("probe-y").max = String(source.dimension === 2 ? source.y.length-1 : 0); $("probe-y").value = String(point.iy);
+    $("probe-y-control").hidden = source.dimension !== 2;
+    $("probe-x-value").textContent = fmt(source.x[point.ix]); $("probe-y-value").textContent = source.dimension === 2 ? fmt(source.y[point.iy]) : "";
+    $("probe-x").setAttribute("aria-valuetext",`x = ${fmt(source.x[point.ix])}, grid point ${point.ix+1}`);
+    $("probe-y").setAttribute("aria-valuetext",source.dimension === 2 ? `y = ${fmt(source.y[point.iy])}, grid point ${point.iy+1}` : "Not used in one dimension");
+    $("probe-value").textContent = `${field}: reference ${fmt(probeValue(source,"reference",field,point))} · perturbed ${fmt(probeValue(source,"perturbed",field,point))} · difference ${fmt(probeValue(source,"difference",field,point))}`;
+    $("crop-note").textContent = `x ∈ [${cx.bounds.map(fmt).join(", ")}]${cy ? `; y ∈ [${cy.bounds.map(fmt).join(", ")}]` : ""}. Same field scale as the whole domain; clipped at its boundary.`;
+    $("probe-history-note").textContent = `Client samples since this browser connected at ${connectedAt?.toLocaleTimeString() || "—"}; this probe's samples start at t = ${fmt(probeSince)}. ${snapshot.samples.length}/${MAX_SAMPLES} retained, from t = ${fmt(snapshot.samples[0]?.time)}. Moving the probe or starting a new run restarts this history. Network gaps are left blank; saved-frame inspection never adds historical samples.`;
+    for (const [id,description] of [["global-plot","Whole-domain perturbed"],["difference-plot","Whole-domain signed difference"],["local-plot","Local perturbed"]]) $(id).setAttribute("aria-label",`${description} ${field} at time ${fmt(source.time)}. Use the probe sliders for keyboard selection.`);
+    $("metrics-time").textContent = `t = ${fmt(source.time)}`; $("metrics-body").replaceChildren();
+    const diagnostics = source.diagnostics || {}, names = new Set([...Object.keys(diagnostics.reference || {}),...Object.keys(diagnostics.perturbed || {})]);
+    for (const name of names) {
+      const row = document.createElement("tr"), title = document.createElement("th"); title.scope = "row"; title.textContent = friendly(name); row.append(title);
+      for (const branch of ["reference","perturbed"]) { const cell = document.createElement("td"); cell.textContent = fmt(diagnostics[branch]?.[name]); row.append(cell); }
+      $("metrics-body").append(row);
+    }
+    $("difference-value").textContent = `L² difference${typeof diagnostics.difference_field === "string" ? " ("+diagnostics.difference_field+")" : ""} = ${fmt(diagnostics.difference_l2)}`;
+    $("frame-parameters").textContent = `At this displayed time — reference: ${parametersText(source.parameters?.reference)}; perturbed: ${parametersText(source.parameters?.perturbed)}.`;
+  }
+  function requestRender() {
+    ++viewRevision; state.ready = false; renderPending = true;
+    if (!renderScheduled && !rendering) { renderScheduled = true; requestAnimationFrame(render); }
+  }
+  async function render() {
+    renderScheduled = false;
+    if (rendering || !renderPending || !displayed || frameLoading) return;
+    rendering = true; renderPending = false;
+    const revision = viewRevision, source = displayed, field = state.field, point = {...probe};
+    const cached = scales.get(field) || {field:null,difference:1e-9};
+    const snapshot = {source,field,point,range:{field:cached.field ? [...cached.field] : null,difference:cached.difference},cx:crop(source.x,point.ix),cy:source.dimension === 2 ? crop(source.y,point.iy) : null,samples:[...localSamples],live:latest,diagnostic};
+    const spatialKey = `${source.run_id}:${source.dimension}:${source.x.length}:${source.y?.length || 0}:${field}`;
+    try {
+      const diagnostics = globalHistoryPlot(snapshot);
+      updateViewReadouts(snapshot);
+      const calls = [
+        draw("global-plot",spatialPlot(snapshot),spatialKey),
+        draw("difference-plot",spatialPlot(snapshot,true),spatialKey),
+        draw("local-plot",spatialPlot(snapshot,false,true),spatialKey),
+        draw("probe-history-plot",probeHistoryPlot(snapshot),spatialKey),
+        draw("diagnostic-plot",diagnostics,`${source.run_id}:${source.dimension}:${diagnosticNames.join("|")}:${diagnostic}`)
+      ];
+      const results = await Promise.allSettled(calls), failed = results.find(result => result.status === "rejected");
+      if (failed) throw failed.reason;
+      if (revision === viewRevision) {
+        renderedRevision = revision; errors.render = null;
+        state.time = source.time; state.dimension = source.dimension; state.frame = state.live ? null : selectedFrame;
+        state.probe = {...point,x:source.x[point.ix],y:source.dimension === 2 ? source.y[point.iy] : null};
+        $("diagnostic-note").textContent = `Server-recorded history for this run; ${diagnostics.count} of ${diagnostics.total} supplied samples plotted. The lower panel shows the supplied L² difference. Separate vertical scales; dotted line = displayed time.`;
+      }
+    } catch (error) {
+      plotKeys.clear();
+      if (revision === viewRevision) errors.render = `Plot could not be drawn: ${error.message}. Retrying on the next update.`;
+    } finally {
+      rendering = false; updateStatus();
+      if (renderPending && !renderScheduled) { renderScheduled = true; requestAnimationFrame(render); }
+    }
+  }
+
+  $("field-select").addEventListener("change",() => { state.field = $("field-select").value; requestRender(); });
+  $("diagnostic-select").addEventListener("change",() => { diagnostic = $("diagnostic-select").value; requestRender(); });
+  $("probe-x").addEventListener("input",() => moveProbe(Number($("probe-x").value),probe.iy));
+  $("probe-y").addEventListener("input",() => moveProbe(probe.ix,Number($("probe-y").value)));
+  $("center-probe").addEventListener("click",() => { if (displayed) moveProbe(Math.floor((displayed.x.length-1)/2),displayed.dimension === 2 ? Math.floor((displayed.y.length-1)/2) : 0); });
+  $("frame-slider").addEventListener("input",() => selectFrame(Number($("frame-slider").value)));
+  $("live-button").addEventListener("click",goLive);
+  $("model-select").addEventListener("change",newModelForm);
+  $("perturb-form").addEventListener("submit",event => submit(event,"perturb-form",() => ({action:"perturb",parameters:collectParameters("perturb",latest.model)})));
+  $("horizon-form").addEventListener("submit",event => submit(event,"horizon-form",() => ({action:"horizon",value:horizonValue("horizon-input")})));
+  $("new-run-form").addEventListener("submit",event => submit(event,"new-run-form",() => {
+    const model = $("model-select").value;
+    return {action:"reset",model,kind:model === "sve" ? "interacting" : $("kind-select").value,n:MODELS[model].n,parameters:collectParameters("new",model),horizon:horizonValue("new-horizon")};
+  }));
+  for (const [id,action] of [["pause-button","pause"],["resume-button","resume"],["step-button","step"],["rebase-button","rebase"]]) $(id).addEventListener("click",() => { void control({action}); });
+  $("retry-button").addEventListener("click",() => {
+    if (!window.Plotly) { location.reload(); return; }
+    if (busy) return;
+    ++pollEpoch; pollController?.abort(); pollController = null;
+    errors.action = null; errors.frame = null; nextFramesAt = 0; void poll();
+  });
+  document.addEventListener("visibilitychange",() => { if (!document.hidden && !busy && !pollController) void poll(); });
+  window.addEventListener("online",() => { if (!busy && !pollController) void poll(); });
+  newModelForm();
+  if (!window.Plotly) { errors.render = "Local plotly.min.js could not be loaded. Serve it alongside live_dashboard.html, then retry."; updateStatus(); }
+  else if (!["http:","https:"].includes(location.protocol)) { errors.network = "Open this page through the simulation's HTTP server; file:// cannot access the live API."; updateStatus(); }
+  else { setInterval(updateStatus,1000); void poll(); }
+})();
+</script>
+</body>
+</html>

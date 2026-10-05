@@ -1,0 +1,52 @@
+{
+  "reason": "Post-run dashboard subplot-transition fix, early rerun guard, final reports and browser evidence; scientific source and numerical arrays unchanged.",
+  "original_source_archive_sha256": "5ad0f9a76934d6f9aee34c8b66ad968c948f3bc81425f4976d03e9441826ed44",
+  "original_results_archive_sha256": "31dee238a353d03bf5cbd4888628f8b424eb11cbc81d6987de182858a1f8fb84",
+  "files": [
+    {
+      "local": "symm/fluid_baselines/dashboard.html",
+      "remote": "symm/fluid_baselines/dashboard.html",
+      "sha256": "a22b9137d56d069e9e8388dbf77e10f9528f432ea0aaf678861e5b5f15875eb3"
+    },
+    {
+      "local": "symm/fluid_baselines/remote_run.sh",
+      "remote": "symm/fluid_baselines/remote_run.sh",
+      "sha256": "a81fba6de7147df151c7c23e336c187fa58def14482aed31d71014e703bc4225"
+    },
+    {
+      "local": "research_artifacts/fluid-baseline-20260925/fluid-baseline/index.html",
+      "remote": "results/fluid-baseline/index.html",
+      "sha256": "a22b9137d56d069e9e8388dbf77e10f9528f432ea0aaf678861e5b5f15875eb3"
+    },
+    {
+      "local": "docs/fluid_baseline_accomplishments.md",
+      "remote": "results/fluid-baseline/baseline-report.md",
+      "sha256": "df8d6f4da29e724460405bcc43919351c95f26106989fd2998fd8926d1d7c5d3"
+    },
+    {
+      "local": "docs/fluid_baseline_novelty.md",
+      "remote": "results/fluid-baseline/novelty-audit.md",
+      "sha256": "645141feb749ea53a65a2d753015e7fcb574f68aebd16852a89cc60f645c2d20"
+    },
+    {
+      "local": "research_artifacts/fluid-baseline-20260925/browser-checks.json",
+      "remote": "results/fluid-baseline/browser-checks.json",
+      "sha256": "a6c543cc5fd4f17beaa8901991e8aebb7a868446bc39e3205cf30e187a11b878"
+    },
+    {
+      "local": "research_artifacts/fluid-baseline-20260925/browser-checks.js",
+      "remote": "results/fluid-baseline/browser-checks.js",
+      "sha256": "c19954c0d47b9ad37fab5981d0ea00ab9497a5806fcbaf1c383bb116a1040d8c"
+    },
+    {
+      "local": "research_artifacts/fluid-baseline-20260925/rerun-guard-check.json",
+      "remote": "results/fluid-baseline/rerun-guard-check.json",
+      "sha256": "fc172680681a290508c51a648e03c24833f862a1342c162fbdf68382579cd668"
+    },
+    {
+      "local": "research_artifacts/fluid-baseline-20260925/diagnostic-resolution.txt",
+      "remote": "results/fluid-baseline/diagnostic-resolution.txt",
+      "sha256": "3c0f88a757acde9fc789b98d4d254a32a87006704d71755bc2af0b860a7d4fe0"
+    }
+  ]
+}

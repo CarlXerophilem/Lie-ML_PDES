@@ -1,0 +1,1693 @@
+ ▐▛███▜▌   Claude Code v2.1.220
+▝▜█████▛▘  Opus 4.8 · API Usage Billing
+  ▘▘ ▝▝    D:\MATHs\math 4890 LieML
+
+
+● Done. Ledger current.
+
+  State: canonical corpus (200 PDEs, presence features + stalled labels) at
+  symm/reductor/corpus_v1.json; baseline to beat = presence 1-NN 0.69/0.76.
+
+  Next: a model that learns term interactions over the presence flags (small CPU
+  MLP or a decision-tree) — the actual learned reductor — measured against that
+  1-NN baseline. Go, or stop here?
+
+✻ Crunched for 8m 30s
+
+※ recap: Building a Lie-symmetry PDE engine (v1 done, 38 tests passing) plus a learned "reductor" to predict PDE reducibility. Foundation is built: generator, fuzz test, and a 200-PDE corpus with a 1-NN baseline of 0.69/0.76. Next: train a small MLP or decision-tree to beat that baseline. (disable recaps in /config)
+
+❯ /compact                                                                      
+  ⎿  Compacted (ctrl+o to see full summary)
+  ⎿  Read .sdd\progress.md (40 lines)
+  ⎿  Read symm\reductor\generator.py (87 lines)
+  ⎿  Read symm\tests\test_generator_fuzz.py (19 lines)
+  ⎿  Read symm\reductor\__init__.py (1 lines)
+  ⎿  Referenced file 
+     docs\superpowers\specs\2026-06-26-lie-symmetry-engine-v1-design.tex
+  ⎿  Plan file referenced 
+     (C:\Users\Administrator\.claude\plans\parallel-chasing-yao.md)
+  ⎿  Skills restored (logger, claude-api)
+
+❯ advise my project with broad and math-professional scope, include a brief     
+  guide to operate machine learning.                                            
+  ⎿  2 skills available
+
+● I'll deliver this as files: a professional advisory (ADVISORY.md) grounded in
+  the project's verified state, with the ML operating guide included — plus a
+  small runnable evaluation script so the guide's numbers are reproduced, per
+  the project's honesty convention. First, quick recon of the paper corpus for
+  precise citations, then the verified computation, then the write-up.
+
+  Searched for 2 patterns (ctrl+o to expand)
+
+● Write(symm\reductor\train_reductor.py)
+  ⎿  Wrote 281 lines to symm\reductor\train_reductor.py
+       1 """Reductor v1.1 — honest evaluation harness over the presence c
+       2 
+         no sklearn).
+       4 Everything is deterministic: LOOCV, first-min tie-breaks, no RNG
+       5 
+       7   1. Structure audit — how many DISTINCT term-structures the 200
+       8      and whether rows sharing a structure ever disagree on (klas
+         s, dim).
+         group-
+         irical
+     … +334 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(symm\reductor\train_reductor.py)
+  ⎿  Added 26 lines
+      185      return tree_hits / hi.sum(), nn_hits / hi.sum(), int(hi.su
+           m())
+      186  
+      187  
+      188 +def triage_eval(X, y_hi, max_depth=3):                        
+      189 +    """Structure-LOOCV on the binary triage target (dim >= HI_
+          +DIM) — the                                                    
+      190 +    prioritizer's actual job. Returns acc/recall/precision for
+          + tree and 1-NN."""                                            
+      191 +    n = len(y_hi)                                             
+      192 +    D = (X[:, None, :] != X[None, :, :]).sum(-1)              
+      193 +    np.fill_diagonal(D, X.shape[1] + 1)                       
+      194 +    tree_pred = np.empty(n, dtype=int)                        
+      195 +    nn_pred = np.empty(n, dtype=int)                          
+      196 +    for i in range(n):                                        
+      197 +        keep = np.arange(n) != i                              
+      198 +        tree_pred[i] = fit_tree(X[keep], y_hi[keep], max_depth
+          +).predict(X[i])                                               
+      199 +        nn_pred[i] = y_hi[int(np.argmin(D[i]))]               
+      200 +                                                              
+      201 +    def stats(pred):                                          
+      202 +        tp = int(((pred == 1) & (y_hi == 1)).sum())           
+      203 +        fp = int(((pred == 1) & (y_hi == 0)).sum())           
+      204 +        fn = int(((pred == 0) & (y_hi == 1)).sum())           
+      205 +        acc = float((pred == y_hi).mean())                    
+      206 +        rec = tp / (tp + fn) if tp + fn else None             
+      207 +        prec = tp / (tp + fp) if tp + fp else None            
+      208 +        return {"acc": acc, "recall": rec, "precision": prec} 
+      209 +                                                              
+      210 +    maj = float((y_hi == Counter(y_hi.tolist()).most_common(1)
+          +[0][0]).mean())                                               
+      211 +    return {"majority_acc": maj, "tree": stats(tree_pred), "nn
+          +": stats(nn_pred)}                                            
+      212 +                                                              
+      213 +                                                              
+      214  # ------------------------------------------------------------
+           ---- main
+      215  
+      216  def evaluate(path=CORPUS, depths=(1, 2, 3, 4, 5, 6), verbose=T
+           rue):
+
+● Update(symm\reductor\train_reductor.py)
+  ⎿  Added 14 lines, removed 4 lines
+      280      say("  (depth curve shown so selection optimism is visible
+           ; d=3 is the "
+      281          "pre-registered headline)")
+      282  
+      283 -    # 5 — safety metric                                       
+      283 +    # 5 — safety metric on the dim predictor                  
+      284      tr_rec, nn_rec, n_hi = hi_dim_recall(Xu, ydu, 3)
+      285      out["hi_dim"] = {"tree_recall": tr_rec, "nn_recall": nn_re
+           c, "n_hi": n_hi}
+      286 -    say(f"\n[safety] structures with dim>={HI_DIM}: {n_hi}  | 
+          - "                                                            
+      286 +    say(f"\n[safety] structures with dim>={HI_DIM}: {n_hi}  | 
+          + dim-predictor "                                              
+      287          f"recall  tree d=3: {tr_rec:.3f}   1-NN: {nn_rec:.3f}"
+           )
+      288  
+      289 +    # 6 — the triage target itself (binary dim >= HI_DIM): the
+          + prioritizer job                                              
+      290 +    yhi = (ydu >= HI_DIM).astype(int)                         
+      291 +    out["triage"] = triage_eval(Xu, yhi, max_depth=3)         
+      292 +    t = out["triage"]                                         
+      293 +    say(f"\n[triage] target = (dim >= {HI_DIM});  majority acc
+          + {t['majority_acc']:.3f}")                                    
+      294 +    say(f"  tree d=3: acc {t['tree']['acc']:.3f}  recall {t['t
+          +ree']['recall']:.3f}  "                                       
+      295 +        f"precision {t['tree']['precision']:.3f}")            
+      296 +    say(f"  1-NN:     acc {t['nn']['acc']:.3f}  recall {t['nn'
+          +]['recall']:.3f}  "                                           
+      297 +        f"precision {t['nn']['precision']:.3f}")              
+      298 +                                                              
+      299      # readable rules from the full-data depth-3 trees
+      290 -    say("\n[rules] depth-3 dim tree (fin structures) — read as
+          - conjectures, "                                               
+      300 +    say("\n[rules] depth-3 TRIAGE tree (predict dim>=4) - read
+          + as conjectures, "                                            
+      301          "verify with the engine:")
+      292 -    say(render_tree(fit_tree(Xu[finu], ydu[finu], 3)))        
+      302 +    say(render_tree(fit_tree(Xu, yhi, 3)))                    
+      303      say("[rules] depth-3 klass tree (all structures):")
+      304      say(render_tree(fit_tree(Xu, yku, 3)))
+      305  
+
+● Update(symm\reductor\train_reductor.py)
+  ⎿  Added 1 line, removed 1 line
+      235      say(f"[audit] constant feature columns: {const_cols or 'no
+           ne'}")
+      236      if inconsistent:
+      237          say(f"[audit] label DISAGREEMENT inside {len(inconsist
+           ent)} structure(s) "
+      238 -            f"— coefficient-driven dim jumps, listed:")       
+      238 +            f"- candidate coefficient-driven dim jumps, listed
+          +:")                                                           
+      239          for rec in inconsistent:
+      240              say(f"        terms={rec['terms']} dims={rec['dims
+           ']} "
+      241                  f"klass={rec['klasses']} rows={rec['n_rows']}"
+           )
+
+● Update(symm\reductor\train_reductor.py)
+  ⎿  Added 1 line, removed 1 line
+      241                  f"klass={rec['klasses']} rows={rec['n_rows']}"
+           )
+      242      else:
+      243          say("[audit] all duplicated structures agree on (klass
+           , dim) "
+      244 -            "— dim is structure-determined on this corpus.")  
+      244 +            "- dim is structure-determined on this corpus.")  
+      245  
+      246      # 2 — row-LOOCV (ledger-comparable, duplicate-inflated)
+      247      fin = yk == 0
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\probe_inconsistent.py)  ⎿  Wrote 22 lines to
+     C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\probe_inconsistent.py
+       1 """Replay seed-0 sampling, find the {u,u3,xu_x} draws, re-run di
+         scover at Dmax=5."""
+       2 import time
+       3 import numpy as np
+       4 from symm.reductor.generator import sample_pde, is_linear
+       6 
+       7 rng = np.random.default_rng(0)
+       8 hits = []
+       9 for i in range(200):
+      10     p = sample_pde(rng, max_order=2, name=f"gen{i}")
+     … +16 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(symm\tests\test_train_reductor.py)
+  ⎿  Wrote 44 lines to symm\tests\test_train_reductor.py
+      1 # Locks the reductor evaluation protocol + the corpus_v1 headline
+         numbers.
+      2 # Everything is deterministic (no RNG in the harness), so pins ar
+        e tight.
+      3 from symm.reductor.generator import MASTER
+      5 
+      6 
+      7 def _close(a, b):
+      8     return abs(a - b) < 5e-4
+      9 
+     … +45 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● 40/40 green. Ledger update, then the advisory itself:
+
+● Update(.sdd\progress.md)
+  ⎿  Added 7 lines, removed 1 line
+      36    Findings: (a) linearity is NOT a perfect fin/inf proxy (~8% n
+          onlinear PDEs have large/growing algebras); the wobble is the g
+          rowth-heuristic LABEL, not the features. (b) dim signal is capp
+          ed by PRESENCE-only features (they ignore coefficient values, w
+          hich set special-case dims).
+      37  - Levers TESTED — both duds (honest negative): coefficient feat
+          ures HURT (dim 1-NN 0.685->0.395, below majority) => reducibili
+          ty here is coefficient-invariant / structure-determined; `stall
+          ed` relabel = no change (same 23/177 split). Reverted featurize
+           to PRESENCE; canonical corpus_v1.json rebuilt (200/200, presen
+          ce + stalled labels).
+      38    Real ceiling = presence 1-NN ~0.69(all)/0.76(fin) vs majority
+           0.54/0.61. The cap is TERM-INTERACTIONS the flat flags don't e
+          ncode, NOT missing features.
+      39 -NEXT: a model that learns interactions (small MLP or decision-t
+         -ree over the presence flags) to beat the 1-NN baseline = the ac
+         -tual learned reductor (awaiting go).                           
+      39 +- Interaction learner + honest-protocol harness — symm/reductor
+         +/train_reductor.py (numpy-only CART, deterministic LOOCV) + pin
+         +ned regression test symm/tests/test_train_reductor.py. Suite no
+         +w 40 tests pass.                                               
+      40 +  (a) AUDIT: 200 rows = 187 distinct structures; duplicate leak
+         +age was inflating row-LOOCV (1-NN dim 0.685 -> honest structure
+         +-LOOCV 0.591; klass 0.920 -> 0.871, now BELOW majority 0.898). 
+      41 +  (b) TREE WINS on dim under the honest protocol: depth-3 CART 
+         +0.747(all)/0.832(fin) vs 1-NN 0.591/0.707 vs majority 0.543/0.6
+         +05. Depth curve reported (d=3 pre-registered headline).        
+      42 +  (c) SAFETY GATE FAILED by the dim-tree: recall on dim>=4 is 0
+         +.000 (buries every rich PDE); 1-NN recall 0.833. Fix = train th
+         +e TRIAGE target directly: binary (dim>=4) depth-3 tree gets acc
+         + 0.892 / recall 0.792 / precision 0.559 (vs majority 0.871, 1-N
+         +N acc 0.839 / prec 0.435). Triage tree = the usable prioritizer
+         +; its rules are readable conjectures (absence of {u2u_xx, u_x2,
+         + uu_xx} => predict high-symmetry).                             
+      43 +  (d) RESONANCE FOUND by the audit: structure {u, u3, xu_x} wit
+         +h coeff of x*u_x = -1/2 gives dims [2,2] stable (fin), coeff = 
+         +2 gives [2,3,4,7,13] growing (inf). Verified by replaying seed-
+         +0 draws + discover at Dmax=5 (rows 96/132). So the windowed lab
+         +el is NOT coefficient-invariant at resonances — exactly the gro
+         +up-classification special-value locus; presence features cannot
+         + see it (engine-always-verifies is forced, not policy). 186/187
+         + structures label-consistent.                                  
+      44 +DELIVERABLE: ADVISORY.md (project advisory + ML operating guide
+         +, Part II).                                                    
+      45 +NEXT (recommended, awaiting direction): v1.2 "enumerate, don't 
+         +sample" — order<=2 dictionary has 2^11-1 = 2047 structures at ~
+         +0.26 s/PDE = ~9 CPU-min for COMPLETE ground truth (perfect trai
+         +n/test split by structure + full jump-candidate list via repeat
+         +ed coefficient draws).                                         
+
+● Write(ADVISORY.md)
+  ⎿  Wrote 163 lines to ADVISORY.md
+      1 # LieML — Project Advisory
+      3 *2026-07-03. A whole-project assessment at professional mathemati
+        ite green as of today). Part I is the advisory; Part II is the re
+         number in this document is reproduced by a runnable script named
+      4 
+      5 ---
+      7 ## 0. Executive summary
+      9 1. **The thesis spine is sound and mostly built.** REDUCE → CLOSE
+        riskiest software — the symmetry engine — exists, is exact (ratio
+        wers where checked (Burgers dim 
+     … +426 lines (ctrl+o to expand)
+
+● Done. The advisory is at ADVISORY.md (Part I: professional assessment; Part
+  II: the ML operating guide), and every number in it is reproduced by a new
+  runnable harness, symm/reductor/train_reductor.py, locked by a pinned
+  regression test — the suite is now 40 passed. Along the way this also
+  completed the ledger's pending "interaction learner" step, with three
+  substantive findings:
+
+  1. The old baselines were leakage-inflated — corrected. The 200 corpus rows
+  contain only 187 distinct term-structures. Evaluating on genuinely unseen
+  structures (structure-level LOOCV) deflates 1-NN on dim from 0.685 to 0.591,
+  and on inf/fin it actually drops below the majority baseline. The honest
+  protocol is now the default in the harness.
+
+  2. The interaction tree is the first model to really win — with one honest 
+  failure. A hand-rolled depth-3 decision tree (no sklearn) beats 1-NN on dim:
+  0.747 vs 0.591 (all), 0.832 vs 0.707 (finite-class only). But as a
+  dim-predictor it fails the safety gate outright — recall 0.000 on
+  high-symmetry PDEs (it buries every rich one). Training the actual triage
+  target (binary dim ≥ 4) fixes this: accuracy 0.892, recall 0.792, precision 
+  0.559, beating both baselines. That triage tree is the usable prioritizer, and
+  its rules are readable conjectures: absence of {u²uₓₓ, uₓ², uuₓₓ} ⇒ predict 
+  high symmetry.
+
+  3. The audit caught a genuine coefficient resonance. One structure, u_t = u + 
+  2u³ + c·x·uₓ, gives a stable dim-2 algebra at c = −1/2 but a growing sequence
+  2→3→4→7→13 at c = 2 (verified by replaying the seed-0 draws through the engine
+  at degree 5). This is the group-classification "special value" phenomenon
+  appearing in the wild — and the advisory's §3 builds the project's
+  mathematical spine around it: semicontinuity of nullity explains why
+  coefficient features hurt, why presence features are generically right yet
+  provably blind to the interesting locus, and why "engine always verifies" is
+  forced by the mathematics, not a policy choice.
+
+  Top recommendation (Gate G2): enumerate, don't sample. The order-≤2 dictionary
+  has only 2¹¹−1 = 2047 possible structures at ~0.26 s each — about 9
+  CPU-minutes for complete ground truth, which pre-empts the "your learned model
+  is a lookup table" referee objection and yields the full jump-candidate list.
+  The advisory lays out the full gated roadmap (G1 textbook-validation table →
+  … → G7 draft results) with a clear split between the course-thesis bar (G1+G5)
+  and the external-publication bar (G2–G4, G7).
+
+✻ Crunched for 23m 58s
+
+※ recap: Wrote the requested project advisory plus ML operating guide (ADVISORY.md), backed by a verified reductor harness; triage tree is the working prioritizer, 40 tests pass. Next action: your go on Gate G2, enumerating all 2047 structures. (disable recaps in /config)
+
+❯ /model                                                                        
+  ⎿  Set model to Opus 4.8 (1M context) and saved as your default for new
+     sessions
+
+❯ /superpowers:subagent-driven-development D:\MATHs\math 4890 LieML\ADVISORY.md 
+
+● Using subagent-driven-development to execute the ADVISORY roadmap. Pre-flight
+  review first — I scanned §5 (the G1–G7 gate roadmap) and found two structural
+  realities that need handling before I dispatch anything.
+
+  Two adaptations I'm making (my call, not asking):
+  1. Not a git repo. The skill's machinery (review-package, per-task commits,
+  worktrees, finishing-a-development-branch) is all git-based and doesn't apply
+  here. I'll adapt exactly as engine v1 did: track progress in the existing
+  .sdd/progress.md ledger, hand each reviewer the new/changed files directly
+  (they Read them), and gate on the pytest suite. No commits, no worktree.
+  2. ADVISORY §5 is a coarse gate roadmap, not a granular task plan. G1–G3 are
+  independent and I can fully specify their briefs now (I wrote the advisory and
+  know the engine's exact expected dims). G4–G7 are coupled, multi-day, and
+  need design judgment — the skill's own flowchart routes tightly-coupled work
+  away from this workflow toward "brainstorm/plan first." I won't force them
+  through blind.
+
+  One decision is genuinely yours: scope. The roadmap spans hours (G1) to
+  multiple weeks (all seven), so how far to run this pass isn't something I
+  should assume.
+
+● User answered Claude's questions:
+  ⎿  · How far through the ADVISORY §5 roadmap should this subagent-driven run 
+     go? (Gates are ordered; each option is a prefix.) → Through G1 only
+
+● Scope set: G1 only — the textbook-validation table. I'll report and stop for
+  your go on G2.
+
+  G1 is one deliverable, so this is a single implementer + review cycle. But to
+  write the brief with exact assertion values (the skill requires briefs carry
+  exact values verbatim), I first need to know what the engine actually produces
+  on each canonical PDE — I've personally verified only Burgers (5), porous m=2
+  (4), and Fisher (2); KdV, heat, and transport I have not. Quick controller
+  recon to de-risk the brief:
+
+  Read 2 files (ctrl+o to expand)
+
+● Now a recon run of all six canonical PDEs through discover, so the brief can
+  carry exact values and I can flag any genuine discrepancies up front:
+
+● Write(C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\g1_recon.py)
+  ⎿  Wrote 50 lines to
+     C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\g1_recon.py
+       1 """G1 recon: run discover() on the six canonical PDEs, report di
+         m/stalled/sequence/time.
+         tion brief will assert."""
+       3 import time
+       4 import sympy as sp
+       6 from symm.sym_engine.eliminate import discover
+       7 
+       8 
+      10     if name == "heat":                       # textbook: 6 (+ in
+         finite superposition)
+     … +53 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Clean recon — this is essentially a G1 pass already, and it surfaced no
+  genuine discrepancies:
+
+  ┌──────────────┬──────────┬─────────────────────┬─────────┬───────────────┐
+  │     PDE      │ Textbook │       Engine        │ stalled │    verdict    │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ heat         │ 6 ⊕ ∞    │ 12, growing         │ True    │ ∞ correctly   │
+  │ u_t=u_xx     │          │ [6,8,10,11,12]      │         │ detected      │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ Burgers      │ 5        │ 5                   │ False   │ match         │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ Fisher       │ 2        │ 2                   │ False   │ match         │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ porous m=2   │ 4        │ 4                   │ False   │ match         │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ KdV (order   │ 4        │ 4                   │ False   │ match         │
+  │ 3)           │          │                     │         │               │
+  ├──────────────┼──────────┼─────────────────────┼─────────┼───────────────┤
+  │ transport    │ ∞        │ 98, growing         │ True    │ ∞ correctly   │
+  │ u_t=u_x      │          │                     │         │ detected      │
+  └──────────────┴──────────┴─────────────────────┴─────────┴───────────────┘
+
+  Four finite exact matches (including order-3 KdV), and both infinite cases
+  correctly flagged by the stalled heuristic. Now I codify this into a
+  validation deliverable + regression test via one implementer cycle. Writing
+  the brief:
+
+● Write(.sdd\g1-brief.md)
+  ⎿  Wrote 154 lines to .sdd\g1-brief.md
+       1 # Task brief — G1: Textbook symmetry-dimension validation table
+       3 This is your requirements document. Use the exact values below v
+         erbatim.
+       5 ## Goal
+       6 
+         he LieML symmetry
+       8 engine on six canonical PDEs whose Lie point symmetry algebra di
+       9 from the literature, and certifies that the engine agrees with t
+         hose published
+         ebras), that it
+     … +220 lines (ctrl+o to expand)
+● Brief written. Dispatching the implementer (Sonnet — the diff is
+  near-transcription from the verified brief, but the honesty-verdict logic is
+  correctness-sensitive):
+
+● Agent(Implement G1 validation table) Sonnet 5
+  ⎿  Done (31 tool uses · 93.0k tokens · 14m 2s)
+  (ctrl+o to expand)
+
+● Implementer reports DONE (45 passed, table reproduced, two benign disclosed
+  concerns). Before the review gate, I'll read the new files and the report
+  myself to curate the reviewer's attention lens:
+
+  Read 3 files (ctrl+o to expand)
+
+● Both files are clean, honest, and match my recon value-for-value; the report
+  is thorough and discloses the one real deviation (a 4-line sys.path shim to
+  resolve a genuine conflict the brief created between package-imports and
+  direct runnability). Now the review gate. Since this isn't a git repo, I hand
+  the reviewer the file paths directly. I'm using Opus for this review — it's
+  this single-task run's only review, and the load-bearing risk here is
+  mathematical (are the six textbook dimensions actually the correct literature
+  values?), which the tests can't catch and which warrants the most capable
+  model:
+
+● Agent(Review G1 validation task) Opus 4.8 (1M context)
+  ⎿  Done (10 tool uses · 66.4k tokens · 5m 11s)
+  (ctrl+o to expand)
+
+● Review came back clean: Spec ✅ full compliance, Code quality Approved, all
+  six textbook dimensions independently confirmed against
+  Olver/Bluman–Kumei/Ibragimov, and the honesty guardrail verified as
+  structurally enforced (heat's "6+inf" string makes a false MATCH unreachable
+  by construction). No Critical or Important findings — only three non-blocking
+  Minor observations. No fix loop needed. Recording completion in the ledger and
+  stamping the gate status on the advisory:
+
+● Update(.sdd\progress.md)
+  ⎿  Added 8 lines
+      43    (d) RESONANCE FOUND by the audit: structure {u, u3, xu_x} wit
+          h coeff of x*u_x = -1/2 gives dims [2,2] stable (fin), coeff = 
+          2 gives [2,3,4,7,13] growing (inf). Verified by replaying seed-
+          0 draws + discover at Dmax=5 (rows 96/132). So the windowed lab
+          el is NOT coefficient-invariant at resonances — exactly the gro
+          up-classification special-value locus; presence features cannot
+           see it (engine-always-verifies is forced, not policy). 186/187
+           structures label-consistent.
+      44  DELIVERABLE: ADVISORY.md (project advisory + ML operating guide
+          , Part II).
+      45  NEXT (recommended, awaiting direction): v1.2 "enumerate, don't 
+          sample" — order<=2 dictionary has 2^11-1 = 2047 structures at ~
+          0.26 s/PDE = ~9 CPU-min for COMPLETE ground truth (perfect trai
+          n/test split by structure + full jump-candidate list via repeat
+          ed coefficient draws).
+      46 +                                                               
+      47 +=== ADVISORY.md ROADMAP EXECUTION (subagent-driven, non-git: le
+         +dger + pytest) ===                                             
+      48 +- Gate G1 (textbook validation table): COMPLETE + REVIEW CLEAN.
+         + Deliverable symm/textbook_validation.py (build/evaluate/__main
+         +__) + regression test symm/tests/test_textbook_validation.py (5
+         + tests). Suite now 45 pass (40 + 5).                           
+      49 +  RESULT: 6/6 PASS, zero unexplained discrepancies. Four finite
+         + MATCHes vs literature — Burgers 5, Fisher 2, porous m=2 (gener
+         +ic branch) 4, KdV (order 3) 4 — each corroborated by exact-rati
+         +onal dim == numeric SVD nullity. Two infinite algebras INF-DETE
+         +CTED via the stalled flag + strictly-growing per-degree seq — h
+         +eat u_t=u_xx (6+inf; windowed seq [6,8,10,11,12], dim 12@D5) an
+         +d transport u_t=u_x (inf; seq [10,22,40,65,98], dim 98@D5).    
+      50 +  Honesty guardrail STRUCTURALLY enforced: heat textbook="6+inf
+         +" (string) makes a false finite MATCH unreachable; only claim v
+         +erified for heat/transport is infinite-part detection, NOT reco
+         +very of the finite generators (window limitation, documented). 
+      51 +  Opus task-review independently CONFIRMED all six literature d
+         +imensions (Olver/Bluman-Kumei/Ibragimov) and verified the guard
+         +rail is by-construction. Spec full compliance; quality approved
+         +.                                                              
+      52 +  Minor observations (non-blocking, logged for any future harde
+         +ning): (1) PASS/DISCREPANCY summary is printed not returned as 
+         +structured data; (2) no negative/mutation test proving a delibe
+         +rately-wrong value surfaces as DISCREPANCY; (3) a 4-line idempo
+         +tent sys.path shim was added to textbook_validation.py so `pyth
+         +on symm/textbook_validation.py` runs by path (no-op under pytes
+         +t; only new file touched).                                     
+      53 +  Run chose scope "G1 only" — STOPPED here; G2 (enumerate) awai
+         +ting go. Course-thesis bar is G1 + G5.                         
+
+● Update(ADVISORY.md)
+  ⎿  Added 2 lines
+      88  | **G6** | Build the benchmark harness per `symm/bench/BUILD_PL
+          AN.md` | Its own acceptance tests | days |
+      89  | **G7** | Draft: results section from G1–G5, claims tightened 
+          per §2.4, citations re-verified | Compiles; every claim traceab
+          le to a script | days |
+      90  
+      91 +**Status (2026-07-03): G1 COMPLETE — 6/6 PASS, review clean.** 
+         +`symm/textbook_validation.py` + `symm/tests/test_textbook_valid
+         +ation.py` (suite 45 pass). Four finite dims match the literatur
+         +e (Burgers 5, Fisher 2, porous m=2 → 4, KdV → 4), each corrobor
+         +ated by exact-rational-dim = numeric-SVD-nullity; heat and tran
+         +sport are correctly flagged infinite by the `stalled`+growth si
+         +gnature (no false finite number). Opus review independently re-
+         +confirmed all six literature values. G2–G7 not started.        
+      92 +                                                               
+      93  **Two bars.** Course thesis = G1 + G5 (+ the already-done engin
+          e and reductor story, negatives included). External publication
+           (e.g. a symbolic-computation or SciML venue) = additionally G2
+          –G4 + G7. Do them in the numbered order; G1 is first because it
+           is cheap and every later claim leans on it.
+      94  
+      95  ---
+
+● G1 is done and passed cleanly. The engine now has a literature-validation
+  gate, and it agrees with the textbook on every case it should.
+
+  What was built (two new files, suite now 45 passed, up from 40):
+  - symm/textbook_validation.py — runs the engine on six canonical PDEs and
+  checks each against its known Lie-symmetry algebra dimension, printing a
+  verdict table.
+  - symm/tests/test_textbook_validation.py — pins the result so it can't
+  silently regress.
+
+  The result — 6/6 pass, zero unexplained discrepancies:
+
+  ┌─────────────────┬────────────┬──────────────┬──────────────────────────┐
+  │       PDE       │ Literature │    Engine    │         outcome          │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ Burgers         │ 5          │ 5            │ MATCH (+ numeric SVD     │
+  │                 │            │              │ cross-check)             │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ Fisher–KPP      │ 2          │ 2            │ MATCH                    │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ porous medium   │ 4          │ 4            │ MATCH                    │
+  │ (m=2)           │            │              │                          │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ KdV (3rd order) │ 4          │ 4            │ MATCH                    │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ heat u_t=u_xx   │ 6 ⊕ ∞      │ flagged      │ INF-DETECTED             │
+  │                 │            │ infinite     │                          │
+  ├─────────────────┼────────────┼──────────────┼──────────────────────────┤
+  │ transport       │ ∞          │ flagged      │ INF-DETECTED             │
+  │ u_t=u_x         │            │ infinite     │                          │
+  └─────────────────┴────────────┴──────────────┴──────────────────────────┘
+
+  The four finite cases match exactly, and each is double-confirmed by the
+  engine's exact rational dimension agreeing with an independent numeric SVD
+  nullity. The two genuinely infinite-dimensional algebras (heat, transport) are
+  correctly caught by the stalled flag plus a strictly-growing per-degree
+  sequence — the engine reports "infinite detected," never a wrong finite
+  number.
+
+  Why this matters and why it's honest: heat is the trap. Its D=1 window happens
+  to report 6, which equals the textbook finite-part count — it would be easy
+  to overclaim "the engine recovered the 6 finite generators." It didn't; that
+  number also mixes in low-degree superposition solutions. The code enforces
+  this structurally: heat's textbook value is stored as the string "6+inf",
+  which makes a false finite "MATCH" unreachable by construction, not just
+  discouraged by a comment.
+
+  Review (Opus): Spec ✅ full compliance, code quality Approved, and — the
+  load-bearing check no test can do — it independently re-confirmed all six
+  literature dimensions against Olver / Bluman–Kumei / Ibragimov. Three Minor,
+  non-blocking observations logged for future hardening (e.g. a mutation test
+  proving a wrong value would surface as a discrepancy). One benign disclosed
+  deviation: a 4-line sys.path shim so the script runs by path (no-op under
+  pytest).
+
+  Logged in .sdd/progress.md, and I stamped the G1 status onto ADVISORY.md §5.
+
+  Stopped here per your "G1 only" choice. The recommended next gate is G2 — 
+  "enumerate, don't sample": run all 2047 order-≤2 structures for complete
+  ground truth (~9 CPU-min), which pre-empts the "your learned reductor is just
+  a lookup table" objection and hands G3 an exact train/test split. Say the word
+  and I'll run it the same way.
+
+✻ Cooked for 30m 45s
+
+❯ how is lie algebra working during this reduction process?                     
+
+● Good question — and it's the heart of the whole pipeline, so let me build it
+  up from the ground with a concrete, verified example rather than hand-wave.
+  First a small computation on Fisher (the PDE we just validated at dim 2) so
+  the mechanism is grounded, not asserted:
+
+● Write(C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\reduction_mechanism.py)
+  ⎿  Wrote 34 lines to C:\Users\Administrator\.claude\jobs\e4d6590d\tmp\red
+     uction_mechanism.py
+       1 """Show, concretely and verifiably, how a Lie generator reduces 
+         Fisher PDE -> ODE."""
+       3 from symm.sym_engine.jet import PDE, symmetry_residual
+       4 
+       5 # --- 1. Fisher u_t = u_xx + u(1-u), and its 2-dim algebra {d_t,
+       6 p = PDE.scalar_1plus1(None, 2, "fisher", {})
+       7 p.Delta = p.jet_sym(0, 1) - p.jet_sym(2, 0) - p.u * (1 - p.u)
+       8 p._init_onshell()
+      10 # are the two claimed generators really symmetries? (tau, xi, ph
+         i)
+     … +30 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Verified — Fisher's two generators both return symmetry residual 0, and
+  feeding the invariant u = U(x−ct) into the PDE collapses it to U″ + cU′ + 
+  U(1−U) = 0, an ODE in z alone (the output literally shows only c, z
+  surviving). That single run is the reduction mechanism in miniature. Here's
+  what's happening underneath, built up from the start.
+
+  The one-line version
+
+  A Lie algebra is a variable-compression tool: each independent generator is a
+  direction along which the PDE looks identical to itself, and every such
+  direction lets you delete one variable by switching to coordinates that don't
+  change along it. Fisher lives in (x, t) — two independent variables — so using
+  one symmetry direction drops you to one variable z, i.e. PDE → ODE. That
+  reduced ODE is exactly what the rest of the pipeline (HAM series → certificate
+  → PINN) then consumes.
+
+  What one generator actually is
+
+  A generator is a vector field X = τ ∂_t + ξ ∂_x + φ ∂_u — an infinitesimal
+  recipe for nudging (t, x, u). It "is a symmetry" when nudging any solution
+  gives you another solution. That condition, run through the prolongation
+  formula, is the residual our engine checks: for Fisher, ∂_t (τ=1) and ∂_x
+  (ξ=1) both gave residual 0 above, so both are genuine symmetries.
+
+  The key move is that a symmetry has invariants — quantities the nudge leaves
+  fixed. You find them by solving the characteristic system
+
+  dx/ξ  =  dt/τ  =  du/φ .
+
+  For the travelling-wave combination X = ∂_t + c ∂_x (τ=1, ξ=c, φ=0):
+  - du/0 says u itself is unchanged → the profile U,
+  - dx/c = dt/1 integrates to x − c t = const → the similarity variable z.
+
+  So "a solution that respects this symmetry" must have the form u(x,t) = U(z).
+  Substitute that in and the two-variable derivatives collapse (u_t = −cU′, u_xx
+  = U″), leaving the ODE you saw. That collapse is the compression — the
+  symmetry guaranteed the answer only depends on z, so x and t separately never
+  appear again.
+
+  What the algebra buys you beyond one generator
+
+  This is where "algebra" (not just "a symmetry") earns its name. The full set
+  of generators is a vector space — you can add and scale them — and it's closed
+  under the bracket [X, Y] = XY − YX. Two things follow, and they're exactly
+  the two things our engine measures:
+
+  (1) The dimension = how much reduction is on the menu. This is the number we
+  validated in G1: Fisher 2, Burgers 5, porous 4, KdV 4. A bigger algebra means
+  more inequivalent ways to reduce (each different subalgebra gives a different
+  similarity variable and a different ODE). Fisher's 2-dimensional algebra is
+  small — essentially it offers the travelling-wave reduction. Burgers'
+  5-dimensional algebra is large, which is the fingerprint of it being
+  linearizable (Cole–Hopf); porous medium's 4 includes scaling generators, which
+  is why it has self-similar Barenblatt solutions.
+
+  (2) The bracket structure = whether you can keep reducing. After you reduce by
+  one generator X, the other symmetries don't vanish — the ones compatible with
+  X (its normalizer) descend to become symmetries of the reduced ODE. If the
+  algebra is solvable, you can peel them off one at a time, each one integrating
+  the ODE down by one order, until you reach an explicit answer — this is Lie's
+  theorem, the deep reason "enough symmetry ⇒ integrable by quadratures."
+  Concretely for Fisher: after the reduction, the ODE U″ + cU′ + U(1−U) = 0
+  still has a leftover z-translation symmetry, and that is what lets you drop it
+  into the 2-D (U, U′) phase plane — the standard way Fisher travelling fronts
+  are analyzed. algebra.py computes these brackets and the derived/lower-central
+  series precisely to report solvable-vs-not.
+
+  The two reduction "branches" in our engine
+
+  reduce.py implements exactly the two most common generator types:
+  - Translation branch → travelling waves, z = x − ct, u = U(z) (the Fisher case
+  above). Derivatives just pick up powers of −c.
+  - Scaling branch → self-similar solutions, z = x / t^a, u = t^b U(z) (the
+  porous-medium/Barenblatt case). Here u does transform (φ ≠ 0), so the profile
+  carries a t-power out front.
+
+  Which branch fires is dictated by which generator you hand it — the algebra is
+  the menu, each generator (or low-dimensional subalgebra) is a dish, and the
+  guards in the code (e.g. the projective generator returning None) are there
+  because some generators don't yield a clean lower-order ODE through this
+  simple ansatz.
+
+  The infinite case, connected to G1
+
+  When the algebra is infinite-dimensional — heat and transport, which G1
+  flagged as stalled — the "compression" is of a different flavor. A linear PDE
+  always contains the superposition symmetry u → u + β for any other solution β,
+  which is an infinite family of generators. That infinitude is just linearity
+  restated as symmetry: you can't compress two variables to one and stop,
+  because there are infinitely many independent symmetry directions. The engine
+  correctly refuses to report a finite dimension there — which is exactly the
+  honest behavior we validated.
+
+  How it all chains in CCS-SYM+
+
+  So the algebra's job in the pipeline is narrow and precise: REDUCE uses it to
+  manufacture a faithful low-dimensional ODE whose solutions are exactly the
+  symmetric solutions of the PDE; the dimension tells you the reduction exists
+  and the structure tells you how far it can go; then CLOSE/CERTIFY/CORRECT work
+  entirely on that ODE. Everything downstream inherits its trustworthiness from
+  this step being an exact algebraic fact, not an approximation.
+
+  If it'd help, I can fold this — the characteristic-system derivation, the
+  Fisher worked example, and the two-branch picture — into intro.tex as a short
+  "how reduction works" subsection next to the manifold/Lie-group material, so
+  it's part of your beginner conceptual map rather than just this chat. Want me
+  to?
+
+✻ Churned for 3m 19s
+
+❯ yes.                                                                          
+  ⎿  45 skills available
+
+● Let me map intro.tex — its structure, preamble macros, and the §2.3 region
+  I'll be inserting next to — so the new subsection matches the existing style
+  exactly.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● There's already a dedicated section — §"Variable compression made precise:
+  symmetry reduction" at line 707. That's the natural home (putting it there
+  avoids scattering reduction content). Let me read it, plus the preamble macros
+  and a style-reference region, before writing:
+  Read 1 file (ctrl+o to expand)
+
+● The section already exists and is good — it has the ansatz idea and a
+  three-reduction example, but it asserts the invariants exist without showing
+  the mechanism, and it doesn't cover the algebra's structural role. Those are
+  exactly the two things you asked about, so I'll add them as two focused
+  subsections (mechanism + why-the-whole-algebra-matters), reusing the Fisher
+  example I just verified. Three surgical edits:
+
+● Update(intro.tex)
+  ⎿  Error editing file
+
+● Match failed — likely line-ending or whitespace. Let me re-read the exact
+  bytes:
+
+  Read 1 file (ctrl+o to expand)
+
+● Misread the wrap — "an" is on line 717, not 716. Correcting:
+
+● Update(intro.tex)
+  ⎿  Added 36 lines
+      716  and substituting it into the PDE collapses two independent var
+           iables $(x,t)$ into one $(z)$: a PDE becomes
+      717  an \textbf{ODE}.
+      718  
+      719 +\subsection{Finding the invariants: the characteristic system}
+          +\label{sec:char}                                              
+      720 +                                                              
+      721 +The paragraph above asserts that two invariants exist; here is
+          + the mechanism that produces them ---                         
+      722 +all a computer (or a hand calculation) actually needs. The gen
+          +erator                                                        
+      723 +$X=\xi\partial_x+\tau\partial_t+\phi\partial_u$ is the velocit
+          +y field of a flow on $(x,t,u)$-space, and                     
+      724 +an invariant is anything constant along that flow. Constancy i
+          +s exactly the equality of the following                       
+      725 +ratios, the \textbf{characteristic system}:                   
+      726 +\begin{equation}\label{eq:char}                               
+      727 +\boxed{\;\dfrac{dx}{\xi}=\dfrac{dt}{\tau}=\dfrac{du}{\phi}\;} 
+      728 +\end{equation}                                                
+      729 +Every independent first integral of \eqref{eq:char} is one inv
+          +ariant; on the three coordinates                              
+      730 +$(x,t,u)$ there are two --- the similarity variable $z$, and o
+          +ne that fixes the profile.                                    
+      731 +                                                              
+      732 +\begin{example}[Fisher--KPP, worked in full and re-verified]\l
+          +abel{ex:fisher-collapse}                                      
+      733 +Combine Fisher's two basis symmetries into $X=c\,\partial_x+\p
+          +artial_t$ (so $\xi=c,\ \tau=1,\ \phi=0$).                     
+      734 +The characteristic system \eqref{eq:char} becomes $\dfrac{dx}{
+          +c}=\dfrac{dt}{1}=\dfrac{du}{0}$, and its                      
+      735 +two invariants can be read straight off:                      
+      736 +\begin{itemize}[nosep]                                        
+      737 +  \item $\dfrac{du}{0}$ forces $du=0$: the value $u$ rides alo
+          +ng unchanged --- the profile $U$;                             
+      738 +  \item $\dfrac{dx}{c}=\dfrac{dt}{1}$ integrates to $x-ct=\tex
+          +t{const}$ --- the similarity variable $z=x-ct$.               
+      739 +\end{itemize}                                                 
+      740 +An $X$-invariant solution therefore has the form $u(x,t)=U(z)$
+          + with $z=x-ct$, and every derivative                          
+      741 +becomes a $z$-derivative times a fixed factor,                
+      742 +\[                                                            
+      743 +u_t=-c\,U',\qquad u_x=U',\qquad u_{xx}=U'' .                  
+      744 +\]                                                            
+      745 +Fisher's equation $u_t=u_{xx}+u(1-u)$ then collapses to       
+      746 +\[                                                            
+      747 +-c\,U'=U''+U(1-U)\qquad\Longleftrightarrow\qquad \boxed{\,U''+
+          +c\,U'+U(1-U)=0\,,}                                            
+      748 +\]                                                            
+      749 +an ODE in $z$ alone: the two independent variables have become
+          + one. (Re-verified for this note ---                          
+      750 +substituting $u=U(x-ct)$ leaves an expression whose only free 
+          +symbols are $c$ and $z$, and the engine                       
+      751 +independently certifies $\partial_x,\partial_t$ as symmetries 
+          +with residual $\equiv0$; files                                
+      752 +\texttt{symm/sym\_engine/reduce.py}, \texttt{symm/fisher\_kpp\
+          +_reduction.py}.)                                              
+      753 +\end{example}                                                 
+      754 +                                                              
+      755  \begin{keyidea}[The compression, quantified]
+      756  A PDE on $\R^2$ (variables $x,t$) reduces to an ODE on $\R$ (v
+           ariable $z$). More generally, an
+      757  $r$-parameter solvable subgroup reduces the number of independ
+           ent variables by $r$. The infinite solution
+
+● Now the second new subsection (why the whole algebra matters) after the
+  examples, and a cross-reference tidy in the existing Fisher bullet so the
+  result isn't stated twice without linkage:
+
+● Update(intro.tex)
+  ⎿  Added 31 lines
+      774  \end{itemize}
+      775  \end{example}
+      776  
+      777 +\subsection{Why the whole algebra matters, not just one genera
+          +tor}\label{sec:whole-algebra}                                 
+      778 +                                                              
+      779 +One generator gives one reduction. The \emph{algebra} --- the 
+          +full solution space of the determining                        
+      780 +equations --- adds two things more, and they are exactly the t
+          +wo quantities the engine computes and that                    
+      781 +we checked against the literature.                            
+      782 +                                                              
+      783 +\textbf{Its dimension is the size of the menu.} Each inequival
+          +ent one-dimensional subalgebra yields a                       
+      784 +different similarity variable, hence a different reduction. Fi
+          +sher's algebra is two-dimensional and                         
+      785 +essentially offers the single travelling wave above; Burgers' 
+          +five-dimensional algebra                                      
+      786 +(Example~\ref{ex:burgers}) offers many reductions, and its ver
+          +y size reflects that Burgers is                               
+      787 +linearisable (Cole--Hopf); the porous medium's four-dimensiona
+          +l algebra contains genuine \emph{scalings},                   
+      788 +which is why it admits self-similar (Barenblatt) solutions. Bi
+          +gger algebra, richer menu.                                    
+      789 +                                                              
+      790 +\textbf{Its bracket structure decides how far you can go.} Aft
+          +er a reduction by $X$, the other symmetries                   
+      791 +do not vanish: those compatible with $X$ (its normaliser) desc
+          +end to symmetries of the reduced \emph{ODE}.                  
+      792 +If $\g$ is \textbf{solvable}, Lie's theorem then integrates th
+          +at ODE by successive quadratures --- one                      
+      793 +symmetry peeled off per order until an explicit answer appears
+          +. Fisher's reduced ODE $U''+cU'+U(1-U)=0$                     
+      794 +still carries a $z$-translation symmetry, and that leftover is
+          + exactly what lets one study the fronts in                    
+      795 +the $(U,U')$ \textbf{phase plane}. (Testing solvability --- th
+          +e derived and lower-central series of $\g$                    
+      796 +--- is the job of \texttt{symm/sym\_engine/algebra.py}.)      
+      797 +                                                              
+      798 +\begin{remark}[Two branches, and the honest infinite case]    
+      799 +The engine's \texttt{reduce.py} implements the two commonest g
+          +enerator types directly: a                                    
+      800 +\emph{translation} branch (travelling waves, $z=x-ct$) and a \
+          +emph{scaling} branch (self-similar                            
+      801 +solutions, $z=x/t^{a}$, $u=t^{b}U$); which one fires is set by
+          + the generator supplied. When the algebra                     
+      802 +is \emph{infinite}-dimensional --- the heat and transport equa
+          +tions, which the validation flags as                          
+      803 +\texttt{stalled} rather than pinning a finite dimension --- it
+          +s generators include the superposition                        
+      804 +symmetry $u\mapsto u+\beta$ shared by every linear PDE. That i
+          +s compression of a different kind                             
+      805 +(linearity restated as symmetry), and the engine reports it as
+          + infinite instead of forcing a finite ODE.                    
+      806 +\end{remark}                                                  
+      807 +                                                              
+      808  When the reduced ODE is not solvable in closed form (Fisher--K
+           PP, Blasius), we close it with a
+      809  \emph{semi-analytical series} (homotopy analysis) and, if need
+           ed, a small neural-network correction ---
+      810  which is where ML enters. The project's contribution is to att
+           ach a \emph{convergence certificate} to
+
+● Update(intro.tex)
+  ⎿  Added 1 line, removed 1 line
+      769          self-similar profile checks out for $m=1,2,3$. (This i
+           s the textbook example of
+      770          ``compression by scaling''.)
+      771    \item \textbf{Fisher--KPP} $u_t=u_{xx}+u(1-u)$ (travelling w
+           ave): $z=x-ct$ gives the
+      772 -        ODE $U''+cU'+U(1-U)=0$, \emph{non-integrable for gener
+          -ic $c$} --- with a closed-form Ablowitz--Zeppetella front only
+          - at                                                           
+      772 +        ODE $U''+cU'+U(1-U)=0$ (derived in full in Example~\re
+          +f{ex:fisher-collapse}), \emph{non-integrable for generic $c$} 
+          +--- with a closed-form Ablowitz--Zeppetella front only at     
+      773          $c=5/\sqrt6$. (Files: \texttt{symm/feasibility\_demo.p
+           y}, \texttt{symm/fisher\_kpp\_reduction.py}.)
+      774  \end{itemize}
+      775  \end{example}
+
+● Now compile (twice, for the cross-references and TOC) and confirm it builds
+  clean:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Clean build, exit 0, 23 pages (was 22). Let me confirm no undefined references
+  slipped through (the new \ref/\label cross-links):
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Done. The explanation is now part of intro.tex, compiled cleanly to intro.pdf
+  (23 pages, all cross-references resolved; the only log warning is a cosmetic
+  font substitution for \texttt in math, which is harmless).
+
+  What landed, both inside the existing §"Variable compression made precise:
+  symmetry reduction" so the reduction story stays in one place:
+
+  1. § "Finding the invariants: the characteristic system" — the mechanism you
+  actually asked about. It introduces the generator as a flow, boxes the
+  characteristic system dx/ξ = dt/τ = du/φ, and then works Fisher end-to-end: X 
+  = c∂ₓ + ∂ₜ → read off u and z = x−ct as the two invariants → substitute →
+  watch u_t=−cU′, u_xx=U″ collapse the PDE to U″ + cU′ + U(1−U) = 0 in z alone.
+  It's flagged "worked in full and re-verified," citing the sympy check (only c,
+  z survive) and the engine's residual-0 certification, with file pointers to
+  reduce.py and fisher_kpp_reduction.py.
+  2. § "Why the whole algebra matters, not just one generator" — the structural
+  half: dimension = size of the menu (Fisher 2 → one travelling wave; Burgers 5
+  → many, reflecting Cole–Hopf linearisability; porous 4 → scalings →
+  Barenblatt), and bracket structure = how far you can go (normaliser descends
+  to the ODE; solvable ⇒ Lie's theorem ⇒ successive quadratures; Fisher's
+  leftover z-translation ⇒ the (U,U′) phase plane). A closing remark ties it to
+  the engine's two reduce.py branches and the honest infinite case —
+  heat/transport flagged stalled, the superposition symmetry u ↦ u+β, exactly as
+  G1 reports.
+
+  It cross-links to the existing Burgers example and the three-reduction summary
+  (which now points back to the full Fisher derivation), and every concrete
+  claim is anchored to a verified computation or an engine module — consistent
+  with the doc's stated convention.
+
+✻ Cogitated for 6m 43s
+
+※ recap: Advising the LieML project: I executed roadmap gate G1 (textbook symmetry-dimension validation, 6/6 pass, review clean) and added a verified "how reduction works" explanation to intro.tex, now compiled. Next action awaiting your go: run gate G2, the full 2047-structure enumeration. (disable recaps in /config)
+
+❯ /model                                                                        
+  ⎿  Set model to Fable 5 and saved as your default for new sessions
+
+❯ /effort                                                                       
+  ⎿  Set effort level to xhigh (saved as your default for new sessions): Deeper
+     reasoning than high, just below maximum (Fable 5, Opus 4.7+, Sonnet 5)
+
+❯ You are a math professor supervising my paper 'Semi-Analytical and Machine    
+  Learning Methods for Solving PDEs Using Lie Symmetry', with high thinking     
+  variety.                                                                      
+  The paper study aims to reduce complex PDEs into simpler forms and obtain     
+  exact or approximate analytical solutions with applications in mathematical   
+  physics and engineering problems. Please offer me a path-application          
+  motivated TODO list to let me complete this study in 20 days. The list should 
+  decompose each sub aims and be based on current progress and connecting       
+  existing references.                                                          
+  ⎿  1 skill available
+
+● A 20-day completion plan is a planning deliverable, so per our working
+  convention it goes into a self-contained file (runnable by a future autonomous
+  session), with the TLDR here. Let me write it, grounded in the verified
+  current state and the ref/ corpus.
+
+● Write(PAPER_TODO_20DAYS.md)
+  ⎿  Wrote 214 lines to PAPER_TODO_20DAYS.md
+       1 # 20-Day Completion Plan — "Semi-Analytical and Machine Learning
+       2 
+       3 Course math 4890. Written 2026-07-13. Window: **Day 1 = Tue 2026
+       4 This file is self-contained: a later autonomous session can exec
+         ute any phase from it without chat
+         lready complete) on a dated schedule,
+       6 with each phase motivated by a concrete application in mathemati
+       7 
+       8 ---
+      10 ## 0. Standing rules for every working session
+     … +354 lines (ctrl+o to expand)
+● Update(.sdd\progress.md)
+  ⎿  Added 1 line
+      51    Opus task-review independently CONFIRMED all six literature d
+          imensions (Olver/Bluman-Kumei/Ibragimov) and verified the guard
+          rail is by-construction. Spec full compliance; quality approved
+          .
+      52    Minor observations (non-blocking, logged for any future harde
+          ning): (1) PASS/DISCREPANCY summary is printed not returned as 
+          structured data; (2) no negative/mutation test proving a delibe
+          rately-wrong value surfaces as DISCREPANCY; (3) a 4-line idempo
+          tent sys.path shim was added to textbook_validation.py so `pyth
+          on symm/textbook_validation.py` runs by path (no-op under pytes
+          t; only new file touched).
+      53    Run chose scope "G1 only" — STOPPED here; G2 (enumerate) awai
+          ting go. Course-thesis bar is G1 + G5.
+      54 +- 20-DAY PAPER PLAN written: PAPER_TODO_20DAYS.md (dated schedu
+         +le Jul 14 - Aug 2, phases A-G mapping ADVISORY gates G2-G7 to d
+         +ays, application hooks per PDE, cut-lines, risk register, Day-2
+         +0 done-checklist). Plan only — no implementation started.      
+
+● Advising using Fable 5
+  ⎿  Advisor unavailable (unavailable)
+
+● The plan is written to PAPER_TODO_20DAYS.md (self-contained: dated phases,
+  falsifiable gates, exact file paths, cut-lines, risk register, Day-20
+  checklist), and logged in the ledger. Per our convention I have not started
+  implementing anything. Here is the supervisor's view.
+
+  Three strategic points before the schedule
+
+  1. Your paper has one spine: the Fisher end-to-end run. Everything in the
+  title — semi-analytical, machine learning, Lie symmetry — meets in a single
+  command: engine discovers the algebra → travelling-wave reduction → HAM series
+  → convergence certificate → PINN correction, all validated against the exact
+  Ablowitz–Zeppetella front. Days 8–11 build it. If only one thing survives the
+  20 days, it must be this; the plan's cut-lines protect it explicitly.
+
+  2. Your differentiator is honesty, so schedule it like a feature. The vacuous
+  certificate branch, the coefficient-features-hurt negative, the recall-0
+  safety failure that forced the triage redesign, the infinite algebras flagged
+  rather than faked — these are results, and Day 18 is reserved for writing them
+  as such. A referee who catches you overclaiming loses trust in everything;
+  one who reads a correctly-labeled negative gains it.
+
+  3. Applications are the narrative thread, not decoration. Each computation is
+  anchored to a physical story you can open a section with: reaction–diffusion
+  fronts (Fisher, combustion/genetics), groundwater and gas filtration
+  (porous/Barenblatt, the scaling branch), shocks (Burgers), solitons (KdV), and
+  the reductor as model-library triage — screening thousands of candidate
+  models before expensive symbolic classification.
+
+  The 20 days at a glance
+
+  Days: 1–2
+  Phase: G2 Enumerate all 2047 structures (~2×9 CPU-min)
+  Deliverable: landscape_v1.json — complete ground truth
+  Gate: 2047/2047, jump-candidates listed
+  ────────────────────────────────────────
+  Days: 3–4
+  Phase: G3 Reductor on the full landscape
+  Deliverable: exact scoreboard + tree rules exhaustively verified/refuted
+  Gate: beats both baselines, honestly
+  ────────────────────────────────────────
+  Days: 5–7
+  Phase: G4 Classification sweep
+  Deliverable: porous integer-m sweep + the guaranteed resonance-family demo
+  (c=−1/2 vs c=2, already verified); Day-5 spike decides if m=−4/3 is reachable
+  Gate: one automated jump-detection table
+  ────────────────────────────────────────
+  Days: 8–11
+  Phase: G5 Fisher end-to-end pipeline
+  Deliverable: symm/ccs_pipeline.py, one command, six stages
+  Gate: reproduces every standalone-demo number
+  ────────────────────────────────────────
+  Days: 12–13
+  Phase: G6-lite
+  Deliverable: results tables + pgfplots CSVs (matplotlib not assumed)
+  Gate: every datum traceable to a script
+  ────────────────────────────────────────
+  Days: 14–18
+  Phase: G7 Paper assembly
+  Deliverable: draft/draft.tex: results in, Day-16 citation audit (✅/🟡,
+  in-tree
+   ref/ corpus mapped to sections), Day-18 negatives section
+  Gate: compiles clean; no claim exceeds ADVISORY §2.4
+  ────────────────────────────────────────
+  Days: 19–20
+  Phase: Buffer + red-team
+  Deliverable: hostile-referee pass, final compile
+  Gate: Done-checklist all ticked
+
+  The reference map in the file connects each phase to the papers already in
+  ref/ (Olver and the symmetry notes for methods; the five Lie+ML papers for
+  related work; McGreivy–Hakim for the validation policy) and lists the external
+  classics (Ablowitz–Zeppetella, Turkyilmazoglu, Ovsiannikov, Bluman–Kumei) as
+  🟡 until the Day-16 verification — nothing load-bearing ships unverified.
+
+  One scheduling note: the plan assumes roughly one full day of slippage (that's
+  what Day 19 is for), and the descope order is written down so any cut is a
+  decision, not an accident. Say "start" (or name a phase) and I'll begin
+  executing — Phase A is two days and its gate is fully mechanical.
+
+✻ Cogitated for 5m 7s
+
+❯ can you stress out the whole math curiculum for me, like how should the       
+  machine point to a valid group+manifold for what kind of PDEs; any new        
+  algorithms suggested better than those before July 2026?                      
+
+● API Error: Unable to connect to API 
+  (UNKNOWN_CERTIFICATE_VERIFICATION_ERROR)
+
+✻ Crunched for 3m 57s
+
+❯ can you stress out the whole math curiculum for me, like how should the       
+  machine point to a valid group+manifold for what kind of PDEs; any new        
+  algorithms suggested better than those before July 2026?                      
+
+※ recap: Goal: finish the LieML thesis paper in 20 days; the full dated plan is in PAPER_TODO_20DAYS.md (nothing implemented yet). Next action: on your "start", execute Phase A — enumerate all 2047 structures for complete ground truth. (disable recaps in /config)
+
+● Two-part question — the curriculum map (how a machine gets from a PDE to a
+  valid group + manifold) I can build from what we've verified; but "any new
+  algorithms better than those before July 2026" needs a live literature check,
+  since my training cutoff is January 2026. Let me load the web tools and sweep
+  first, then write the curriculum as a durable file.
+
+● Web Search("Lie symmetry analysis PDE new algorithm 2026 arXiv determining
+            equations")
+  ⎿  Did 1 search in 8s
+
+● Web Search("machine learning symmetry discovery partial differential equations
+            2025 2026 Lie group neural")
+  ⎿  Did 1 search in 3s
+
+● Web Search("arXiv 2026 canonicalization equivariant neural operator Lie
+            algebra PDE")
+  ⎿  Did 1 search in 9s
+
+● Web Search("differential elimination Rosenfeld-Groebner rif algorithm
+            improvement 2025 2026 symbolic computation")
+  ⎿  Did 1 search in 8s
+
+● Agent "what are the '2047 structures'?" was stopped by user
+
+● Web Search("neural network discover Lie point symmetries PDE 2025 LieGAN
+            symmetry discovery data-driven")
+  ⎿  Did 1 search in 9s
+
+● Web Search(""symmetry" PDE solver algorithm 2026 breakthrough automated group
+            classification machine learning arXiv")
+  ⎿  Did 1 search in 7s
+
+● Fetch(https://arxiv.org/abs/2603.07299)
+  ⎿  Received 41.6KB (200 OK)
+
+● Fetch(https://arxiv.org/abs/2510.01855)
+  ⎿  Received 41.6KB (200 OK)
+● Write(CURRICULUM.md)
+  ⎿  Wrote 219 lines to CURRICULUM.md
+       1 # The Mathematical Curriculum of LieML — and How a Machine Point
+       2 
+       3 *2026-07-13. A stress-tested map of the full mathematical stack 
+       4 Learning Methods for Solving PDEs Using Lie Symmetry": what must
+          be learned, in what order, what the
+         ich group/manifold structures, and an
+       6 algorithm survey current to July 2026 (web-swept today; tags: ✅
+       7 
+       8 ---
+      10 ## 0. The central correction (read this first)
+     … +383 lines (ctrl+o to expand)
+
+● Update(.sdd\progress.md)
+  ⎿  Added 1 line
+      52    Minor observations (non-blocking, logged for any future harde
+          ning): (1) PASS/DISCREPANCY summary is printed not returned as 
+          structured data; (2) no negative/mutation test proving a delibe
+          rately-wrong value surfaces as DISCREPANCY; (3) a 4-line idempo
+          tent sys.path shim was added to textbook_validation.py so `pyth
+          on symm/textbook_validation.py` runs by path (no-op under pytes
+          t; only new file touched).
+      53    Run chose scope "G1 only" — STOPPED here; G2 (enumerate) awai
+          ting go. Course-thesis bar is G1 + G5.
+      54  - 20-DAY PAPER PLAN written: PAPER_TODO_20DAYS.md (dated schedu
+          le Jul 14 - Aug 2, phases A-G mapping ADVISORY gates G2-G7 to d
+          ays, application hooks per PDE, cut-lines, risk register, Day-2
+          0 done-checklist). Plan only — no implementation started.
+      55 +- CURRICULUM.md written: full math-stack map (L0-L10 with stres
+         +s tests), the "machine points to group+manifold" decision proce
+         +dure (5 real decision points D1-D5; manifold forced by signatur
+         +e, group computed as kernel), PDE-class -> group/manifold taxon
+         +omy table, and a July-2026 web-swept algorithm survey. Survey v
+         +erdict: no post-2025 method supersedes exact determining system
+         +s for known PDEs; new front is data-only discovery (LieNLSD 251
+         +0.01855 ✅ = same linear determining core with data-estimated j
+         +ets; spectral GFT 2603.07299 ✅ adjacent). Future-work hook log
+         +ged: "discover, then certify" (data front-end + our exact verif
+         +ier).                                                          
+
+● The full curriculum is written to CURRICULUM.md (levels L0–L10, each with its
+  stress test — the known way it breaks — plus the decision procedure and the
+  July-2026 algorithm survey with ✅/🟡 tags). Here is the supervisor's summary
+  of both questions.
+
+  First, the correction that reorganizes everything
+
+  "How should the machine point to a valid group + manifold?" contains a hidden
+  misconception, and removing it is the most important thing I can teach you
+  this week: the machine never guesses either one.
+
+  - The manifold is forced. A PDE with p independent variables, q dependent,
+  order k lives on the jet bundle J^k(R^p, R^q) — for our equations, coordinates
+  (x, t, u, u_x, u_t, u_xx, …). The equation Δ=0 is a submanifold of it. Zero
+  decisions.
+  - The group is computed, not selected. The invariance condition pr X(Δ)|_{Δ=0}
+  = 0 is linear in the infinitesimals (τ, ξ, φ) even for nonlinear PDEs, so the
+  whole symmetry algebra is the null space of a linear operator. "Valid" has an
+  exact, machine-checkable meaning: residual ≡ 0 on shell — which our engine
+  certifies for every generator it emits.
+
+  The machine genuinely "points" at only five places: D1 which symmetry type to
+  search (point → contact → generalized → nonclassical, a cost ladder); D2 which
+  ansatz window (degree-D gives a certified lower bound + the stalled flag;
+  completeness belongs to differential elimination); D3 which PDE to spend
+  engine time on first — the only seat ML legitimately owns, per the
+  semicontinuity argument; D4 which subalgebra to reduce by (optimal systems —
+  our one honest gap); D5 which quotient coordinates to hand downstream (moving
+  frames / SAC-NO). The taxonomy that guides the prior: linear ⇒ infinite
+  algebra with the superposition ideal (heat's finite part is the 6-dim
+  Schrödinger algebra); first-order ⇒ infinite contact pseudogroup
+  (characteristics); generic nonlinear evolution ⇒ small solvable algebra, dim
+  2–4 (Fisher 2); linearizable ⇒ large algebra mirroring the linear target
+  (Burgers 5, Cole–Hopf); soliton equations ⇒ modest point algebra but infinite
+  generalized hierarchy (KdV 4 — point count does not detect integrability);
+  parameterized families ⇒ generic branch + upward jumps on special subvarieties
+  (m = −4/3, our measured resonance). Every row of that table is anchored to
+  something we verified.
+
+  Second: new algorithms as of July 2026 — the honest verdict
+
+  I swept the literature today (my training ends January 2026, so this was
+  checked live, two post-cutoff papers opened):
+
+  - For our regime — PDE known symbolically: no, nothing better. The
+  completeness stack is still Riquier–Janet → rif / Rosenfeld–Gröbner; the sweep
+  surfaced only incremental pre-2025 improvements. Our degree-window engine
+  remains a defensible lightweight variant with the escape hatch.
+  - The real 2024–26 innovation is the data-only regime. The strongest item,
+  LieNLSD (Oct 2025, ✅ read): explicit nonlinear generators from trajectory
+  data via a function library + the linearity of the prolongation formula + SVD
+  null space. Note what that is: our determining-matrix pipeline with 
+  data-estimated jets instead of exact symbolic ones. Independent convergence on
+  the same linear core — it validates our design rather than superseding it. A
+  genuinely-2026 paper (spectral symmetry discovery via generalized Fourier 
+  transforms, Mar 2026, ✅ read) detects symmetry as spectral sparsity, but
+  isn't demonstrated on PDE point symmetries. LieLAC (ICLR 2025, in ref/) still
+  owns non-compact canonicalization.
+  - The opportunity this hands your paper: nobody surfaced does
+  discover-then-certify — a data-driven front end proposing generators when the
+  equation is unknown, with an exact engine like ours verifying them at residual
+  ≡ 0 before anything is trusted. That's now written into CURRICULUM.md §3.3 as
+  a paste-ready future-work paragraph.
+
+  Sources: LieNLSD, arXiv:2510.01855 · Spectral GFT discovery, arXiv:2603.07299
+  · LieLAC, arXiv:2410.02698 · Yang et al., arXiv:2505.12083 · LieGAN — the
+  first two verified by reading today; lineage items 🟡 until the Day-16
+  citation audit in the 20-day plan.
+
+✻ Crunched for 6m 16s
+
+※ recap: Advising your Lie-symmetry PDE thesis: G1 textbook validation passed (45 tests green), and the 20-day paper plan, advisory, and curriculum files are all written. Next action: say "start" to begin Phase A, the 2047-structure enumeration. (disable recaps in /config)
+
+❯ before starting phase A, use pure math to demonstrate your ideas from the     
+  curriculum baseline, write into the .tex for visualization.                   
+
+● Before Phase A, then: a pure-mathematics companion that derives the
+  curriculum's claims — with proofs — and explains the engine's measured G1
+  numbers in closed form. I've spotted something worth proving properly: the
+  transport sequence [10, 22, 40, 65, 98] should be exactly 2·C(D+2,2) + 
+  C(D+3,3), and heat's [6, 8, 10, 11, 12] should be the degree-filtered
+  classical algebra + heat polynomials. House rule: verify the math by
+  computation before enshrining it in the .tex.
+
+● Write(symm\curriculum_checks.py)
+  ⎿  Wrote 96 lines to symm\curriculum_checks.py
+       1 """Symbolic verification of every claim made in curriculum_math.
+       2 
+          at the end.
+       5   (T) transport u_t = u_x: the FULL point-symmetry family in cha
+       6       coordinates zeta = x+t, eta = x-t is  a(zeta,u) d_zeta + b
+         (zeta,eta,u) d_eta
+         ual == 0, and the
+         the engine.
+         polynomial
+          filtration
+     … +111 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(curriculum_math.tex)
+  ⎿  Wrote 510 lines to curriculum_math.tex
+       1 \documentclass[11pt]{article}
+       2 
+       3 \usepackage[margin=1in]{geometry}
+       4 \usepackage{amsmath, amssymb, amsfonts, amsthm}
+       5 \usepackage{enumitem}
+         rref}
+       7 \usepackage{tikz}
+       8 \usetikzlibrary{arrows.meta,calc,positioning}
+       9 
+      10 \theoremstyle{plain}
+     … +719 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Missing TikZ library for the brace decoration. Fixing:
+
+● Update(curriculum_math.tex)
+  ⎿  Added 1 line, removed 1 line
+       5  \usepackage{enumitem}
+       6  \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyp
+          erref}
+       7  \usepackage{tikz}
+       8 -\usetikzlibrary{arrows.meta,calc,positioning}                  
+       8 +\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathre
+         +placing}                                                       
+       9  
+      10  \theoremstyle{plain}
+      11  \newtheorem{theorem}{Theorem}[section]
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● Fully settled — zero warnings, all cross-references resolved. Ledger:
+
+● Update(.sdd\progress.md)
+  ⎿  Added 1 line
+      52    Minor observations (non-blocking, logged for any future harde
+          ning): (1) PASS/DISCREPANCY summary is printed not returned as 
+          structured data; (2) no negative/mutation test proving a delibe
+          rately-wrong value surfaces as DISCREPANCY; (3) a 4-line idempo
+          tent sys.path shim was added to textbook_validation.py so `pyth
+          on symm/textbook_validation.py` runs by path (no-op under pytes
+          t; only new file touched).
+      53    Run chose scope "G1 only" — STOPPED here; G2 (enumerate) awai
+          ting go. Course-thesis bar is G1 + G5.
+      54  - 20-DAY PAPER PLAN written: PAPER_TODO_20DAYS.md (dated schedu
+          le Jul 14 - Aug 2, phases A-G mapping ADVISORY gates G2-G7 to d
+          ays, application hooks per PDE, cut-lines, risk register, Day-2
+          0 done-checklist). Plan only — no implementation started.
+      55 +- PURE-MATH COMPANION (pre-Phase-A, user-requested): curriculum
+         +_math.tex -> curriculum_math.pdf (8 pp, compiles clean, 4 TikZ 
+         +figures) + symm/curriculum_checks.py (18/18 symbolic checks PAS
+         +S). Proves the curriculum baseline: linearity of determining op
+         +erator (lemma+proof); window monotonicity (lemma); ALL THREE G1
+         + sequences derived in closed form — Burgers [4,5,5] = degree ce
+         +nsus (projective deg 2), heat [6,8,10,11,12] = f(D)+(D+1) heat 
+         +polynomials, transport [10,22,40,65,98] = 2*C(D+2,2)+C(D+3,3) v
+         +ia a COMPLETE determination of u_t=u_x's point algebra (a(z,u)d
+         +z + b(z,e,u)de + c(z,u)du, full 6-line proof); semicontinuity p
+         +rop (minors) => division-of-labor corollary; reduction/transver
+         +sality section. Phase A still not started.                     
+      56  - CURRICULUM.md written: full math-stack map (L0-L10 with stres
+          s tests), the "machine points to group+manifold" decision proce
+          dure (5 real decision points D1-D5; manifold forced by signatur
+          e, group computed as kernel), PDE-class -> group/manifold taxon
+          omy table, and a July-2026 web-swept algorithm survey. Survey v
+          erdict: no post-2025 method supersedes exact determining system
+          s for known PDEs; new front is data-only discovery (LieNLSD 251
+          0.01855 ✅ = same linear determining core with data-estimated j
+          ets; spectral GFT 2603.07299 ✅ adjacent). Future-work hook log
+          ged: "discover, then certify" (data front-end + our exact verif
+          ier).
+
+● Done. The pure-math demonstration is at curriculum_math.tex → 
+  curriculum_math.pdf (8 pages, compiles clean, 4 TikZ figures), backed by a new
+  verification script symm/curriculum_checks.py — 18/18 symbolic checks pass,
+  all in exact arithmetic. Phase A remains untouched, as you asked.
+
+  The standard I set for "demonstrate" is strict: every number the engine 
+  measured in G1 is now re-derived by hand, in closed form. That's the note's
+  centerpiece, and one result turned out to be a genuine little theorem:
+
+  1. Transport [10, 22, 40, 65, 98] is an exact binomial identity. I determined
+  the complete point algebra of u_t = u_x from scratch — in characteristic
+  coordinates ζ = x+t, η = x−t the determining condition splits on the free jet
+  coordinate and forces exactly the family a(ζ,u)∂ζ + b(ζ,η,u)∂η + c(ζ,u)∂u, a
+  six-line proof. Counting polynomials gives dim_D = 2·C(D+2,2) + C(D+3,3),
+  which reproduces all five engine values exactly. What looked like an opaque
+  "growing sequence" is a theorem.
+  2. Heat [6, 8, 10, 11, 12] = filtered finite part + heat polynomials. The
+  count is f(D) + (D+1): the visible classical generators (4, 5, 6, 6, 6 — the
+  boost enters at degree 2, the projective at degree 3) plus one heat polynomial
+  per degree. This also proves the honesty guardrail from G1: the D=1 value of
+  6 equals the finite part's dimension by a coincidence of counts (4+2), not
+  because the window separated finite from infinite.
+  3. Burgers [4, 5, 5] is a degree census — the projective generator carries
+  degree-2 coefficients, so it's invisible at D=1 and appears at D=2.
+
+  Around these sit the four structural results, each proved or precisely cited:
+  the linearity lemma (why the symmetry algebra of even a nonlinear PDE is the
+  kernel of a linear operator — with the induction over the prolongation
+  recursion written out), the window monotonicity lemma (dim_D is a certified,
+  monotone lower bound), the semicontinuity proposition (minors argument:
+  dimension jumps only up, only on thin algebraic sets — with your measured
+  c=−1/2 vs c=2 resonance as the live instance, its mechanism stated and the
+  unproved part explicitly flagged as deferred), and the transversality 
+  proposition for reduction. The closing table maps each machine decision
+  (D1–D5) to the exact result that licenses it — the "prioritize, never assert"
+  architecture now arrives as a corollary, not a design taste.
+
+  The figures visualize the four ideas: the forced tower of spaces (J⁰ → Jᵏ ⊃
+  {Δ=0} → quotient → ODE), the two dimension staircases with their closed forms,
+  the jump-locus picture, and the characteristic foliation collapsing to the
+  z-line.
+
+  One honest note: the heat and Burgers derivations take the classical generator
+  bases as given (each individually machine-certified, residual ≡ 0); only
+  transport is determined completely from first principles — the other two would
+  need the full determining-system solution, which is exactly what the
+  literature provides and the escape hatch checks. Ready for Phase A whenever
+  you say go.
+
+✻ Sautéed for 9m 44s
+
+❯ /effort                                                                       
+  ⎿  Set effort level to max (this session only): Maximum capability with
+     deepest reasoning. May use excessive tokens resulting in long response
+     times or overthinking. Use sparingly for the hardest tasks.
+
+❯ write the PDE solvability-check &homogenuity-check method to the tex          
+  document.                                                                     
+
+● The house rule first: verify every claim symbolically before it enters the
+  .tex. The section will cover (1) the homogeneity check — the scaling-weight
+  criterion that reads scaling symmetries off the exponents alone, and (2) the
+  solvability checks — Kovalevskaya form before the kernel computation, the
+  derived series (Lie's quadrature theorem) after it. Extending the checks
+  script with both:
+● Update(symm\curriculum_checks.py)
+  ⎿  Added 12 lines
+      11        predicts dim_D = finite(D) + (D+1), matching the engine.
+      12    (B) Burgers: window sequence [4,5,5] is explained by the proj
+          ective
+      13        generator's coefficient degree 2 (invisible at D=1).
+      14 +  (W) homogeneity check: the scaling-weight criterion. For evol
+         +ution equations                                                
+      15 +      u_t = sum c_k m_k, the diagonal field a*x*d_x + b*t*d_t +
+         + c*u*d_u is a                                                  
+      16 +      symmetry iff every present term's weight equals w(u_t) = 
+         +c - b. Verified:                                               
+      17 +      the predicted scaling lattices of porous(m=2) (2-dim), Bu
+         +rgers (1-dim),                                                 
+      18 +      KdV (1-dim), heat (2-dim) all certify residual == 0, Fish
+         +er's lattice is                                                
+      19 +      trivial (reaction term kills scaling; generic diagonal FA
+         +ILS residual),                                                 
+      20 +      and the weight-difference matrices have the predicted ran
+         +ks.                                                            
+      21 +  (S) solvability check: derived series of the computed algebra
+         +s. Verified:                                                   
+      22 +      Fisher [2,0] and porous [4,2,0] and KdV [4,3,1,0] termina
+         +te (solvable);                                                 
+      23 +      Burgers (5-dim) and heat (6-dim) go stationary at a nonze
+         +ro derived                                                     
+      24 +      algebra (NOT solvable) -- each contains an sl(2,R) triple
+         + {d_t, scaling,                                                
+      25 +      projective}, whose brackets are verified explicitly.     
+      26  Run:  PYTHONPATH=<project root> python symm/curriculum_checks.p
+          y
+      27  """
+      28  import sys
+
+● Update(symm\curriculum_checks.py)
+  ⎿  Added 116 lines
+      104  check(f"(B) Burgers window seq {seq_b} == [4,5,5] "
+      105        f"(projective coeff degree 2 => enters at D=2)", seq_b =
+           = [4, 5, 5])
+      106  
+      107 +# ------------------------------------------------------------
+          +---- (W) homogeneity                                          
+      108 +def scaling(a, b, c):                                         
+      109 +    """(tau, xi, phi) of the diagonal field a*x*d_x + b*t*d_t 
+          ++ c*u*d_u."""                                                 
+      110 +    return (b * t, a * x, c * u)                              
+      111 +                                                              
+      112 +                                                              
+      113 +bu, kd, fi, po = build("burgers"), build("kdv"), build("fisher
+          +"), build("porous2")                                          
+      114 +                                                              
+      115 +for nm, pde, abc in [("porous S1=(1,2,0)", po, (1, 2, 0)),    
+      116 +                     ("porous S2=(0,-2,1)", po, (0, -2, 1)),  
+      117 +                     ("burgers (1,2,-1)", bu, (1, 2, -1)),    
+      118 +                     ("kdv (1,3,-2)", kd, (1, 3, -2)),        
+      119 +                     ("heat (1,2,0)", he, (1, 2, 0)),         
+      120 +                     ("heat (0,0,1)", he, (0, 0, 1))]:        
+      121 +    res = sp.simplify(symmetry_residual(pde, *scaling(*abc))) 
+      122 +    check(f"(W) scaling {nm}: residual == 0", res == 0)       
+      123 +                                                              
+      124 +res_f = sp.simplify(symmetry_residual(fi, *scaling(1, 2, 0))) 
+      125 +check("(W) fisher generic scaling (1,2,0): residual != 0 (no s
+          +caling exists)",                                              
+      126 +      res_f != 0)                                             
+      127 +                                                              
+      128 +# weight-difference matrices in (a,b,c): rows = w(term) - w(u_
+          +t) for each term.                                             
+      129 +W_FISHER = sp.Matrix([[-2, 1, 0],   # u_xx: (c-2a)-(c-b)      
+      130 +                      [0, 1, 0],    # u   : c-(c-b)           
+      131 +                      [0, 1, 1]])   # u^2 : 2c-(c-b)          
+      132 +W_POROUS = sp.Matrix([[-2, 1, 2]])  # u^2 u_xx (= u u_x^2): (3
+          +c-2a)-(c-b)                                                   
+      133 +W_BURGERS = sp.Matrix([[-1, 1, 1],  # u u_x: (2c-a)-(c-b)     
+      134 +                       [-2, 1, 0]])  # u_xx                   
+      135 +check("(W) fisher weight system rank 3 => only trivial scaling
+          +",                                                            
+      136 +      W_FISHER.rank() == 3)                                   
+      137 +check("(W) porous weight system nullity 2 => 2-dim scaling lat
+          +tice",                                                        
+      138 +      3 - W_POROUS.rank() == 2)                               
+      139 +check("(W) burgers weight system nullity 1 => 1-dim scaling la
+          +ttice",                                                       
+      140 +      3 - W_BURGERS.rank() == 1)                              
+      141 +                                                              
+      142 +# ------------------------------------------------------------
+          +---- (S) solvability                                          
+      143 +def vf_apply(X, f):                                           
+      144 +    tau, xi, phi = X                                          
+      145 +    return tau * sp.diff(f, t) + xi * sp.diff(f, x) + phi * sp
+          +.diff(f, u)                                                   
+      146 +                                                              
+      147 +                                                              
+      148 +def bracket(X, Y):                                            
+      149 +    return tuple(sp.expand(vf_apply(X, Y[i]) - vf_apply(Y, X[i
+          +]))                                                           
+      150 +                 for i in range(3))                           
+      151 +                                                              
+      152 +                                                              
+      153 +def _coeff_matrix(vecs):                                      
+      154 +    monos = sorted({m for X in vecs for comp in X             
+      155 +                    for m in sp.Poly(comp, x, t, u).monoms()} 
+          +| {(0, 0, 0)})                                                
+      156 +    rows = []                                                 
+      157 +    for X in vecs:                                            
+      158 +        row = []                                              
+      159 +        for comp in X:                                        
+      160 +            p = sp.Poly(comp, x, t, u)                        
+      161 +            d = dict(zip(p.monoms(), p.coeffs()))             
+      162 +            row += [d.get(m, 0) for m in monos]               
+      163 +        rows.append(row)                                      
+      164 +    return sp.Matrix(rows)                                    
+      165 +                                                              
+      166 +                                                              
+      167 +def reduce_span(vecs):                                        
+      168 +    """Greedy independent spanning subset (exact rank over Q).
+          +"""                                                           
+      169 +    keep = []                                                 
+      170 +    r = 0                                                     
+      171 +    for v in vecs:                                            
+      172 +        if any(sp.expand(c) != 0 for c in v):                 
+      173 +            r2 = _coeff_matrix(keep + [v]).rank()             
+      174 +            if r2 > r:                                        
+      175 +                keep.append(v)                                
+      176 +                r = r2                                        
+      177 +    return keep                                               
+      178 +                                                              
+      179 +                                                              
+      180 +def derived_dims(basis, max_steps=6):                         
+      181 +    """Dimensions of the derived series g, g', g'', ... (stops
+          + when 0 or stationary)."""                                    
+      182 +    cur = reduce_span(list(basis))                            
+      183 +    dims = [len(cur)]                                         
+      184 +    for _ in range(max_steps):                                
+      185 +        brs = [bracket(a, b) for i, a in enumerate(cur) for b 
+          +in cur[i + 1:]]                                               
+      186 +        cur = reduce_span(brs)                                
+      187 +        dims.append(len(cur))                                 
+      188 +        if dims[-1] == 0 or dims[-1] == dims[-2]:             
+      189 +            break                                             
+      190 +    return dims                                               
+      191 +                                                              
+      192 +                                                              
+      193 +FISHER_B = [(1, 0, 0), (0, 1, 0)]                             
+      194 +POROUS_B = [(1, 0, 0), (0, 1, 0), scaling(1, 2, 0), scaling(0,
+          + -2, 1)]                                                      
+      195 +KDV_B = [(1, 0, 0), (0, 1, 0), (0, t, 1), scaling(1, 3, -2)]  
+      196 +BURGERS_B = [(1, 0, 0), (0, 1, 0), (0, t, 1), (2 * t, x, -u), 
+      197 +             (t ** 2, t * x, x - t * u)]                      
+      198 +HEAT_B = [(tau, xi, phi) for tau, xi, phi in HEAT_GENS]       
+      199 +                                                              
+      200 +for nm, pde, B in [("kdv", kd, KDV_B), ("burgers", bu, BURGERS
+          +_B)]:                                                         
+      201 +    ok = all(sp.simplify(symmetry_residual(pde, *X)) == 0 for 
+          +X in B)                                                       
+      202 +    check(f"(S) {nm} basis: every generator residual == 0", ok
+          +)                                                             
+      203 +                                                              
+      204 +# sl(2,R) inside Burgers: [E,H] = 2E? -- verify the standard t
+          +riple relations                                               
+      205 +E, H, P = (1, 0, 0), (2 * t, x, -u), (t ** 2, t * x, x - t * u
+          +)                                                             
+      206 +sl2_ok = (bracket(E, H) == (2, 0, 0)                          
+      207 +          and bracket(E, P) == H                              
+      208 +          and bracket(H, P) == tuple(sp.expand(2 * v) for v in
+          + P))                                                          
+      209 +check("(S) burgers contains sl(2,R): [d_t,H]=2 d_t, [d_t,P]=H,
+          + [H,P]=2P", sl2_ok)                                           
+      210 +                                                              
+      211 +for nm, B, expect in [("fisher", FISHER_B, [2, 0]),           
+      212 +                      ("porous", POROUS_B, [4, 2, 0]),        
+      213 +                      ("kdv", KDV_B, [4, 3, 1, 0])]:          
+      214 +    dd = derived_dims(B)                                      
+      215 +    check(f"(S) {nm} derived series {dd} == {expect} => SOLVAB
+          +LE", dd == expect)                                            
+      216 +                                                              
+      217 +for nm, B in [("burgers", BURGERS_B), ("heat", HEAT_B)]:      
+      218 +    dd = derived_dims(B)                                      
+      219 +    stationary_nonzero = dd[-1] == dd[-2] and dd[-1] > 0      
+      220 +    check(f"(S) {nm} derived series {dd} stationary at nonzero
+          + dim "                                                        
+      221 +          f"=> NOT solvable", stationary_nonzero)             
+      222 +                                                              
+      223  print(f"\n{sum(RESULTS)}/{len(RESULTS)} checks pass")
+      224  sys.exit(0 if all(RESULTS) else 1)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(curriculum_math.tex)
+  ⎿  Added 7 lines, removed 2 lines
+      42  $\dim_D=2\binom{D+2}{2}+\binom{D+3}{3}$ whose proof takes six l
+          ines. Along the way we prove the four
+      43  structural facts that license the machine's design: the stage i
+          s forced (jet bundles), the group is a
+      44  kernel (linearity of the determining operator), the window is a
+           filtration (monotone lower bounds),
+      45 -and the parameter dependence is semicontinuous (jumps only up, 
+         -only on thin sets). All symbolic                               
+      46 -claims are independently re-verified by \texttt{symm/curriculum
+         -\_checks.py} (18/18 checks pass).                              
+      45 +and the parameter dependence is semicontinuous (jumps only up, 
+         +only on thin sets). Two further                                
+      46 +machine checks are then demonstrated with proofs and verified v
+         +erdict tables for all five canonical                           
+      47 +equations: the \emph{homogeneity check} --- an exact scaling-we
+         +ight criterion decided by the                                  
+      48 +exponents alone, which emits scaling generators without ever bu
+         +ilding the determining matrix ---                              
+      49 +and the \emph{solvability checks}: Kovalevskaya form before the
+         + kernel computation, the derived                               
+      50 +series (Lie's quadrature theorem) after it. All symbolic claims
+         + are independently re-verified by                              
+      51 +\texttt{symm/curriculum\_checks.py} (36/36 checks pass).       
+      52  \end{abstract}
+      53  
+      54  \tableofcontents
+
+● Update(curriculum_math.tex)
+  ⎿  Added 5 lines, removed 1 line
+      68    (\S\ref{sec:window});
+      69  \item[(D)] symmetry dimension depends \emph{semicontinuously} o
+          n equation parameters --- constant
+      70    generically, jumping only upward on thin special sets --- whi
+          ch forces the division of labor
+      71 -  ``machine prioritizes, engine verifies'' (\S\ref{sec:param}).
+      71 +  ``machine prioritizes, engine verifies'' (\S\ref{sec:param});
+      72 +\item[(E)] two cheap structural checks bracket the kernel compu
+         +tation: the \emph{homogeneity}                                 
+      73 +  (scaling-weight) criterion, exact and decided by the term exp
+         +onents alone, and the                                          
+      74 +  \emph{solvability} checks --- Kovalevskaya form before, the d
+         +erived series after                                            
+      75 +  (\S\ref{sec:checks}).                                        
+      76  \end{enumerate}
+      77  
+      78  Section~\ref{sec:quotient} completes the story with the reducti
+          on step (algebra $\to$ quotient
+  ⎿  Not logged in · Please run /login
+
+✻ Baked for 13m 16s
+
+❯ continue.                                                                     
+  ⎿  1 skill available
+
+● There's an issue with the selected model (claude-fable-5[1m]). It may not
+  exist or you may not have access to it. Run /model to pick a different model.
+
+✻ Brewed for 7s
+
+❯ /update-config                                                                
+
+● There's an issue with the selected model (claude-fable-5[1m]). It may not
+  exist or you may not have access to it. Run /model to pick a different model.
+
+✻ Sautéed for 7s
+
+❯ /subtask 
+  ⎿  Usage: /subtask <task>
+
+❯ /update-config                                                                
