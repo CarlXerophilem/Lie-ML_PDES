@@ -2,13 +2,9 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb}
-\usepackage{booktabs,tabularx,tikz}
-\usepackage{listings}
+\usepackage{booktabs,tabularx,tikz,placeins}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage[hidelinks]{hyperref}
-\lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,columns=fullflexible,
-  keepspaces=true,showstringspaces=false,frame=single,xleftmargin=1em,
-  xrightmargin=1em}
 \newcommand{\E}{\mathcal E}
 \newcommand{\pr}{\operatorname{pr}}
 \title{Lie Symmetry Reduction near an Exceptional Transport Exponent:\\
@@ -152,9 +148,17 @@ Reserve $\delta=m-3$ for model perturbation: Kovalev's group parameter $a$
 and perturbation parameter $\epsilon$ correspond to our $\varepsilon$ and
 $\delta$, respectively \cite{kovalev}. Model parameters remain fixed under
 $S_\varepsilon$; transformations changing them require an extended action.
-For dimensionless $\phi_t>0$,
+Choose scales $T_*,S_*,U_*>0$ and write
+$t_{\rm phys}=T_*\bar t$, $s_{\rm phys}=S_*\bar s$, and
+$\phi_{\rm phys}=U_*T_*\bar\phi$.  Then
+$v=\bar\phi_{\bar t}=(\phi_{\rm phys})_{t_{\rm phys}}/U_*>0$.
+For notational economy, the near-cubic calculation below drops bars, so its
+displayed $\phi_t$ means $v$; consequently every logarithm has the
+dimensionless argument $v$.  The resulting $(g,\kappa)$ family is a
+fixed-coefficient dimensionless normal form, not a claim that a dimensional
+transport coefficient has $m$-independent units.  Thus
 \begin{equation}
-\phi_t^{2+\delta}=\phi_t^2\bigl(1+\delta\log\phi_t+O(\delta^2)\bigr).
+v^{2+\delta}=v^2\bigl(1+\delta\log v+O(\delta^2)\bigr).
 \end{equation}
 Expand both the equation and generator smoothly,
 $\E_\delta=\E_0+\delta\E_1+O(\delta^2)$ and
@@ -350,18 +354,25 @@ imposed; they are not discarded. The data status is
 data. Differential completion and maximal classification retain their
 separate, possibly incomplete statuses.
 
-The executable entry points are \texttt{PDEProblem},
-\texttt{ReductionChart} and \texttt{reduce\_in\_chart} in
-\texttt{symm.generic}. The source-specific run is
-\begin{lstlisting}[language=Python]
-from symm.generic import reduce_in_chart
-from symm.generic.sve_reduction import sve_scaling_case
-problem, generator, chart, M = sve_scaling_case(m=3)
-outcome = reduce_in_chart(
-    problem, generator, chart, symmetry_multipliers=M)
-print(outcome.certificate.status)
-print(outcome.reduced_system.equations)
-\end{lstlisting}
+\noindent\textbf{Algorithm 1 (certificate-gated chart reduction).}
+\emph{Input:} a branch-qualified problem $\mathcal P_\lambda$, a supplied
+generator $X$, chart $(I,R,H,C,b)$, and multiplier $M$.
+\emph{Output:} a reduced system with a local certificate, or an explicit
+failed/unsupported status.
+\begin{enumerate}
+\item Check the chart inverses, $XI=0$, $XR\ne0$, branch predicates,
+      $\det D_x(I,R)\ne0$, and $\det C\ne0$; retain each division guard.
+\item Verify $\pr^{(n)}X(\Delta)=M\Delta$ and $Q=0$ under reconstruction.
+      Reject an identity failure without inferring that no symmetry exists.
+\item Generate jet pullbacks by \eqref{eq:pullback-recursion}; substitute
+      $x=H(z,\rho)$ and test \eqref{eq:chart-pullback} with $a_A\ne0$.
+      Reject residual orbit-coordinate dependence.
+\item Pull back data and sign conditions separately. Record unresolved
+      orbit-dependent data as \texttt{pulled-back-only}; return the reduced
+      equations together with the verified identities and remaining guards.
+\end{enumerate}
+The implementation in \texttt{symm.generic} follows this contract. It does
+not solve the unrestricted determining system.
 For this example, $\kappa=A_g\xi$ is fixed, $\beta_{\rm tr}=m\kappa$,
 $I=st^2$, $R=t$, $H=(\rho,z/\rho^2)$, $C=1$, $b=0$,
 $M=-1$ and $a_1=1/t$. At $m=3$ the routine reproduces
@@ -438,107 +449,44 @@ equation itself changes in time, recompute the determining system for that
 coefficient function. Numerical near-symmetry discovered by SVD is useful for
 diagnosis, but is not an exact classification certificate \cite{approxalg}.
 
-\subsection{Reproducible SymPy workflow on the SVE branch}
-The following compact jet-space implementation uses SymPy's exact
-differentiation, polynomial collection, and matrix nullspace operations. It
-spells out the prolongation instead of relying on a black-box Lie solver;
-the documented SymPy PDE interface includes utilities such as separation,
-which are different from a general PDE symmetry classifier \cite{sympydocs}.
-The code below computes candidates in a declared polynomial ansatz for the
-regular $m=3$ branch. It does not compute the generic-$m$ algebra: that branch
-needs a separate determining-system run and a branch-aware split of the
-noninteger powers on $phi_t>0$. Increase the ansatz only after examining the
-determining system; completeness requires solving that full linear
-differential system, including its arbitrary-function branches, not merely
-enlarging a finite polynomial trial space.
+\subsection{Reproducible symbolic workflow on the SVE branch}
+SymPy supplies exact differentiation, polynomial collection, and matrix
+nullspaces, not a general completeness oracle for PDE symmetries
+\cite{sympydocs}. The following finite search applies only on the regular
+$m=3$ branch; the generic-$m$ determining system and its noninteger powers
+on $v>0$ require a separate, branch-aware analysis.
 
-\begin{lstlisting}[language=Python]
-import sympy as sp
+\noindent\textbf{Algorithm 2 (finite point-generator search; candidate status).}
+\emph{Input:} $\E_3$ from \eqref{eq:sve}, the branch $\phi_s>0$, jet order
+$n=3$, and total-degree bound $d=2$ for each infinitesimal in
+$(t,s,\phi)$. \emph{Output:} verified candidate generators within that
+ansatz, never a maximality certificate.
+\begin{enumerate}
+\item Introduce independent jet coordinates $\phi_{t^is^j}$ through order
+      $n+1$ and construct $D_t,D_s$ by the jet chain rule. Form $\E_3$
+      with $\beta_{\rm tr}=3\kappa$.
+\item For symbolic $\tau,\xi,\eta$, construct every prolongation coefficient
+      recursively by
+      $\eta_{J+e_i}=D_i\eta_J-\phi_{J+e_t}D_i\tau
+      -\phi_{J+e_s}D_i\xi$.
+\item Solve $\E_3=0$ for the leading jet $\phi_{ttt}$ only where its
+      coefficient is nonzero. Record the solved-jet rule and all cleared
+      denominator guards; exit to a separate singular branch otherwise.
+\item Expand each of $\tau,\xi,\eta$ over monomials of total degree at
+      most $d$ with independent unknown coefficients. Reduce
+      $\pr^{(3)}X(\E_3)$ by the solved-jet rule, split its numerator over
+      the remaining free jets and base coordinates, and solve the exact
+      homogeneous coefficient system.
+\item Reinsert each nullspace generator into the prolonged equation for an
+      exact zero test. Separately check $X_5$, its invariant $st^2$,
+      and the lifting identity \eqref{eq:reduction}; retain failures and
+      regularity guards in the record.
+\end{enumerate}
 
-t, s, m = sp.symbols("t s m", real=True)
-g, Ag, xi_sed = sp.symbols("g Ag xi_sed", positive=True)
-R = 3                         # order of the SVE master PDE
-jets = {(i, j): sp.Symbol(f"u{i}{j}", real=True)
-        for i in range(R + 2) for j in range(R + 2 - i)}
-u = jets[(0, 0)]
-
-def D(expr, axis):            # axis 0=t, 1=s; total derivative
-    out = sp.diff(expr, (t, s)[axis])
-    for (i, j), uj in jets.items():
-        if i + j <= R:
-            nxt = (i + (axis == 0), j + (axis == 1))
-            out += sp.diff(expr, uj) * jets[nxt]
-    return sp.expand(out)
-
-Dt, Ds = lambda f: D(f, 0), lambda f: D(f, 1)
-us, ut = jets[(0, 1)], jets[(1, 0)]
-utt, uss, uts = jets[(2, 0)], jets[(0, 2)], jets[(1, 1)]
-beta = m * Ag * xi_sed
-E = Dt(us*utt - g*uss/us**2) - g*beta*Ds(ut**(m-1)*uts/us)
-E3 = sp.cancel(E.subs(m, 3))
-
-def prolong(tau, xi, eta, r=R):
-    e = {(0, 0): eta}
-    for n in range(1, r + 1):
-        for i in range(n + 1):
-            j = n - i
-            if i: parent, axis = (i - 1, j), 0
-            else: parent, axis = (i, j - 1), 1
-            a, b = parent
-            e[(i, j)] = sp.expand(
-                D(e[parent], axis)
-                - jets[(a + 1, b)] * D(tau, axis)
-                - jets[(a, b + 1)] * D(xi, axis))
-    return e
-
-def prX(F, tau, xi, eta, r=R):
-    e = prolong(tau, xi, eta, r)
-    ans = tau*sp.diff(F, t) + xi*sp.diff(F, s) + eta*sp.diff(F, u)
-    for (i, j), ej in e.items():
-        if i + j and (i + j) <= r:
-            ans += ej * sp.diff(F, jets[(i, j)])
-    return sp.expand(ans)
-
-# Candidate search only: total-degree <= 2 in (t,s,u).
-mon = [t**a*s**b*u**c for a in range(3) for b in range(3-a)
-       for c in range(3-a-b)]
-def ansatz(prefix):
-    cs = sp.symbols(f"{prefix}0:{len(mon)}")
-    return sum(c*p for c, p in zip(cs, mon)), cs
-
-tau, c_tau = ansatz("ct")
-xi, c_xi = ansatz("cs")
-eta, c_eta = ansatz("cu")
-cvars = c_tau + c_xi + c_eta
-lead = jets[(3, 0)]       # regular branch: solve E3 for phi_ttt
-lead_rule = sp.solve(E3, lead, dict=True)[0]
-determining = sp.cancel(prX(E3, tau, xi, eta).subs(lead_rule))
-num = sp.together(determining).as_numer_denom()[0]
-free_jets = [jets[J] for J in jets
-             if 0 < sum(J) <= R and J != (3, 0)]
-P = sp.Poly(num, *(free_jets + [t, s, u]), domain="EX")
-eqs = P.coeffs()                       # split all free-jet monomials
-M, rhs = sp.linear_eq_to_matrix(eqs, cvars)
-basis = M.nullspace()                  # exact candidate generators
-generators = []
-for v in basis:
-    gen = tuple(sp.expand(f.subs(dict(zip(cvars, v))))
-                for f in (tau, xi, eta))
-    test = sp.cancel(prX(E3, *gen).subs(lead_rule))
-    assert sp.simplify(test) == 0       # verify each candidate on E3=0
-    generators.append(gen)
-check_x5 = sp.cancel(prX(E3, t, -2*s, 0).subs(lead_rule))
-assert sp.simplify(check_x5) == 0       # independent m=3 anchor check
-\end{lstlisting}
-
-Read the steps as an executable protocol. First form the PDE using independent
-jet symbols, not unevaluated derivatives of an unknown function. The total
-derivative operator raises each jet index and the recursion constructs
-$\eta_J=D_i\eta_{J-e_i}-u_{J-e_i,t}D_i\tau-u_{J-e_i,s}D_i\xi$.
-Second, solve the regular PDE branch for a chosen leading jet and substitute
-it into $\operatorname{pr}^{(3)}X(E)$. For the SVE equation the leading
+The jet coordinates are formal independent variables, not sampled derivative
+values. For the SVE equation the leading
 coefficient is nonzero on $\phi_s>0$; record that condition and analyze
-singular branches separately. Third, clear only denominators known nonzero on
+singular branches separately. Clear only denominators known nonzero on
 the branch, split with respect to all remaining jets (and then the base
 coordinates), and solve the resulting homogeneous linear system. The matrix
 nullspace returns a basis within the stated ansatz. For a system, repeat the
@@ -546,12 +494,12 @@ criterion for every $E_A$ and eliminate a compatible set of leading jets;
 check differential consequences whenever the system is not in a regular
 solved form.
 
-For generic symbolic $m$, the factors $\phi_t^{m+k}$ are not ordinary
+For generic symbolic $m$, the factors $v^{m+k}$ are not ordinary
 polynomial monomials. Split them as distinct smooth functions on the chosen
-$\phi_t>0$ branch, or analyze rational/integer $m$ strata separately; then
+$v>0$ branch, or analyze rational/integer $m$ strata separately; then
 solve $m=3$ again without first dividing by $m-3$. For
-$m=3+\delta$, expand powers as
-$\phi_t^{2+\delta}=\phi_t^2(1+\delta\log\phi_t)+O(\delta^2)$ and retain the
+$m=3+\delta$, expand the dimensionless velocity as
+$v^{2+\delta}=v^2(1+\delta\log v)+O(\delta^2)$ and retain the
 logarithmic basis element in the split. To certify maximality, replace the
 finite polynomial ansatz by unknown functions $\tau(t,s,\phi)$,
 $\xi(t,s,\phi)$, and $\eta(t,s,\phi)$, integrate the determining PDEs (or
@@ -631,20 +579,83 @@ This identity supplies a symbolic and numerical consistency check before
 approximating $F$. It describes an invariant solution family, not arbitrary
 initial data. Singular points of the reduced equation require separate analysis.
 
-\subsection{Continuation near the exceptional exponent}
-Solve the first-order symmetry condition for $Y_0=X_5$ before extending this
-ansatz to $\delta\ne0$. If a deformation exists, construct its invariants
-to the same order and substitute them into the perturbed equation. If it
-does not, use a surviving subgroup or retain the additional independent
-variable. In particular, the unrestricted correction
-$\phi=F(st^2)+\delta\psi(t,s)+O(\delta^2)$ satisfies
+\subsection{Scoped near-cubic scaling obstruction}
+\label{sec:p0-obstruction}
+The following P0 calculation is a reproducible obstruction within one
+declared class, not a replacement for the published unrestricted
+classification.  On the regular nondimensional branch
+$t,s,\phi_s,v>0$, set $\kappa=A_g\xi>0$ fixed,
+$\beta_{\rm tr}=m\kappa$, $m=3+\delta$, and
+\[
+H=\frac{v^2\phi_{ts}}{\phi_s}.
+\]
+Expanding both the exponent and the induced coefficient change gives
+\begin{align}
+\E_{3+\delta}&=\E_0+\delta\E_1+O(\delta^2),\\
+\E_0&=D_t\!\left(\phi_s\phi_{tt}
+      -g\frac{\phi_{ss}}{\phi_s^2}\right)-3g\kappa D_s(H),\\
+\E_1&=-g\kappa D_s\!\left(H[1+3\log v]\right).
+\label{eq:p0-expansion}
+\end{align}
+The $1$ in \eqref{eq:p0-expansion} is essential: it is the contribution from
+$\beta_{\rm tr}=(3+\delta)\kappa$, not from the exponent alone.
+
+For a diagonal scaling
+\[
+X=a\,t\partial_t+b\,s\partial_s+c\,\phi\partial_\phi,
+\]
+comparison of the two terms inside the first $D_t$ and then of the two
+outer terms derives
 \begin{equation}
-D_\phi\E_0[F]\,\psi+\E_1[F]=0,
+3c-b-2a=0,\qquad (m-3)(c-a)=0.
+\label{eq:p0-scaling-conditions}
 \end{equation}
-with $D_\phi\E_0$ the linearization in the field. This is generally a PDE;
-writing $\psi=F_1(\sigma)$ without checking closure would impose an
-unsupported reduction. Truncation accuracy is local and must be checked
-uniformly on the chosen domain.
+This derivation does not assume a polynomial ansatz for the PDE or its
+solutions.  Substituting a smooth deformation of the exceptional generator,
+\[
+a=1+\delta a_1,\qquad b=-2+\delta b_1,\qquad c=\delta c_1,
+\]
+the first condition gives $-2a_1-b_1+3c_1=0$, whereas the second becomes
+\[
+(m-3)(c-a)=-\delta+O(\delta^2).
+\]
+Its first-order coefficient is therefore $-1$, independently of
+$a_1,b_1,c_1$.  No generator in this diagonal-scaling class can continue
+$X_5$ smoothly from $m=3$.
+
+This result was also checked without using the weight comparison.  Direct
+third-jet prolongation verifies
+\[
+\pr^{(3)}X_5(\E_0)=-\E_0,\qquad
+\pr^{(3)}X_5(\E_1)+\E_1=3g\kappa D_s(H),
+\]
+and the first-order prolonged residual after imposing the first condition in
+\eqref{eq:p0-scaling-conditions} agrees with the nonzero defect above.  The
+certificate records the source and manuscript hashes, the nondimensional
+unit convention, every denominator/logarithm guard, multiplier convention,
+and a two-sided numerical $\delta$ check; the numerical check is secondary
+to the exact coefficient calculation.
+
+There is also a conditional consequence of the published generic list
+\cite{ap}.  If that list is exhaustive and a generic generator family has
+coefficientwise limits in the displayed $(t,s,\phi)$ chart, its only
+generic dilation direction is
+$X_4=t\partial_t+s\partial_s+\phi\partial_\phi$.  A finite multiple of
+$X_4$ cannot simultaneously approach the $t$ coefficient $1$ and the $s$
+coefficient $-2$ of $X_5$; translations do not alter these linear
+coefficients.  This is source-conditioned, excludes divergent rebasing and
+parameter-changing equivalence actions, and is not a new point-symmetry
+classification theorem.
+
+The obstruction does not rule out an unrestricted $Y_1$, nonclassical or
+generalized symmetries, or another reduction.  In particular, it forbids
+assuming $\psi=F_1(st^2)$ merely by continuity.  The next analytic gate is
+to derive and verify whether the linear response PDE for
+$\phi=F(st^2)+\delta\psi(t,s)+O(\delta^2)$ closes in
+$r=\log t$, $z=st^2$, for example through
+$\psi=A(z)+rG(z)$, before considering a learned response.  P0 contains no
+neural training, solution-existence result, error bound, or acceleration
+claim.
 
 \subsection{Time-dependent coefficient perturbations}
 Keep two perturbations separate. The primary continuation is the constant
@@ -771,6 +782,24 @@ Compare error versus computational budget rather than assume that fewer
 coordinates guarantee faster training.
 
 \section{Implemented three-layer baseline and fused prototype}
+\noindent\textbf{Evidence and metric convention.}
+The reported relative $L^2$ error is
+$\|\widehat y-y_{\rm ref}\|_{\ell^2}/\|y_{\rm ref}\|_{\ell^2}$;
+``maximum'' errors and residuals are discrete maxima, not supremum norms or
+error bounds. Logistic and Duffing use 1001-point evaluation grids, denser
+than their respective 100 and 128 training collocation points. The SVE
+profile evaluations use 1001 cell midpoints in $[1,1.5]$, distinct from
+the fixed-IVP prototype's 128 training points and the parameter-family
+study's 64 collocation points per training parameter; direct-PDE checks use
+a separate $11\times11$
+$(t,\sigma)$ grid with $t\in[1,1.25]$. A reported seed median of maxima
+is the median of three run-wise maxima, not a maximum over all seeds.
+DOP853/Radau agreement tests numerical consistency, not the true error of
+either solver. The JSON/CSV records retain all declared seeds and statuses;
+the small seed counts do not support population-level confidence intervals.
+The following ODE literature baselines are not SVE experiments and are not
+pooled into an architecture ranking.
+
 \subsection{Reported ML baselines kept outside the Lie pipeline}
 The ML-only executable imports no Lie-reduction code.  Its first experiment is
 a bounded fixed-IVP reproduction of the Duffing comparison in the Taylor-model
@@ -800,17 +829,33 @@ short-time advantage and long-time degradation, not the paper's full
 parameter-family solution map.}
 \label{tab:duffing}
 \end{table}
+\FloatBarrier
+In this fixed IVP, TM-PINN beats vanilla in all three short-time seeds but
+is worse in all three long-time seeds. At $T=3$ its $L^2$ error spans
+$0.08678$ to $8.894$; the median alone conceals this instability. The
+median CPU training times at $T=1$ are approximately $3.33$, $6.83$, and
+$5.17$ s for vanilla, higher-order, and TM-PINN, respectively. These are
+single-machine wall times, not matched-accuracy costs. The experiment does
+not reproduce the source paper's full parameter-family task or establish a
+method ordering beyond these horizons and seeds.
 
 The second experiment follows the 2026 PINN--PIKAN logistic benchmark
 \cite{pikan} with 100 uniform points, Adam step size $0.01$, 10000 iterations
 and ten seeds. The MLP has 121 parameters; the PIKAN has 112 trainable
 parameters after unused symbolic affine parameters are frozen. PIKAN's
 relative-$L^2$ median/mean are $8.580\times10^{-5}/1.148\times10^{-3}$, while the
-MLP values are $9.740\times10^{-1}/6.895\times10^{-1}$. Thus the reported direction
-is reproduced, but the numerical values are not: several MLP seeds converge
-to low-residual wrong branches. Median CPU training times are 63.71 s and
-7.24 s, respectively. PirateNet \cite{piratenet} remains a literature
-comparator because its JAX/Fourier/causal-training protocol was not reproduced.
+MLP values are $9.740\times10^{-1}/6.895\times10^{-1}$. The seed ranges
+overlap: $[2.36\times10^{-5},7.96\times10^{-3}]$ for PIKAN and
+$[1.29\times10^{-3},9.98\times10^{-1}]$ for MLP. Thus this local PyTorch
+implementation reproduces the reported \emph{median direction}, not the
+paper's numerical values or a uniform architecture advantage. Several MLP
+seeds have small sampled training loss but large error against the unique
+logistic IVP solution; they are erroneous approximants, not alternative exact
+solution branches. Median CPU training times are 63.71 s for PIKAN versus
+7.24 s for MLP, and the corresponding 1001-point solution-plus-derivative
+evaluation times are about 0.011 and 0.00044 s. PirateNet \cite{piratenet}
+remains a literature comparator because its JAX/Fourier/causal-training
+protocol was not reproduced.
 
 \subsection{Pure Lie baseline}
 The Lie-only executable imports no neural library. For the printed master
@@ -854,12 +899,21 @@ are therefore retained. Direct and lifted residuals agree to about $10^{-14}$.}
 \label{tab:fusion}
 \end{table}
 
-The $P_2$ correction has the smallest profile error, whereas the $P_4$
-correction has the smallest residual. Fine DOP853 takes about 0.0034 s for this
-single IVP, versus 3.6--4.2 s training per neural seed. The prototype therefore
-does not establish an ML speedup. Cubic PIKAN is not transferred to this
-third-order residual because its third-derivative smoothness has not passed a
-separate gate.
+The $P_2$ correction has the smallest profile error \emph{among these neural
+methods}, whereas the $P_4$ correction has the smallest residual. In the
+table, raw and normalized residuals are separate 1001-point reduced-ODE
+maxima; the original-$\E_3$ column is a maximum on the $11\times11$
+reconstruction grid, so the columns are not pointwise paired. Direct and
+lifted PDE residuals agree within $1.8\times10^{-14}$ across the nine runs;
+that validates the algebraic lifting on sampled points, not solution accuracy.
+The unperturbed exact profile is a separate control; the $\eta_{\rm ic}=0.01$
+reference is the perturbed IVP. Its DOP853/Radau difference is
+$3.281\times10^{-13}$ on the comparison grid. Fine DOP853 takes about
+$0.0034$ s for this single IVP, versus $3.6$--$4.2$ s training per neural
+seed. No matched-accuracy speedup is established, and a direct full-PDE
+PINN or symmetry-loss ablation has not yet been run on the same SVE data.
+Cubic PIKAN is not transferred to this third-order residual because its
+third-derivative smoothness has not passed a separate gate.
 
 \subsection{Stage goal: a data-compatible parameter-family certificate}
 The bounded v0.2 goal is not the unresolved generic-$m$ classification. It is
@@ -908,7 +962,8 @@ and held-out parameter sets are respectively
 \end{aligned}
 \]
 They are disjoint, and every run retains seeds $0,1,2$. All eleven numerical
-references are sampled regular and DOP853/Radau differ by at most
+references pass the regularity guard on a 1001-point grid and DOP853/Radau
+differ by at most
 $3.312\times10^{-13}$. All twelve held-out evaluations complete; their
 maximum profile errors range from $2.636\times10^{-5}$ to
 $1.670\times10^{-4}$, compared with about $2.05\times10^{-2}$ for $P_2$ and
@@ -918,16 +973,27 @@ $1.616\times10^{-14}$.
 
 Median training, DOP853-query, and neural-query times are respectively
 $4.625$ s, $0.00326$ s, and $0.00262$ s. Their measured arithmetic break-even
-is about 7170 repeated queries, before deployment and uncertainty costs.
+is about 7170 repeated queries, computed as
+$\lceil4.6254781/(0.0032609-0.00261575)\rceil$ from these unreplicated timing
+summaries. The neural ``query'' evaluates $F,F',F''$ and a third-order
+residual on a 1001-point grid; the numerical query integrates the IVP, so
+their online workloads and accuracy are not yet matched. Deployment,
+reference generation, training-data preparation, uncertainty, and repeated
+wall-time variance are also unpriced.
 Consequently this experiment supports held-out interpolation beyond finite
 Taylor truncations on the declared regular family, but still does not prove an
-ML speedup, an interval error bound, or a solution on a singular branch.
+ML speedup, a uniform-in-parameter error bound, an interval error bound, or
+a solution on a singular branch. The sample margins do not prove regularity
+between sampled points or for unseen parameter values outside the split.
 
 \subsection{Additional ML sockets}
-The primary socket is the parameter-conditioned reduced-profile correction
-in \eqref{eq:neural}; condition it on $\delta$ or coefficients of a prescribed
-$q(t)$ when testing exponent or time-dependent forcing perturbations. If exact
-reduction fails, finite orbit augmentation or a Lie-derivative loss is a
+The current socket is the fixed-$m=3$ initial-curvature-conditioned
+reduced-profile correction in \eqref{eq:neural}. Conditioning on
+$\delta=m-3$ requires a new certified reduction or a verified response PDE;
+the scoped obstruction in Section~\ref{sec:p0-obstruction} rules out simply
+reusing $X_5$ for this purpose. A prescribed $q(t)$ likewise requires a
+separate data-compatible analysis. If exact reduction fails, finite orbit
+augmentation or a Lie-derivative loss is a
 fallback, but each is sampled/soft and cannot certify invariance. For drifting
 waves or changing scales, a moving-frame PINN/DAE can infer speed or scale
 rates together with the profile \cite{flow}. If many parameter or forcing
@@ -968,8 +1034,9 @@ Reproducible commands, evidence limits and next gates recorded. \\
 Having tested one constructed initial-curvature family, the next gates are to
 select a subgroup compatible with physically sourced initial/boundary data,
 analyze the recorded rank and leading-coefficient singular exits, and establish
-a smoothness gate before any KAN transfer to a third-order residual. The case
-$m=3+\delta$ remains separate until its symmetry-persistence calculation. A
+a smoothness gate before any KAN transfer to a third-order residual. For
+$m=3+\delta$, the diagonal-scaling obstruction is established, while
+unrestricted continuation and the linear-response closure remain open. A
 local series, rational continuation, or matched expansion should be selected
 only after analyzing the reduced equation's singularities and admissible data.
 

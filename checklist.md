@@ -1,10 +1,11 @@
 # LieML PDE formalization, symmetry reduction and research gates
 
-Updated: 2026-10-05. This checklist replaces conversational knowledge checks.
-Current priority: decide whether the exceptional cubic generator has a
-first-order continuation or a first-order obstruction at `m = 3 + delta`,
-then test data/flux compatibility. ML remains a candidate proposer behind
-exact symbolic gates; it is not the authority on symmetry or reduction.
+Updated: 2026-10-07. This checklist replaces conversational knowledge checks.
+Current priority: P0 has verified a first-order obstruction only in the
+declared diagonal-scaling class at `m = 3 + delta`. The next decision is the
+unrestricted response/determining problem, followed by data/flux
+compatibility. ML remains a candidate proposer behind exact symbolic gates;
+it is not the authority on symmetry or reduction.
 
 ## Current evidence status
 
@@ -17,6 +18,11 @@ exact symbolic gates; it is not the authority on symmetry or reduction.
 - [x] The printed reduced equation in the 2026 source conflicts with direct
   substitution into its printed master equation; the project uses the directly
   derived expression and retains the discrepancy as a source audit result.
+- [x] P0 has a machine-checkable **scaling** obstruction certificate for
+  `X_5=t*d_t-2*s*d_s` at `m=3+delta`, with `beta_tr=m*kappa`, fixed
+  dimensionless `kappa`, and the branch `t,s,phi_s,v>0`. Its status is
+  `verified` / `obstruction-verified-scaling`; it is not an unrestricted
+  point-symmetry result.
 - [ ] No unrestricted generic-`m` determining-system solution, maximality
   theorem or equivalence-group classification has been established.
 - [ ] No exact or formally completed first-order continuation of `X_5` at
@@ -26,7 +32,10 @@ exact symbolic gates; it is not the authority on symmetry or reduction.
 
 ## Ordered research branches
 
-### P0 -- near-cubic continuation or obstruction (next experiment)
+### P0 -- near-cubic continuation or obstruction
+
+The declared diagonal-scaling subproblem is complete. The unrestricted
+first-order determining problem remains open and is the next analytic gate.
 
 The next bounded mathematical question is not whether a neural network can fit
 an `X_1`. It is whether the first-order determining problem is compatible:
@@ -35,27 +44,34 @@ an `X_1`. It is whether the first-order determining problem is compatible:
 `X_delta = X_5 + delta X_1 + O(delta^2)`,
 `A_0 X_1 = -A_1 X_5`.
 
-- [ ] Freeze the exact Lagrangian master equation, multiplier convention,
+- [x] Freeze the exact Lagrangian master equation, multiplier convention,
   regular branch, jet order and assumptions such as `phi_s>0`; declare the
   sign branch needed to expand noninteger powers through logarithms.
 - [ ] Derive the `O(delta)` determining equations without dividing by
   `delta`, `m-3`, a leading derivative, `phi_s`, `phi_t` or any branch factor.
-- [ ] Separate two claims: an unrestricted differential determining problem
-  and a declared finite-ansatz pilot. Stabilization inside an ansatz is not a
-  proof about all smooth infinitesimals.
+- [x] Separate two claims: an unrestricted differential determining problem
+  and a declared diagonal-scaling calculation. The latter is not a proof
+  about all smooth infinitesimals.
 - [ ] Fix the gauge freedoms of `X_1` modulo known `m=3` generators so that
   continuation is not confused with a change of basis.
-- [ ] Compute the exact compatibility/cokernel condition before training any
-  neural model. For a differential operator, do not replace formal completion
-  by a finite matrix cokernel without labeling the restriction.
-- [ ] If compatibility fails, emit a machine-checkable first-order obstruction
-  certificate and classify the result as symmetry breaking.
+- [x] Compute the exact first-order defect inside the declared diagonal
+  scaling class, including the `m*kappa` coefficient perturbation and direct
+  third-jet prolongation agreement.
+- [x] Emit
+  `research_artifacts/p0-near-cubic-20261007/p0_scaling_obstruction_certificate.json`
+  with status `verified` / `obstruction-verified-scaling`, source hashes,
+  nondimensional units, guards, divisions, multiplier convention and
+  two-sided numerical secondary evidence.
+- [ ] Compute the exact compatibility/cokernel condition for an unrestricted
+  `X_1` before training any neural model. For a differential operator, do not
+  replace formal completion by a finite matrix cokernel without labeling the
+  restriction.
 - [ ] If compatibility holds, recover and verify `X_1` exactly on every
   declared regular branch, including bracket and parameter-stratum checks.
 - [ ] Only after `X_1` passes verification, derive approximate invariants and
   an approximate reduced equation; verify the invariant-surface, reduction,
   reconstruction and original-PDE residual identities through `O(delta^2)`.
-- [ ] Use two-sided numerical `delta` refinement only as secondary evidence.
+- [x] Use two-sided numerical `delta` refinement only as secondary evidence.
   A sampled slope near two does not replace the symbolic coefficient check.
 - [ ] Do not infer an approximate solution or an error bound merely from an
   approximate generator. Initial/boundary compatibility, existence and error
@@ -64,7 +80,9 @@ an `X_1`. It is whether the first-order determining problem is compatible:
 Decision exits:
 
 - `continuation-verified`: proceed to compatible approximate reduction.
-- `obstruction-verified`: retain `m=3` as an exceptional isolated stratum.
+- `scaling-obstruction-verified`: retain `m=3` as exceptional within the
+  declared diagonal-scaling class and escalate to the unrestricted analytic
+  gate; do not infer isolation among all point symmetries.
 - `ansatz-inconclusive`: escalate to P2 rather than claiming persistence.
 - `regularity-failed`: split the singular branch; do not divide it away.
 
@@ -155,8 +173,10 @@ Failure of that sufficient test does not prove that no symmetry exists.
 - [ ] Select physical initial/boundary data after inspecting their pulled-back constraints.
 - [ ] Extend beyond supplied charts and supplied symmetry multiplier identities.
 - [x] Reproduce the exact cubic branch before opening the `m = 3 + delta` study.
-- [ ] Execute the P0 continuation/obstruction experiment without conflating it
-  with the fixed-`m=3` initial-curvature family.
+- [x] Execute the P0 diagonal-scaling obstruction experiment without
+  conflating it with the fixed-`m=3` initial-curvature family.
+- [ ] Resolve the unrestricted P0 continuation/obstruction problem without
+  promoting the diagonal-scaling exit to a full classification claim.
 - [x] Define structural ML as an exact-gated candidate task rather than a
   solution or certificate generator.
 - [ ] Train structural ML only after P0/P2 produce exact labels and timing
