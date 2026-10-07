@@ -1,0 +1,326 @@
+[
+  {
+    "bibtex_key": "archive_pdf_ed46a28af98f",
+    "path": "code/repository/curriculum_math.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_4c4607627e46",
+    "path": "code/repository/docs/2014_Book_IntroductionToPartialDifferent.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_31f28e8757bc",
+    "path": "code/repository/docs/superpowers/specs/2026-06-26-lie-symmetry-engine-v1-design.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_c82188a36127",
+    "path": "code/repository/draft/draft.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_725eef406597",
+    "path": "code/repository/intro.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_298b7b3bcee2",
+    "path": "code/repository/poster.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_005016bbe0d9",
+    "path": "code/repository/ref/An Elementary Introduction to Groups and Representations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_7412b62a3936",
+    "path": "code/repository/ref/An Expert's Guide to Training Physics-informed Neural Networks-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_4996a99cdf5d",
+    "path": "code/repository/ref/Brandstetter_LPSDA_2202.07643.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_54dff4a34e89",
+    "path": "code/repository/ref/Duval_SchrodingerSymmetry_2403.20316.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_c71dbf1bd7e9",
+    "path": "code/repository/ref/Explicit Discovery of Nonlinear Symmetries from Dynamic Data.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_355d55ae14c9",
+    "path": "code/repository/ref/FOURIER NEURAL OPERATOR FOR parametric partial differential equations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_28f47aa8f656",
+    "path": "code/repository/ref/Gathmann_AlgGeom_2014.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_fd32058aa113",
+    "path": "code/repository/ref/Generalized Lie Symmetries in Physics-Informed Neural Operators-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_ccef49d2cecd",
+    "path": "code/repository/ref/Generalized Lie Symmetries in Physics-Informed Neural Operators.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_b0d405c1d790",
+    "path": "code/repository/ref/Geometric Neural Operators via Lie Group-Constrained Latent Dynamics.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_626cbe410dc5",
+    "path": "code/repository/ref/GrinbergReiner_HopfCombinatorics_1409.8356.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_02404bf68909",
+    "path": "code/repository/ref/Hall-LieGroupsLiealgebras2015.Springer.Elementaryintro.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_b2494fd9b3f3",
+    "path": "code/repository/ref/Helwig_GFNO_2306.05697.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_d06e532db315",
+    "path": "code/repository/ref/Ishii_JetSchemes_0704.3327.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_39ca68468e43",
+    "path": "code/repository/ref/KruglikovLychagin_GeometryDEs.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_297e80ade6ae",
+    "path": "code/repository/ref/Lie Algebra Canonicalization Equivariant Neural Operators under arbitrary Lie Groups-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_8336a920cd2d",
+    "path": "code/repository/ref/LieSolver A PDE-constrained solver for IBVPs using Lie symmetries-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_c97b934dd939",
+    "path": "code/repository/ref/LieTresse_2011.05101.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_56ced7b1bfb4",
+    "path": "code/repository/ref/Lie_Groups_Lectures.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_6598490b1621",
+    "path": "code/repository/ref/Machine Learning for Partial Differential Equations-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_89a21a2efd25",
+    "path": "code/repository/ref/NeurIPS-2023-lie-point-symmetry-and-physics-informed-networks-Paper-Conference.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_da96f490b102",
+    "path": "code/repository/ref/Notes on Lie symmetry group methods for differential equations-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_9bc60206474b",
+    "path": "code/repository/ref/Olver_LieGroups_DiffEq_g.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_b2708cb10168",
+    "path": "code/repository/ref/Partial Differential Equations in the Age of Machine Learning A Critical Synthesis of Classical, Machine Learning, and Hybrid Methods-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_18a523409240",
+    "path": "code/repository/ref/Pugliese_VinogradovGeometryPDE_2301.02038.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_49d2746b2f8c",
+    "path": "code/repository/ref/SOME PROBLEMS IN THE REPRESENTATION THEORY1503.06762v2.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_e1890678d731",
+    "path": "code/repository/ref/Sophus Lie, the mathematician.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_d3ea01536ea6",
+    "path": "code/repository/ref/Symmetry Analysis of Semi-Linear Partial Differential Equations and Forward Backward Stochastic Differential Equations-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_acb771cda82b",
+    "path": "code/repository/ref/The Fractal Lie Derivative Theory and Applications-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_49aecbd896ee",
+    "path": "code/repository/ref/Weak baselines and reporting biases lead to overoptimism in machine learning for fluid-related partial differential equations-with-annotations.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_9fe20c6540dd",
+    "path": "code/repository/ref/Yang_SymmetryInvariants_2505.12083.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_88bd2298c6e6",
+    "path": "code/repository/ref/lee_smooth_manifolds.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_f540291cc3e1",
+    "path": "code/repository/ref/liegroups.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_f48ae5950928",
+    "path": "code/repository/ref/visual_complex_analysis.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_751c39f3e393",
+    "path": "references/pdfs/Applications of Symmetries to Nonlinear Partial Differential Equations(1).pdf"
+  },
+  {
+    "bibtex_key": "liulou",
+    "path": "references/pdfs/Applications of Symmetries to Nonlinear Partial Differential Equations.pdf"
+  },
+  {
+    "bibtex_key": "twovelocities",
+    "path": "references/pdfs/Communications in Nonlinear Science and Numerical solutions.pdf"
+  },
+  {
+    "bibtex_key": "ohrnell",
+    "path": "references/pdfs/FULLTEXT01 (1).pdf"
+  },
+  {
+    "bibtex_key": "compressiblens",
+    "path": "references/pdfs/Group theoretic approach and analytical solutions of the compressible Navier–Stokes equations.pdf"
+  },
+  {
+    "bibtex_key": "cassoneyring",
+    "path": "references/pdfs/Integration of lie symmetry analysis with magnetohydrodynamic heat and mass transfer in a hybrid Casson–Eyring–Powell nanofluid over a porous stretching sheet.pdf"
+  },
+  {
+    "bibtex_key": "sympinn",
+    "path": "references/pdfs/Lie Point Symmetry and Physics Informed Networks.pdf"
+  },
+  {
+    "bibtex_key": "ap",
+    "path": "references/pdfs/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf"
+  },
+  {
+    "bibtex_key": "sveold",
+    "path": "references/pdfs/Lie Symmetry Analysis of the One-Dimensional SVE.pdf"
+  },
+  {
+    "bibtex_key": "bionanoflow",
+    "path": "references/pdfs/Lie symmetry analysis of bio-nano-slip flow in a conical gap between a rotating disk and cone with Stefan blowing.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_a5ebbca7b954",
+    "path": "references/pdfs/On the Lie symmetry analysis of three-dimensional perturbed shear flows(1).pdf"
+  },
+  {
+    "bibtex_key": "shearflows",
+    "path": "references/pdfs/On the Lie symmetry analysis of three-dimensional perturbed shear flows.pdf"
+  },
+  {
+    "bibtex_key": "mathebula",
+    "path": "references/pdfs/Symmetry Analysis and Invariant_AS_Mathebula_MSc.pdf"
+  },
+  {
+    "bibtex_key": "fushchych1",
+    "path": "references/pdfs/Symmetry reduction and exact solutions of the Navier-Stokes equations. I.pdf"
+  },
+  {
+    "bibtex_key": "fushchych2",
+    "path": "references/pdfs/Symmetry reduction and exact solutionsof the Navier-Stokes equations. II-jnmp-1994.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_0d004ecaca08",
+    "path": "references/pdfs/application-of-symmetry-methods-to-partial-differential-53fphztrbi(1).pdf"
+  },
+  {
+    "bibtex_key": "hijazi",
+    "path": "references/pdfs/application-of-symmetry-methods-to-partial-differential-53fphztrbi.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_028615f39280",
+    "path": "references/pdfs/intro.pdf"
+  },
+  {
+    "bibtex_key": "etingof",
+    "path": "references/pdfs/lnlg.pdf"
+  },
+  {
+    "bibtex_key": "naviercd",
+    "path": "references/pdfs/navier-stokes-c,d.pdf"
+  },
+  {
+    "bibtex_key": "passivescalar",
+    "path": "references/pdfs/passive-scalar-statistics-in-a-turbulent-round-jet-symmetry-theory-and-direct-numerical-simulation.pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_41f71fe2f10b",
+    "path": "references/pdfs/proposal(1).pdf"
+  },
+  {
+    "bibtex_key": "archive_pdf_3b82c7891bc2",
+    "path": "references/pdfs/proposal.pdf"
+  },
+  {
+    "bibtex_key": "flow",
+    "path": "references/public-pdfs/flow.pdf"
+  },
+  {
+    "bibtex_key": "liesolver",
+    "path": "references/public-pdfs/liesolver.pdf"
+  },
+  {
+    "bibtex_key": "jiao",
+    "path": "references/public-pdfs/jiao.pdf"
+  },
+  {
+    "bibtex_key": "otto",
+    "path": "references/public-pdfs/otto.pdf"
+  },
+  {
+    "bibtex_key": "lieLAC",
+    "path": "references/public-pdfs/lieLAC.pdf"
+  },
+  {
+    "bibtex_key": "approxalg",
+    "path": "references/public-pdfs/approxalg.pdf"
+  },
+  {
+    "bibtex_key": "liestonet",
+    "path": "references/public-pdfs/liestonet.pdf"
+  },
+  {
+    "bibtex_key": "lagaris",
+    "path": "references/public-pdfs/lagaris.pdf"
+  },
+  {
+    "bibtex_key": "tmpinn",
+    "path": "references/public-pdfs/tmpinn.pdf"
+  },
+  {
+    "bibtex_key": "pikan",
+    "path": "references/public-pdfs/pikan.pdf"
+  },
+  {
+    "bibtex_key": "piratenet",
+    "path": "references/public-pdfs/piratenet.pdf"
+  },
+  {
+    "bibtex_key": "noether",
+    "path": "references/public-pdfs/noether.pdf"
+  },
+  {
+    "bibtex_key": "zurek",
+    "path": "references/public-pdfs/zurek.pdf"
+  },
+  {
+    "bibtex_key": "decohydro",
+    "path": "references/public-pdfs/decohydro.pdf"
+  },
+  {
+    "bibtex_key": "lindblad",
+    "path": "references/public-pdfs/lindblad.pdf"
+  },
+  {
+    "bibtex_key": "lindbladsy",
+    "path": "references/public-pdfs/lindbladsy.pdf"
+  },
+  {
+    "bibtex_key": "parvin",
+    "path": "references/public-pdfs/parvin.pdf"
+  },
+  {
+    "bibtex_key": "wanggradient",
+    "path": "references/public-pdfs/wanggradient.pdf"
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "flat": {
+    "ladder": [
+      {
+        "n": 12,
+        "solve_seconds": 0.012890866999896389,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97,
+        "min_speed": 0.2852990942446282,
+        "high_mode_fraction": 1.6199454915239557e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 7.149035807785253e-10
+      },
+      {
+        "n": 18,
+        "solve_seconds": 0.013696491999780847,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97,
+        "min_speed": 0.28530345504703,
+        "high_mode_fraction": 1.4945851437637634e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 4.524158825347513e-15
+      },
+      {
+        "n": 24,
+        "solve_seconds": 0.014875150000079884,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97,
+        "min_speed": 0.2852990941216677,
+        "high_mode_fraction": 1.3830031155676437e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 0.0
+      }
+    ],
+    "tight": {
+      "n": 24,
+      "solve_seconds": 0.02335694599969429,
+      "nfev": 47,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 5.551115123125783e-16,
+      "bed_mean_drift": 0.0,
+      "min_depth": 0.97,
+      "min_speed": 0.2852990941215649,
+      "high_mode_fraction": 1.643125129431581e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "temporal_difference": 8.37019342725398e-12,
+    "estimated_reference_uncertainty": 8.37019342725398e-12,
+    "total_reference_seconds": 0.06481945499945141
+  }
+}

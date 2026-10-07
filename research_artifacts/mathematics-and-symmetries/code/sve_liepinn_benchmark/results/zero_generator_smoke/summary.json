@@ -1,0 +1,38 @@
+[
+  {
+    "group": "flat",
+    "architecture": "mlp",
+    "method": "vanilla",
+    "seeds": [
+      0
+    ],
+    "parameters": 2628,
+    "error_median": 1.8727709532395225,
+    "error_min": 1.8727709532395225,
+    "error_max": 1.8727709532395225,
+    "max_field_error_median": 3.779697771229247,
+    "train_seconds_median": 0.03431069100042805,
+    "train_seconds_min": 0.03431069100042805,
+    "train_seconds_max": 0.03431069100042805,
+    "matched_runs": 0,
+    "total_runs": 1
+  },
+  {
+    "group": "flat",
+    "architecture": "mlp",
+    "method": "lie",
+    "seeds": [
+      0
+    ],
+    "parameters": 2628,
+    "error_median": 1.8727709532395225,
+    "error_min": 1.8727709532395225,
+    "error_max": 1.8727709532395225,
+    "max_field_error_median": 3.779697771229247,
+    "train_seconds_median": 0.04865790499979994,
+    "train_seconds_min": 0.04865790499979994,
+    "train_seconds_max": 0.04865790499979994,
+    "matched_runs": 0,
+    "total_runs": 1
+  }
+]

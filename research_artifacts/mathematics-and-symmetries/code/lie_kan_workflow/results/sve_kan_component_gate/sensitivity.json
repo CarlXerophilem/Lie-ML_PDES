@@ -1,0 +1,155 @@
+{
+  "status": "passed-checkpoint-replay",
+  "parameter": "m",
+  "center": {
+    "name": "sensitivity",
+    "m": 3,
+    "kappa": 0.01,
+    "coriolis": 0.0,
+    "drag": 0.0,
+    "amplitude": 0.03,
+    "bed_amplitude": 0.02,
+    "phase_x": 0.0,
+    "phase_y": 0.0,
+    "u0": 0.25,
+    "v0": 0.15,
+    "g": 1.0,
+    "control": "wave"
+  },
+  "finite_difference_steps": [
+    0.01,
+    0.005
+  ],
+  "reference_difference_between_steps_max": 3.361469641880436e-11,
+  "reference_diagnostics": {
+    "0.01_-1": {
+      "n": 24,
+      "solve_seconds": 0.018930156000351417,
+      "nfev": 32,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 0.0,
+      "bed_mean_drift": 6.550388125433256e-20,
+      "min_depth": 0.97,
+      "min_speed": 0.2878991241626549,
+      "high_mode_fraction": 1.461787928121884e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.01_1": {
+      "n": 24,
+      "solve_seconds": 0.018116638999345014,
+      "nfev": 32,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 0.0,
+      "bed_mean_drift": 1.3703110791136236e-19,
+      "min_depth": 0.97,
+      "min_speed": 0.2878991217321622,
+      "high_mode_fraction": 1.8134692656486527e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.005_-1": {
+      "n": 24,
+      "solve_seconds": 0.01802049499929126,
+      "nfev": 32,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 0.0,
+      "bed_mean_drift": 5.157489501059518e-20,
+      "min_depth": 0.97,
+      "min_speed": 0.2878991235507654,
+      "high_mode_fraction": 1.4594362708511664e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.005_1": {
+      "n": 24,
+      "solve_seconds": 0.01788591100012127,
+      "nfev": 32,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 0.0,
+      "bed_mean_drift": 3.6516531503852056e-20,
+      "min_depth": 0.97,
+      "min_speed": 0.28789912233553044,
+      "high_mode_fraction": 2.0910594189581052e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    }
+  },
+  "runs": [
+    {
+      "method": "chain_kan",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 367.3476728590052,
+      "per_field_relative_l2": {
+        "h": 12338.683283529186,
+        "u": 3276.193581053194,
+        "v": 2756.9436515334805,
+        "b": 0.1669912811951298
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.00012035265638706303,
+        "u": 0.00025606153904208606,
+        "v": 0.0002154781179012739,
+        "b": 1.6060586005184895e-07
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.754092363139013e-09,
+        "u": 7.815824453198832e-08,
+        "v": 7.81583322464424e-08,
+        "b": 9.617619489018744e-07
+      }
+    },
+    {
+      "method": "chain_kan",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.12541573343028756,
+      "per_field_relative_l2": {
+        "h": 0.9999999999999994,
+        "u": 1.0000000000000004,
+        "v": 0.9999999999999998,
+        "b": 0.05125798931216647
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 9.754092363139008e-09,
+        "u": 7.815824453198835e-08,
+        "v": 7.815833224644239e-08,
+        "b": 4.929798369766067e-08
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.754092363139013e-09,
+        "u": 7.815824453198832e-08,
+        "v": 7.81583322464424e-08,
+        "b": 9.617619489018744e-07
+      }
+    },
+    {
+      "method": "chain_kan",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 120.66775397337358,
+      "per_field_relative_l2": {
+        "h": 5985.516378863864,
+        "u": 944.5110927612855,
+        "v": 885.4642196063627,
+        "b": 0.09204135007286611
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 5.838327960051949e-05,
+        "u": 7.382132895121205e-05,
+        "v": 6.920640666833093e-05,
+        "b": 8.852186822563939e-08
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.754092363139013e-09,
+        "u": 7.815824453198832e-08,
+        "v": 7.81583322464424e-08,
+        "b": 9.617619489018744e-07
+      }
+    }
+  ],
+  "checkpoint_replay_max": 0.0,
+  "scope": "post-hoc local central finite differences; weak sensitivities can have ill-conditioned relative errors; no parameter-gradient certificate"
+}

@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "paired_loss_gradient_identities": {
+    "flat": {
+      "loss_difference": 0.0,
+      "max_parameter_gradient_difference": 2.949029909160572e-17
+    },
+    "rotation_drag": {
+      "loss_difference": 0.0,
+      "max_parameter_gradient_difference": 5.551115123125783e-17
+    },
+    "sve_m3": {
+      "loss_difference": 0.0,
+      "max_parameter_gradient_difference": 5.551115123125783e-17
+    },
+    "sve_m3.1": {
+      "loss_difference": 0.0,
+      "max_parameter_gradient_difference": 4.163336342344337e-17
+    },
+    "sve_m4": {
+      "loss_difference": 0.0,
+      "max_parameter_gradient_difference": 1.1102230246251565e-16
+    }
+  },
+  "torch_sympy_equation_max": 8.881784197001252e-16,
+  "boundary_checks": {
+    "mlp": {
+      "ic_max": 0.0,
+      "periodic_max": 2.220446049250313e-16,
+      "translation_family_max": 7.806255641895632e-18
+    },
+    "modified": {
+      "ic_max": 0.0,
+      "periodic_max": 6.938893903907228e-18,
+      "translation_family_max": 2.220446049250313e-16
+    },
+    "deeponet": {
+      "ic_max": 0.0,
+      "periodic_max": 2.7755575615628914e-17,
+      "translation_family_max": 5.204170427930421e-18
+    }
+  },
+  "lake_at_rest_max": 1.02550998600571e-16,
+  "constant_flow_max": 0.0,
+  "uniform_rotation_drag_max": 5.551115123125783e-17,
+  "invalid_near_cubic_scaling_rejected": true,
+  "translation_lie_loss_is_zero": true
+}

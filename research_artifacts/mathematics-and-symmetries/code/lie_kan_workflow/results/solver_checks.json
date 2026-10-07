@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "uniform_rotation_drag_max_error": 5.551115123125783e-17,
+  "lake_at_rest_max_change": 2.220446049250313e-16,
+  "spectral_interpolation_roundtrip_error": 6.661338147750939e-16,
+  "expanded_Grass_vs_flux_finite_difference_max_error": 5.478514235150722e-15,
+  "refinement": {
+    "ladder": [
+      {
+        "n": 12,
+        "solve_seconds": 0.014470083000560408,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 1.264902534566422e-19,
+        "min_depth": 0.97,
+        "min_speed": 0.2878991114207815,
+        "high_mode_fraction": 1.2992003084512848e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 9.005327317179734e-10
+      },
+      {
+        "n": 18,
+        "solve_seconds": 0.016278131000944995,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 1.2849803525754126e-19,
+        "min_depth": 0.97,
+        "min_speed": 0.28788928854582585,
+        "high_mode_fraction": 2.1267618173925682e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 7.41073868937292e-15
+      },
+      {
+        "n": 24,
+        "solve_seconds": 0.018847145000108867,
+        "nfev": 32,
+        "rtol": 1e-09,
+        "atol": 1e-11,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 1.1482002173891626e-19,
+        "min_depth": 0.97,
+        "min_speed": 0.2878991113420303,
+        "high_mode_fraction": 1.362560042272643e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+        "max_difference_from_finest": 0.0
+      }
+    ],
+    "tight": {
+      "n": 24,
+      "solve_seconds": 0.017524259999845526,
+      "nfev": 32,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 0.0,
+      "bed_mean_drift": 6.32451267283211e-20,
+      "min_depth": 0.97,
+      "min_speed": 0.28789911134193585,
+      "high_mode_fraction": 1.1698703163666061e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "temporal_difference": 1.095368240555672e-11,
+    "estimated_reference_uncertainty": 1.095368240555672e-11,
+    "total_reference_seconds": 0.0671196190014598
+  },
+  "scope": "smooth periodic short-time controls; sampled hyperbolicity and refinement are not global certificates"
+}

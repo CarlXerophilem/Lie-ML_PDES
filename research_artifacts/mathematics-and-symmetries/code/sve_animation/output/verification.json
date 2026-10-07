@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "g": 9.81,
+    "h0": 1.0,
+    "beta": 0,
+    "B": 0,
+    "m": "irrelevant when beta=0",
+    "domain": [
+      -40.0,
+      60.0
+    ],
+    "T": 8.0,
+    "cfl": 0.45,
+    "dry_tolerance": 1e-12
+  },
+  "symbolic": {
+    "fan_continuity": "0",
+    "fan_momentum": "0",
+    "lagrange_equation_5": "0",
+    "exner": "0 (beta=0, B=0)",
+    "scope": "Smooth fan only; wet/dry interfaces checked by continuous h and hu limits."
+  },
+  "production": {
+    "n": 1200,
+    "dx": 0.0833333333333357,
+    "steps": 1236,
+    "min_depth_m": 0.0,
+    "relative_mass_drift": 1.7763568394002e-16,
+    "normalized_L1_depth": 0.008405003616034416,
+    "mean_absolute_depth_error_m": 0.0033620014464137665
+  },
+  "convergence": [
+    {
+      "n": 600,
+      "dx": 0.1666666666666643,
+      "steps": 549,
+      "min_depth_m": 0.0,
+      "relative_mass_drift": 1.7763568394002757e-16,
+      "normalized_L1_depth": 0.014260032288921162,
+      "mean_absolute_depth_error_m": 0.005704012915568465
+    },
+    {
+      "n": 1200,
+      "dx": 0.0833333333333357,
+      "steps": 1146,
+      "min_depth_m": 0.0,
+      "relative_mass_drift": 5.3290705182006e-16,
+      "normalized_L1_depth": 0.0083923470312625,
+      "mean_absolute_depth_error_m": 0.003356938812505
+    },
+    {
+      "n": 2400,
+      "dx": 0.0416666666666643,
+      "steps": 2375,
+      "min_depth_m": 0.0,
+      "relative_mass_drift": 1.4210854715202811e-15,
+      "normalized_L1_depth": 0.004846184009449335,
+      "mean_absolute_depth_error_m": 0.0019384736037797341
+    }
+  ],
+  "exact_front_m": 50.11347124277064,
+  "exact_fan_head_m": -25.05673562138532,
+  "note": "Convergence uses only initial/final output times; production hits 161 frame times."
+}

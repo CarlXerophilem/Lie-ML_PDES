@@ -1,0 +1,10 @@
+{
+  "checkpoint_replay_max_errors": {
+    "mlp": 0.0,
+    "modified": 0.0,
+    "deeponet": 0.0
+  },
+  "main_runs": 108,
+  "all_main_runs_ok": true,
+  "zero_generator_training_equal": true
+}

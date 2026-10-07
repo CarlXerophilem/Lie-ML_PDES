@@ -1,0 +1,156 @@
+{
+  "checks": {
+    "cubic_first_order_defect_identity": true,
+    "cubic_multiplier_identity": true,
+    "generic_x4_multiplier_identity": true,
+    "nonzero_first_order_scaling_defect": true,
+    "prolonged_residual_agrees": true,
+    "transport_expansion_includes_beta_change": true
+  },
+  "cubic_first_order_defect": {
+    "identity": "pr(X5)(E1) + E1 = 3*g*kappa*D_s(H)",
+    "regular_sample_value": "186/125"
+  },
+  "direct_prolongation": {
+    "comparison": "direct jet prolongation after inner-homogeneity substitution",
+    "expected_residual": "(-3*g*kappa*phi_x**2*phi_xy*phi_yy + 3*g*kappa*phi_x**2*phi_xyy*phi_y + 6*g*kappa*phi_x*phi_xy**2*phi_y)/phi_y**2",
+    "restricted_residual": "(-3*g*kappa*phi_x**2*phi_xy*phi_yy + 3*g*kappa*phi_x**2*phi_xyy*phi_y + 6*g*kappa*phi_x*phi_xy**2*phi_y)/phi_y**2"
+  },
+  "equation_expansion": {
+    "E0": "(3*g*kappa*phi_x**2*phi_xy*phi_y*phi_yy - 3*g*kappa*phi_x**2*phi_xyy*phi_y**2 - 6*g*kappa*phi_x*phi_xy**2*phi_y**2 + 2*g*phi_xy*phi_yy - g*phi_xyy*phi_y + phi_xx*phi_xy*phi_y**3 + phi_xxx*phi_y**4)/phi_y**3",
+    "E0_canonical": "D_t(phi_s*phi_tt - g*phi_ss/phi_s**2) - 3*g*kappa*D_s(H)",
+    "E1": "(3*g*kappa*phi_x**2*phi_xy*phi_yy*log(phi_x) + g*kappa*phi_x**2*phi_xy*phi_yy - 3*g*kappa*phi_x**2*phi_xyy*phi_y*log(phi_x) - g*kappa*phi_x**2*phi_xyy*phi_y - 6*g*kappa*phi_x*phi_xy**2*phi_y*log(phi_x) - 5*g*kappa*phi_x*phi_xy**2*phi_y)/phi_y**2",
+    "E1_canonical": "-g*kappa*D_s(H*(1 + 3*log(v)))",
+    "H_canonical": "v**2*phi_ts/phi_s",
+    "engine_symbol_map": {
+      "phi_x": "v = phi_t in the nondimensional chart",
+      "phi_xx": "phi_tt",
+      "phi_xy": "phi_ts",
+      "phi_y": "phi_s",
+      "phi_yy": "phi_ss"
+    },
+    "order": "E_(3+delta) = E0 + delta*E1 + O(delta**2)"
+  },
+  "first_order_defect": "-1",
+  "model_contract": {
+    "beta_rule": "beta_tr = m*kappa",
+    "branch_guards": [
+      "t > 0",
+      "s > 0",
+      "phi_s > 0",
+      "v > 0"
+    ],
+    "dimensionless_velocity": "v = d(phi_bar)/d(t_bar) = d(phi_phys)/d(t_phys)/U_star > 0",
+    "divisions_and_log_guards": [
+      "phi_s != 0",
+      "v > 0",
+      "U_star > 0"
+    ],
+    "fixed_kappa": true,
+    "jet_order": 3,
+    "missing_required_guards": [],
+    "multiplier_convention": "pr(X)(E) = M*E",
+    "positive_material_coordinate": true,
+    "positive_phi_s": true,
+    "positive_time": true,
+    "positive_velocity": true,
+    "source_doi": "10.3390/math14030433",
+    "velocity_scale": "U_star"
+  },
+  "multiplier_convention": {
+    "cubic_multiplier": "M0 = -1",
+    "first_order_multiplier": "M1 = -(a1 + c1) after inner homogeneity",
+    "identity": "pr(X)(E) = M*E"
+  },
+  "next_analytic_gate": "Derive and verify the response PDE in r=log(t), z=s*t**2 before assuming a one-profile correction or training a model.",
+  "nonclaims": [
+    "No unrestricted point-symmetry classification is established.",
+    "No generalized, nonclassical, or equivalence-symmetry obstruction is established.",
+    "No Eulerian/Lagrangian physical-equivalence theorem is established.",
+    "No solution existence, error bound, or ML acceleration claim is established.",
+    "ML training is intentionally excluded from P0"
+  ],
+  "nondimensional_chart": {
+    "coefficient_convention": "g and kappa are fixed dimensionless constants of the rescaled normal form",
+    "coordinate_rescaling": "t_phys = T_star*t_bar, s_phys = S_star*s_bar, phi_phys = U_star*T_star*phi_bar",
+    "engine_jet_interpretation": "after dropping bars, phi_x = phi_t = v and phi_y = phi_s in the nondimensional chart",
+    "family_status": "dimensionless-formal-parameter-family",
+    "logarithm_argument": "v",
+    "source_units_nonclaim": "P0 does not infer m-independent physical units for the source coefficient beta_tr across different exponents.",
+    "velocity": "v = d(phi_bar)/d(t_bar) = d(phi_phys)/d(t_phys)/U_star > 0"
+  },
+  "outcome": "obstruction-verified-scaling",
+  "scaling_constraints": {
+    "inner": "3*c - b - 2*a",
+    "inner_first_order": "-2*a1 - b1 + 3*c1",
+    "outer": "(m - 3)*(c - a)",
+    "outer_first_order": "-1"
+  },
+  "schema": "lieml.sve.near-cubic-obstruction.v1",
+  "scope": {
+    "full_point_statement": "source-conditioned only",
+    "parameter_perturbation": "m = 3 + delta with kappa fixed",
+    "symmetry_class": "diagonal scalings a*t*d_t+b*s*d_s+c*phi*d_phi",
+    "unrestricted_determining_system": "not-solved"
+  },
+  "secondary_numerical_check": {
+    "absolute_defect_at_h": 1.4880000000013392e-12,
+    "absolute_ratio_h_over_half_h": 2.0000000000009,
+    "absolute_ratio_negative_h_over_half_h": 1.9999999999990998,
+    "classification": "linear-defect-secondary-evidence",
+    "h": "1e-12",
+    "sample_jet": "regular rational jet with phi_t=3/2 and phi_s=5/4",
+    "symbolic_status": "secondary only; exact coefficients determine the certificate"
+  },
+  "source_conditioned_corollary": {
+    "argument": "A generic dilation coefficient would have to converge to both 1 from the t component and -2 from the s component in order to reach X5, which is impossible.",
+    "continuity_requirement": "generator coefficients converge as delta approaches zero",
+    "excluded": [
+      "unrestricted determining-system proof",
+      "generalized or nonclassical symmetry analysis",
+      "parameter equivalence transformations"
+    ],
+    "independent_classification_claim": false,
+    "published_premise": "For generic m, the published source lists translations and the single dilation X4=t*d_t+s*d_s+phi*d_phi.",
+    "requires_published_exhaustiveness": true,
+    "status": "qualified"
+  },
+  "source_hashes": {
+    "draft_main_tex_sha256": "e113406d555793042980730433c50663e41bf669300c6bc555180b130f027c87",
+    "published_source_pdf_sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5"
+  },
+  "status": "verified",
+  "transport_expansion": {
+    "factor": "(3 + delta)*v**(2 + delta)",
+    "first_order": "v**2*(3*log(v) + 1)",
+    "leading": "3*v**2"
+  },
+  "units_and_divisions": {
+    "division_records": [
+      {
+        "expression": "phi_ss/phi_s**2",
+        "guard": "phi_s != 0",
+        "location": "fluid inner term"
+      },
+      {
+        "expression": "phi_ts/phi_s",
+        "guard": "phi_s != 0",
+        "location": "transport inner term"
+      },
+      {
+        "expression": "log(v)",
+        "guard": "v > 0",
+        "location": "near-cubic expansion"
+      }
+    ],
+    "scaling_constraint_divisions": "none",
+    "unit_convention": {
+      "g": "fixed dimensionless coefficient in the rescaled normal form",
+      "kappa": "fixed dimensionless coefficient in the rescaled normal form",
+      "phi": "dimensionless phi_bar after phi_phys = U_star*T_star*phi_bar",
+      "s": "dimensionless s_bar, written s after bars are dropped",
+      "t": "dimensionless t_bar, written t after bars are dropped",
+      "v": "dimensionless"
+    }
+  }
+}

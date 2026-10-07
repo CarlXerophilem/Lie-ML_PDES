@@ -1,0 +1,43 @@
+{
+  "name": "swe2d",
+  "spatial_dimension": 2,
+  "fields": [
+    "h",
+    "u",
+    "v"
+  ],
+  "order": 1,
+  "positive_fields": [
+    "h"
+  ],
+  "parameters": {
+    "g": {
+      "value": "1",
+      "assumptions": [
+        "positive"
+      ]
+    },
+    "f": "0",
+    "gamma": "0"
+  },
+  "equations": [
+    "h_t+u*h_x+h*u_x+v*h_y+h*v_y",
+    "u_t+u*u_x+g*h_x+v*u_y-f*v+gamma*u",
+    "v_t+u*v_x+v*v_y+g*h_y+f*u+gamma*v"
+  ],
+  "leaders": [
+    "h_t",
+    "u_t",
+    "v_t"
+  ],
+  "roles": [
+    "conservation",
+    "main",
+    "main"
+  ],
+  "domains": [
+    "t>0",
+    "h>0",
+    "g>0"
+  ]
+}

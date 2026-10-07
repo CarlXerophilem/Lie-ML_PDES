@@ -1,0 +1,180 @@
+{
+  "flat": {
+    "case": {
+      "name": "flat",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    "jet_dimension": 19,
+    "equation_ops": 19,
+    "build_seconds": 0.002529294999931153,
+    "scaling_seconds": 0.0011066790002587368,
+    "total_seconds": 0.04865359699988403,
+    "generators": [
+      {
+        "generator": "Tt",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.002873765000003914,
+        "prolong_ops": 0,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "Tx",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.002589536999948905,
+        "prolong_ops": 0,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "Ty",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.0025646889998824918,
+        "prolong_ops": 0,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "D",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.007527396000114095,
+        "prolong_ops": 24,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "V",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.004155078000167123,
+        "prolong_ops": 24,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "J",
+        "verified": true,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verify_seconds": 0.0174819120002212,
+        "prolong_ops": 31,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      },
+      {
+        "generator": "Gx",
+        "verified": false,
+        "defect": [
+          "0",
+          "0",
+          "0",
+          "-bx"
+        ],
+        "verify_seconds": 0.0039898189997984446,
+        "prolong_ops": 1,
+        "bulk_only": true,
+        "fixed_periodic_IC_compatible": false
+      }
+    ],
+    "useful_generators": [
+      "D",
+      "V",
+      "J"
+    ],
+    "scaling_ansatz": {
+      "coefficient_names": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "constraints": [
+        "-a + b - d",
+        "c - 2*d",
+        "-c + e"
+      ],
+      "matrix_shape": [
+        3,
+        5
+      ],
+      "rank": 3,
+      "nullity": 2,
+      "basis": [
+        [
+          "1",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "-1/2",
+          "0",
+          "1",
+          "1/2",
+          "1"
+        ]
+      ],
+      "scope": "constant-coefficient isotropic scaling ansatz only"
+    },
+    "assumptions": [
+      "h>0",
+      "u^2+v^2>0 for noninteger active flux",
+      "g>0"
+    ],
+    "claim": "supplied-generator identities; not a maximal Lie classification",
+    "Galilean_Gx_valid_on_flat_bed_restriction": true,
+    "subgroups": {
+      "D": "(t,x,y)->exp(eps)*(t,x,y); fields unchanged",
+      "V": "(x,y)->exp(eps)*(x,y); (h,b)->exp(2eps)*(h,b); (u,v)->exp(eps)*(u,v)",
+      "J": "rotate (x,y) and (u,v) through eps; h,b unchanged",
+      "Tx_Ty": "commuting two-parameter translations; projected rank 2; nonuniform IC prevents hard reduction",
+      "topology": "continuous rotations/scalings are bulk symmetries, not global actions of a fixed square torus"
+    }
+  }
+}

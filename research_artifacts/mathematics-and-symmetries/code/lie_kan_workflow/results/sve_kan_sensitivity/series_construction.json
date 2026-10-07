@@ -1,0 +1,25 @@
+{
+  "construction": "a1=F(U0); a2=DF(U0)[a1]/2",
+  "order": 2,
+  "fields": [
+    "h",
+    "u",
+    "v",
+    "b"
+  ],
+  "seconds": 2.573974608998469,
+  "operation_count": 353,
+  "a1": [
+    "A*u0*sin(x)*cos(y) + A*v0*sin(y)*cos(x)",
+    "f*v0 - g*(-A*sin(x)*cos(y) + B*sin(y)*cos(x)) - gamma*u0",
+    "-f*u0 - g*(-A*sin(y)*cos(x) + B*sin(x)*cos(y)) - gamma*v0",
+    "0"
+  ],
+  "a2": [
+    "-A*u0*(u0*cos(x)*cos(y) - v0*sin(x)*sin(y))/2 + A*v0*(u0*sin(x)*sin(y) - v0*cos(x)*cos(y))/2 - A*(f*u0 - g*(A*sin(y)*cos(x) - B*sin(x)*cos(y)) + gamma*v0)*sin(y)*cos(x)/2 + A*(f*v0 + g*(A*sin(x)*cos(y) - B*sin(y)*cos(x)) - gamma*u0)*sin(x)*cos(y)/2 - g*(A*cos(x)*cos(y) + 1)*(A*cos(x)*cos(y) + B*sin(x)*sin(y))",
+    "A*f*g*sin(y)*cos(x)/2 - A*g*gamma*sin(x)*cos(y)/2 - A*g*u0*cos(x)*cos(y) + A*g*v0*sin(x)*sin(y) - B*f*g*sin(x)*cos(y)/2 + B*g*gamma*sin(y)*cos(x)/2 - B*g*u0*sin(x)*sin(y)/2 + B*g*v0*cos(x)*cos(y)/2 - f**2*u0/2 - f*gamma*v0 + gamma**2*u0/2",
+    "-A*f*g*sin(x)*cos(y)/2 - A*g*gamma*sin(y)*cos(x)/2 + A*g*u0*sin(x)*sin(y) - A*g*v0*cos(x)*cos(y) + B*f*g*sin(y)*cos(x)/2 + B*g*gamma*sin(x)*cos(y)/2 + B*g*u0*cos(x)*cos(y)/2 - B*g*v0*sin(x)*sin(y)/2 - f**2*v0/2 + f*gamma*u0 + gamma**2*v0/2",
+    "g*k*(2*u0*v0*(m - 1)*(u0**2 + v0**2)**(m/2 - 3/2)*(A*sin(x)*sin(y) + B*cos(x)*cos(y)) + (A*cos(x)*cos(y) + B*sin(x)*sin(y))*(u0**2*(1 - m)*(u0**2 + v0**2)**(m/2 - 3/2) - (u0**2 + v0**2)**(m/2 - 1/2)) + (A*cos(x)*cos(y) + B*sin(x)*sin(y))*(v0**2*(1 - m)*(u0**2 + v0**2)**(m/2 - 3/2) - (u0**2 + v0**2)**(m/2 - 1/2)))/2"
+  ],
+  "scope": "local smooth expansion; not a convergence radius or global solution certificate"
+}

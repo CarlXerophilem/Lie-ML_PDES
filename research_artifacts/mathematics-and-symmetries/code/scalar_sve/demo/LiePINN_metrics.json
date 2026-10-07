@@ -1,0 +1,42 @@
+{
+  "training_seconds": 14.739868092999586,
+  "optimizer": "soap + L-BFGS",
+  "steps": 1000,
+  "lbfgs_max_iterations": 100,
+  "seed": 7,
+  "parameter_count": 1273,
+  "points": 256,
+  "width": 24,
+  "depth": 3,
+  "lr": 0.003,
+  "final_scaled_losses": [
+    1.7573805565624035e-08,
+    1.1875630245932025e-10,
+    0.0
+  ],
+  "boundary_weight": 60.05131248283891,
+  "torch_version": "2.14.0+cpu",
+  "device": "cpu",
+  "architecture": "tanh MLP; not a reproduction of PirateNets",
+  "training_labels": "boundary/Cauchy only; no interior solution labels",
+  "trial_function": "P2(sigma)+(sigma-sigma0)^3*N(sigma)",
+  "method": "LiePINN",
+  "scope": "scalar master equation only",
+  "m": 3,
+  "relative_phi_l2": 2.612188739172062e-08,
+  "relative_v_l2": 3.9273452070394027e-07,
+  "relative_h_l2": 3.9309438282934324e-07,
+  "pde_residual_rms": 0.0019216160294653682,
+  "minimum_phi_s": 1.115721153670982,
+  "problem": {
+    "g": 1.0,
+    "beta": 0.125,
+    "t0": 1.0,
+    "t1": 1.2,
+    "s0": 1.0,
+    "s1": 1.2,
+    "nt": 25,
+    "ns": 65
+  },
+  "max_scaled_cauchy_mismatch": 2.2672635720584145e-05
+}

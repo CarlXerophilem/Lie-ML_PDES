@@ -1,0 +1,5 @@
+{
+  "downloaded_public_pdfs": 18,
+  "failed_downloads": 0,
+  "note": "Each downloaded PDF was checked for a PDF header and its first page inspected against the reference identity."
+}

@@ -1,0 +1,500 @@
+{
+  "status": "passed-checkpoint-replay",
+  "parameter": "coriolis",
+  "center": {
+    "name": "sensitivity",
+    "m": 3.0,
+    "kappa": 0,
+    "coriolis": 0.1,
+    "drag": 0.0,
+    "amplitude": 0.03,
+    "bed_amplitude": 0,
+    "phase_x": 0.0,
+    "phase_y": 0.0,
+    "u0": 0.25,
+    "v0": 0.15,
+    "g": 1.0,
+    "control": "wave"
+  },
+  "finite_difference_steps": [
+    0.01,
+    0.005
+  ],
+  "reference_difference_between_steps_max": 4.992753432908614e-08,
+  "reference_diagnostics": {
+    "0.01_-1": {
+      "n": 24,
+      "solve_seconds": 0.02262495800096076,
+      "nfev": 47,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 5.551115123125783e-16,
+      "bed_mean_drift": 0.0,
+      "min_depth": 0.97,
+      "min_speed": 0.28525646366121477,
+      "high_mode_fraction": 1.7234027732292152e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.01_1": {
+      "n": 24,
+      "solve_seconds": 0.022024271998816403,
+      "nfev": 47,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 1.7763568394002505e-15,
+      "bed_mean_drift": 0.0,
+      "min_depth": 0.97,
+      "min_speed": 0.28524713257643647,
+      "high_mode_fraction": 1.3483642880832153e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.005_-1": {
+      "n": 24,
+      "solve_seconds": 0.02217484799984959,
+      "nfev": 47,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 1.2212453270876722e-15,
+      "bed_mean_drift": 0.0,
+      "min_depth": 0.97,
+      "min_speed": 0.2852541260189461,
+      "high_mode_fraction": 1.340091288600792e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    },
+    "0.005_1": {
+      "n": 24,
+      "solve_seconds": 0.022055669000110356,
+      "nfev": 47,
+      "rtol": 1e-11,
+      "atol": 1e-13,
+      "mass_drift": 9.992007221626409e-16,
+      "bed_mean_drift": 0.0,
+      "min_depth": 0.97,
+      "min_speed": 0.2852494604746563,
+      "high_mode_fraction": 1.521081205504767e-32,
+      "sampled_max_eigenvalue_imag": 0.0,
+      "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+    }
+  },
+  "runs": [
+    {
+      "method": "direct_mlp",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.07311015877377054,
+      "per_field_relative_l2": {
+        "h": 12.626026119165605,
+        "u": 0.09487468164183407,
+        "v": 0.05999305806708217,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0011834024379520948,
+        "u": 0.0027067698269806024,
+        "v": 0.003003599664187625,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "direct_kan",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.052181394855644825,
+      "per_field_relative_l2": {
+        "h": 18.556981467168047,
+        "u": 0.06512716670040991,
+        "v": 0.031982481075486305,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0017392944464089044,
+        "u": 0.0018580747433430602,
+        "v": 0.001601228083936043,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_mlp",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.0012894822853600709,
+      "per_field_relative_l2": {
+        "h": 0.16968767369019203,
+        "u": 0.0014915006894628154,
+        "v": 0.0011744876711645542,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 1.590435540368289e-05,
+        "u": 4.255243857786577e-05,
+        "v": 5.880164953014762e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_kan",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.0018657802909252572,
+      "per_field_relative_l2": {
+        "h": 0.5388263849841511,
+        "u": 0.0027412841677141144,
+        "v": 0.0010741632339253374,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 5.050270382818578e-05,
+        "u": 7.820869745165405e-05,
+        "v": 5.3778827628577236e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.0012075438262071669,
+      "per_field_relative_l2": {
+        "h": 0.21335898417832713,
+        "u": 0.0014643849935281883,
+        "v": 0.0010371972893065,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 1.9997546310501423e-05,
+        "u": 4.177882915622355e-05,
+        "v": 5.192809852056332e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_kan",
+      "seed": 0,
+      "parameter_derivative_relative_l2": 0.0014005173513198582,
+      "per_field_relative_l2": {
+        "h": 0.29389550641709133,
+        "u": 0.0011405194670881063,
+        "v": 0.0013686767277636316,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 2.754601135104698e-05,
+        "u": 3.2538962209669695e-05,
+        "v": 6.852387746754851e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "direct_mlp",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.06966294233573177,
+      "per_field_relative_l2": {
+        "h": 9.053563359786722,
+        "u": 0.10150452051003236,
+        "v": 0.05287557854254507,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0008485654037941595,
+        "u": 0.002895918791653064,
+        "v": 0.002647257450629221,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "direct_kan",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.050519673413164615,
+      "per_field_relative_l2": {
+        "h": 11.280071420698292,
+        "u": 0.04723869442173031,
+        "v": 0.04701557216990737,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0010572498340760815,
+        "u": 0.0013477175418559295,
+        "v": 0.002353871620000101,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_mlp",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.000991824441589285,
+      "per_field_relative_l2": {
+        "h": 0.16256389143046623,
+        "u": 0.0011028591537173762,
+        "v": 0.0009030916827256252,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 1.5236663034442289e-05,
+        "u": 3.146451539053457e-05,
+        "v": 4.521399579151762e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_kan",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.05018735779251657,
+      "per_field_relative_l2": {
+        "h": 15.689501490867961,
+        "u": 0.0773274291209946,
+        "v": 0.02307071087899369,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.001470533494807405,
+        "u": 0.002206147607776501,
+        "v": 0.0011550532958535262,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.0011044027157800838,
+      "per_field_relative_l2": {
+        "h": 0.23151667205011256,
+        "u": 0.0011250755064886706,
+        "v": 0.0010084105578534062,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 2.1699416074767688e-05,
+        "u": 3.209834680167873e-05,
+        "v": 5.048686815639533e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_kan",
+      "seed": 1,
+      "parameter_derivative_relative_l2": 0.0011158661959949883,
+      "per_field_relative_l2": {
+        "h": 0.21780744799357768,
+        "u": 0.0011161165794465564,
+        "v": 0.0010386132700995747,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 2.0414488495985915e-05,
+        "u": 3.1842749070228504e-05,
+        "v": 5.199899071328701e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "direct_mlp",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.11731412025168433,
+      "per_field_relative_l2": {
+        "h": 18.965935352482187,
+        "u": 0.1368098641676644,
+        "v": 0.10437039210081837,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0017776245607555013,
+        "u": 0.0039031784450179684,
+        "v": 0.005225385815715855,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "direct_kan",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.08089003109628988,
+      "per_field_relative_l2": {
+        "h": 18.032981324655847,
+        "u": 0.10252385283085269,
+        "v": 0.06414852390699011,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 0.0016901813652000115,
+        "u": 0.002925000290762369,
+        "v": 0.0032116463316426234,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_mlp",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.0013326117053638808,
+      "per_field_relative_l2": {
+        "h": 0.34078848606223067,
+        "u": 0.001413720356034687,
+        "v": 0.0011386409713460193,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 3.19411603798186e-05,
+        "u": 4.033336963331275e-05,
+        "v": 5.700695629386027e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "series_kan",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.003569067475752851,
+      "per_field_relative_l2": {
+        "h": 0.3354858547117699,
+        "u": 0.0036704974470106733,
+        "v": 0.003479278829513992,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 3.144415943839245e-05,
+        "u": 0.00010471910490392619,
+        "v": 0.00017419283264837252,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.0012816899852482527,
+      "per_field_relative_l2": {
+        "h": 0.26681988965279,
+        "u": 0.0013610959090374047,
+        "v": 0.0011511216519681034,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 2.500828882572337e-05,
+        "u": 3.883199684524349e-05,
+        "v": 5.7631811390985146e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    },
+    {
+      "method": "chain_kan",
+      "seed": 2,
+      "parameter_derivative_relative_l2": 0.001004873854935396,
+      "per_field_relative_l2": {
+        "h": 0.17644535791230886,
+        "u": 0.00117324749336179,
+        "v": 0.0008840664236893115,
+        "b": 0.0
+      },
+      "per_field_absolute_derivative_error_rms": {
+        "h": 1.6537734418416938e-05,
+        "u": 3.347269112955863e-05,
+        "v": 4.42614812257714e-05,
+        "b": 0.0
+      },
+      "reference_derivative_field_rms": {
+        "h": 9.372722872446429e-05,
+        "u": 0.02852994898258587,
+        "v": 0.05006578695870285,
+        "b": 0.0
+      }
+    }
+  ],
+  "checkpoint_replay_max": 0.0,
+  "scope": "post-hoc local central finite differences; weak sensitivities can have ill-conditioned relative errors; no parameter-gradient certificate"
+}

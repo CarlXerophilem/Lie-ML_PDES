@@ -1,0 +1,3759 @@
+{
+  "arguments": {
+    "task": "suite",
+    "cases": [
+      "all"
+    ],
+    "architectures": [
+      "mlp"
+    ],
+    "methods": [
+      "vanilla",
+      "lie",
+      "reweighted"
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "steps": 600,
+    "collocation": 128,
+    "width": 32,
+    "lr": 0.001,
+    "horizon": 0.25,
+    "grids": [
+      12,
+      18,
+      24
+    ],
+    "eval_grid": 16,
+    "threads": 1,
+    "sym_weight": 1.0,
+    "generators": null,
+    "accuracy": 0.05,
+    "out": "results/suite_pilot"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "torch": "2.14.1+cpu",
+    "torch_threads": 1,
+    "device": "CPU",
+    "dtype": "float64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "cases": [
+    {
+      "name": "flat",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "topography",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "rotation_drag",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.2,
+      "drag": 0.05,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "sve_m2.9",
+      "m": 2.9,
+      "kappa": 0.01,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "sve_m3",
+      "m": 3.0,
+      "kappa": 0.01,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "sve_m3.1",
+      "m": 3.1,
+      "kappa": 0.01,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "sve_m4",
+      "m": 4.0,
+      "kappa": 0.01,
+      "coriolis": 0.0,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0.02,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    }
+  ],
+  "reference_wall_seconds": 0.5810871170001519,
+  "runs": [
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009644340002523677,
+      "train_seconds": 2.959425781007212,
+      "monitor_seconds": 0.011459789000582532,
+      "training_wall_seconds": 3.650194081000336,
+      "total_seconds": 3.6730676520000998,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0005150946334995679,
+          "evolution_relative_l2": 0.15434285994610872,
+          "max_active_field_evolution_error": 0.2519721505883036,
+          "field_evolution_relative_l2": {
+            "h": 0.2519721505883036,
+            "u": 0.15726337846991126,
+            "v": 0.1321469427450087,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00027198857765498263,
+            "u": 0.00045803083179918693,
+            "v": 0.0003848790143904802,
+            "b": 0.0
+          },
+          "mass_drift": 3.4270548434855996e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2855483692388434,
+          "independent_pde_mse": 0.0003816923590982356,
+          "inference_seconds": 0.0008519049997630646,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008015433752212805,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed0/vanilla",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0011979559999417688,
+      "train_seconds": 4.401932841997223,
+      "monitor_seconds": 0.011436084999786544,
+      "training_wall_seconds": 4.416253644000335,
+      "total_seconds": 4.439497483000196,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0005404217370358297,
+          "evolution_relative_l2": 0.1619318685276573,
+          "max_active_field_evolution_error": 0.2434892848249931,
+          "field_evolution_relative_l2": {
+            "h": 0.2434892848249931,
+            "u": 0.1664267375544143,
+            "v": 0.1421413399744659,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002628318411346409,
+            "u": 0.00048471918750148156,
+            "v": 0.0004139877752531731,
+            "b": 0.0
+          },
+          "mass_drift": 3.8057486858811274e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2856956393567406,
+          "independent_pde_mse": 0.00039692202727772854,
+          "inference_seconds": 0.0008520950000274752,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009077442217766076,
+        "weighted_extra_gradient_norm": 0.001016101815643985,
+        "extra_to_pde_norm_ratio": 1.119370182996377,
+        "gradient_cosine": 0.887243399163018,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed0/lie",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009736279998833197,
+      "train_seconds": 3.0081895530011025,
+      "monitor_seconds": 0.010611651999170135,
+      "training_wall_seconds": 3.0213005030000204,
+      "total_seconds": 3.0417549869998766,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0005404217370358295,
+          "evolution_relative_l2": 0.16193186852765726,
+          "max_active_field_evolution_error": 0.24348928482499316,
+          "field_evolution_relative_l2": {
+            "h": 0.24348928482499316,
+            "u": 0.1664267375544142,
+            "v": 0.14214133997446587,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00026283184113464093,
+            "u": 0.00048471918750148124,
+            "v": 0.00041398777525317306,
+            "b": 0.0
+          },
+          "mass_drift": 3.8057486858811274e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2856956393567406,
+          "independent_pde_mse": 0.0003969220272777291,
+          "inference_seconds": 0.0008444439999948372,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.000907744221776592,
+        "weighted_extra_gradient_norm": 0.001016101815643974,
+        "extra_to_pde_norm_ratio": 1.119370182996384,
+        "gradient_cosine": 0.8872433991630172,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed0/reweighted",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009277589997509494,
+      "train_seconds": 2.9119394770077633,
+      "monitor_seconds": 0.010687295000934682,
+      "training_wall_seconds": 2.9251125329997194,
+      "total_seconds": 2.9466661729998123,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0004016494916920336,
+          "evolution_relative_l2": 0.12035017880593256,
+          "max_active_field_evolution_error": 0.21410729394538627,
+          "field_evolution_relative_l2": {
+            "h": 0.21410729394538627,
+            "u": 0.10802232607476736,
+            "v": 0.11398327902676494,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00023111577295267214,
+            "u": 0.00031461587781147083,
+            "v": 0.000331977200361477,
+            "b": 0.0
+          },
+          "mass_drift": 1.8410645213129406e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2853534955914019,
+          "independent_pde_mse": 0.000358934385532455,
+          "inference_seconds": 0.0008454449998680502,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.000421673570452022,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed1/vanilla",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008958610001172929,
+      "train_seconds": 4.509750171006999,
+      "monitor_seconds": 0.01099318500064328,
+      "training_wall_seconds": 4.523407483000028,
+      "total_seconds": 4.547167939999781,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0004046166705331409,
+          "evolution_relative_l2": 0.12123926372067272,
+          "max_active_field_evolution_error": 0.21125842965677422,
+          "field_evolution_relative_l2": {
+            "h": 0.21125842965677422,
+            "u": 0.1087593109844288,
+            "v": 0.11600848718678707,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00022804059760498974,
+            "u": 0.0003167623521812826,
+            "v": 0.00033787563512185524,
+            "b": 0.0
+          },
+          "mass_drift": 2.239038720108777e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2853351576174309,
+          "independent_pde_mse": 0.00035280481521364677,
+          "inference_seconds": 0.000849000000016531,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.00043038622933023134,
+        "weighted_extra_gradient_norm": 0.0005281995698222739,
+        "extra_to_pde_norm_ratio": 1.22726875031355,
+        "gradient_cosine": 0.8791636482247481,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed1/lie",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0021319150000636,
+      "train_seconds": 3.1316537440047796,
+      "monitor_seconds": 0.01101396299964108,
+      "training_wall_seconds": 3.1462672840002597,
+      "total_seconds": 3.1680134729999736,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.00040461667053314106,
+          "evolution_relative_l2": 0.12123926372067277,
+          "max_active_field_evolution_error": 0.21125842965677372,
+          "field_evolution_relative_l2": {
+            "h": 0.21125842965677372,
+            "u": 0.10875931098442887,
+            "v": 0.11600848718678722,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002280405976049892,
+            "u": 0.00031676235218128284,
+            "v": 0.0003378756351218557,
+            "b": 0.0
+          },
+          "mass_drift": 2.239038720108777e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28533515761743095,
+          "independent_pde_mse": 0.00035280481521364644,
+          "inference_seconds": 0.0008464480001748598,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.00043038622933022885,
+        "weighted_extra_gradient_norm": 0.0005281995698222864,
+        "extra_to_pde_norm_ratio": 1.227268750313586,
+        "gradient_cosine": 0.8791636482247407,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed1/reweighted",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008766539999669476,
+      "train_seconds": 3.0246093490009116,
+      "monitor_seconds": 0.011128295000162325,
+      "training_wall_seconds": 3.038158795000072,
+      "total_seconds": 3.059178019999763,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0004806914302039675,
+          "evolution_relative_l2": 0.14403429052484562,
+          "max_active_field_evolution_error": 0.24407750381331794,
+          "field_evolution_relative_l2": {
+            "h": 0.24407750381331794,
+            "u": 0.14908787742843843,
+            "v": 0.11803020700641896,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.000263466787677783,
+            "u": 0.00043421962044894007,
+            "v": 0.00034376391006329737,
+            "b": 0.0
+          },
+          "mass_drift": 1.3686410599289545e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28556492434809816,
+          "independent_pde_mse": 0.0004108892429407784,
+          "inference_seconds": 0.0008749500002522836,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009061306981230325,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed2/vanilla",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009909240002343722,
+      "train_seconds": 4.449760796003375,
+      "monitor_seconds": 0.011422885000229144,
+      "training_wall_seconds": 4.463809797000067,
+      "total_seconds": 4.4875312130002385,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.00047422604992965216,
+          "evolution_relative_l2": 0.1420970051848736,
+          "max_active_field_evolution_error": 0.23085300321746144,
+          "field_evolution_relative_l2": {
+            "h": 0.23085300321746144,
+            "u": 0.1509794252361666,
+            "v": 0.11419931592034423,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00024919174538097987,
+            "u": 0.0004397287683776641,
+            "v": 0.0003326064095202028,
+            "b": 0.0
+          },
+          "mass_drift": 1.2732381244440205e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2856728787318773,
+          "independent_pde_mse": 0.00040299042227447937,
+          "inference_seconds": 0.0008911239997360099,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009266356105570304,
+        "weighted_extra_gradient_norm": 0.0010495807409038598,
+        "extra_to_pde_norm_ratio": 1.132679047671094,
+        "gradient_cosine": 0.9136149843832571,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed2/lie",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008957009999903676,
+      "train_seconds": 3.05270688199289,
+      "monitor_seconds": 0.010437489999731042,
+      "training_wall_seconds": 3.0656256119996215,
+      "total_seconds": 3.0868182939998405,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "flat": {
+          "relative_l2": 0.0004742260499296521,
+          "evolution_relative_l2": 0.14209700518487356,
+          "max_active_field_evolution_error": 0.2308530032174612,
+          "field_evolution_relative_l2": {
+            "h": 0.2308530032174612,
+            "u": 0.15097942523616648,
+            "v": 0.11419931592034441,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002491917453809796,
+            "u": 0.00043972876837766376,
+            "v": 0.00033260640952020333,
+            "b": 0.0
+          },
+          "mass_drift": 1.2732381244440205e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2856728787318773,
+          "independent_pde_mse": 0.0004029904222744805,
+          "inference_seconds": 0.0008515849999639613,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009266356105570337,
+        "weighted_extra_gradient_norm": 0.0010495807409038602,
+        "extra_to_pde_norm_ratio": 1.1326790476710902,
+        "gradient_cosine": 0.9136149843832594,
+        "case": "flat",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/flat/mlp/seed2/reweighted",
+      "group": "flat"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009407090001332108,
+      "train_seconds": 2.9987150510032734,
+      "monitor_seconds": 0.011398490999454225,
+      "training_wall_seconds": 3.012670957999944,
+      "total_seconds": 3.033579361000193,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.000536694718291297,
+          "evolution_relative_l2": 0.13457086785979278,
+          "max_active_field_evolution_error": 0.26071479991179797,
+          "field_evolution_relative_l2": {
+            "h": 0.26071479991179797,
+            "u": 0.12796849485216819,
+            "v": 0.11934827423197238,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0003058772117744909,
+            "u": 0.0004480536061112605,
+            "v": 0.0004178717950443322,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 6.817939377223858e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28756338427250633,
+          "independent_pde_mse": 0.00043434469191203366,
+          "inference_seconds": 0.000845014999867999,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007730004772922636,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed0/vanilla",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0011731089998647803,
+      "train_seconds": 4.38114712399647,
+      "monitor_seconds": 0.01100753199943938,
+      "training_wall_seconds": 4.394885131000137,
+      "total_seconds": 4.418043409999882,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.0005721097616844523,
+          "evolution_relative_l2": 0.14345083809665732,
+          "max_active_field_evolution_error": 0.25184503148092274,
+          "field_evolution_relative_l2": {
+            "h": 0.25184503148092274,
+            "u": 0.144511389396046,
+            "v": 0.12434517393558944,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00029547097462324603,
+            "u": 0.0005059749215449175,
+            "v": 0.0004353673429460008,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 6.733948185155825e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2875547875760545,
+          "independent_pde_mse": 0.000457190608787417,
+          "inference_seconds": 0.0008577339999646938,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009380620767064467,
+        "weighted_extra_gradient_norm": 0.0011061620389834859,
+        "extra_to_pde_norm_ratio": 1.1791991878269308,
+        "gradient_cosine": 0.8967071508221374,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed0/lie",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000921700000162673,
+      "train_seconds": 3.0082727780031746,
+      "monitor_seconds": 0.01238238599989927,
+      "training_wall_seconds": 3.022922385000129,
+      "total_seconds": 3.043317936999756,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.0005721097616844523,
+          "evolution_relative_l2": 0.14345083809665732,
+          "max_active_field_evolution_error": 0.25184503148092197,
+          "field_evolution_relative_l2": {
+            "h": 0.25184503148092197,
+            "u": 0.14451138939604605,
+            "v": 0.1243451739355895,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002954709746232451,
+            "u": 0.0005059749215449177,
+            "v": 0.000435367342946001,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 6.733948185155825e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2875547875760545,
+          "independent_pde_mse": 0.0004571906087874175,
+          "inference_seconds": 0.0008432919998995203,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0009380620767064457,
+        "weighted_extra_gradient_norm": 0.0011061620389834729,
+        "extra_to_pde_norm_ratio": 1.1791991878269181,
+        "gradient_cosine": 0.8967071508221341,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed0/reweighted",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.001013758999761194,
+      "train_seconds": 2.9107646670004215,
+      "monitor_seconds": 0.01082634499971391,
+      "training_wall_seconds": 2.9240049799996086,
+      "total_seconds": 2.9442202249997536,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.0003568312296313189,
+          "evolution_relative_l2": 0.08947188525321148,
+          "max_active_field_evolution_error": 0.24152919527099193,
+          "field_evolution_relative_l2": {
+            "h": 0.24152919527099193,
+            "u": 0.06915628221056097,
+            "v": 0.07467649568236352,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00028336817409913516,
+            "u": 0.00024213554801504227,
+            "v": 0.0002614633642524004,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.7578703731045984e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28785234957001965,
+          "independent_pde_mse": 0.0003157244432609196,
+          "inference_seconds": 0.0008529460001227562,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0002965837368486595,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed1/vanilla",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009800070001801942,
+      "train_seconds": 4.585096186999181,
+      "monitor_seconds": 0.011660874999051885,
+      "training_wall_seconds": 4.599470941000163,
+      "total_seconds": 4.623936264999884,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.00035952364500864106,
+          "evolution_relative_l2": 0.09014698165646813,
+          "max_active_field_evolution_error": 0.2325104547113819,
+          "field_evolution_relative_l2": {
+            "h": 0.2325104547113819,
+            "u": 0.07096206598450239,
+            "v": 0.07784421823664166,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002727871590703593,
+            "u": 0.0002484581036777179,
+            "v": 0.0002725544497203461,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.934999145765005e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28786071869435376,
+          "independent_pde_mse": 0.0003023239352412117,
+          "inference_seconds": 0.0008786550001786964,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0003069535549894749,
+        "weighted_extra_gradient_norm": 0.00039572739175440215,
+        "extra_to_pde_norm_ratio": 1.289209345589665,
+        "gradient_cosine": 0.7943952339153972,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed1/lie",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010446450000927143,
+      "train_seconds": 3.160704745003841,
+      "monitor_seconds": 0.011628601000211347,
+      "training_wall_seconds": 3.1747846070002197,
+      "total_seconds": 3.195773114000076,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.00035952364500864165,
+          "evolution_relative_l2": 0.09014698165646828,
+          "max_active_field_evolution_error": 0.2325104547113831,
+          "field_evolution_relative_l2": {
+            "h": 0.2325104547113831,
+            "u": 0.07096206598450194,
+            "v": 0.07784421823664203,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002727871590703607,
+            "u": 0.0002484581036777163,
+            "v": 0.0002725544497203474,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.934999145765005e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28786071869435376,
+          "independent_pde_mse": 0.00030232393524121234,
+          "inference_seconds": 0.0008621100000709703,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0003069535549894962,
+        "weighted_extra_gradient_norm": 0.00039572739175439755,
+        "extra_to_pde_norm_ratio": 1.2892093455895604,
+        "gradient_cosine": 0.7943952339153973,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed1/reweighted",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009490399997957866,
+      "train_seconds": 2.9338961329949598,
+      "monitor_seconds": 0.011156510000091657,
+      "training_wall_seconds": 2.9474594769999385,
+      "total_seconds": 2.967719539999962,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.0004293603742146565,
+          "evolution_relative_l2": 0.1076578475872224,
+          "max_active_field_evolution_error": 0.20798277491494066,
+          "field_evolution_relative_l2": {
+            "h": 0.20798277491494066,
+            "u": 0.08982187062572841,
+            "v": 0.10750289814807076,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002440106634131465,
+            "u": 0.00031449157144505433,
+            "v": 0.0003763978097771942,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.9094191865919328e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28781983978844383,
+          "independent_pde_mse": 0.0004387344488767987,
+          "inference_seconds": 0.0008447840000371798,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007001454992065396,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed2/vanilla",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009710250001262466,
+      "train_seconds": 4.362796158988203,
+      "monitor_seconds": 0.010675769000044966,
+      "training_wall_seconds": 4.375927735000005,
+      "total_seconds": 4.398758865000218,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.0004373030585509565,
+          "evolution_relative_l2": 0.10964939676377335,
+          "max_active_field_evolution_error": 0.2036589182241984,
+          "field_evolution_relative_l2": {
+            "h": 0.2036589182241984,
+            "u": 0.09261982026853179,
+            "v": 0.11027423808223957,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00023893780514378798,
+            "u": 0.00032428797819832576,
+            "v": 0.0003861010484743728,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.5868912287174695e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2878445122978511,
+          "independent_pde_mse": 0.0004319298658469208,
+          "inference_seconds": 0.000841589000174281,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007431219791286734,
+        "weighted_extra_gradient_norm": 0.0009525002008536826,
+        "extra_to_pde_norm_ratio": 1.2817548499514302,
+        "gradient_cosine": 0.7612949310716464,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed2/lie",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009980049999285256,
+      "train_seconds": 2.9796369989994673,
+      "monitor_seconds": 0.010851043998627574,
+      "training_wall_seconds": 2.9929519639999853,
+      "total_seconds": 3.01361582599975,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "topography": {
+          "relative_l2": 0.00043730305855095515,
+          "evolution_relative_l2": 0.109649396763773,
+          "max_active_field_evolution_error": 0.20365891822419846,
+          "field_evolution_relative_l2": {
+            "h": 0.20365891822419846,
+            "u": 0.09261982026853115,
+            "v": 0.11027423808223945,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00023893780514378803,
+            "u": 0.00032428797819832354,
+            "v": 0.0003861010484743724,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 2.5868912287174695e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2878445122978511,
+          "independent_pde_mse": 0.00043192986584692015,
+          "inference_seconds": 0.0008794559998932527,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007431219791286797,
+        "weighted_extra_gradient_norm": 0.000952500200853669,
+        "extra_to_pde_norm_ratio": 1.2817548499514009,
+        "gradient_cosine": 0.7612949310716399,
+        "case": "topography",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/topography/mlp/seed2/reweighted",
+      "group": "topography"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000847126999815373,
+      "train_seconds": 3.094769320003252,
+      "monitor_seconds": 0.011424318999615934,
+      "training_wall_seconds": 3.1089762510000583,
+      "total_seconds": 3.1318366049999895,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.000487523851591551,
+          "evolution_relative_l2": 0.048385915039057974,
+          "max_active_field_evolution_error": 0.25093494154042595,
+          "field_evolution_relative_l2": {
+            "h": 0.25093494154042595,
+            "u": 0.0880864386721673,
+            "v": 0.030481320617046326,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002929149179342705,
+            "u": 0.0004109020659938104,
+            "v": 0.0003632168963361484,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 7.659240578905546e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2841139459318422,
+          "independent_pde_mse": 0.00035497762294020314,
+          "inference_seconds": 0.0009047540002029564,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006029218667536933,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed0/vanilla",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008967019998635806,
+      "train_seconds": 4.582036960009191,
+      "monitor_seconds": 0.011233560000164289,
+      "training_wall_seconds": 4.59597783900017,
+      "total_seconds": 4.619935897000232,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.0005401658909315165,
+          "evolution_relative_l2": 0.05361054812043655,
+          "max_active_field_evolution_error": 0.2499935010481354,
+          "field_evolution_relative_l2": {
+            "h": 0.2499935010481354,
+            "u": 0.09893028368712709,
+            "v": 0.03524947725404326,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002918159798475837,
+            "u": 0.0004614859968137034,
+            "v": 0.0004200344823158747,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 7.455937818678926e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2841889513514691,
+          "independent_pde_mse": 0.000389122351797485,
+          "inference_seconds": 0.0008642640000289248,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007673324978948874,
+        "weighted_extra_gradient_norm": 0.0010868418114615773,
+        "extra_to_pde_norm_ratio": 1.4163896543457195,
+        "gradient_cosine": 0.7375278883550885,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed0/lie",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000891925000360061,
+      "train_seconds": 3.256048448998172,
+      "monitor_seconds": 0.011343858000145701,
+      "training_wall_seconds": 3.2699265220003326,
+      "total_seconds": 3.2985086840003532,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.0005401658909315163,
+          "evolution_relative_l2": 0.053610548120436544,
+          "max_active_field_evolution_error": 0.24999350104813628,
+          "field_evolution_relative_l2": {
+            "h": 0.24999350104813628,
+            "u": 0.0989302836871269,
+            "v": 0.03524947725404327,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00029181597984758475,
+            "u": 0.0004614859968137026,
+            "v": 0.00042003448231587475,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 7.455937818678926e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2841889513514691,
+          "independent_pde_mse": 0.0003891223517974846,
+          "inference_seconds": 0.0011078409997935523,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007673324978948793,
+        "weighted_extra_gradient_norm": 0.0010868418114616018,
+        "extra_to_pde_norm_ratio": 1.4163896543457666,
+        "gradient_cosine": 0.7375278883550905,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed0/reweighted",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008994569998321822,
+      "train_seconds": 3.0616780529940115,
+      "monitor_seconds": 0.011466246000054525,
+      "training_wall_seconds": 3.0756238849999136,
+      "total_seconds": 3.0956887349998397,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.0004711461752472898,
+          "evolution_relative_l2": 0.046760458451562584,
+          "max_active_field_evolution_error": 0.22130327758419419,
+          "field_evolution_relative_l2": {
+            "h": 0.22130327758419419,
+            "u": 0.07090110457749775,
+            "v": 0.03608686883447687,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00025832604656102166,
+            "u": 0.0003307366127101961,
+            "v": 0.00043001288104355394,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 1.0279719039774093e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2842033816701242,
+          "independent_pde_mse": 0.00035098600680313473,
+          "inference_seconds": 0.0008416900000156602,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006711929551599921,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed1/vanilla",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008674289997543383,
+      "train_seconds": 4.462410554993312,
+      "monitor_seconds": 0.011035365999305213,
+      "training_wall_seconds": 4.475894915000026,
+      "total_seconds": 4.508270630999959,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.0004896431384698466,
+          "evolution_relative_l2": 0.048596250665718786,
+          "max_active_field_evolution_error": 0.21661930654131153,
+          "field_evolution_relative_l2": {
+            "h": 0.21661930654131153,
+            "u": 0.07465619227769431,
+            "v": 0.03797032257387944,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002528584740292328,
+            "u": 0.0003482531943458917,
+            "v": 0.00045245620724366413,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 1.3042160281528936e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.284216147328459,
+          "independent_pde_mse": 0.0003466748455789412,
+          "inference_seconds": 0.0008419900000262714,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007194460590560566,
+        "weighted_extra_gradient_norm": 0.0008406486462483308,
+        "extra_to_pde_norm_ratio": 1.1684665384800317,
+        "gradient_cosine": 0.7435581669009015,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed1/lie",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.002827344999786874,
+      "train_seconds": 3.055776853999305,
+      "monitor_seconds": 0.010783617000470258,
+      "training_wall_seconds": 3.070830082000157,
+      "total_seconds": 3.091655302000163,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.000489643138469847,
+          "evolution_relative_l2": 0.04859625066571883,
+          "max_active_field_evolution_error": 0.21661930654131223,
+          "field_evolution_relative_l2": {
+            "h": 0.21661930654131223,
+            "u": 0.0746561922776943,
+            "v": 0.03797032257387948,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00025285847402923363,
+            "u": 0.00034825319434589157,
+            "v": 0.00045245620724366456,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 1.3042160281528936e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.284216147328459,
+          "independent_pde_mse": 0.00034667484557894106,
+          "inference_seconds": 0.0008438239997303754,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007194460590560395,
+        "weighted_extra_gradient_norm": 0.000840648646248328,
+        "extra_to_pde_norm_ratio": 1.1684665384800554,
+        "gradient_cosine": 0.7435581669008852,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed1/reweighted",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008378950001315388,
+      "train_seconds": 3.0059049450064776,
+      "monitor_seconds": 0.010709782999583695,
+      "training_wall_seconds": 3.0188451620001615,
+      "total_seconds": 3.039197275999868,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.0003698935634256187,
+          "evolution_relative_l2": 0.03671130853388705,
+          "max_active_field_evolution_error": 0.20694165394885508,
+          "field_evolution_relative_l2": {
+            "h": 0.20694165394885508,
+            "u": 0.06186851749281873,
+            "v": 0.023867276795507226,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.0002415618056676484,
+            "u": 0.0002886017648231473,
+            "v": 0.00028440362904787897,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 3.074415285264642e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.28428219648582026,
+          "independent_pde_mse": 0.0003887886281904046,
+          "inference_seconds": 0.0008377929998459877,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006846475807777555,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed2/vanilla",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009122050000769377,
+      "train_seconds": 4.564653567000278,
+      "monitor_seconds": 0.011634772999968845,
+      "training_wall_seconds": 4.578872246000174,
+      "total_seconds": 4.603402967999955,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.00039533629667568183,
+          "evolution_relative_l2": 0.03923645663767739,
+          "max_active_field_evolution_error": 0.2002866924687368,
+          "field_evolution_relative_l2": {
+            "h": 0.2002866924687368,
+            "u": 0.06944495913668287,
+            "v": 0.025810816750358456,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00023379350730378529,
+            "u": 0.0003239440441941146,
+            "v": 0.0003075629455084519,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 3.586264081389956e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2843335960829143,
+          "independent_pde_mse": 0.0003851163814081839,
+          "inference_seconds": 0.000934270000016113,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008220668697662881,
+        "weighted_extra_gradient_norm": 0.0011838246770352317,
+        "extra_to_pde_norm_ratio": 1.4400588572214212,
+        "gradient_cosine": 0.6164220197409599,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed2/lie",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008854159996189992,
+      "train_seconds": 3.2830787619959665,
+      "monitor_seconds": 0.011637139000868046,
+      "training_wall_seconds": 3.2973316619995785,
+      "total_seconds": 3.3185143329997118,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "rotation_drag": {
+          "relative_l2": 0.00039533629667568227,
+          "evolution_relative_l2": 0.039236456637677435,
+          "max_active_field_evolution_error": 0.20028669246873732,
+          "field_evolution_relative_l2": {
+            "h": 0.20028669246873732,
+            "u": 0.06944495913668293,
+            "v": 0.02581081675035847,
+            "b": null
+          },
+          "field_rmse": {
+            "h": 0.00023379350730378588,
+            "u": 0.0003239440441941149,
+            "v": 0.00030756294550845207,
+            "b": 4.5123527469141005e-18
+          },
+          "mass_drift": 3.586264081389956e-05,
+          "bed_mean_drift": 3.0047890861272706e-20,
+          "min_depth": 0.97,
+          "min_speed": 0.2843335960829143,
+          "independent_pde_mse": 0.0003851163814081842,
+          "inference_seconds": 0.0008921949997784395,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008220668697662948,
+        "weighted_extra_gradient_norm": 0.0011838246770352352,
+        "extra_to_pde_norm_ratio": 1.4400588572214137,
+        "gradient_cosine": 0.6164220197409637,
+        "case": "rotation_drag",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/rotation_drag/mlp/seed2/reweighted",
+      "group": "rotation_drag"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009303130000262172,
+      "train_seconds": 3.0496664920033254,
+      "monitor_seconds": 0.010843496999768831,
+      "training_wall_seconds": 3.0628168500002175,
+      "total_seconds": 3.0846341510000457,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0005286274675944456,
+          "evolution_relative_l2": 0.1325506423181056,
+          "max_active_field_evolution_error": 0.48855263370478885,
+          "field_evolution_relative_l2": {
+            "h": 0.22503291006094342,
+            "u": 0.13268540219489636,
+            "v": 0.11756117975689483,
+            "b": 0.48855263370478885
+          },
+          "field_rmse": {
+            "h": 0.0002640129292001239,
+            "u": 0.0004645594829508488,
+            "v": 0.00041160640115490553,
+            "b": 4.662340195348374e-07
+          },
+          "mass_drift": 3.806593256272528e-05,
+          "bed_mean_drift": 1.1999280087635902e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2881764019872748,
+          "independent_pde_mse": 0.00045444822421889495,
+          "inference_seconds": 0.0008733680001569155,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008130185418528395,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed0/vanilla",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008686699998179392,
+      "train_seconds": 5.359087869002451,
+      "monitor_seconds": 0.011213934000807058,
+      "training_wall_seconds": 5.373177753000164,
+      "total_seconds": 5.399743015999775,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0004956779782317463,
+          "evolution_relative_l2": 0.1242887258517633,
+          "max_active_field_evolution_error": 0.5037095777938377,
+          "field_evolution_relative_l2": {
+            "h": 0.22887505407697512,
+            "u": 0.12328752149554581,
+            "v": 0.10746242038131966,
+            "b": 0.5037095777938377
+          },
+          "field_rmse": {
+            "h": 0.0002685206063030265,
+            "u": 0.0004316555272307524,
+            "v": 0.00037624852186766516,
+            "b": 4.80698546955177e-07
+          },
+          "mass_drift": 4.237741443091636e-05,
+          "bed_mean_drift": 1.0785052244302771e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.28815966108670077,
+          "independent_pde_mse": 0.0004370568110323989,
+          "inference_seconds": 0.0008649950000290119,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008573657311367366,
+        "weighted_extra_gradient_norm": 0.0006610884242558068,
+        "extra_to_pde_norm_ratio": 0.7710693351124543,
+        "gradient_cosine": 0.7113318795801234,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed0/lie",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000891825000053359,
+      "train_seconds": 3.089889561997552,
+      "monitor_seconds": 0.010710225998991518,
+      "training_wall_seconds": 3.102894324999852,
+      "total_seconds": 3.123761711000043,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.000495677978231747,
+          "evolution_relative_l2": 0.1242887258517635,
+          "max_active_field_evolution_error": 0.503709577793837,
+          "field_evolution_relative_l2": {
+            "h": 0.22887505407697697,
+            "u": 0.1232875214955459,
+            "v": 0.10746242038131958,
+            "b": 0.503709577793837
+          },
+          "field_rmse": {
+            "h": 0.0002685206063030287,
+            "u": 0.0004316555272307527,
+            "v": 0.00037624852186766484,
+            "b": 4.806985469551762e-07
+          },
+          "mass_drift": 4.237741443091636e-05,
+          "bed_mean_drift": 1.0785052244302742e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.28815966108670077,
+          "independent_pde_mse": 0.00043705681103239853,
+          "inference_seconds": 0.0008424409998042393,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008573657311367397,
+        "weighted_extra_gradient_norm": 0.0006610884242558107,
+        "extra_to_pde_norm_ratio": 0.7710693351124561,
+        "gradient_cosine": 0.7113318795801268,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed0/reweighted",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010455170004206593,
+      "train_seconds": 3.301330693000182,
+      "monitor_seconds": 0.011174088999723608,
+      "training_wall_seconds": 3.315165569000328,
+      "total_seconds": 3.337707480000063,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0003981298251992943,
+          "evolution_relative_l2": 0.09982902382334713,
+          "max_active_field_evolution_error": 0.3832555577380922,
+          "field_evolution_relative_l2": {
+            "h": 0.21827392785576594,
+            "u": 0.07897100412994264,
+            "v": 0.0972861693296122,
+            "b": 0.3832555577380922
+          },
+          "field_rmse": {
+            "h": 0.0002560831615500626,
+            "u": 0.0002764940848039018,
+            "v": 0.00034061932793388725,
+            "b": 3.657472437274166e-07
+          },
+          "mass_drift": 1.943552136296489e-05,
+          "bed_mean_drift": 6.059440021547143e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2882468859736378,
+          "independent_pde_mse": 0.0003749039323002837,
+          "inference_seconds": 0.0009213889998136437,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005719186324757604,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed1/vanilla",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008899019999262237,
+      "train_seconds": 5.388873526008865,
+      "monitor_seconds": 0.01193580200060751,
+      "training_wall_seconds": 5.403515916999822,
+      "total_seconds": 5.428764601999774,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0003823974048192453,
+          "evolution_relative_l2": 0.0958841996240231,
+          "max_active_field_evolution_error": 0.38383078812545823,
+          "field_evolution_relative_l2": {
+            "h": 0.21990763613994593,
+            "u": 0.07335929326285523,
+            "v": 0.09278067196583867,
+            "b": 0.38383078812545823
+          },
+          "field_rmse": {
+            "h": 0.00025799985946526113,
+            "u": 0.00025684630550219307,
+            "v": 0.0003248446346282344,
+            "b": 3.6629619578940115e-07
+          },
+          "mass_drift": 2.0971484958609565e-05,
+          "bed_mean_drift": 5.90162338840051e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28818038837992593,
+          "independent_pde_mse": 0.0003736088532352655,
+          "inference_seconds": 0.0008518639997419086,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005878737718664608,
+        "weighted_extra_gradient_norm": 0.0004306438851238529,
+        "extra_to_pde_norm_ratio": 0.7325448178383375,
+        "gradient_cosine": 0.7113393019731105,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed1/lie",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000881538999692566,
+      "train_seconds": 3.110973389991159,
+      "monitor_seconds": 0.010737975000211009,
+      "training_wall_seconds": 3.1240293420000853,
+      "total_seconds": 3.1452063879996786,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0003823974048192449,
+          "evolution_relative_l2": 0.09588419962402298,
+          "max_active_field_evolution_error": 0.3838307881254583,
+          "field_evolution_relative_l2": {
+            "h": 0.21990763613994518,
+            "u": 0.07335929326285505,
+            "v": 0.09278067196583872,
+            "b": 0.3838307881254583
+          },
+          "field_rmse": {
+            "h": 0.00025799985946526027,
+            "u": 0.0002568463055021925,
+            "v": 0.00032484463462823464,
+            "b": 3.662961957894012e-07
+          },
+          "mass_drift": 2.0971484958609565e-05,
+          "bed_mean_drift": 5.901623388400544e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28818038837992593,
+          "independent_pde_mse": 0.000373608853235265,
+          "inference_seconds": 0.0008400070000789128,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005878737718664564,
+        "weighted_extra_gradient_norm": 0.00043064388512384507,
+        "extra_to_pde_norm_ratio": 0.7325448178383296,
+        "gradient_cosine": 0.7113393019731051,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed1/reweighted",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009048550000443356,
+      "train_seconds": 3.1128576559954126,
+      "monitor_seconds": 0.010716664000483433,
+      "training_wall_seconds": 3.1259080730001187,
+      "total_seconds": 3.1468793760000153,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0004130106637667638,
+          "evolution_relative_l2": 0.10356031822491492,
+          "max_active_field_evolution_error": 0.455697348170735,
+          "field_evolution_relative_l2": {
+            "h": 0.19488285856761464,
+            "u": 0.08720900689335052,
+            "v": 0.1038449349888773,
+            "b": 0.455697348170735
+          },
+          "field_rmse": {
+            "h": 0.0002286403101101758,
+            "u": 0.0003053370640692097,
+            "v": 0.0003635829451297257,
+            "b": 4.3487966632759856e-07
+          },
+          "mass_drift": 2.7472761042535154e-05,
+          "bed_mean_drift": 2.232226383457431e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28754629838979984,
+          "independent_pde_mse": 0.0004646900734330329,
+          "inference_seconds": 0.000858144000176253,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006290681666876403,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed2/vanilla",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.001064746999873023,
+      "train_seconds": 5.202122225000039,
+      "monitor_seconds": 0.010908889999882376,
+      "training_wall_seconds": 5.215847044999919,
+      "total_seconds": 5.240279847000238,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0003841197415924293,
+          "evolution_relative_l2": 0.09631606678864946,
+          "max_active_field_evolution_error": 0.4553668714868734,
+          "field_evolution_relative_l2": {
+            "h": 0.19799752438387286,
+            "u": 0.07970442636744027,
+            "v": 0.09402388132307517,
+            "b": 0.4553668714868734
+          },
+          "field_rmse": {
+            "h": 0.00023229449582642115,
+            "u": 0.00027906195021939106,
+            "v": 0.0003291973719048796,
+            "b": 4.345642868535162e-07
+          },
+          "mass_drift": 2.9815463826299293e-05,
+          "bed_mean_drift": 2.2013192771370854e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2875666499114381,
+          "independent_pde_mse": 0.00044429054816732947,
+          "inference_seconds": 0.0008407780001107312,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006521188466470832,
+        "weighted_extra_gradient_norm": 0.0004917076046045362,
+        "extra_to_pde_norm_ratio": 0.7540153257840758,
+        "gradient_cosine": 0.621434638549978,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed2/lie",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009256369999093295,
+      "train_seconds": 3.148212686003262,
+      "monitor_seconds": 0.010985079999954905,
+      "training_wall_seconds": 3.1615715709999677,
+      "total_seconds": 3.1925829000001613,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m2.9": {
+          "relative_l2": 0.0003841197415924288,
+          "evolution_relative_l2": 0.09631606678864933,
+          "max_active_field_evolution_error": 0.4553668714868734,
+          "field_evolution_relative_l2": {
+            "h": 0.19799752438387283,
+            "u": 0.07970442636744013,
+            "v": 0.09402388132307501,
+            "b": 0.4553668714868734
+          },
+          "field_rmse": {
+            "h": 0.00023229449582642112,
+            "u": 0.0002790619502193906,
+            "v": 0.00032919737190487906,
+            "b": 4.345642868535162e-07
+          },
+          "mass_drift": 2.9815463826299293e-05,
+          "bed_mean_drift": 2.2013192771371152e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2875666499114381,
+          "independent_pde_mse": 0.00044429054816732833,
+          "inference_seconds": 0.0008732570004212903,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0006521188466470789,
+        "weighted_extra_gradient_norm": 0.0004917076046045384,
+        "extra_to_pde_norm_ratio": 0.7540153257840841,
+        "gradient_cosine": 0.6214346385499722,
+        "case": "sve_m2.9",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m2.9/mlp/seed2/reweighted",
+      "group": "sve_m2.9"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0030106199997135263,
+      "train_seconds": 3.0441894859959575,
+      "monitor_seconds": 0.011120842000309494,
+      "training_wall_seconds": 3.059842779000064,
+      "total_seconds": 3.0806450219997714,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.0004443973399620172,
+          "evolution_relative_l2": 0.1114301331471333,
+          "max_active_field_evolution_error": 0.5108452811094,
+          "field_evolution_relative_l2": {
+            "h": 0.22577348064989042,
+            "u": 0.10781218911091409,
+            "v": 0.09423643976685837,
+            "b": 0.5108452811094
+          },
+          "field_rmse": {
+            "h": 0.00026488193326546216,
+            "u": 0.00037747396259866996,
+            "v": 0.0003299423064637991,
+            "b": 4.357706686053092e-07
+          },
+          "mass_drift": 5.742710307776733e-05,
+          "bed_mean_drift": 1.6510128138896113e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2881409252182115,
+          "independent_pde_mse": 0.0004284514218270997,
+          "inference_seconds": 0.0008407980003539706,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007696860997192836,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed0/vanilla",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008905730001060874,
+      "train_seconds": 5.393853921993468,
+      "monitor_seconds": 0.011683498999445874,
+      "training_wall_seconds": 5.408308480999949,
+      "total_seconds": 5.433062397999947,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.00048604116835544644,
+          "evolution_relative_l2": 0.12187208885963331,
+          "max_active_field_evolution_error": 0.5041281665507474,
+          "field_evolution_relative_l2": {
+            "h": 0.2210000155171446,
+            "u": 0.11853011290259304,
+            "v": 0.10881110055560549,
+            "b": 0.5041281665507474
+          },
+          "field_rmse": {
+            "h": 0.00025928160913041585,
+            "u": 0.0004149997488556717,
+            "v": 0.0003809713691964715,
+            "b": 4.300407115898198e-07
+          },
+          "mass_drift": 5.289050730539202e-05,
+          "bed_mean_drift": 1.6425710352376514e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.28814490543000737,
+          "independent_pde_mse": 0.00044687492105194564,
+          "inference_seconds": 0.0008474480000586482,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008594785180450342,
+        "weighted_extra_gradient_norm": 0.0010163154925807243,
+        "extra_to_pde_norm_ratio": 1.182479225766376,
+        "gradient_cosine": 0.8262632134586801,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed0/lie",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009337980000054813,
+      "train_seconds": 3.1275960740067603,
+      "monitor_seconds": 0.011315566999655857,
+      "training_wall_seconds": 3.141350025000065,
+      "total_seconds": 3.163156064999839,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.00048604116835544676,
+          "evolution_relative_l2": 0.1218720888596334,
+          "max_active_field_evolution_error": 0.5041281665507377,
+          "field_evolution_relative_l2": {
+            "h": 0.22100001551714407,
+            "u": 0.11853011290259313,
+            "v": 0.10881110055560564,
+            "b": 0.5041281665507377
+          },
+          "field_rmse": {
+            "h": 0.00025928160913041526,
+            "u": 0.000414999748855672,
+            "v": 0.00038097136919647203,
+            "b": 4.300407115898115e-07
+          },
+          "mass_drift": 5.289050730539202e-05,
+          "bed_mean_drift": 1.6425710352376517e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.28814490543000737,
+          "independent_pde_mse": 0.0004468749210519452,
+          "inference_seconds": 0.000845194000248739,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008594785180450299,
+        "weighted_extra_gradient_norm": 0.0010163154925807321,
+        "extra_to_pde_norm_ratio": 1.182479225766391,
+        "gradient_cosine": 0.8262632134586807,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed0/reweighted",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009196070000143663,
+      "train_seconds": 3.019339159991887,
+      "monitor_seconds": 0.011160013999869989,
+      "training_wall_seconds": 3.032922784999755,
+      "total_seconds": 3.053692511999998,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.00038384003353507536,
+          "evolution_relative_l2": 0.09624572921086622,
+          "max_active_field_evolution_error": 0.43669284476525116,
+          "field_evolution_relative_l2": {
+            "h": 0.21792195941582992,
+            "u": 0.07240270952162202,
+            "v": 0.09482636760031726,
+            "b": 0.43669284476525116
+          },
+          "field_rmse": {
+            "h": 0.0002556703725561784,
+            "u": 0.00025349766006411994,
+            "v": 0.00033200777233347934,
+            "b": 3.7251578897868847e-07
+          },
+          "mass_drift": 8.240297436179489e-06,
+          "bed_mean_drift": 1.1105151870597992e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880607231375149,
+          "independent_pde_mse": 0.00037717972373865375,
+          "inference_seconds": 0.0008456760001536168,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0004875064178207524,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed1/vanilla",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009966830002667848,
+      "train_seconds": 5.595042342004945,
+      "monitor_seconds": 0.01167570200004775,
+      "training_wall_seconds": 5.609978068000146,
+      "total_seconds": 5.635232147000352,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.0004111154663308275,
+          "evolution_relative_l2": 0.10308489055313735,
+          "max_active_field_evolution_error": 0.4421842503699339,
+          "field_evolution_relative_l2": {
+            "h": 0.21088165089539906,
+            "u": 0.07936897660117613,
+            "v": 0.10560926167141545,
+            "b": 0.4421842503699339
+          },
+          "field_rmse": {
+            "h": 0.0002474105427200566,
+            "u": 0.0002778880788166296,
+            "v": 0.00036976103369367944,
+            "b": 3.7720016912357045e-07
+          },
+          "mass_drift": 7.316859699013634e-06,
+          "bed_mean_drift": 1.0757221669797664e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880991702771142,
+          "independent_pde_mse": 0.0003700042183823122,
+          "inference_seconds": 0.0008668769996802439,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005369724800287692,
+        "weighted_extra_gradient_norm": 0.0007316365199602534,
+        "extra_to_pde_norm_ratio": 1.3625214460172237,
+        "gradient_cosine": 0.7610307070975133,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed1/lie",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008840840000630124,
+      "train_seconds": 3.2733030430053986,
+      "monitor_seconds": 0.015406590001020959,
+      "training_wall_seconds": 3.2913159180002367,
+      "total_seconds": 3.3141892180001378,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.0004111154663308266,
+          "evolution_relative_l2": 0.1030848905531371,
+          "max_active_field_evolution_error": 0.44218425036993386,
+          "field_evolution_relative_l2": {
+            "h": 0.21088165089539807,
+            "u": 0.07936897660117594,
+            "v": 0.10560926167141532,
+            "b": 0.44218425036993386
+          },
+          "field_rmse": {
+            "h": 0.0002474105427200554,
+            "u": 0.0002778880788166289,
+            "v": 0.000369761033693679,
+            "b": 3.772001691235704e-07
+          },
+          "mass_drift": 7.316859699013634e-06,
+          "bed_mean_drift": 1.0757221669797656e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880991702771142,
+          "independent_pde_mse": 0.0003700042183823123,
+          "inference_seconds": 0.0008354500000677945,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005369724800287634,
+        "weighted_extra_gradient_norm": 0.0007316365199602449,
+        "extra_to_pde_norm_ratio": 1.3625214460172226,
+        "gradient_cosine": 0.7610307070975199,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed1/reweighted",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010142099999939092,
+      "train_seconds": 3.1112162900008116,
+      "monitor_seconds": 0.011407547000089835,
+      "training_wall_seconds": 3.1250266080000983,
+      "total_seconds": 3.146908591999818,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.0004519360904365369,
+          "evolution_relative_l2": 0.1133204324212256,
+          "max_active_field_evolution_error": 0.44571249524013307,
+          "field_evolution_relative_l2": {
+            "h": 0.22312517892043437,
+            "u": 0.0894789818796227,
+            "v": 0.11631152890040915,
+            "b": 0.44571249524013307
+          },
+          "field_rmse": {
+            "h": 0.00026177489305883846,
+            "u": 0.000313285409914532,
+            "v": 0.00040723200291388934,
+            "b": 3.8020989767142146e-07
+          },
+          "mass_drift": 3.781911976097341e-05,
+          "bed_mean_drift": 1.5373382630781175e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28762733047833744,
+          "independent_pde_mse": 0.0005106886891869363,
+          "inference_seconds": 0.0008951900003921764,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007104496858014417,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed2/vanilla",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000904865000393329,
+      "train_seconds": 5.41602701300053,
+      "monitor_seconds": 0.011306943000818137,
+      "training_wall_seconds": 5.430430671000067,
+      "total_seconds": 5.4548117740000635,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.00048349870765201024,
+          "evolution_relative_l2": 0.12123458114023639,
+          "max_active_field_evolution_error": 0.43854050574316983,
+          "field_evolution_relative_l2": {
+            "h": 0.22480779514089155,
+            "u": 0.09670195359677441,
+            "v": 0.1265701571330577,
+            "b": 0.43854050574316983
+          },
+          "field_rmse": {
+            "h": 0.0002637489718396394,
+            "u": 0.00033857460753027144,
+            "v": 0.0004431496953543998,
+            "b": 3.740919148419929e-07
+          },
+          "mass_drift": 3.9034870662479904e-05,
+          "bed_mean_drift": 1.4908329160817744e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28761629599706184,
+          "independent_pde_mse": 0.0005355198635824995,
+          "inference_seconds": 0.000848740000037651,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008249318436304218,
+        "weighted_extra_gradient_norm": 0.0010279368670103645,
+        "extra_to_pde_norm_ratio": 1.2460870251856722,
+        "gradient_cosine": 0.7513199568270023,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed2/lie",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008651250000184518,
+      "train_seconds": 3.0831657629933034,
+      "monitor_seconds": 0.010705236000376317,
+      "training_wall_seconds": 3.0961320989999876,
+      "total_seconds": 3.117284041000403,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3": {
+          "relative_l2": 0.0004834987076520108,
+          "evolution_relative_l2": 0.12123458114023652,
+          "max_active_field_evolution_error": 0.43854050574317005,
+          "field_evolution_relative_l2": {
+            "h": 0.2248077951408916,
+            "u": 0.09670195359677464,
+            "v": 0.12657015713305783,
+            "b": 0.43854050574317005
+          },
+          "field_rmse": {
+            "h": 0.0002637489718396395,
+            "u": 0.0003385746075302722,
+            "v": 0.00044314969535440025,
+            "b": 3.740919148419931e-07
+          },
+          "mass_drift": 3.9034870662479904e-05,
+          "bed_mean_drift": 1.4908329160813962e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28761629599706184,
+          "independent_pde_mse": 0.0005355198635824995,
+          "inference_seconds": 0.0008423809999840159,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008249318436304382,
+        "weighted_extra_gradient_norm": 0.0010279368670103744,
+        "extra_to_pde_norm_ratio": 1.2460870251856595,
+        "gradient_cosine": 0.7513199568270086,
+        "case": "sve_m3",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3/mlp/seed2/reweighted",
+      "group": "sve_m3"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008025799997994909,
+      "train_seconds": 3.022373751000032,
+      "monitor_seconds": 0.010820517999945878,
+      "training_wall_seconds": 3.035514873000011,
+      "total_seconds": 3.057183564999832,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.0004562550112430809,
+          "evolution_relative_l2": 0.11440316321034294,
+          "max_active_field_evolution_error": 0.5958935472848242,
+          "field_evolution_relative_l2": {
+            "h": 0.23337538362577934,
+            "u": 0.11261891193477394,
+            "v": 0.09405985096325459,
+            "b": 0.5958935472848242
+          },
+          "field_rmse": {
+            "h": 0.0002738007772137795,
+            "u": 0.00039430411644603196,
+            "v": 0.000329324673717123,
+            "b": 4.54375240724011e-07
+          },
+          "mass_drift": 6.16862235367499e-05,
+          "bed_mean_drift": 1.8678728313305004e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880039243595729,
+          "independent_pde_mse": 0.00047684049206803787,
+          "inference_seconds": 0.0008547190000172122,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007783254185610079,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed0/vanilla",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0011260780001975945,
+      "train_seconds": 5.294773963006719,
+      "monitor_seconds": 0.0110911390002002,
+      "training_wall_seconds": 5.308930063999924,
+      "total_seconds": 5.334063851999872,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.0004290830053202282,
+          "evolution_relative_l2": 0.10758994833764458,
+          "max_active_field_evolution_error": 0.6166807775013324,
+          "field_evolution_relative_l2": {
+            "h": 0.2411123808554239,
+            "u": 0.10510140075591876,
+            "v": 0.08292743032862343,
+            "b": 0.6166807775013324
+          },
+          "field_rmse": {
+            "h": 0.00028287798073827126,
+            "u": 0.000367983620604548,
+            "v": 0.000290347567591217,
+            "b": 4.7022572740346605e-07
+          },
+          "mass_drift": 6.889834949519447e-05,
+          "bed_mean_drift": 1.919024202290142e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880605393913069,
+          "independent_pde_mse": 0.0004718038325218404,
+          "inference_seconds": 0.0008423899998888373,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007789504369879261,
+        "weighted_extra_gradient_norm": 0.0006375492475483382,
+        "extra_to_pde_norm_ratio": 0.8184721610962012,
+        "gradient_cosine": 0.7656247817467078,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed0/lie",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009355810002489306,
+      "train_seconds": 3.1183103640028094,
+      "monitor_seconds": 0.01165999600016221,
+      "training_wall_seconds": 3.1324094860001424,
+      "total_seconds": 3.154251519000354,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.0004290830053202274,
+          "evolution_relative_l2": 0.10758994833764438,
+          "max_active_field_evolution_error": 0.6166807775013273,
+          "field_evolution_relative_l2": {
+            "h": 0.24111238085542197,
+            "u": 0.10510140075591871,
+            "v": 0.08292743032862354,
+            "b": 0.6166807775013273
+          },
+          "field_rmse": {
+            "h": 0.000282877980738269,
+            "u": 0.0003679836206045479,
+            "v": 0.0002903475675912174,
+            "b": 4.7022572740346213e-07
+          },
+          "mass_drift": 6.889834949519447e-05,
+          "bed_mean_drift": 1.9190242022901448e-07,
+          "min_depth": 0.97,
+          "min_speed": 0.2880605393913069,
+          "independent_pde_mse": 0.00047180383252184044,
+          "inference_seconds": 0.0008405170001424267,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007789504369879274,
+        "weighted_extra_gradient_norm": 0.0006375492475483351,
+        "extra_to_pde_norm_ratio": 0.8184721610961958,
+        "gradient_cosine": 0.7656247817467056,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed0/reweighted",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008771829998295289,
+      "train_seconds": 3.1305600379942007,
+      "monitor_seconds": 0.011013972000000649,
+      "training_wall_seconds": 3.1438893360000293,
+      "total_seconds": 3.1656577290000314,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.00038166841205283374,
+          "evolution_relative_l2": 0.09570102806618747,
+          "max_active_field_evolution_error": 0.45690183730835815,
+          "field_evolution_relative_l2": {
+            "h": 0.21231811453258148,
+            "u": 0.07335434312342051,
+            "v": 0.09435685896298908,
+            "b": 0.45690183730835815
+          },
+          "field_rmse": {
+            "h": 0.0002490959580758608,
+            "u": 0.0002568300381867603,
+            "v": 0.0003303645654626686,
+            "b": 3.483925665249694e-07
+          },
+          "mass_drift": 9.137978082440767e-06,
+          "bed_mean_drift": 5.4906341283674075e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28815697000984986,
+          "independent_pde_mse": 0.0003740297750365007,
+          "inference_seconds": 0.0008449140000266198,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005384898629712399,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed1/vanilla",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0011230939999222755,
+      "train_seconds": 5.5016772680082795,
+      "monitor_seconds": 0.011551062000307866,
+      "training_wall_seconds": 5.5162602479999805,
+      "total_seconds": 5.540702033999878,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.00036465329864113634,
+          "evolution_relative_l2": 0.09143459208474501,
+          "max_active_field_evolution_error": 0.4626928224751116,
+          "field_evolution_relative_l2": {
+            "h": 0.21497161617785124,
+            "u": 0.06801073152934331,
+            "v": 0.08857118403382763,
+            "b": 0.4626928224751116
+          },
+          "field_rmse": {
+            "h": 0.00025220910052270044,
+            "u": 0.0002381208532724742,
+            "v": 0.0003101076174793703,
+            "b": 3.528082550169193e-07
+          },
+          "mass_drift": 8.99653090835617e-06,
+          "bed_mean_drift": 5.548048236965522e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2880983008475671,
+          "independent_pde_mse": 0.00038259255898413455,
+          "inference_seconds": 0.0008460859999104287,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005790869244293236,
+        "weighted_extra_gradient_norm": 0.00041838718519952915,
+        "extra_to_pde_norm_ratio": 0.7224946161784602,
+        "gradient_cosine": 0.5917584671906716,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed1/lie",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.000921550000384741,
+      "train_seconds": 3.276807095006461,
+      "monitor_seconds": 0.01157721399977163,
+      "training_wall_seconds": 3.2910685710003236,
+      "total_seconds": 3.312939629000084,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.0003646532986411369,
+          "evolution_relative_l2": 0.09143459208474514,
+          "max_active_field_evolution_error": 0.4626928224751107,
+          "field_evolution_relative_l2": {
+            "h": 0.2149716161778508,
+            "u": 0.06801073152934346,
+            "v": 0.08857118403382792,
+            "b": 0.4626928224751107
+          },
+          "field_rmse": {
+            "h": 0.0002522091005226999,
+            "u": 0.00023812085327247473,
+            "v": 0.00031010761747937135,
+            "b": 3.5280825501691855e-07
+          },
+          "mass_drift": 8.99653090835617e-06,
+          "bed_mean_drift": 5.548048236964491e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2880983008475671,
+          "independent_pde_mse": 0.00038259255898413547,
+          "inference_seconds": 0.000835939999888069,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0005790869244293251,
+        "weighted_extra_gradient_norm": 0.00041838718519952866,
+        "extra_to_pde_norm_ratio": 0.7224946161784574,
+        "gradient_cosine": 0.5917584671906684,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed1/reweighted",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008796760002951487,
+      "train_seconds": 3.1644467090018225,
+      "monitor_seconds": 0.011325932999625365,
+      "training_wall_seconds": 3.178203534000204,
+      "total_seconds": 3.199926117999894,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.00048120671363111403,
+          "evolution_relative_l2": 0.12065965050436024,
+          "max_active_field_evolution_error": 0.43212243279063606,
+          "field_evolution_relative_l2": {
+            "h": 0.23676750575191893,
+            "u": 0.08984628574814982,
+            "v": 0.12800518257948454,
+            "b": 0.43212243279063606
+          },
+          "field_rmse": {
+            "h": 0.00027778048432817835,
+            "u": 0.0003145720350983343,
+            "v": 0.0004481749073104302,
+            "b": 3.2949800399104087e-07
+          },
+          "mass_drift": 4.298798434199114e-05,
+          "bed_mean_drift": 7.890705479926611e-09,
+          "min_depth": 0.97,
+          "min_speed": 0.2878048037546008,
+          "independent_pde_mse": 0.0005571234147629323,
+          "inference_seconds": 0.0008796869997240719,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007932856963357273,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed2/vanilla",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0023896539996712818,
+      "train_seconds": 5.343208067004525,
+      "monitor_seconds": 0.011609240999860049,
+      "training_wall_seconds": 5.359186793999925,
+      "total_seconds": 5.38464791899969,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.00046098483897752184,
+          "evolution_relative_l2": 0.11558913868661397,
+          "max_active_field_evolution_error": 0.42850406854110945,
+          "field_evolution_relative_l2": {
+            "h": 0.24565745713789763,
+            "u": 0.08460849336603027,
+            "v": 0.11952914574036151,
+            "b": 0.42850406854110945
+          },
+          "field_rmse": {
+            "h": 0.00028821035726960545,
+            "u": 0.0002962333470229641,
+            "v": 0.0004184983977489917,
+            "b": 3.2673896232261353e-07
+          },
+          "mass_drift": 4.536547129818658e-05,
+          "bed_mean_drift": 1.2085115206526998e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2878050306227954,
+          "independent_pde_mse": 0.0005465896878064371,
+          "inference_seconds": 0.0008517849996678706,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008377102426094514,
+        "weighted_extra_gradient_norm": 0.0006660291902968464,
+        "extra_to_pde_norm_ratio": 0.7950591462534565,
+        "gradient_cosine": 0.6739148546684669,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed2/lie",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010021519997280848,
+      "train_seconds": 3.165436499000407,
+      "monitor_seconds": 0.01085811900020417,
+      "training_wall_seconds": 3.1787787509997543,
+      "total_seconds": 3.199528516999635,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m3.1": {
+          "relative_l2": 0.00046098483897752184,
+          "evolution_relative_l2": 0.11558913868661397,
+          "max_active_field_evolution_error": 0.4285040685411067,
+          "field_evolution_relative_l2": {
+            "h": 0.2456574571378974,
+            "u": 0.08460849336603041,
+            "v": 0.11952914574036144,
+            "b": 0.4285040685411067
+          },
+          "field_rmse": {
+            "h": 0.0002882103572696052,
+            "u": 0.0002962333470229646,
+            "v": 0.0004184983977489914,
+            "b": 3.267389623226114e-07
+          },
+          "mass_drift": 4.536547129818658e-05,
+          "bed_mean_drift": 1.208511520652722e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2878050306227954,
+          "independent_pde_mse": 0.000546589687806437,
+          "inference_seconds": 0.0008527770000910095,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008377102426094543,
+        "weighted_extra_gradient_norm": 0.0006660291902968405,
+        "extra_to_pde_norm_ratio": 0.7950591462534468,
+        "gradient_cosine": 0.6739148546684661,
+        "case": "sve_m3.1",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m3.1/mlp/seed2/reweighted",
+      "group": "sve_m3.1"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008069069999692147,
+      "train_seconds": 2.983863409004698,
+      "monitor_seconds": 0.011183228999470884,
+      "training_wall_seconds": 2.9972304640000402,
+      "total_seconds": 3.0717160179997336,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.000442216176618106,
+          "evolution_relative_l2": 0.1108819120204379,
+          "max_active_field_evolution_error": 1.2842623675005942,
+          "field_evolution_relative_l2": {
+            "h": 0.25924916412343535,
+            "u": 0.09711610381621587,
+            "v": 0.09482620849186175,
+            "b": 1.2842623675005942
+          },
+          "field_rmse": {
+            "h": 0.00030415724747228333,
+            "u": 0.00034002881327456226,
+            "v": 0.00033201129240089126,
+            "b": 3.5654725397153995e-07
+          },
+          "mass_drift": 3.884613021032379e-05,
+          "bed_mean_drift": 7.788732494131629e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2876428108175569,
+          "independent_pde_mse": 0.000404110642318407,
+          "inference_seconds": 0.001050423999913619,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0007181158381222541,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed0/vanilla",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010979359999510052,
+      "train_seconds": 5.296416623998084,
+      "monitor_seconds": 0.011191479999524745,
+      "training_wall_seconds": 5.31066519199976,
+      "total_seconds": 5.335027857999648,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.00043114169569611797,
+          "evolution_relative_l2": 0.10810508094959187,
+          "max_active_field_evolution_error": 1.4391002825928982,
+          "field_evolution_relative_l2": {
+            "h": 0.27652572222497784,
+            "u": 0.09104630101118208,
+            "v": 0.08837607731660485,
+            "b": 1.4391002825928982
+          },
+          "field_rmse": {
+            "h": 0.00032442651381968873,
+            "u": 0.00031877685027868237,
+            "v": 0.000309427700567879,
+            "b": 3.995346020663707e-07
+          },
+          "mass_drift": 4.3709080267184675e-05,
+          "bed_mean_drift": 7.786081293563877e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2876154337264665,
+          "independent_pde_mse": 0.0004387504086506905,
+          "inference_seconds": 0.0008446239999102545,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008433997636461358,
+        "weighted_extra_gradient_norm": 0.0006081965518180844,
+        "extra_to_pde_norm_ratio": 0.721124878182044,
+        "gradient_cosine": 0.6497936743760574,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed0/lie",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 0,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008818699998300872,
+      "train_seconds": 3.179672351008321,
+      "monitor_seconds": 0.010924456999873655,
+      "training_wall_seconds": 3.1929170729999896,
+      "total_seconds": 3.2139105269998254,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0004311416956961193,
+          "evolution_relative_l2": 0.1081050809495922,
+          "max_active_field_evolution_error": 1.4391002825929058,
+          "field_evolution_relative_l2": {
+            "h": 0.27652572222497895,
+            "u": 0.09104630101118241,
+            "v": 0.08837607731660496,
+            "b": 1.4391002825929058
+          },
+          "field_rmse": {
+            "h": 0.00032442651381969003,
+            "u": 0.00031877685027868356,
+            "v": 0.0003094277005678794,
+            "b": 3.995346020663728e-07
+          },
+          "mass_drift": 4.3709080267184675e-05,
+          "bed_mean_drift": 7.786081293563911e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2876154337264665,
+          "independent_pde_mse": 0.0004387504086506918,
+          "inference_seconds": 0.0008449940000900824,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0008433997636462684,
+        "weighted_extra_gradient_norm": 0.0006081965518180925,
+        "extra_to_pde_norm_ratio": 0.7211248781819403,
+        "gradient_cosine": 0.6497936743761511,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed0/reweighted",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008881089997885283,
+      "train_seconds": 3.0141341089929483,
+      "monitor_seconds": 0.01125564799986023,
+      "training_wall_seconds": 3.0276521830001,
+      "total_seconds": 3.048538756999733,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0004903685808039873,
+          "evolution_relative_l2": 0.122955714216784,
+          "max_active_field_evolution_error": 1.9640909067264265,
+          "field_evolution_relative_l2": {
+            "h": 0.2536642356769756,
+            "u": 0.10822076283392827,
+            "v": 0.11400469453265044,
+            "b": 1.9640909067264265
+          },
+          "field_rmse": {
+            "h": 0.0002976048774025536,
+            "u": 0.00037890912126917664,
+            "v": 0.00039916017495102694,
+            "b": 5.452867241657733e-07
+          },
+          "mass_drift": 4.327604899168058e-05,
+          "bed_mean_drift": 8.197243171812876e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2880260364269087,
+          "independent_pde_mse": 0.0005585068103244603,
+          "inference_seconds": 0.0008464269999421958,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0012452650255685956,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed1/vanilla",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008548300002075848,
+      "train_seconds": 5.1717739629907555,
+      "monitor_seconds": 0.010793842000111908,
+      "training_wall_seconds": 5.185185063000063,
+      "total_seconds": 5.209515831000317,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0004492120555142503,
+          "evolution_relative_l2": 0.11263606862818636,
+          "max_active_field_evolution_error": 2.064442219725941,
+          "field_evolution_relative_l2": {
+            "h": 0.25959953169728145,
+            "u": 0.09317490537523855,
+            "v": 0.10271198518332547,
+            "b": 2.064442219725941
+          },
+          "field_rmse": {
+            "h": 0.000304568306991896,
+            "u": 0.000326229649427327,
+            "v": 0.00035962145369023975,
+            "b": 5.731470632895068e-07
+          },
+          "mass_drift": 4.362394718571139e-05,
+          "bed_mean_drift": 8.817669800345805e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28796803259155124,
+          "independent_pde_mse": 0.0005390741343967806,
+          "inference_seconds": 0.0008646339997540053,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.001264668652095953,
+        "weighted_extra_gradient_norm": 0.0009062139050735622,
+        "extra_to_pde_norm_ratio": 0.7165623213413895,
+        "gradient_cosine": 0.6702661615981266,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed1/lie",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 1,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0010912669999925129,
+      "train_seconds": 3.0932121909950183,
+      "monitor_seconds": 0.010996330000125454,
+      "training_wall_seconds": 3.1066599539999515,
+      "total_seconds": 3.1282768290002423,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0004492120555142497,
+          "evolution_relative_l2": 0.11263606862818622,
+          "max_active_field_evolution_error": 2.064442219725937,
+          "field_evolution_relative_l2": {
+            "h": 0.2595995316972814,
+            "u": 0.09317490537523833,
+            "v": 0.10271198518332535,
+            "b": 2.064442219725937
+          },
+          "field_rmse": {
+            "h": 0.00030456830699189595,
+            "u": 0.00032622964942732624,
+            "v": 0.0003596214536902393,
+            "b": 5.731470632895056e-07
+          },
+          "mass_drift": 4.362394718571139e-05,
+          "bed_mean_drift": 8.817669800345959e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28796803259155124,
+          "independent_pde_mse": 0.00053907413439678,
+          "inference_seconds": 0.0008387550001316413,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.001264668652095938,
+        "weighted_extra_gradient_norm": 0.0009062139050735572,
+        "extra_to_pde_norm_ratio": 0.7165623213413941,
+        "gradient_cosine": 0.6702661615981161,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed1/reweighted",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "vanilla",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009135379996223492,
+      "train_seconds": 2.9822301069989408,
+      "monitor_seconds": 0.01124517999960517,
+      "training_wall_seconds": 2.9958020079998278,
+      "total_seconds": 3.0169244599997,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0006717738167456582,
+          "evolution_relative_l2": 0.16844152065100199,
+          "max_active_field_evolution_error": 2.3049972230949063,
+          "field_evolution_relative_l2": {
+            "h": 0.3248523470719958,
+            "u": 0.13764390610540891,
+            "v": 0.17069234560706828,
+            "b": 2.3049972230949063
+          },
+          "field_rmse": {
+            "h": 0.00038112445243327714,
+            "u": 0.000481927221216247,
+            "v": 0.0005976384289666718,
+            "b": 6.399318792669782e-07
+          },
+          "mass_drift": 1.7628850761619574e-05,
+          "bed_mean_drift": 3.2215559910463007e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2877320792416826,
+          "independent_pde_mse": 0.0007571740688975268,
+          "inference_seconds": 0.0008555209997211932,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0018533009902237834,
+        "weighted_extra_gradient_norm": 0.0,
+        "extra_to_pde_norm_ratio": 0.0,
+        "gradient_cosine": null,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed2/vanilla",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "lie",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0008665979999022966,
+      "train_seconds": 5.235367685996152,
+      "monitor_seconds": 0.011565736000193283,
+      "training_wall_seconds": 5.249493193000035,
+      "total_seconds": 5.279519946999699,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0006351338533521341,
+          "evolution_relative_l2": 0.15925436420525008,
+          "max_active_field_evolution_error": 2.4674231727856637,
+          "field_evolution_relative_l2": {
+            "h": 0.35332557837248335,
+            "u": 0.12813955059101848,
+            "v": 0.15210055737368092,
+            "b": 2.4674231727856637
+          },
+          "field_rmse": {
+            "h": 0.0004145299204442542,
+            "u": 0.0004486499932437003,
+            "v": 0.0005325437284868948,
+            "b": 6.850258785941307e-07
+          },
+          "mass_drift": 1.967888170728571e-05,
+          "bed_mean_drift": 2.0417425002752182e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.28771279367480634,
+          "independent_pde_mse": 0.0007707903226634356,
+          "inference_seconds": 0.0009332879999419674,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0020418005855340187,
+        "weighted_extra_gradient_norm": 0.0016275294105010032,
+        "extra_to_pde_norm_ratio": 0.7971049778474494,
+        "gradient_cosine": 0.7178476837074961,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed2/lie",
+      "group": "sve_m4"
+    },
+    {
+      "architecture": "mlp",
+      "method": "reweighted",
+      "seed": 2,
+      "status": "ok",
+      "message": "",
+      "parameters": 2628,
+      "hidden_width": 32,
+      "init_seconds": 0.0009740699997564661,
+      "train_seconds": 3.260527984999044,
+      "monitor_seconds": 0.011592346000270481,
+      "training_wall_seconds": 3.274699253000108,
+      "total_seconds": 3.2962573119998524,
+      "steps_completed": 600,
+      "distinct_collocation_points": 128,
+      "test_metrics": {
+        "sve_m4": {
+          "relative_l2": 0.0006351338533521334,
+          "evolution_relative_l2": 0.15925436420524988,
+          "max_active_field_evolution_error": 2.467423172785662,
+          "field_evolution_relative_l2": {
+            "h": 0.35332557837248174,
+            "u": 0.12813955059101848,
+            "v": 0.15210055737368097,
+            "b": 2.467423172785662
+          },
+          "field_rmse": {
+            "h": 0.0004145299204442523,
+            "u": 0.0004486499932437003,
+            "v": 0.0005325437284868951,
+            "b": 6.850258785941303e-07
+          },
+          "mass_drift": 1.967888170728571e-05,
+          "bed_mean_drift": 2.0417425002748913e-08,
+          "min_depth": 0.97,
+          "min_speed": 0.2877127936748063,
+          "independent_pde_mse": 0.0007707903226634357,
+          "inference_seconds": 0.000856391000070289,
+          "reference_accuracy_guard_passed": true,
+          "sampled_physical_branch_passed": true,
+          "matched_accuracy": false,
+          "new_parameter_query_break_even": null,
+          "break_even_reason": "accuracy threshold not reached"
+        }
+      },
+      "gradient_diagnostics": {
+        "pde_gradient_norm": 0.0020418005855340282,
+        "weighted_extra_gradient_norm": 0.0016275294105010014,
+        "extra_to_pde_norm_ratio": 0.7971049778474448,
+        "gradient_cosine": 0.7178476837074983,
+        "case": "sve_m4",
+        "point_count": 128,
+        "interpretation": "local diagnostic; negative cosine means conflicting gradient directions"
+      },
+      "directory": "/workspace/scratch/8ef888379641/output/sve_liepinn_benchmark/results/suite_pilot/sve_m4/mlp/seed2/reweighted",
+      "group": "sve_m4"
+    }
+  ],
+  "protocol": {
+    "fixed_paired_collocation": true,
+    "parameter_matched_architectures": true,
+    "checkpoint": "final fixed step; test diagnostics never select checkpoint or loss weight",
+    "accuracy": "max per-active-field relative evolution L2 <= accuracy; reference uncertainty separately guarded",
+    "scope": "smooth periodic 2+1 SWE/Grass-SVE adaptation, not reproduction of paper Heat/Burgers tables"
+  },
+  "wall_seconds": 238.922372817
+}

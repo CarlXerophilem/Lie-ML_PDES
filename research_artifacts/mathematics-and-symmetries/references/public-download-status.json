@@ -1,0 +1,164 @@
+[
+  {
+    "bibtex_key": "flow",
+    "url": "https://www.nature.com/articles/s41467-026-75936-3.pdf",
+    "resolved_url": "https://www.nature.com/articles/s41467-026-75936-3.pdf?error=cookies_not_supported&code=0bc3fa76-85d3-49b3-add8-d01145b35c87",
+    "status": "downloaded",
+    "path": "references/public-pdfs/flow.pdf",
+    "bytes": 3215383,
+    "sha256": "ab2d7b52566d8b12dc3e89cfa4df14563e52dced6d51d1aaae622d83c9c8a977"
+  },
+  {
+    "bibtex_key": "liesolver",
+    "url": "https://arxiv.org/pdf/2510.25731v2",
+    "resolved_url": "https://arxiv.org/pdf/2510.25731v2",
+    "status": "downloaded",
+    "path": "references/public-pdfs/liesolver.pdf",
+    "bytes": 6704738,
+    "sha256": "78cc95786b5ccac80e6b5af64a895286beaacbe13ee6251c945332a373dfa91c"
+  },
+  {
+    "bibtex_key": "jiao",
+    "url": "https://arxiv.org/pdf/2407.20155v2",
+    "resolved_url": "https://arxiv.org/pdf/2407.20155v2",
+    "status": "downloaded",
+    "path": "references/public-pdfs/jiao.pdf",
+    "bytes": 1349676,
+    "sha256": "727d36bd41796e9c2588717d72ecb8cc9476b1c281791afd16bdc95b017ecc7d"
+  },
+  {
+    "bibtex_key": "otto",
+    "url": "https://jmlr.org/papers/volume26/24-1315/24-1315.pdf",
+    "resolved_url": "https://jmlr.org/papers/volume26/24-1315/24-1315.pdf",
+    "status": "downloaded",
+    "path": "references/public-pdfs/otto.pdf",
+    "bytes": 4077994,
+    "sha256": "0e6bc7ec407a4cf910842175f2f3fcf0c8294d9c8f741999ec7417fdd324c352"
+  },
+  {
+    "bibtex_key": "lieLAC",
+    "url": "https://arxiv.org/pdf/2410.02698",
+    "resolved_url": "https://arxiv.org/pdf/2410.02698",
+    "status": "downloaded",
+    "path": "references/public-pdfs/lieLAC.pdf",
+    "bytes": 6786269,
+    "sha256": "14505dd7aca9f7309721b5207249b77b11e97b6b436fb5c57b6ca2fdbf217f8f"
+  },
+  {
+    "bibtex_key": "approxalg",
+    "url": "https://arxiv.org/pdf/2410.20608",
+    "resolved_url": "https://arxiv.org/pdf/2410.20608",
+    "status": "downloaded",
+    "path": "references/public-pdfs/approxalg.pdf",
+    "bytes": 325823,
+    "sha256": "e44eb7653be54ec878404074f6a2e1a02b6534d4d2465c1250630874595c34c5"
+  },
+  {
+    "bibtex_key": "liestonet",
+    "url": "https://arxiv.org/pdf/2608.01582",
+    "resolved_url": "https://arxiv.org/pdf/2608.01582",
+    "status": "downloaded",
+    "path": "references/public-pdfs/liestonet.pdf",
+    "bytes": 2550092,
+    "sha256": "f8f0136cd35c129aa0117639d368868ab10a2c25d5a55b53f7d96ad70fdb697f"
+  },
+  {
+    "bibtex_key": "lagaris",
+    "url": "https://arxiv.org/pdf/physics/9705023",
+    "resolved_url": "https://arxiv.org/pdf/physics/9705023",
+    "status": "downloaded",
+    "path": "references/public-pdfs/lagaris.pdf",
+    "bytes": 330206,
+    "sha256": "6a5806509376ab377bd67b2781e7304981a4512aff8e900670b3002e3fe9fe07"
+  },
+  {
+    "bibtex_key": "tmpinn",
+    "url": "https://raw.githubusercontent.com/mlresearch/v288/main/assets/nagesh25a/nagesh25a.pdf",
+    "resolved_url": "https://raw.githubusercontent.com/mlresearch/v288/main/assets/nagesh25a/nagesh25a.pdf",
+    "status": "downloaded",
+    "path": "references/public-pdfs/tmpinn.pdf",
+    "bytes": 671812,
+    "sha256": "64e95652a63c2512922bf176ede87fdae2692d3d25ae639f92357edfd0560259"
+  },
+  {
+    "bibtex_key": "pikan",
+    "url": "https://arxiv.org/pdf/2602.15068v1",
+    "resolved_url": "https://arxiv.org/pdf/2602.15068v1",
+    "status": "downloaded",
+    "path": "references/public-pdfs/pikan.pdf",
+    "bytes": 14752120,
+    "sha256": "33090c6b702d0ff203c604e6b8e1974ee3b57dddf76f3cceee52d842c49a7020"
+  },
+  {
+    "bibtex_key": "piratenet",
+    "url": "https://arxiv.org/pdf/2402.00326v3",
+    "resolved_url": "https://arxiv.org/pdf/2402.00326v3",
+    "status": "downloaded",
+    "path": "references/public-pdfs/piratenet.pdf",
+    "bytes": 3544793,
+    "sha256": "15b3fdab5b0b1e6202f372e1a7ae54082d63172c1fabdf1cec72f58049a895b1"
+  },
+  {
+    "bibtex_key": "noether",
+    "url": "https://arxiv.org/pdf/physics/0503066",
+    "resolved_url": "https://arxiv.org/pdf/physics/0503066",
+    "status": "downloaded",
+    "path": "references/public-pdfs/noether.pdf",
+    "bytes": 224300,
+    "sha256": "b9f73c19db726b7fd427a38fb786a4a0e7653472abd56d3a042e3b0255ac07d5"
+  },
+  {
+    "bibtex_key": "zurek",
+    "url": "https://arxiv.org/pdf/quant-ph/0105127",
+    "resolved_url": "https://arxiv.org/pdf/quant-ph/0105127",
+    "status": "downloaded",
+    "path": "references/public-pdfs/zurek.pdf",
+    "bytes": 1199665,
+    "sha256": "d3e5276d515209a34bc9fda095a21a5c584e79a09628f330009d2d08a9678990"
+  },
+  {
+    "bibtex_key": "decohydro",
+    "url": "https://arxiv.org/pdf/2506.06618v2",
+    "resolved_url": "https://arxiv.org/pdf/2506.06618v2",
+    "status": "downloaded",
+    "path": "references/public-pdfs/decohydro.pdf",
+    "bytes": 1509354,
+    "sha256": "a4747cfaa65c5d653bf04d704a68b1a780b14242f81b8da52a84bbb2f1656d53"
+  },
+  {
+    "bibtex_key": "lindblad",
+    "url": "https://link.springer.com/content/pdf/10.1140/epjc/s10052-026-15689-x.pdf",
+    "resolved_url": "https://link.springer.com/content/pdf/10.1140/epjc/s10052-026-15689-x.pdf?error=cookies_not_supported&code=8111407a-2e6d-4fa3-b9d3-8d4316a3fcb3",
+    "status": "downloaded",
+    "path": "references/public-pdfs/lindblad.pdf",
+    "bytes": 838803,
+    "sha256": "84101692e6afd197bc4afb8ffb681ceb5eb231f90adabc2e5de66df9f4168ee1"
+  },
+  {
+    "bibtex_key": "lindbladsy",
+    "url": "https://arxiv.org/pdf/1310.1523",
+    "resolved_url": "https://arxiv.org/pdf/1310.1523",
+    "status": "downloaded",
+    "path": "references/public-pdfs/lindbladsy.pdf",
+    "bytes": 1190933,
+    "sha256": "64e1434b4bb68a046bd543e1ad4e4db4ad66d75b11adf6670fe076912d17d687"
+  },
+  {
+    "bibtex_key": "parvin",
+    "url": "https://arxiv.org/pdf/2505.22278v2",
+    "resolved_url": "https://arxiv.org/pdf/2505.22278v2",
+    "status": "downloaded",
+    "path": "references/public-pdfs/parvin.pdf",
+    "bytes": 949465,
+    "sha256": "50e5be6bfd3d13128280a02c8c74b62b8318e8b5428a791198c122035b31c384"
+  },
+  {
+    "bibtex_key": "wanggradient",
+    "url": "https://arxiv.org/pdf/2001.04536",
+    "resolved_url": "https://arxiv.org/pdf/2001.04536",
+    "status": "downloaded",
+    "path": "references/public-pdfs/wanggradient.pdf",
+    "bytes": 7367775,
+    "sha256": "937e4f3610d52f283e124492ec836740dba6cdb0390ff3919a583d25be2b3881"
+  }
+]

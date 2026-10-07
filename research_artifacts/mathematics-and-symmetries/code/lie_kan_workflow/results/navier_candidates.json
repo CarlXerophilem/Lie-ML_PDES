@@ -1,0 +1,779 @@
+{
+  "schema": "lie-seven-step-v1",
+  "model": {
+    "name": "navier2d",
+    "spatial_dimension": 2,
+    "fields": [
+      "u",
+      "v",
+      "p"
+    ],
+    "order": 2,
+    "parameters": {
+      "nu": {
+        "value": "1",
+        "assumptions": [
+          "positive"
+        ]
+      }
+    },
+    "equations": [
+      "u_x+v_y",
+      "u_t+u*u_x+v*u_y+p_x-nu*(u_xx+u_yy)",
+      "v_t+u*v_x+v*v_y+p_y-nu*(v_xx+v_yy)"
+    ],
+    "leaders": [
+      "v_y",
+      "u_t",
+      "v_t"
+    ],
+    "roles": [
+      "constraint",
+      "main",
+      "main"
+    ],
+    "domains": [
+      "t>0",
+      "nu>0"
+    ],
+    "note": "second-order constrained bulk equations; verification is a sufficient algebraic-chart check, not differential-involutive completeness"
+  },
+  "independent_variables": [
+    "t",
+    "x",
+    "y"
+  ],
+  "step_1": {
+    "jet_dimension": 33,
+    "order": 2,
+    "differential_consequences_added": 3,
+    "leading_chart": {
+      "u_t": "-p_x - u*u_x + u_xx - u_y*v + u_yy",
+      "v_t": "-p_y - u*v_x + u_x*v - u_xy + v_xx",
+      "v_ty": "-u_tx",
+      "v_xy": "-u_xx",
+      "v_y": "-u_x",
+      "v_yy": "-u_xy"
+    },
+    "leading_determinant": "1",
+    "domain_restrictions": [
+      "t>0",
+      "nu>0"
+    ]
+  },
+  "step_2": {
+    "candidate_checks": {
+      "Tt": {
+        "vector": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Tx": {
+        "vector": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Ty": {
+        "vector": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "D": {
+        "vector": [
+          "t",
+          "x",
+          "y",
+          "0",
+          "0",
+          "0"
+        ],
+        "verified": false,
+        "on_shell_defects": [
+          "0",
+          "u_xx + u_yy",
+          "-u_xy + v_xx"
+        ]
+      },
+      "Gx": {
+        "vector": [
+          "0",
+          "t",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Gy": {
+        "vector": [
+          "0",
+          "0",
+          "t",
+          "0",
+          "1",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "J": {
+        "vector": [
+          "0",
+          "-y",
+          "x",
+          "-v",
+          "u",
+          "0"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "pressure_shift": {
+        "vector": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "verified": true,
+        "on_shell_defects": [
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    }
+  },
+  "step_3": {
+    "status": "candidate-verification-only",
+    "basis": []
+  },
+  "step_4": {
+    "nonzero_brackets_of_classified_basis": {},
+    "basis_indices": "zero-based"
+  },
+  "step_5": {
+    "one_parameter_flows": {
+      "Tt": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "Tx": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "Ty": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "Gx": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "Gy": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "J": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      },
+      "pressure_shift": {
+        "status": "exact-matrix-exponential",
+        "base": [
+          "t",
+          "x",
+          "y",
+          "u",
+          "v",
+          "p"
+        ],
+        "augmented_matrix": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "flow": "(z(epsilon),1)=exp(epsilon*A)*(z(0),1)",
+        "domain_note": "local flow only; t>0 and all chart/data restrictions must remain valid"
+      }
+    },
+    "admissibility": "PDE symmetry, initial data, boundary data, and global domain are separate tests"
+  },
+  "step_6": {
+    "status": "not-requested"
+  },
+  "step_7": {
+    "exact_reconstruction_passed": false,
+    "scope": "a solved compatible reduced problem is not supplied"
+  },
+  "timings": {
+    "1_model_and_chart": 0.046170763998816255,
+    "2_prolong_and_determine": 0.21058659300069849,
+    "3_exact_split_and_solve": 0.0,
+    "4_verify_and_bracket": 4.1100065573118627e-07,
+    "5_flows_invariants_admissibility": 0.005916235000768211,
+    "6_reduce": 7.109993021003902e-07,
+    "7_reconstruct_and_check": 0.0
+  },
+  "total_seconds": 0.2631640220006375,
+  "ml_imports": false,
+  "limitations": [
+    "finite polynomial ansatz is not maximal classification",
+    "nonpolynomial split is explicitly unsupported",
+    "arbitrary constrained higher-order systems require differential-involutive completion for completeness",
+    "no fractional spatial dimensions, shocks, or dry-bed charts"
+  ]
+}

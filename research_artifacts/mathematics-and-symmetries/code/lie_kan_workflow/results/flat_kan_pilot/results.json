@@ -1,0 +1,2009 @@
+{
+  "arguments": {
+    "verify_only": false,
+    "steps": 600,
+    "stages": 2,
+    "points": 128,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "horizon": 0.25,
+    "n": 16,
+    "lr": 0.001,
+    "family": "flat",
+    "methods": [
+      "direct_mlp",
+      "direct_kan",
+      "series_mlp",
+      "series_kan",
+      "chain_mlp",
+      "chain_kan"
+    ],
+    "out": "results/flat_kan_pilot"
+  },
+  "series": {
+    "construction": "a1=F(U0); a2=DF(U0)[a1]/2",
+    "order": 2,
+    "fields": [
+      "h",
+      "u",
+      "v",
+      "b"
+    ],
+    "seconds": 2.8001015429999825,
+    "operation_count": 353,
+    "a1": [
+      "A*u0*sin(x)*cos(y) + A*v0*sin(y)*cos(x)",
+      "f*v0 - g*(-A*sin(x)*cos(y) + B*sin(y)*cos(x)) - gamma*u0",
+      "-f*u0 - g*(-A*sin(y)*cos(x) + B*sin(x)*cos(y)) - gamma*v0",
+      "0"
+    ],
+    "a2": [
+      "-A*u0*(u0*cos(x)*cos(y) - v0*sin(x)*sin(y))/2 + A*v0*(u0*sin(x)*sin(y) - v0*cos(x)*cos(y))/2 - A*(f*u0 - g*(A*sin(y)*cos(x) - B*sin(x)*cos(y)) + gamma*v0)*sin(y)*cos(x)/2 + A*(f*v0 + g*(A*sin(x)*cos(y) - B*sin(y)*cos(x)) - gamma*u0)*sin(x)*cos(y)/2 - g*(A*cos(x)*cos(y) + 1)*(A*cos(x)*cos(y) + B*sin(x)*sin(y))",
+      "A*f*g*sin(y)*cos(x)/2 - A*g*gamma*sin(x)*cos(y)/2 - A*g*u0*cos(x)*cos(y) + A*g*v0*sin(x)*sin(y) - B*f*g*sin(x)*cos(y)/2 + B*g*gamma*sin(y)*cos(x)/2 - B*g*u0*sin(x)*sin(y)/2 + B*g*v0*cos(x)*cos(y)/2 - f**2*u0/2 - f*gamma*v0 + gamma**2*u0/2",
+      "-A*f*g*sin(x)*cos(y)/2 - A*g*gamma*sin(y)*cos(x)/2 + A*g*u0*sin(x)*sin(y) - A*g*v0*cos(x)*cos(y) + B*f*g*sin(y)*cos(x)/2 + B*g*gamma*sin(x)*cos(y)/2 + B*g*u0*cos(x)*cos(y)/2 - B*g*v0*sin(x)*sin(y)/2 - f**2*v0/2 + f*gamma*u0 + gamma**2*v0/2",
+      "g*k*(2*u0*v0*(m - 1)*(u0**2 + v0**2)**(m/2 - 3/2)*(A*sin(x)*sin(y) + B*cos(x)*cos(y)) + (A*cos(x)*cos(y) + B*sin(x)*sin(y))*(u0**2*(1 - m)*(u0**2 + v0**2)**(m/2 - 3/2) - (u0**2 + v0**2)**(m/2 - 1/2)) + (A*cos(x)*cos(y) + B*sin(x)*sin(y))*(v0**2*(1 - m)*(u0**2 + v0**2)**(m/2 - 3/2) - (u0**2 + v0**2)**(m/2 - 1/2)))/2"
+    ],
+    "scope": "local smooth expansion; not a convergence radius or global solution certificate"
+  },
+  "references": {
+    "test_f0.05_a0.03": {
+      "ladder": [
+        {
+          "n": 12,
+          "solve_seconds": 0.013735059999817167,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 0.0,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28527528155407966,
+          "high_mode_fraction": 1.1021968310586318e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 7.143789448882387e-10
+        },
+        {
+          "n": 18,
+          "solve_seconds": 0.013575298999967345,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 0.0,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.285280023514108,
+          "high_mode_fraction": 2.6166339249063895e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 4.801714581503802e-15
+        },
+        {
+          "n": 24,
+          "solve_seconds": 0.018816537000020617,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 2.220446049250313e-16,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28527528143036013,
+          "high_mode_fraction": 2.0388175843168434e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 0.0
+        }
+      ],
+      "tight": {
+        "n": 24,
+        "solve_seconds": 0.0220463790001304,
+        "nfev": 47,
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "mass_drift": 8.881784197001252e-16,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97,
+        "min_speed": 0.2852752814302675,
+        "high_mode_fraction": 1.117399726467702e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+      },
+      "temporal_difference": 8.169909193611602e-12,
+      "estimated_reference_uncertainty": 8.169909193611602e-12,
+      "total_reference_seconds": 0.06817327499993553
+    },
+    "test_f0.15_a0.03": {
+      "ladder": [
+        {
+          "n": 12,
+          "solve_seconds": 0.012058210999384755,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 0.0,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28522862673987864,
+          "high_mode_fraction": 1.4853192828159296e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 7.131293888740231e-10
+        },
+        {
+          "n": 18,
+          "solve_seconds": 0.013149698000233911,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 0.0,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.2852341225660439,
+          "high_mode_fraction": 1.2749165470963544e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 4.884981308350689e-15
+        },
+        {
+          "n": 24,
+          "solve_seconds": 0.014533275999383477,
+          "nfev": 32,
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "mass_drift": 0.0,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "min_speed": 0.28522862661468223,
+          "high_mode_fraction": 1.3602507502337673e-32,
+          "sampled_max_eigenvalue_imag": 0.0,
+          "scope": "smooth periodic numerical reference; sampled guards are not a theorem",
+          "max_difference_from_finest": 0.0
+        }
+      ],
+      "tight": {
+        "n": 24,
+        "solve_seconds": 0.021119761000591097,
+        "nfev": 47,
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "mass_drift": 8.881784197001252e-16,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97,
+        "min_speed": 0.2852286266146332,
+        "high_mode_fraction": 1.8137703832005747e-32,
+        "sampled_max_eigenvalue_imag": 0.0,
+        "scope": "smooth periodic numerical reference; sampled guards are not a theorem"
+      },
+      "temporal_difference": 7.061240481220921e-12,
+      "estimated_reference_uncertainty": 7.061240481220921e-12,
+      "total_reference_seconds": 0.06086094599959324
+    }
+  },
+  "reference_wall_seconds": 0.17030134800006635,
+  "Taylor_controls": {
+    "P0": {
+      "test_f0.05_a0.03": {
+        "evolution_relative_l2": 1.0000000000000029,
+        "per_field_evolution_error": {
+          "h": 1.0000000000000124,
+          "u": 0.9999999999999994,
+          "v": 1.0000000000000038,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 1.0000000000000124,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      },
+      "test_f0.15_a0.03": {
+        "evolution_relative_l2": 1.0000000000000022,
+        "per_field_evolution_error": {
+          "h": 1.0000000000000124,
+          "u": 0.9999999999999997,
+          "v": 1.0000000000000027,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 1.0000000000000124,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      }
+    },
+    "P1": {
+      "test_f0.05_a0.03": {
+        "evolution_relative_l2": 0.14856026683872145,
+        "per_field_evolution_error": {
+          "h": 0.6541516516089213,
+          "u": 0.06331340733397549,
+          "v": 0.053647363269503937,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 0.6541516516089213,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      },
+      "test_f0.15_a0.03": {
+        "evolution_relative_l2": 0.08107273301628093,
+        "per_field_evolution_error": {
+          "h": 0.6542447103508097,
+          "u": 0.04772231993409621,
+          "v": 0.02773602427527627,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 0.6542447103508097,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      }
+    },
+    "P2": {
+      "test_f0.05_a0.03": {
+        "evolution_relative_l2": 0.019859479364146483,
+        "per_field_evolution_error": {
+          "h": 0.046493577596284884,
+          "u": 0.019267898858709585,
+          "v": 0.01644560663756982,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 0.046493577596284884,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      },
+      "test_f0.15_a0.03": {
+        "evolution_relative_l2": 0.010699972286022564,
+        "per_field_evolution_error": {
+          "h": 0.04664773278783027,
+          "u": 0.012178199413906974,
+          "v": 0.007938727561616099,
+          "b": 0.0
+        },
+        "max_field_evolution_error": 0.04664773278783027,
+        "mass_drift": 0.0,
+        "bed_mean_drift": 0.0,
+        "min_depth": 0.97
+      }
+    }
+  },
+  "train_cases": [
+    {
+      "name": "train_f0_a0.02",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0,
+      "drag": 0.0,
+      "amplitude": 0.02,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "train_f0_a0.04",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0,
+      "drag": 0.0,
+      "amplitude": 0.04,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "train_f0.1_a0.02",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.1,
+      "drag": 0.0,
+      "amplitude": 0.02,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "train_f0.1_a0.04",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.1,
+      "drag": 0.0,
+      "amplitude": 0.04,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "train_f0.2_a0.02",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.2,
+      "drag": 0.0,
+      "amplitude": 0.02,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "train_f0.2_a0.04",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.2,
+      "drag": 0.0,
+      "amplitude": 0.04,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    }
+  ],
+  "test_cases": [
+    {
+      "name": "test_f0.05_a0.03",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.05,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    },
+    {
+      "name": "test_f0.15_a0.03",
+      "m": 3.0,
+      "kappa": 0,
+      "coriolis": 0.15,
+      "drag": 0.0,
+      "amplitude": 0.03,
+      "bed_amplitude": 0,
+      "phase_x": 0.0,
+      "phase_y": 0.0,
+      "u0": 0.25,
+      "v0": 0.15,
+      "g": 1.0,
+      "control": "wave"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.14.1+cpu",
+    "sympy": "1.14.0",
+    "device": "CPU",
+    "threads": 1,
+    "dtype": "float64"
+  },
+  "protocol": "parameter-conditioned field solver; exact P2, smooth edge functions, damped frozen-block chain; no function-space operator claim",
+  "runs": [
+    {
+      "method": "direct_mlp",
+      "seed": 0,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 3.249044322984446,
+      "training_wall_seconds": 3.9799951240001974,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.18993618495923326,
+          "per_field_evolution_error": {
+            "h": 0.2588364360371311,
+            "u": 0.24759014344402663,
+            "v": 0.12355412355356708,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.2588364360371311,
+          "mass_drift": 3.196201463384618e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0009483800004090881
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.09900525781888049,
+          "per_field_evolution_error": {
+            "h": 0.2754278898499731,
+            "u": 0.13904832873928794,
+            "v": 0.06779821543378356,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.2754278898499731,
+          "mass_drift": 2.209423198451521e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0009536380002828082
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.034506663432120686,
+          "after_physics_validation": 0.0012924661135167504,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.18993618495923326,
+            "per_field_evolution_error": {
+              "h": 0.2588364360371311,
+              "u": 0.24759014344402663,
+              "v": 0.12355412355356708,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.2588364360371311,
+            "mass_drift": 3.196201463384618e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.249044322984446
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_mlp/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "direct_kan",
+      "seed": 0,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 4.748624564996135,
+      "training_wall_seconds": 5.014603151000301,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.11266764345978787,
+          "per_field_evolution_error": {
+            "h": 0.18131128721349804,
+            "u": 0.1118395194709512,
+            "v": 0.10593269198015662,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.18131128721349804,
+          "mass_drift": 8.160543885726845e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0013027459999648272
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.05845541545596299,
+          "per_field_evolution_error": {
+            "h": 0.18989499420664097,
+            "u": 0.06328730113600467,
+            "v": 0.050792715057216525,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.18989499420664097,
+          "mass_drift": 8.040546483156774e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.001273441999728675
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.034506663432120686,
+          "after_physics_validation": 0.00045749040196075896,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.11266764345978787,
+            "per_field_evolution_error": {
+              "h": 0.18131128721349804,
+              "u": 0.1118395194709512,
+              "v": 0.10593269198015662,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.18131128721349804,
+            "mass_drift": 8.160543885726845e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 4.748624564996135
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_kan/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_mlp",
+      "seed": 0,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.181602251998811,
+      "training_wall_seconds": 6.522289126999567,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.004353009018752282,
+          "per_field_evolution_error": {
+            "h": 0.009146462435980836,
+            "u": 0.0046011906407647865,
+            "v": 0.003489662085845501,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.009146462435980836,
+          "mass_drift": 8.239095088402593e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.001336186000116868
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.002192158708603744,
+          "per_field_evolution_error": {
+            "h": 0.009350798242037306,
+            "u": 0.0025630766586086863,
+            "v": 0.0016033760065312164,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.009350798242037306,
+          "mass_drift": 8.526142430742567e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0011289429994576494
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.481314131650896e-05,
+          "after_physics_validation": 1.4348411484448515e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.004353009018752282,
+            "per_field_evolution_error": {
+              "h": 0.009146462435980836,
+              "u": 0.0046011906407647865,
+              "v": 0.003489662085845501,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.009146462435980836,
+            "mass_drift": 8.239095088402593e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.181602251998811
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_mlp/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_kan",
+      "seed": 0,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 8.340202174998922,
+      "training_wall_seconds": 8.805483392000497,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.0038347166657370767,
+          "per_field_evolution_error": {
+            "h": 0.008252684764265312,
+            "u": 0.003807178954159224,
+            "v": 0.0032564116751375525,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.008252684764265312,
+          "mass_drift": 2.375944486709969e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.001553123000121559
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.002158000232477191,
+          "per_field_evolution_error": {
+            "h": 0.009486860717556011,
+            "u": 0.0026928832681823484,
+            "v": 0.0014225044363800339,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.009486860717556011,
+          "mass_drift": 3.162804055101276e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0015671939991079853
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.481314131650896e-05,
+          "after_physics_validation": 2.172732867888889e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0038347166657370767,
+            "per_field_evolution_error": {
+              "h": 0.008252684764265312,
+              "u": 0.003807178954159224,
+              "v": 0.0032564116751375525,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.008252684764265312,
+            "mass_drift": 2.375944486709969e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 8.340202174998922
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_kan/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 0,
+      "parameters": 5256,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.473499828995955,
+      "training_wall_seconds": 7.374460760000147,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.0035812845070966456,
+          "per_field_evolution_error": {
+            "h": 0.00839914281485007,
+            "u": 0.003483864186706946,
+            "v": 0.0029543754537376113,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.00839914281485007,
+          "mass_drift": 6.71412033614871e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.001772843999788165
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.0017550400492875808,
+          "per_field_evolution_error": {
+            "h": 0.007983819787244429,
+            "u": 0.0018680175793553873,
+            "v": 0.0013462324327329425,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.007983819787244429,
+          "mass_drift": 4.9180486501043674e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0018432209999446059
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.481314131650896e-05,
+          "after_physics_validation": 2.2726324551096465e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 2.2726324551096465e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 4.9285809617635955e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 8.967285195343879e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.1664319337126858e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.481314131650896e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.005643166363448279,
+            "per_field_evolution_error": {
+              "h": 0.011979834878349698,
+              "u": 0.004537868838652229,
+              "v": 0.005579831260446016,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.011979834878349698,
+            "mass_drift": 8.84008417911808e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.071618797991505
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 2.2726324551096465e-06,
+          "after_physics_validation": 9.426507852284065e-07,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 9.426507852284065e-07
+            },
+            {
+              "weight": 0.5,
+              "loss": 1.22498390376173e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 1.6531437569498147e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.9389720012352197e-06
+            },
+            {
+              "weight": 0.0,
+              "loss": 2.2726324551096465e-06
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0035812845070966456,
+            "per_field_evolution_error": {
+              "h": 0.00839914281485007,
+              "u": 0.003483864186706946,
+              "v": 0.0029543754537376113,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.00839914281485007,
+            "mass_drift": 6.71412033614871e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.473499828995955
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_mlp/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_kan",
+      "seed": 0,
+      "parameters": 5176,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 9.017542031006087,
+      "training_wall_seconds": 10.385673596999368,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.007604569444295161,
+          "per_field_evolution_error": {
+            "h": 0.011317277883079652,
+            "u": 0.007207181904828879,
+            "v": 0.0075176098308136164,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.011317277883079652,
+          "mass_drift": 8.146261080699269e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0028534849998322898
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.003973225737635041,
+          "per_field_evolution_error": {
+            "h": 0.010728474933610805,
+            "u": 0.0044246358641254245,
+            "v": 0.0035209738554023073,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.010728474933610805,
+          "mass_drift": 7.345828534455201e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0026825369996004156
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.481314131650896e-05,
+          "after_physics_validation": 1.3036143121979448e-05,
+          "accepted_weight": 0.125,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 7.405120881096915e-05
+            },
+            {
+              "weight": 0.5,
+              "loss": 2.3445308347824345e-05
+            },
+            {
+              "weight": 0.25,
+              "loss": 1.3882505361075736e-05
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.3036143121979448e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.481314131650896e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.018993640451451438,
+            "per_field_evolution_error": {
+              "h": 0.04104573203247434,
+              "u": 0.016761440677799305,
+              "v": 0.01770145335908711,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.04104573203247434,
+            "mass_drift": 2.475089202036429e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.9862026420069014
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 1.3036143121979448e-05,
+          "after_physics_validation": 3.1336220499550506e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 3.1336220499550506e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 4.639997615896261e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 7.976849190479573e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.0291190869618672e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.3036143121979448e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.007604569444295161,
+            "per_field_evolution_error": {
+              "h": 0.011317277883079652,
+              "u": 0.007207181904828879,
+              "v": 0.0075176098308136164,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.011317277883079652,
+            "mass_drift": 8.146261080699269e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 9.017542031006087
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_kan/seed0",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "direct_mlp",
+      "seed": 1,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 3.38733661898641,
+      "training_wall_seconds": 3.590338301999509,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.2141648882317621,
+          "per_field_evolution_error": {
+            "h": 0.3224719045140181,
+            "u": 0.277317897592116,
+            "v": 0.13660651283832456,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.3224719045140181,
+          "mass_drift": 1.4268692970165198e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0010254680000798544
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.11503205332537801,
+          "per_field_evolution_error": {
+            "h": 0.33063964754725195,
+            "u": 0.16952215033447107,
+            "v": 0.07050086870353622,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.33063964754725195,
+          "mass_drift": 1.3716423555409918e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0009647950000726269
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.03263957363702561,
+          "after_physics_validation": 0.0010926279287906625,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.2141648882317621,
+            "per_field_evolution_error": {
+              "h": 0.3224719045140181,
+              "u": 0.277317897592116,
+              "v": 0.13660651283832456,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.3224719045140181,
+            "mass_drift": 1.4268692970165198e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.38733661898641
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_mlp/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "direct_kan",
+      "seed": 1,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 4.6369303459960065,
+      "training_wall_seconds": 4.904669444999854,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.10748019512059159,
+          "per_field_evolution_error": {
+            "h": 0.1654822766840083,
+            "u": 0.11146370615448858,
+            "v": 0.09826726842642075,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.1654822766840083,
+          "mass_drift": 1.9846789418576094e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.001252289000149176
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.05583379017092912,
+          "per_field_evolution_error": {
+            "h": 0.16041428931935128,
+            "u": 0.06272691398387774,
+            "v": 0.048631061990005775,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.16041428931935128,
+          "mass_drift": 1.2264099175540721e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.001259339999705844
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.03263957363702561,
+          "after_physics_validation": 0.0006569854038322446,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.10748019512059159,
+            "per_field_evolution_error": {
+              "h": 0.1654822766840083,
+              "u": 0.11146370615448858,
+              "v": 0.09826726842642075,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.1654822766840083,
+            "mass_drift": 1.9846789418576094e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 4.6369303459960065
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_kan/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_mlp",
+      "seed": 1,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.1049292559937385,
+      "training_wall_seconds": 6.435813373999736,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.002742631782537559,
+          "per_field_evolution_error": {
+            "h": 0.0060735444520562615,
+            "u": 0.002498665558447533,
+            "v": 0.0024724135959596225,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.0060735444520562615,
+          "mass_drift": 9.938301570588948e-07,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.001143244000559207
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.0014041085581096185,
+          "per_field_evolution_error": {
+            "h": 0.005890738804581601,
+            "u": 0.0016588863144979303,
+            "v": 0.0010256476006382585,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.005890738804581601,
+          "mass_drift": 1.9101110368957563e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0012003009996988112
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5350084704114447e-05,
+          "after_physics_validation": 3.6497030879533765e-07,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.002742631782537559,
+            "per_field_evolution_error": {
+              "h": 0.0060735444520562615,
+              "u": 0.002498665558447533,
+              "v": 0.0024724135959596225,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.0060735444520562615,
+            "mass_drift": 9.938301570588948e-07,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.1049292559937385
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_mlp/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_kan",
+      "seed": 1,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 8.112588368994693,
+      "training_wall_seconds": 8.56522987199969,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.23608930893349947,
+          "per_field_evolution_error": {
+            "h": 0.6032210427873033,
+            "u": 0.3051985140477973,
+            "v": 0.06312217797351403,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.6032210427873033,
+          "mass_drift": 0.0009044947801970515,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.001656630000070436
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.09753143927376363,
+          "per_field_evolution_error": {
+            "h": 0.4695309080219787,
+            "u": 0.14958466305222554,
+            "v": 0.01697837652541844,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.4695309080219787,
+          "mass_drift": 0.0006987900747625897,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0015691680000600172
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5350084704114447e-05,
+          "after_physics_validation": 0.0016206197248868584,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.23608930893349947,
+            "per_field_evolution_error": {
+              "h": 0.6032210427873033,
+              "u": 0.3051985140477973,
+              "v": 0.06312217797351403,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.6032210427873033,
+            "mass_drift": 0.0009044947801970515,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 8.112588368994693
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_kan/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 1,
+      "parameters": 5256,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.744167409986403,
+      "training_wall_seconds": 7.682889947000149,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.002944602848919709,
+          "per_field_evolution_error": {
+            "h": 0.006358847519254215,
+            "u": 0.002585661966576746,
+            "v": 0.0027539391565746026,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.006358847519254215,
+          "mass_drift": 4.155121775095694e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0019241240006522276
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.00138637408624001,
+          "per_field_evolution_error": {
+            "h": 0.005461191519078392,
+            "u": 0.0014378400949454596,
+            "v": 0.0011648761452776265,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.005461191519078392,
+          "mass_drift": 2.5771672882424213e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0018241630004922627
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5350084704114447e-05,
+          "after_physics_validation": 9.027457455687665e-07,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 9.027457455687665e-07
+            },
+            {
+              "weight": 0.5,
+              "loss": 4.526169123002984e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 9.038065926447375e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.1969060135792354e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.5350084704114447e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0032871259248711897,
+            "per_field_evolution_error": {
+              "h": 0.007376717171670237,
+              "u": 0.0029732722213787807,
+              "v": 0.0029597862907728,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.007376717171670237,
+            "mass_drift": 4.200991459590853e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.2529784599973937
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 9.027457455687665e-07,
+          "after_physics_validation": 7.055396371011497e-07,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 7.055396371011497e-07
+            },
+            {
+              "weight": 0.5,
+              "loss": 7.875195265161226e-07
+            },
+            {
+              "weight": 0.25,
+              "loss": 8.409768450070214e-07
+            },
+            {
+              "weight": 0.125,
+              "loss": 8.708223475501995e-07
+            },
+            {
+              "weight": 0.0,
+              "loss": 9.027457455687665e-07
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.002944602848919709,
+            "per_field_evolution_error": {
+              "h": 0.006358847519254215,
+              "u": 0.002585661966576746,
+              "v": 0.0027539391565746026,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.006358847519254215,
+            "mass_drift": 4.155121775095694e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.744167409986403
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_mlp/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_kan",
+      "seed": 1,
+      "parameters": 5176,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 8.823352621002414,
+      "training_wall_seconds": 10.054271511999104,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.004261680236982716,
+          "per_field_evolution_error": {
+            "h": 0.01115646700941909,
+            "u": 0.004651287828714628,
+            "v": 0.0026773393237872352,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.01115646700941909,
+          "mass_drift": 1.1272266238870898e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0024218430007749703
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.0023267510712305295,
+          "per_field_evolution_error": {
+            "h": 0.010923187320672191,
+            "u": 0.0031596571827304516,
+            "v": 0.0011971746010359904,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.010923187320672191,
+          "mass_drift": 9.385204636558342e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.002455866000673268
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5350084704114447e-05,
+          "after_physics_validation": 2.0222403598978654e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 2.0222403598978654e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 5.263605099522915e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 9.451205807563588e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.2186735515253452e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.5350084704114447e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.004261680236982716,
+            "per_field_evolution_error": {
+              "h": 0.01115646700941909,
+              "u": 0.004651287828714628,
+              "v": 0.0026773393237872352,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.01115646700941909,
+            "mass_drift": 1.1272266238870898e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.81940862200463
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 2.0222403598978654e-06,
+          "after_physics_validation": 2.0222403598978654e-06,
+          "accepted_weight": 0.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 2.0543949056129895e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 2.034763170133471e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 2.02761314928886e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 2.024704600652747e-06
+            },
+            {
+              "weight": 0.0,
+              "loss": 2.0222403598978654e-06
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.004261680236982716,
+            "per_field_evolution_error": {
+              "h": 0.01115646700941909,
+              "u": 0.004651287828714628,
+              "v": 0.0026773393237872352,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.01115646700941909,
+            "mass_drift": 1.1272266238870898e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 8.823352621002414
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_kan/seed1",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "direct_mlp",
+      "seed": 2,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 3.2365315489860222,
+      "training_wall_seconds": 3.4254621869986295,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.23398123282238406,
+          "per_field_evolution_error": {
+            "h": 0.2921912423280712,
+            "u": 0.2733381061530695,
+            "v": 0.1943839360541352,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.2921912423280712,
+          "mass_drift": 6.887747744377393e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0009734689992910717
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.12324854136242294,
+          "per_field_evolution_error": {
+            "h": 0.3159090694831933,
+            "u": 0.17206273044601014,
+            "v": 0.08714571043625147,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.3159090694831933,
+          "mass_drift": 5.990298854208209e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0009908449992508395
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.03318242476782637,
+          "after_physics_validation": 0.0014523267245627625,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.23398123282238406,
+            "per_field_evolution_error": {
+              "h": 0.2921912423280712,
+              "u": 0.2733381061530695,
+              "v": 0.1943839360541352,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.2921912423280712,
+            "mass_drift": 6.887747744377393e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.2365315489860222
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_mlp/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "direct_kan",
+      "seed": 2,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 4.6499752120471385,
+      "training_wall_seconds": 4.918599536998954,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.09267100141258264,
+          "per_field_evolution_error": {
+            "h": 0.1805029710163297,
+            "u": 0.10835009690917204,
+            "v": 0.06621338047459017,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.1805029710163297,
+          "mass_drift": 7.015897641338142e-05,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0015276340000127675
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.0549871932149984,
+          "per_field_evolution_error": {
+            "h": 0.1868753012383919,
+            "u": 0.06553541850616144,
+            "v": 0.04373079186242356,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.1868753012383919,
+          "mass_drift": 0.0001096358439599543,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": false,
+          "inference_seconds": 0.0013391699994826922
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 0.03318242476782637,
+          "after_physics_validation": 0.00045515243776991614,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.09267100141258264,
+            "per_field_evolution_error": {
+              "h": 0.1805029710163297,
+              "u": 0.10835009690917204,
+              "v": 0.06621338047459017,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.1805029710163297,
+            "mass_drift": 7.015897641338142e-05,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 4.6499752120471385
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/direct_kan/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_mlp",
+      "seed": 2,
+      "parameters": 2628,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.089212564002082,
+      "training_wall_seconds": 6.4228273699991405,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.0023938550188814813,
+          "per_field_evolution_error": {
+            "h": 0.004931751515319567,
+            "u": 0.002150339981655091,
+            "v": 0.002248202590215595,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.004931751515319567,
+          "mass_drift": 1.087633866081461e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0011321479996695416
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.0012737447543413663,
+          "per_field_evolution_error": {
+            "h": 0.005153530312740832,
+            "u": 0.001548357384386094,
+            "v": 0.0009197102456486446,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.005153530312740832,
+          "mass_drift": 1.6013021117977644e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0011335500003042398
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5345245814940878e-05,
+          "after_physics_validation": 6.160080779536125e-07,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0023938550188814813,
+            "per_field_evolution_error": {
+              "h": 0.004931751515319567,
+              "u": 0.002150339981655091,
+              "v": 0.002248202590215595,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.004931751515319567,
+            "mass_drift": 1.087633866081461e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.089212564002082
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_mlp/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "series_kan",
+      "seed": 2,
+      "parameters": 2588,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 8.49294858102985,
+      "training_wall_seconds": 8.942844625998987,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.010291605034650696,
+          "per_field_evolution_error": {
+            "h": 0.009746559400253018,
+            "u": 0.010335088483554647,
+            "v": 0.010302173599088594,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.010335088483554647,
+          "mass_drift": 6.889442850321892e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0015177490004134597
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.003795095426567775,
+          "per_field_evolution_error": {
+            "h": 0.008919358969284948,
+            "u": 0.004807434881088262,
+            "v": 0.0030919892094166154,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.008919358969284948,
+          "mass_drift": 3.537851003487802e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.001509677000285592
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5345245814940878e-05,
+          "after_physics_validation": 2.9517163115730072e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.010291605034650696,
+            "per_field_evolution_error": {
+              "h": 0.009746559400253018,
+              "u": 0.010335088483554647,
+              "v": 0.010302173599088594,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.010335088483554647,
+            "mass_drift": 6.889442850321892e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 8.49294858102985
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/series_kan/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_mlp",
+      "seed": 2,
+      "parameters": 5256,
+      "parameters_per_block": 2628,
+      "steps": 600,
+      "training_compute_seconds": 6.662932182018267,
+      "training_wall_seconds": 7.608233914999801,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.0031810764994494494,
+          "per_field_evolution_error": {
+            "h": 0.006276487272503242,
+            "u": 0.0027945373411245966,
+            "v": 0.003076888896227699,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.006276487272503242,
+          "mass_drift": 8.802218087744507e-07,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0017191730003105476
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.001696439222154642,
+          "per_field_evolution_error": {
+            "h": 0.006184392608266178,
+            "u": 0.0018871705078224983,
+            "v": 0.0013969419750335563,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.006184392608266178,
+          "mass_drift": 2.6379891875372152e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0017325829994661035
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5345245814940878e-05,
+          "after_physics_validation": 1.5346436022046754e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 1.5346436022046754e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 4.831753986243597e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 9.186451352832664e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.204033633854645e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.5345245814940878e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.004065509424764579,
+            "per_field_evolution_error": {
+              "h": 0.007697314163790959,
+              "u": 0.00363472008077434,
+              "v": 0.00394183092612177,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.007697314163790959,
+            "mass_drift": 6.357181702165704e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.2957156670127006
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 1.5346436022046754e-06,
+          "after_physics_validation": 1.3356310052261757e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 1.3356310052261757e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 1.401298030984993e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 1.459510997385252e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.4949623448641937e-06
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.5346436022046754e-06
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0031810764994494494,
+            "per_field_evolution_error": {
+              "h": 0.006276487272503242,
+              "u": 0.0027945373411245966,
+              "v": 0.003076888896227699,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.006276487272503242,
+            "mass_drift": 8.802218087744507e-07,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 6.662932182018267
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_mlp/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    },
+    {
+      "method": "chain_kan",
+      "seed": 2,
+      "parameters": 5176,
+      "parameters_per_block": 2588,
+      "steps": 600,
+      "training_compute_seconds": 8.864523185005964,
+      "training_wall_seconds": 10.167586646000927,
+      "test_metrics": {
+        "test_f0.05_a0.03": {
+          "evolution_relative_l2": 0.0039199709364445955,
+          "per_field_evolution_error": {
+            "h": 0.009217431534549942,
+            "u": 0.004005091138660055,
+            "v": 0.0030547854584637817,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.009217431534549942,
+          "mass_drift": 8.375551681982785e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0024205320005421527
+        },
+        "test_f0.15_a0.03": {
+          "evolution_relative_l2": 0.002038348910662506,
+          "per_field_evolution_error": {
+            "h": 0.009049648832322465,
+            "u": 0.0025716488569215512,
+            "v": 0.001309970337364792,
+            "b": 0.0
+          },
+          "max_field_evolution_error": 0.009049648832322465,
+          "mass_drift": 7.586756555211238e-06,
+          "bed_mean_drift": 0.0,
+          "min_depth": 0.97,
+          "reference_guard_passed": true,
+          "matched_5percent": true,
+          "inference_seconds": 0.0025754750004125526
+        }
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "before_physics_validation": 1.5345245814940878e-05,
+          "after_physics_validation": 1.9051900937801507e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 1.9051900937801507e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 5.1642495173666285e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 9.389504370726497e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.2151064120698993e-05
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.5345245814940878e-05
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.00395467453726755,
+            "per_field_evolution_error": {
+              "h": 0.009313182462465916,
+              "u": 0.0039093758943201705,
+              "v": 0.00319924464994084,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.009313182462465916,
+            "mass_drift": 8.37910620798965e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 3.992723876011951
+        },
+        {
+          "stage": 1,
+          "before_physics_validation": 1.9051900937801507e-06,
+          "after_physics_validation": 1.879148486169434e-06,
+          "accepted_weight": 1.0,
+          "backtracking_trials": [
+            {
+              "weight": 1.0,
+              "loss": 1.879148486169434e-06
+            },
+            {
+              "weight": 0.5,
+              "loss": 1.886650187896833e-06
+            },
+            {
+              "weight": 0.25,
+              "loss": 1.8945403652578157e-06
+            },
+            {
+              "weight": 0.125,
+              "loss": 1.8995202856161637e-06
+            },
+            {
+              "weight": 0.0,
+              "loss": 1.9051900937801507e-06
+            }
+          ],
+          "test_diagnostic_only": {
+            "evolution_relative_l2": 0.0039199709364445955,
+            "per_field_evolution_error": {
+              "h": 0.009217431534549942,
+              "u": 0.004005091138660055,
+              "v": 0.0030547854584637817,
+              "b": 0.0
+            },
+            "max_field_evolution_error": 0.009217431534549942,
+            "mass_drift": 8.375551681982785e-06,
+            "bed_mean_drift": 0.0,
+            "min_depth": 0.97
+          },
+          "compute_seconds_cumulative": 8.864523185005964
+        }
+      ],
+      "directory": "/workspace/scratch/8ef888379641/output/lie_kan_workflow/results/flat_kan_pilot/chain_kan/seed2",
+      "selection": "fixed checkpoint; chain alpha chosen only by training-family physics validation"
+    }
+  ]
+}

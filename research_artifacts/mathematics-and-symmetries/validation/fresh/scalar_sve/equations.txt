@@ -1,0 +1,17 @@
+SCALAR BENCHMARK (m=3)
+E = Dt(phi_s phi_tt - g phi_ss/phi_s^2) - g beta Ds(phi_t^2 phi_ts/phi_s) = 0
+X5 = t d/dt - 2s d/ds
+S5(a): (t,s,phi) -> (exp(a)t,exp(-2a)s,phi)
+Invariant sigma=s*t^2; invariant field phi=F(sigma); E=R[F]/t.
+
+FULL SVE COORDINATE TRANSFORM (identities, not the solved scalar model)
+Eulerian: h_t+(h*v)_x=0; v_t+v*v_x+g*(h+b)_x=0;
+           b_t+beta*v^(m-1)*v_x=0.
+Lagrangian: x=phi(t,s), y=phi_s, h=1/y, v=phi_t;
+           y_t-v_s=0; v_t+(g/y)*(1/y+b)_s=0;
+           b_t-(v/y)*b_s+(beta/y)*v^(m-1)*v_s=0.
+Operators: d_x=(1/phi_s)*D_s; d_t|x=D_t-(phi_t/phi_s)*D_s.
+The convective bed term cannot be omitted silently. No bed is reconstructed.
+
+R[F] = -8*beta*g*sigma**3*Derivative(F(sigma), sigma)*Derivative(F(sigma), (sigma, 3)) - 8*beta*g*sigma**3*Derivative(F(sigma), (sigma, 2))**2 - 40*beta*g*sigma**2*Derivative(F(sigma), sigma)*Derivative(F(sigma), (sigma, 2)) - 16*beta*g*sigma*Derivative(F(sigma), sigma)**2 - 2*g*sigma*Derivative(F(sigma), (sigma, 3))/Derivative(F(sigma), sigma)**2 + 4*g*sigma*Derivative(F(sigma), (sigma, 2))**2/Derivative(F(sigma), sigma)**3 + 8*sigma**3*Derivative(F(sigma), sigma)*Derivative(F(sigma), (sigma, 3)) + 8*sigma**3*Derivative(F(sigma), (sigma, 2))**2 + 24*sigma**2*Derivative(F(sigma), sigma)*Derivative(F(sigma), (sigma, 2)) + 4*sigma*Derivative(F(sigma), sigma)**2
+Fthird = 2*(-2*beta*g*sigma**2*Derivative(F(sigma), sigma)**3*Derivative(F(sigma), (sigma, 2))**2 - 10*beta*g*sigma*Derivative(F(sigma), sigma)**4*Derivative(F(sigma), (sigma, 2)) - 4*beta*g*Derivative(F(sigma), sigma)**5 + g*Derivative(F(sigma), (sigma, 2))**2 + 2*sigma**2*Derivative(F(sigma), sigma)**3*Derivative(F(sigma), (sigma, 2))**2 + 6*sigma*Derivative(F(sigma), sigma)**4*Derivative(F(sigma), (sigma, 2)) + Derivative(F(sigma), sigma)**5)/((4*beta*g*sigma**2*Derivative(F(sigma), sigma)**3 + g - 4*sigma**2*Derivative(F(sigma), sigma)**3)*Derivative(F(sigma), sigma))
