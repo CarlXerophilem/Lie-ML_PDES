@@ -39,7 +39,9 @@ The prose should be formal but not compressed. A technical term should not appea
 
 ## 3. Editorial architecture
 
-The revised Q&A will be cumulative rather than a sequence of four largely independent essays. It will contain the following questions in this order.
+The revised Q&A will be cumulative rather than a sequence of four largely independent essays. Its order is deliberately asymmetric: the reader first receives a self-contained mathematical account of machine learning without Lie theory, PDE symmetry, or PINN-specific notation; only afterward does the document construct the ML–Lie interface. Later answers may refer back to the pure-ML objects, but Part I must not presuppose Part II.
+
+### Part I. Machine learning on its own
 
 ### Q1. What is the mathematical essence of machine learning?
 
@@ -51,7 +53,7 @@ Separate five sources of difficulty:
 - restricted representation;
 - finite or biased sampling;
 - optimization error;
-- validation under a declared target distribution or physical problem.
+- validation under a declared target distribution.
 
 Explain the approximation–estimation–optimization decomposition only under assumptions for which it is meaningful. State explicitly that the conditional expectation is the Bayes predictor for squared loss, not for every loss.
 
@@ -60,61 +62,106 @@ Explain the approximation–estimation–optimization decomposition only under a
 Use a complete problem specification rather than the current underspecified five-tuple. A suitable organizing object is
 
 \[
-\mathfrak L=(\mathcal Z,P,\mathcal H,\ell,\Omega,\mathcal A,\mathcal V),
+\mathfrak L=(\mathcal Z,P,\mathcal H,\ell,\Omega,\mathsf{Alg},\mathsf{Val}),
 \]
 
 where:
 
 - \(\mathcal Z\) is the observation or query space;
-- \(P\) is a data-generating, sampling, or collocation measure when one is present;
+- \(P\) is a data-generating or sampling measure when one is present;
 - \(\mathcal H\) is the hypothesis class;
-- \(\ell\) or a residual functional defines the discrepancy;
+- \(\ell\) defines the discrepancy or decision cost;
 - \(\Omega\) is an explicit regularizer or structural constraint;
-- \(\mathcal A\) is the search or optimization procedure;
-- \(\mathcal V\) is the validation or certification rule.
+- \(\mathsf{Alg}\) is the search or optimization procedure;
+- \(\mathsf{Val}\) is the validation or evaluation rule.
 
-Clarify that these entries are not independent. The domain constrains the hypotheses; the differential operator constrains smoothness; the data and boundary conditions constrain the trial class; the loss changes the optimizer's geometry; and the validation rule determines what counts as success.
+Clarify in ordinary ML terms that these entries are not independent. The observation space and data law constrain which hypotheses are meaningful; the hypothesis class and regularizer determine representational and inductive bias; the loss determines which discrepancies matter; the parameterization and optimizer determine which candidates are reachable in practice; and the validation rule determines what counts as success. Keep this explanation self-contained and illustrate it with an ordinary supervised-learning example.
 
 ### Q3. Is a neural network necessary?
 
-Answer no. Compare neural networks with polynomial and spectral expansions, splines, finite elements, kernels, Gaussian processes, reduced bases, and conventional ODE/PDE solvers.
+Answer no. Within ordinary machine learning, compare neural networks with linear and generalized-linear models, decision trees and ensembles, nearest-neighbor methods, kernel methods, Gaussian processes, splines, and other basis expansions. Explain that these choices encode different assumptions about smoothness, locality, compositionality, invariance, uncertainty, and computational scaling.
 
-Present a neural network as one parameterized hypothesis class. It is justified only if it provides a measurable benefit, such as approximation of a complicated family, amortization over repeated parameter queries, differentiation through a surrogate, or useful performance under a matched computational budget.
+Present a neural network as one parameterized hypothesis class. It is justified only if it provides a measurable benefit, such as approximation of a complicated function family, reusable representation learning, differentiation through a surrogate, or useful performance under a matched computational budget.
 
-State the important negative case: for one low-dimensional reduced ODE that a conventional integrator solves faster and more accurately, a PINN has no demonstrated computational advantage.
+Close with a general model-selection rule: prefer the simplest hypothesis class and optimization method that meet the declared accuracy, generalization, interpretability, and cost requirements.
 
-### Q4. What changes when the governing object is a PDE rather than a labelled dataset?
+### Q4. How do representation, loss, regularization, optimization, and validation interact?
+
+Explain the coupled structure of a learning system through one elementary supervised example. The answer must show that changing one component changes the meaning or behavior of the others: a loss selects a target functional of the conditional distribution; a restricted hypothesis class introduces approximation bias; regularization changes the effective class; the parameterization and optimizer introduce explicit or implicit search bias; and validation estimates only performance under its declared sampling assumptions.
+
+Distinguish population risk, empirical or training objective, validation criterion, and computational optimization error. Introduce the schematic decomposition
+
+\[
+\text{total performance gap}
+=\text{approximation} + \text{estimation} + \text{optimization}
+\]
+
+only with the warning that an exact additive identity requires a specified setup and that the terms may instead be controlled by inequalities. End by showing how these terms jointly explain underfitting, overfitting, and failure to optimize.
+
+### Q5. What can ordinary machine learning establish, and what remains unproved?
+
+Distinguish training fit, held-out predictive performance, distributional generalization, calibration or uncertainty statements, and formal guarantees. Explain distribution shift, identifiability, and the fact that success under one validation distribution need not transfer to another. End Part I with a compact pure-ML decision rule covering target, data, hypothesis class, objective, optimizer, and validation.
+
+### Part II. Machine learning combined with PDEs and Lie reduction
+
+### Q6. What changes when the governing object is a PDE rather than a labelled dataset?
 
 Introduce the full PDE problem
 
 \[
-\mathcal P_\lambda=(\Omega,\Delta_\lambda,\mathcal B_\lambda,
-\mathcal A_\lambda,\mathcal D_\lambda),
+\mathcal P_\lambda=(\mathscr O,\Delta_\lambda,\mathcal B_\lambda,
+\mathcal C_\lambda,\mathcal D_\lambda),
 \]
 
-where \(\Omega\) is the domain, \(\Delta_\lambda=0\) the PDE system, \(\mathcal B_\lambda=0\) the initial/boundary/interface/asymptotic data, \(\mathcal A_\lambda\) the admissibility and branch conditions, and \(\mathcal D_\lambda\) the parameter and data family of interest.
+where \(\mathscr O\) is the physical domain, \(\Delta_\lambda=0\) the PDE system, \(\mathcal B_\lambda=0\) the initial/boundary/interface/asymptotic data, \(\mathcal C_\lambda\) the admissibility and branch conditions, and \(\mathcal D_\lambda\) the parameter and data family of interest. This notation keeps the ML regularizer \(\Omega\), optimization algorithm \(\mathsf{Alg}\), and PDE-domain/admissibility objects distinct.
 
 Explain that PINN training may use collocation coordinates without labelled solution values. The operator residual and data residual then define the objective. The collocation measure is a numerical design choice, not part of the exact definition of a PDE symmetry.
 
-### Q5. What does Lie symmetry reduction accomplish before machine learning begins?
+Compare the resulting PINN with finite-element, spectral, finite-difference, finite-volume, shooting, and direct ODE-solver alternatives as appropriate to the problem. State the key negative decision rule here: if one low-dimensional reduced ODE is solved faster and more accurately by a conventional integrator, a PINN has no demonstrated one-query computational advantage. Repeated parameter queries, inverse estimation, or differentiable amortization require separate evidence.
 
-Distinguish equation symmetry from invariance of a particular solution graph:
+### Q7. What does Lie symmetry reduction accomplish before machine learning begins?
+
+First define the notation. Let \(x=(x^1,\ldots,x^p)\) denote the independent variables and \(u=(u^1,\ldots,u^q)\) the dependent fields. A point-symmetry generator is
+
+\[
+X=\xi^i(x,u)\frac{\partial}{\partial x^i}
+ +\eta^\alpha(x,u)\frac{\partial}{\partial u^\alpha},
+\]
+
+with summation over the independent-variable index \(i\) and field-component index \(\alpha\). Define
+
+\[
+Q^\alpha[j^1u]
+:=\eta^\alpha(x,u)-\xi^i(x,u)u_i^\alpha,
+\qquad
+u_i^\alpha:=\frac{\partial u^\alpha}{\partial x^i}.
+\]
+
+Call \(Q=(Q^1,\ldots,Q^q)\) the **characteristic** of \(X\). The vertical generalized vector field
+
+\[
+\mathbf v_Q=\sum_{\alpha=1}^{q}Q^\alpha\frac{\partial}{\partial u^\alpha}
+\]
+
+is the associated **evolutionary representative**. Explain clause by clause: \(\eta^\alpha\) is the direct infinitesimal change of field component \(u^\alpha\); \(\xi^iu_i^\alpha\) is the induced change arising from movement of the independent variables; their difference is the field variation at fixed base coordinates. Include the scalar translation example \(X=\partial_x\), for which \(Q=-u_x\), so \(Q=0\) selects fields independent of \(x\).
+
+Then distinguish equation symmetry from invariance of a particular solution graph:
 
 \[
 \left.\operatorname{pr}^{(n)}X(\Delta)\right|_{\Delta=0}=0,
 \qquad
-Q^\alpha=\eta^\alpha-\xi^i u_i^\alpha=0.
+Q^\alpha[j^1u]=0\quad(\alpha=1,\ldots,q).
 \]
 
-The first condition says that the transformation maps solutions to solutions. The second selects solutions fixed by the chosen subgroup. Neither replaces the other.
+The first condition says that the transformation maps solutions to solutions. The second is the invariant-surface condition selecting solution graphs fixed by the chosen subgroup. Neither replaces the other, and the second must not be described as a general definition of equivariance.
 
 Explain orbit rank, invariant coordinates, the quotient problem, the reduced profile \(F\), and the reconstruction map \(u=\mathcal T_HF\). Emphasize that reduction describes an invariant solution family rather than every solution of the original PDE.
 
-### Q6. Under what conditions does a PDE problem belong to the research program?
+### Q8. Under what conditions does a PDE problem belong to the research program?
 
 Present the research-scope and admissibility contract from Sections 5–8 below. This question must appear early enough that later ML options are not mistaken for universally admissible operations.
 
-### Q7. Where exactly can machine learning enter the Lie-reduction pipeline?
+### Q9. Where exactly can machine learning enter the Lie-reduction pipeline?
 
 Distinguish four principal sockets:
 
@@ -131,7 +178,7 @@ Distinguish four principal sockets:
 
 The reduced profile or analytical remainder is the primary socket for the companion manuscript. A full-space PINN is a baseline or fallback. A learned symmetry or learned closure is a different inverse problem and must not be silently identified with solution approximation.
 
-### Q8. How does Lie reduction transform every component of the learning problem?
+### Q10. How does Lie reduction transform every component of the learning problem?
 
 This is the principal interaction section. Explain the transformation
 
@@ -164,7 +211,7 @@ Where possible, connect this section explicitly to the sequence used in `draft/m
 \to\text{original-PDE check}.
 \]
 
-### Q9. How do geometry, data, loss, architecture, and optimization constrain one another?
+### Q11. How do geometry, data, loss, architecture, and optimization constrain one another?
 
 Make the dependencies explicit rather than listing components independently:
 
@@ -180,13 +227,13 @@ Make the dependencies explicit rather than listing components independently:
 
 Include at least one concrete worked comparison between a direct PDE PINN and a reduced-profile PINN.
 
-### Q10. Which components can be tuned, replaced, or generalized?
+### Q12. Which components can be tuned, replaced, or generalized?
 
 Retain the useful breadth of the current answer, but organize it around mathematically distinct choices: domain/observation geometry, sampling, hypotheses, discrepancy, regularization, optimization, and validation.
 
 Correct the geometry. A group orbit \(G\!\cdot\!x\), a homogeneous space \(G/H\), and an orbit space \(M/G\) are different objects. Quotienting by a symmetry requires suitable regularity, rank, transversality, and data compatibility. Do not describe an observation space as being replaced by “diffeomorphic Lie-group orbits” without specifying the action and quotient construction.
 
-### Q11. What is the difference between invariant reduction, equivariant architecture, and symmetry regularization?
+### Q13. What is the difference between invariant reduction, equivariant architecture, and symmetry regularization?
 
 Separate three strategies:
 
@@ -200,13 +247,13 @@ Separate three strategies:
 
 State what each strategy guarantees and does not guarantee. Exact reduction and equivariant learning are not interchangeable.
 
-### Q12. What does compact-group representation theory contribute, and where does it not apply?
+### Q14. What does compact-group representation theory contribute, and where does it not apply?
 
 Retain a corrected, more focused explanation of Peter–Weyl theory, isotypic decomposition, Schur intertwiners, group convolution, and Clebsch–Gordan constructions. Tie each construction to equivariant feature maps rather than presenting it as the universal basis of machine learning.
 
 State prominently that many PDE point-symmetry groups central to reduction—translations, scalings, boosts, and affine groups—are noncompact. Peter–Weyl theory for compact groups therefore cannot be applied indiscriminately to the companion manuscript's symmetry algebra.
 
-### Q13. What can be certified after training?
+### Q15. What can be certified after training?
 
 Distinguish:
 
@@ -220,7 +267,7 @@ Distinguish:
 
 Explain the missing implications. A deterministic solution-error certificate requires a suitable stability estimate, controlled quadrature or residual norm, admissible data, and a bounded reconstruction map. Training success alone is empirical evidence, not a theorem.
 
-### Q14. What workflow is recommended for the present project?
+### Q16. What workflow is recommended for the present project?
 
 End with the decision sequence
 
@@ -469,7 +516,7 @@ Use standard Markdown with LaTeX delimiters:
 - no copied Unicode artifacts or broken subscript ordering;
 - define every symbol before first use;
 - use \(\mathcal H\) consistently for the hypothesis class and \(H\) for a Lie subgroup only when both occur in the same discussion;
-- reserve \(\mathcal A\) for an optimization/search algorithm in the ML specification and use a different symbol for PDE admissibility if ambiguity arises;
+- use \(\mathsf{Alg}\) for the ML search/optimization algorithm, \(\mathsf{Val}\) for its validation rule, \(\mathscr O\) for the physical PDE domain, and \(\mathcal C_\lambda\) for PDE admissibility conditions;
 - distinguish the true distribution \(P\), empirical measure \(P_n\), and numerical collocation measure;
 - distinguish physical parameters \(\lambda\), group parameters, network parameters \(\theta\), and integration/data parameters \(a\);
 - use “neural network,” “PINN,” “equivariant model,” and “neural operator” only for their specific meanings.
@@ -479,8 +526,10 @@ Each Q&A entry should have:
 1. the question as a heading;
 2. a one-paragraph direct answer;
 3. the necessary mathematical development;
-4. a short “Implication for Lie-reduced PDEs” paragraph or callout where relevant;
-5. a limitation or decision rule when the construction is conditional.
+4. a limitation or decision rule when the construction is conditional;
+5. in Part II only, a short “Implication for Lie-reduced PDEs” paragraph or callout where useful.
+
+Part I must stand independently as a pure-ML primer. It must not interrupt each foundational answer with Lie terminology or foreshadowing that requires the reader to understand Part II.
 
 ## 13. Citation policy
 
@@ -527,13 +576,15 @@ The revision is complete only if all of the following checks pass.
 ### Structural checks
 
 - The document remains a Q&A.
-- All fourteen questions form a progressive argument.
-- The research-scope contract appears before the detailed list of ML sockets.
+- All sixteen questions form a progressive argument: Q1–Q5 establish pure ML before Q6–Q16 introduce PDEs, Lie reduction, and their interactions.
+- Part I contains no unexplained Lie, symmetry-reduction, PINN, collocation, or PDE-residual concepts.
+- The research-scope contract appears before the detailed list of ML–Lie sockets.
 - The conclusion gives a concrete decision workflow and fallback paths.
 
 ### Mathematical checks
 
 - Every formula is syntactically readable in Markdown.
+- The generator coefficients, index ranges, jet notation, characteristic \(Q^\alpha\), and associated evolutionary representative \(\mathbf v_Q\) are defined before the invariant-surface condition is used.
 - The error list in Section 11 has been addressed.
 - Compact and noncompact group cases are not conflated.
 - Equation symmetry, invariant solutions, equivariant architectures, and soft symmetry penalties are distinguished.
