@@ -1,7 +1,9 @@
 \documentclass[11pt]{article}
 \usepackage[a4paper,margin=1in]{geometry}
+\usepackage{cmap}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs,tabularx,tikz}
 \usepackage{listings}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
@@ -13,599 +15,1052 @@
 \lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,columns=fullflexible,
   keepspaces=true,showstringspaces=false,frame=single,xleftmargin=1em,
   xrightmargin=1em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}{Example}[section]
 \newcommand{\E}{\mathcal E}
 \newcommand{\pr}{\operatorname{pr}}
-\title{Lie Symmetry Reduction near an Exceptional Transport Exponent:\\
-An SVE-Informed Framework for Semi-Analytical Neural Approximation}
+\title{Lie Symmetry Reduction for Parameter-Dependent PDEs:\\
+Local Verification and Semi-Analytical Neural Approximation}
 \author{}
 \date{}
 \begin{document}
 \maketitle
 \begin{abstract}
-We formulate a bounded framework for reducing parameter-dependent nonlinear partial
-differential equations through Lie symmetries and learning unresolved reduced
-profiles. A shallow-water master equation provides a test of symmetry
-persistence near an exceptional transport exponent. The methodology separates
-classification, admissible reduction, analytical approximation, and neural
-correction. Decoherence-in-quantum-fluid work motivates a later cross-scale
-extension, but is not treated as a mechanism in the classical SVE benchmark.
-We separate two literature baselines, a pure symbolic reduction, and a
-certificate-gated fused prototype. The resulting experiments locate where the
-neural correction helps and where conventional integration remains preferable;
-a uniform neural error certificate remains open.
+We organize local Lie-symmetry reduction of parameter-dependent nonlinear
+partial differential equations as an explicit mathematical verification
+contract. Standard point-symmetry, Frobenius and invariant-section results
+are stated with hypotheses, local proofs and attribution. The construction
+separates equation symmetry from graph invariance, gives the full coordinate
+map and derivative pullback, and retains data, branch and residual-measure
+conditions. A published scalar shallow-water-inspired equation is used only
+after the general core, to verify an exceptional-exponent reduction and audit
+its physical interpretation. We specify a controlled experiment comparing
+an additional equation-derived analytical prior with a reduced hard-data
+PINN and a direct PDE PINN. Historical numerical reports are isolated from
+this prospective protocol because their matching source and raw evidence
+are not all recovered. New maximal classification, a uniform neural error
+certificate, and a physical full-system SVE derivation are not claimed.
 \end{abstract}
 
 \section{Introduction}
-Symmetry is a transformation that maps an object unchanged to a new space. It converts geometric information into analytical constraints on nonlinear
-dynamics.
+A Lie point symmetry is a local transformation of independent and dependent
+variables whose prolongation preserves the differential equation manifold.
+It maps solutions to solutions. Selecting a subgroup and requiring a
+particular solution graph to be invariant is an additional restriction:
+it can remove orbit directions from the unknown profile while retaining
+the original nonlinear derivative problem.
 
-This paper investigates how Lie reduction can produce exact or
-approximate solution families for parameter-dependent PDEs, with neural
-approximation assigned to unresolved reduced profiles. The objective is a
-tractable, interpretable method for mathematical physics and engineering,
-with separate control of approximation and symmetry-breaking residuals.
+This paper asks when that restriction gives a PDE, an ODE or consistency
+conditions; why symmetry dimensions and parameter strata differ; how
+coordinates, data and norms transform; and which measured aspects of a
+reduction can inform a subsequent learning problem. A useful verified
+subgroup is sufficient for a local invariant-family reduction. A claim
+about the maximal point algebra requires a stronger classification proof.
 
-The motivating example is the Saint--Venant--Exner (SVE) master equation of
-Paliathanasis, Leon, and Leach \cite{ap}:
-\begin{equation}
-\E_m[\phi]=D_t\!\left(\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2}\right)
--g\beta_{\rm tr} D_s\!\left(\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right)=0.
-\label{eq:sve}
-\end{equation}
-Here $\phi(t,s)$ is particle position, $s$ a material label, and
-$\beta_{\rm tr}=mA_g\xi$
-the transport coefficient. Its reported point-symmetry algebra enlarges at
-$m=3$. Parameter perturbation therefore challenges both classification and
-reduction: an invariant ansatz at the exceptional value need not survive
-nearby. We retain the published scalar equation as our benchmark; its physical
-SVE interpretation requires resolving the bed-transport term identified by
-the Eulerian-to-Lagrangian chain rule.
-
-Quantum mechanics supplies a limited analogy: perturbations can destroy an
-enhanced symmetry. For the isotropic oscillator,
-$H_0=\hbar\omega(\sum_i a_i^\dagger a_i+k/2)$ and
-$E_{ij}=a_i^\dagger a_j$ satisfy
-\begin{equation}
-[H_0,E_{ij}]=0,\qquad
-[E_{ij},E_{\ell r}]=\delta_{j\ell}E_{ir}-\delta_{ir}E_{\ell j}.
-\end{equation}
-Their skew-Hermitian combinations generate $U(k)$; perturbations can reduce
-this symmetry \cite{tong}. First-order continuation requires cancellation of
-the corresponding symmetry defect. This is an analogy for testing, not
-assuming, persistence near $m=3$. Noether's correspondence yields a conserved
-current only for a variational symmetry \cite{noether}.
-
-The decoherence literature gives distinct precedents. A Lindblad symmetry
-analysis characterizes continuous symmetries and conserved quantities under
-dissipation, where their unitary-system correspondence changes
-\cite{lindbladsy}. A Caldeira--Leggett open-quantum-system study expands a
-reduced density matrix near its diagonal,
-truncates the resulting moment hierarchy, and obtains dissipative hydrodynamic
-equations approaching compressible Navier--Stokes at late times
-\cite{decohydro}. A separate Lindblad study examines perturbations and
-discrete CP/CPT symmetry constraints, not Lie point symmetries of an engineering
-PDE \cite{lindblad}. Neither derives classical water-wave or SVE equations.
-For this project, decoherence is therefore a motivation for asking how
-micro-to-macro closure can change a model; it is not a term in \eqref{eq:sve}.
-Any water-specific extension must instead derive its scale bridge from the
-chosen fluid, sediment, and bed-load closures.
-A current classical example derives a shallow-water moment system from a
-vertically resolved water-sediment Navier--Stokes model and couples it to
-suspended-load and Exner bed-load balances with erosion and deposition
-\cite{parvin}. This supplies a concrete engineering scale bridge without
-invoking quantum decoherence.
+The mathematical core is independent of the motivating PDE and credits
+standard theory \cite{olver,anderson2000}. Section~\ref{sec:examples}
+then provides worked examples and an audit of a published scalar benchmark
+\cite{ap}. The ML contribution remains a bounded, testable protocol until
+the numerical evidence gates in Section~\ref{sec:next-experiment} are met.
+We separate fixed model parameters $\lambda$, data parameters $a$, group
+parameters $\varepsilon$ and model perturbations $\delta$ throughout the
+new development. The appendix preserves historical records with their
+explicit evidence limitations.
 
 \clearpage
-\section{Preliminaries: from transformations to reduced equations}
-\subsection{Decomposed fundamentals}
+\section{General reduction core and local proofs}
+\label{sec:general-core}
+\subsection{Decomposed fundamentals and unified notation}
 \label{sec:decomposed-fundamentals}
-% Discussion: https://chatgpt.com/share/6ac68212-ef04-83ea-a9b5-36f8b0d9b624
-% Expanded to distinguish equation symmetry, invariant graphs, orbit rank,
-% algebra dimension, parameter strata, and approximation/computational cost.
-\begingroup
-\small
-\subsubsection*{1. Exact geometric reduction: PDE, ODE, or constraints?}
-Let $\pi:E\to M$ have $p$ independent variables and $q$ fields. At fixed model
-parameters $\lambda$, a smooth order-$n$ system of $r$ equations is
-$\mathcal E_\lambda=\{\Delta_A(x,u^{(n)};\lambda)=0\}_{A=1}^r\subset J^n(E)$
-on a regular chart. A point symmetry is a local point transformation whose
-chain-rule prolongation preserves this equation manifold. For a projectable
-generator $X_a=\xi_a^i(x)\partial_{x^i}+\eta_a^\alpha(x,u)\partial_{u^\alpha}$,
+The statements in this section are local, classical Lie-reduction results,
+organized as a verification contract. Their foundations are the point-symmetry
+and prolongation theory of \citet{olver} and the invariant-section and dynamic
+reduction framework of \citet{anderson2000}. They are not claimed as new
+classification or existence theorems. Concrete equations appear only in
+Section~\ref{sec:examples}.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}p{3.2cm}X@{}}
+\toprule
+Notation & Fixed meaning throughout the reduction core \\
+\midrule
+$p,q,r,n$ & Counts of independent variables, fields, equations, and original differential order; $r=q$ is not required. \\
+$\pi:E\to M$ & Local field bundle; $x=(x^1,\ldots,x^p)$ are base coordinates, $u=(u^1,\ldots,u^q)$ are fibre coordinates. \\
+$\sigma:M\to E$ & A physical field/section; $j^n\sigma$ is its derivative jet. The coordinate $u$ and a section are distinct objects. \\
+$\lambda,a,\varepsilon,\delta$ & Fixed model parameters, data/integration parameters, group-flow displacement, and model perturbation, respectively. \\
+$H,\mathfrak h,k,\ell$ & Selected local symmetry subgroup, its Lie algebra, $k=\dim\mathfrak h$, and base-orbit rank $\ell$. \\
+$y,z,v,F$ & Orbit coordinates, quotient coordinates, invariant field coordinates, and the unknown reduced profile. \\
+$\Delta,\mathcal R,\mathcal T$ & Original residual, reduced residual, and reconstruction map. \\
+$J,\alpha,i,b$ & Derivative multi-index; field, base-coordinate and generator indices. Repeated applicable indices are summed. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+At fixed $\lambda$, specify the problem as
 \begin{equation}
- \underbrace{\left.\pr^{(n)}X_a(\Delta_A)\right|_{\mathcal E_\lambda}=0}
- _{\text{equation symmetry}},\qquad
- \underbrace{Q_a^\alpha=\eta_a^\alpha-\xi_a^i u_i^\alpha=0}
- _{\text{invariance of a particular graph}}.
+ \mathcal P_\lambda=
+ \bigl(\Omega,\Delta,\mathcal N,\mathcal A,
+       \{(\Gamma_j,\mathcal B_j)\}_{j=1}^{N_B};\lambda\bigr),\qquad
+ \mathcal E_\lambda=\{\Delta_A(x,u^{(n)};\lambda)=0\}_{A=1}^r\subset J^n(E).
+ \label{eq:formal-problem}
+\end{equation}
+Here $\Omega\subset M$ is the domain, $\mathcal N$ records nonzero factors,
+$\mathcal A$ records smoothness/sign/branch assumptions, and $\mathcal B_j=0$
+is prescribed on the supplied data surface $\Gamma_j$. The derivative budget
+also covers the data operators. Work on a regular equation chart or record
+redundant equations and their rank explicitly. Smooth real branches and every
+denominator remain part of the problem after symbolic simplification.
+
+The ordinary finite-order jet construction below assumes integer differential
+order and point transformations. Fractional/nonlocal operators require a
+separate operator-action and chain-rule contract; they are not obtained by
+replacing $n$ by a noninteger in the formulas.
+
+\subsection{Point actions, prolongation and the infinitesimal criterion}
+\label{sec:prolongation-core}
+A local point action $\Phi_\varepsilon(x,u)=(\bar x,\bar u)$ acts on a field
+when its transformed graph is still a graph. Its generator and characteristic are
+\begin{equation}
+ X=\xi^i(x,u;\lambda)\partial_{x^i}
+       +\eta^\alpha(x,u;\lambda)\partial_{u^\alpha},\qquad
+ Q^\alpha=\eta^\alpha-\xi^i u_i^\alpha.
+ \label{eq:characteristic-core}
+\end{equation}
+The flow solves $d\bar x^i/d\varepsilon=\xi^i(\bar x,\bar u)$ and
+$d\bar u^\alpha/d\varepsilon=\eta^\alpha(\bar x,\bar u)$, with the original
+point as initial condition. Parameters $\lambda$ remain fixed. At fixed base
+coordinates the infinitesimal field change is $Q[j^1\sigma]$.
+
+Prolongation is the derivative chain rule, not an independently chosen symmetry.
+With $u_0^\alpha=u^\alpha$ and $\eta_0^\alpha=\eta^\alpha$,
+\begin{align}
+ D_i&=\partial_{x^i}+\sum_{\alpha,J}u_{J+e_i}^\alpha\partial_{u_J^\alpha},\\
+ \eta_{J+e_i}^\alpha&=D_i\eta_J^\alpha-u_{J+e_j}^\alpha D_i\xi^j,\\
+ \pr^{(n)}X&=X+\sum_{\alpha,\,1\le |J|\le n}
+                      \eta_J^\alpha\partial_{u_J^\alpha}.
+ \label{eq:prolongation-core}
+\end{align}
+Total derivatives are understood on the infinite jet bundle, or with enough
+higher jets for each finite calculation. The equivalent expression
+$\eta_J^\alpha=D_JQ^\alpha+\xi^iu_{J+e_i}^\alpha$ has cancellation of the
+apparent higher-order jets for a point generator.
+
+\begin{proposition}[Local infinitesimal symmetry criterion]
+\label{prop:infinitesimal-core}
+Let $\mathcal E_\lambda$ be a smooth equation submanifold on a regular jet
+chart, and let the prolonged local point flow be defined there. The flow
+preserves $\mathcal E_\lambda$ locally if and only if
+\begin{equation}
+ \left.\pr^{(n)}X(\Delta_A)\right|_{\mathcal E_\lambda}=0
+ \quad\text{for every defining equation }A.
+ \label{eq:determining}
+\end{equation}
+When the defining residuals are independent, this is locally equivalent to
+$\pr^{(n)}X(\Delta)=C_X\Delta$ for a smooth multiplier matrix $C_X$.
+\end{proposition}
+\begin{proof}
+Preservation differentiates to tangency. Conversely, a smooth tangent vector
+field has a local flow in the submanifold by uniqueness of its flow equations.
+On a regular defining chart, a smooth function vanishing on the submanifold
+is a smooth linear combination of its defining coordinates (Hadamard's lemma),
+which gives the multiplier form. Redundant or singular equations require
+their own defining chart; the rank hypothesis cannot be discarded.
+\end{proof}
+
+Equation symmetry and graph invariance are separate conditions:
+\begin{equation}
+ \underbrace{\pr^{(n)}X_b\Delta|_{\mathcal E_\lambda}=0}_{\text{maps solutions to solutions}},
+ \qquad
+ \underbrace{Q_b^\alpha[j^1\sigma]=0}_{\text{fixes this solution graph}}.
  \label{eq:fundamental-tangencies}
 \end{equation}
-The first condition maps solutions to solutions; the second selects the
-solutions fixed by a chosen subgroup. Neither condition replaces the other
-\cite{olver,anderson2000}.
+An invariant quantity $I$ instead satisfies $X_bI=0$. Thus an orbit, a field
+coordinate, an invariant quantity, and an invariant solution are not
+interchangeable. Nonclassical symmetry tests tangency on the joint PDE and
+invariant-surface system, including its differential consequences; it has a
+different contract from classical point symmetry.
 
-\noindent\textbf{Local reduction contract.}
-Choose a finite-dimensional, connected subgroup $H$ of verified point
-symmetries. Require a projectable action and constant, equal orbit ranks
+\subsection{Canonical coordinates and the local reconstruction theorem}
+\label{sec:canonical-core}
+Choose a finite-dimensional local subgroup $H$ of verified equation symmetries.
+An infinite-dimensional full point algebra does not prevent this choice.
+
+\begin{assumption}[Regular transverse local reduction]
+\label{ass:reduction-core}
+On a connected local chart, the action is projectable:
+$X_b=\xi_b^i(x;\lambda)\partial_{x^i}+\eta_b^\alpha(x,u;\lambda)\partial_{u^\alpha}$.
+Its selected fields close as a Lie subalgebra and have constant ranks
 \begin{equation}
- \ell=\operatorname{rank}[\xi_a^i]
-      =\operatorname{rank}[\xi_a^i,\eta_a^\alpha],\qquad 0\le\ell\le p,
+ \ell=\operatorname{rank}[\xi_b^i]
+      =\operatorname{rank}[\xi_b^i,\eta_b^\alpha],\qquad 0\le\ell\le p.
  \label{eq:fundamental-rank}
 \end{equation}
-independent base invariants $z=z(x)$, field invariants $v=I(x,u)$ with
-$\det I_u\ne0$, and a smooth local quotient bundle $\bar E\to M/H$.
-Lie closure makes the projected orbit distribution involutive. Frobenius
-gives local coordinates $(y,z)$ with $\ell$ orbit directions $y$ and
-$d=p-\ell$ transverse coordinates $z$. In invariant field coordinates,
-$Q=0$ becomes $\partial_yv=0$, so
+Take smooth base coordinates $(y,z)$, where $y\in\mathbb R^\ell$ and
+$z\in\mathbb R^d$, $d=p-\ell$, and invariant fibre coordinates
+$v=I(x,u)\in\mathbb R^q$ satisfying
 \begin{equation}
- v=F(z),\qquad u=\mathcal T_{\lambda,H}F:=\Psi_{\lambda,H}(x,F(z)).
+ X_bz^a=0,\quad X_bI^\alpha=0,\quad
+ \det D_x(y,z)\ne0,\quad \det I_u\ne0.
+ \label{eq:canonical-checks}
+\end{equation}
+The resulting local quotient bundle is smooth. Restrict all flows to the
+connected orbit segments in this chart; no global quotient is assumed.
+\end{assumption}
+
+\begin{theorem}[Local canonical form and invariant sections]
+\label{thm:canonical-core}
+Under Assumption~\ref{ass:reduction-core}, the coordinate map and its inverse are
+\begin{equation}
+ \chi:(x,u)\longmapsto(y(x),z(x),I(x,u)),\qquad
+ x=\Theta(y,z),\quad u=\Psi(\Theta(y,z),v).
+ \label{eq:reduction-chart}
+\end{equation}
+The orbit distribution becomes $\operatorname{span}\{\partial_{y^1},\ldots,
+\partial_{y^\ell}\}$. The $H$-invariant local sections correspond bijectively
+to reduced profiles through
+\begin{equation}
+ v=F(z),\qquad
+ u=\mathcal T_{\lambda,H}F:=\Psi(x,F(z(x))).
  \label{eq:fundamental-reconstruction}
 \end{equation}
-Thus the unknown profile loses orbit arguments exactly. This is local
-invariant-solution reduction, not a representation of every PDE solution.
+\end{theorem}
+\begin{proof}
+Lie closure and constant rank make the orbit distribution involutive;
+Frobenius' theorem gives adapted local coordinates. Projectability permits
+the base coordinates to be chosen independently of $u$. Equal base and total
+ranks make the infinitesimal isotropy act trivially in the fibre on this
+local transverse chart. The invariant coordinates and nonzero Jacobians give
+a local inverse by the inverse function theorem. In these coordinates,
+$Q_b=0$ says that the section is constant in every orbit direction:
+$\partial_yv=0$. Connectedness gives $v=F(z)$. Conversely, $v=F(z)$ has an
+orbit-invariant graph, and the inverse chart reconstructs it uniquely.
+\end{proof}
+
+For a single nonvanishing generator, the flow-box theorem permits $Xy=1$.
+For several noncommuting generators, Frobenius straightens their distribution,
+not all generators simultaneously into commuting coordinate fields.
+Solve the characteristic flow equations or the invariant PDEs $X_bI=0$;
+ratios of characteristic differentials are usable only where their denominators
+are nonzero. Explicitly check both inverse identities and the Jacobians.
 
 \begin{center}
-\begin{tikzpicture}[x=.95cm,y=.85cm,>=Latex,line cap=round,
- every node/.style={font=\scriptsize}]
- % (a) A regular foliated chart and its local quotient.
- \fill[fundgeometry!4,rounded corners] (-.1,-.35) rectangle (4.85,2.85);
- \node[font=\scriptsize\bfseries] at (2.37,2.56) {Orbit foliation};
- \draw[->,gray] (.38,.15)--(2.8,.15) node[right] {$y$};
- \draw[->,gray] (.38,.15)--(.38,2.08) node[above] {$z$};
- \foreach \h in {.48,.94,1.4,1.86}{
-  \draw[fundgeometry,line width=.8pt] (.45,\h)--(2.76,\h);
-  \draw[->,fundgeometry] (1.78,\h)--(2.37,\h);
-  \draw[->,fundanalysis!75,line width=.5pt] (2.88,\h)--(3.62,\h);
-  \fill[fundanalysis] (3.77,\h) circle (1.5pt);
- }
- \draw[fundanalysis,thick,dashed] (.98,.32)--(.98,2.02);
- \draw[fundanalysis,thick] (3.77,.3)--(3.77,2.06);
- \node[fundanalysis,align=center] at (4.3,1.19) {$M/H$\\$z$};
- \node[fundgeometry,align=center] at (1.75,-.1)
-  {$\mathcal D=\operatorname{span}\{\partial_y\}$};
- \node[fundanalysis] at (1.04,2.18) {slice};
- % (b) Prolonged tangency to the differential equation manifold.
- \fill[fundgeometry!4,rounded corners] (5.03,-.35) rectangle (9.55,2.85);
- \node[font=\scriptsize\bfseries] at (7.29,2.56) {PDE tangency in jets};
- \node[gray,anchor=west] at (5.28,2.17) {$J^n(E)$};
- \begin{scope}[rotate around={14:(7.3,1.05)}]
-  \filldraw[fill=fundanalysis!12,draw=fundanalysis,line width=.8pt]
-   (7.3,1.05) ellipse[x radius=1.7,y radius=.6];
-  \draw[fundanalysis!35] (5.72,1.05)--(8.88,1.05);
-  \draw[fundanalysis!35] (6.3,.62)--(6.3,1.48);
-  \draw[fundanalysis!35] (7.3,.45)--(7.3,1.65);
-  \draw[fundanalysis!35] (8.3,.62)--(8.3,1.48);
-  \fill[fundgeometry] (7.3,1.05) circle (2pt);
-  \draw[->,fundgeometry,line width=1pt] (7.3,1.05)--(8.63,1.05);
- \end{scope}
- \node[fundgeometry] at (8.0,1.92) {$\pr^{(n)}X_a$};
- \node[fundanalysis] at (7.32,.03) {$\mathcal E:\ \Delta=0$};
- % (c) Restriction to invariant jets, then quotient.
- \fill[fundgeometry!4,rounded corners] (9.72,-.35) rectangle (16.45,2.85);
- \node[font=\scriptsize\bfseries] at (13.08,2.56) {Invariant-jet quotient};
- \node[fundgeometry] (ij) at (11.28,1.78) {$\operatorname{Inv}_H^n(E)$};
- \node[fundgeometry] (rj) at (14.79,1.78) {$J^n(\bar E)$};
- \node[fundanalysis] (ie) at (11.28,.52)
-  {$\mathcal E\cap\operatorname{Inv}_H^n(E)$};
- \node[fundanalysis] (re) at (14.79,.52) {$\bar{\mathcal E}$};
- \draw[->,fundgeometry] (ij)--(rj) node[midway,above] {$/{H}$};
- \draw[->,fundanalysis] (ie)--(re) node[midway,above] {$/{H}$};
- \draw[{Hooks[right]}->,fundanalysis] (ie)--(ij);
- \draw[{Hooks[right]}->,fundanalysis] (re)--(rj);
- \node[gray] at (13.08,-.09) {local smooth quotient; $\bar E=E/H$};
+\begin{tikzpicture}[x=.92cm,y=1cm,>=Latex,
+ every node/.style={font=\scriptsize},
+ card/.style={draw=fundgeometry,fill=fundgeometry!5,rounded corners,
+              align=center,inner sep=4pt,minimum height=.65cm}]
+ \node[card,text width=3.6cm] (e) at (2.3,0) {$E$\\$(x,u)$};
+ \node[card,text width=4.0cm] (c) at (8,0) {Adapted chart\\$(y,z,v)$};
+ \node[card,text width=3.4cm] (q) at (13.6,0) {$\bar E=E/H$ locally\\$(z,v)$};
+ \node[card,text width=3.6cm] (j) at (2.3,-1.55) {$\operatorname{Inv}_H^n(E)$\\jets of invariant sections};
+ \node[card,text width=4.0cm] (jc) at (8,-1.55) {Invariant-jet coordinates\\$(y,z,j^nF)$};
+ \node[card,text width=3.4cm] (jq) at (13.6,-1.55) {$J^n(\bar E)$\\$(z,j^nF)$};
+ \node[card,draw=fundanalysis,fill=fundanalysis!5,text width=3.6cm] (s) at (2.3,-3.1)
+  {$\mathcal E_\lambda\cap\operatorname{Inv}_H^n(E)$};
+ \node[card,draw=fundanalysis,fill=fundanalysis!5,text width=4.0cm] (sc) at (8,-3.1)
+  {$\Delta[\mathcal TF;\lambda]=0$};
+ \node[card,draw=fundanalysis,fill=fundanalysis!5,text width=3.4cm] (sq) at (13.6,-3.1)
+  {$\bar{\mathcal E}_\lambda$\\$\mathcal R_{\lambda,H}[F]=0$};
+ \draw[->,fundgeometry] (e)--(c) node[midway,above] {$\chi$};
+ \draw[->,fundgeometry] (c)--(q) node[midway,above] {$\pi_H$};
+ \draw[->,fundgeometry] (j)--(jc) node[midway,above] {$j^n\chi$};
+ \draw[->,fundgeometry] (jc)--(jq) node[midway,above] {$\rho$};
+ \draw[->,fundanalysis] (s)--(sc) node[midway,above] {$\chi^*$};
+ \draw[->,fundanalysis] (sc)--(sq) node[midway,above] {$\rho$};
+ \draw[->,fundgeometry] (j)--(e) node[midway,left] {$\pi_{n,0}$};
+ \draw[->,fundgeometry] (jc)--(c) node[midway,left] {$\pi_{n,0}$};
+ \draw[->,fundgeometry] (jq)--(q) node[midway,right] {$\pi_{n,0}$};
+ \draw[->,fundanalysis] (s)--(j) node[midway,left] {include};
+ \draw[->,fundanalysis] (sc)--(jc) node[midway,left] {include};
+ \draw[->,fundanalysis] (sq)--(jq) node[midway,right] {include};
 \end{tikzpicture}
+\par\smallskip\small
+Coordinate adaptation, invariant jets, and equation reduction are separate,
+compatible maps. Here $\pi_H$ forgets orbit coordinates, $j^n\chi$ is the
+chain-rule jet map, and $\rho$ is the invariant-jet quotient. Prolongation
+precedes restriction to invariant jets.
 \end{center}
 
-Jets of invariant sections form $\operatorname{Inv}_H^n(E)$; the constraints
-$Q=0$ include their necessary differential consequences. The chain rule
-restricts the original equations to these jets, then quotients along $H$:
+\begin{theorem}[Local reduced-equation and reconstruction equivalence]
+\label{thm:reconstruction-core}
+Assume the hypotheses above and that the invariant equation intersection and
+its quotient have regular local defining charts. Then
 \begin{equation}
  \bar{\mathcal E}_\lambda
- =\bigl(\mathcal E_\lambda\cap\operatorname{Inv}_H^n(E)\bigr)/H,
- \qquad \mathcal R_{\lambda,H}[F]=0\ \Longleftrightarrow\
- \Delta[\mathcal T_{\lambda,H}F;\lambda]=0.
+   =\bigl(\mathcal E_\lambda\cap\operatorname{Inv}_H^n(E)\bigr)/H
+       \subset J^n(\bar E).
  \label{eq:fundamental-pullback}
 \end{equation}
-The equivalence holds on the stated chart for invariant profiles; data
-compatibility, solution existence and stability are additional questions.
-
-\begin{center}
-\renewcommand{\arraystretch}{1.15}
-\begin{tabularx}{\linewidth}{@{}p{1.7cm}X@{}}
-\toprule
-Quotient dimension & Resulting profile problem \\
-\midrule
-$d\ge2$ & A PDE system if derivatives genuinely involve several invariant
-variables; degenerate equations can instead be ODEs with parameters or constraints. \\
-$d=1$ & An ODE system, possibly with algebraic constraints or lower differential order. \\
-$d=0$ & No profile arguments: consistency/algebraic conditions for constant profile values. \\
-\bottomrule
-\end{tabularx}
-\end{center}
-Nonlinearity does not decide this classification. For viscous Burgers,
-$u_t+uu_x=\nu u_{xx}$, $\nu>0$, the subgroup generated by
-$\partial_t+c\partial_x$ gives $z=x-ct$ and
-$\nu F''+(c-F)F'=0$. For
-$u_t=\nu(u_{xx}+u_{yy})+u(1-u)$, imposing $\partial_y$-invariance leaves
-the PDE $V_t=\nu V_{xx}+V(1-V)$ in $(t,x)$; adding
-$\partial_t+c\partial_x$ gives the ODE
-$\nu F''+cF'+F(1-F)=0$. A $2+1$ PDE therefore generally needs two
-independent base-orbit directions to reach one profile argument.
-
-\clearpage
-\subsubsection*{2. Finite and infinite refer to different mathematical objects}
-At fixed $\lambda$, the unrestricted determining equations define the
-point-symmetry Lie algebra
+For a $C^n$ profile $F$ whose reconstructed jet stays in the chart,
 \begin{equation}
- \mathfrak g_\lambda
- =\{X:\left.\pr^{(n)}X(\Delta_A)\right|_{\mathcal E_\lambda}=0
-      \text{ for every }A\}.
- \label{eq:fundamental-algebra}
+ \mathcal R_{\lambda,H}[F]=0
+ \quad\Longleftrightarrow\quad
+ \Delta[\mathcal T_{\lambda,H}F;\lambda]=0.
+ \label{eq:reconstruction-equivalence}
 \end{equation}
-These equations are linear in the unknown generator coefficients even when
-the target PDE is nonlinear. If their complete solution is parameterized by
-finitely many independent constants, $\dim_{\mathbb R}\mathfrak g_\lambda=k<\infty$.
-If genuinely arbitrary functions yield infinitely many linearly independent
-generators, the algebra is infinite-dimensional. A finite-type determining
-system whose solutions are fixed by finitely many coefficient-jet values is
-a sufficient finite-dimensionality criterion. A finite polynomial ansatz,
-by itself, establishes neither this property nor maximality.
+This correspondence is exactly between reduced solutions and invariant
+original solutions on the stated chart. It need not preserve the original
+number of independent defining residuals or their differential order.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:canonical-core} identifies an invariant jet with
+$(y,z,j^nF)$. The prolonged action preserves both the equation manifold and
+invariant jets. Their intersection therefore has an orbit-invariant zero set.
+On the regular local quotient its defining conditions depend only on
+$(z,j^nF)$; equivalently they can be read on a transverse slice. A jet lies in
+the intersection if and only if its quotient lies in $\bar{\mathcal E}_\lambda$.
+Applying this equivalence to $j^n(\mathcal TF)$ gives both implications.
+\end{proof}
+
+The effective profile dimension is $d=p-\ell$. For $d=1$ the reduced system
+is an ODE system, possibly with algebraic constraints; $d=0$ leaves
+consistency/algebraic conditions. For $d\ge2$, a genuinely multivariable
+derivative system is a PDE; degeneracy can instead leave ODEs with parameters.
+Orbit rank controls the number of arguments. Reduction does not automatically
+lower differential order or produce a solvable, nonempty, globally defined family.
+
+If total orbit rank exceeds base rank, use an isotropy-fixed kinematic bundle
+when it is regular; fewer reduced fields may remain \cite{anderson2000}.
+For nonprojectable actions, rank-changing points or nonregular quotients,
+the present theorem does not apply without another invariant-graph construction.
+Record those branches explicitly rather than silently forcing this chart.
+
+\subsection{Derivative pullback, data, measures and inherited symmetries}
+\label{sec:pullback-core}
+For arbitrary smooth reconstruction $P_0^\alpha=\Psi^\alpha(x,F)$,
+the chain rule generates every original derivative:
+\begin{equation}
+ P_{J+e_i}^\alpha=\widehat D_iP_J^\alpha,\qquad
+ \widehat D_i=\partial_{x^i}
+ +\sum_{a,\beta,K}(\partial_{x^i}z^a)
+             F_{K+e_a}^\beta\partial_{F_K^\beta}.
+ \label{eq:pullback-recursion}
+\end{equation}
+Before substituting $x=\Theta(y,z)$, the partial derivative holds profile-jet
+placeholders fixed. Equation components may transform with multipliers;
+their zero set descends even if each original component is not an invariant
+scalar. A useful stronger, checkable certificate is the off-shell factorization
+\begin{equation}
+ \Delta[\mathcal TF](\Theta(y,z))
+       =M_H(y,z,j^nF;\lambda)\mathcal R[F](z),\qquad
+ \operatorname{rank}M_H=\bar r,
+ \label{eq:chart-pullback}
+\end{equation}
+where $\bar r$ is the length of the reduced residual vector. Full column rank,
+with a retained left inverse/guard, gives the reverse implication as well as
+the forward one. This factorization is an extra certificate, not an assumed
+universal componentwise identity.
+
+Pull back each $\mathcal B_j$, $\Gamma_j$, sign predicate and nonzero factor
+separately. If data conditions descend, denote them by $\bar{\mathcal B}_j[F]=0$.
+If they retain $y$, impose them for every relevant orbit point; do not erase
+that dependence. Symmetry of the PDE, compatibility of prescribed data, and
+existence/uniqueness of the resulting problem are three different questions.
+
+Norms also transform. When the factorization~\eqref{eq:chart-pullback}
+holds and the original residual is integrable on a chart domain, the
+base-coordinate change-of-variables theorem gives
+\begin{align}
+ \int_\Omega\|\Delta[\mathcal TF](x)\|^2\,dx
+ &=\int_{\bar\Omega}\mathcal R[F](z)^T W_H(z,j^nF)\mathcal R[F](z)\,dz,\\
+ W_H(z,w)&=\int_{Y_z}M_H(y,z,w)^TM_H(y,z,w)
+                   |\det D_{(y,z)}\Theta|\,dy.
+ \label{eq:quotient-loss-measure}
+\end{align}
+Here $Y_z$ is the orbit part of the chosen domain. If $M_H$ depends on the
+profile, $W_H$ is profile-dependent. An unweighted quotient loss is generally
+a different objective. Fix nondimensional residual scales, quadrature and
+domain measures, and independently report the original residual.
+
+For a symmetry $Y$ of the original equations satisfying
+$[Y,\mathfrak h]\subset\mathfrak h$, its local flow normalizes $H$ and can
+descend to the regular quotient. The normalizer algebra modulo $\mathfrak h$
+therefore supplies inherited reduced-symmetry candidates, possibly with an
+additional kernel. Other symmetries can appear only after reduction. Further
+ODE order reduction requires a separate symmetry/data/regularity check.
+
+\subsection{Classification, parameter strata and approximate persistence}
+\label{sec:classification-core}
+The full local point algebra is the solution space
+$\mathfrak g_\lambda=\{X:\pr^{(n)}X\Delta|_{\mathcal E_\lambda}=0\}$.
+The determining equations are linear in the unknown generator coefficients,
+although the target equations can be nonlinear. A complete solution with
+finitely many independent constants is finite-dimensional; genuine
+arbitrary-function families can make it infinite-dimensional. A finite-type
+determining system fixed by finitely many coefficient-jet values is a sufficient
+finite-dimensionality criterion. A finite generator ansatz only certifies its
+own verified solution space.
 
 A positive-dimensional Lie group has infinitely many transformations even
-when it has finitely many independent generators. For example,
-$\{\exp(\varepsilon\partial_x)\}$ has dimension one and infinitely many elements.
-Discrete, zero-dimensional groups can be finite or infinite; infinitesimal
-analysis describes the identity component and does not classify every
-disconnected component. For infinite-dimensional point symmetry one usually
-works with a local symmetry pseudogroup.
+when its algebra is finite-dimensional. Discrete groups may be finite or
+infinite; infinitesimal analysis controls the identity component locally, not
+all disconnected components or global topology. Point, contact, generalized,
+conditional, nonlocal and equivalence symmetries have different contracts.
+Coefficient/rank branches must be split before division. For a declared
+finite ansatz, $A(\lambda)c=0$ and its minors describe rank strata only within
+that ansatz. Maximality requires the full determining system and branch coverage.
 
-\begin{center}
-\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}p{4.4cm}X@{}}
-\toprule
-Example & Point-symmetry algebra, with coefficients fixed \\
-\midrule
-Viscous Burgers, $\nu>0$ & Five-dimensional maximal local point algebra. \\
-Heat, $u_t=\nu u_{xx}$ & Infinite-dimensional: a six-dimensional essential
-algebra plus the superposition ideal $X_h=h(t,x)\partial_u$, $h_t=\nu h_{xx}$. \\
-Nonlinear Liouville, $u_{xy}=e^u$ & Infinite-dimensional despite nonlinearity:
-$X_f=f(x)\partial_x-f'(x)\partial_u$ and
-$Y_g=g(y)\partial_y-g'(y)\partial_u$, with arbitrary smooth $f,g$. \\
-\bottomrule
-\end{tabularx}
-\end{center}
-The first two classifications are given in \citet{koval2023}; the continuous
-Liouville example and its exponential change of field variable are discussed
-in \citet{levi2015}. In particular,
-$\pr^{(2)}X_f(u_{xy}-e^u)=-f'(x)(u_{xy}-e^u)$, so the arbitrary-function
-symmetry follows directly. The Burgers algebra is spanned by
+Subgroup selection is distinct from maximal classification. A one-dimensional
+optimal system classifies lines in the algebra under the stated adjoint action
+and nonzero rescaling; it neither enumerates all PDE solutions nor classifies
+higher-dimensional subgroups. Compute brackets with
+$[X,Y](f)=X(Yf)-Y(Xf)$ and state the adjoint convention. For the vector-field
+push-forward convention,
 \begin{equation}
- \partial_t,\ \partial_x,\ t\partial_x+\partial_u,\
- 2t\partial_t+x\partial_x-u\partial_u,\
- t^2\partial_t+tx\partial_x+(x-tu)\partial_u.
- \label{eq:fundamental-burgers-basis}
+ \operatorname{Ad}_{\Phi_\varepsilon}Y=(\Phi_\varepsilon)_*Y
+   =\exp(-\varepsilon\operatorname{ad}_X)Y.
 \end{equation}
+A useful verified subgroup suffices for a local reduction without proving an
+optimal system. Intertwining neural feature channels is a further design choice:
+$W\,d\rho_{\rm in}(X)=d\rho_{\rm out}(X)\,W$ applies only when those
+representations have actually been specified \cite{otto}.
 
-\subsubsection*{3. Why counts change, and how fields, orbits and invariants differ}
-The number of independent generators is $\dim\mathfrak g_\lambda$, not the
-number of all linear combinations or transformations. It depends on the
-equations, their coefficients and parameter branch, and the specified symmetry
-class. Point, generalized, nonclassical and equivalence symmetries have
-different defining contracts. Symmetries of an equation can also be removed
-by its domain or boundary/initial data.
-
-A Lie field here means an infinitesimal vector field $X_a$.
-For a selected $H$, $\ell$ is the rank of the projected vector fields at a
-point, not $\dim H$ or $\dim\mathfrak g_\lambda$. Stabilizers can make an
-orbit smaller than the group. Invariants satisfy $X_a z=0$ and $X_a I=0$;
-an invariant graph additionally satisfies $Q_a=0$. The physical field can
-change along a base orbit while its invariant combination $v$ stays constant.
-For example, the Burgers boost $t\partial_x+\partial_u$ has
-$z=t$, $v=u-x/t$ on $t\ne0$, giving $u=x/t+F(t)$ and the first-order
-equation $F'+F/t=0$.
-
-If the total-space orbit rank exceeds the base rank, classical transversality
-fails. A pure field translation $\partial_u$ has base rank zero and gives
-$Q=1$, so it fixes no solution graph although it is a heat-equation symmetry.
-Other nontransverse actions may impose algebraic field restrictions: use
-the isotropy-fixed kinematic bundle of \citet{anderson2000}, rather than
-assuming $q$ free reduced fields. For a nonprojectable action,
-$\xi=\xi(x,u)$, there is no base-space orbit distribution of this form;
-a different invariant-graph/chart construction is needed. Rank-change and
-singular charts require separate treatment.
-
-Parameter strata matter even in a simple family
-$\Delta_\mu=u_t-\nu u_{xx}-\mu u^2$. For a heat solution $h$,
+For a smooth model perturbation and a known multiplier identity, write
+$\Delta_\delta=\Delta_0+\delta\Delta_1+O(\delta^2)$ and
+$X_\delta=X_0+\delta Y+O(\delta^2)$ with
+$\pr X_0\Delta_0=C_0\Delta_0$. The first-order determining condition is
 \begin{equation}
- \pr^{(2)}(h\partial_u)\Delta_\mu=-2\mu u h.
- \label{eq:fundamental-parameter-example}
+ \left.(\pr Y\Delta_0+\pr X_0\Delta_1-C_0\Delta_1)\right|_{\mathcal E_0}=0.
+ \label{eq:first-order-core}
 \end{equation}
-The superposition ideal survives at $\mu=0$ and disappears for $\mu\ne0$.
-This is a symmetry calculation, not an automatic assertion about the full
-algebra on the nonlinear branch. Transformations changing $\mu$ would belong
-to an equivalence problem rather than the fixed-parameter problem.
+This follows by expanding the multiplier identity through first order;
+the first-order multiplier times $\Delta_0$ vanishes on shell. A finite-ansatz
+cokernel obstruction is an obstruction only in that ansatz. If persistence is
+verified, its invariants and bracket closure must be continued consistently.
+Otherwise retain a surviving subgroup or the unreduced problem.
 
-\clearpage
-\subsubsection*{4. Parameter-aware reduction complexity and the ML target}
-Report complexity relative to both $\lambda$ and the chosen admissible $H$.
-For the transverse contract with $q$ retained fields, exact ambient jet counts are
-\begin{align}
- D_{\rm full}&=p+q\binom{p+n}{n},\qquad
- D_{\rm red}=d+q\binom{d+n}{n},\quad d=p-\ell,\\
- \Delta_{\rm jet}&=\ell+q\left[\binom{p+n}{n}-\binom{p-\ell+n}{n}\right].
+This generator expansion is of Baikov--Gazizov--Ibragimov (BGI) type, but the
+label does not remove the verification obligations. In the BGI framework one
+expands $X_\varepsilon=X_0+\varepsilon X_1+\cdots$ and asks whether the exact
+unperturbed symmetry $X_0$ has a nontrivial approximate lift. The distinct
+Fushchich--Shtelen (FS) framework expands the field
+$u=v+\varepsilon w+o(\varepsilon)$ and computes exact symmetries of the
+resulting triangular coefficient system. These frameworks can give different
+PDE classifications \cite{tarayrah2023}. The current near-cubic calculation
+certifies only a first-order obstruction inside a declared diagonal-scaling
+class: it is not an unrestricted BGI classification, and no FS classification
+has been performed. Both notions are also distinct from an equivalence
+transformation moving model parameters and from a nearby-equation approximate
+algebra inferred by numerical rank and completed determining systems
+\cite{kovalev,approxalg}.
+
+\subsection{Analytical approximation, complexity and the ML interface}
+\label{sec:complexity-core}
+For an ordinary point of a reduced scalar ODE, the implicit function theorem
+can put $\mathcal R=0$ in normal form if
+$\partial\mathcal R/\partial F^{(\bar n)}\ne0$. Local Lipschitz dependence
+of the normal-form right-hand side gives local IVP existence and uniqueness
+by Picard--Lindelof. Analytic dependence gives the analytic ODE existence
+theorem and a local Taylor recurrence \cite{teschl2012}. Singular points and global continuation
+need separate analysis. A formal series is not a convergence certificate.
+
+For $K$ justified coefficients, let $P_K$ be the analytical approximation and
+use $\widehat F_\theta=P_K+\chi_KN_\theta(z,\lambda,a)$ when appropriate.
+The choice $\chi_K=(z-z_0)^{K+1}$ preserves Taylor coefficients through $K$
+for a sufficiently smooth network. Hard data lifting already supplies some
+analytical terms; an ablation must distinguish these from an additional
+equation-derived prior \cite{lagaris}. Smoothness must cover the original
+residual derivative budget and the derivatives used by optimization.
+
+For a transverse reduction retaining $q$ fields, exact ambient counts at the
+same order $n$ are
+\begin{equation}
+ D_{\rm full}=p+q\binom{p+n}{n},\qquad
+ D_{\rm red}=d+q\binom{d+n}{n},\qquad
+ \Delta_{\rm jet}=D_{\rm full}-D_{\rm red}.
  \label{eq:fundamental-jet-count}
-\end{align}
-Count both jet spaces at the same order $n$. If a regular kinematic reduction
-retains only $\bar q$ fields, replace $q$ by $\bar q$ in $D_{\rm red}$.
-Record actual reduced differential order $\bar n$ separately. These are
-ambient coordinate counts, not the dimension of the solution space, neural
-sample complexity, or an operation-count theorem.
+\end{equation}
+Replace $q$ by the retained $\bar q$ in $D_{\rm red}$ for a regular kinematic
+reduction. Record the actual reduced order separately. These counts describe
+ambient coordinates, not solution-space dimension, statistical complexity or
+runtime. Keep algebra status, ranks, chart guards, reduced constraints,
+regularity, conditioning and all computational costs in a parameter-stratified
+feature record.
 
-\begin{center}
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Scalar order-two example & $p$ & $\ell$ & $D_{\rm full}\to D_{\rm red}$ & $\Delta_{\rm jet}$ \\
-\midrule
-Burgers travelling-wave reduction & 2 & 1 & $8\to4$ & 4 \\
-$2+1$ reaction--diffusion, $\partial_y$ & 3 & 1 & $13\to8$ & 5 \\
-Same equation, two orbit directions & 3 & 2 & $13\to4$ & 9 \\
-\bottomrule
-\end{tabular}
-\end{center}
-For a declared finite generator ansatz, an exact coefficient matrix
-$A(\lambda)c=0$ gives $k_{\rm ansatz}=N-\operatorname{rank}A(\lambda)$.
-Its minors identify rank strata within that ansatz. These strata and
-verification labels can support structural ML, but do not classify the
-unrestricted determining system.
-
-\begin{center}
-\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}p{3.15cm}X@{}}
-\toprule
-Quantity to record & Meaning and limitation \\
-\midrule
-Geometry and algebra & $d,\bar q,\Delta_{\rm jet}$; algebra status
-(finite/infinite/unknown), brackets, orbit rank and chart guards. \\
-Reduced dynamics & $\bar n$, constraints, nonlinear structure, singularities,
-data compatibility and measured conditioning/stiffness where defined. \\
-Approximation & Fixed domain, normalization and norm; regularity in
-$z,\lambda$ and data; series error/radius and held-out profile/derivative errors. \\
-Computation & Symbolic setup, training, inference, original-equation checking,
-fallback and matched-accuracy reference costs. \\
-\bottomrule
-\end{tabularx}
-\end{center}
-A genuine approximation measure requires a solution family. Assume a
-well-defined, compact family of data-compatible reduced profiles
-$\mathcal F=\{F_{\lambda,a}\}$, placed on a common reference quotient domain
-in a fixed Banach space $X$. Its Kolmogorov width is
+For a compact data-compatible profile family $\mathcal F$ on a common quotient
+domain in a fixed Banach space $\mathcal X$, its linear approximation benchmark is
 \begin{equation}
- d_K(\mathcal F;X)
- =\inf_{\substack{V\subset X\\\dim V\le K}}
-   \sup_{F\in\mathcal F}\inf_{v\in V}\|F-v\|_X.
+ d_K(\mathcal F;\mathcal X)
+  =\inf_{\dim V\le K}\sup_{F\in\mathcal F}\inf_{v\in V}\|F-v\|_{\mathcal X}.
  \label{eq:fundamental-width}
 \end{equation}
-It benchmarks linear reduced spaces; regularity of the parameter-to-solution
-map is central to such approximation bounds \cite{cohen2015}. For a declared
-neural class $\mathcal N_P$, the analogous representation error is
-$e_P=\sup_{F\in\mathcal F}\inf_{N\in\mathcal N_P}\|F-N\|_X$.
-Neither quantity alone bounds training effort or statistical sample needs.
-Reducing profile arguments also does not remove the independent parameter/data
-arguments of a network $N_\theta(z,\lambda,a)$.
+This Kolmogorov width depends on the family and parameter-to-solution
+regularity \cite{cohen2015}. For a declared neural class $\mathcal N_P$, the
+corresponding representation error is
+$e_P=\sup_{F\in\mathcal F}\inf_{N\in\mathcal N_P}\|F-N\|_{\mathcal X}$.
+Neither quantity alone bounds optimization effort or statistical sample needs.
 
-The proposed learning task is therefore conditional on a verified regular
-stratum: learn a reduced profile or its justified analytical remainder.
-Parameter transitions may change $H$, its ranks, chart and reduced equation;
-recheck these before sharing a representation across strata. Control the
-reconstruction map in the relevant norms: a bound
-$\|\mathcal T_{\lambda,H}\widehat F-\mathcal T_{\lambda,H}F\|_Y
-\le L_T\|\widehat F-F\|_X$ requires a proved/controlled $L_T$.
-Small residuals alone do not establish solution error without stability.
+\begin{proposition}[A posteriori error for a regular reduced IVP]
+\label{prop:ode-error-core}
+On $[z_0,z_0+b]$, write the reduced normal form as $Y'=G(z,Y)$,
+$Y(z_0)=Y_0$. Suppose the exact and approximate states remain in a common
+convex regular tube where $G$ is Lipschitz in $Y$ with constant $L\ge0$.
+For $\widehat Y\in C^1$, define the defect
+$d(z)=\widehat Y'(z)-G(z,\widehat Y(z))$ and initial mismatch
+$e_0=\widehat Y(z_0)-Y_0$. Then
+\begin{align}
+ \|\widehat Y(z)-Y(z)\|
+ &\le e^{L(z-z_0)}\|e_0\|
+       +\int_{z_0}^z e^{L(z-\zeta)}\|d(\zeta)\|\,d\zeta,\\
+ \|\widehat Y-Y\|_\infty
+ &\le e^{Lb}\bigl(\|e_0\|+\sqrt b\,\|d\|_{L^2}\bigr).
+ \label{eq:ode-error-core}
+\end{align}
+\end{proposition}
+\begin{proof}
+Subtract the integral equations for $Y$ and $\widehat Y$, apply the
+Lipschitz estimate, and use the integral Gronwall inequality. Bounding the
+exponential by $e^{Lb}$ and using Cauchy--Schwarz gives the second bound.
+These are standard IVP stability arguments \cite{teschl2012}.
+\end{proof}
+For a consistent state $\widehat Y=(\widehat F,\ldots,
+\widehat F^{(\bar n-1)})$, only its last defect component is nonzero.
+For a scalar normal form with last component $G_{\rm last}$, if
+$\mathcal R=c_{\rm lead}(F^{(\bar n)}-G_{\rm last})$ and
+$|c_{\rm lead}|\ge\mu_{\rm lead}>0$ in the tube,
+$\|d\|\le\mu_{\rm lead}^{-1}\|\mathcal R[\widehat F]\|$.
+This controls derivatives through order $\bar n-1$ in the uniform norm;
+the highest derivative additionally needs the corresponding defect norm
+and a bound for $G_{\rm last}$. Verifying the tube, $L$, the leading-factor margin
+and the continuous defect norm remains necessary. Finite collocation
+residuals alone do not establish these hypotheses.
 
-At matched error tolerance, a useful measured cost decomposition for $Q$
-queries is
+\begin{proposition}[Conditional transfer of profile error]
+\label{prop:error-transfer-core}
+Suppose the chosen profile/data problem has a solution $F$ and a stability
+estimate on an admissible neighborhood,
+\[
+ \|\widehat F-F\|_{\mathcal X}
+ \le C_{\rm stab}\bigl(\|\mathcal R[\widehat F]\|_{\mathcal Z}
+                       +\|\bar{\mathcal B}[\widehat F]\|_{\mathcal D}\bigr).
+\]
+If reconstruction is Lipschitz from $\mathcal X$ to the reported physical norm
+$\mathcal Y$ with constant $L_T$, then
 \begin{equation}
- T_{\rm hybrid}(Q)=T_{\rm setup}+T_{\rm train}
-   +Q\bigl(T_{\rm infer}+T_{\rm verify}+p_{\rm fall}T_{\rm fall}\bigr).
- \label{eq:fundamental-cost}
+ \|\mathcal T\widehat F-\mathcal TF\|_{\mathcal Y}
+ \le L_TC_{\rm stab}\bigl(\|\mathcal R[\widehat F]\|_{\mathcal Z}
+                       +\|\bar{\mathcal B}[\widehat F]\|_{\mathcal D}\bigr).
+ \label{eq:conditional-error-core}
 \end{equation}
-Compare it with the full cost of a reference method on the same admissible
-problem. Dimension reduction is exact; a runtime or data advantage is a
-separate analytical or experimental claim.
+\end{proposition}
+\begin{proof}
+Apply the reconstruction Lipschitz estimate to the assumed stability bound.
+For smooth $\Psi$ and $z$ on compact regular charts, suitable finite-order
+norm bounds for reconstruction follow from the chain rule and mean value
+estimates on bounded profile sets. Uniform constants across a parameter
+family require uniform chart, range and derivative bounds.
+\end{proof}
+The stability estimate is an additional analytical input; Lie symmetry does
+not supply it. Turning empirical residuals into continuous residual norms
+also needs quadrature/generalization control. This distinction is central in
+the rigorous PINN error analysis of \citet{mishra2023}.
 
-\clearpage
-\subsubsection*{5. Complete process and the parallel approximation interface}
-The workflow starts before a generator is chosen. It separates verifying a
-useful subgroup from proving a maximal classification, keeps singular branches
-and data checks explicit, and always returns to the original equations.
-An infinite-dimensional algebra does not prevent selecting a finite-dimensional
-admissible subgroup. Failed guards lead to another subgroup/chart or an
-unreduced route, not a forced similarity ansatz \cite{olver,anderson2000}.
-
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,
- every node/.style={font=\fontsize{7.5}{9}\selectfont},
- box/.style={draw,rounded corners=3pt,align=center,font=\fontsize{7.5}{9}\selectfont,
-             inner sep=4pt,minimum height=.72cm},
- geom/.style={box,draw=fundgeometry,fill=fundgeometry!6},
- ana/.style={box,draw=fundanalysis,fill=fundanalysis!6},
- learn/.style={box,draw=fundlearning,fill=fundlearning!7},
- ref/.style={box,draw=gray,fill=gray!5}]
- \node[geom,text width=5.6cm] (contract) at (8,0)
-  {1. Specify model and data\\
-   $\Delta_\lambda$, domain, smoothness and parameter guards};
- \node[geom,text width=5.6cm] (determining) at (8,-1.25)
-  {2. Solve or verify determining equations\\
-   parameter branches and classification status};
- \node[geom,text width=5.6cm] (algebra) at (8,-2.45)
-  {3. Compute brackets; choose subgroup $H$\\
-   maximal algebra or a verified subalgebra};
- \node[diamond,aspect=4,draw=fundgeometry,fill=fundgeometry!5,
-       text width=3.65cm,align=center,inner sep=1pt] (guard) at (8,-3.80)
-  {4. Projectable? Ranks regular?\\Chart and data compatible?};
- \node[ref,text width=2.55cm] (fallback) at (13.53,-3.80)
-  {Other $H$/chart, or\\unreduced problem};
- \node[geom,text width=5.6cm] (reduced) at (8,-5.65)
-  {5. Restrict jets, quotient and apply chain rule\\
-   $\mathcal R_{\lambda,H}[F]=0$, pulled-back data $\bar B[F]=0$};
- \node[ana,text width=3.02cm] (analysis) at (2.50,-7.40)
-  {6a. Analytical branch\\first integrals / local series\\$P_N$ with stated validity};
- \node[learn,text width=3.05cm] (neural) at (8,-7.40)
-  {6b. Optional neural model\\$N_\theta(z,\lambda,a)$\\profile or remainder};
- \node[ref,text width=3.05cm] (reference) at (13.53,-7.40)
-  {6c. Classical reference\\full or reduced problem\\accuracy refinement};
- \node[ana,text width=3.83cm] (assembly) at (8,-9.10)
-  {7. Profile and reconstruction\\
-   $\widehat F_\theta=P_N+\chi_NN_\theta$\\
-   $\widehat u_\theta=\mathcal T_{\lambda,H}\widehat F_\theta$};
- \node[learn,text width=3.05cm] (loss) at (13.53,-9.10)
-  {Reduced residual/data loss\\$\mathcal L(\theta)$};
- \node[geom,text width=5.04cm] (verify) at (8,-10.80)
-  {8. Independent original-problem checks\\PDE, data, chart guards and errors};
- \node[ref,text width=3.03cm] (refine) at (2.50,-10.80)
-  {Failure: refine approximation\\or revisit reduction/branch};
- \node[geom,text width=5.04cm] (report) at (8,-12.35)
-  {9. Report accuracy and all costs\\Failures, held-out parameters and branches};
- \draw[->,fundgeometry] (contract)--(determining);
- \draw[->,fundgeometry] (determining)--(algebra);
- \draw[->,fundgeometry] (algebra)--(guard);
- \draw[->,fundgeometry] (guard)--(reduced) node[midway,right] {yes};
- \draw[->,gray] (guard.east)--(fallback.west) node[midway,above] {no};
- \draw[->,gray] (fallback.south)--(reference.north);
- \draw[->,fundgeometry] (reduced.west)--(2.50,-5.65)--(analysis.north);
- \draw[->,fundgeometry] (reduced.south)--(neural.north);
- \draw[->,gray] (reduced.east)--(11.35,-5.65)--(11.35,-6.40)--(reference.north west);
- \draw[->,fundanalysis] (analysis.south)|-(assembly.west);
- \draw[->,fundlearning] (neural.south)--(assembly.north);
- \draw[->,fundlearning] (assembly.east)--(loss.west);
- \draw[->,fundlearning] (loss.north west) to[bend left=12] (neural.east);
- \node[fundlearning,fill=white,inner sep=1pt] at (10.76,-8.22) {$\theta$ update};
- \draw[->,fundgeometry] (assembly.south)--(verify.north);
- \draw[->,gray] (reference.east)--(15.67,-7.40)--(15.67,-10.80)--(verify.east);
- \draw[->,gray] (verify.west)--(refine.east) node[midway,above] {fail};
- \draw[->,gray,dashed] (refine.west)--(.43,-10.80)--(.43,-3.80)--(guard.west);
- \draw[->,fundgeometry] (verify.south)--(report.north)
-  node[midway,right] {pass};
-\end{tikzpicture}
-\par\smallskip
-{\scriptsize Blue: exact geometric work; green: analysis; orange: trainable
-approximation; gray: reference, fallback and refinement.}
+\subsection{Verified algorithm and implementation coverage}
+\label{sec:algorithm-core}
+The general mathematical algorithm returns a branch-aware certificate:
+\begin{center}\small
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}p{.8cm}p{3.2cm}X@{}}
+\toprule
+Step & Operation & Required output/check \\
+\midrule
+1 & Specify $\mathcal P_\lambda$ & Coordinates, jets, fixed parameters, data, scales and branch guards. \\
+2 & Verify or solve determining equations & Every original equation; supplied-candidate and maximality statuses kept separate. \\
+3 & Brackets and subgroup choice & Lie closure, effective orbit ranks, data compatibility; optional optimal-system coverage. \\
+4 & Construct $\chi,\chi^{-1}$ & Invariants, inverse identities, base/fibre Jacobians, connected chart and excluded strata. \\
+5 & Pull back all jets & Recursion~\eqref{eq:pullback-recursion}; original equations and all data/sign constraints. \\
+6 & Certify reduced equations & Quotient zero-set equivalence; factorization and nonzero/full-rank guards when used. \\
+7 & Approximate the profile & Analytical/numerical/neural route; initial-data enforcement and smoothness budget. \\
+8 & Reconstruct and verify & Independent original residuals, data, chart margins and held-out errors. \\
+9 & Report coverage and cost & All branches, failures, setup/training/query/verification/fallback costs and source hashes. \\
+\bottomrule
+\end{tabularx}
 \end{center}
 
-For an ordinary point of a scalar reduced ODE, coefficient matching gives
-$P_N(z)=\sum_{k=0}^N a_k(z-z_0)^k$. Analytic $\mathcal R$,
-$\partial\mathcal R/\partial F^{(\bar n)}\ne0$ and admissible initial data
-justify a local analytic solution; singular points require separate expansion methods. A formal series
-alone is not a global convergence or error certificate. With a justified prior,
-$\chi_N=(z-z_0)^{N+1}$ preserves its Taylor coefficients through order $N$;
-without it, use a direct reduced profile model. Approximation can be purely
-analytical, purely numerical, neural, or hybrid \cite{lagaris}.
+The earlier draft's supplied-chart API is a restricted realization of steps
+1--6: one projectable generator, $p\ge2$, affine reconstruction
+$u=C(x)F(z)+b(x)$, a supplied multiplier identity, and componentwise
+nonzero pullback factors. It records pulled-back data separately. Nonlinear
+$\Psi$, multiple generators and differential completion are general-theory
+capabilities, not automatically implemented capabilities. The recovered
+archive does not contain the cited newer \texttt{symm.generic} source;
+its API descriptions and historical results require source recovery before
+being described as freshly reproducible. A verified scalar control and a
+declared finite-ansatz analyzer have narrower coverage.
+
+Use explicit exits: verified local reduction; unresolved data; singular
+chart; inconclusive ansatz; partial branch coverage; unsupported action;
+or unavailable backend. Failure of a supplied
+multiplier identity or a solver timeout is not a proof that no symmetry exists.
+\subsection{Parameter-aware complexity and selection of a reduction}
+\label{sec:selection-core}
+There is no equation-only scalar that determines how easy a family is to
+learn. For each verified subgroup and parameter stratum, a usable record is
 \begin{equation}
- \min_\theta\mathcal L(\theta)=
- \|\mathcal R_{\lambda,H}[\widehat F_\theta]\|_{L^2(\bar\Omega,\mu)}^2
- +w_B\|\bar B[\widehat F_\theta]\|^2,\qquad w_B>0.
- \label{eq:fundamental-optimization}
+ \mathsf C_H(\lambda,a)=
+ \bigl(d,\bar q,\bar n,\bar r,D_{\rm red},
+       \mu_\chi,\mu_{\rm lead},\kappa_M,C_{\rm stab},
+       e_K;\mathsf s_H,\mathsf c_H\bigr).
+ \label{eq:complexity-record}
 \end{equation}
-Fix quotient measure/quadrature and normalization, impose compatible data,
-and provide field derivatives through the original residual order. The series
-and neural representations share a reduced interface; training is coupled to
-the assembled profile, not independent of its analytical prior. Exact geometry
-is not learned by this loss. Sampled residual checks remain numerical evidence;
-error certificates require stability and controlled residual bounds. A verified
-subgroup is sufficient for a valid local reduction even when maximal
-classification remains unresolved.
-\endgroup
+Here $\bar q,\bar n,\bar r$ are retained field count, actual order and
+independent residual count; $\mu_\chi$ bounds chart singular values away
+from zero; $\mu_{\rm lead}$ bounds the selected normal-form leading factor
+when one is used; $\kappa_M$ bounds the pullback/left-inverse conditioning;
+$C_{\rm stab}$ is an available stability constant; $e_K$ is an analytical
+approximation error bound or explicitly labeled estimate. The status record
+$\mathsf s_H$ includes algebra/classification coverage, rank strata, guards,
+data compatibility and whether each number is proved or sampled.
+The cost record $\mathsf c_H$ separates symbolic setup, reference generation,
+training, full query and fallback. Use fixed dimensionless coordinates and
+norms; condition numbers depend on scaling. Missing quantities are recorded
+as unknown, not set to zero.
+
+A learning-based selector may rank already verified choices, but a prediction
+does not verify a symmetry or remove a singular branch. For a declared query
+count $N_{\rm query}$, a task-specific design problem is
+\begin{equation}
+ \min_{\substack{H\in\mathcal H_{\rm verified}\!,\ K,P,N,\theta}}
+  c_{\rm setup}+c_{\rm ref}+c_{\rm train}
+          +N_{\rm query}c_{\rm full\ query},
+ \label{eq:reduction-design}
+\end{equation}
+subject to chart/data admissibility and the declared accuracy criterion.
+Here $K$ is prior order, $P$ neural capacity and $N$ collocation budget.
+A certified criterion uses Proposition~\ref{prop:error-transfer-core}; an
+empirical criterion is labeled and tested on held-out families. Changes of
+rank or branch require separate feature records. The exact jet saving,
+family approximation width, optimization conditioning and measured cost
+therefore answer different parts of ``reduction complexity.''
+
+\subsection{Parallel mathematical routes and the complete workflow}
+\label{sec:workflow-core}
+Figure~\ref{fig:complete-workflow} shows dependencies, optional routes and
+failure exits. Analytical and neural components share a verified profile
+interface; the classical reference is independent. A successful reduction
+need not use a network, and a failed chart/data test returns to subgroup or
+model analysis. An infinite full algebra still permits a verified finite
+subgroup. Maximal classification is required only if it is a stated claim.
+
+\begin{figure}[p]
+\centering
+\begin{tikzpicture}[>=Latex,every node/.style={font=\scriptsize},
+ box/.style={draw,rounded corners,align=center,inner sep=4pt,
+             minimum height=.72cm},
+ geom/.style={box,draw=fundgeometry,fill=fundgeometry!5},
+ ana/.style={box,draw=fundanalysis,fill=fundanalysis!5},
+ learn/.style={box,draw=fundlearning,fill=fundlearning!6},
+ ref/.style={box,draw=gray,fill=gray!5}]
+ \node[geom,text width=5.3cm] (model) at (5,0)
+  {1. Specify model and data\\$\Delta_\lambda$, domain, scales, smoothness and guards};
+ \node[geom,text width=5.3cm] (verify) at (5,-1.6)
+  {2. Verify candidates or solve determining equations\\Keep maximality and parameter-branch status explicit};
+ \node[geom,text width=5.3cm] (select) at (5,-3.2)
+  {3. Brackets and subgroup $H$\\Lie closure and effective base/total ranks};
+ \node[geom,text width=5.3cm] (chart) at (5,-4.8)
+  {4. Construct $\chi$ and $\chi^{-1}$\\Invariants, orbit coordinates and Jacobians};
+ \node[diamond,aspect=4,draw=fundgeometry,fill=fundgeometry!5,
+       align=center,text width=3.3cm,inner sep=1pt] (guard) at (5,-6.4)
+  {Regular chart?\\Compatible data/branch?};
+ \node[ref,text width=3cm] (fallback) at (10.45,-6.4)
+  {Other subgroup or chart\\Otherwise retain full problem};
+ \node[geom,text width=5.3cm] (reduced) at (5,-8.0)
+  {5. Pull back jets, equations and data\\Certify $\mathcal R[F]=0\iff\Delta[\mathcal TF]=0$};
+ \node[ana,text width=3.05cm] (analytical) at (-.15,-9.7)
+  {6a. Analytical route\\Integrals / justified local series\\Prior $P_K$ and its validity};
+ \node[learn,text width=3.05cm] (neural) at (5,-9.7)
+  {6b. Optional neural route\\$N_\theta(z,\lambda,a)$\\Smoothness and data lifting};
+ \node[ref,text width=3cm] (reference) at (10.45,-9.7)
+  {6c. Classical reference\\Independent refinement\\Full or reduced problem};
+ \node[ana,text width=3.7cm] (assembly) at (5,-11.5)
+  {7. Assemble and reconstruct\\$\widehat F=P_K+\chi_KN_\theta$\\$\widehat u=\mathcal T\widehat F$};
+ \node[learn,text width=3cm] (loss) at (10.45,-11.5)
+  {Loss with transformed measure\\Reduced residual / remaining data};
+ \node[geom,text width=5cm] (check) at (5,-13.3)
+  {8. Independent original-problem checks\\Equations, data, guards, derivative and held-out errors};
+ \node[ref,text width=3.05cm] (refine) at (-.15,-13.3)
+  {Failure: refine approximation\\or revisit subgroup / branch};
+ \node[geom,text width=5cm] (report) at (5,-15.0)
+  {9. Report accuracy, coverage and full costs\\All seeds, failures, setup, queries and fallback};
+ \draw[->,fundgeometry] (model)--(verify);
+ \draw[->,fundgeometry] (verify)--(select);
+ \draw[->,fundgeometry] (select)--(chart);
+ \draw[->,fundgeometry] (chart)--(guard);
+ \draw[->,fundgeometry] (guard)--(reduced) node[midway,right] {pass};
+ \draw[->,gray] (guard)--(fallback) node[midway,above] {fail};
+ \draw[->,gray] (fallback)--(reference);
+ \draw[->,fundgeometry] (reduced.west)-|(analytical.north);
+ \draw[->,fundgeometry] (reduced)--(neural);
+ \draw[->,gray] (reduced.east)--(8.1,-8.0)--(8.1,-8.8)--(reference.north west);
+ \draw[->,fundanalysis] (analytical.south)|-(assembly.west);
+ \draw[->,fundlearning] (neural)--(assembly);
+ \draw[->,fundlearning] (assembly)--(loss);
+ \draw[->,fundlearning] (loss.north west) to[bend left=15]
+   node[midway,above,sloped] {$\theta$ update} (neural.east);
+ \draw[->,fundgeometry] (assembly)--(check);
+ \draw[->,gray] (reference.east)--(12.25,-9.7)--(12.25,-13.3)--(check.east);
+ \draw[->,gray] (check)--(refine) node[midway,above] {fail};
+ \draw[->,gray,dashed] (refine.west)--(-2,-13.3)--(-2,-6.4)--(guard.west);
+ \draw[->,fundgeometry] (check)--(report) node[midway,right] {pass};
+\end{tikzpicture}
+\caption{Complete local reduction and approximation workflow. Blue denotes
+exact geometry, green analysis, orange trainable approximation, and gray
+independent references and failure routes. Parameter changes return to the
+symmetry/chart checks; they do not merely become new network inputs.}
+\label{fig:complete-workflow}
+\end{figure}
+
+\subsection{Where the neural optimization acts}
+\label{sec:optimization-core}
+For a verified reconstruction, the trainable variables are the profile
+remainder coefficients $\theta$, unless a separate generator-learning
+problem has been specified and certified. For fixed $\lambda,a$, use
+\begin{equation}
+ \widehat F_\theta=P_K+\chi_KN_\theta(z,\lambda,a),\qquad
+ \widehat u_\theta=\mathcal T\widehat F_\theta,\qquad
+ \mathcal L=\int\mathcal R[\widehat F_\theta]^T
+                    W_H\mathcal R[\widehat F_\theta]\,dz
+             +w_B\|\bar{\mathcal B}[\widehat F_\theta]\|^2.
+ \label{eq:neural}
+\end{equation}
+Average over the declared parameter/data distribution when learning a
+family. Add an observation term only when measurements are supplied.
+If only zero-set equivalence is available, evaluate the original residual
+pullback with its changed domain measure directly; do not assume a
+factorization matrix or $W_H$ without verification.
+If $W_H$ is fixed, the residual contribution to a directional gradient is
+\begin{equation}
+ D_\theta\mathcal L[\dot\theta]
+  =2\int (D_F\mathcal R[\widehat F_\theta]
+                    (\chi_KD_\theta N_\theta[\dot\theta]))^T
+                      W_H\mathcal R[\widehat F_\theta]\,dz,
+ \label{eq:optimization-gradient-core}
+\end{equation}
+plus remaining-data terms. Profile-dependent $W_H$ contributes its own
+derivative. $D_F\mathcal R$ is a differential linearization, so the network
+must supply the required field derivatives; reducing input dimension does
+not remove the derivative budget or ensure good conditioning.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,every node/.style={font=\scriptsize},
+ box/.style={draw,rounded corners,align=center,inner sep=4pt,
+             minimum height=.75cm}]
+ \node[box,draw=fundgeometry,fill=fundgeometry!5,text width=3.5cm] (chart) at (0,0)
+  {Verified geometry\\$\chi,\mathcal T,W_H$ and guards};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5,text width=3.5cm] (prior) at (0,-1.45)
+  {Fixed analysis/data lifting\\$P_K,\chi_K$};
+ \node[box,draw=fundlearning,fill=fundlearning!6,text width=3.5cm] (net) at (0,-2.9)
+  {Trainable smooth network\\$N_\theta(z,\lambda,a)$};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5,text width=3.3cm] (profile) at (5,-1.45)
+  {Profile and its jets\\$j^n\widehat F_\theta$};
+ \node[box,draw=fundlearning,fill=fundlearning!6,text width=3.3cm] (loss) at (10,-1.45)
+  {Residual/data objective\\with declared measure};
+ \node[box,draw=fundgeometry,fill=fundgeometry!5,text width=3.3cm] (physical) at (5,-4.4)
+  {Reconstructed field and jets\\$j^n\widehat u_\theta$};
+ \node[box,draw=gray,fill=gray!5,text width=3.3cm] (checks) at (10,-4.4)
+  {Independent validation\\Original equations / data / references};
+ \draw[->,fundanalysis] (prior)--(profile);
+ \draw[->,fundlearning] (net.east)--(profile.south west);
+ \draw[->,fundgeometry] (chart.east)--(5,0)--(profile.north);
+ \draw[->,fundgeometry] (chart.north)--(0,.65)--(10,.65)--(loss.north);
+ \draw[->,fundlearning] (profile)--(loss);
+ \draw[->,fundlearning,dashed] (loss.east)--(12.4,-1.45)--(12.4,-5.25)
+   --(-2.2,-5.25)--(-2.2,-2.9)--(net.west);
+ \node[fundlearning] at (5,-5.5) {gradient updates $\theta$};
+ \draw[->,fundgeometry] (profile)--(physical) node[midway,left] {chain rule};
+ \draw[->,fundgeometry] (physical)--(checks);
+\end{tikzpicture}
+\caption{Parallel inputs to a constrained profile and its optimization.
+The fixed geometric maps and analytical prior enter the forward calculation;
+the gradient loop updates the neural remainder. Independent original-field
+checks do not replace the training loss or the required stability analysis.}
+\label{fig:network-parallel}
+\end{figure}
 
 \clearpage
-\subsection{Transformations, prolongation, and perturbation}
-Let $x=(x^1,\ldots,x^p)$ denote independent coordinates and
-$u=(u^1,\ldots,u^q)$ field coordinates. A physical field is a section
-$u=f(x;\lambda)$ of the local bundle $M\times\mathbb R^q\to M$, with fixed model
-parameters $\lambda$. Reserve $p$ for independent variables, $q$ for fields,
-$r$ for equations and $n$ for differential order. The jet $j^nf$ records
-derivatives through order $n$; a PDE system is the submanifold
-$\Delta_A(x,u^{(n)};\lambda)=0$, $A=1,\ldots,r$, wherever its defining
-constraints have full rank.
+\section{Examples: interpretation, verification and the SVE benchmark}
+\label{sec:examples}
+The examples illustrate the preceding contract; none is a hypothesis of the
+general theorems. A verified reduction describes a selected invariant family,
+and every chart and data restriction is retained.
 
-A local Lie-group action transforms points and, when the transformed graph
-remains a graph, fields:
+\begin{example}[A nonlinear PDE can reduce to either a PDE or an ODE]
+For viscous Burgers, $u_t+uu_x=\nu u_{xx}$, $\nu>0$, select
+$X=\partial_t+c\partial_x$. The complete adapted chart is
+$y=t$, $z=x-ct$, $v=u$, with inverse $t=y$, $x=z+cy$, $u=v$.
+Its base Jacobian is one, $Xy=1$, $Xz=Xv=0$, and graph invariance is
+$u_t+cu_x=0$. Thus $u=F(z)$ and direct substitution gives
+\[
+ \nu F''+(c-F)F'=0.
+\]
+Here $p=2$, $\ell=1$, $d=1$, and the second differential order is retained.
+In contrast, for $u_t=\nu(u_{xx}+u_{ww})+u(1-u)$, invariance under
+$\partial_w$ gives $u=V(t,x)$ and a nonlinear PDE in two variables.
+Adding the commuting generator $\partial_t+c\partial_x$ gives
+\[
+ \nu F''+cF'+F(1-F)=0.
+\]
+The successive quotient dimensions are two and one. Effective orbit rank
+decides the number of profile arguments in these nonlinear examples.
+\end{example}
+
+\begin{example}[Infinite point algebras, including a nonlinear example]
+For $u_t=u_{xx}$, every solution $f_t=f_{xx}$ gives a point generator
+$f(t,x)\partial_u$ through linear superposition. This is an
+infinite-dimensional abelian ideal in the point algebra, distinct from its
+finite-dimensional essential quotient \cite{koval2023}.
+For the nonlinear Liouville equation $w_{xy}=e^w$, arbitrary smooth
+functions $A(x)$ and $B(y)$ generate
+\[
+ X=A(x)\partial_x+B(y)\partial_y
+                  -(A'(x)+B'(y))\partial_w.
+\]
+Indeed, for $\Delta=w_{xy}-e^w$,
+$\pr^{(2)}X\Delta=-(A'+B')\Delta$. The finite local action can be written
+$\bar x=f(x)$, $\bar y=h(y)$,
+$\bar w=w-\log(f'h')$ on a branch $f'h'>0$. This verifies arbitrary-function
+point symmetry directly; nonlinear PDEs need not have finite point algebras
+\cite{levi2015}. Selecting a finite-dimensional regular subgroup remains
+possible in either example.
+\end{example}
+
+\begin{example}[A parameter stratum can change symmetry dimension]
+For $u_t-u_{xx}-\mu u^2=0$, a vertical shift candidate
+$f(t,x)\partial_u$ has infinitesimal residual
+$f_t-f_{xx}-2\mu uf$. At $\mu=0$, every heat solution supplies a symmetry.
+At $\mu\ne0$, the freedom in $u$ forces $f=0$ in this particular vertical
+shift class. This verifies loss of that ideal; it does not by itself classify
+the remaining algebra. Exceptional parameter strata and the declared
+symmetry class must both accompany a symmetry count.
+\end{example}
+
+\begin{example}[The published scalar Lagrangian benchmark]
+\label{ex:sve}
+Paliathanasis, Leon and Leach \cite{ap} report the scalar equation
+\begin{equation}
+ \E_m[\phi]=D_t\!\left(\phi_s\phi_{tt}
+                       -g\frac{\phi_{ss}}{\phi_s^2}\right)
+ -g\beta_{\rm tr}D_s\!\left(\phi_t^{m-1}
+                                 \frac{\phi_{ts}}{\phi_s}\right)=0,
+ \qquad \beta_{\rm tr}=m\kappa,\quad \kappa=A_g\xi_{\rm por}.
+ \label{eq:sve}
+\end{equation}
+Here $(t,s)$ are time and material-label coordinates and $\phi$ is particle
+position. The porosity factor $\xi_{\rm por}$ is not a generator coefficient
+$\xi^i$; the porosity itself is also distinct from the group parameter
+$\varepsilon$. We audit the printed scalar equation as a mathematical
+benchmark. Its equivalence to the full physical bed-transport system is a
+separate question addressed below. The positive branch $\phi_s>0$ permits
+$h=1/\phi_s$; noninteger powers additionally require a stated real branch
+for $\phi_t$.
+\end{example}
+
+\subsection{What the reference includes, and what must be made explicit here}
+The reference is a model-specific Lie calculation, not a general reduction
+theorem. Its equations (9)--(12) give the point action and generator,
+(13)--(18) the infinitesimal test/prolongation and determining system,
+(22)--(23) the invariant equations, and Table 3 the similarity variables.
+Thus the coordinate transformation is present, mainly through invariants
+and an ansatz. It does not write out all orbit coordinates, inverse maps,
+Jacobians, data pullbacks or residual measures needed for a reusable solver.
+Its citations provide the general background; our general results above
+state their hypotheses and local scope explicitly and credit that background.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}p{3.6cm}p{3.8cm}X@{}}
+\toprule
+Reference object/location & Unified notation & Extra verification in this paper \\
+\midrule
+$(t,s,\phi)$; equation (7) & $(x,u)$; $\Delta=\E_m$ & Fixed parameters, denominator and real-power branches. \\
+$X$; equations (9)--(12) & $X_b$, $Q_b$ & Equation symmetry versus invariant solution graph. \\
+$X^{[n]}$; equations (13)--(18) & $\pr^{(n)}X$ & Explicit jet chain rule and multiplier/zero-set check. \\
+$W^{[0]},W^{[1]}$; equations (22)--(23), Table 3 & $z,v$ & Complete $(y,z,v)$ chart, inverse and ranks. \\
+Similarity ansatz/reduced equations & $u=\mathcal TF$, $\mathcal R[F]=0$ & Independent substitution, data and norm pullbacks. \\
+Proposition 1, Tables 1--2 & $\mathfrak g_\lambda$, brackets, adjoint action & Attribution of classification; convention and consistency audit. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The printed source also needs careful reading. Under the bracket convention
+$[X,Y]=XY-YX$, its Table 1 gives the same sign for both
+$[X_1,X_5]$ and $[X_5,X_1]$, and similarly for the $X_2,X_5$ pair.
+Direct computation instead gives
+\[
+ [\partial_t,X_5]=\partial_t,\quad [X_5,\partial_t]=-\partial_t,
+ \qquad [\partial_s,X_5]=-2\partial_s,\quad
+ [X_5,\partial_s]=2\partial_s.
+\]
+The text of its stationary subsections 3.1--3.2 interchanges the surviving
+variables, although Table 3 gives them correctly: $X_1=\partial_t$ yields
+$\phi=F(s)$, and $X_2=\partial_s$ yields $\phi=F(t)$.
+A pure vertical translation $X_3=\partial_\phi$ has $Q=1$ and hence no
+fixed scalar solution graph. These checks concern specific printed entries,
+not a new maximal-classification proof. In particular, we verify our reduced
+equation by substitution rather than importing equation (25) as an identity.
+
+The displayed determining system on the reference's page 4 contains
+$3\eta^1+\xi^2_{,s}+2\xi^1_{,t}=0$. Its reported scaling generator
+$X_4$ has $\eta^1=1$, $\xi^1=t$, $\xi^2=s$, giving $6=0$ in that
+printed condition. This identifies an internal inconsistency, potentially
+typographical; it does not invalidate a generator independently verified
+against the original scalar residual. The printed determining system must
+be corrected and solved before it can support a maximality proof.
+
+\subsection{The complete exceptional-branch coordinate transformation}
+At $m=3$ the source reports the additional generator
+$X_5=t\partial_t-2s\partial_s$. Its finite flow is
+$(t,s,\phi)\mapsto(e^\varepsilon t,e^{-2\varepsilon}s,\phi)$.
+On $t>0$, with a fixed reference time $t_*>0$, choose
+\begin{equation}
+ y=\log(t/t_*),\quad z=st^2,\quad v=\phi;
+ \qquad t=t_*e^y,\quad s=z/t^2,\quad \phi=v.
+ \label{eq:sve-chart}
+\end{equation}
+Then $X_5y=1$, $X_5z=X_5v=0$,
+$\det D_{(t,s)}(y,z)=t\ne0$, and the fibre Jacobian is one.
+With $v=F(z)$ the reconstruction is $\phi(t,s)=F(st^2)$, and
+\begin{equation}
+ \partial_t=\frac1t(\partial_y+2z\partial_z),\qquad
+ \partial_s=t^2\partial_z,
+ \qquad
+ \phi_s=t^2F',\quad \phi_t=\frac{2zF'}t,
+ \quad \phi_{tt}=\frac{2zF'+4z^2F''}{t^2}.
+ \label{eq:sve-chain-rule}
+\end{equation}
+The prime denotes $d/dz$ throughout this example. Direct substitution gives
 \begin{align}
-S_\varepsilon(x,u)&=(\bar x,\bar u),&
-f_\varepsilon(\bar x;\lambda)&=\bar u\big|_{u=f(x;\lambda)},\\
-\bar x^\mu&=x^\mu+\varepsilon\zeta^\mu+O(\varepsilon^2),&
-\bar u^\alpha&=u^\alpha+\varepsilon\eta^\alpha+O(\varepsilon^2).
+ \E_3[F(st^2)]&=\frac1t\mathcal R_0[F],\qquad
+ \mathcal R_0[F]=2z\mathcal A'[F]-g\beta_{\rm tr}\mathcal B'[F],\label{eq:reduction}\\
+ \mathcal A[F]&=2z(F')^2+4z^2F'F''-g\frac{F''}{(F')^2},\qquad
+ \mathcal B[F]=8z^2F'(F'+zF'').\nonumber
 \end{align}
-Thus $\varepsilon$ labels a group displacement, not a model perturbation.
-The infinitesimal vector field and its characteristic are
+The off-shell multiplier $1/t$ is nonzero on this chart. The coefficient of
+$F'''$ is
 \begin{equation}
-X=\zeta^\mu\partial_{x^\mu}+\eta^\alpha\partial_{u^\alpha},
-\qquad Q^\alpha=\eta^\alpha-\zeta^\mu u^\alpha_\mu.
+ c_{\rm lead}(z,F')=-\frac{2gz}{(F')^2}
+                       +8(1-g\beta_{\rm tr})z^3F'.
+ \label{eq:sve-leading}
 \end{equation}
-Repeated indices are summed. At fixed coordinates,
-$\partial_\varepsilon f_\varepsilon^\alpha|_0=Q^\alpha[j^1f]$:
-the characteristic subtracts apparent field change caused by coordinate
-motion. Prolongation applies the chain rule to derivatives \cite{olver}:
-\begin{align}
-\pr^{(n)}X&=X+\sum_{\alpha,\,1\le|J|\le n}\eta_J^\alpha
-\partial_{u_J^\alpha},\\
-\eta_J^\alpha&=D_JQ^\alpha+\zeta^\mu u^\alpha_{J,\mu},
-\qquad D_\mu=\partial_{x^\mu}+\sum_{\alpha,J}
-u^\alpha_{J,\mu}\partial_{u_J^\alpha}.
-\end{align}
-Here $J$ is a derivative multi-index. Tangency to the equation manifold gives
+Use a third-order normal-form IVP only where $F'>0$ and
+$c_{\rm lead}\ne0$. For $1-4g\beta_{\rm tr}>0$, the explicit branch
 \begin{equation}
-\left.\pr^{(n)}X(\Delta_A)\right|_{\Delta=0}=0.
-\label{eq:determining}
+ F_0(z)=C+Kz^{1/3},\qquad K^3=\frac{27g}{1-4g\beta_{\rm tr}}
+ \label{eq:sve-exact}
 \end{equation}
-Eliminate constrained derivatives, split in the remaining independent
-derivatives, and solve the resulting determining equations for
-$\zeta^\mu,\eta^\alpha$. Their solutions form a Lie algebra under commutators;
-adjoint equivalence organizes inequivalent subgroup reductions.
+solves the verified scalar equation on $z>0$ and supplies an exact check.
+It is not an existence theorem for arbitrary physical initial/boundary data.
 
-For \eqref{eq:sve}, use $(x,u)=((t,s),\phi)$ and retain the source's
-$X_i$ notation, with $S_i(\varepsilon)=\exp(\varepsilon X_i)$.
-At $m=3$,
-\begin{equation}
-X_5=t\partial_t-2s\partial_s,
-\quad S_5:(t,s,\phi)\mapsto(e^\varepsilon t,e^{-2\varepsilon}s,\phi),
-\quad \phi=F(\sigma),\quad \sigma=st^2.
-\end{equation}
-Solving $X_5\sigma=0$ and $Q=0$ gives this invariant family; substitution
-reduces the PDE to an ODE. Compatible data and regular group orbits are
-required. Nonclassical symmetry instead imposes \eqref{eq:determining} on
-the joint PDE and invariant-surface system $Q=0$, including differential
-consequences; it is distinct from approximate symmetry.
+\begin{center}
+\begin{tikzpicture}[>=Latex,every node/.style={font=\scriptsize},
+ box/.style={draw,rounded corners,align=center,text width=3.8cm,
+              minimum height=.8cm,inner sep=4pt}]
+ \node[box,draw=fundgeometry,fill=fundgeometry!5] (original) at (0,0)
+  {Reconstructed graph\\$\phi=\mathcal TF$};
+ \node[box,draw=fundgeometry,fill=fundgeometry!5] (adapted) at (5,0)
+  {Adapted invariant graph\\$v(y,z)=F(z)$};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5] (profile) at (10,0)
+  {Invariant profile\\$F(z)$};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5] (pde) at (0,-1.6)
+  {$\E_3[\phi]=0$};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5] (factor) at (5,-1.6)
+  {On invariant jets\\$e^{-y}t_*^{-1}\mathcal R_0[F]=0$};
+ \node[box,draw=fundanalysis,fill=fundanalysis!5] (ode) at (10,-1.6)
+  {$\mathcal R_0[F]=0$};
+ \draw[->,fundgeometry] (original)--(adapted) node[midway,above] {$\chi$};
+ \draw[->,fundgeometry] (adapted)--(profile) node[midway,above] {$\pi_H$};
+ \draw[->,fundanalysis] (pde)--(factor) node[midway,above] {$\chi^*$};
+ \draw[->,fundanalysis] (factor)--(ode) node[midway,above] {$t>0$};
+ \draw[->,fundanalysis] (original)--(pde);
+ \draw[->,fundanalysis] (adapted)--(factor);
+ \draw[->,fundanalysis] (profile)--(ode);
+\end{tikzpicture}
+\end{center}
 
-Reserve $\delta=m-3$ for model perturbation: Kovalev's group parameter $a$
-and perturbation parameter $\epsilon$ correspond to our $\varepsilon$ and
-$\delta$, respectively \cite{kovalev}. Model parameters remain fixed under
-$S_\varepsilon$; transformations changing them require an extended action.
-For dimensionless $\phi_t>0$,
-\begin{equation}
-\phi_t^{2+\delta}=\phi_t^2\bigl(1+\delta\log\phi_t+O(\delta^2)\bigr).
-\end{equation}
-Expand both the equation and generator smoothly,
-$\E_\delta=\E_0+\delta\E_1+O(\delta^2)$ and
-$Y_\delta=Y_0+\delta Y_1+O(\delta^2)$, including the $m$-dependence of
-$\beta_{\rm tr}$.
-Here $Y_k$ denote perturbation coefficients; $X_i$ retain the source's basis labels.
-If $\pr Y_0\E_0=c_0\E_0$, first-order persistence requires
-\begin{equation}
-\left.(\pr Y_1\E_0+\pr Y_0\E_1-c_0\E_1)\right|_{\E_0=0}=0.
-\end{equation}
-The correction must cancel the perturbation's symmetry defect; a solution
-$Y_1$ is not guaranteed. For $z=(x,u)$ and generator coefficients
-$V_0,V_1$, the approximate flow $\bar z=z_0+\delta z_1$ obeys
-\begin{equation}
-\frac{dz_0}{d\varepsilon}=V_0(z_0),\qquad
-\frac{dz_1}{d\varepsilon}=DV_0(z_0)z_1+V_1(z_0),\qquad
-z_0(0)=z,\quad z_1(0)=0.
-\end{equation}
-Kovalev's renormalization-group construction additionally extends the
-equation manifold, finds its symmetries, and restricts them using the selected
-boundary-value solution before reconstructing that solution; this restriction
-must be derived for SVE.
+For the chart domain $1\le t\le2$, $1\le z\le1.5$, take $t_*=1$.
+The inverse base Jacobian is $1/t=e^{-y}$ and the residual multiplier is
+$e^{-y}$. Thus the unnormalized original squared-residual integral equals
+\[
+ \int_{\Omega}|\E_3[\mathcal TF]|^2\,dt\,ds
+   =\frac7{24}\int_1^{1.5}|\mathcal R_0[F](z)|^2\,dz.
+\]
+Normalized averages require their own domain-volume factors. This example
+shows why the quotient loss measure must be declared rather than inferred
+from the invariant coordinate alone.
 
+\subsection{Physical-model audit before any full-SVE interpretation}
+Let $B(t,x)$ be Eulerian bed elevation and $b(t,s)=B(t,\phi(t,s))$ its
+material pullback. Suppose the Eulerian transport equation is
+$B_t+\beta_{\rm tr}u^{m-1}u_x=0$, with $u(t,\phi)=\phi_t$.
+The chain rule gives
+\begin{equation}
+ b_t=B_t+\phi_tB_x,\qquad b_s=\phi_sB_x,
+ \qquad
+ b_t-\frac{\phi_t}{\phi_s}b_s
+       +\beta_{\rm tr}\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}=0.
+ \label{eq:physical-bed-audit}
+\end{equation}
+The source's printed equation (6) lacks this advective bed term when its bed
+variable is interpreted as the Eulerian pullback. A different variable or
+closure would have to be defined to justify its omission. Consequently the
+scalar benchmark, its reported symmetry classification, and a physically
+equivalent full SVE reduction cannot be treated as interchangeable. Resolve
+this derivation with the authors/source model before making the latter claim;
+changing the model also requires a new symmetry and data calculation.
+Smooth classical reductions here do not establish shock solutions or weak
+Rankine--Hugoniot balances.
+
+There is also an integration issue even for the source's printed model.
+Set $A=\phi_s\phi_{tt}-g\phi_{ss}/\phi_s^2$ and
+$C=\phi_t^{m-1}\phi_{ts}/\phi_s$. Its equations (5)--(6) require
+$b_s=-A/g$ and $b_t=-\beta_{\rm tr}C$. Thus the one-form
+\[
+ \omega=-\beta_{\rm tr}C\,dt-\frac{A}{g}\,ds
+\]
+is closed precisely when $\mathcal E_m[\phi]=0$. On a sufficiently small
+simply connected regular domain, the Poincare lemma reconstructs $b$ up to
+an additive constant. On a multiply connected domain, vanishing periods
+are additionally necessary. Prescribed bed data must agree with this
+primitive. This recovers only the printed two-equation model; it does not
+repair the missing advective term in the physical pullback. A scalar PDE
+certificate and a physical full-system certificate are therefore distinct.
+
+\subsection{Persistence and the limitations of a near-cubic ansatz}
+For the printed scalar equation, weighted prolongation gives the off-shell
+identity
+\begin{equation}
+ \pr^{(3)}X_5\E_m+\E_m
+  =(m-3)g\beta_{\rm tr}D_s\!\left(
+        \phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right).
+ \label{eq:sve-defect}
+\end{equation}
+It verifies $X_5$ at $m=3$ and exhibits its generic defect away from that
+stratum. For a regular branch at $m=4$ the right-hand side is generically
+nonzero on shell. Failure of a guessed multiplier alone would not prove
+this; the explicit on-shell defect does. Persistence of a \emph{deformed}
+generator remains a separate determining-system question.
+Use equation~\eqref{eq:first-order-core} before extending this chart to
+$m=3+\delta$. In a nondimensional model, vary $m$ at fixed nondimensional
+$\kappa$ and retain $\beta_{\rm tr}=m\kappa$. A logarithmic expansion uses a
+positive dimensionless velocity $\phi_t/U_*$; a logarithm of a dimensional
+velocity does not define a constitutive perturbation.
+If no continued symmetry is verified, an unrestricted field correction
+satisfies a linearized PDE of the form
+\[
+ D_\phi\E_0[\mathcal TF]\psi+\E_1[\mathcal TF]=0.
+\]
+Writing $\psi=F_1(st^2)$ without checking closure would impose an unsupported
+reduction. A prescribed time-dependent transport coefficient, or physical
+time-dependent data, each requires its own model/symmetry/data audit.
+The next ML experiment below therefore varies a data parameter at fixed
+$m=3$, while near-cubic continuation remains mathematical work.
+
+
+\clearpage
 \section{Related work and research position}
 Symmetry-informed neural solution methods already exist. Akhound-Sadegh
 et al.\ \cite{sympinn} penalize infinitesimal changes of the PDE residual;
@@ -616,26 +1071,34 @@ moving or rescaled coordinates and profiles through a PINN coupled to
 index-2 differential-algebraic constraints; their examples include nonlinear
 wave and spreading equations. LieSolver builds PDE solutions from known
 symmetry transformations and fits initial/boundary data, but its reported
-scope is linear homogeneous PDEs \cite{liesolver}. Thus combining Lie
-reduction and PINNs is not a novelty claim. A one-dimensional SVE Lie analysis
+scope is linear homogeneous PDEs \cite{liesolver}. Lie point symmetry data
+augmentation (LPSDA) transforms known solution data to improve the sample
+complexity of neural PDE solvers \cite{lpsda}; it is not an exact quotient or
+a symmetry-discovery certificate. Generalized-symmetry loss augmentation has
+also been proposed for physics-informed neural operators when ordinary point
+symmetries provide little training signal \cite{genliepino}. Thus combining Lie
+information and neural PDE solvers is not a novelty claim. A one-dimensional SVE Lie analysis
 also predates this study, and the selected Lagrangian source already reports
 its symmetry algebra and similarity reductions \cite{sveold,ap}; discovery of
 SVE symmetries or of $X_5$ is not claimed. The proposed contribution is
 independent verification, persistence or obstruction under parameter
 perturbation, and a parameter-conditioned neural correction to a reduced
-analytical profile. The attached Navier--Stokes blow-up C/D manuscript is
-used only as an example of a staged PDE construction and residual-correction
-proof architecture; it does not establish an SVE, decoherence, or Lie-symmetry
-method \cite{naviercd}. Otto et al.'s 2025 review unifies symmetry enforcement,
+analytical profile. Otto et al.'s 2025 review unifies symmetry enforcement,
 discovery, and promotion through Lie-derivative constraints; LieLAC uses
 infinitesimal generators to canonicalize inputs for pre-trained models,
 including neural PDE solvers \cite{otto,lieLAC}. These offer useful ML
 interfaces, while the direct low-cost path here is exact symmetry reduction
 before training. A 2025 master's thesis provides a recent worked account of
 determining equations, gas-dynamic PDE systems, and symmetry-compatible
-initial-boundary data \cite{beligiannis}. The 2024 algorithmic study of
-approximate symmetry algebras highlights involutive completion and warns that
-numerical rank/SVD methods can depend on base point and tolerance
+initial-boundary data \cite{beligiannis}. Tarayrah, Pitzel and Cheviakov
+compare BGI and FS approximate symmetries for nonlinear PDEs, prove relations
+only under stated hypotheses, exhibit classification differences, and separate
+symmetry classification from approximate-solution and wave-breaking accuracy
+\cite{tarayrah2023}. Their results rule out a single undifferentiated label
+``approximate symmetry found.'' The 2024 algorithmic study of approximate
+symmetry algebras instead defines an approximate algebra through an exact
+algebra of a nearby equation; it highlights involutive completion and warns
+that numerical rank/SVD results can depend on base point and tolerance
 \cite{approxalg}. An SDE preprint cited in the supplied draft learns generators while enforcing
 Lie-bracket closure; this is adjacent evidence for learning algebra structure,
 not a PDE classification result \cite{liestonet}. Effectiveness remains an
@@ -652,221 +1115,471 @@ thesis compares classical, nonclassical, and potential-symmetry workflows on
 coupled systems, including Burgers-type models, and discusses special cases
 and time-dependent coefficients \cite{hijazi}. These are useful procedural
 examples, but neither thesis is evidence for a new SVE result or a 2024--2026
-ML method. For the low-cost study, first complete the classical local
-point-algebra calculation; pursue conditional, potential/nonlocal, or other
+ML method. For the low-cost study, complete the classical local
+point-algebra calculation if maximality is claimed; pursue conditional, potential/nonlocal, or other
 symmetry notions only as separately named extensions motivated by the target
 model and available conservation laws.
 
-\section{Methodology: classify, reduce, and reconstruct}
-\subsection{Formal PDE-system input}
-The executable first version separates specification, candidate verification,
-and reduction. It takes a supplied generator and local chart; it does not
-require a claim of maximal symmetry classification before reducing a known
-admitted subgroup. On a local bundle $E=\Omega\times\mathbb R^q\to\Omega$,
-$\Omega\subset\mathbb R^p$, specify
-\begin{equation}
-\mathcal P_\lambda=
-\bigl(\Omega,\Delta,\mathcal N,\mathcal A,
-      \{(\gamma_b,\mathcal B_b)\}_{b=1}^{N_B};\lambda\bigr).
-\label{eq:formal-problem}
-\end{equation}
-Here $\lambda$ consists of fixed real model parameters;
-$\Delta_A(x,u^{(n)};\lambda)=0$, $A=1,\ldots,r$, are residual equations;
-$\mathcal N$ lists nonzero expressions; and $\mathcal A$ records domain,
-sign and smooth-branch predicates. No equality $r=q$ is required.
-Data residuals $\mathcal B_b$ vanish on supplied base hypersurfaces
-$\Gamma_b=\{x:\gamma_b(x;\lambda)=0\}$, restricted to the relevant local
-domain. The order budget $n$ covers both equations and data. Thus
-\begin{equation}
-\Delta_A(j^nf;\lambda)=0,\qquad
-N(j^nf;\lambda)\ne0\ (N\in\mathcal N),\qquad
-\mathcal B_b(j^nf;\lambda)|_{\Gamma_b}=0.
-\end{equation}
-Predicates in $\mathcal A$ must also hold. A sampling distribution is a later
-numerical choice, not part of the exact definition of a symmetry.
+\clearpage
+\section{Publication review: claims, missing proofs and evidence gates}
+\label{sec:publication-review}
+The standard local reduction theorems above make the mathematical argument
+auditable; they do not constitute the paper's research novelty. Publication
+needs one explicit new result with a comparison and evidence appropriate to
+that claim. The present paper is theorem-first: its primary target is an
+unrestricted regular continuation or certified first obstruction for the
+exceptional near-cubic point-symmetry generator. The existing diagonal-scaling
+P0 certificate is evidence in a restricted class, not that theorem. A reusable
+exact/BGI/FS/nearby-equation benchmark is supporting infrastructure, and
+real-world shallow-water demonstrations are validation or follow-on studies.
+The present manuscript remains a research draft with verified local identities,
+historical numerical reports, and a proposed next experiment. Proofreading
+alone cannot convert these into a completed research result.
 
-In Python, \texttt{PDEProblem} wraps the existing \texttt{DifferentialSystem}
-and adds parameters, domain predicates and \texttt{DataCondition} records.
-A jet $u^\alpha_J$, $J\in\mathbb N^p$, denotes a derivative coordinate, not a
-sampled derivative value. Parameter symbols are disjoint from base and jet
-coordinates; undeclared symbols and unevaluated derivative inputs are rejected.
-The representation distinguishes polynomial, rational and nonpolynomial
-dependence on jets. For the cubic master equation, multiplying by
-$\phi_s^3$ produces a polynomial differential expression only on the retained
-branch $\phi_s\ne0$. Generic real powers of $\phi_t$ require a specified smooth
-real branch; the routine does not replace them by polynomial monomials.
+\begin{center}\small
+\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}p{3.1cm}XX@{}}
+\toprule
+Issue & Required formal action & Claim allowed after the action \\
+\midrule
+Contribution and attribution & Prove unrestricted regular parameter continuation through a declared order or certify the first obstruction order. Credit existing SVE classification and symmetry-informed neural PDE work. & A specific new continuation/obstruction proposition; not discovery of $X_5$, not a conclusion extrapolated from the scaling ansatz, and not universal Lie--ML novelty. \\
+Model interpretation & Resolve equation~\eqref{eq:physical-bed-audit}; define units, bed variable, closure and parameter convention. & Physical SVE interpretation only for the derived model. Until then, the printed scalar benchmark. \\
+Reduction proof & Retain inverse/Jacobian checks, branch guards, equation equivalence, pulled-back data and reconstruction. Cover or list every excluded stratum. & Local invariant solutions on the stated branch; not all solutions or a global classification. \\
+Classifications and tables & Distinguish source classification, finite-ansatz verification and maximality. Recompute brackets with a declared convention. & Precisely stated algebra coverage and subgroup selection. \\
+Existence, error and stability & Prove normal-form IVP conditions; add uniform stability and residual/quadrature bounds for any error-certificate claim. & Numerical accuracy without a certificate, or a conditional theorem with all its hypotheses. \\
+Numerical evidence & Recover matching code, configurations, raw histories, seeds, references and machine information. Separate new runs from historical tables. & Reproducible measured performance within the declared experiment. \\
+Scope and presentation & Keep general theory before Examples, isolate speculative scale bridges, use consistent symbols and a self-contained bibliography. & A readable paper with a bounded mathematical and experimental scope. \\
+\bottomrule
+\end{tabularx}
+\end{center}
 
-\subsection{Verified reduction in a supplied chart}
-The first algorithm supports one projectable point generator
-$X=\zeta^i(x;\lambda)\partial_{x^i}
-+\eta^\alpha(x,u;\lambda)\partial_{u^\alpha}$, with $p\ge2$.
-Its input chart is
-\begin{equation}
-z=I(x)\in\mathbb R^{p-1},\qquad \rho=R(x),\qquad
-x=H(z,\rho),\qquad u=C(x)U(z)+b(x).
-\label{eq:reduction-chart}
-\end{equation}
-The profile coordinates $U$ and chart coordinates are fresh symbols.
-The algorithm checks both inverse-coordinate identities, $XI^a=0$,
-$XR\ne0$, and records the guards
-$\det D_x(I,R)\ne0$ and $\det C\ne0$.
-The orbit coordinate need not satisfy $XR=1$; for SVE we use $R=t$.
-The affine field reconstruction includes field scaling and offsets, while
-more general field transformations remain outside this implementation.
+The newly adopted contract is theorem-first: establish unrestricted regular
+persistence through a declared order or certify the first obstruction on a
+stated parameter branch, then derive any admissible reduced problem and its
+local analytical expansion. The verified fixed branch may still support a
+secondary controlled test of whether an equation-derived prior improves error
+versus time, but that protocol is not the paper's primary claim. It still needs
+the reduction/data proofs and must not present a numerical comparison as a
+general sample-complexity theorem. If maximal symmetry classification is a
+claimed contribution, the full determining system and its parameter/singular
+branches must be completed; a useful supplied subgroup does not require that
+stronger claim.
 
-A supplied regular multiplier matrix $M(x;\lambda)$ is checked through the
-off-shell identity
-\begin{equation}
-\pr^{(n)}X(\Delta)=M\Delta.
-\label{eq:multiplier-identity}
-\end{equation}
-This is a sufficient, deliberately restricted test of the supplied generator.
-Failure does not establish absence of all symmetries. Every denominator in
-the supplied expressions is retained as a regularity condition. The routine
-also verifies $Q^\alpha=0$ after the reconstruction substitution.
+The attached reference's compact presentation explains why several general
+theorems are implicit there. For this paper's reusable method, the missing
+links are exactly the explicit hypotheses and maps in
+Section~\ref{sec:general-core}, rather than additional unrelated examples.
+An interval-wide analytical conclusion needs uniform bounds, not merely
+regularity sampled on a mesh. Fractional/nonlocal operators and weak/shock
+solutions are extensions with separate analytical contracts.
 
-Derivative substitutions are generated recursively. If $P^\alpha_0=C U+b$,
-then the pullback of a source jet is computed by
+\section{Next ML experiment: a controlled test on a verified data family}
+\label{sec:next-experiment}
+This section preserves a secondary prospective protocol, not a report of new
+training runs and not the theorem-first paper's primary experiment. Its local
+question is whether a fourth-order equation-derived prior improves the learned
+family beyond the quadratic polynomial already needed to impose a third-order
+IVP's data. A separate comparison tests the benefit of restricting the field
+to the verified invariant coordinates. These runs remain gated until the
+unrestricted continuation/obstruction analysis is reported or explicitly
+separated as fixed-branch supporting evidence.
+
+\subsection{Mathematical and reference-solution prerequisites}
+Use the nondimensional printed scalar benchmark at
+$m=3$, $g=1$, $\beta_{\rm tr}=0.1$, $\kappa=0.1/3$.
+Keep $\delta=m-3=0$. On $z\in[1,1.5]$ and $t\in[1,2]$, let
+$K=\sqrt[3]{45}$ and vary only the data parameter $a\in[-0.02,0.02]$:
 \begin{equation}
-P^\alpha_{J+e_i}=\widehat D_i P^\alpha_J,\qquad
-\widehat D_i=\partial_{x^i}
-+\sum_{a=1}^{p-1}\sum_{\beta,K}
- (\partial_{x^i}I^a)U^\beta_{K+e_a}\partial_{U^\beta_K}.
-\label{eq:pullback-recursion}
+ F(1;a)=K,\qquad F'(1;a)=K/3,\qquad
+ F''(1;a)=-2K(1+a)/9.
+ \label{eq:experiment-ivp}
 \end{equation}
-Here $P$ has no explicit $z$ dependence before the inverse base substitution;
-the coefficient functions use $x$ and profile-jet placeholders. The finite
-jet budget is enforced. After setting $x=H(z,\rho)$, supplied nonzero factors
-$a_A(x;\lambda)$ must give
+The corresponding original data on $\Gamma_0=\{st^2=1\}$ are
 \begin{equation}
-\Delta_A[j^n(\mathcal TU)](H(z,\rho))
-=a_A(H(z,\rho);\lambda)\,\mathcal R_A[j^nU](z).
-\label{eq:chart-pullback}
+ \phi=K,\qquad t^{-2}\phi_s=K/3,\qquad
+ t^{-4}\phi_{ss}=-2K(1+a)/9.
+ \label{eq:experiment-original-data}
 \end{equation}
-Any remaining $\rho$ dependence in $\mathcal R_A$ rejects this proposed
-reduction. Zero equations are retained so the original equation count and
-constraints remain traceable. The commuting square is
+Their prolonged $X_5$ action vanishes, and their pullbacks give
+equation~\eqref{eq:experiment-ivp}. This is a constructed compatible data
+family, not a physically sourced canal boundary problem. At $a=0$ the exact
+profile~\eqref{eq:sve-exact} supplies a check. Normal-form existence and
+continuous parameter dependence give a neighborhood of a regular solution;
+the entire proposed interval/domain still needs verified guard bounds or a
+clearly labeled numerical regularity check.
+
+Before training, regenerate the exact chart, pullback and data certificates
+from available source. Recover the newer generic backend only if its
+capabilities are claimed. For every reference profile record
+$\min F'$, $\min|c_{\rm lead}|$, chart/domain exits and independent solver
+agreement. Solve all 17 distinct parameter cases below with DOP853 at
+$(\mathrm{rtol},\mathrm{atol})=(10^{-9},10^{-12})$,
+$(10^{-11},10^{-14})$, and $(10^{-13},10^{-15})$, and cross-check with Radau.
+For the proposed $10^{-5}$ profile-error target, require at most $10^{-8}$
+reference discrepancy on the evaluation grid. If guards fail, split or
+shrink the family before training and disclose the change. Finite mesh
+checks are not a uniform interval certificate.
+
+For an analytical certificate on this reduced IVP, use
+Proposition~\ref{prop:ode-error-core} with a verified regular tube,
+a bound on $D_YG$, the leading-factor margin and a continuous residual
+bound. These are additional deliverables beyond solver agreement.
+
+Write the regular ODE as $F'''=G(z,F,F',F'')$. With $h=z-1$, define
+\begin{align}
+ P_2(z,a)&=K+(K/3)h-K(1+a)h^2/9,\\
+ P_4(z,a)&=P_2+c_3(a)h^3+c_4(a)h^4,\label{eq:experiment-priors}\\
+ c_3&=G(1,Y_0)/6,\qquad
+ c_4=\bigl(G_z+F'G_F+F''G_{F'}+G\,G_{F''}\bigr)(1,Y_0)/24,\nonumber
+\end{align}
+where $Y_0=(F(1),F'(1),F''(1))$. Verify this recurrence symbolically and
+against the exact $a=0$ series. Choosing $P_4$ does not prove that its
+truncation is accurate over the whole training interval.
+
+\subsection{Ablations that actually isolate the analytical prior}
+\begin{center}\small
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}p{3cm}p{5.1cm}X@{}}
+\toprule
+Arm & Trial function & Question isolated \\
+\midrule
+B: reduced hard-IVP PINN & $\widehat F=P_2+h^3N_\theta(z,a)$ & Baseline with exactly the same three initial data. \\
+H: added analytical prior & $\widehat F=P_4+h^3N_\theta(z,a)$ & Extra equation-derived coefficients with the same remainder factor and neural architecture. \\
+H5: extra hard series jets & $\widehat F=P_4+h^5N_\theta(z,a)$ & Additional exact Taylor constraints and different conditioning; a separate ablation. \\
+D: direct PDE PINN & $\widehat\phi=P_2(st^2,a)+(st^2-1)^3N_\theta(t,s,a)$ & Same supplied data, without imposing $Q_5=0$ on the trainable field. \\
+Controls & $P_2$, $P_4$, exact $a=0$ profile; converged classical solver & Accuracy and total cost without neural training. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+A ``hard-IVP PINN without an analytical part'' is misleading here: imposing
+three data jets already builds $P_2$ into the trial function. Moreover B and H
+have the same unconstrained smooth profile class up to a shift of the neural
+remainder by $c_3+c_4h$; any observed advantage concerns the chosen finite
+network, initialization and optimization, not elimination of unknown
+degrees of freedom by $P_4$. H5 adds stronger exact local information and
+must not be used alone to attribute an improvement to the prior.
+The direct arm knows the supplied surface $st^2=1$ through its data lifting;
+it is not a baseline with no information about the data geometry.
+
+For the fixed cubic benchmark, equation~\eqref{eq:sve-defect} implies
+$\pr^{(3)}X_5\E_3=-\E_3$. Squaring that Lie derivative of the residual
+merely reweights the original squared-residual loss. It provides no
+independent symmetry information in this case. A graph penalty
+$\|Q_5[\widehat\phi]\|^2$, or a genuinely different symmetry-informed
+baseline, must be named separately from the residual-Lie-derivative
+construction of \citet{sympinn}. Exact reduction imposes $Q_5=0$ by
+construction, but restricts the solution family.
+
+In the full adapted PDE, the coefficient of the highest normal derivative
+$v_{zzz}$ on the initial surface is $c_{\rm lead}/t=2K/t\ne0$ for these
+data. The equation is analytic on the regular branch. The
+Cauchy--Kowalevski theorem therefore supplies local existence and uniqueness
+for the analytic data, consistently with the reconstructed analytic ODE
+solution. This is a local analytic statement. A common domain reaching
+$z=1.5$, smooth-problem stability and an error bound for approximate fields
+still need their own analysis. Limit the numerical comparison to the stated
+regular reference branch until those stronger claims are justified.
+
+\paragraph{Classical approximation and launch criteria.}
+Alongside the classical IVP solver, include a tensor-product Chebyshev
+approximation or spline interpolant in $(z,a)$, built from declared
+reference data. Report its label-generation cost separately from the
+label-free residual training of B/H. This comparator tests whether a neural
+family surrogate is useful beyond ordinary smooth interpolation; it is
+not a matched zero-label baseline. Also retain an adaptive Taylor or
+polynomial approximation of each profile to separate neural benefit from
+the benefit of the analytical expansion itself.
+
+Training starts only after (i) the exact scalar model and branch are frozen,
+(ii) symbolic reconstruction and data checks are reproducible,
+(iii) the reference family passes the declared convergence and guard tests,
+and (iv) the loss measure, validation split, primary metric and cost
+accounting are fixed. These gates authorize an empirical scalar-benchmark
+experiment. A certified experiment additionally requires interval-wide
+solution-tube and continuous-residual bounds; a physical SVE experiment
+additionally requires resolving the bed-transport derivation. Neither
+requirement is supplied by a small sampled training loss.
+
+\subsection{Splits, optimization budget and smoothness}
+Use disjoint data-parameter sets, with the final test set reserved before
+hyperparameter selection:
+\begin{align*}
+ \mathcal T_a&=\{-0.02,-0.015,-0.01,0,0.01,0.015,0.02\},\\
+ \mathcal V_a&=\{-0.0125,-0.005,0.005,0.0125\},\\
+ \mathcal S_a&=\{-0.018,-0.008,-0.002,0.002,0.008,0.018\}.
+\end{align*}
+The older draft used $\mathcal V_a$ as held-out cases; they therefore cannot
+serve as a newly untouched final test. Symmetry-generated orbit copies stay
+in the same split. Training uses no interior reference-solution labels;
+validation and test references still count toward setup cost.
+
+Use float64 and smooth $\tanh$ networks so the third-order original residual
+and optimization derivatives exist. A pilot architecture with two hidden
+layers of width 24 has 697 parameters for input $(z,a)$ and 721 for
+$(t,s,a)$; report these counts rather than claiming identical budgets.
+Use fixed affine input scaling from the declared domains, including
+$\widetilde z=4z-5$ and $\widetilde a=a/0.02$; compute physical residual
+derivatives with all inverse scaling factors. Pair B/H initializations and
+collocation seeds so their primary difference is the analytical prior.
+Start with B, H and D, seeds 0 and 1, 128 residual points per training
+parameter and 1000 Adam updates at learning rate $10^{-3}$. Sample the
+direct arm in $(t,z)$ and transform to $(t,s)$ with the correct quadrature
+weight. Draw independent collocation coordinates using the same declared
+sampler. If the pilot passes the mathematical/reference and numerical
+finiteness gates, confirm with seeds 0--4 at 64, 128 and 256 points per
+parameter. Test H5 only as the separately declared ablation. Run sequentially
+within the available CPU or 6 GB GPU budget and record the actual hardware.
+
+This pilot budget is a starting protocol, not an assertion of adequate
+capacity or convergence. Use $\mathcal V_a$ for any documented budget or
+conditioning adjustment, freeze the final configurations before opening
+$\mathcal S_a$, and retain all seeds and failures. Report both matched-step
+comparisons and error versus measured time. The original-volume objective
+for B/H can be evaluated using the factor $7/24$ above; normalized objectives
+use the corresponding volume. Use the same fixed nondimensional residual
+scales across arms, not method-dependent denominators chosen after training.
+Distinct quotient states, original-domain samples, derivative evaluations
+and optimizer updates are separate cost counts.
+
+\subsection{Metrics, artifacts and conditions for a conclusion}
+On independent grids and all held-out parameters report errors in
+$F,F',F'',F'''$ and reconstructed $\phi$ derivatives; raw and fixed-scale
+normalized reduced/original residuals; data errors; $Q_5$ or orbit dependence
+for D; guard margins; seed medians/ranges; and failures. Include the reference
+solver's error budget. A third derivative supplied directly by the ODE's
+own normal-form right-hand side is not an independent residual certificate;
+validate with refinement, solver agreement and an independent field/residual
+evaluation route. Parameter-derivative accuracy must be measured separately
+if claimed.
+
+The preregistered primary target is at most $10^{-5}$ held-out absolute
+profile error, with the reference discrepancy threshold already specified.
+Failure to reach it remains a reportable outcome. To claim an improvement,
+show the prior contrast H versus B and coordinate contrast B versus D
+across seeds and budgets, with residual/derivative errors and costs, not
+only the best profile-error seed. A formal error certificate additionally
+requires the stability, reconstruction and continuous-residual bounds in
+Proposition~\ref{prop:error-transfer-core}.
+
+Store an equation/certificate hash, code version, configuration, seeds,
+training histories, reference profiles, held-out predictions, errors,
+guard checks and timing records. Separate analytical setup, reference
+generation, training and full query cost, including reconstruction,
+derivatives, verification and fallback. An amortized speedup requires
+measuring all of these on the actual query task; historical break-even
+arithmetic is not new evidence. Only after a continued subgroup or an
+unreduced correction problem is verified should $\delta=m-3$ become an ML
+input. The fixed-branch experiment and near-cubic mathematical analysis
+can progress independently.
+
+
+\clearpage
+\appendix
+\section{Historical numerical reports awaiting matching evidence}
+\label{app:historical}
+\textbf{Evidence status.} The numerical values below are preserved from the
+earlier manuscript; they are not new experiments performed for this paper
+update. The recovered archive does not contain the matching raw
+Duffing/logistic/fusion and strict v0.2 family artifacts or the newer generic
+backend needed to reproduce all of these claims. They must not support a
+publication performance claim until the matching sources, configurations
+and results are recovered and verified. In particular, the older comparison
+between a hard-IVP PINN and a $P_2$ correction needs its implementation
+explained: both can share the same hard-data polynomial.
+
+Historical notation in this appendix maps $\sigma$ to the new quotient
+coordinate $z$, $\eta_{\rm ic}$ to the new data parameter $a$, and $\rho=t$
+to an alternative orbit coordinate; the canonical normalized orbit
+coordinate in the new derivation is $y=\log(t/t_*)$.
+
+\subsection{Reported ML baselines kept outside the Lie pipeline}
+The ML-only executable imports no Lie-reduction code.  Its first experiment is
+a bounded fixed-IVP reproduction of the Duffing comparison in the Taylor-model
+PINN paper \cite{tmpinn},
 \[
-\begin{array}{ccc}
-U & \xrightarrow{\ \mathcal T\ } & f\\
-{\scriptstyle\mathcal R}\downarrow &&
-\downarrow{\scriptstyle\Delta}\\
-\mathcal R[U] & \xrightarrow{\ \mathcal L_a\ } & \Delta[f],
-\end{array}
-\qquad (\mathcal L_a v)_A(x)=a_A(x)v_A(I(x)).
+ \dot x=y,\qquad \dot y=x-x^3-\delta_Dy,
+ \quad (x(0),y(0),\delta_D)=(-0.224,-0.269,0.327).
 \]
+Here $\delta_D$ is the Duffing damping coefficient and is unrelated to
+$\delta=m-3$. All three methods use one hidden layer of width 64 and three
+seeds. Table~\ref{tab:duffing} gives relative $L^2$ medians after 3000 Adam
+steps; the bracket is the full seed range for TM-PINN.
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+Horizon & vanilla PINN & higher-order PINN & TM-PINN & TM range \\
+\midrule
+$T=1$ & $2.050\times10^{-4}$ & $1.914\times10^{-4}$ & $7.585\times10^{-5}$
+ & $[4.491\times10^{-5},1.001\times10^{-4}]$ \\
+$T=3$ & $6.555\times10^{-2}$ & $9.841\times10^{-2}$ & $1.756$
+ & $[8.678\times10^{-2},8.894]$ \\
+\bottomrule
+\end{tabular}
+\caption{Historical, not re-executed: bounded Duffing fixed-IVP reproduction. It tests the reported
+short-time advantage and long-time degradation, not the paper's full
+parameter-family solution map.}
+\label{tab:duffing}
+\end{table}
 
-\noindent\textbf{Local correctness statement.}
-Assume the supplied maps are smooth on the recorded chart, its Jacobians
-are nonzero, and all recorded branch and denominator conditions hold.
-Then the verified identities imply
-$\mathcal R[U]=0\Longleftrightarrow\Delta[\mathcal TU]=0$
-for the reconstructed profiles on that chart. Invertibility of $C$ and the
-base chart, together with $Q=0$, identifies these profiles locally with
-invariant fields, after restricting to connected orbit segments.
-Indeed, in chart coordinates $X$ acts along the nonvanishing orbit direction;
-the reconstructed profile coordinates have zero derivative in that direction.
-Equation~\eqref{eq:chart-pullback} and $a_A\ne0$ give both implications.
-This classical local argument is not a new classification theorem
-\cite{olver}. It establishes neither nonemptiness of the branch nor existence,
-uniqueness or global continuation of solutions.
+The second experiment follows the 2026 PINN--PIKAN logistic benchmark
+\cite{pikan} with 100 uniform points, Adam step size $0.01$, 10000 iterations
+and ten seeds. The MLP has 121 parameters; the PIKAN has 112 trainable
+parameters after unused symbolic affine parameters are frozen. PIKAN's
+relative-$L^2$ median/mean are $8.580\times10^{-5}/1.148\times10^{-3}$, while the
+MLP values are $9.740\times10^{-1}/6.895\times10^{-1}$. Thus the reported direction
+is reproduced, but the numerical values are not: several MLP seeds converge
+to low-residual wrong branches. Median CPU training times are 63.71 s and
+7.24 s, respectively. PirateNet \cite{piratenet} remains a literature
+comparator because its JAX/Fourier/causal-training protocol was not reproduced.
 
-Data surfaces, data residuals and sign predicates are pulled back separately.
-Conditions that retain $\rho$ are stored in the result and must still be
-imposed; they are not discarded. The data status is
-\texttt{pulled-back-only}, not a certificate of compatible initial-boundary
-data. Differential completion and maximal classification retain their
-separate, possibly incomplete statuses.
+\subsection{Pure Lie baseline}
+The Lie-only executable imports no neural library. For the printed master
+equation it verifies the supplied $m=3$ multiplier identity for
+$X_5=t\partial_t-2s\partial_s$, integrates its flow, checks
+$\sigma=st^2$ and $Q=-t\phi_t+2s\phi_s=0$, derives the third-order reduced
+equation, and verifies
+\[
+ \E_3[F(st^2)]=t^{-1}\mathcal R_0[F],\qquad
+ F_0=C+K\sigma^{1/3},\quad
+ K^3=\frac{27g}{1-4g\beta_{\rm tr}}.
+\]
+The same supplied identity at $m=4$ returns \texttt{unsupported}. This is a
+negative control for $X_5$, not a proof that no other $m=4$ symmetry exists.
 
-The executable entry points are \texttt{PDEProblem},
-\texttt{ReductionChart} and \texttt{reduce\_in\_chart} in
-\texttt{symm.generic}. The source-specific run is
-\begin{lstlisting}[language=Python]
-from symm.generic import reduce_in_chart
-from symm.generic.sve_reduction import sve_scaling_case
-problem, generator, chart, M = sve_scaling_case(m=3)
-outcome = reduce_in_chart(
-    problem, generator, chart, symmetry_multipliers=M)
-print(outcome.certificate.status)
-print(outcome.reduced_system.equations)
-\end{lstlisting}
-For this example, $\kappa=A_g\xi$ is fixed, $\beta_{\rm tr}=m\kappa$,
-$I=st^2$, $R=t$, $H=(\rho,z/\rho^2)$, $C=1$, $b=0$,
-$M=-1$ and $a_1=1/t$. At $m=3$ the routine reproduces
-\eqref{eq:reduction}; at $m=4$ the same supplied multiplier identity fails.
-This negative control concerns this generator and chart, not every possible
-reduction at $m=4$.
+\subsection{Certificate-gated Lie--ML prototype}
+The fusion executable refuses an unverified Lie-only certificate. It fixes
+$g=1$, $\beta_{\rm tr}=0.1$, $m=3$, $\sigma\in[1,1.5]$, and changes only
+the initial curvature by
+$F''(1)\mapsto(1+\eta_{\rm ic})F_0''(1)$ with $\eta_{\rm ic}=0.01$;
+$\delta=m-3$ remains zero. A coarse/medium/fine DOP853 tolerance ladder uses
+92, 197 and 377 function evaluations; its first two differences from fine are
+$2.025\times10^{-11}$ and $2.065\times10^{-14}$. Fine DOP853 and Radau agree
+to $3.281\times10^{-13}$.
+The three neural methods have 673 parameters, use 1000 Adam steps and retain
+all three seeds. Table~\ref{tab:fusion} reports seed medians.
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & $\max|F-F_{\rm ref}|$ & raw $\mathcal R_0$ & normalized
+ $\mathcal R_0$ & original $\E_3$ \\
+\midrule
+hard-IVP PINN & $3.425\times10^{-5}$ & $4.701\times10^{-1}$ & $4.496\times10^{-2}$ & $4.711\times10^{-1}$ \\
+$P_2+h^3N_\theta$ & $2.670\times10^{-6}$ & $1.804\times10^{-1}$ & $2.535\times10^{-2}$ & $1.831\times10^{-1}$ \\
+$P_4+h^5N_\theta$ & $3.467\times10^{-5}$ & $5.354\times10^{-2}$ & $5.470\times10^{-3}$ & $5.458\times10^{-2}$ \\
+\bottomrule
+\end{tabular}
+\caption{Historical, not re-executed: scalar-benchmark prototype; $h=\sigma-1$. Profile and residual rankings disagree; both
+are therefore retained. Direct and lifted residuals agree to about $10^{-14}$.}
+\label{tab:fusion}
+\end{table}
 
-\subsection{Model and admissibility}
-First specify the scalar benchmark, parameter convention, physical domain,
-and compatible data. For comparison with the full SVE system, rederive the
-material-coordinate transformation: for an Eulerian quantity $b(t,x)$,
-$\widetilde b(t,s)=b(t,\phi(t,s))$ gives
-$\widetilde b_t=b_t+\phi_t b_x$. Any elimination of bed elevation must retain
-this distinction and recover the original equations after reconstruction.
-Until this audit is complete, results concern \eqref{eq:sve} itself.
-Work locally where $\phi_s>0$, and, for noninteger exponents, on a specified
-positive-velocity branch. Nondimensionalization precedes logarithmic expansion.
+The $P_2$ correction has the smallest profile error, whereas the $P_4$
+correction has the smallest residual. Fine DOP853 takes about 0.0034 s for this
+single IVP, versus 3.6--4.2 s training per neural seed. The prototype therefore
+does not establish an ML speedup. Cubic PIKAN is not transferred to this
+third-order residual because its third-derivative smoothness has not passed a
+separate gate.
 
-Compute the determining equations at generic $m$ and at $m=3$ separately;
-division by $m-3$ would discard the exceptional branch. Verify each $X_i$
-by prolongation, compute its commutators, and retain subgroups compatible
-with the data. Solve their characteristic equations for invariants and check
-the coordinate Jacobian. For a PDE with $p$ independent variables, an ODE
-reduction requires $p-1$ independent orbit directions, subject to regularity
-and transversality. A single symmetry does not generally reduce a higher
-dimensional PDE to an ODE.
+\subsection{Stage goal: a data-compatible parameter-family certificate}
+The bounded v0.2 goal is not the unresolved generic-$m$ classification. It is
+to close one local, falsifiable chain on the fixed cubic branch:
+\[
+ (\E_3,X_5,\mathcal D_\eta)
+ \longrightarrow (\mathcal R_0,\mathcal C_{0.2})
+ \longrightarrow \widehat F_\theta(\sigma,\eta)
+ \longrightarrow \E_3[\widehat F_\theta(st^2)].
+\]
+Here $\rho=t$, $\sigma=st^2$, and $\mathcal C_{0.2}$ is accepted only if the
+chart rank, orbit speed, fibre rank, exact pullback, and data checks all pass.
+On the invariant hypersurface $\Sigma_0=\{st^2=1\}$ we prescribe
+\[
+ \phi-K=0,\qquad t^{-2}\phi_s-\frac K3=0,\qquad
+ t^{-4}\phi_{ss}+\frac{2K}{9}(1+\eta_{\rm ic})=0,
+ \quad K=\sqrt[3]{45}.
+\]
+The prolonged action annihilates the surface residual and all three data
+residuals off shell, and their pullbacks contain no $\rho$. Thus they become
+\[
+ F(1)=K,\qquad F'(1)=K/3,\qquad
+ F''(1)=-\frac{2K}{9}(1+\eta_{\rm ic}).
+\]
+This is a strict sufficient compatibility test for this constructed data
+family, not a statement that arbitrary canal boundaries are symmetry
+compatible. The certificate excludes $\rho=0$, $F'=0$, and
+\[
+ a(\sigma,F')=-\frac{2g\sigma}{(F')^2}
+ +8(1-\beta_{\rm tr}g)\sigma^3F'=0;
+\]
+it records these as separate singular exits rather than dividing them away.
 
-\subsection{What a complete classification means}
-The completeness claim must name its transformation class. The primary target
-is the maximal local \emph{point-symmetry Lie algebra} on each regular parameter
-stratum: smooth transformations of $(x,u)$ whose prolonged fields are tangent
-to the PDE jet manifold. This determines the identity component locally. It
-does not include, without separate work, generalized or contact symmetries,
-nonlocal or conditional symmetries, variational symmetries, or discrete maps.
-For linear PDEs the point algebra may also contain an infinite-dimensional
-solution-superposition ideal, so a finite polynomial ansatz cannot establish
-maximality. A point symmetry of the differential equation is not automatically
-a symmetry of its initial-boundary value problem: the data and domain must be
-invariant too \cite{beligiannis}.
+For $\eta_{\rm ic}\in[-0.02,0.02]$ the conditional profile is
+\[
+ \widehat F_\theta(\sigma,\eta_{\rm ic})
+ =P_2(\sigma,\eta_{\rm ic})
+  +(\sigma-1)^3N_\theta(\sigma,\eta_{\rm ic}),
+\]
+so the three data jets are exact for training and unseen parameters. Training
+and held-out parameter sets are respectively
+\[
+\begin{aligned}
+ \mathcal T_\eta&=\{-0.02,-0.015,-0.01,0,0.01,0.015,0.02\},\\
+ \mathcal H_\eta&=\{-0.0125,-0.005,0.005,0.0125\}.
+\end{aligned}
+\]
+They are disjoint, and every run retains seeds $0,1,2$. All eleven numerical
+references are sampled regular and DOP853/Radau differ by at most
+$3.312\times10^{-13}$. All twelve held-out evaluations complete; their
+maximum profile errors range from $2.636\times10^{-5}$ to
+$1.670\times10^{-4}$, compared with about $2.05\times10^{-2}$ for $P_2$ and
+$2.4\times10^{-3}$ for $P_4$. The initial-jet error is at most
+$1.111\times10^{-16}$ and direct-versus-lifted PDE residuals differ by at most
+$1.616\times10^{-14}$.
 
-In practical terms, ``all'' means all solutions of the determining system in
-the declared smoothness class, on the stated regular jet chart, for the
-specified fixed-parameter stratum and point-transformation class. There is no
-universal finite-degree ansatz that proves this for an arbitrary nonlinear
-PDE. A completeness certificate therefore records: (a) the regular and
-singular branches of the equation manifold; (b) all coefficient and rank
-branches, including exceptional parameter values; (c) the complete solution
-of, or involutive completion of, the determining PDEs for unrestricted
-infinitesimals; and (d) substitution of the resulting basis into every
-prolonged equation. The polynomial calculation below is a cheap candidate
-search and an $m=3$ anchor, not that certificate. Symmetries of a specified
-initial-boundary value problem are then the subgroup preserving its domain
-and data.
+Median training, DOP853-query, and neural-query times are respectively
+$4.625$ s, $0.00326$ s, and $0.00262$ s. Their measured arithmetic break-even
+is about 7170 repeated queries, before deployment and uncertainty costs.
+Consequently this experiment supports held-out interpolation beyond finite
+Taylor truncations on the declared regular family, but still does not prove an
+ML speedup, an interval error bound, or a solution on a singular branch.
 
-For a parameterized model, first compute the equivalence group (which may
-transform parameters), then classify admitted algebras for fixed parameter
-values modulo that equivalence. Split exceptional strata before dividing by
-parameter factors. The Lie algebra describes only the identity component;
-for a global group, record the component sequence
-$1\to G^0\to G\to\pi_0(G)\to1$ and determine $\pi_0(G)$ separately.
-Reflections, reversals, permutations, and other disconnected components are
-tested directly on the equation and domain. Topology and global coverage of a
-Lie group are not recovered from infinitesimal determining equations alone.
-Likewise, do not adjoin discrete maps to a Lie algebra. A semidirect product
-is appropriate only after an actual action on the continuous group is defined
-and the combined transformations are checked to preserve the PDE.
+\section{Historical implementation record}
+The earlier manuscript recorded the following four-day sprint. This is a
+historical work record subject to the evidence status in Appendix~\ref{app:historical}.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+Day & Work & Result \\
+\midrule
+1 & Lock notation and finish the Lie-only reduction certificate. &
+$m=3$ verified; the supplied $X_5$ identity at $m=4$ rejected. \\
+2 & Run the TM-PINN and PINN--PIKAN literature baselines. &
+All declared seeds retained; directional and negative results separated. \\
+3 & Run the certificate-gated SVE fusion against DOP853 and Radau. &
+Three methods and three seeds completed; lifting checked in the original PDE. \\
+4 & Consolidate JSON, CSV, figures, manuscript and interim report. &
+Reproducible commands, evidence limits and next gates recorded. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Having tested one constructed initial-curvature family, the next gates are to
+select a subgroup compatible with physically sourced initial/boundary data,
+analyze the recorded rank and leading-coefficient singular exits, and establish
+a smoothness gate before any KAN transfer to a third-order residual. The case
+$m=3+\delta$ remains separate until its symmetry-persistence calculation. A
+local series, rational continuation, or matched expansion should be selected
+only after analyzing the reduced equation's singularities and admissible data.
 
-Keep three perturbation questions distinct: (i) exact symmetries at fixed
-parameters; (ii) approximate continuation of a generator under
-$\lambda=\lambda_0+\delta\lambda$; and (iii) equivalence transformations that
-move the parameter. The first-order defect equation in the preliminaries
-addresses (ii); its bracket closure is checked modulo $O(\delta^2)$. If the
-equation itself changes in time, recompute the determining system for that
-coefficient function. Numerical near-symmetry discovered by SVD is useful for
-diagnosis, but is not an exact classification certificate \cite{approxalg}.
 
-\subsection{Reproducible SymPy workflow on the SVE branch}
+\section{Example implementation: a declared SVE candidate ansatz}
+\label{app:sve-listing}
+This worked listing belongs to the scalar example, not the general theorem.
+Its finite trial space is explicitly bounded; the shorter independent
+checks used for this paper update verify supplied identities, not maximality.
+
 The following compact jet-space implementation uses SymPy's exact
 differentiation, polynomial collection, and matrix nullspace operations. It
 spells out the prolongation instead of relying on a black-box Lie solver;
@@ -979,7 +1692,7 @@ polynomial monomials. Split them as distinct smooth functions on the chosen
 $\phi_t>0$ branch, or analyze rational/integer $m$ strata separately; then
 solve $m=3$ again without first dividing by $m-3$. For
 $m=3+\delta$, expand powers as
-$\phi_t^{2+\delta}=\phi_t^2(1+\delta\log\phi_t)+O(\delta^2)$ and retain the
+$(\phi_t/U_*)^{2+\delta}=(\phi_t/U_*)^2(1+\delta\log(\phi_t/U_*))+O(\delta^2)$ and retain the
 logarithmic basis element in the split. To certify maximality, replace the
 finite polynomial ansatz by unknown functions $\tau(t,s,\phi)$,
 $\xi(t,s,\phi)$, and $\eta(t,s,\phi)$, integrate the determining PDEs (or
@@ -990,455 +1703,503 @@ degree ansatz is a discovery aid \cite{approxalg}.
 
 For every basis element, run an independent invariance check by substituting
 the solved-jet rules into $\operatorname{pr}^{(3)}X(E)$ and simplifying to
-zero. Compute $[X_i,X_j]$ componentwise as
-$X_i(\zeta_j,\xi_j,\eta_j)-X_j(\zeta_i,\xi_i,\eta_i)$; express each bracket
-in the basis to obtain structure constants and check Jacobi. The adjoint
+zero. For coefficient triples $(\tau_i,\xi_i,\eta_i)$, compute
+\[
+ [X_i,X_j]\ \longleftrightarrow\
+ X_i(\tau_j,\xi_j,\eta_j)-X_j(\tau_i,\xi_i,\eta_i).
+\]
+Express these triples in the basis and check the structure constants and Jacobi.
+The adjoint
 representation then supports the optimal-system calculation. For $X_5$,
 verify $X_5(st^2)=0$ and $X_5(\phi)=0$, substitute $\phi=F(st^2)$ directly,
 and simplify $t\E_3-\mathcal R_0[F]$ to zero. Finally exponentiate candidate
 generators and check the finite transformation on the physical domain; local
 infinitesimal validity alone does not establish a globally admissible action.
 
-\subsection{Representation theory and low-cost ML interfaces}
-Representations are useful after the infinitesimal algebra has been found;
-they are not required to discover low-dimensional point symmetries. Compute
-the commutator table and adjoint matrices first. The adjoint representation is
-needed for classifying one-dimensional subalgebras. Compute the center,
-derived algebra, solvable radical, and (when useful) Levi factor from the
-commutator table; do not assume a direct or semidirect sum before verifying
-closure and the action. Representations on the fields, jets, or learned
-feature channels are useful when imposing equivariance. For a linear layer
-$W$ with input and output infinitesimal representations $d\rho_{\rm in},
-d\rho_{\rm out}$, the intertwining constraints are
-$W d\rho_{\rm in}(X_i)=d\rho_{\rm out}(X_i)W$. Add these only if a
-nontrivial equivariant architecture is warranted.
-
-The least expensive ML path is: (1) exact symbolic reduction to invariant
-coordinates; (2) represent the analytical profile plus a small correction
-network in those coordinates; (3) reconstruct with the known group action;
-(4) penalize the first-order defect only for the broken directions. This
-reduces input dimension and avoids sampling the continuous group. If repeated
-parameter/forcing queries are needed, learn an operator on reduced profiles.
-If symmetry is unknown from data, estimate a candidate generator nullspace
-from a discretized Lie-derivative operator, then pass candidates to the exact
-symbolic verifier. A global canonical section may fail at singular orbits or
-for topological reasons, so use local moving-frame charts and test their
-overlap instead of assuming one canonicalization works everywhere
-\cite{lieLAC}. The JMLR review frames enforcement, discovery, and
-symmetry-promoting regularization as linear-algebraic problems, and LieLAC
-offers a canonicalization socket when full group formulas are inconvenient
-\cite{otto,lieLAC}. For a baseline PINN, a post-training correction
-$F_{\rm PINN}+\omega_N C_\theta$ can target the residual left in the reduced
-manifold; compare it against an equally budgeted direct correction. For an
-LLM, the reliable role is orchestration: emit a typed PDE/generator/parameter
-specification, call SymPy for prolongation, splitting, and verification, then
-report the exact residual and unresolved branches. The language model itself
-is not the completeness certificate.
-
-\subsection{An explicit reduction anchor}
-For $X_5$ at $m=3$, take $t>0$ and $\sigma=st^2$. Writing primes for
-$d/d\sigma$, direct differentiation gives
+\section{Supporting context outside the reduction claim}
+Quantum mechanics supplies a limited analogy: perturbations can destroy an
+enhanced symmetry. For the isotropic oscillator,
+$H_0=\hbar\omega(\sum_i a_i^\dagger a_i+k/2)$ and
+$E_{ij}=a_i^\dagger a_j$ satisfy
 \begin{equation}
-\phi_s=t^2F',\qquad \phi_t=\frac{2\sigma F'}{t},\qquad
-\phi_{tt}=\frac{2\sigma F'+4\sigma^2F''}{t^2}.
+[H_0,E_{ij}]=0,\qquad
+[E_{ij},E_{\ell r}]=\delta_{j\ell}E_{ir}-\delta_{ir}E_{\ell j}.
 \end{equation}
-Define the following expressions, rather than new model parameters:
-\begin{align}
-A[F]&=2\sigma(F')^2+4\sigma^2F'F''-g\frac{F''}{(F')^2},\\
-B[F]&=8\sigma^2F'(F'+\sigma F'').
-\end{align}
-Since $D_t A=2\sigma A'/t$ and the transport term inside $D_s$ is
-$t^{-3}B$, the reduced equation is
-\begin{equation}
-\E_3[F(st^2)]=t^{-1}\mathcal R_0[F],\qquad
-\mathcal R_0[F]=2\sigma A'[F]-g\beta_{\rm tr} B'[F]=0,
-\quad \beta_{\rm tr}=3A_g\xi.
-\label{eq:reduction}
-\end{equation}
-This identity supplies a symbolic and numerical consistency check before
-approximating $F$. It describes an invariant solution family, not arbitrary
-initial data. Singular points of the reduced equation require separate analysis.
+Their skew-Hermitian combinations generate $U(k)$; perturbations can reduce
+this symmetry \cite{tong}. First-order continuation requires cancellation of
+the corresponding symmetry defect. This is an analogy for testing, not
+assuming, persistence near $m=3$. Noether's correspondence yields a conserved
+current only for a variational symmetry \cite{noether}.
 
-\subsection{Continuation near the exceptional exponent}
-Solve the first-order symmetry condition for $Y_0=X_5$ before extending this
-ansatz to $\delta\ne0$. If a deformation exists, construct its invariants
-to the same order and substitute them into the perturbed equation. If it
-does not, use a surviving subgroup or retain the additional independent
-variable. In particular, the unrestricted correction
-$\phi=F(st^2)+\delta\psi(t,s)+O(\delta^2)$ satisfies
-\begin{equation}
-D_\phi\E_0[F]\,\psi+\E_1[F]=0,
-\end{equation}
-with $D_\phi\E_0$ the linearization in the field. This is generally a PDE;
-writing $\psi=F_1(\sigma)$ without checking closure would impose an
-unsupported reduction. Truncation accuracy is local and must be checked
-uniformly on the chosen domain.
-
-\subsection{Time-dependent coefficient perturbations}
-Keep two perturbations separate. The primary continuation is the constant
-exponent $m=3+\delta$, including the induced change in
-$\beta_{\rm tr}=mA_g\xi$.
-A later nonautonomous test may prescribe
-$\beta_{\rm tr}(t)=\beta_{\rm tr,0}[1+\delta q(t)]$ with fixed $m=3$; this is a controlled
-coefficient perturbation, not a newly derived SVE closure. Time-dependent
-boundary or initial data are a separate compatibility test. For each case,
-recompute the determining equations and first-order symmetry defect rather
-than assuming $X_5$ persists. A time-varying exponent $m(t)$ is excluded unless
-a constitutive derivation justifies it. A frozen-time or adiabatic approximation
-is admissible only after a slow-variation scale is stated and checked.
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[>=Latex,
- box/.style={draw,rounded corners,align=center,font=\footnotesize,
- text width=5cm,minimum height=9mm,inner sep=4pt}]
-\node[box] (model) at (0,0) {Specify equation, parameters\\and compatible data};
-\node[box] (class) at (0,-1.3) {Classify $X_i$; verify $S_i$\\Test persistence near $m=3$};
-\node[box] (yes) at (-3,-2.7)
- {Admissible symmetry persists\\Derive invariants and reduced ODE};
-\node[box] (no) at (3,-2.7)
- {Continuation fails\\Use surviving subgroup or retain PDE};
-\node[box] (learn) at (-3,-4.1)
- {Construct analytical profile\\Learn unresolved correction};
-\node[box] (check) at (-3,-5.4)
- {Reconstruct the field\\Check original equations and data};
-\draw[->] (model)--(class);
-\draw[->] (class)--(yes); \draw[->] (class)--(no);
-\draw[->] (yes)--(learn);
-\draw[->] (learn)--(check);
-\end{tikzpicture}
-\caption{Decision flow. Follow the neural ODE branch only after a valid
-reduction is established; failed continuation returns to mathematical analysis.}
-\end{figure}
-
-\section{Machine-learning construction and comparison design}
-\subsection{Learn the part left unresolved by analysis}
-For an admissible reduced problem, let $F_{\mathrm{an}}$ denote a provisional
-analytical approximation and $\lambda$ its physical parameters and admissible
-integration constants. Construct
-\begin{equation}
-\widehat F_\theta(\sigma;\lambda)=F_{\mathrm{an}}(\sigma;\lambda)
-+\omega_N(\sigma;\lambda)N_\theta(\sigma;\lambda),\qquad
-\widehat\phi_\theta=\mathcal T_\lambda[\widehat F_\theta],
-\label{eq:neural}
-\end{equation}
-where $\mathcal T_\lambda$ is the derived reconstruction map. The factor
-$\omega_N$
-preserves known linear constraints. For prescribed Taylor coefficients
-through order $K$ at a regular point $\sigma_0$, one possible choice is
-$F_{\mathrm{an}}=P_K$ and $\omega_N=(\sigma-\sigma_0)^{K+1}$.
-This example does not select Taylor expansion as the final method.
-Analytically constrained neural trial functions have a longstanding precedent
-\cite{lagaris}; the research question is how to construct their analytical
-part from the perturbed symmetry structure.
-
-Train on collocation coordinates and parameter values, not necessarily
-solution labels. For a derived residual $\mathcal R_\lambda$ and any constraints
-$\mathcal B_\lambda$ not imposed exactly, use
-\begin{equation}
-\mathcal L(\theta)=
-\left\langle\|\mathcal R_\lambda[\widehat F_\theta]\|^2\right\rangle_{\mathcal C}
-+w_B\left\langle\|\mathcal B_\lambda[\widehat F_\theta]\|^2\right\rangle
-+w_D\left\langle\|\mathcal H\widehat\phi_\theta-y\|^2\right\rangle_{\mathcal D}.
-\end{equation}
-Brackets denote sample averages; $\mathcal H$ is an observation operator.
-Omit the final term when no measurements are supplied. Scale residual
-components using the nondimensional equations, and document how weights
-are chosen. Use symbolic differentiation for reduction identities and
-automatic differentiation for neural residuals. Choose network capacity,
-sampling density, and stopping criteria by validation rather than fixed
-unmotivated numerical values.
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[>=Latex,
- box/.style={draw,rounded corners,align=center,font=\footnotesize,
- text width=3.3cm,minimum height=8mm,inner sep=4pt}]
-\node[box] (a) at (-4,0) {Analytical construction\\$F_{\mathrm{an}}$};
-\node[box] (n) at (-4,-1.3) {Trainable correction\\$\omega_N N_\theta$};
-\node[box] (f) at (0,-.65) {Constrained profile\\$\widehat F_\theta$};
-\node[box] (r) at (4,-.65) {Reduced residual\\and remaining data};
-\draw[->] (a)--(f); \draw[->] (n)--(f); \draw[->] (f)--(r);
-\draw[->] (r.south)--++(0,-.8)-| node[pos=.25,below,font=\footnotesize]
- {Optimize $\theta$; preserve analytical constraints} (n.south);
-\end{tikzpicture}
-\caption{Neural construction. The analytical component and reconstruction
-are specified by the reduction; optimization adjusts the unresolved profile.}
-\end{figure}
-
-\subsection{Comparisons that isolate each contribution}
-The following comparison design isolates each contribution. All methods must
-target the same admissible solution and data.
-\begin{center}
-\small
-\begin{tabularx}{\linewidth}{@{}lX@{}}
-\toprule
-Construction & Question isolated \\
-\midrule
-Analytical approximation alone & How much does neural correction add? \\
-Reduced PINN without analytical part & Does the analytical construction help training? \\
-Direct PDE PINN & What benefit comes from reducing coordinates? \\
-PDE PINN with symmetry loss \cite{sympinn} & Does explicit reduction help beyond regularization? \\
-Converged conventional reduced solver & Is the learned profile accurate and cost-effective? \\
-\bottomrule
-\end{tabularx}
-\end{center}
-Use exact profiles when available, otherwise independently converged
-reference solutions. Report profile error, reconstructed PDE residual,
-data mismatch, runtime, and variation across training seeds. Separate
-interpolation from held-out parameter tests. Symmetry-generated copies
-of one profile stay in the same data split. Test both the exceptional case
-and nearby admissible parameters; failure of symmetry continuation is itself
-a mathematical result, not a training failure.
-
-Evaluate the original PDE on independent points even when training uses
-only a truncated ODE. A small reduced residual alone does not bound solution
-error: such a bound additionally requires stability of the reduced problem,
-controlled reconstruction, and a perturbation-remainder estimate.
-Compare error versus computational budget rather than assume that fewer
-coordinates guarantee faster training.
-
-\section{Implemented three-layer baseline and fused prototype}
-\subsection{Reported ML baselines kept outside the Lie pipeline}
-The ML-only executable imports no Lie-reduction code.  Its first experiment is
-a bounded fixed-IVP reproduction of the Duffing comparison in the Taylor-model
-PINN paper \cite{tmpinn},
-\[
- \dot x=y,\qquad \dot y=x-x^3-\delta_Dy,
- \quad (x(0),y(0),\delta_D)=(-0.224,-0.269,0.327).
-\]
-Here $\delta_D$ is the Duffing damping coefficient and is unrelated to
-$\delta=m-3$. All three methods use one hidden layer of width 64 and three
-seeds. Table~\ref{tab:duffing} gives relative $L^2$ medians after 3000 Adam
-steps; the bracket is the full seed range for TM-PINN.
-\begin{table}[htbp]
-\centering\small
-\begin{tabular}{@{}ccccc@{}}
-\toprule
-Horizon & vanilla PINN & higher-order PINN & TM-PINN & TM range \\
-\midrule
-$T=1$ & $2.050\times10^{-4}$ & $1.914\times10^{-4}$ & $7.585\times10^{-5}$
- & $[4.491\times10^{-5},1.001\times10^{-4}]$ \\
-$T=3$ & $6.555\times10^{-2}$ & $9.841\times10^{-2}$ & $1.756$
- & $[8.678\times10^{-2},8.894]$ \\
-\bottomrule
-\end{tabular}
-\caption{Bounded Duffing fixed-IVP reproduction. It tests the reported
-short-time advantage and long-time degradation, not the paper's full
-parameter-family solution map.}
-\label{tab:duffing}
-\end{table}
-
-The second experiment follows the 2026 PINN--PIKAN logistic benchmark
-\cite{pikan} with 100 uniform points, Adam step size $0.01$, 10000 iterations
-and ten seeds. The MLP has 121 parameters; the PIKAN has 112 trainable
-parameters after unused symbolic affine parameters are frozen. PIKAN's
-relative-$L^2$ median/mean are $8.580\times10^{-5}/1.148\times10^{-3}$, while the
-MLP values are $9.740\times10^{-1}/6.895\times10^{-1}$. Thus the reported direction
-is reproduced, but the numerical values are not: several MLP seeds converge
-to low-residual wrong branches. Median CPU training times are 63.71 s and
-7.24 s, respectively. PirateNet \cite{piratenet} remains a literature
-comparator because its JAX/Fourier/causal-training protocol was not reproduced.
-
-\subsection{Pure Lie baseline}
-The Lie-only executable imports no neural library. For the printed master
-equation it verifies the supplied $m=3$ multiplier identity for
-$X_5=t\partial_t-2s\partial_s$, integrates its flow, checks
-$\sigma=st^2$ and $Q=-t\phi_t+2s\phi_s=0$, derives the third-order reduced
-equation, and verifies
-\[
- \E_3[F(st^2)]=t^{-1}\mathcal R_0[F],\qquad
- F_0=C+K\sigma^{1/3},\quad
- K^3=\frac{27g}{1-4g\beta_{\rm tr}}.
-\]
-The same supplied identity at $m=4$ returns \texttt{unsupported}. This is a
-negative control for $X_5$, not a proof that no other $m=4$ symmetry exists.
-
-\subsection{Certificate-gated Lie--ML prototype}
-The fusion executable refuses an unverified Lie-only certificate. It fixes
-$g=1$, $\beta_{\rm tr}=0.1$, $m=3$, $\sigma\in[1,1.5]$, and changes only
-the initial curvature by
-$F''(1)\mapsto(1+\eta_{\rm ic})F_0''(1)$ with $\eta_{\rm ic}=0.01$;
-$\delta=m-3$ remains zero. A coarse/medium/fine DOP853 tolerance ladder uses
-92, 197 and 377 function evaluations; its first two differences from fine are
-$2.025\times10^{-11}$ and $2.065\times10^{-14}$. Fine DOP853 and Radau agree
-to $3.281\times10^{-13}$.
-The three neural methods have 673 parameters, use 1000 Adam steps and retain
-all three seeds. Table~\ref{tab:fusion} reports seed medians.
-\begin{table}[htbp]
-\centering\small
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Method & $\max|F-F_{\rm ref}|$ & raw $\mathcal R_0$ & normalized
- $\mathcal R_0$ & original $\E_3$ \\
-\midrule
-hard-IVP PINN & $3.425\times10^{-5}$ & $4.701\times10^{-1}$ & $4.496\times10^{-2}$ & $4.711\times10^{-1}$ \\
-$P_2+z^3N_\theta$ & $2.670\times10^{-6}$ & $1.804\times10^{-1}$ & $2.535\times10^{-2}$ & $1.831\times10^{-1}$ \\
-$P_4+z^5N_\theta$ & $3.467\times10^{-5}$ & $5.354\times10^{-2}$ & $5.470\times10^{-3}$ & $5.458\times10^{-2}$ \\
-\bottomrule
-\end{tabular}
-\caption{Fused SVE prototype. Profile and residual rankings disagree; both
-are therefore retained. Direct and lifted residuals agree to about $10^{-14}$.}
-\label{tab:fusion}
-\end{table}
-
-The $P_2$ correction has the smallest profile error, whereas the $P_4$
-correction has the smallest residual. Fine DOP853 takes about 0.0034 s for this
-single IVP, versus 3.6--4.2 s training per neural seed. The prototype therefore
-does not establish an ML speedup. Cubic PIKAN is not transferred to this
-third-order residual because its third-derivative smoothness has not passed a
-separate gate.
-
-\subsection{Stage goal: a data-compatible parameter-family certificate}
-The bounded v0.2 goal is not the unresolved generic-$m$ classification. It is
-to close one local, falsifiable chain on the fixed cubic branch:
-\[
- (\E_3,X_5,\mathcal D_\eta)
- \longrightarrow (\mathcal R_0,\mathcal C_{0.2})
- \longrightarrow \widehat F_\theta(\sigma,\eta)
- \longrightarrow \E_3[\widehat F_\theta(st^2)].
-\]
-Here $\rho=t$, $\sigma=st^2$, and $\mathcal C_{0.2}$ is accepted only if the
-chart rank, orbit speed, fibre rank, exact pullback, and data checks all pass.
-On the invariant hypersurface $\Sigma_0=\{st^2=1\}$ we prescribe
-\[
- \phi-K=0,\qquad t^{-2}\phi_s-\frac K3=0,\qquad
- t^{-4}\phi_{ss}+\frac{2K}{9}(1+\eta_{\rm ic})=0,
- \quad K=\sqrt[3]{45}.
-\]
-The prolonged action annihilates the surface residual and all three data
-residuals off shell, and their pullbacks contain no $\rho$. Thus they become
-\[
- F(1)=K,\qquad F'(1)=K/3,\qquad
- F''(1)=-\frac{2K}{9}(1+\eta_{\rm ic}).
-\]
-This is a strict sufficient compatibility test for this constructed data
-family, not a statement that arbitrary canal boundaries are symmetry
-compatible. The certificate excludes $\rho=0$, $F'=0$, and
-\[
- a(\sigma,F')=-\frac{2g\sigma}{(F')^2}
- +8(1-\beta_{\rm tr}g)\sigma^3F'=0;
-\]
-it records these as separate singular exits rather than dividing them away.
-
-For $\eta_{\rm ic}\in[-0.02,0.02]$ the conditional profile is
-\[
- \widehat F_\theta(\sigma,\eta_{\rm ic})
- =P_2(\sigma,\eta_{\rm ic})
-  +(\sigma-1)^3N_\theta(\sigma,\eta_{\rm ic}),
-\]
-so the three data jets are exact for training and unseen parameters. Training
-and held-out parameter sets are respectively
-\[
-\begin{aligned}
- \mathcal T_\eta&=\{-0.02,-0.015,-0.01,0,0.01,0.015,0.02\},\\
- \mathcal H_\eta&=\{-0.0125,-0.005,0.005,0.0125\}.
-\end{aligned}
-\]
-They are disjoint, and every run retains seeds $0,1,2$. All eleven numerical
-references are sampled regular and DOP853/Radau differ by at most
-$3.312\times10^{-13}$. All twelve held-out evaluations complete; their
-maximum profile errors range from $2.636\times10^{-5}$ to
-$1.670\times10^{-4}$, compared with about $2.05\times10^{-2}$ for $P_2$ and
-$2.4\times10^{-3}$ for $P_4$. The initial-jet error is at most
-$1.111\times10^{-16}$ and direct-versus-lifted PDE residuals differ by at most
-$1.616\times10^{-14}$.
-
-Median training, DOP853-query, and neural-query times are respectively
-$4.625$ s, $0.00326$ s, and $0.00262$ s. Their measured arithmetic break-even
-is about 7170 repeated queries, before deployment and uncertainty costs.
-Consequently this experiment supports held-out interpolation beyond finite
-Taylor truncations on the declared regular family, but still does not prove an
-ML speedup, an interval error bound, or a solution on a singular branch.
-
-\subsection{Additional ML sockets}
-The primary socket is the parameter-conditioned reduced-profile correction
-in \eqref{eq:neural}; condition it on $\delta$ or coefficients of a prescribed
-$q(t)$ when testing exponent or time-dependent forcing perturbations. If exact
-reduction fails, finite orbit augmentation or a Lie-derivative loss is a
-fallback, but each is sampled/soft and cannot certify invariance. For drifting
-waves or changing scales, a moving-frame PINN/DAE can infer speed or scale
-rates together with the profile \cite{flow}. If many parameter or forcing
-profiles must be queried, the reduced solver may be amortized as an operator
-or surrogate; with sparse measurements, an observation term can estimate
-parameters alongside profiles.
-For a later conservative Eulerian SVE system with shocks, a flux-based or
-finite-volume neural correction is more suitable than a pointwise residual
-alone. Ensemble uncertainty and residual-adaptive collocation can guide
-sampling, but do not replace held-out tests. These are later extensions, not
-parallel week-one deliverables. Here ``post-PINN'' means an optional second
-correction after a baseline PINN has converged: freeze
-$F_{\mathrm{PINN}}$ and train $C_\theta$ in
-$F_{\mathrm{PINN}}+\omega_N C_\theta$ against the remaining residual. This is a
-separate ablation; the primary method remains the post-reduction correction
-in \eqref{eq:neural}.
-
-\section{Four-day implementation record and next gates}
-The four-day sprint released checkable artifacts rather than a universal
-performance claim.
-\begin{center}
-\small
-\begin{tabularx}{\linewidth}{@{}lXX@{}}
-\toprule
-Day & Work & Result \\
-\midrule
-1 & Lock notation and finish the Lie-only reduction certificate. &
-$m=3$ verified; the supplied $X_5$ identity at $m=4$ rejected. \\
-2 & Run the TM-PINN and PINN--PIKAN literature baselines. &
-All declared seeds retained; directional and negative results separated. \\
-3 & Run the certificate-gated SVE fusion against DOP853 and Radau. &
-Three methods and three seeds completed; lifting checked in the original PDE. \\
-4 & Consolidate JSON, CSV, figures, manuscript and interim report. &
-Reproducible commands, evidence limits and next gates recorded. \\
-\bottomrule
-\end{tabularx}
-\end{center}
-Having tested one constructed initial-curvature family, the next gates are to
-select a subgroup compatible with physically sourced initial/boundary data,
-analyze the recorded rank and leading-coefficient singular exits, and establish
-a smoothness gate before any KAN transfer to a third-order residual. The case
-$m=3+\delta$ remains separate until its symmetry-persistence calculation. A
-local series, rational continuation, or matched expansion should be selected
-only after analyzing the reduced equation's singularities and admissible data.
+The decoherence literature gives distinct precedents. A Lindblad symmetry
+analysis characterizes continuous symmetries and conserved quantities under
+dissipation, where their unitary-system correspondence changes
+\cite{lindbladsy}. A Caldeira--Leggett open-quantum-system study expands a
+reduced density matrix near its diagonal,
+truncates the resulting moment hierarchy, and obtains dissipative hydrodynamic
+equations approaching compressible Navier--Stokes at late times
+\cite{decohydro}. A separate Lindblad study examines perturbations and
+discrete CP/CPT symmetry constraints, not Lie point symmetries of an engineering
+PDE \cite{lindblad}. Neither derives classical water-wave or SVE equations.
+For this project, decoherence is therefore a motivation for asking how
+micro-to-macro closure can change a model; it is not a term in \eqref{eq:sve}.
+Any water-specific extension must instead derive its scale bridge from the
+chosen fluid, sediment, and bed-load closures.
+A current classical example derives a shallow-water moment system from a
+vertically resolved water-sediment Navier--Stokes model and couples it to
+suspended-load and Exner bed-load balances with erosion and deposition
+\cite{parvin}. This supplies a concrete engineering scale bridge without
+invoking quantum decoherence.
 
 
-\section{Export provenance and reproducibility status}
-This revision externalizes the existing citations into \texttt{references.bib}
-and retains the mathematical development and reported experiment values.
-The archive includes the recovered scalar SVE implementation, the distinct
-two-spatial-coordinate SWE/SVE benchmark, the series-first Lie/KAN pilot,
-and a public repository snapshot \cite{projectrepo}. These implementations
-have different equation, data, and certificate contracts and must not be
-treated as one reproduction of every table above.
+The attached Navier--Stokes blow-up C/D manuscript is retained only as a
+source supplied for reading; its claims are not verified here and it is not
+evidence for this reduction or ML protocol \cite{naviercd}.
+\section{Source provenance and reproducibility status}
+All bibliography entries used by this manuscript are embedded directly in
+\texttt{main.tex}. The source and its diagrams compile without an external
+\texttt{.bib} database or figure assets. Earlier bibliographic databases are
+preserved as archival records and are not compilation dependencies.
 
-Export-time checks re-execute the recovered scalar reduction, the independent
-scalar equation control, and the standalone Lie analyzer. They do not rerun
-the neural training histories. The newer \texttt{symm.generic} implementation,
-the raw Duffing/logistic/fusion evidence, and the strict v0.2 family artifacts
-referenced above are not present in the recovered repository. Their results
-remain historical manuscript reports pending recovery of the matching source
-and evidence. \texttt{NEXT.md} records these recovery tasks and the near-cubic
-continuation/obstruction question as separate gates.
+The recovered archive includes the scalar implementation, a distinct
+two-spatial-coordinate benchmark, a series-first Lie/KAN pilot and a public
+repository snapshot \cite{projectrepo}. These have different equation,
+data and certificate contracts. They do not reproduce every historical
+table in Appendix~\ref{app:historical}. The newer \texttt{symm.generic}
+backend and matching raw numerical histories remain source-recovery gates.
+No new neural training is reported in Section~\ref{sec:next-experiment}.
 
-The source archive also preserves supporting fluid reductions
+The present mathematical checks independently verify coordinate/inverse
+identities, prolongation multipliers, the scalar residual pullback, the
+exact profile, bracket signs, data compatibility and initial Taylor
+coefficients. They do not certify a maximal algebra or a uniform solution
+error. The physical bed transformation remains an explicit model audit.
+
+Supporting fluid reductions
 \cite{shearflows,twovelocities,compressiblens,fushchych1,fushchych2,passivescalar},
-additional engineering case studies \cite{bionanoflow,cassoneyring}, and
-foundational notes \cite{etingof,ohrnell}. Their inclusion is a reading record,
-not evidence of new SVE results. Classical SVE closure and gradient-flow
-baseline references are retained from the recovered benchmark
-\cite{fernandez2017,wanggradient}. User-supplied book-page images have no
-verified book identity and are kept without an invented attribution.
+engineering cases \cite{bionanoflow,cassoneyring} and foundational reading
+\cite{etingof,ohrnell} remain a reading record, not new evidence for the
+scalar benchmark. Classical closure and gradient-flow references are
+retained from the recovered benchmark \cite{fernandez2017,wanggradient}.
+Unidentified user-supplied book images have no invented attribution.
+Original drafts and source inventories remain unchanged in the recovered
+archive; inaccessible histories remain explicitly incomplete.
 
-The additional BibTeX database in \texttt{references/} contains inventory citations for
-additional archived PDFs and HTTP links, with file paths or URLs and explicit
-metadata limitations. Those inventory records are included in the bibliography
-database but are not asserted as sources for a scientific claim unless cited.
-\texttt{references/LINKS.md} maps those records to the files containing them.
-The original manuscript and earlier drafts remain in
-\texttt{manuscript\_history/}. Available chat excerpts are exported in
-\texttt{chats/}; inaccessible full histories are explicitly marked incomplete.
+% Complete cited bibliography embedded here; no external .bib dependency.
+\clearpage
+\begingroup
+\small
+\setlength{\bibsep}{4pt plus 1pt minus 1pt}
+\begin{thebibliography}{50}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibliographystyle{unsrtnat}
-\bibliography{references,references/archived_sources}
+\bibitem[Olver(1993)]{olver}
+Peter~J. Olver.
+\newblock \emph{{Applications of Lie Groups to Differential Equations}}.
+\newblock Springer, 2 edition, 1993.
+\newblock \doi{10.1007/978-1-4612-4350-2}.
+\newblock URL \url{https://doi.org/10.1007/978-1-4612-4350-2}.
+\newblock Archived Olver PDF in repository is identified separately; do not
+  infer that an excerpt is the full book.
+
+\bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
+Ian~M. Anderson, Mark~E. Fels, and Charles~G. Torre.
+\newblock {Group Invariant Solutions without Transversality}.
+\newblock \emph{Communications in Mathematical Physics}, 212\penalty0
+  (3):\penalty0 653--686, 2000.
+\newblock \doi{10.1007/s002200000215}.
+\newblock URL \url{https://arxiv.org/abs/math-ph/9910015}.
+
+\bibitem[Paliathanasis et~al.(2026)Paliathanasis, Leon, and Leach]{ap}
+Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach.
+\newblock {Lie Symmetries and Similarity Solutions for a Shallow-Water Model
+  with Bed Elevation in Lagrange Variables}.
+\newblock \emph{Mathematics}, 14:\penalty0 433, 2026.
+\newblock \doi{10.3390/math14030433}.
+\newblock URL \url{https://doi.org/10.3390/math14030433}.
+
+\bibitem[Otto et~al.(2025)Otto, Zolman, Kutz, and Brunton]{otto}
+S.~E. Otto, N.~Zolman, J.~N. Kutz, and S.~L. Brunton.
+\newblock {A Unified Framework to Enforce, Discover, and Promote Symmetry in
+  Machine Learning}.
+\newblock \emph{Journal of Machine Learning Research}, 26:\penalty0 1--83,
+  2025.
+\newblock URL \url{https://jmlr.org/papers/v26/24-1315.html}.
+
+\bibitem[Kovalev(2021)]{kovalev}
+V.~F. Kovalev.
+\newblock {Approximate Symmetry in Nonlinear Physics Problems}.
+\newblock In A.~C.~J. Luo and R.~K. Gazizov, editors, \emph{Symmetries and
+  Applications of Differential Equations}. Springer, 2021.
+\newblock \doi{10.1007/978-981-16-4683-6_1}.
+\newblock URL \url{https://doi.org/10.1007/978-981-16-4683-6_1}.
+
+\bibitem[Deng and Reid(2024)]{approxalg}
+Siyuan Deng and Gregory Reid.
+\newblock {Contributions to the Algorithmic Foundations of Approximate Lie
+  Symmetry Algebras of Differential Equations}.
+\newblock arXiv:2410.20608v1 [math-ph], 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.20608v1}.
+
+\bibitem[Tarayrah et~al.(2023)Tarayrah, Pitzel, and
+  Cheviakov]{tarayrah2023}
+Mahmood~R. Tarayrah, Brian Pitzel, and Alexei Cheviakov.
+\newblock {Two Approximate Symmetry Frameworks for Nonlinear Partial
+  Differential Equations with a Small Parameter: Comparisons, Relations,
+  Approximate Solutions}.
+\newblock \emph{European Journal of Applied Mathematics}, 34:\penalty0
+  1017--1045, 2023.
+\newblock \doi{10.1017/S0956792522000407}.
+\newblock URL \url{https://doi.org/10.1017/S0956792522000407}.
+
+\bibitem[Teschl(2012)]{teschl2012}
+Gerald Teschl.
+\newblock \emph{Ordinary Differential Equations and Dynamical Systems}, volume
+  140 of \emph{Graduate Studies in Mathematics}.
+\newblock American Mathematical Society, Providence, 2012.
+\newblock ISBN 978-0-8218-8328-0.
+\newblock URL \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/}.
+
+\bibitem[Lagaris et~al.(1998)Lagaris, Likas, and Fotiadis]{lagaris}
+I.~E. Lagaris, A.~Likas, and D.~I. Fotiadis.
+\newblock {Artificial Neural Networks for Solving Ordinary and Partial
+  Differential Equations}.
+\newblock \emph{IEEE Transactions on Neural Networks}, 9:\penalty0 987--1000,
+  1998.
+\newblock URL \url{https://arxiv.org/abs/physics/9705023}.
+
+\bibitem[Cohen and DeVore(2015)]{cohen2015}
+Albert Cohen and Ronald DeVore.
+\newblock {Approximation of high-dimensional parametric PDEs}, 2015.
+\newblock URL \url{https://arxiv.org/abs/1502.06797}.
+
+\bibitem[Mishra and Molinaro(2023)]{mishra2023}
+Siddhartha Mishra and Roberto Molinaro.
+\newblock Estimates on the generalization error of physics-informed neural
+  networks for approximating pdes.
+\newblock \emph{IMA Journal of Numerical Analysis}, 43\penalty0 (1):\penalty0
+  1--43, 2023.
+\newblock \doi{10.1093/imanum/drab093}.
+\newblock URL \url{https://arxiv.org/abs/2006.16144}.
+
+\bibitem[Koval and Popovych(2023)]{koval2023}
+Serhii~D. Koval and Roman~O. Popovych.
+\newblock {Point and generalized symmetries of the heat equation revisited}.
+\newblock \emph{Journal of Mathematical Analysis and Applications},
+  527:\penalty0 127430, 2023.
+\newblock \doi{10.1016/j.jmaa.2023.127430}.
+\newblock URL \url{https://arxiv.org/abs/2208.11073}.
+\newblock Extended arXiv version 4, revised 17 September 2024.
+
+\bibitem[Levi et~al.(2015)Levi, Martina, and Winternitz]{levi2015}
+Decio Levi, Luigi Martina, and Pavel Winternitz.
+\newblock {Lie-point symmetries of the discrete Liouville equation}.
+\newblock \emph{Journal of Physics A: Mathematical and Theoretical},
+  48\penalty0 (2):\penalty0 025204, 2015.
+\newblock \doi{10.1088/1751-8113/48/2/025204}.
+\newblock URL \url{https://arxiv.org/abs/1407.4043}.
+
+\bibitem[Akhound-Sadegh et~al.(2023)Akhound-Sadegh, Perreault-Levasseur,
+  Brandstetter, Welling, and Ravanbakhsh]{sympinn}
+Tara Akhound-Sadegh, Laurence Perreault-Levasseur, Johannes Brandstetter, Max
+  Welling, and Siamak Ravanbakhsh.
+\newblock {Lie Point Symmetry and Physics Informed Networks}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+\newblock URL \url{https://arxiv.org/abs/2311.04293}.
+
+\bibitem[Jiao and Xiong(2025)]{jiao}
+X.~Jiao and F.~Xiong.
+\newblock {Leveraging Lie Group Symmetries to Enhance Physics-Informed Neural
+  Networks for the Fundamental Solution of Linear PDEs}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2407.20155v2}.
+\newblock Version 2; metadata retained from supplied manuscript.
+
+\bibitem[Kavousanakis et~al.(2026)Kavousanakis, Fabiani, Georgiou, Siettos,
+  Kevrekidis, and Kevrekidis]{flow}
+Michail~E. Kavousanakis, Gianluca Fabiani, Anastasia~S. Georgiou, Constantinos
+  Siettos, Panayotis~G. Kevrekidis, and Ioannis~G. Kevrekidis.
+\newblock {Going with the flow to solve for symmetry-driven PDE dynamics with
+  physics-informed neural networks}.
+\newblock \emph{Nature Communications}, 17:\penalty0 9420, 2026.
+\newblock \doi{10.1038/s41467-026-75936-3}.
+\newblock URL \url{https://www.nature.com/articles/s41467-026-75936-3}.
+
+\bibitem[Klausen et~al.(2026)Klausen, Timofeev, Naujoks, Frank, Wiegand,
+  Lapuschkin, and Samek]{liesolver}
+Ren{\'e}~P. Klausen, Ivan Timofeev, Jonas Naujoks, Johannes Frank, Thomas
+  Wiegand, Sebastian Lapuschkin, and Wojciech Samek.
+\newblock {LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries}.
+\newblock In \emph{Proceedings of the AI4Physics Workshop at the 43rd
+  International Conference on Machine Learning (AI4Physics@ICML 2026)},
+  Seoul, South Korea, 2026.
+\newblock URL \url{https://arxiv.org/abs/2510.25731v2}.
+\newblock Version 2, revised 25 June 2026; original submission 2025.
+
+\bibitem[Brandstetter et~al.(2022)Brandstetter, Welling, and Worrall]{lpsda}
+Johannes Brandstetter, Max Welling, and Daniel~E. Worrall.
+\newblock {Lie Point Symmetry Data Augmentation for Neural PDE Solvers}.
+\newblock In \emph{Proceedings of the 39th International Conference on
+  Machine Learning}, volume 162 of \emph{Proceedings of Machine Learning
+  Research}, pages 2241--2256. PMLR, 2022.
+\newblock URL \url{https://arxiv.org/abs/2202.07643v2}.
+
+\bibitem[Wang et~al.(2025)Wang, Shumaylov, Zaika, Sherry, and
+  Sch{\"o}nlieb]{genliepino}
+Amy~Xiang Wang, Zakhar Shumaylov, Peter Zaika, Ferdia Sherry, and
+  Carola-Bibiane Sch{\"o}nlieb.
+\newblock {Generalized Lie Symmetries in Physics-Informed Neural Operators}.
+\newblock Workshop paper, \emph{COLT 2025 Theory of AI for Scientific
+  Computing Workshop}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.00373v2}.
+
+\bibitem[Paliathanasis(2022)]{sveold}
+Andronikos Paliathanasis.
+\newblock {Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner
+  Model}.
+\newblock \emph{Symmetry}, 14\penalty0 (8):\penalty0 1679, 2022.
+\newblock \doi{10.3390/sym14081679}.
+\newblock URL \url{https://doi.org/10.3390/sym14081679}.
+
+\bibitem[Shumaylov et~al.(2025)Shumaylov, Zaika, Rowbottom, Sherry, Weber, and
+  Sch{\"o}nlieb]{lieLAC}
+Z.~Shumaylov, P.~Zaika, J.~Rowbottom, F.~Sherry, M.~Weber, and C.-B.
+  Sch{\"o}nlieb.
+\newblock {Lie Algebra Canonicalization: Equivariant Neural Operators under
+  Arbitrary Lie Groups}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2410.02698v2}.
+\newblock Version 2, 4 March 2025; original submission 2024.
+
+\bibitem[Beligiannis(2025)]{beligiannis}
+G.~Beligiannis.
+\newblock {Symmetries of Partial Differential Equations: Applications to
+  Initial and Boundary Value Problems}.
+\newblock Master's thesis, National Technical University of Athens, February
+  2025.
+\newblock URL \url{https://dspace.lib.ntua.gr/xmlui/handle/123456789/62800}.
+
+\bibitem[Liu et~al.(2026)Liu, Gupta, Sinha, and Mahadevan]{liestonet}
+S.~Liu, A.~Gupta, S.~Sinha, and L.~Mahadevan.
+\newblock {LieStoNet: Learning Lie Symmetries from Spatiotemporal Data for
+  Stochastic Dynamical Systems}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2608.01582}.
+\newblock Publication metadata retained from supplied manuscript; ICML
+  acceptance not independently verified in this export.
+
+\bibitem[Liu and Lou(2024)]{liulou}
+Ping Liu and Senyue Lou.
+\newblock {Applications of Symmetries to Nonlinear Partial Differential
+  Equations}.
+\newblock \emph{Symmetry}, 16\penalty0 (12):\penalty0 1591, 2024.
+\newblock \doi{10.3390/sym16121591}.
+\newblock URL \url{https://doi.org/10.3390/sym16121591}.
+
+\bibitem[Mathebula(2017)]{mathebula}
+Agreement Mathebula.
+\newblock {Symmetry Analysis and Invariant Properties of Some Partial
+  Differential Equations}.
+\newblock Master's thesis, University of the Witwatersrand, 2017.
+\newblock URL
+  \url{https://wiredspace.wits.ac.za/items/b89c36fb-2264-4ce9-b529-c02c1f7e2801}.
+
+\bibitem[Hijazi(2013)]{hijazi}
+Omar~Mayez Hijazi.
+\newblock \emph{{Application of Symmetry Methods to Partial Differential
+  Equations}}.
+\newblock PhD thesis, University of Western Sydney, 2013.
+\newblock URL
+  \url{https://researchers-admin.westernsydney.edu.au/ws/portalfiles/portal/94854495/uws_17137.pdf}.
+
+\bibitem[Nagesh et~al.(2025)Nagesh, Sankaranarayanan, Kaur, Sahai, and
+  Jha]{tmpinn}
+Chandra~Kanth Nagesh, Sriram Sankaranarayanan, Ramneet Kaur, Tuhin Sahai, and
+  Susmit Jha.
+\newblock {Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary
+  Differential Equations}.
+\newblock In \emph{Proceedings of the International Conference on
+  Neuro-symbolic Systems}, volume 288 of \emph{Proceedings of Machine Learning
+  Research}, pages 621--642. PMLR, 2025.
+\newblock URL \url{https://proceedings.mlr.press/v288/nagesh25a.html}.
+
+\bibitem[Dzimah et~al.(2026)Dzimah, Rubio~Herranz, Lopez~Hernandez, and
+  L{\'o}pez~Montes]{pikan}
+S.~K. Dzimah, S.~Rubio~Herranz, F.~C. Lopez~Hernandez, and A.~L{\'o}pez~Montes.
+\newblock {A Unified Benchmark of Physics-Informed Neural Networks and
+  Kolmogorov-Arnold Networks for Ordinary and Partial Differential Equations},
+  2026.
+\newblock URL \url{https://arxiv.org/abs/2602.15068v1}.
+
+\bibitem[Wang et~al.(2024)Wang, Li, Chen, and Perdikaris]{piratenet}
+S.~Wang, B.~Li, Y.~Chen, and P.~Perdikaris.
+\newblock {PirateNets: Physics-informed Deep Learning with Residual Adaptive
+  Networks}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2402.00326v3}.
+
+\bibitem[{SymPy Development Team}(n.d.)]{sympydocs}
+{SymPy Development Team}.
+\newblock {SymPy: Partial Differential Equations}, n.d.
+\newblock URL \url{https://docs.sympy.org/latest/modules/solvers/pde.html}.
+\newblock Online documentation; accessed 6 October 2026; original draft refers
+  to SymPy 1.14.
+
+\bibitem[Tong(n.d.)]{tong}
+David Tong.
+\newblock {Lectures on Quantum Mechanics}.
+\newblock University of Cambridge lecture notes, n.d.
+\newblock URL
+  \url{https://www.damtp.cam.ac.uk/user/tong/qm/qmhtml/qmhtml.html}.
+
+\bibitem[Noether(1918)]{noether}
+Emmy Noether.
+\newblock {Invariant Variation Problems}, 1918.
+\newblock URL \url{https://arxiv.org/abs/physics/0503066}.
+\newblock English translation deposited in 2005.
+
+\bibitem[Albert and Jiang(2014)]{lindbladsy}
+V.~V. Albert and L.~Jiang.
+\newblock {Symmetries and conserved quantities in Lindblad master equations}.
+\newblock \emph{Physical Review A}, 89:\penalty0 022118, 2014.
+\newblock \doi{10.1103/PhysRevA.89.022118}.
+\newblock URL \url{https://doi.org/10.1103/PhysRevA.89.022118}.
+
+\bibitem[Zhou et~al.(2025)Zhou, Hippert, Mullins, and Noronha]{decohydro}
+Z.-L. Zhou, M.~Hippert, N.~Mullins, and J.~Noronha.
+\newblock {Emergent Viscous Hydrodynamics from a Single Quantum Particle},
+  2025.
+\newblock URL \url{https://arxiv.org/abs/2506.06618v2}.
+
+\bibitem[Klimenko(2026)]{lindblad}
+A.~Y. Klimenko.
+\newblock {Decoherence, perturbations and symmetry in Lindblad dynamics:
+  implications for diffractive dissociation}.
+\newblock \emph{European Physical Journal C}, 86:\penalty0 482, 2026.
+\newblock \doi{10.1140/epjc/s10052-026-15689-x}.
+\newblock URL \url{https://doi.org/10.1140/epjc/s10052-026-15689-x}.
+
+\bibitem[Parvin et~al.(2026)Parvin, Samaey, and Koellermeier]{parvin}
+A.~Parvin, G.~Samaey, and J.~Koellermeier.
+\newblock {A Hyperbolic Moment-Based Shallow Water Model for Coupled
+  Bedload--Suspended Load Morphodynamics with Variable Density}, 2026.
+\newblock URL \url{https://arxiv.org/abs/2505.22278v2}.
+
+\bibitem[{OpenAI}(n.d.)]{naviercd}
+{OpenAI}.
+\newblock {Finite Time Blowup for Navier--Stokes}.
+\newblock User-supplied manuscript; public publication record not established,
+  n.d.
+\newblock Author and title from the PDF title page; no date stated there. Used
+  only as a staged proof-workflow analogy; its claimed theorem is not validated
+  by this project.
+
+\bibitem[{CarlXerophilem}(n.d.)]{projectrepo}
+{CarlXerophilem}.
+\newblock {Lie-ML PDES project source repository}, n.d.
+\newblock URL \url{https://github.com/CarlXerophilem/Lie-ML_PDES}.
+\newblock Snapshot commit fbdcfe361bc98027f33e639a803a93a40c393045; retrieved 6
+  October 2026.
+
+\bibitem[Mandal et~al.(2025)Mandal, Sil, and Ghosh]{shearflows}
+Sougata Mandal, Subhankar Sil, and Sukhendu Ghosh.
+\newblock {On the Lie symmetry analysis of three-dimensional perturbed shear
+  flows}.
+\newblock \emph{Chaos, Solitons and Fractals}, 191:\penalty0 115875, 2025.
+\newblock \doi{10.1016/j.chaos.2024.115875}.
+\newblock URL \url{https://doi.org/10.1016/j.chaos.2024.115875}.
+
+\bibitem[Sharma et~al.(2025)Sharma, Shagolshem, and Arora]{twovelocities}
+Aniruddha~Kumar Sharma, Sumanta Shagolshem, and Rajan Arora.
+\newblock {Analysis of wave propagation and conservation laws for a shallow
+  water model with two velocities via Lie symmetry}.
+\newblock \emph{Communications in Nonlinear Science and Numerical Simulation},
+  143:\penalty0 108637, 2025.
+\newblock \doi{10.1016/j.cnsns.2025.108637}.
+\newblock URL \url{https://doi.org/10.1016/j.cnsns.2025.108637}.
+
+\bibitem[Razafindralandy and Hamdouni(2021)]{compressiblens}
+Dina Razafindralandy and Aziz Hamdouni.
+\newblock {Group theoretic approach and analytical solutions of the
+  compressible Navier--Stokes equations}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2111.13039}.
+
+\bibitem[Fushchych and Popowych(1994{\natexlab{a}})]{fushchych1}
+Wilhelm Fushchych and Roman Popowych.
+\newblock {Symmetry reduction and exact solutions of the Navier--Stokes
+  equations. I}.
+\newblock \emph{Journal of Nonlinear Mathematical Physics}, 1\penalty0
+  (1):\penalty0 75--113, 1994{\natexlab{a}}.
+\newblock \doi{10.2991/jnmp.1994.1.1.6}.
+\newblock URL \url{https://doi.org/10.2991/jnmp.1994.1.1.6}.
+
+\bibitem[Fushchych and Popowych(1994{\natexlab{b}})]{fushchych2}
+Wilhelm Fushchych and Roman Popowych.
+\newblock {Symmetry reduction and exact solutions of the Navier--Stokes
+  equations. II}.
+\newblock \emph{Journal of Nonlinear Mathematical Physics}, 1\penalty0
+  (2):\penalty0 158--189, 1994{\natexlab{b}}.
+
+\bibitem[Nguyen and Oberlack(2025)]{passivescalar}
+Cat~Tuong Nguyen and Martin Oberlack.
+\newblock {Passive scalar statistics in a turbulent round jet: symmetry theory
+  and direct numerical simulation}.
+\newblock \emph{Journal of Fluid Mechanics}, 1013:\penalty0 A33, 2025.
+\newblock \doi{10.1017/jfm.2025.10236}.
+\newblock URL \url{https://doi.org/10.1017/jfm.2025.10236}.
+
+\bibitem[Hamadneh et~al.(2025)Hamadneh, Uddin, Khan, Tanjila, Tamanna, and
+  Jaber]{bionanoflow}
+Nawaf~N. Hamadneh, Mohammed~Jashim Uddin, Waqar Khan, Rubina Tanjila, Nadia
+  Tamanna, and Jamil~J. Jaber.
+\newblock {Lie symmetry analysis of bio-nano-slip flow in a conical gap between
+  a rotating disk and cone with Stefan blowing}.
+\newblock \emph{Applied Rheology}, 35:\penalty0 20240027, 2025.
+\newblock \doi{10.1515/arh-2024-0027}.
+\newblock URL \url{https://doi.org/10.1515/arh-2024-0027}.
+
+\bibitem[Sulaxshan et~al.(2026)Sulaxshan, Mohd~Kasim, Ariffin, Khashiie, and
+  Shafie]{cassoneyring}
+Nadarajathurai Sulaxshan, Abdul~Rahman Mohd~Kasim, Noor Amalina~Nisa Ariffin,
+  Najiyah~Safwa Khashiie, and Sharidan Shafie.
+\newblock {Integration of lie symmetry analysis with magnetohydrodynamic heat
+  and mass transfer in a hybrid Casson--Eyring--Powell nanofluid over a porous
+  stretching sheet}.
+\newblock \emph{Journal of Thermal Analysis and Calorimetry}, 151:\penalty0
+  10059--10077, 2026.
+\newblock \doi{10.1007/s10973-026-15613-1}.
+\newblock URL \url{https://doi.org/10.1007/s10973-026-15613-1}.
+
+\bibitem[Etingof(n.d.)]{etingof}
+Pavel Etingof.
+\newblock {18.745: Lie Groups and Lie Algebras, I}.
+\newblock Lecture notes; date not confirmed from title page, n.d.
+
+\bibitem[{\"O}hrnell(2020)]{ohrnell}
+Carl {\"O}hrnell.
+\newblock {Lie Groups and PDE}.
+\newblock Project report 2020:43, Uppsala University, 2020.
+
+\bibitem[Fern{\'a}ndez-Nieto et~al.(2017)Fern{\'a}ndez-Nieto, Morales~de Luna,
+  Narbona-Reina, and Zabsonr{\'e}]{fernandez2017}
+E.~D. Fern{\'a}ndez-Nieto, T.~Morales~de Luna, G.~Narbona-Reina, and J.~D.
+  Zabsonr{\'e}.
+\newblock {Formal deduction of the Saint-Venant--Exner model including
+  arbitrarily sloping sediment beds and associated energy}.
+\newblock \emph{ESAIM: Mathematical Modelling and Numerical Analysis},
+  51:\penalty0 115--145, 2017.
+\newblock Reference retained from recovered benchmark source bibliography.
+
+\bibitem[Wang et~al.(2021)Wang, Teng, and Perdikaris]{wanggradient}
+S.~Wang, Y.~Teng, and P.~Perdikaris.
+\newblock {Understanding and mitigating gradient flow pathologies in
+  physics-informed neural networks}.
+\newblock \emph{SIAM Journal on Scientific Computing}, 43:\penalty0
+  A3055--A3081, 2021.
+\newblock URL \url{https://arxiv.org/abs/2001.04536}.
+
+\end{thebibliography}
+\endgroup
 
 \end{document}

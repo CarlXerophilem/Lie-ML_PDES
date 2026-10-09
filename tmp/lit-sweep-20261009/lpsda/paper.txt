@@ -1,0 +1,981 @@
+                                        Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+                                        Johannes Brandstetter 1 2 Max Welling 1 Daniel E. Worrall 3
+
+arXiv:2202.07643v2 [cs.LG] 29 May 2022                          Abstract                                2019; Bar-Sinai et al., 2019; Sanchez-Gonzalez et al., 2020;
+                                                                                                        Thuerey et al., 2021), circumventing the lengthy and often
+                                              Neural networks are increasingly being used to            tedious process of solver design. But we are left with a
+                                              solve partial differential equations (PDEs), re-          proverbial `chicken-and-egg problem'. From where do we
+                                              placing slower numerical solvers. However, a crit-        obtain the abundant data needed to train said neural solvers?
+                                              ical issue is that neural PDE solvers require high-       It has to be generated with a classical solver, after all.
+                                              quality ground truth data, which usually must
+                                              come from the very solvers they are designed              It seems the best we can do is to generate `groundtruth' data
+                                              to replace. Thus, we are presented with a prover-         using a high-quality, slow `teacher' and then clone its be-
+                                              bial chicken-and-egg problem. In this paper, we           havior with a cheaper neural `student'--a form of so-called
+                                              present a method, which can partially alleviate           model order reduction (Schilders, 2008). This considered, a
+                                              this problem, by improving neural PDE solver              natural question is whether we can train student models with
+                                              sample complexity--Lie point symmetry data                less of this `expensive' data. More precisely, how do we
+                                              augmentation (LPSDA). In the context of PDEs, it          improve solver sample complexity? One potential route is
+                                              turns out that we are able to quantitatively derive       to exploit symmetries of the loss with respect to input trans-
+                                              an exhaustive list of data transformations, based         formations, building in equivariance (Wang et al., 2021).
+                                              on the Lie point symmetry group of the PDEs               However, the design of equivariant layers is a difficult task.
+                                              in question, something not possible in other ap-
+                                              plication areas. We present this framework and            A much simpler traditional method is data augmenta-
+                                              demonstrate how it can easily be deployed to im-          tion (Simard et al., 2003). However, knowing how to aug-
+                                              prove neural PDE solver sample complexity by              ment data and to what extent is a routine question faced by
+                                              an order of magnitude.                                    ML practitioners. It turns out that PDEs are uniquely special
+                                                                                                        in that it is possible to characterize the full set of permissible
+                                        1. Introduction                                                 augmentations for each PDE. We shall define permissible
+                                                                                                        augmentations as Lie point symmetries in Section 2. As
+                                        Simulation of the physical world around us is an important      such, for learnable PDE solvers, we shall show that we
+                                        component of many numerate disciplines. From computa-           are able to define exactly what kinds of data augmentation
+                                        tional fluid dynamics to molecular modeling (Lelie`vre &        we need, placing a typically intuition-based aspect of deep
+                                        Stoltz, 2016) or astronomical simulation (Courant et al.,       learning pipeline design on a firm mathematical footing.
+                                        1967), solving the underlying dynamical equations is usu-
+                                        ally analytically intractable. The equations themselves are     The contributions of this paper are:
+                                        regularly expressed as partial differential equations (PDEs),      · Lie point symmetry data augmentation (LPSDA), a
+                                        solutions of which require efficient and accurate solvers. In         mathematically-grounded treatment of data augmenta-
+                                        reality, however, classical solvers are expensive and custom          tion for neural PDE solvers. LPSDA comprises the full
+                                        designed per PDE class (Quarteroni & Quarteroni, 2009).               set of solution-preserving, pointwise, continuous data
+                                                                                                              transformations for any (analytic) PDE.
+                                        In recent years, with the reascendance of deep learning, it
+                                        has become popular to learn PDE solvers (Greydanus et al.,         · Demonstration that LPSDA improves neural PDE
+                                                                                                              solver sample complexity to over an order of mag-
+                                            1University of Amsterdam 2Johannes Kepler University Linz         nitude on a SOTA neural PDE solver, across multiple
+                                        now at Microsoft Research 3Qualcomm AI Research, an initiative        PDEs (of evolution type) and training modalities.
+                                        of Qualcomm Technologies, Inc now at Deepmind. Correspon-
+                                        dence to: Johannes Brandstetter <brandstetter@ml.jku.at>.          · Ablations and interpolation on the effect of individual
+                                                                                                              symmetries on neural PDE solvers.
+                                        Proceedings of the 39 th International Conference on Machine
+                                        Learning, Baltimore, Maryland, USA, PMLR 162, 2022. Copy-          · Demonstration that LPSDA is faster and stabler than
+                                        right 2022 by the author(s).                                          running a classical solver to produce the same solu-
+                                                                                                              tion trajectories and measurement of the equivariance
+                                                                                                              properties of classical and neural solvers.
+Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+2. Background                                                      The symmetry group of  has the structure of a mathe-
+                                                                   matical group: a set, which is closed under composition,
+Here we cover PDEs and their Lie point symmetries. For a           is associative, has an identity element, and for which each
+textbook we suggest Olver (1986) as an excellent resource          element has an inverse. For PDEs, there exists a subgroup2,
+or Oliveri (2010) as a more easily digestible review paper.        within G, with additional structure; namely, it is a Lie point
+                                                                   symmetry. Lie point symmetries are Lie groups--classes of
+Partial Differential Equations. A partial differential             smooth transformations with smooth inverse--that act on
+                                                                   the (x, u|x) representation of a function pointwise, as
+equation (PDE)  specifies a relationship between a so-
+lution u : X  Rn and its derivatives at all points x in the           (x, u|x) g (gx, gu|x) , for all g and (x, u) . (5)
+domain X  Rm. It is convenient to define the prolongation
+                                                                   This maps points to points, hence the name. In particular,
+of u as                                                            g may not depend on derivatives of u, otherwise it is a
+                                                                   Lie-Ba¨cklund transformation, not considered in this paper.
+pr(n)u = (u, ux, uxx, ..., unx) ,  (1)                             Examples of Lie point symmetries are rotations, translations,
+                                                                   Galilean boosts, scalings, and shears. A counterexample
+where ux is all first-order derivatives of u with respect          is a blur, which neither acts pointwise, since it performs
+to the independent variable x, uxx is all unique second-           averages over neighborhoods, nor is invertible, thus not a
+order derivatives of u (e.g. xxu, xyu, yxu), and so forth          group-structured transformation. Figure 1 shows the four
+up until nth order. The range of the prolonged function            Lie point symmetries of the Korteweg-de Vries equation.
+pr(n)u lives in the so-called jet space U (n). PDEs are thus
+                                                                   The significance of PDE symmetries has a long history dat-
+represented as a system of algebra¨ic equations                    ing back to Sophus Lie, who famously developed the theory
+                                                                   of Lie groups to better solve ordinary differential equations.
+(x, pr(n) u|x) = 0 , for all x  X . (2)                            Most importantly for us, if we have procured a solution
+                                                                   u (by any means necessary), we can generate a collection
+By way of example, the 1 + 1 dimensional Heat equation in          of new solutions {gu}gGfor free, given computing gu is
+space and time can be written                                      relatively cheap, which we show in Section 4.7.
+
+(x, pr(2) u|x) = ut - uxx = 0      (3)
+
+for independent variables x = (x, t) and thermal diffusiv-         One-parameter Lie groups. The Lie point symmetries
+                                                                   of a given PDE can be multidimensional and it is thus useful
+ity  > 0. We use unbolded type for scalar-valued vari-             to break this down into modular components. Any d di-
+ables. The set S = {(x, u(n) x)|(x, u(n) x) = 0}                   mensional simply-connected Lie group can be decomposed
+X × U (n), where u(n) = pr(n)u, can be thought of as a             (Olver, 1986, Equation 1.40) into a series of one-parameter
+(collection of) surface(s) in total space X × U (n), is called     transformations gi : R  G for i = 1, ..., d, with the
+an algebra¨ic subvariety (Olver, 1986, p. 79). It is the graph1    property gi()gj( ) = gi( + ) if i = j, such that
+
+of all prolonged solutions. Thinking in these geometrical
+
+terms, we are equipped to define symmetries of PDEs.
+
+Lie Point Symmetries of PDEs. If a function u satisfies            g = g1( 1)g2( 2) · · · gd( d) .  (6)
+
+Equation 2 at point x, then u is called the solution of            Note that gi()gj( ) = gj( )gi() for i = j. Each gi is a
+                                                                   smooth, group-structured map from the real parameter i on
+at x. We leave a discussion on boundary conditions for             to the group, and is thus also referred to as a one-parameter
+                                                                   group. For us, each one-parameter group will correspond
+later. Symmetries are classes of transformations, which map        to a different kind of data augmentation we can apply. The
+                                                                   caveat that G is simply-connected is important. It means
+the solution set back into itself. For solution u we define        we only consider transformations that can be continuously
+                                                                   parameterized, for instance, 2D rotations but not reflections.
+its image after transformation as gu. g could abstractly
+                                                                   For each PDE , a complete set of simply-connected Lie
+represent a rotation, or a shear, or a flip. The set G of all      point symmetries can be derived in the form of a collection
+                                                                   of one-parameter Lie groups (Olver, 1986, § 2.4). There is
+solutions preserving g is called the symmetry group of . If        extensive literature tabulating these symmetries for a vast
+gu represents a transformed u, then pr(n)g · u(n) represents       array of common PDEs (e.g., Ibragimov (1993)) and for
+the corresponding transformation of the prolongation u(n).         novel PDEs software exists to derive them symbolically
+Then (x, u(n) x)  S implies (gx, pr(n)g · u(n) x)  S.              (e.g., Baumann (1998)).
+Defining g(x, u(n) x) = (gx, pr(n)g · u(n) x) we then have
+
+gS = S .                           (4)
+
+gS is the set where g is applied to every element of S.            2Group within a group
+
+    1It is unfortunate that this nomenclature is already so over-
+loaded in our field. Graph here refers to the surface one would
+draw if plotting u(n) with pencil and paper.
+                                         Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+       T Original: u 32T Time translation: g1u Space translation: g2u Galilean boost: g3u                         Scaling: g4u                4
+                                                                                                                                              2
+       34 T                     45 T
+
+t [s]  12 T                     T
+
+       14 T                     34 T                                                                                                          0
+
+       00    14L x 21[mL ] 43L  L 21T 0  41L x 42[mL ] 34L  L0  14L x 21[mL ] 43L  L0  41L x 21[mL ] 34L  L 0 e4 3 L x2e4[m3 L] 3e4 3 L e 3L     2
+
+Figure 1. One-parameter Lie point symmetries of the Korteweg-de Vries equation. The transformations are: (g1) time translation, (g2)
+space translation, (g3) Galilean-like boost, and (g4) scaling. The domain is periodic in the x-direction with units of meters and the time
+axis has units of seconds. Each plot has been shown for random transformations with shared spatial-scaling and colorspace.
+
+3. Lie Point Symmetry Data Augmentation                              for times [0, T ]. We impose periodic boundary conditions
+                                                                     u(0, t) = u(L, t) and initial conditions u(x, 0) = u0(x) for
+Here we show how Lie point symmetries can be used as                 all x and t. Note X = [0, L] × [0, T ]. We discretize X
+a data augmentation technique for a learned neural PDE               uniformly on a grid X = {(xi, tj)}i,j of Nx spatial points
+solver. We elucidate our method with a worked example.               and Nt timesteps. A typical neural PDE solver takes as
+                                                                     input initial conditions u0 = {u0(x)|x  X0} evaluated
+Given a PDE , one can look up its Lie point symmetries as            at X0 = {x  X|t = 0} and outputs predictions to match
+one-parameter transformations {g1, ..., gd} using, say, Ibrag-       targets u^ = {u(x)|x  X}. We augment this data as
+imov (1993) or Baumann (1998). Theory tells us that list is
+exhaustive, under regularity conditions (Section 3.1). Each                            (X0, u0, X, u^) g (gX0, gu0, gX, gu^)                  (9)
+symmetry gi is a function of a single variable i, controlling
+the magnitude of the augmentation. For instance i might              with g sampled according to Equation 7 from the Lie point
+correspond to a rotation angle or spatial shift. At training         symmetry group of the KdV equation. These are namely
+time, we sample each i independently from an appropriate
+probability density p( i) for i = 1, ..., d. Each density is                       g1( )(x, t, u) = (x, t + , u)  time shift,                 (10)
+chosen using standard techniques, such as cross-validation.
+At training time, one can then augment the training set D                          g2( )(x, t, u) = (x + , t, u)  space shift,                (11)
+by sampling a solution u  D and augmenting it as
+                                                                                   g3( )(x, t, u) = (x + t, t, u + ) Galilean boost, (12)
+
+                                                                                   g4( )(x, t, u) = (e x, e3 t, e-2 u) scaling,               (13)
+
+             u = gd( d) · · · g1( 1)u .                         (7)  which can be readily found in Olver (1986, p. 126)--note the
+                                                                     sign flip in g3 and g4. Working with these transformations
+In words, we take u, apply transformation g1( 1), followed           poses some technical design issues, discussed next.
+by g2( 2), and so forth, where each 1, 2, ... is sampled
+from its own density. How D is generated is beyond the               Resampling. A transformation, say Equation 11, maps
+scope of this paper, but it may consist of known analytical          the grid points (x, t)  (gx, gt) = (x + , t). This poses an
+solutions, simulation data, or real-world data. The latter           issue for Eulerian solvers, where the grid X is always fixed.
+two methods will contain noise meaning that u does not lie           Augmented solutions (gx, gt, gu) thus have to be resampled
+within the solution set, implying that gu does not either. We        on X. In this work, we use trigonometric interpolation in
+assume this noise is sufficiently small, so while gu may not         the x-direction. A deeper discussion is found in Appendix B.
+lie exactly in the solution set, it is situated very close to it.
+
+Worked Example: The Korteweg-de Vries Equation.                      3.1. How complete is our symmetry list?
+By way of example, let's consider the Korteweg-de Vries
+(KdV) equation (Boussinesq, 1877, p. 360), a nonlinear               Theory tells us our list of symmetries is exhaustive if the
+scalar-valued PDE in space and time, made famous in the              PDE is `nondegenerate' (Olver, 1986, Theorem 2.71), a
+1960s (Zabusky & Kruskal, 1965) for exhibiting solitons,             technical condition that  is of maximal rank and locally
+solitary weakly-interacting "wave-pulses". Example solu-             solvable. Intuitively, local solvability is the condition the
+tions can be found in Figure 1. The KdV equation is                  PDE is smooth enough that points (x, u(n)) satisfying 
+                                                                     can be interpolated locally by sufficiently smooth u. Lo-
+             ((x, t), u(3)) = ut + uux + uxxx = 0 .             (8)  cal solvability is implied if  is analytic in its arguments,
+                                                                     a corollary of the Cauchy-Kovalevskaya theorem (Olver,
+Notable is the nonlinear convective term uux and the dis-            1986, Corollary 2.74). In practice though, we need not
+persive term uxxx, which in traditional solvers require care-        worry ourselves with demonstrating nondegeneracy.
+ful attention. We solve this equation on a domain [0, L]
+                              Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+   2   Initial solution u     Discretized solution (x, u) Transformed graph (gx, gu) Interpolation u (x) = u(x )         Resampling (x, u )
+
+   1
+
+u  0
+
+   1   u(x)                   (x,u)                 (x + , u)                 u (x)                                      (x, u )
+
+   20   /2   x  3 /2       0   /2 x   3 /2      0    /2 x       3 /2  0        /2 x         3 /2                  0       /2 x       3 /2
+
+Figure 2. Schematic of the data augmentation process: From left to right we see how a solution u is drawn, discretized into its graph
+(x, u), transformed as per the symmetry (translation), interpolated with a smooth interpolant, and resampled on to the original mesh X.
+
+3.2. A note on boundary conditions                              for viscocity   0. It exhibits shock formation, which
+
+The symmetries listed are defined on open neighborhoods         becomes discontinuities when  = 0. In our experiments,
+about the origin, where is sufficiently small. In general,
+symmetries break at boundaries where open neighborhoods         we only work with viscid systems ( > 0) where deriva-
+cannot be defined, requiring special care. We work with
+wrapped domains to avoid this issue. One could foresee,         tives exist everywhere. Each PDE has symmetries listed
+however, that we could sidestep the problem of boundaries
+by performing data augmentation on local patches, but we        in Table 1. The Burgers' equation has an extra `infinite
+leave that for future work. Despite working in this restricted
+scenario, we are still left with sufficiently many interesting  dimensional subalgebra' g, which is not a Lie group sym-
+symmetries, which we demonstrate can improve generaliza-
+tion performance in our experiments.                            metry, but for any two solutions u, , we can return a new
+
+                                                                one as 2 log  (1 -  )e   1  u(x,t)  +             e   1  (x,t)  for   [0, 1].
+                                                                                        2                            2
+
+                                                                Training data generation is described in Appendix A.
+
+4. Experiments                                                  Meshes and parameters. Unless otherwise stated, we set
+                                                                 = [0, L] discretized uniformly over Nx = 256 points
+We ran experiments across different equations (Section 4.2),    with periodic boundaries and set t  [0, T ] at Ntout = 100
+models (Section 4.3), training setups (Section 4.4), and        uniformly sampled timesteps. Equation specific settings are
+choices of symmetries (Section 4.5). We tested the effec-       in Table 2. Initial conditions are sampled per Bar-Sinai et al.
+tiveness of adding symmetries on raw generalization per-        (2019) from a distribution over truncated Fourier series with
+formance and survival time and demonstrate that adding          random coefficients {Ak, k, k}k as
+LPSDA is equivalent to using larger training sets by up to a
+factor of ×16 in size on the datasets used. We also probe the                                      K
+effect of LPSDA on long rollout stability (Section 4.6), and
+we measure the equivariance error of the learned models,                    u0(x) = Ak sin(2 kx/L + k) . (17)
+comparing with classical solvers (Section 4.7).
+                                                                                                 k=1
+
+4.1. Experimental setup                                         Neural PDE Solvers. We experimented with two models:
+                                                                a litmus test that data augmentation can benefit more than
+Equations. We chose to use 1D evolution equations:              one model class. These were: a baseline 1D ResNet-like
+                                                                model (He et al., 2016), and and adapted version of the
+             ut - F (x, u, ux, uxx, ...) = 0 ,     (14)         Fourier Neural Operator (FNO) (Li et al., 2020), which is
+                                                                SOTA for regular meshes with periodic boundaries. The ex-
+                                                                act architectures are in Appendix C. Both models are trained
+                                                                in two different ways following Brandstetter et al. (2022): (i)
+                                                                a neural operator method and (ii) an autoregressive method.
+
+as a test bed for LPSDA; although, our method can be            Training methodologies. A neural operator (NO) is a
+applied to other classes of PDE. Unless otherwise stated        mapping M : [0, T ] × F  F, where F is a (possibly
+(e.g., Section 4.2), we run most ablation experiments on the    infinite-dimensional) function space, trained to satisfy
+KdV equation. Notwithstanding, we also consider 1) the
+Kuramoto-Shivashinsky (KS) equation and 2) the Burgers'                             M(t, u0) = u(t) .                                        (18)
+equation. The KS equation is known for its chaotic behavior:
+
+             ut + uxx + uxxxx + uux = 0 .          (15)         It maps initial conditions u0 directly to solutions u at time
+                                                                t. The flavor we use predicts all Ntout future times simulta-
+Above being chaotic, it is nonlinear and the biharmonic term    neously, a technique called temporal bundling (Brandstetter
+uxxxx is hard to model. The Burgers' equation is
+                                                                et al., 2022). The initial conditions are also extended in time
+                ut + uux - uxx = 0 ,               (16)         as a trajectory of the last Ntin = 20 steps. This assumes our
+                                                                prediction task has a fixed rollout length. An autoregressive
+                             Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Table 1. Lie point symmetries as function of  R for studied PDEs.  : R  [0, 1] is any squashing function. Sources: KdV Olver
+(1986, Ex. 2.44), KS (derivative form): Cvitanovic´ et al. (2010), Burgers': Hoarau & David (2007) and Olver (1986, Ex. 2.42).
+
+EQUATION     g1              g2                       g3                  g4                                   g
+
+  KdV     (x, t + , u),      (x + , t, u),   (x + t, t, u + ),        (e x, e3 t, e-2 u)      u, t, 2 log  (1 - (  ))e   1  u  + (  )e   1  
+   KS     (x, t + , u),      (x + , t, u),   (x + t, t, u + )           (e x, e2 t, u),                                 2               2
+
+Burgers'  (x, t + , u),      (x + , t, u),      (x, t, u + ),
+
+(AR) method on the other hand solves the PDE iteratively,             ×4 to ×16. LPSDA works most strikingly on the Burgers'
+allowing it to run for variable length (up to multiples of the        equation, where it appears the infinite-dimensional subalge-
+temporal bundling size). For time-dependent PDEs with                 bra g is doing most of the work. This symmetry takes two
+time-independent coefficients, the solution is computed as            old solutions and combines them into a new one, in effect
+                                                                      squaring the size of the dataset probably accounting for the
+          u(t + t) = A(t, u(t)) ,                         (19)        near doubling in slope we observe (Burgers' + G line).
+
+where A : R>0 × Rn  Rn is the temporal update. Again,                 We plot on log-log axes and fit straight lines to the data,
+the flavor we use is a temporally bundled variant, which pre-         based on the documented phenomenon that neural network
+dicts NtAR future timesteps simultaneously in each recurrent          test performance follows a power law (Kaplan et al., 2020).
+iteration. A schematic of these two training methodologies            This experiment gives a strong indication that LPSDA could
+is shown in Figure 3. We trained in these two ways so that            be effective for a great many other PDEs. Typically roll-
+LPSDA is tested in different task setups.                             outs from the KS equation along with per-cell normalized
+                                                                      squared errors is shown in Figure 5. Errors increase with
+Evaluation metrics. We report in terms of rollout aver-               time. LPSDA appears to delay the rate at which errors grow.
+aged normalized MSE (NMSE), defined as
+                                                                      4.3. Different models
+                 1 Nt        u(tj) - u^(tj)  2  ,         (20)
+          L=                      u^(tj) 2   2                        Figure 4b shows the effect of LPSDA for the KdV equa-
+                                                                      tion. We compare the FNO and ResNet trained as neural
+                Nt j=1                                                operator methods. In development the ResNet struggled to
+                                                                      model the solution manifold, so for a fairer comparison we
+where u is the target and u^ is the model output. The normal-         made the problem easier by predicting T = 20 s into the
+ized MSE is itself dimensionless and invariant to rescaling           future instead of T = 40 s. Bold lines show test NMSE
+of the spatial axes. However, the average over timesteps is           across training set size without LPDSA () and dashed
+not invariant to time rescaling, with dimensions of error per         lines show it with LPSDA (g1g2g3g4). We see that LPSDA
+timestep. We chose to report this error instead of error per          is equivalent to increasing the training set size by a factor
+second, because a) we can compare across different PDEs               between ×4 and ×8. Again, we fitted straight lines because
+and b) we only need look at relative improvement of LPSDA             we are in the neural operator model setting. It is interesting
+on top of an arbitrary baseline without augmentation. All             that LPSDA improves each model by a differing amount,
+errors are reported with ±2 standard deviation error bars             especially FNO, where the sample complexity improvement
+(95% confidence intervals), computed with bootstrapping.              appears to grow with increasing dataset size.
+
+4.2. Different PDEs                                                       AR              AR
+
+We tested LPSDA on the KdV, KS, and Burgers' equations.
+Each equation has symmetries listed in Table 1. Figure 4a
+shows sample complexity improvements on FNO, trained
+as a neural operator to predict T s into the future, as per Ta-
+ble 2. This shows LPSDA improves sample complexity by
+
+                                                                      AR      AR              AR           NO
+
+Table 2. Experimental choices for studied PDEs as per Bar-Sinai
+
+et al. (2019). Ranges are sampled from uniformly.                     Autoregressive (AR)                  Neural Operator (NO)
+
+          L              T   K   Ak                k      k
+
+KDV [0.9, 1.1] · 128 [0.9, 1.1] · 40 10 [-0.5, 0.5] {1, 2, 3} [0, 2]  Figure 3. Autoregressive models predict the solution recurrently;
+                                                                      whereas neural operator methods predict it directly.
+KS [0.9, 1.1] · 64 [0.9, 1.1] · 20 10 [-0.5, 0.5] {1, 2, 3} [0, 2]
+
+BURGERS' [0.9, 1.1] · 2  10  20 [-0.5, 0.5] {3, 4, 5, 6} [0, 2]
+                                                          Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+           100                                            100                                            100                                          100
+
+           10 1                                                                                          10 1
+
+Test NMSE  10 2                                           10 1
+
+           10 3  KdV +                                                                                   10 2                                              10 1
+                 KdV + G                                                                                                                              29 10 2
+           10 4  KS +                                     10 2  FNO +                                    10 3     NO +                                             gggg1111ggg222gg33g4
+                 KS + G                                         ResNet +                                 10 4 24  AR +
+           10 5  Burgers' +                                     FNO + G                                           NO + G                                         24 Num25ber o2f6traini2n7g sam2p8les 29
+                   Burgers' + G                                   ResNet + G                                      AR + G
+           10 6                                           10 3
+                 24 Num25ber o2f6traini2n7g sam28ples 29        24 Num25ber o2f6traini2n7g sam2p8les 29            N2u5mber o2f6trainin2g7 samp2le8s
+
+                 (a) Different PDEs                             (b) Different Models                           (c) Training methods                   (d) Combining symmetries
+
+Figure 4. We compare test set normalized MSE with and without LPSDA across training set sizes. All errorbars are ± 2 std, calculated
+via bootstrap. A comprehensive summary of results can be found in Table 3 in the appendix. (a): LPSDA improves sample complexity on
+the KdV and KS equations by ×4 to ×8, (b) LPSDA improves sample complexity on Fourier Neural Operator and Residual Networks
+on the KdV equation, (c) LPSDA is also effective across neural operator (NO) and autoregressive (AR) training methodologies on the
+KdV equation, (d) on the KdV equation time translation (g1) and Galilean boosts (g3) appear to help a lot, but space translation (g2) and
+scaling (g4) do not.
+
+4.4. Different Training Methods                                                                          ios. We see that with this setup the time translation (g1) and
+                                                                                                         Galilean boost (g3) improve sample complexity. Interest-
+Figure 4c shows the LPSDA ablation for the FNO model                                                     ingly, space translation (g2) neither improves nor degrades
+trained either as a neural operator (blue), predicting Ntout =                                           performance. This is because the models we use are already
+100 timesteps in to the future in one shot, or as an autore-                                             translation equivariant. Furthermore, it appears scaling (g4)
+gressive method (orange), predicting NtAR = 20 timesteps                                                 does not help either. Our best explanation is that with our
+at a time. Again LPSDA improves both methods. This                                                       parameterization scale is `too simple' a data transformation,
+experiment is important because rollout stability and accu-                                              simply multiplying solution values by a random constant.
+racy of autoregressive methods--a still poorly understood                                                It is interesting to observe that not all symmetries improve
+phenomenon--appears to be intimately connected with gen-                                                 performance equally; this corroborates what is commonly
+eralization capacity (Um et al., 2021; Brandstetter et al.,                                              observed with classical data augmentation.
+2022). LPSDA, in improving generalization performance,
+naturally improves AR methods as well as NO methods. It
+is interesting to note that the generalization performance of
+the AR method does not follow a power law.
+
+4.5. Incremental effect of symmetries
+
+The effect of incrementally adding symmetries on the KdV-
+FNO neural operator model is shown in Figure 4d. In Ap-
+pendix D we show that this effect is repeated in other scenar-
+
+Figure 5. Visualisation of sample rollouts of the KS equation along                                      Figure 6. Examples of "long rollouts" of Ntout = 400 timesteps on
+with the corresponding per-cell normalized squared error.                                                the KdV and KS equations. Visually it is hard to spot errors.
+                         Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+4.6. Very long rollouts                                        contrast, data augmentation is several orders of magnitude
+                                                               faster (our implementation: 0.76 ms). This indicates train-
+We ran long rollouts on the KdV (KS) equation of T =           ing data generation could be sped up by solving `simple'
+200 s (T = 50 s) with Ntout = 400 timesteps to check           problems on a classical solver, and then transforming solu-
+how LPSDA can improve performance in a practical use           tions into challenging regions of the training data space.
+case. We used an AR-trained FNO model. We compare a
+na¨ive model predicting NtAR = 1 timestep at a time (), a      5. Related Work
+temporally bundled model predicting NtAR = 120 timesteps
+at a time (TB), the NtAR = 120 model with the pushforward      The closest work to ours is Wang et al. (2021) who design
+trick (Brandstetter et al., 2022) (TB+PF) needed for long      neural PDE solvers equivariant to Lie point symmetries
+run stability, and (TB+PF+LPDSA) where we add LPSDA.           of the Navier-Stokes equation and Heat equation. While
+Figure 6 shows the resulting rollouts and Figure 7a shows      this method is sensible and effective, they are only able to
+the cumulative NMSE with respect to time. Visually it is       incorporate a single symmetry (other than translation and
+difficult to spot errors. The error graphs, on log-lin plots,  time) at a time. With our method, we can learn equivari-
+reveal interesting subexponential cumulative error growth      ance to multiple symmetries at once. It is also simpler to
+with time. The uparrows for the  rollouts indicate error       implement a data augmentation pipeline than a equivariant
+explosion. Here, again, we see that LPSDA improves rollout     network. Furthermore, the computational budget for equiv-
+performance. A summary of all results is in Appendix D.        ariant networks is exponential in the number of symmetries,
+                                                               a limitation if you have 6 or 7 symmetries, a scenario unseen
+4.7. How equivariant are classical/neural solvers              in the equivariance literature (Bronstein et al., 2021).
+
+Figure 7b shows the equivariance properties of classi-         In the context of classical PDE solvers Hoarau & David
+                                                               (2007); Hoarau et al. (2007) analyzed the stability properties
+cal solvers for KdV Galilean boost parameter 3 after           of various finite difference schemes under the action of the
+                                                               individual symmetries of the Burgers' equation. Studying
+T = 100 s. For model output u at time T , this is              equivariance properties of classical solvers dates back to
+                                                               1994 with Dorodnitsyn (1994). Valiquette & Winternitz
+u(gu0 ) - gu(u0 )  2  /  u(gu0)  22. Ground truth was solved   (2005) discretize scalar-valued PDEs with two independent
+                   2                                           variables such that their Lie point symmetries are preserved.
+
+at tolerance 1e-12. Blue dashed lines are isotherms of con-    Symplectic integrators (Hairer et al., 1993, § II.16), such as
+                                                               leapfroging (Neal, 1993, p. 72), have a long history in ma-
+stant log solver tolerance (base 10). This error is mainly     chine learning for their utility in Hamiltonian Monte Carlo
+                                                               (Duane et al., 1987) and (Neal, 1993, § 5). These are limited
+a function of solver tolerance. The red solid lines are        to integrating symplectic systems, such as Hamiltonians,
+                                                               which abound in physical systems. More recent neural mod-
+isotherms of constant solution time. Thus more time is         els learn Hamiltonians directly (Greydanus et al., 2019) or
+                                                               indirectly (Sanchez-Gonzalez et al., 2019; Cranmer et al.,
+needed to maintain a constant error for larger | 3|. Neural    2020; Finzi et al., 2020b). Bar-Sinai et al. (2019); Kochkov
+                                                               et al. (2021) explicitly conserve volume (another integral of
+solvers, on the other hand, have constant time overhead (our   motion) for conservation form evolution equations via finite
+                                                               volume projection on their solver outputs.
+AR-FNO model measured 38 ms), but without error control.
+                                                               In the field of neural PDE solvers, there are neural operator
+Figure 7c shows equivariance error of neural models trained    methods of finite dimensionality (Raissi, 2018; Sirignano
+                                                               & Spiliopoulos, 2018; Bhatnagar et al., 2019; Guo et al.,
+with and without LPSDA. LPSDA clearly encourages equiv-        2016; Zhu & Zabaras, 2018; Khoo et al., 2020) and infinite
+                                                               dimensionality (Li et al., 2020; Bhattacharya et al., 2020;
+ariance around the training range 3  [-0.4, 0.4]. Classi-      Patel et al., 2021). Leading autoregressive methods are Bar-
+                                                               Sinai et al. (2019); Um et al. (2021); Sanchez-Gonzalez
+cal solvers have superior equivariance error are two orders    et al. (2020); Brandstetter et al. (2022). Then in so-called
+                                                               neural augmentation a neural component is added to finite
+slower. We also considered autocorrelative error defined       elements (Hsieh et al., 2019), multigrid solvers (Greenfeld
+as u(gu0) - u(u0) 22/ u(u0) 22. Models trained without         et al., 2019), and eikonal solvers (Lichtenstein et al., 2019).
+LPSDA map u(gu0) close to u(u0) for small 3. We sus-
+
+pect the  model outputs solutions close to regions of the
+
+solution manifold it has observed, where 3 0. This shows
+
+how data augmentation is important for generalization.
+
+Speed and Difficulty. We highlight the 3 dependence of
+the time isotherms in Figure 7b. Adaptive timestep solvers
+limit the error incurred across a given unit of time by ex-
+pending more operations on more `difficult' trajectories.
+Consider a wave moving across a discrete spatial grid. To
+compute its position at a future timestep, we are limited by
+the maximum speed information can propagate across the
+grid. This must exceed the speed of the wavefront, other-
+wise we have to reduce the time increment. Faster waves
+require finer timesteps. For the KdV equation, we can con-
+trol wavespeed by adding 3 to the initial conditions. Larger
+| 3| leads to faster waves, and thus longer solver times. By
+                                   Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+          KdV Equation                    KS Equation                                     4                                                                                                  5
+                                                                                                                                                                                             4
+10 1                            100                            10 9
+
+                                10 1                                                      5                                                                                                  3
+Cumulative Test NMSE
+                                                                                             Equivariance error10 11                                                                         2
+10 2                                                                                                                                                                     Equivariance error  1
+                                10 2                                                      0.4 6                                                                                              0
+                                                               10 13
+
+                                10 3                           10 15                           7                                                                                             101
+                                                                                          0.6
+10 3               TB+PF+LPSDA                    TB+PF+LPSDA                                              1.0                                                                             10 1
+10 4               TB+PF        10 4              TB+PF                                        80.8             1.2
+                   TB                             TB           10 17           1.0                                  1.4 1.6                                                                10 3   LPSDA
+                                          40 t [s6]0 80 100                1.2
+                               10 5                                   1.4
+      50  10t0[s] 150     200         20                       10 191.00 0.75       0.50 Ga0li.l2e5an B0o.0o90st 30[.m25/s] 0.50 0.75 1.00                                                 10 51.00 0.75 0.50Gal0il.e2a5n B0o.0o0st 30.[2m5/s]0.50 0.75 1.00
+
+                                                                                          10
+
+          (a) Long rollout errors                              (b) Classical equivariance analysis (c) Neural equivariance analysis
+
+Figure 7. (a) Cumulative error growth over a long autoregressive rollout (Ntout = 400 timesteps) on the KdV and KS equations. Uparrows
+indicate error explosion upon rollout instability. The four incrementally combined settings are: , one timestep prediction at a time;
+
+TB, temporal bundling (Brandstetter et al., 2022); PF, the pushforward trick; LPSDA, our method. (b) Equivariance error of a single
+
+KdV rollout after T = 100s against Galilean boost parameter 3. We use tol = 1e-12 as groundtruth. BLUE DASHED: Isotherms
+
+of log solver tolerance (base 10). Equivariance error decreases with log tolerance, relatively unaffected by transformation magnitude.
+
+RED SOLID: Isotherms of solution time. Solution time is a function of tolerance and 3. Neural solvers instead have constant time
+
+overhead. (c) Equivariance error of neural models trained with (LPSDA) and without LPSDA (). Bold lines: Equivariance error
+
+f (gu0) - gf (u0)  22 /   f (gu0)  2  (where  f  is  model  output).  LPSDA         is  clearly      equivariant  around                                                                     the  training  range  3  [-0.4, 0.4]
+                                   2
+
+and  is not. Dashed lines: Autocorrelative error       f (gu0) - f (u0)             2  /  f (u0)     2  .   maps f (gu0) close to f (u0) for small                                                                 3 but
+                                                                                    2                2
+
+LPSDA does not. We suspect  tries to map unseen 3 back into a region ( 3 = 0) often encountered in the training set.
+
+6. Limitations and Restrictions                                                     footing. We demonstrated our claims on three common
+                                                                                    fluid dynamical PDEs: the Korteweg-de Vries, Kuramoto-
+The space of PDEs and their symmetries is vast. We made                             Shivashinsky, and Burgers' equations. Here we showed
+some experimental design choices to limit the scope of our                          clear decrease in sample complexity, measured by gener-
+investigations. Namely, we investigated Eulerian solvers (in-                       alization error across PDEs, models, and training regime.
+stead of Lagrangian) on 1D evolution equations on periodic                          We investigated the effect of individual symmetries and the
+domains. These choices are a restriction of our experimental                        equivariance properties of solvers, classical and learned.
+setup and not of the core idea. From a theory standpoint we
+expect LSPDA to generalize easily to other settings.                                There are many potential directions from here; symmetries
+                                                                                    beyond the Lie point symmetries are vast. Examples in-
+Methodologically, we could only implement symmetries                                clude generalized symmetries, such as contact symmetries
+that act globally. Purely local symmetries were not tackled,                        and Lie-Ba¨cklund symmetries (c.f., Section 2). These form
+which would require data augmentation on local patches,                             a broader class of transformations, depending on solution
+something we are yet to develop. Furthermore, while theory                          derivatives as well as value. For instance, the KdV equation
+provides an exhaustive list of Lie point symmetries for a                           has an infinite number of these symmetries. Then there are
+given PDE, it gives no indication as to the efficacy of each                        discrete symmetries, such as reflections, which can easily
+symmetry. We could reason qualitatively about efficacy for,                         be integrated into our framework. If a problem can be cast
+say, space translation or the infinite-dimensional subalgebra                       into variational form, then Noether's theorem states that
+g, but we could not provide quantitative predictions. Lastly,                       every symmetry of the variational form translates into a con-
+given a PDE, user input is required to implement the data                           served quantity of the system. This has been exploited by
+augmentation functions from a mathematical description                              the ML4Physics community with Lagrangian Neural Net-
+of the symmetries {g1, ..., gd}. Mechanizing this process                           works (Greydanus et al., 2019), and with classical solvers
+would make LPSDA far more attractive. This said, we feel                            this is the basis of the finite volume method and symplectic
+LPSDA is a significant step forward in terms of expanding                           integrators.
+the range of techniques available to train neural PDE solvers.
+                                                                                    Orthogonally, we could follow the work pioneered by Wang
+7. Conclusion and Future work                                                       et al. (2021) and bake equivariance into the solver architec-
+                                                                                    ture itself. Beyond "simple" symmetries, such as translation
+We showed it is possible to apply the commonplace practice                          or scale (which is actually very difficult), there is little work
+of data augmentation to the training of neural PDE solvers.                         in this area, apart from Finzi et al. (2020a). In Section 4.7,
+Here, the space of possible transformations, restricted to Lie                      we saw that classical solvers can exhibit controllable equiv-
+point symmetries, can be exhaustively derived from the PDE                          ariance error. We speculate that merging neural PDE solvers
+definition. This places a typically intuition-based aspect of                       with variable tolerance solvers may be a fruitful area for
+the deep learning user experience on firm mathematical                              building equivariance to complicated groups.
+Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+8. Acknowledgements                                            Courant, R., Friedrichs, K. O., and Lewy, H. On the partial
+                                                                  difference equations of mathematical physics. IBM J. Res.
+The authors thank Markus Holzleitner for discussions on          Dev., 11(2):215­234, 1967. ISSN 0018-8646.
+prolongation theory, and especially for pointing us towards
+the Cauchy-Kovalevskaya theorem.                               Cranmer, M. D., Greydanus, S., Hoyer, S., Battaglia, P. W.,
+                                                                  Spergel, D. N., and Ho, S. Lagrangian neural networks.
+References                                                       CoRR, abs/2003.04630, 2020. URL https://arxiv.
+                                                                  org/abs/2003.04630.
+Bar-Sinai, Y., Hoyer, S., Hickey, J., and Brenner, M. P.
+   Learning data-driven discretizations for partial differen-  Cvitanovic´, P., Davidchack, R. L., and Siminos, E. On the
+   tial equations. Proceedings of the National Academy of         state space geometry of the kuramoto-sivashinsky flow
+   Sciences, 116(31):15344­15349, Jul 2019. ISSN 1091-            in a periodic domain. SIAM J. Appl. Dyn. Syst., 9:1­33,
+   6490. doi: 10.1073/pnas.1814058116.                            2010.
+
+Baumann, G. Mathlie a program of doing symmetry                Dorodnitsyn, V. A. Finite difference models entirely inher-
+   analysis. Mathematics and Computers in Simula-                 iting continuous symmetry of original differential equa-
+   tion, 48(2):205­223, 1998. ISSN 0378-4754. doi:                tions. International Journal of Modern Physics C, 05:
+   https://doi.org/10.1016/S0378-4754(98)00143-8.                723­734, 1994.
+   URL https://www.sciencedirect.com/
+   science/article/pii/S0378475498001438.                      Duane, S., Kennedy, A. D., Pendleton, B. J., and
+                                                                  Roweth, D. Hybrid Monte Carlo. Physics Let-
+Bhatnagar, S., Afshar, Y., Pan, S., Duraisamy, K., and            ters B, 195(2):216­222, 1987. ISSN 0370-2693.
+   Kaushik, S. Prediction of aerodynamic flow fields using        doi: https://doi.org/10.1016/0370-2693(87)91197-X.
+   convolutional neural networks. Computational Mechan-           URL https://www.sciencedirect.com/
+   ics, 64(2):525­545, Jun 2019.                                  science/article/pii/037026938791197X.
+
+Bhattacharya, K., Hosseini, B., Kovachki, N. B., and Stuart,   Finzi, M., Stanton, S., Izmailov, P., and Wilson, A. G. Gen-
+   A. M. Model reduction and neural networks for paramet-         eralizing convolutional neural networks for equivariance
+   ric pdes. arXiv preprint arXiv:2005.03180, 2020.               to lie groups on arbitrary continuous data. In Interna-
+                                                                  tional Conference on Machine Learning, pp. 3165­3176.
+Boussinesq, M. Essai sur la the´orie des eaux courantes,          PMLR, 2020a.
+   volume XXIII. Memoires presentes par divers savants a
+   l'Academie des Sciences de l'Institut National de France,   Finzi, M., Wang, K. A., and Wilson, A. G. Simplifying
+  1877.                                                           hamiltonian and lagrangian neural networks via explicit
+                                                                  constraints. In Larochelle, H., Ranzato, M., Hadsell, R.,
+Brandstetter, J., Worrall, D. E., and Welling, M. Mes-            Balcan, M., and Lin, H. (eds.), Advances in Neural In-
+   sage passing neural pde solvers. arXiv preprint                formation Processing Systems 33: Annual Conference on
+   arXiv:2202.03376, 2022.                                       Neural Information Processing Systems 2020, NeurIPS
+                                                                 2020, December 6-12, 2020, virtual, 2020b.
+Bronstein, M. M., Bruna, J., Cohen, T., and Velickovic,
+   P. Geometric deep learning: Grids, groups, graphs,          Greenfeld, D., Galun, M., Basri, R., Yavneh, I., and Kim-
+   geodesics, and gauges. CoRR, abs/2104.13478, 2021.             mel, R. Learning to optimize multigrid PDE solvers.
+   URL https://arxiv.org/abs/2104.13478.                          In Proceedings of the 36th International Conference on
+                                                                 Machine Learning, ICML 2019, 9-15 June 2019, Long
+Burgers, J. A mathematical model illustrating the                Beach, California, USA, pp. 2415­2423, 2019.
+   theory of turbulence. volume 1 of Advances in
+  Applied Mechanics, pp. 171­199. Elsevier, 1948.              Greydanus, S., Dzamba, M., and Yosinski, J. Hamiltonian
+   doi: https://doi.org/10.1016/S0065-2156(08)70100-5.            neural networks. In Wallach, H., Larochelle, H., Beygelz-
+   URL https://www.sciencedirect.com/                             imer, A., d'Alche´-Buc, F., Fox, E., and Garnett, R. (eds.),
+   science/article/pii/S0065215608701005.                        Advances in Neural Information Processing Systems, vol-
+                                                                  ume 32. Curran Associates, Inc., 2019.
+Clevert, D.-A., Unterthiner, T., and Hochreiter, S. Fast
+   and accurate deep network learning by exponential linear    Guo, X., Li, W., and Iorio, F. Convolutional neural networks
+   units (elus). In International Conference on Learning          for steady flow approximation. In Proceedings of the 22nd
+   Representations (ICLR), 2016.                                 ACM SIGKDD International Conference on Knowledge
+                                                                 Discovery and Data Mining, KDD '16, pp. 481­490.
+Cole, J. On a quasi-linear parabolic equation occurring in       Association for Computing Machinery, 2016.
+   aerodynamics. Quarterly of Applied Mathematics, 9(3):
+   225­236, 1951.
+Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Hairer, E., Nørsett, S., and Wanner, G. Solving Ordinary          and on a new type of long stationary waves. The Lon-
+  Differential Equations I (2nd Revised. Ed.): Nonstiff Prob-     don, Edinburgh, and Dublin Philosophical Magazine and
+   lems. Springer-Verlag, Berlin, Heidelberg, 1993. ISBN         Journal of Science, 39(240):422­443, 1895.
+   0387566708.
+                                                               Kuramoto, Y. Diffusion-Induced Chaos in Reaction Systems.
+He, K., Zhang, X., Ren, S., and Sun, J. Deep residual            Progress of Theoretical Physics Supplement, 64:346­367,
+   learning for image recognition. In 2016 IEEE Conference        02 1978.
+   on Computer Vision and Pattern Recognition (CVPR), pp.
+  770­778, 2016. doi: 10.1109/CVPR.2016.90.                    Lelie`vre, T. and Stoltz, G. Partial differential equations
+                                                                  and stochastic methods in molecular dynamics. Acta
+Hendrycks, D. and Gimpel, K. Gaussian error linear units         Numerica, 25:681­880, 2016.
+  (gelus). arXiv preprint arXiv:1606.08415, 2016.
+                                                               Li, Z., Kovachki, N., Azizzadenesheli, K., Liu, B., Bhat-
+Hoarau, E. and David, C. Lie group computation of finite          tacharya, K., Stuart, A., and Anandkumar, A. Fourier
+   difference schemes. Dyn. Contin. Discrete Impuls. Syst.        neural operator for parametric partial differential equa-
+  Ser. A Math. Anal., 14(Advances in Dynamical Systems,           tions. arXiv preprint arXiv:2010.08895, 2020.
+   suppl. S2):180­184, 2007. ISSN 1201-3390.
+                                                               Lichtenstein, M., Pai, G., and Kimmel, R. Deep eikonal
+Hoarau, E., David, C., Sagaut, P., and Le^, T.-H. Lie             solvers. arXiv preprint arXiv:1903.07973, 2019.
+   group study of finite difference schemes. Discrete Contin.
+  Dyn. Syst., (Dynamical systems and differential equations.   Loshchilov, I. and Hutter, F. Decoupled weight decay regu-
+   Proceedings of the 6th AIMS International Conference,          larization. arXiv preprint arXiv:1711.05101, 2017.
+   suppl.):495­505, 2007. ISSN 1078-0947.
+                                                               Neal, R. M. Probabilistic inference using markov chain
+Hopf, E. The partial differential equation ut + uux = µuxx.       monte carlo methods. Technical report, 1993.
+  Communications on Pure and Applied Mathematics, 3(3):
+   201­230, 1950.                                              Oliveri, F. Lie Symmetries of Differential Equations:
+                                                                  Classical Results and Recent Contributions. Symme-
+Hsieh, J., Zhao, S., Eismann, S., Mirabella, L., and Ermon,       try, 2(2):658­706, 2010. ISSN 2073-8994. doi: 10.
+   S. Learning neural PDE solvers with convergence guar-          3390/sym2020658. URL https://www.mdpi.com/
+   antees. arXiv preprint arXiv:1906.01200, 2019.                 2073-8994/2/2/658.
+
+Ibragimov, N. H. CRC Handbook of Lie Group Analysis            Olver, P. Symmetry groups of differential equations. In
+   of Differential Equations, Volume I: Symmetries, Exact        Applications of Lie Groups to Differential Equations, pp.
+  Solutions, and Conservation Laws. CRC Press, paperback         77­185. Springer, 1986.
+   edition, 12 1993. ISBN 978-0851996370.
+                                                               Patel, R. G., Trask, N. A., Wood, M. A., and Cyr, E. C. A
+Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B.,           physics-informed operator regression framework for ex-
+   Chess, B., Child, R., Gray, S., Radford, A., Wu, J., and       tracting data-driven continuum models. Computer Meth-
+  Amodei, D. Scaling laws for neural language models.             ods in Applied Mechanics and Engineering, 373:113500,
+  CoRR, abs/2001.08361, 2020. URL https://arxiv.                 Jan 2021. ISSN 0045-7825.
+   org/abs/2001.08361.
+                                                               Quarteroni, A. and Quarteroni, S. Numerical models for
+Khoo, Y., Lu, J., and Ying, L. Solving parametric pde prob-       differential problems, volume 2. Springer, 2009.
+   lems with artificial neural networks. European Journal
+   of Applied Mathematics, 32(3):421­435, Jul 2020. ISSN       Raissi, M. Deep hidden physics models: Deep learning of
+  1469-4425.                                                      nonlinear partial differential equations. J. Mach. Learn.
+                                                                 Res., 19:25:1­25:24, 2018.
+Kochkov, D., Smith, J. A., Alieva, A., Wang, Q., Brenner,
+   M. P., and Hoyer, S. Machine learning­accelerated com-      Sanchez-Gonzalez, A., Bapst, V., Cranmer, K., and
+   putational fluid dynamics. Proceedings of the National         Battaglia, P. W. Hamiltonian graph networks with
+  Academy of Sciences, 118(21), 2021. ISSN 0027-8424.             ODE integrators. CoRR, abs/1909.12790, 2019. URL
+   doi: 10.1073/pnas.2101784118. URL https://www.                 http://arxiv.org/abs/1909.12790.
+   pnas.org/content/118/21/e2101784118.
+                                                               Sanchez-Gonzalez, A., Godwin, J., Pfaff, T., Ying, R.,
+Korteweg, D. D. J. and de Vries, D. G. On the change              Leskovec, J., and Battaglia, P. W. Learning to sim-
+   of form of long waves advancing in a rectangular canal,        ulate complex physics with graph networks. CoRR,
+                                                                  abs/2002.09405, 2020. URL https://arxiv.org/
+                                                                  abs/2002.09405.
+Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Schilders, W. Introduction to Model Order Reduc-                A. Training data
+   tion. Springer Berlin Heidelberg, Berlin, Heidelberg,
+   2008. ISBN 978-3-540-78841-6. doi: 10.1007/                  Korteweg-de Vries and Kuramoto-Shivashinsky equa-
+   978-3-540-78841-6 1. URL https://doi.org/10.                 tion. Numerical groundtruth data for the Korteweg-de
+  1007/978-3-540-78841-6_1.                                     Vries (KdV (Boussinesq, 1877, p. 360)(Korteweg &
+                                                                de Vries, 1895) and the Kuramoto-Shivashinsky (KS) (Ku-
+Shivashinsky, G. Nonlinear analysis of hydrodynamic insta-      ramoto, 1978; Shivashinsky, 1977) equation is obtained on
+   bility in laminar flames--i. derivation of basic equations.  a periodic domain using the method of lines, with the spa-
+  Acta Astronautica, 4(11):1177­1206, 1977.                     tial derivatives computed using the pseudo-spectral method.
+                                                                The method of lines discretizes the domain X on a (regular)
+Simard, P., Steinkraus, D., and Platt, J. Best practices for    mesh at a finite number of points X = {xi  X }, where
+   convolutional neural networks applied to visual document     |X| < . We can then represent the signal {u(t, x)|x 
+   analysis. In Seventh International Conference on Docu-       X, t  [0, T ]} in terms of a vector u(t), where the ith el-
+   ment Analysis and Recognition, 2003. Proceedings., pp.       ement of the vector is the ith element in X (assuming we
+   958­963, 2003. doi: 10.1109/ICDAR.2003.1227801.              have imposed some sensible ordering on X). We then solve
+
+Sirignano, J. and Spiliopoulos, K. Dgm: A deep learning         tu = f (t, u) t  [0, T ] ,  (21)
+   algorithm for solving partial differential equations. Jour-
+   nal of Computational Physics, 375:1339 ­ 1364, 2018.         where f is a numerical implementation of all the spatial
+   ISSN 0021-9991. doi: https://doi.org/10.1016/j.jcp.2018.     derivatives. This is just a set of coupled ODEs. Typically
+   08.029.                                                      we also discretize the time domain [0, T ] as well to yield
+                                                                a forward time-stepping formulation. In the pseudospec-
+Thuerey, N., Holl, P., Mueller, M., Schnell, P.,                tral method, the derivatives are computed in the frequency
+  Trost, F., and Um, K. Physics-based Deep                      domain by first applying a fast fourier transform (FFT) to
+  Learning. WWW, 2021. URL https://                             the data, then multiplying by the appropriate values and
+   physicsbaseddeeplearning.org.                                converting back to the spatial domain with the inverse FFT.
+                                                                This method of differentiation is implemented by the diff
+Um, K., Brand, R., Yun, Fei, Holl, P., and Thuerey, N.          function in the module scipy.fftpack. For integration
+   Solver-in-the-loop: Learning from differentiable physics     in time we use an implicit Runge-Kutta method of Radau
+   to interact with iterative pde-solvers, 2021.                IIA family, order 5 (Hairer et al., 1993).
+
+Valiquette, F. and Winternitz, P. Discretization of partial     As a crosscheck, we use a Finite Volume method (FVM),
+   differential equations preserving their physical symme-      which is a valid approach since the equations at hand are in
+   tries. Journal of Physics A: Mathematical and General,       conservation form, i.e. it can be shown via the divergence
+   38(45):9765­9783, oct 2005. doi: 10.1088/0305-4470/          theorem that the integral of u over cell i increases only
+   38/45/004. URL https://doi.org/10.1088/                      by the net flux into the cell. We therefore estimate the
+   0305-4470/38/45/004.                                         flux at the left and right cell boundary at time tk, which
+                                                                we again do via the pseudospectral method of the module
+Wang, R., Walters, R., and Yu, R. Incorporating sym-            scipy.fftpack.
+   metry into deep dynamics models for improved gener-
+   alization. In 9th International Conference on Learn-         Figure 8 shows visual comparisons of the described pseu-
+   ing Representations, ICLR 2021, Virtual Event, Austria,
+  May 3-7, 2021. OpenReview.net, 2021. URL https:               dospectral and FVM pseudospectral data generation. Mean
+  //openreview.net/forum?id=wta_8Hx2KD.                         numerical mean-squared errors are in the order of 10-5.
+
+Zabusky, N. J. and Kruskal, M. D. Interaction of                Burgers' equation. Numerical groundtruth data for the
+  "solitons" in a collisionless plasma and the recur-           Burgers' equation (Burgers, 1948)
+   rence of initial states. Phys. Rev. Lett., 15:240­
+   243, Aug 1965. doi: 10.1103/PhysRevLett.15.                  ut + uux - uxx = 0 ,        (22)
+   240. URL https://link.aps.org/doi/10.
+  1103/PhysRevLett.15.240.                                      is obtained by solving the Heat equation for viscocity
+                                                                 = 0.01. This is possible due to the Cole-Hopf trans-
+Zhu, Y. and Zabaras, N. Bayesian deep convolutional             formation (Cole, 1951; Hopf, 1950)
+   encoder­decoder networks for surrogate modeling and
+   uncertainty quantification. Journal of Computational                           
+  Physics, 366:415­447, Aug 2018. ISSN 0021-9991.               u = 2 log() ,               (23)
+                                                                         x
+
+                                                                which turns the Burgers' equation into the Heat equation:
+
+                                                                                  t = xx .  (24)
+                                                                                                                                 Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+100 KdV (pseudospectral)                                                                                                         100 KdV (FVM+pseudospectral)                                                                                                 50 KS (pseudospectral)                                                                                                           50 KS (FVM+pseudospectral)
+                                                                                                                                                                                                                                                           4
+
+                                                                                                                              4                                                                                                                               40                              2                                                                                                40                              2
+
+       80                                                                                                                               80       3
+                          3
+                                                                                                                                                                                                                                                                                                                                                                                          1                                                                                                                                1
+       60                 2                                                                                                      t [s]  60       2                                                                                                            t [s]                                                                                                                            t [s]
+                                                                                                                                                                                                                                                                   30                                                                                                                               30
+t [s]  40                 1                                                                                                             40       1                                                                                                                                                                                                                                        0                                                                                                                                0
+
+                                                                                                                                                                                                                                                                   20                                                                                                                               20
+                                                                                                                                                                                                                                                                                                                                                                                            1                                                                                                                                1
+
+       20                 0                                                                                                             20       0                                                                                                            10                                                                                                                                    10
+
+                                                                                                                                                                                                                                                                                                 2                                                                                                                                2
+
+                                                                                                                            1           00 20 40 x60[m]80 100 120 1                                                                                                  00 10 20 x30[m]40 50 60     3                                                                                                    00 10 20 x30[m]40 50 60     3
+
+       00 20 40 x60[m] 80 100 120
+
+           (a)                                                                                                                              (b)                                                                                                                          (c)                                                                                                                               (d)
+
+Figure 8. Comparison of pseudospectral and Finite Volume Method (FVM) pseudospectral data generation for the Korteweg de Vries (a,b)
+and the Kuramoto-Shivashinsky (c,d) equation. Mean numerical mean-squared errors are in the order 10-5.
+
+The Heat equation is solved in the same manner as the KdV                                                                                                                                                                                                            16       Heat 1                                                                                                                  16   Burgers' 1
+and the KS equations, initial conditions for the Heat equa-
+tion are obtained by taking initial conditions of the Burgers'                                                                                                                                                                                                       14                                                                                                                               14
+equation and applying an inverse Cole-Hopf transformation.                                                                                                                                                                                                           12                                                                                                                               12
+Finally, applying the inverse Cole-Hopf transformation on                                                                                                                                                                                                            10                                                                                                                               10
+the solved trajectory yields the Burgers' equation. Figure                                                                                                                                                                                                    t [s]  8                                                                                                                         t [s]    8
+9 shows exemplary Heat equation and respective Burgers'                                                                                                                                                                                                              6                                                                                                                                  6
+equation trajectories. The trajectories Burgers' 1+2 are of                                                                                                                                                                                                          4                                                                                                                                  4
+special interest since they are obtained via non-linear com-                                                                                                                                                                                                         2                                                                                                                                  2
+bination of the trajectories Burgers' 1 and Burgers' 2, which                                                                                                                                                                                                        00 1 2 x 3[m] 4 5 6 00 1 2 x 3[m] 4 5 6
+is exactly what the generator g in Table 1 stands for.
+                                                                                                                                                                                                                                                                     16       Heat 2                                                                                                                  16   Burgers' 2
+B. Interpolation scheme
+                                                                                                                                                                                                                                                                     14                                                                                                                               14
+In our method we use trigonometric interpolation to                                                                                                                                                                                                                  12                                                                                                                               12
+shift/rotate solutions in the x-direction. This makes use                                                                                                                                                                                                            10                                                                                                                               10
+of the Fourier shift theorem: translating a function u(x)                                                                                                                                                                                                     t [s]  8                                                                                                                         t [s]    8
+u(x - ) on periodic domain of length L linearly shifts its                                                                                                                                                                                                           6                                                                                                                                  6
+Fourier transform as u^(k)  e-i2k /Lu^(k). We can thus                                                                                                                                                                                                               4                                                                                                                                  4
+translate a function by by first taking a Fourier transform                                                                                                                                                                                                          2                                                                                                                                  2
+F, shifting the phase and then taking the inverse Fourier                                                                                                                                                                                                            00 1 2 x 3[m] 4 5 6 00 1 2 x 3[m] 4 5 6
+transform F:
+                                                                                                                                                                                                                                                                     16  Heat 1+2                                                                                                                     16   Burgers' 1+2
+   u(x) F u^(k) shift e-i2k /Lu^(k) F-1 u(x - ) , (25)
+                                                                                                                                                                                                                                                                     14                                                                                                                               14
+We originally chose this scheme based on standard signal                                                                                                                                                                                                             12                                                                                                                               12
+processing considerations. Furthermore, it seemed a sen-                                                                                                                                                                                                             10                                                                                                                               10
+sible choice, given that we use pseudospectral methods to                                                                                                                                                                                                     t [s]  8                                                                                                                         t [s]    8
+compute the instantaneous spatial derivatives in the classical                                                                                                                                                                                                       6                                                                                                                                  6
+solver.                                                                                                                                                                                                                                                              4                                                                                                                                  4
+                                                                                                                                                                                                                                                                     2                                                                                                                                  2
+We benchmarked the performance of Fourier interpolation                                                                                                                                                                                                              00 1 2 x 3[m] 4 5 6 00 1 2 x 3[m] 4 5 6
+against linear interpolation after experiments as a cross-
+check. The results are in Figure 10. Surprisingly, the results                                                                                                                                                                                                Figure 9. Comparison of exemplary trajectories of the Heat and
+show that whether we interpolate data using trigonomet-                                                                                                                                                                                                       the Burgers' equation. The Burgers' equation is obtained out of
+ric or linear interpolation the effect on test NMSE is not                                                                                                                                                                                                    the Heat equation via the inverse Cole-Hopf transformation.
+statistically significant, contrary to what we primarily had
+suspected. This result does not invalidate our experiments.                                                                                                                                                                                                   the previous Nin steps, across which they can average out
+We suspect that the neural models are able to undo interpola-                                                                                                                                                                                                 interpolation artifacts.
+tion artifacts introduced by the linear interpolation scheme.
+This is potentially because the neural models take in not                                                                                                                                                                                                     C. Experimental Architectures
+just an initial condition at a single time, but a trajectory of
+                                                                                                                                                                                                                                                              We experimented with two models: a baseline 1D ResNet-
+                                                                                                                                                                                                                                                              like model (He et al., 2016) and the state-of-the-art Fourier
+                                                                                                                                                                                                                                                              Neural Operator (FNO) network (Li et al., 2020). Both
+                                                                                                                                                                                                                                                              models take K history timesteps as input and are trained in
+                                                                                                                                                                                                                                                              an autoregressive way and as neural operator (see Figure 3).
+                Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Test NMSE       linear                                              normalized mean squared error (NMSE) which is outlined
+                fourier                                             in Equation 20. The overall used FNO architectures consist
+                                                                    of roughly 1 million parameters and training for the different
+
+           101                                                      experiments takes between 12 and 24 hours on average on a
+                                                                    GeForceRTX 2080 Ti GPU.
+
+     23 Numb2e5r of train2in7g samp2le9s                            D. Results
+
+Figure 10. Comparison of the linear and Fourier interpolations      Table 3 and Table 4 contain a comprehensive summary of re-
+schemes for different training set sizes, over the KdV equation,    sults presented in Figures 4a, 4b, 4c, 4d, i.e. an extensive test
+using the setup from Section 4.2. We see no discernable difference  of Lie point symmetry data augmentation (LPSDA) on the
+in performance.                                                     Korteweg-de Vries (KdV) and the Kuramoto-Shivashinsky
+                                                                    (KS) equation. Table 5 and Table 6 contain a comprehensive
+                                                                    summary of KdV and KS long rollout results, discussed in
+                                                                    Section 4.6 in the main paper.
+
+The input therefore has the dimension [batch, K, c] where K
+is interpreted as channel dimension. The channel dimension
+is mapped to 128 and 256 dimension for the 1D ResNet and
+the FNO, respectively. The 1D ResNet has 8 convolutional
+layers using residual connections and increasing receptive
+fields (kernel size 3 to kernel size 15) and ELU (Clevert et al.,
+2016) non-linearities in between. The FNO architectures
+use 5 1D FNO layers as proposed in Li et al. (2020) with 32
+Fourier modes. These layers have residual connections and
+are intertwined with GeLU (Hendrycks & Gimpel, 2016)
+non-linearieties. We also test a 2D FNO architecture as
+alternatively described in Li et al. (2020), but the 1D FNO
+worked consistently better. For both models, the output
+is mapped to K channels in the autoregressive setting and
+to the number of desired timesteps in the neural operator
+setting.
+
+A note on Fourier Neural Operators. The way we in-
+terpret the Fourier Neural Operator (FNO) is via its dif-
+ferent treatment of the spatial and temporal informations.
+FNO layers (Li et al., 2020) consist of two parts, which
+are convolutions in the Fourier domain and convolutions
+with kernel size equals one. Whereas the former focus on
+processing spatial information, the latter process temporal
+information if temporal information is provided in the chan-
+nel dimension. We therefore merge the temporal bundling
+idea of Brandstetter et al. (2022) into the FNO framework,
+where K timesteps are input to the model. Consequently,
+the temporal information processing is strongly enhanced.
+This is not only results in improved runtimes by a factor K
+for rollouts, but also in better stability and decreased errors,
+see e.g. Figure 6 and Tables 5 and 6.
+
+Training details. We optimize models using the AdamW
+optimizer (Loshchilov & Hutter, 2017) with learning rate
+1e-4, weight decay 1e-8 for 20 epochs and minimize the
+                                          Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Table 3. Test of Lie point symmetry data augmentation (LPSDA) on the Korteweg-de Vries (KdV) and the Kuramoto-Shivashinsky (KS)
+
+equation.  Averaged  normalized        MSE  (NMSE)     errors  on  the  test  set  are  reported,  LNMSE   1      Nt   u(tj )-u^(tj )  2   Autoregressive (AR)
+                                                                                                          Nt      j=1       u^(tj ) 2
+                                                                                                                                       2.
+
+and neural operator (NO) prediction errors are compared. A 1D ResNet-like and a Fourier Neural Operator Li et al. (2020) (FNO) solver
+
+are compared. Best performing symmetry groups are highlighted. Different solvers are tested on different combination of Lie point
+
+symmetries. Experiments show that performance gets consistently better for additional generators. This is verified for different solvers,
+
+different equations, different tasks, and different combination of generators.
+
+                                                                                             Number of samples
+
+    Task          Solver        Sym.               512                256               128                   64                32                  16
+
+KdV (20s)       FNO (AR)           -       .0030 ± .0010      .0058 ± .0010         .0225 ± .0024 .0604 ± .0036         .1328 ± .0093       .1901 ± .0105
+KdV (20s)       FNO (AR)     g1 g2 g3 g4  .0010 ± .0001      .0037 ± .0006         .0119 ± .0013 .0387 ± .0025         .0959 ± .0082       .1399 ± .0065
+
+KdV (20s)       FNO (NO)           -       .0276 ± .0038      .0407 ± .0037         .0858 ± .0056 .1699 ± .0100         .2717 ± .0146       .4887 ± .0156
+KdV (20s)       FNO (NO)     g1 g2 g3 g4  .0055 ± .0007      .0132 ± .0013         .0302 ± .0021 .0574 ± .0045         .1289 ± .0084       .2376 ± .0136
+
+KdV (20s)       ResNet (NO)        -       .0160 ± .0014      .0273 ± .0014         .0443 ± .0026   .0574 ± .0030       .1021 ± .0056       .1178 ± .0064
+KdV (20s)       ResNet (NO)     g1 g2      .0161 ± .0014      .0231 ± .0023         .0291 ± .0031   .0434 ± .0025       .0896 ± .0072       .1239 ± .0095
+KdV (20s)       ResNet (NO)   g1 g2 g3     .0168 ± .0014     .0209 ± .0011          .0310 ± .0024   .0426 ± .0021       .0824 ± .0049       .0990 ± .0037
+KdV (20s)       ResNet (NO)   g1 g2 g4    .0121 ± .0013      .0204 ± .0016         .0276 ± .0021    .0474 ± .0021       .1314 ± .0077       .1188 ± .0054
+KdV (20s)       ResNet (NO)  g1 g2 g3 g4  .0118 ± .0010      .0205 ± .0016         .0277 ± .0020   .0407 ± .0026       .0774 ± .0048       .0746 ± .0036
+
+KdV (20s)       ResNet (AR)        -       .0223 ± .0026      .0392 ± .0031         .0669 ± .0050   .0914 ± .0087       .1701 ± .0110       .2087 ± .0121
+KdV (20s)       ResNet (AR)     g1 g2      .0200 ± .0021      .0284 ± .0022         .0470 ± .0031   .0782 ± .0049       .1463 ± .0099       .1911 ± .0110
+KdV (20s)       ResNet (AR)   g1 g2 g3     .0111 ± .0010      .0185 ± .0013         .0318 ± .0022   .0517 ± .0029       .0883 ± .0068       .1145 ± .0069
+KdV (20s)       ResNet (AR)   g1 g2 g4     .0155 ± .0019      .0269 ± .0026         .0445 ± .0028   .0763 ± .0045       .1602 ± .0104       .1887 ± .0088
+KdV (20s)       ResNet (AR)  g1 g2 g3 g4  .0113 ± .0012      .0184 ± .0016         .0333 ± .0020   .0544 ± .0030       .0965 ± .0064       .1106 ± .0052
+
+KdV (40s)       FNO (AR)           -       .0081 ± .0026      .0361 ± .0062         .0681 ± .0084   .1248 ± .0108       .1981 ± .0167       .2904 ± .0184
+KdV (40s)       FNO (AR)          g1       .0023 ± .0004      .0082 ± .0010         .0293 ± .0024   .0674 ± .0055       .1294 ± .0081       .2224 ± .0123
+KdV (40s)       FNO (AR)        g1 g2      .0016 ± .0008      .0088 ± .0017         .0278 ± .0045   .0673 ± .0058       .1251 ± .0106       .2160 ± .0135
+KdV (40s)       FNO (AR)      g1 g2 g3    .0011 ± .0005       .0062 ± .0012        .0229 ± .0035   .0550 ± .0058       .0940 ± .0079       .1818 ± .0153
+KdV (40s)       FNO (AR)      g1 g2 g4     .0017 ± .0009      .0102 ± .0016         .0287 ± .0048   .0795 ± .0077       .1271 ± .0096       .2092 ± .0138
+KdV (40s)       FNO (AR)     g1 g2 g3 g4  .0010 ± .0006      .0058 ± .0013         .0213 ± .0029    .0606 ± .0040      .0968 ± .0091       .1817 ± .0118
+
+KdV (40s)       FNO (NO)           -       .1113 ± .0100      .1761 ± .0122         .2343 ± .0194   .3331 ± .0185       .4892 ± .0237       .5954 ± .0301
+KdV (40s)       FNO (NO)          g1       .0735 ± .0040      .1162 ± .0053         .1723 ± .0083   .2350 ± .0076       .3674 ± .0149       .4627 ± .0112
+KdV (40s)       FNO (NO)        g1 g2      .0761 ± .0086      .1140 ± .0087         .1622 ± .0121   .2494 ± .0158       .3432 ± .0232       .4884 ± .0254
+KdV (40s)       FNO (NO)      g1 g2 g3    .0279 ± .0038      .0462 ± .0052         .0868 ± .0072   .1170 ± .0111       .1842 ± .0130       .3001 ± .0169
+KdV (40s)       FNO (NO)      g1 g2 g4     .0779 ± .0086      .1140 ± .0098         .1757 ± .0130   .2534 ± .0139       .3731 ± .0207       .4764 ± .0204
+KdV (40s)       FNO (NO)     g1 g2 g3 g4  .0273 ± .0040      .0478 ± .0052         .0873 ± .0070   .1127 ± .0101       .1743 ± .0118       .3037 ± .0190
+
+KS (20s)        FNO (AR)         -         .0279 ± .0013      .1084 ± .0048         .1983 ± .0073   .2898 ± .0080       .4234 ± .0106       .5279 ± .0110
+KS (20s)        FNO (AR)        g1         .0045 ± .0004      .0421 ± .0022         .1347 ± .0045   .2241 ± .0067       .3690 ± .0086       .4984 ± .0143
+KS (20s)        FNO (AR)      g1 g2        .0057 ± .0004      .0581 ± .0020         .1321 ± .0056   .2316 ± .0085       .3605 ± .0109       .4945 ± .0122
+KS (20s)        FNO (AR)     g1 g2 g3     .0028 ± .0002      .0261 ± .0012         .0755 ± .0035   .1504 ± .0064       .2656 ± .0074       .4398 ± .0133
+
+KS (20s)        FNO (NO)         -         .3905 ± .0049      .4733 ± .0051         .5662 ± .0051   .6855 ± .0097       .8502 ± .0064      1.0005 ± .0076
+KS (20s)        FNO (NO)        g1         .2936 ± .0044      .3863 ± .0050         .4813 ± .0050   .5884 ± .0057       .7438 ± .0054       .8426 ± .0060
+KS (20s)        FNO (NO)      g1 g2        .2948 ± .0047      .3864 ± .0043         .4854 ± .0043   .5810 ± .0061       .7388 ± .0048       .8359 ± .0070
+KS (20s)        FNO (NO)     g1 g2 g3     .2268 ± .0049      .3089 ± .0066         .3981 ± .0075   .4501 ± .0069       .5321 ± .0038       .6045 ± .0057
+
+Table 4. Test of Lie point symmetry data augmentation (LPSDA) on the Burgers' equation. Averaged normalized MSE (NMSE) errors
+
+on the test set are reported, LNMSE       u(tj )-u^(tj )  2  is omitted due to the small values.   Autoregressive (AR) and neural operator (NO)
+                                                          2
+
+                                            u^(tj ) 2
+
+prediction errors are compared. Fourier Neural Operator Li et al. (2020) (FNO) solver are tested on different combination of Lie point
+
+symmetries. Best performing symmetry groups are highlighted. Experiments show that performance gets consistently better for additional
+
+generators.
+
+                                                                                        Number of samples
+
+      Task        Solver     Sym.                  512                256               128                   64                32                  16
+
+Burgers' (10s)  FNO (AR)       -           .0020 ± .0002      .0091 ± .0008         .0696 ± .0057   .3442 ± .0226       .7962 ± .0358      1.6493 ± .0581
+Burgers' (10s)  FNO (AR)      g1           .0010 ± .0001      .0061 ± .0006         .0455 ± .0034   .2767 ± .0189       .8489 ± .0461      2.5599 ± .0954
+Burgers' (10s)  FNO (AR)     g1 g5        .0003 ± .0001      .0010 ± .0002         .0063 ± .0014   .0228 ± .0031       .0656 ± .0104       .3729 ± .0303
+
+Burgers' (10s)  FNO (NO)       -           .0428 ± .0049      .1145 ± .0110         .2792 ± .0199   .5692 ± .0306       .7959 ± .0409      1.8415 ± .0645
+Burgers' (10s)  FNO (NO)      g1           .0092 ± .0014      .0566 ± .0050         .2723 ± .0156   .6092 ± .0290       .9784 ± .0445      2.3453 ± .0663
+Burgers' (10s)  FNO (NO)     g1 g5        .0003 ± .0001      .0009 ± .0001         .0066 ± .0015   .0322 ± .0043       .1436 ± .0112       .5511 ± .0281
+           Lie Point Symmetry Data Augmentation for Neural PDE Solvers
+
+Table 5. Long rollouts of T = 200 s with Ntout = 400 timesteps on the Korteweg-de Vries (KdV) equation to check how LPSDA can
+improve performance in a practical use case. The cumulative error normalized over seconds is reported. We use an autoregressively-trained
+FNO model. Additionally, the training procedure of the solvers is augmented with temporal bundling (TB) and the pushforward trick (PF)
+as introduced in Brandstetter et al. (2022). For temporal bundling variants we input and output 20 timesteps at a time, which we compare
+to one timestep predictions (1-step). All training tricks are ablated. Best performing symmetry groups are highlighted.
+
+                                                        Training methods
+
+Timesteps        1-step                             TB                      TB+PF           TB+PF+LPSDA
+
+    20s    .0008 ± .0005       .0008 ± .0005                                .0011 ± .0005   .0003 ± .0001
+    40s    .0046 ± .0011       .0065 ± .0021                                .0048 ± .0016   .0012 ± .0003
+    60s    .0120 ± .0021       .0176 ± .0046                                .0119 ± .0034   .0028 ± .0009
+    80s    .0242 ± .0037       .0287 ± .0065                                .0209 ± .0052   .0053 ± .0013
+   100s    .0441 ± .0084       .0423 ± .0083                                .0326 ± .0064   .0094 ± .0018
+   120s    .0628 ± .0032       .0610 ± .0110                                .0446 ± .0080   .0151 ± .0024
+   140s    .0946 ± .0074       .0744 ± .0125                                .0616 ± .0102   .0231 ± .0040
+   160s    .1345 ± .0093       .0932 ± .0150                                .0801 ± .0123   .0338 ± .0047
+   180s                        .1167 ± .0181                                .0959 ± .0137   .0454 ± .0048
+   200s                        .1369 ± .0188                                .1198 ± .0136   .0621 ± .0056
+                   
+
+Table 6. Long rollouts of T = 100 s with Ntout = 400 timesteps on the Kuramoto-Shivashinsky (KS) equation to check how LPSDA can
+improve performance in a practical use case. The cumulative error normalized over seconds is reported. We use an autoregressively-trained
+FNO model. Additionally, the training procedure of the solvers is augmented with temporal bundling (TB) and the pushforward trick (PF)
+as introduced in Brandstetter et al. (2022). For temporal bundling variants we input and output 20 timesteps at a time, which we compare
+to one timestep predictions (1-step). All training tricks are ablated. Best performing symmetry groups are highlighted.
+
+Timesteps              1-step                   TB        Training methods   TB+PF+LPSDA            TB+LPSDA
+
+    10s    .0003 ± .0001        .0001 ± .0000                       TB+PF   .0000 ± .0000    .0000 ± .0000
+    20s    .0060 ± .0010        .0009 ± .0001                                .0003 ± .0000   .0002 ± .0000
+    30s    .0283 ± .0040        .0077 ± .0013            .0001 ± .0000       .0024 ± .0002   .0017 ± .0002
+    40s    .0391 ± .0359        .0377 ± .0054            .0011 ± .0001       .0126 ± .0021   .0101 ± .0019
+    50s                         .1166 ± .0128            .0080 ± .0013       .0536 ± .0051   .0419 ± .0049
+    60s                          .2914 ± 0222            .0381 ± .0060       .1415 ± .0127   .1278 ± .0110
+    70s                          .5604 ± 0273            .1126 ± .0138       .3088 ± .0188   .2853 ± .0190
+    80s                         .9387 ± .4007            .2793 ± .0224       .5668 ± .0256   .5241 ± .0264
+    90s                        1.3422 ± .0523            .5459 ± .0283       .9369 ± .0392   .8736 ± .0390
+   100s                        1.7821 ± .0564            .9011 ± .0393                      1.2741 ± .0570
+                                                        1.3049 ± .0598      1.3692 ± .0572
+                                                        1.7431 ± .0587
+

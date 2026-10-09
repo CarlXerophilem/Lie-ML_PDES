@@ -1,0 +1,551 @@
+                                                GENERALIZED LIE SYMMETRIES
+                                        IN PHYSICS-INFORMED NEURAL OPERATORS
+
+                                        Amy Xiang Wang*             Zakhar Shumaylov*                     Peter Zaika
+                                        New York University        University of Cambridge         University of Cambridge
+
+                                          xw914@nyu.edu               zs334@cam.ac.uk                 paz24@cam.ac.uk
+
+arXiv:2502.00373v2 [cs.LG] 11 Jun 2025                       Ferdia Sherry                         Carola-Bibiane Schönlieb
+                                                        University of Cambridge                     University of Cambridge
+
+                                                           fs436@cam.ac.uk                             cbs31@cam.ac.uk
+
+                                                                                  ABSTRACT
+
+                                        Physics-informed neural operators (PINOs) have emerged as powerful tools for learning solution
+                                        operators of partial differential equations (PDEs). Recent research has demonstrated that incorporating
+                                        Lie point symmetry information can significantly enhance the training efficiency of PINOs, primarily
+                                        through techniques like data, architecture, and loss augmentation. In this work, we focus on the latter,
+                                        highlighting that point symmetries oftentimes result in no training signal, limiting their effectiveness
+                                        in many problems. To address this, we propose a novel loss augmentation strategy that leverages
+                                        evolutionary representatives of point symmetries, a specific class of generalized symmetries of the
+                                        underlying PDE. These generalized symmetries provide a richer set of generators compared to
+                                        standard symmetries, leading to a more informative training signal. We demonstrate that leveraging
+                                        evolutionary representatives enhances the performance of neural operators, resulting in improved
+                                        data efficiency and accuracy during training.
+
+                                        Keywords Deep learning · Physics-informed · Neural Operator · PINN · Lie point symmetries · Generalized symmetries
+
+                                        1 Introduction                                             In a separate direction, the field of geometric deep learning
+
+                                                                                                   has demonstrated the practical and theoretical benefits of
+
+                                        Deep neural networks are increasingly used for scientific  incorporating symmetry information into neural networks,
+                                        computing, particularly in simulating complex physical     leading to improved performance through beneficial induc-
+                                        systems governed by partial differential equations (PDEs)  tive biases [6, 5]. For example, the translational equivari-
+                                        [11], where traditional methods struggle [24].             ance of convolutional neural networks (CNNs) [9, 18] has
+                                                                                                   been suggested as an important reason for their successes
+
+                                        Physics-informed neural networks (PINNs) [24] integrate in tasks such as image classification [16, 12].
+
+                                        physical laws and constraints directly into the learning   Similarly, recent work in neural operators has shown that
+                                        process, demonstrating success in various applications     incorporating PDE symmetries improves generalization
+                                        [24, 29, 35, 14, 27, 33]. However, classical PINNs         and training efficiency. However, most research has fo-
+                                        face challenges under varying parameters and bound-        cused on Lie point symmetries due to their well-established
+                                        ary conditions and often encounter training challenges     theoretical foundation and systematic derivation methods
+                                        due to unbalanced gradients and non-convex loss land-      [23, 13, 3]. In contrast, the potential of generalized symme-
+                                        scapes [10, 15, 22]. Neural operators offer a compelling   tries remains largely unexplored due to their unsuitability
+                                        alternative, which unlike standard feedforward neural      for data augmentation or equivariant architectures.
+                                        networks, learn mappings between infinite-dimensional
+
+                                        function spaces, directly connecting parameters and ini- This paper demonstrates that generalized PDE symmetries
+
+                                        tial/boundary conditions to PDE solutions [21, 32]. This can nonetheless provide valuable inductive biases when
+
+                                        eliminates the need for independent simulations and, when incorporated through loss augmentation.
+
+                                        combined with physics-informed loss functions, often im-
+
+                                        proves generalization and physical validity. We focus on
+
+                                        this class of approaches.
+
+                                        Equal Contribution
+
+                                        COLT 2025 Theory of AI for Scientific Computing Workshop
+                        Generalized Lie Symmetries in PINOs
+
+1.1 PDE Symmetries in Deep Learning                             smooth function u = f (x), there is an induced function
+                                                                u(n) = pr(n) f (x), called the n-th prolongation of f , de-
+Incorporation of point symmetries into neural solvers has       fined by the equations uJ = J f (x). Thus pr(n)f is a
+received significant attention, leading to the development      function from X to the space U (n), and for each x in X,
+of many approaches that can be broadly classified into          pr(n) f (x) is a vector representing values of f and all its
+three categories:                                               derivatives up to order n at the point x.
+
+Data augmentation is the simplest way to add symmetry           The PDE is a system of equations  x, u(n) = 0, with
+information into neural PDE solvers [4, 20] by augmenting        : X × U (n)  Rl smooth, determining a subvariety
+the training data with transformed versions obtained by
+applying symmetry operations. While straightforward to             S = x, u(n) :  x, u(n) = 0  X × U (n)
+implement, this approach can increase training costs.
+
+Loss augmentation is an alternative way to inject sym- A symmetry group of the system  will be a local group
+metry information by appropriately regularizing the loss of transformations, G, acting on some open subset
+using symmetry information [1, 19, 34]. This often leads M  X × U such that "G transforms solutions of 
+to improved generalization and sample efficiency, although
+it may not guarantee equivariant models.                        to other solutions of ", i.e. leaving S invariant.
+
+Architecture augmentation aims to directly embed Prolongations of actions Now suppose G acts on an
+
+symmetries into the model architecture. Given the com- open M  X × U , i.e. independent and dependent vari-
+
+plexity of point symmetry groups associated with PDEs, ables. There is an induced local action of G on the n-jet
+
+this requires either general techniques [26] or exploiting space M (n), called the n-th prolongation of G denoted
+simpler subgroups with existing architectures [31].
+                                                                pr(n)G. This prolongation is defined so that it transforms
+
+Beyond these, alternative approaches exist, based on prob- the derivatives of functions u = f (x) into the correspond-
+lem reformulations [2, 17] or those focused on other types ing derivatives of the transformed function u~ = f~(x~).
+
+of structures, e.g. from Hamiltonian dynamics [7, 8, 30]. Consider now v a vector field on M , with a corresponding
+
+                                                                one-parameter group exp(v). The n-th prolongation of
+
+2 PDE Symmetries                                                v is denoted pr(n) v, will be a vector field on the n-jet
+                                                                space M (n), and is defined to be the infinitesimal genera-
+
+Here, we introduce the notion of PDE symmetries. The for-       tor of the corresponding prolonged one-parameter group
+mal presentation here closely follows [23], and the reader      pr(n)[exp(v)]. Relevance of these concepts is highlighted
+is strongly encouraged to read it for more in-depth discus-     by the following theorem:
+
+sions of the concepts.                                          Theorem 2.1 (2.31 in [23]). Suppose  x, u(n) = 0 is
+
+                                                                        a system of differential equations of maximal rank defined
+In simple words, PDE point symmetries are transforma- over M  X × U . If G is a local group of transformations
+tions that map solutions of a given PDE to other solutions acting on M , and
+of the same PDE. To derive these symmetries, traditionally
+the focus is shifted to Jet spaces, where the problem of pr(n) v  x, u(n) = 0, whenever  x, u(n) = 0
+
+studying PDE symmetries is transformed into the simpler
+task of studying symmetries of algebraic equations. By for every infinitesimal generator v of G, then G is a sym-
+employing one-parameter groups of transformations, it metry group of the system.
+
+becomes possible to systematically derive all such symme-       Generalized Symmetries We can consider some vector
+
+tries by examining their infinitesimal actions.                 field acting on M of the form
+
+Suppose we are considering a system  of n-th or-                    p                          q               
+                                                                                     xi            (x, u) u ,
+der differential equations involving p independent x =          v=         i(x,  u)      +
+ x1, . . . , xp  X, and q dependent variables u =
+                                                                    i=1                        =1
+u1, . . . , uq  U .
+                                                                and provided the coefficient functions i,  depend only
+
+Jet Spaces and Prolongations: Consider f : X  U                 on x and u, v generates a one-parameter group of trans-
+                                                                formations exp(v) acting pointwise. A significant gen-
+smooth and let Uk be the Euclidean space, endowed with          eralization of the notion of symmetry group is obtained
+coordinates uJ = J f (x) in multi-index notation so             by relaxing this geometrical assumption, and allowing the
+as to represent the above derivatives. Furthermore, set         coefficients i,  to also depend on derivatives of u.
+U (n) = U × U1 × · · · × Un to be the Cartesian product
+space, whose coordinates represent all the derivatives of       Definition 2.1 (Generalized Vector Fields). A generalized
+                                                                vector field is an expression of the form
+functions u = f (x) of all orders from 0 to n. The total
+                                                                         p                     q
+space X × U (n), whose coordinates represent the indepen-                                                   
+dent variables, the dependent variables and the derivatives     v=            i[u]   xi  +         [u] u
+of the dependent variables up to order n is called the n-th
+                                                                         i=1                   =1
+
+order jet space of the underlying space X × U . Given a in which i and  are smooth differential functions.
+
+                                                             2
+                                  Generalized Lie Symmetries in PINOs
+
+Figure 1: Left (first two): Darcy Flow zero-shot evaluation by resolution. Middle: Burgers' equation symmetry
+regularization effectiveness by vector. Right: Darcy Flow prediction results comparison with 100 training samples
+
+Example. An example of a generalized vector field is To understand the proposed methodology, we first recap in
+
+v = uxu, which admits the following prolongation:               simpler notation, the method of [1, 34]. Clasically, PINNs
+
+                                                                aim to solve the PDE by minimizing the residual
+
+pr v = ux u + uxx ux + uxt ut + uxxx uxx + · · ·                                min        [u ]22 .                   (1)
+
+                                                                                  
+
+and thus turns out to be a generalized symmetry of the In [1, 34], it is proposed that for a Lie algebra vi, it is
+                                                                beneficial to minimize (for some  > 0):
+Burgers' Equation (6), as pr v [B] = 0.
+
+Evolutionary Vector Fields Among all the generalized               min  [u ]22  +                pr vi [] [u]22 ,     (2)
+vector fields, those in which the coefficients i[u] of the
+/xi are zero play a particularly important role.                                              i
+
+                                                                as by Theorem 2.1, zero loss solutions of Equation (1)
+
+                                                                are also zero loss solutions of Equation (2). Based on
+
+Definition 2.2 (5.4 in [23]). Let Q[u] = Proposition 2.2, we instead propose to use the evolutionary
+
+(Q1[u], . . . , Qq[u]) be a q-tuple of differential functions. representatives of vi, via
+
+The generalized vector field                                            [u]22 +                                   2
+
+                 q                                                 min                           pr [vi]Q [] [u]   ,  (3)
+
+                                                                                           i                      2
+
+         vQ = Q[u] u                                            as motivated by the following example:
+                 =1
+                                                                Example (Burgers). Consider Burgers' Equation (6), and
+is called an evolutionary vector field, and Q is called its
+characteristic.                                                 consider the symmetry generated by v1 = x. Its evolu-
+                                                                tionary representative, as above, is [v1]Q = -uxu. We
+
+Any generalized vector field v has an associated evo- can derive both prolongation actions as:
+
+lutionary representative vQ with characteristic Q = pr v1 [B] = 0, pr [v1]Q [B] = -Dx [B] , (4)
+    p
+ -  i=1  iu/xi,  determining    essentially       the  same     where Dx denotes the total x derivative. This shows that
+
+symmetry, as illustrated by the following proposition:          standard point symmetries result in no extra terms in Equa-
+
+Proposition 2.2 (5.5 in [23]). A generalized vector field v tion (2), unlike Equation (3). Same occurs for all other
+
+is a symmetry of a system of differential equations if and generators for both Burgers' equation (Appendix A) and
+
+only if its evolutionary representative vQ is.                  Darcy Flow (Appendix B).
+
+Evolutionary vector fields are particularly appealing as        4  Experiments
+they capture the essence of the symmetry, discarding the
+
+dependent variable information, while also admitting much       In this section we present numerical results showcasing
+simpler expressions for their prolongations.                    the utility of generalized symmetries for training PINOs.
+
+However, it is important to note that these are not sym- This is illustrated for the 2D Darcy flow and the 1D
+
+metries in the traditional sense, as they no longer act on Burgers' equation. Our code is publicly available at
+
+X × U . For a more in-depth discussion, see [23].               https://github.com/xiwang129/GPS_PINO.
+
+3 Methodology                                                   4.1 Darcy Flow
+
+Based on the discussion in Section 2, instead of consider-      We consider solving the 2D Darcy Flow equation
+
+ing symmetry vector fields, we propose to use evolutionary         D :=  · (k(x)u(x)) + f (x) = 0,                    (5)
+
+representatives of these vector fields instead. These turn on the domain x  [0, 1]2 with u(x) = 0 on the boundary,
+
+out to be more informative in practice, as illustrated below. where k(x) is the permeability field and f (x) is the source
+
+                                                             3
+                                         Generalized Lie Symmetries in PINOs
+
+Table 1: Comparison of L2 loss and equation error for Darcy Flow and Burgers' equation with varying sample sizes,
+using our symmetry-based method, PINO (no symmetry), and the method from [1, 34].
+
+Equation                    No. Samples  Metric      Symmetry (Ours)  No Symmetry (PINO) Symmetry [1, 34]
+Darcy Flow                               L2 Loss
+                            100                      0.046 ± 1e - 3           0.066 ± 1e - 2
+Burgers' Eqn.               250          Eqn. Error  0.029 ± 7e - 4           0.323 ± 8e - 4
+                            500          L2 Loss     0.014 ± 3e - 4           0.017 ± 4e - 4
+                            1000         Eqn. Error  0.011 ± 2e - 3           0.013 ± 3e - 4
+
+                            100                      1.202 ± 1e - 2           1.551 ± 1e - 2
+                            250                      0.621 ± 7e - 3           0.925 ± 1e - 2
+                            500                      0.579 ± 7e - 3           0.723 ± 9e - 3
+                            1000                     0.491 ± 6e - 3           0.583 ± 7e - 3
+
+                            25                       0.082 ± 6e - 3    0.089 ± 6e - 3  0.099 ± 6e - 3
+                            50                       0.044 ± 3e - 3   0.044 ± 3e - 2   0.050 ± 4e - 3
+                            100                      0.018 ± 1e - 3    0.019 ± 1e - 3  0.022 ± 1e - 3
+
+                            25                       0.182 ± 3e - 2   0.217 ± 4e - 2   0.440 ± 6e - 2
+                            50                       0.068 ± 1e - 2   0.095 ± 2e - 2   0.217 ± 4e - 2
+                            100                      0.023 ± 4e - 3   0.024 ± 4e - 3   0.068 ± 1e - 2
+
+term. We tested our approach on a 61 × 61 resolution by adding one term at a time. An example is illustrated in
+dataset downsampled from a 421 × 421 resolution dataset the middle pane of Figure 1, showcasing that the introduc-
+and set f (x) = 1 as in [21]. We trained a 2D Fourier tion of even a single Lie algebra vector yields a substantial
+neural operator model for 300 epochs using the proposed reduction in the equation error, while the benefit of incor-
+generalized symmetry loss in Equation (3). As is common porating additional vectors becomes marginal.
+with PINOs, in this example we also include a data loss
+term enforcing initial and boundary conditions, and a tra-
+jectory matching loss. The trained model is tested on 500
+samples. Table 1 indicates that the proposed symmetry
+regularization improves prediction in terms of both L2 and
+equation losses, being more sample efficient in minimizing
+the PDE residuals. As shown in Equation (10), the point
+symmetry method of [1, 34] in Equation (2) generates no
+extra terms, being equivalent to a standard PINO.
+
+Moreover, we experimented with zero-shot prediction by
+
+testing the trained 61 × 61 model on other resolutions:        Figure 2: Visual comparison of trajectory predictions for
+40 × 40 and 211 × 211. Figure 1 left illustrates that the      Burgers' equation trained with 50 samples.
+resulting model consistently outperforms the baselines in
+
+both L2 and equation loss.
+
+                                                               4.3 Ablation studies
+
+4.2 Burgers' equation
+
+We consider solving the 1D Burgers' equation                   We evaluated the robustness, generalization ability, and
+                                                               stability of our approach and PINO by adding various lev-
+
+B := ut + uux - uxx = 0,                             (6) els of noise into the training dataset using the Darcy flow
+
+on the domain x  [0, 1] and t  [0, 1] with initial con-        equation with 500 samples, as shown in Table 2. The
+dition u(x, 0) = u0(x), for which we generated the 1D          generalization gap, calculated as the difference between
+Burgers' dataset following [25], using a 128×100 grid and      the L2 loss on the test and training sets, increases slightly
+setting the viscosity coefficient to  = 0.01. We compared      with higher noise level. This suggests that our approach
+the proposed method in Equation (3) with [1, 34] defined       generalizes reasonably well and resists overfitting to noisy
+in Equation (2). Table 1 presents the results, demonstrat-     data.
+
+ing that the proposed method consistently achieves either For robustness, both test L2 loss and the equation error
+superior or comparable performance to the baselines with show a steady increase as the noise level rises, indicating
+
+respect to both equation error and L2 error. Following ex- that the model remains relatively robust up to 5% noise
+perimental details of [1], the residual for this equation does level. In comparison, our approach consistently achieves
+
+not appear directly in the training objective. Figure 2 pro- lower L2 loss and the equation error than PINO as the
+vides a representative prediction showcasing the improved noise level increase.
+
+error achieved by our method.                                  However, noise level does impact the the model's ability to
+
+We further evaluated the impact of each of the Lie algebra capture the underlying physics well as reflected by the sta-
+
+vectors from Equation (7) on the resulting equation error, bility gap, defined as the difference between the equation
+
+                                                            4
+                                          Generalized Lie Symmetries in PINOs
+
+          Table 2: Ablation study of model robustness, generalization, and stability using Darcy flow
+
+Metric              Clean data (0%)                       Noise (1%)                      Noise (5%)                      Noise (10%)
+
+L2 Loss (Train)     Ours            PINO            Ours              PINO          Ours              PINO          Ours               PINO
+L2 Loss (Test)
+Eqn. error (Train)  0.007 ± 6e - 6  0.007 ± 6e - 6  0.007 ± 6e - 6  0.007 ± 6e - 6  0.008 ± 6e - 6  0.008 ± 6e - 6  0.010 ± 4e - 6  0.010 ± 5e - 6
+Eqn. error (Test)   0.016 ± 4e - 4  0.019 ± 5e - 4  0.018 ± 4e - 4  0.019 ± 5e - 4  0.019 ± 4e - 4  0.020 ± 4e - 4  0.022 ± 4e - 4  0.022 ± 5e - 4
+                    0.007 ± 6e - 4  0.007 ± 6e - 4  0.092 ± 5e - 4  0.091 ± 5e - 4  0.264 ± 1e - 3  0.268 ± 1e - 3  0.461 ± 2e - 3  0.488 ± 2e - 3
+Generalization gap  0.569 ± 7e - 3  0.701 ± 9e - 3  0.624 ± 8e - 3  0.723 ± 9e - 2  0.722 ± 8e - 3  0.723 ± 9e - 3  0.827 ± 4e - 3  0.918 ± 9e - 3
+Stability gap
+                    0.009 ± 4e - 4 0.012 ± 5e - 4   0.011 ± 4e - 4 0.012 ± 5e - 4   0.011 ± 4e - 4 0.012 ± 4e - 4    0.012 ± 4e - 4 0.012 ± 5e - 4
+                     0.562 ± 7e - 3 0.694 ± 9e - 3  0.532 ± 8e - 3 0.632 ± 9e - 3   0.458 ± 8e - 3 0.455 ± 9e - 3   0.366 ± 4e - 3 0.430 ± 9e - 3
+
+errors on the test and training sets. Notably, while both References
+
+the training and test equation errors increase with noise,               [1] Tara Akhound-Sadegh, Laurence Perreault-
+the test equation error grows more slowly. Compared to                        Levasseur, Johannes Brandstetter, Max Welling,
+PINO, our approach achieves a lower stability gap by hav-                     and Siamak Ravanbakhsh. Lie point symmetry and
+ing smaller equation errors, indicating that incorporating                    physics-informed networks. In A. Oh, T. Naumann,
+symmetry enhances its ability to learn the underlying phys-                  A. Globerson, K. Saenko, M. Hardt, and S. Levine,
+ical laws.                                                                    editors, Advances in Neural Information Processing
+
+                                                                                    Systems, volume 36, pages 42468­42481. Curran
+
+5 Conclusion                                                                Associates, Inc., 2023.
+
+This work demonstrates that evolutionary representatives                 [2] Shivam Arora, Alex Bihlo, and Francis Valiquette.
+of point symmetries enhance data efficiency in training                       Invariant physics-informed neural networks for ordi-
+PINOs, resulting in a useful training signal even when the                    nary differential equations, 2024. arXiv:2310.17053.
+underlying point symmetries themselves can not be used.
+                                                                         [3] Gerd Baumann. MathLie a program of doing sym-
+While this study focused on point symmetries, the frame-                      metry analysis. Mathematics and Computers in Sim-
+work presented is readily applicable to any generalized                       ulation, 48:205­223, 1998.
+symmetry. We hypothesize that incorporating such sym-
+metries can similarly improve trainability and we leave a                [4] Johannes Brandstetter, Max Welling, and Daniel E
+proper evaluation of this to future work.                                    Worrall. Lie point symmetry data augmentation for
+                                                                              neural PDE solvers. In International Conference on
+                                                                             Machine Learning, pages 2241­2256. PMLR, 2022.
+
+We further posit that the observed efficiency partly arises              [5] Johann Brehmer, Sönke Behrends, Pim de Haan, and
+from the inducement of a Sobolev-type norm [28]. Cru-                        Taco Cohen. Does equivariance matter at scale?,
+cially, our approach offers a systematic way for select-                      2024.
+ing the appropriate norm based on the governing PDE.
+This connection between generalized symmetries, Sobolev                  [6] Michael M. Bronstein, Joan Bruna, Taco Cohen,
+norms, and improved training warrants further investiga-                      and Petar Velickovic. Geometric deep learning:
+tion.                                                                         Grids, groups, graphs, geodesics, and gauges. CoRR,
+                                                                              abs/2104.13478, 2021.
+
+                                                                         [7] Priscilla Canizares, Davide Murari, Carola-Bibiane
+
+Acknowledgments                                                                     Schönlieb, Ferdia Sherry, and Zakhar Shumaylov.
+
+                                                                                    Hamiltonian matching for symplectic neural integra-
+
+CBS acknowledges support from the Philip Lever-                                     tors. arXiv preprint arXiv:2410.18262, 2024.
+
+hulme Prize, UK, the Royal Society Wolfson Fel- [8] Priscilla Canizares, Davide Murari, Carola-Bibiane
+
+lowship, UK, the EPSRC advanced career fellow-                                      Schönlieb, Ferdia Sherry, and Zakhar Shumaylov.
+
+ship, UK EP/V029428/1, EPSRC grants EP/S026045/1                                    Symplectic neural flows for modeling and discovery.
+
+and EP/T003553/1, EP/N014588/1, EP/T017961/1, the                                   arXiv preprint arXiv:2412.16787, 2024.
+
+Wellcome Innovator Awards, UK 215733/Z/19/Z and                           [9] Kunihiko Fukushima and Sei Miyake. Neocognitron:
+221633/Z/20/Z, the European Union Horizon 2020 re-                             A new algorithm for pattern recognition tolerant of
+search and innovation programme under the Marie                                deformations and shifts in position. Pattern Recogni-
+Sklodowska-Curie grant agreement No.777826 NoMADS,                             tion, 15(6):455­469, 1982.
+the Cantab Capital Institute for the Mathematics of In-
+formation, UK and the Alan Turing Institute, UK. FS ac-                  [10] Tamara G Grossmann, Urszula Julia Komorowska,
+knowledges support from the EPSRC advanced career fel-                         Jonas Latz, and Carola-Bibiane Schönlieb. Can
+lowship EP/V029428/1. ZS acknowledges support from                             physics-informed neural networks beat the finite el-
+the Cantab Capital Institute for the Mathematics of In-                        ement method? arXiv preprint arXiv:2302.04107,
+formation, Christs College and the Trinity Henry Barlow                        2023.
+
+Scholarship scheme. AXW acknowledges the support from [11] Jiequn Han, Arnulf Jentzen, and Weinan E. Solving
+
+NYU HPC.                                                                            high-dimensional partial differential equations using
+
+                                                                      5
+Generalized Lie Symmetries in PINOs
+
+      deep learning. Proceedings of the National Academy          [23] Peter J Olver. Applications of Lie groups to differ-
+      of Sciences, 115(34):8505­8510, 2018.                             ential equations, volume 107. Springer Science &
+                                                                        Business Media, 1993.
+[12] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and
+      Jian Sun. Deep residual learning for image recog-           [24] Maziar Raissi, Paris Perdikaris, and George E Kar-
+      nition. In Proceedings of the IEEE Conference on                  niadakis. Physics-informed neural networks: A
+      Computer Vision and Pattern Recognition (CVPR),                   deep learning framework for solving forward and
+      June 2016.                                                        inverse problems involving nonlinear partial differ-
+                                                                        ential equations. Journal of Computational physics,
+[13] Nail H Ibragimov. CRC handbook of Lie group anal-                  378:686­707, 2019.
+      ysis of differential equations, volume 3. CRC press,
+      1995.                                                       [25] Shawn G Rosofsky, Hani Al Majed, and EA Huerta.
+                                                                        Applications of physics informed neural opera-
+[14] Sharmila Karumuri, Rohit Tripathy, Ilias Bilionis,                 tors. Machine Learning: Science and Technology,
+      and Jitesh Panchal. Simulator-free solution of high-              4(2):025022, 2023.
+      dimensional stochastic elliptic partial differential
+      equations using deep neural networks. Journal of            [26] Zakhar Shumaylov, Peter Zaika, James Rowbottom,
+      Computational Physics, 404:109120, 2020.                          Ferdia Sherry, Melanie Weber, and Carola-Bibiane
+                                                                        Schönlieb. Lie algebra canonicalization: Equivariant
+[15] Aditi Krishnapriyan, Amir Gholami, Shandian Zhe,                   neural operators under arbitrary lie groups. arXiv
+      Robert Kirby, and Michael W Mahoney. Charac-                      preprint arXiv:2410.02698, 2024.
+      terizing possible failure modes in physics-informed
+      neural networks. Advances in Neural Information             [27] Justin Sirignano and Konstantinos Spiliopoulos.
+      Processing Systems, 34:26548­26560, 2021.                         DGM: A deep learning algorithm for solving par-
+                                                                        tial differential equations. Journal of computational
+[16] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hin-               physics, 375:1339­1364, 2018.
+      ton. Imagenet classification with deep convolutional
+      neural networks. In F. Pereira, C.J. Burges, L. Bottou,     [28] Hwijae Son, Jin Woo Jang, Woo Jin Han, and
+      and K.Q. Weinberger, editors, Advances in Neural                  Hyung Ju Hwang. Sobolev training for physics-
+      Information Processing Systems, volume 25. Curran                 informed neural networks. Communications in Math-
+      Associates, Inc., 2012.                                           ematical Sciences, 21(6):1679­1705, 2023.
+
+[17] Pierre-Yves Lagrave and Eliot Tron. Equivariant              [29] Luning Sun, Han Gao, Shaowu Pan, and Jian-Xun
+      neural networks and differential invariants theory for            Wang. Surrogate modeling for fluid flows based on
+      solving partial differential equations. In Physical               physics-constrained deep learning without simulation
+      Sciences Forum, volume 5, page 13. MDPI, 2022.                    data. Computer Methods in Applied Mechanics and
+                                                                        Engineering, 361:112732, 2020.
+[18] Y. LeCun, B. Boser, J. S. Denker, D. Henderson, R. E.
+      Howard, W. Hubbard, and L. D. Jackel. Backprop-             [30] Yusuke Tanaka, Takaharu Yaguchi, Tomoharu Iwata,
+      agation applied to handwritten zip code recognition.              and Naonori Ueda. Neural operators meet energy-
+      Neural Computation, 1(4):541­551, 1989.                           based theory: Operator learning for hamiltonian and
+                                                                        dissipative pdes, 2024.
+[19] Jie-Ying Li, Hui Zhang, Ye Liu, Lei-Lei Guo, Li-
+      Sheng Zhang, and Zhi-Yong Zhang. Utilizing                  [31] Rui Wang, Robin Walters, and Rose Yu. Incorpo-
+      symmetry-enhanced physics-informed neural net-                    rating symmetry into deep dynamics models for im-
+      work to obtain the solution beyond sampling domain                proved generalization. In 9th International Confer-
+      for partial differential equations. Nonlinear Dynam-              ence on Learning Representations, ICLR 2021, Vir-
+      ics, 111(23):21861­21876, 2023.                                   tual Event, Austria, May 3-7, 2021. OpenReview.net,
+                                                                        2021.
+[20] Ye Li, Yiwen Pang, and Bin Shan. Physics-guided
+      data augmentation for learning the solution operator        [32] Sifan Wang, Hanwen Wang, and Paris Perdikaris.
+      of linear differential equations. In 2022 IEEE 8th                Learning the solution operator of parametric partial
+      International Conference on Cloud Computing and                   differential equations with physics-informed Deep-
+      Intelligent Systems (CCIS), pages 543­547, 2022.                  ONets. Science advances, 7(40):eabi8605, 2021.
+
+[21] Zongyi Li, Hongkai Zheng, Nikola Kovachki, David             [33] Lipei Zhang, Yanqi Cheng, Lihao Liu, Carola-
+      Jin, Haoxuan Chen, Burigede Liu, Kamyar Azizzade-                 Bibiane Schönlieb, and Angelica I Aviles-Rivero.
+      nesheli, and Anima Anandkumar. Physics-informed                   Biophysics informed pathological regularisation
+      neural operator for learning partial differential equa-           for brain tumour segmentation. arXiv preprint
+      tions. ACM/JMS Journal of Data Science, 2021.                     arXiv:2403.09136, 2024.
+
+[22] Johannes Müller and Marius Zeinhofer. Position:              [34] Zhi-Yong Zhang, Hui Zhang, Li-Sheng Zhang, and
+      Optimization in SciML should employ the function                  Lei-Lei Guo. Enforcing continuous symmetries
+      space geometry. In Forty-first International Confer-              in physics-informed neural network for solving
+      ence on Machine Learning, 2024.                                   forward and inverse problems of partial differen-
+                                                                        tial equations. Journal of Computational Physics,
+                                                                        492:112415, 2023.
+
+                                                               6
+                                               Generalized Lie Symmetries in PINOs
+[35] Yinhao Zhu, Nicholas Zabaras, Phaedon-Stelios
+
+      Koutsourelakis, and Paris Perdikaris. Physics-
+      constrained deep learning for high-dimensional sur-
+      rogate modeling and uncertainty quantification with-
+      out labeled data. Journal of Computational Physics,
+      394:56­81, 2019.
+
+                                                                      7
+                                  Generalized Lie Symmetries in PINOs
+
+A Burgers' Equation Symmetries                                   B Darcy Flow Symmetries
+
+In this appendix, we provide detailed derivations of the         In this appendix, we provide detailed derivations of the
+evolutionary representatives and their prolongations for the     evolutionary representatives and their prolongations for the
+symmetries of Burgers' equation.                                 Darcy flow symmetries.
+
+Burgers' equation is given by:                                   The Darcy flow equation is given for x  D  R2:
+
+       B := ut + uux - uxx = 0                                   D :=  · (k(x)u(x)) + f (x) = 0,
+
+                                                                 Unlike the the Burgers case, the algebra for the Darcy Flow
+The Lie algebra of symmetries for Burgers' equation in- is no longer finite dimensional. The algebra of symme-
+cludes the following generators:
+                                                                 tries for the Darcy flow equation includes the following
+
+       v1 = x,                                                   generators:
+
+       v2 = t,                                                    v1 = h[1](u)u - khu[1](u)k,
+       v3 = 2tt + xx - uu,                                        v2 = -h[y2](x, y)x - h[x2](x, y)y + 2f h[x2y](x, y)f ,
+       v4 = tx + u,
+       v5 = t2t + txx + (x - tu)u.                               where h[1] is arbitrary and 2h[2](x, y) = 0.
+
+It turns out to be rather simple to find evolutionary repre- The evolutionary representatives of these generators are:
+
+sentatives of these as:                                          v1 = h[1](u)u - kh[u1](u)k,
+
+       [v1]Q = -uxu,                                             v2 = -h[y2](x, y)x - hx[2](x, y)y
+
+       [v2]Q = -utu,                                                          + 2f h[x2y](x, y)f ,
+
+       [v3]Q = -(u + xux + 2tut)u,                               The prolongations of these evolutionary representatives
+       [v4]Q = -(tux - 1)u,                                      acting on the PDE are:
+       [v5]Q = (x - tu - txux - t2ut)u.
+                                                                       pr [v1]Q [D] = 0,
+
+The prolongations of these evolutionary representatives          pr [v2]Q [D] = Dx[h[y2]D] + Dy[h[x2]D].
+
+acting on the PDE B are:                                         Unfortunately, by the virtue of already being in its evo-
+
+       pr [v1]Q [B] = -Dx [B] ,                (7) lutionary form, the first vector does not result in a useful
+       pr [v2]Q [B] = -Dt [B] ,                      training signal.
+       pr [v3]Q [B] = -(3 + xDx + 2tDt) [B] ,
+       pr [v4]Q [B] = -tDx [B] ,                     Now, if we are to enforce this during training we need
+       pr [v5]Q [B] = -t(3 + xDx + tDt) [B] .        to somehow sample h[2], such that it solves the Laplace
+                                                     equation. For practical purposes, we consider a finite-
+                                                     dimensional sub-algebra with linear h[2], resulting in a
+                                                     two-dimensional Lie algebra:
+
+However if one were to use the method of [1, 34], the                         pr v20 Q [D] = Dy[D],       (9)
+resulting actions would instead be:
+                                                                              pr v21 Q [D] = Dx[D].
+       pr v1 [B] = 0,                          (8)
+
+       pr v2 [B] = 0,                                            However if one were to use the method of [1, 34], the
+                                                                 resulting actions would instead be:
+       pr v3 [B] = 3B,
+
+       pr v4 [B] = 0,                                                         pr v1 [D] = 0,              (10)
+
+       pr v5 [B] = 3tB.                                                       pr v2 [D] = 2hx[2y]D,
+
+These calculations show that using the evolutionary rep- which for the two dimensional sub-algebra would both be
+
+resentatives of the symmetries results in useful training zero, resulting in no training signal. Thus, one would be
+
+signals, unlike previous methods used for loss augmenta- forced to solve the Laplace equation, making the resulting
+
+tion.                                                            method significantly more complex.
+
+                                                              8
+

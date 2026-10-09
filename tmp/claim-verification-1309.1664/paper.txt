@@ -1,0 +1,1552 @@
+arXiv:1309.1664v1 [math-ph] 6 Sep 2013  Algorithmic framework for group analysis
+                                        of differential equations and its application
+                                        to generalized Zakharov­Kuznetsov equations
+
+                                        Ding-jiang Huang and Nataliya M. Ivanova
+
+                                         Department of Mathematics, East China University of Science and Technology, Shanghai,
+                                          200237, P. R. China
+                                          e-mail: djhuang.math@gmail.com, djhuang@ecust.edu.cn
+
+                                         Institute of Mathematics of NAS of Ukraine, 3 Tereshchenkivska Str., 01601 Kyiv, Ukraine
+                                          e-mail: ivanova@imath.kiev.ua
+
+                                              In this paper, we explain in more details the modern treatment of the problem of group classifi-
+                                              cation of (systems of) partial differential equations (PDEs) from the algorithmic point of view.
+                                              More precisely, we revise the classical Lie­Ovsiannikov algorithm of construction of symmetries
+                                              of differential equations, describe the group classification algorithm and discuss the process of
+                                              reduction of (systems of) PDEs to (systems of) equations with smaller number of independent
+                                              variables in order to construct invariant solutions. The group classification algorithm and
+                                              reduction process are illustrated by the example of the generalized Zakharov­Kuznetsov (GZK)
+                                              equations of form ut + (F (u))xxx + (G(u))xyy + (H(u))x = 0. As a result, a complete group
+                                              classification of the GZK equations is performed and a number of new interesting nonlinear
+                                              invariant models which have non-trivial invariance algebras are obtained. Lie symmetry reduc-
+                                              tions and exact solutions for two important invariant models, i.e., the classical and modified
+                                              Zakharov­Kuznetsov equations, are constructed. The algorithmic framework for group analy-
+                                              sis of differential equations presented in this paper can also be applied to other nonlinear PDEs.
+
+                                              Mathematics Subject Classifications (2010): 35Q60, 35A30, 35C05
+
+                                              Keywords: group classification, equivalence transformation, symmetry reduction, gen-
+                                              eralized Zakharov­Kuznetsov equations, invariant solutions
+
+                                        1 Introduction
+
+                                        One of the most famous two-dimensional generalizations (together with Kadomtsev-Petviashvili
+                                        equation) of the Korteweg-de Vries (KdV) equation is given by the Zakharov­Kuznetsov (ZK)
+                                        equation
+
+                                        ut + auxxx + buxyy + cuux = 0.                                                   (1)
+
+                                        It was first derived by Zakharov and Kuznetsov [38] to describe nonlinear ion-acoustic waves
+                                        in a magnetized plasma. More precisely, they considered a plasma in a strong magnetic field,
+                                        B = Bz^, with cold ions and hot electrons (Te  Ti). The ion motions are described by the
+                                        following equations
+
+                                        nt +  · (nu) = 0,         ut      +  (u  ·  )u  =  -   e      +  u  ×  i,
+                                                                                              mi
+
+                                        2 = -4e(n - ne),
+
+                                        where n is number density of ions, u = (u, v, w) is ion velocity, mi is ion mass,  is electric
+                                                         eB                                                     e
+                                        potential  i  =  mic  is  scaled  magnetic  field  and    ne  =  exp(  K Te  ).
+
+                                                                                              1
+   After introducing the dimensionless variables and approximating the x-component of u by
+the polarization shift these equations look like
+
+nt - (ntx)x + (nw)z = 0, wt = txwx + wwz - z,
+xx + zz = e - n.
+
+Now, after a change of independent variables  = 1/2(z - t),  = 1/2x,  = 3/2t assuming a
+solution of the latter equations of the form
+
+                                            
+
+n = 1 + jnj,         = j j ,       w = j wj ,
+
+               j=1          j=1            j=1
+
+one gets that n1 = 1 = w1 with 1 being solution of
+
+1,t  +  11,  +  1  (1,  +  (1  +  )1, )  =  0
+                2
+
+which has the form (1).
+   In the more realistic situation in which the electrons are non-isothermal, Munro and
+
+Parkes [23, 24] showed that, with an appropriate modified form of the electron number den-
+sity proposed by Schamel [31], a reductive perturbation procedure leads to a modified form of
+the Zakharov­Kuznetsov (mZK1) equation, namely
+
+ut + au1/2ux + buxxx + cuxyy = 0.
+
+   One more modification of the Zakharov­Kuznetsov equation is given by Kakutani and
+Ono [19] who have shown that the modified KdV equation governs the propagation of Alfv´en
+waves at a critical angle to the undisturbed magnetic field. The presence of the transverse
+dispersion has been physically attributed to the finite Larmor radius effects [12]. The resulting
+two-dimensional equation in this physical context is known as the modified Zakharov­Kuznetsov
+equation (mZK2) [3]
+
+       ut + au2ux + uxxx + uxyy = 0.
+
+Here, the sign of a can not be forced to be definite by scaling considerations and the two signs
+of a correspond to different physical phenomenon. For example, the focusing equation can be
+derived as a model for the evolution of ion acoustic perturbations with a negative ion component,
+while the defocusing equation models the evolution of ion acoustic perturbations in a plasma
+with two negative ion components of different temperature.
+
+   In order to encompass as many physical applications as possible, many researchers consider
+dispersive models of the Zakharov­Kuznetsov (dZK) type equations of form [37]
+
+ut + a(un)xxx + b(um)xyy + c(uk)x = 0,
+
+or even the generalized Zakharov­Kuznetsov (GZK) equations
+
+ut + (F (u))xxx + (G(u))xyy + (H(u))x = 0                   (2)
+
+with enough smooth functions F (u), G(u) and H(u).
+   Many mathematical properties such as the stability or transverse instability of solitary-wave
+
+solutions, initial-boundary value problems, generalized Painlev´e formulation, compactons and
+solitons and so on for the special cases of class (2) have been investigated exhaustively by
+many authors [1, 3, 5, 6, 9, 13, 17­19, 23, 24, 30, 32, 33, 35, 37]. However, despite of great interest
+
+                                         2
+of researchers and importance of class (2), very few facts of its Lie symmetry structure and
+related topics are known. Therefore, for the sake of providing more information to understand
+the mathematical structures of the ZK-like equations, in this paper we will perform detailed
+group analysis for the class of GZK equations (2), where F (u), G(u) and H(u) are arbitrary
+smooth (analytic) functions, FuGuHuu = 0.
+
+   It is known that the Lie group analysis is a systematic and powerful method for handling
+partial differential equations (PDEs) [4, 10, 26, 27]. Moreover, it forms a basis for many useful
+techniques in both pure and applied areas of mathematics, physics, and mechanics, etc. For the
+PDEs, admitting symmetry is an essential part of their intrinsic nature. Based on the symmetries
+of a PDE, one can successively consider many other important properties of the equation such
+as integrability, conservation laws and linearizations, reducing equations and invariant solutions,
+fundamental solution and invariant numerical integrators and so on [2,4,8,10,11,21,26,27,34,36].
+In general, for a single PDE one can directly implement the classical Lie­Ovsiannikov method
+to compute the symmetries. However, for parameterized classes of PDEs (namely, equations
+containing arbitrary constants or functions), one can not derive all the symmetries by direct
+usage of this method. One will face the so called group classification problem of PDEs, which is
+the keystone of group analysis of differential equations. Although this problem has been widely
+investigated for different subclasses of (2), many of the existing classifications are incomplete.
+In fact, one can find a huge number of recent papers on symmetry analysis of PDEs, including
+different generalizations of the Zakharov­Kuznetsov equations, where the group classification
+problem is solved incompletely or incorrectly and papers studying symmetries of some fixed
+equations with low physical motivation. There are also many papers on "preliminary group
+classification" where authors list some cases with new symmetries but do not claim that the
+general classification problem is solved. In many respects this can be explained to two main
+reasons: (i) many researchers do not incorporate the equivalence transformation theory to the
+classification problem; (ii) overdetermined systems of PDEs derived from the invariance criterion
+of parameterized PDEs under consideration often can not be solved completely.
+
+   That is why, in this paper we will describe an algorithmic framework for group classifica-
+tion of (systems of) partial differential equations. More precisely, we revise the classical Lie­
+Ovsiannikov method of construction of symmetries of differential equations in more details and
+write down the precise formulation of the algorithm of group classification of a class (of systems)
+of differential equations by introducing equivalence transformation theory and a compatibility
+method for solving the overdetermined system of PDEs. Moreover, we describe a systematic
+way of reduction of (systems of) partial differential equations to (systems of) equations with
+smaller number of independent variables so that we can find all possible invariant solutions of
+(systems of) differential equations. We will illustrate this well-known theoretical background
+and algorithmic framework by the running example of the GZK equations (2).
+
+   Therefore, the purpose of this paper is two fold. On the one hand, we explain the modern
+treatment of the problem of group classification of (systems of) PDEs from the algorithmic
+point of view. On the other hand, we perform the systematic complete group classification and
+construct invariant reductions for the GZK equations (2). The rest of this paper is organized as
+follows. In section 2, we describe the algorithmic framework for group classification of (systems
+of) PDEs and give an exhaustive algorithm of solving such problems. An efficient algorithm of
+constructing optimal systems of subalgebras of Lie symmetry algebras and invariant solutions of
+differential equations is also given. In section 3, we investigate the equivalence transformations
+of the GZK equations (2). The complete group classification of class (2) is presented in section 4
+by using a compatibility method. Section 5 contains results on optimal systems of subalgebras
+of Lie symmetry algebras of two equations from class (2). Invariant solutions of the equations
+under consideration are also constructed. Finally, some conclusion and discussion are given in
+section 6.
+
+                                                              3
+2 Algorithmic framework for group analysis of differential equa-
+     tions
+
+2.1 Computation of Lie symmetries of differential equations
+
+For construction of symmetries of differential equations we use Lie­Ovsiannikov infinitesimal
+
+criterion of invariance [26, 27].
+
+   Consider the system L: L(x, u(p)) = 0 of l differential equations for m unknown functions
+u = (u1, . . . , um) of n independent variables x = (x1, . . . , xn). Here u(p) denotes the set of all
+the derivatives of u with respect to x of order not greater than p, including u as the derivatives
+of the zero order. L = (L1, . . . , Ll) is a tuple of l fixed functions depending on x, and u(p).
+
+   Let L(k) denote the set of all algebraically independent differential consequences of the sys-
+tem L that have, as differential equations, orders not greater than k. Under the local approach,
+the system L(k) is identified with the manifold determined by L(k) in the jet space J(k).
+
+   Each one-parametric group of point transformations that leaves the system L invariant cor-
+
+responds to an infinitesimal symmetry operator of the form
+
+Q = i(x, u)xi + a(x, u)ua .
+
+Here and below the summation over the repeated indices is assumed. The indices i and a run
+from 1 to n and from 1 to m, respectively.
+
+   The infinitesimal criterion of invariance of the system L with respect to the Lie symmetry
+operator Q has the form
+
+Q(p)L(x, u(p)) L(p) = 0, where Q(p) := Q +          aua ,
+
+                                            0<|| p
+
+i.e., the result of acting by Q(p) on L vanishes on the manifold L(p). Here Q(p) denotes the stan-
+dard p-th prolongation of the operator Q, coefficient a = D11 . . . Dnn Q[ua] + iua,i, operator
+Di = i + ua,iua is the operator of total differentiation with respect to the variable xi, and
+Q[ua] = a(x, u) - i(x, u)uia is the characteristic of operator Q, associated with ua. The tuple
+ = (1, . . . , n) is a multi-index, i  N  {0}, ||: = 1 + · · · + n. The variables ua and ua,i
+of the jet space J(r) correspond to the derivatives
+
+    ||ua        and                    ||+1ua                   respectively.
+x1 1 . . . xnn       x1 1 . . . xi-i-11 xii+1xi+i+11 . . . xnn
+
+Example 1. For equations of form (2) we look for the infinitesimal symmetry generator in form
+
+       Q =  (t, x, y, u)t + (t, x, y, u)x + (t, x, y, u)y + (t, x, y, u)u.
+
+(In the above notation (t, x, y) = (x0, x1, x2) and  = 0,  = 1,  = 2.) Application of the Lie
+infinitesimal criterion to (2) gives
+
+       t + Fuuuuux3 + 3xFuuuux2 + 3Fuuuuxuxx + 3Fuu(xuxx + xxux) + Fuuuxxx
+       +xxxFu + Guuuuuxu2y + Guu(xuy2 + 2yuxuy) + 2Guuuuyuxy
+       +2Guu(yuxy + xyuy) + Guuuuxuyy + Guu(xyy + yyux)
+       +Guuuxyy + xyyGu + Huuux + Hux = 0.
+
+One can also verify that the coefficients of the first prolongation of Q look like
+
+       t = t + uut - ut(t + uut) - ux(t + uut) - uy(t + uut),
+       x = x + uux - ut(x + uux) - ux(x + uux) - uy(x + uux),
+       y = y + uuy - ut(y + uuy) - ux(y + uuy) - uy(y + uuy).
+
+In an analogous way the higher order coefficients can be found.
+
+                             4
+Example 2. Consider the Lie symmetries of the ZK equation:
+
+ut + auxxx + buxyy + cuux = 0.
+
+Applying the Lie infinitesimal criterion to the above equation we get
+
+t + axxx + bxyy + cux + cux = 0.
+
+Substituting the coefficients of the prolongation of the operator Q into the above equation and
+splitting it with respect to the unconstrained variables, we obtain the system of determining
+equations
+
+t = 3x, x = 0, y = 0, u = 0;
+t = c + 2cux, xx = 0, y = 0, u = 0;
+t = 0, x = 0, y = x, u = 0;
+uu = 0, t + axxx + bxyy + cux = 0.
+
+The general solution of this system is
+
+ = c1 + c2t,             =  1  c2  x  +  c3t   +   c4,     =       1  c2y    +  c5,         =  -  2  c2u  +  1  c3,
+                            3                                      3                              3          c
+
+where c1, . . . , c5 are arbitrary constants. Therefore the most general infinitesimal symmetry
+generator has the form
+
+Q = (c1 + c2t)t +           1   c2    x  +  c3t  +  c4   x +          1  c2  y  +   c5  y +       -  2  c2u  +  1  c3  u
+                            3                                         3                              3          c
+
+As c1, . . . , c5 are arbitrary constants, we conclude that the maximal Lie invariance algebra of
+the equation under consideration is 5-dimensional and is spanned by the following generators
+
+t, x, y, 3tt + xx + yy - 2uu, ctx + u .
+
+Example 3. Consider the Lie symmetries of the the modified ZK1 equation:
+
+ut  +  au  1  ux  +  buxxx  +   cuxyy       =  0.
+           2
+
+Application of the Lie infinitesimal criterion to the above equation gives
+
+t   +  1  au-     1  ux  +  ax  u  1  +  bxxx      +  cxyy      =  0,
+       2          2                2
+
+or, multiplying it by two for convenience,
+
+2t  u  1  + aux      +   2axu   +     2bxxxu       1  +  2cxyy     u  1  =      0.
+       2                                           2                  2
+
+Substituting the coefficients of the prolongation of the operator Q into the above equation, we
+obtain the system of determining equations
+
+x = 0, y = 0, u = 0, t = 3x, tt = 0;
+
+y = 0, u = 0, xx = 0, xt = 0;
+
+t = 0, x = 0, u = 0, y = x;
+
+xu = 0,          yu = 0,       uu = 0,             a  -  2u  1  t  +     4aux       =   0,
+                                                             2
+
+t   +  au  1  x   +  bxxx   +   cxyy     =  0.
+           2
+
+                                                                5
+Its general solution is
+
+ = c1 + c2t,             =  1  c2  x  +  c3,    =  1  c2y    +  c4,       =  -  4  c2u,
+                            3                      3                            3
+
+where c1, . . . , c4 are arbitrary constants. Therefore the most general infinitesimal symmetry
+operator has the form
+
+Q = (c1 + c2t)t +           1  c2  x  +  c3   x +     1  c2  y  +  c4  y  -  4  c2  uu,
+                            3                         3                      3
+
+that implies that the Lie algebra of infinitesimal symmetry generators can be represented as
+
+t, x, y, 3tt + xx + yy - 4uu .
+
+Example 4. Consider the Lie symmetries of the the modified ZK2 equation:
+       ut + au2ux + uxxx + uxyy = 0
+
+Application of the Lie infinitesimal criterion to the above equation gives
+       t + xxx + gxyy + 2huux + hxu2 = 0
+
+Substituting the coefficients of the prolongation of the operator Q into the above equation, we
+obtain the system of determining equation
+
+x = 0, y = 0, u = 0, t = 3x, tt = 0;
+y = 0, u = 0, xx = 0, xt = 0;
+t = 0, x = 0, u = 0, y = x;
+xu = 0, yu = 0, uu = 0, 2au + a(t - x)u2 - t = 0,
+t + au2x + xxx + xyy = 0.
+
+Solving the above system, we obtain
+
+ = c1 + c2t,             =  1  c2  x  +  c3,    =  1  c2y    +  c4,       =  -  1  c2u,
+                            3                      3                            3
+
+where c1, . . . , c4 are arbitrary constants. In an analogous to the previous examples way we get
+the four-dimensional Lie algebra of infinitesimal symmetry generators
+
+t, x, y, 3tt + xx + yy - uu .
+
+   As in the above examples it appears that in the most of cases computation of symmetries for
+a single equation is an algorithmic and simple exercise, which can be easily done by direct com-
+puting or by many standard mathematical software such as MAPLE, MATHEMATICA, MuLie
+and so on. In contrast to this, for parametric classes of differential equations, an exhaustive
+investigation of symmetries is usually a very difficult task, that requires to solve the so-called
+group classification problem.
+
+2.2 Group classification of classes of differential equations
+
+One of the most famous problems of group analysis of differential equations is the group classi-
+fication which is one of the symmetry methods used to choose physically relevant models from
+parametric classes of systems of (partial or ordinary) differential equations. The parameters can
+be constants or functions of independent variables, unknown functions and their derivatives.
+
+                                                         6
+Solving this problem is interesting not only from mathematical point of view, but is also impor-
+tant for applications. In physical models there often exist a priori requirements to symmetry
+groups that follow from physical laws (in particular, from the Galilei or relativistic theories).
+Moreover, modeling differential equations could contain parameters or functions that have been
+found experimentally and so are not strictly fixed. At the same time mathematical models have
+to be simple enough to analyze and solve them. Solving the problems of group classification
+makes possible to accept for the criterion of applicability the following statement. The modeling
+differential equation has to admit a group with certain properties or the richest symmetry group
+among the possible ones.
+
+   Exhaustive consideration of the problem of group classification for a parametric class L of
+systems of differential equations includes the following steps:
+
+   1. Finding the group G of local transformations that are symmetries for all systems from
+       L.
+
+   2. Construction of the group G (the equivalence group) of local transformations which
+       transform L into itself.
+
+   3. Description of all possible G-inequivalent values of parameters that admit maximal in-
+       variance groups wider than G.
+
+Following S. Lie, one usually considers infinitesimal transformations instead of finite ones. In
+such a way the problem of group classification can be simplified to a problem for Lie algebras
+of vector fields (infinitesimal generators of symmetry groups). Thus the group classification in
+a class of differential equations is reduced to integration of an overdetermined system of partial
+differential equations with respect to both coefficients of infinitesimal symmetry operators and
+arbitrary elements. That is why it is much more complicated problem than finding the Lie
+symmetry group of a single differential equation.
+
+   Below we present the classical algorithm of group classification restricting ourselves, for sim-
+plicity, to the case of one differential equation of the form
+
+L(x, u(n)) = L(x, u(n), (x, u(n))) = 0.              (3)
+
+Here x = (x1, . . . , xl) denotes independent variables, u is a dependent variable, u(n) is the set
+of all the partial derivatives of the function u with respect to x of order no greater than n,
+
+including u as the derivative of zero order. L is a fixed function of x, u(n) and .  denotes the
+set of of arbitrary (parametric) functions (x, u(p)) = (1(x, u(p)), . . . , k(x, u(p))) satisfying the
+conditions
+
+S(x, u(p), (q)(x, u(p))) = 0, S = (S1, . . . , Sr).  (4)
+
+These conditions consist of r differential equations on , where x and u(p) play the role of
+independent variables and (q) stands for the set of all the partial derivatives of  of order no
+greater than q. In what follows we call the functions (x, u(p)) arbitrary elements. Sometimes
+this set is additionally constrained by the non-vanish condition S(x, u(p), (q)(x, u(p))) = 0 with
+another tuple S of differential functions. Denote the class of equations of form (3) with the
+
+arbitrary elements  satisfying the constraint (4) as L|S.
+
+Example 5. For the class (2) of the generalized Zakharov­Kuznetsov equation, in the above
+
+notation p = 0, the set of arbitrary elements (x, u(p)) consists of functions F , G and H satisfying
+system of differential equations
+
+Ft = 0, Fx = 0, Gt = 0, Gx = 0, Ht = 0, Hx = 0,      (5)
+
+                                         7
+and system of inequalities
+
+Fu = 0, Gu = 0, Huu = 0.                                            (6)
+
+   Let the functions  be fixed. Each one-parametric group of local point transformations that
+leaves equation (3) invariant corresponds to an infinitesimal symmetry operator of form
+
+       Q = a(x, u)xa + (x, u)u.
+
+The complete set of such groups generates the principal group Gmax = Gmax(L, ) of equation (3).
+The principal group Gmax has a corresponding Lie algebra Amax = Amax(L, ) of infinitesimal
+symmetry operators of equation (3). The group G of local transformations that are symmetries
+for all systems is
+
+G = G(L, S) =               Gmax(L, )
+
+               :S()=0
+
+with the corresponding Lie algebra of form
+
+A = A(L, S) =               Amax(L, ).
+
+               :S()=0
+
+Let G = G(L, S) denote the point transformations group preserving the form of equations
+from L|S (group of equivalence transformations). In other words, G maps any equation from
+
+class L|S to an equation (possibly, another one) from the same class.
+
+Note 1. Sometimes one considers a subgroup instead of the complete equivalence group, e.g.,
+subgroup of continuous transformations of the complete equivalence group. This is because the
+group of continuous transformations can be easily found using infinitesimal method, and to find
+the complete equivalence group one needs to apply more cumbersome and sophisticated direct
+method of construction of equivalence transformations.
+
+Example 6. To find the connected component of the unity of the equivalence group G of
+
+class (2), i.e., the subgroup of continuous equivalence transformations, we have to investigate
+
+Lie symmetries of the system that consists of equation (2) and additional conditions (5) subject
+to (6). In other words we must seek for an operator from G in the form
+
+X =  t + x + y + u + F + G + H                                      (7)
+
+using the infinitesimal invariance criterion applied to the system
+
+ut + (F (u))xxx + (G(u))xyy + (H(u))x = 0,                          (8)
+
+Ft = Fx = Fy = 0, Gt = Gx = Gy = 0, Ht = Hx = Hy = 0,
+
+subject to conditions (6). Here u, F , G and H are considered as differential variables: u on the
+space (t, x, y) and F , G, H on the extended space (t, x, y, u). The coordinates  , ,  and  of
+the operator (7) are sought as functions of t, x, y and u while the coordinates ,  and  are
+sought as functions of t, x, y, u, F , G, H.
+
+   The problem of group classification consists in finding all possible inequivalent cases of ex-
+tensions of Amax, i.e. in a listing all G-inequivalent values of  that satisfy equation (4) and
+the condition Amax(L, ) = A.
+
+   In the approach used here group classification is application of the following algorithm [27]:
+
+                                            8
+   1. From the infinitesimal Lie invariance criterion [26, 27] we find the system of determining
+       equations for the coefficients of the infinitesimal generator Q. It is possible that some
+       of the determining equations does not contain arbitrary elements and therefore can be
+       integrated immediately. The equations containing arbitrary elements explicitly are called
+       classifying equations.
+
+   2. We decompose the determining equations with respect to all unconstrained derivatives of
+       arbitrary elements. This gives a system of partial differential equations for coefficients
+       of the infinitesimal operator Q only. Solving this system yields the algebra A of point
+       transformations that are symmetries for all equations from L|S.
+
+   3. To construct the equivalence group G of the class L|S one has to investigate the point
+       symmetry transformations of system (3), (4), considering it as a system of partial differ-
+       ential equations with respect to  with the independent variables x, u(n). If we restrict
+       ourselves to studying the connected component of unity in G, (i.e., finding continuous
+       equivalence transformations only), the Lie infinitesimal method of finding symmetries of
+       this system can be applied. To find the complete equivalence group (including discrete
+       transformations) one has to use the direct method.
+
+   4. If Amax is an extension of A (i.e. in the case Amax(L, ) = A), then the classifying
+       equations define a system of nontrivial equations for arbitrary elements . Depending on
+       their form and number, we obtain different cases of extensions of A.
+
+Note 2. To integrate completely the determining equations often it is necessary to investigate
+a large number of different cases of extensions of A. There exist different methods allowing
+to avoid cumbersome enumeration of possibilities in solving the determining equations. To
+solve determining equations for the coefficients of symmetry generators of Zakharov­Kuznetsov
+equations we use a method which involves the investigation of compatibility of the classifying
+equations [25, 29].
+
+   The result of application of the above algorithm is a list of equations with their Lie invariance
+algebras. The problem of group classification is assumed to be completely solved if
+
+   1. the list contains all possible inequivalent cases of extensions;
+
+   2. all equations from the list are mutually inequivalent with respect to the transformations
+       from G;
+
+   3. the obtained algebras are the maximal invariance algebras of the respective equations.
+
+Such list may include equations being mutually equivalent with respect to point transformations
+which do not belong to G. Knowing such additional equivalences allows to simplify essentially
+further investigation of L|S. Constructing them sometimes is considered as the fifth step of the
+algorithm of group classification. Then, the above enumeration of requirements to the resulting
+list of classification can be completed by the following step:
+
+   4. all possible additional equivalences between the listed equations are constructed in explicit
+       form.
+
+See, e.g., [29] for more details.
+   When the symmetry group is known, a wide range of applications becomes available, e.g.,
+
+construction of invariant solutions of nonlinear equations. Indeed, group analysis is one of very
+few systematic methods known for deducing exact solutions of nonlinear partial differential
+equations.
+
+                                                              9
+2.3 Invariant solutions of differential equations
+
+Although Lie symmetry analysis does not help to construct general solutions of systems of
+nonlinear PDEs it often gives an approach to deduct wide classes of solutions being invariant
+with respect to different subgroups of the Lie symmetry group. Roughly speaking, the main
+theorem on invariant solutions [26, 27] claims that all solutions invariant with respect to r-
+parametric group of symmetries (with some restrictions on the form of the algebra) of the given
+n-dimensional system can be obtained by solving a system of differential equation with n - r
+independent variables. In particular, if r = n - 1, invariant solutions can be constructed via
+solving a system of ordinary differential equations.
+
+Example 7. Generalized Zakharov­Kuznetsov equations (2) are three-dimensional. Therefore,
+to reduce an equation of form (2) to ordinary differential equation we have to use two-dimensional
+subalgebras of its symmetry algebra. Reduction of (2) with respect to one-dimensional symmetry
+algebras provides us with the two-dimensional reduced equations. Note, that the reduction with
+respect to the three-dimensional subalgebras leads to algebraic equations.
+
+   To construct solutions of a system of partial differential equations invariant with respect to
+r-dimensional symmetry algebra spanned by symmetry generators vi = jii +juj , j = 1, . . . , r,
+we need to solve a system of r first-order PDEs:
+
+       ji ui = j, j = 1, . . . , n.
+
+Solution of this system provides us with expressions for n - r new independent variables and
+Ansatz for the dependent variables. Substituting this to the initial system we obtain a system of
+differential equations with n - r independent variables. A detailed example of implementation
+of this method will be given in section 5.
+
+Note 3. The above mentioned procedure works only if the symmetry algebra satisfies the
+property of transversality. For more details see [26, 27].
+
+   As we have already noticed, in general "almost every" subgroup of a Lie symmetry group
+corresponds to a class of invariant solutions. Since almost always there exist an infinite number
+of such subgroups, often it is practically impossible to list all invariant solutions. Therefore one
+needs an effective systematic tool of their classification that gives an "optimal system" of such
+solutions, from where one can find all possible invariant solutions.
+
+   Any two conjugate subgroups of a Lie symmetry group of a system of PDEs give rise to
+reduced equations that are related by a conjugacy transformation in the point symmetry group
+of the system acting on the invariant solutions determined by each subgroup. Hence, up to the
+action of the point symmetry transformations, all invariant solutions for a given system can
+be obtained by selecting a subgroup in each conjugacy class of all admitted point symmetry
+subgroups. Such a selection is called an optimal set of subgroups [27]. A set of subalgebras of
+the Lie symmetry algebra corresponding to the optimal set of subgroups consists of subalgebras
+inequivalent with respect to the action of adjoint representation of the Lie symmetry group on
+its Lie algebra.
+
+   An effective algorithm of construction of optimal systems of subalgebras of Lie algebras
+is given in [27] (see also a simpler explanation and examples for one-dimensional subalgebras
+in [26]). In section 5 we illustrate this algorithm by examples of the usual and modified Zakharov­
+Kuznetsov equations.
+
+3 Equivalence transformations of the GZK equations
+
+We start the group classification procedure of class (2) of the GZK equations from investigating
+its group of equivalence transformations.
+
+                                                             10
+   First, we describe construction of the continuous equivalence transformations. As it is stated
+in Example 6, to reach this goal one has to investigate Lie symmetries of system (8). Application
+of the infinitesimal invariance criterion to system (8) yields the following determining equations
+for  , , , , ,  and :
+
+x = y = u = 0, y = u = xx = 0,
+
+t = x = u = yy = 0, t = x = y = 0,
+
+t = x = y = u = G = H = F F = 0, F - u + t - 3x = 0,
+
+t = x = y = u = F = H = GG = 0, G - u + t - x - 2y = 0,
+
+t = x = y = F = G = 0, u - t = 0 H - u + t - x = 0.                                 (9)
+
+After easy calculations from (9), we find the coefficients of the infinitesimal operators of contin-
+uous equivalent transformations of class (2) have the form
+
+ = c1 + c5t,  = c2 + c6x + c9t,  = c3 + c7y,  = c4 + c8u,
+ = (c5 - 3c6 - c8)F + c11,  = (c5 - c6 - 2c7 - c8)G + c12,
+ = (c5 - c6 - c8)H + c9u + c10.
+
+Then the Lie algebra of the equivalence group G for class (2) is
+
+A = t, x, y, u, tt + F F + GG + HH , xx - 3F F - GG - HH ,
+yy - 2GG, uu - F F - GG - HH , tx + uH , F , G, H .
+
+   Now, to recover the formulas for the transformations of variables one needs to solve the so-
+
+called Lie equations (see, e.g., [26, 27]). Namely, for any infinitesimal operator X =  t + x +
+y + u + F + G + H the corresponding finite transformations of variables can be found
+from solving the system
+
+dt~  =  ,  t~|=0 = t,
+d          x~|=0 = x,
+
+dx~  =  ,
+d
+
+...
+
+dH~  = ,   H~ |=0 = H.
+d
+
+Solving this system for every infinitesimal equivalence generator and gathering all 12 results
+together, we get that the group Gcont of continuous equivalence transformations of class (2) is
+as follows:
+
+t~ = e1 t + 6, x~ = e2 x + e5 t + 7, y~ = e3y + 8, u~ = e4u + 9,
+F~ = e-1 + 32 + 4F + 10, G~ = e-1+2+23+4G + 11,
+H~ = e-1+2+4 H + e-1+4+5 u + 12.
+
+   To find the complete equivalence group of class (2) we use the direct method. More precisely,
+we look for transformations of form
+
+t~ = t~(t, x, y, u), x~ = x~(t, x, y, u), y~ = y~(t, x, y, u), u~ = u~(t, x, y, u)
+
+that relates equations  ut + (F (u))xxx + (G(u))xyy  + (H (u))x  =  0  and  u~t~+ (F~(u~))x~x~x~ + (G~(u~))x~y~y~ +
+(H~ (u~))x~ = 0.
+
+                                11
+   Now we have to express the non-transformed variables in terms of the "tilded" ones and
+substitute them into equation (2). Requiring that the obtained equation belongs to class (2) we
+get a polynomial equation with respect to the derivatives of u. Setting to zero its coefficients with
+respect to the unconstrained variables we obtain a system of overdetermined partial differential
+equations, general solution of which gives that the most general form of the transformation from
+the complete equivalence group G of class (2) is
+
+       t~ = 1t + 6, x~ = 2x + 5t + 7, y~ = 3y + 8, u~ = 4u + 9,
+       F~ = 1-1234F + 10, G~ = -1 12324G + 11, H~ = 1-124H + -1 145u + 12,
+
+where 1, . . . , 12 are arbitrary constants, 1234 = 0.
+   For more details and examples of application of the direct method of finding of equivalence
+
+transformations see, e.g., [20].
+
+Note 4. As one can see, the only discrete equivalence transformations for class (2) are alternat-
+ing of signs of the dependent and independent variables (extended to the arbitrary elements).
+However, for many classes this is not the case, i.e., there can exist nontrivial complicated discrete
+equivalence transformations that can essentially simplify classification problem (see, e.g., [14­16]
+and references therein).
+
+4 Lie symmetries of the GZK equations
+
+We search for infinitesimal generators of Lie symmetries of equations of class (2) in form
+
+       Q =  (t, x, y, u)t + (t, x, y, u)x + (t, x, y, u)y + (t, x, y, u)u.
+
+From the infinitesimal invariance criterion we obtain the following system of the determining
+equations for the coefficients of the infinitesimal generators:
+
+x = y = u = y = u = t = x = u = uu = 0,
+
+(xGu)u = 0,
+
+t + Fuxxx + Guxyy + xHu = 0,
+
+(Fux)u - Fuxx = 0,
+
+2(yGu)u - Guyy = 0,
+
+Fuu + (t - 3x)Fu = 0,
+
+Guu + (t - x - 2y)Gu = 0,
+
+3(xxFu)u + (yyGu)u + Huu - xxxFu + (t - x)Hu - t = 0.                                       (10)
+
+   Solving this system up to the equivalence group G we obtain the complete group classifica-
+tion of class (2) that presented in Table 1.
+
+                              12
+                              Table 1. Group classification of class (2).
+
+N F (u) G(u) H(u)                                          Amax
+
+1.                                   A = t, x, y
+
+2.   uk               gum     hun A + (k + 2 - 3n)tt + (k - n)xx + (m - n)yy + 2uu
+
+3.   uk               gum hu ln u A + (k - 1)tt + (2ht + kx - x)x + (m - 1)yy + 2uu
+
+4.   uk               gum     h ln u A + (k + 2)tt + kxx + myy + 2uu
+
+5. ln u               gum     hun A + (3n - 2)tt + nxx + (n - m)yy - 2uu
+
+6. ln u               gum     hu ln u A + tt + (x - 2ht)x - (m - 1)yy - 2uu
+
+7. ln u               gum     h ln u A + 2tt + myy + 2uu
+
+8.   eku              gemu    henu A + (k - 3n)tt + (k - n)xx + (m - n)yy + 2u
+
+9.   eku              gemu    hu2    A + ktt + (kx + 4ht)x + myy + 2u
+
+10. u                 gemu    henu A + 3ntt + nxx + (n - m)yy - 2u
+
+11. u                 gemu    hu2    A + 4htx + myy + 2u
+
+12. uk                g ln u  hun A + (k - 3n + 2)tt + (k - n)xx - nyy + 2uu
+
+13. uk                g ln u  h ln u A + (k + 2)tt + kxx + 2uu
+
+14. uk                g ln u hu ln u A + (k - 1)tt + (2ht + kx - x)x - yy + 2uu
+
+15. ln u g ln u               hun A + (3n - 2)tt + nxx + nyy - 2uu
+
+16. ln u g ln u h ln u A + tt + uu
+
+17. ln u g ln u hu ln u A + tt + (x - 2ht)x + yy - 2uu
+
+18. eku               gu      henu A + (k - 3n)tt + (k - n)xx - nyy + 2u
+
+19. eku               gu      hu2 A + ktt + (kx + 4ht)xx + 2u
+
+20. u                 gu      hu2    A + 3tt + xx + yy - 2uu, 2htx + u
+
+21. u                 u-1/3   u-1/3  A + 6tt + 2xx + 3uu, cos 2yy + 3u sin 2yu,
+                                     sin 2yy - 3u cos 2yu
+
+22.  u                -u-1/3 -u-1/3 A + 6tt + 2xx + 3uu, cos 2yy + 3u sin 2yu,
+
+                                     sin 2yy - 3u cos 2yu
+
+23.  u                -u-1/3 u-1/3 A + 6tt + 2xx + 3uu, e2y(y - 3uu), e-2y(y + 3uu)
+
+24. u                 u-1/3 -u-1/3 A + 6tt + 2xx + 3uu, e2y(y - 3uu), e-2y(y + 3uu)
+
+Here g = ±1, h = ±1.
+
+Proof. To obtain the classification result we need to solve the system of determining equa-
+tions (10). Integrating the equations that do not contain arbitrary elements we get
+
+ =  (t),  = (t, x),  = (y),  = 1(t, x, y)u + 0(t, x, y).                             (11)
+
+   Splitting the rest of the system (10) with respect to the arbitrary elements and their non-
+vanishing derivatives gives the equations t = 0, t = x = 0, y = 0 and  = 0 for the coefficients
+of the operators from A of (2). As a result, we get case 1 of Table 1.
+
+   As one can see, for any symmetry operator, equations Fuu + (t - 3x)Fu = 0 and Guu +
+(t - x - 2y)Gu = 0 give some equations (not greater than 3 each) on F and G of the general
+form
+
+       (au + b)Fuu + cFu = 0, (au + b)Guu + f Gu = 0,
+
+where a, b, c and f are constants. Solving this system up to G, we obtain the following different
+values of F (u) and G(u): F (u) = uk, F (u) = eku or F (u) = ln u mod G and G(u) = gum, or
+G(u) = gemu or G(u) = g ln u mod G. Therefore, to complete the classification we have to
+
+                                     13
+consider all possible combinations of the values of F (u) and G(u). We attempted to present our
+
+calculations in reasonable detail so that verification would be feasible.
+   (I) F = uk and G = gum mod G, where m = 0, g = ±1. Substituting F , G and (11) into
+
+the rest of the equations (10) yields
+
+x1 = xx = 0, (m - 1)x0 = (m - 1)y0 = (k - 1)x0 = 0, (m - 1)0 = (k - 1)0 = 0,                                        (12)
+2my1 - yy = 0, (k - 1)1 + (t - 3x) = 0, (m - 1)1 + (t - x - 2y) = 0.
+
+From the last three equations of this system we can get two classifying conditions:
+
+(k - 1)y1 = 0, (3m + 1)y1 = 0,                                                                                      (13)
+
+which can be decomposed into four cases:
+
+(i)  k  =  1, m  =  -  1  ;  (ii)  k  =  1,  m  =  -  1  ;   (iii)  k  =  1, m  =  -  1  ;  (iv)  k  =  1, m  =  -  1  .
+                       3                              3                               3                             3
+
+   (i) For this case equations (12) and (13) imply x1 = y1 = xx = 0 = 0. Hence, the equation
+for H in (10) looks like µuHuu + Hu +  = 0, where µ, ,  = const. Therefore, H(u) must take
+one of the following three values: H(u) = hun or H(u) = hu ln u or H(u) = h ln u mod G,
+
+where h = ±1. Substituting these three values in (10) and solving the obtained equations, we
+
+get cases 2, 3 and 4 respectively.
+   (ii) From k = 1 and (12) and (13) we obtain x1 = y1 = xx = 0 = 0 that leads to the
+
+subcases of the previously obtained cases 2, 3 and 4.
+   (iii) With the restriction m = 1, we have again x1 = y1 = xx = 0 = 0. This also leads to
+
+the subcases of cases 2, 3 and 4.
+   If m = 1, then from (12) and (13) we have x1 = y1 = xx = 0. Thus, from the equation for
+
+H(u) we deduce that it takes one of the following three values: H(u) = hun or H(u) = hu ln u
+or H(u) = h ln u mod G, where h = ±1. Solving the rest of equations (10) and (12) with
+H(u) = hun, we can find that the only extension case corresponds to the values n = 2 and is
+
+tabulated as case 20. The values H(u) = hu ln u and H(u) = h ln u give the classification cases
+
+3 and 4 with k = m = 1 respectively.
+
+   (iv) After obvious simple computations, we get cases 21­24.
+   (II) F = uk and G = gemu mod G, where m = 0, g = ±1. Substituting F , G and (11)
+
+into (10) we derive
+
+1 = xx = 0, x0 = t0 = y0y = 0, k(k - 1)0 = 0,
+my0 - yy = 0, t - 3x = 0, m0 + (t - x - 2y) = 0,
+                                                                                                                    (14)
+
+0Huu + (t - x)Hu - t = 0.
+
+If k = 1, then 0 = 0. Therefore, H = const that contradicts with the assumption Hu = 0. If
+k = 1, then the last equation of system (14) looks like µHuu + Hu +  = 0 with respect to
+H, where µ, ,  = const. Thus, H(u) must take one of the following two values: H(u) = henu
+or H(u) = hu2 mod G, where h = ±1. Substituting these two values into system (14) and
+
+solving the obtained equations we get cases 10 and 11 respectively.
+   (III) F = uk and G = g ln u mod G, where g = ±1. System (10) takes now the form
+
+t1 = x1 = y1 = xx = 0, 0 = 0, yy = 0,
+(k - 1)1 + t - 3x = 0, -1 + (t - x - 2y) = 0,
+                                                                                                                    (15)
+
+1uHuu + (t - x)Hu - t = 0.
+
+The last equation of system (15) looks like µuHuu + Hu +  = 0 with respect to H, where
+µ, ,  = const. Thus, H(u) must be of one of the following three values: H(u) = hun or
+
+                                                         14
+H(u) = h ln u or H(u) = hu ln u mod G, where h = ±1. Solving system (15) fot these three
+
+values of H, we can obtain cases 12, 13 and 14 respectively.
+   (IV) F = eku and G = gum mod G, where m = 0, g = ±1. From (10) we derive
+
+1 = 0, xx = t0 = x0 = y0 = 0, yy = 0, m(m - 1)0 = 0,
+k0 + t - 3x = 0, t - x - 2y = 0,
+                                                      (16)
+
+0Huu + (t - x)Hu - t = 0.
+
+The fourth and the last equations of system (16) imply m = 1, or H = const mod G which
+
+contradicts with the assumption that Hu = 0. Thus, H(u) must take one of the following two
+values: H(u) = henu or H(u) = hu2 mod G, where h = ±1. Substituting these values of H
+
+into system (16) and solving it, we obtain cases 18 and 19 respectively.
+   (V) F = eku and G = gemu mod G, m = 0, g = ±1. From (10) we derive
+
+1 = 0, xx = t0 = x0 = y0 = 0, yy = 0,
+k0 + t - 3x = 0, m0 + t - x - 2y = 0,
+                                                      (17)
+
+0Huu + (t - x)Hu - t = 0.
+
+The last equation of system (17) looks like µHuu + Hu +  = 0 with respect to H, where
+µ, ,  = const. Thus, up to G, H(u) must take one of the following two values: H(u) = henu
+or H(u) = hu2, where h = ±1. Now from system (17) we obtain easily cases 8 and 9.
+
+   (VI) F = ln u and G = gemu mod G, m = 0, g = ±1. From (10) we derive
+
+0 = 0, xx = t1 = x1 = y1 = 0, yy = 0,
+-1 + t - 3x = 0, (m - 1)1 + t - x - 2y = 0,
+                                                      (18)
+
+1uHuu + (t - x)Hu - t = 0.
+
+The last equation of system (18) looks like µuHuu + Hu +  = 0 with respect to H, where
+µ, ,  = const. Thus, H(u) must take one of the following three values: H(u) = hun or
+H(u) = hu ln u or H(u) = h ln u mod G, where h = ±1. Solving now system (18) we obtain
+
+cases 5, 6 and 7 respectively.
+   (VII) F = ln u and G = g ln u mod G, where g = ±1. Substituting F , G and 11 into (10)
+
+we derive
+
+0 = 0, xx = t1 = x1 = y1 = 0, yy = 0,
+-1 + t - 3x = 0, -1 + t - x - 2y = 0,
+                                                      (19)
+
+1uHuu + (t - x)Hu - t = 0.
+
+Similar to (VI), from the last equation of system (19) we obtain that H(u) must take one of the
+following three values: H(u) = hun or H(u) = h ln u or H(u) = hu ln u mod G, where h = ±1.
+
+These values correspond to cases 15, 16 and 17 respectively.
+
+   The problem of group classification of class (2) is completely solved.
+
+Note 5. Although equations (2) with Huu = 0 are of low physical interest, below for complete-
+ness we adduce the result of their symmetry classification.
+
+If Huu = 0, equation (2) is equivalent to
+
+ut + (F (u))xxx + (G(u))xyy = 0.                      (20)
+
+Result of group classification of class (20) (up to the restriction of the equivalence group G of
+class (2) to H(u) = 0) is presented in Table 2.
+
+                                           15
+                        Table 2. Group classification of class (20).
+
+         N F (u) G(u)                                             Amax
+
+         1.                                  A0 = t, x, y, 3tt + xx + yy
+
+         2.         uk        gum A0 + (k + 2)tt + kxx + myy + 2uu
+
+         3.      ln u         gum A0 + 2tt + myy + 2uu
+
+         4.      eku          gemu A0 + ktt + kxx + myy + 2u
+
+         5.         u         gemu A0 + myy + 2u
+
+         6.         uk        g ln u A0 + (k + 2)tt + kxx + 2uu
+
+         7. ln u g ln u A0 + tt + uu
+
+         8.      eku              gu         A0 + ktt + kxx + 2u
+
+         9.         u         gu-1/3 A0 + 2yy - 3u sin 2yu, y2y - 3yuu
+
+         10. u                    gu         A0 + uu, u
+
+Here g = ±1,  = (t, x, y) is an arbitrary solution of t + xxx + gxyy = 0.
+
+5 Exact solutions
+
+In this section we construct exact solutions for some special forms of the GZK equations (2)
+by means of the classical Lie­Ovsiannikov algorithm. We first give a detailed classification of
+optimal systems of subalgebras of the Lie algebra of the equations under consideration. Then
+we reduce the (2+1)-dimensional equations to (1+1)-dimensional equations or ordinary differen-
+tiate equation or algebraic equation according to the subalgebras system and the corresponding
+ansatz. Solving the reduced equations, we can finally obtain exact invariant solutions of the orig-
+inal equation. Below, we illustrate this algorithm by two examples: the modified and classical
+Zakharov­Kuznetsov equations.
+
+5.1 Modified Zakharov­Kuznetsov equation
+
+Consider the modified Zakharov­Kuznetsov equation of form
+
+ut + uxxx + guxyy + hu2ux = 0.                                                         (21)
+
+It is shown above that equation (21) is invariant with respect to a realization of four-dimensional
+symmetry algebra A413,,513 spanned by the following operators
+
+v1 = t, v2 = x,     v3 = y,                 v4  =  tt  +   1  xx  +  1  yy  -  1  uu.
+                                                           3         3         3
+
+The commutation relations of the symmetry operators are given by
+
+[vi, vj ] v1 v2         v3 v4
+
+v1  0        0             0 v1
+
+v2  0        0             0          1  v2
+                                      3
+
+v3  0        0             0          1  v3
+                                      3
+
+v4  -v1  -   1  v2      -  1  v3         0
+             3             3
+
+Since L1 has zero center, we can directly apply Ovsiannikov's method of classification of sub-
+algebras [27]. Namely, construction of optimal system of one-dimensional subalgebras we start
+from taking a non-zero vector
+
+a4v4 + a3v3 + a2v2 + a1v1
+
+                                                       16
+and considering its image under the action of adjoint representations adduced in the following
+table.
+
+Ad v1 v2                v3           v4
+
+v1 v1 v2                v3 v4 - v1
+                                        1
+v2 v1 v2                v3       v4  -  3  v2
+
+v3 v1 v2                v3       v4  -  1  v3
+                                        3
+    e v1     1  v2      1  
+v4        e  3      e   3    v3      v4
+
+Note 6. Without going to the theoretical details we recall that the adjoint representation of a
+Lie group G on its Lie algebra L can be reconstructed from the infinitesimal adjoint action adL
+on itself by means of the following formula
+
+Ad(exp(v))w     =       n    (adv)n  (w)   =   w  -  [v, w]  +  2  [v, [v, w]]  -  ·  ·  ·  .
+                   n=0  n!                                      2
+
+Here v and w are elements of the Lie algebra L, exp(v) is the one-parameter subgroup of G
+corresponding to the infinitesimal v. For more details we refer the reader to [26].
+
+   Then we try to choose the values of parameters in the adjoint actions in order to simplify
+possible forms of the class of subalgebras that our vector belongs to. Different possibilities
+arising under this procedure give us the classes of inequivalent one-dimensional subalgebras. In
+such a way we find an optimal system of 1-dimensional subalgebras:
+
+v1 + v2 + v3 , v2 , v3 + av2 , v4 , v1 .
+
+Here and below  = 0, ±1, a, b = const.
+   An excellent detailed explanation and examples of classification of one-dimensional subalge-
+
+bras of Lie algebras can be found in the textbooks [26, 27]. (Inequivalent subalgebras of all 2-,
+3- and 4-dimensional Lie algebras were classified in [28].)
+
+   Constructing optimal system of two-dimensional subalgebras, we can suppose immediately
+that one of the basis vectors of two-dimensional subalgebra is taken from the previously obtained
+optimal system of one-dimensional subalgebras. Then we try to choose the parameters in the
+adjoint actions in order to simplify possible forms of the second basis and not to "spoil" the
+first one. It is possible that some of the basis vectors of the already classified one-dimensional
+subalgebras do not belong to any of the two-dimensional subalgebras.
+
+   After construction of all two-dimensional subalgebras for all basis vectors of the optimal
+system of one-dimensional subalgebras, we have to consider the action of inner automorphisms to
+order and simplify them, similarly to what we have already done for one-dimensional subalgebras.
+As a result we get an optimal system of two-dimensional subalgebras of the Lie symmetry algebra:
+
+v1, v2 ,  v1, v3 + av2 ,         v2, v3 v3, v1 + v2 ,              v1 + v3, v2 + av3 ,
+v1, v4 ,  v4, v3 + av2 ,         v4, v2 .
+
+   An optimal system of three-dimensional subalgebras can be constructed by means of extension
+of the two-dimensional subalgebras completely similarly to the above extension of the one-
+dimensional subalgebras to the two-dimensional ones. Note, that there exist three-dimensional
+algebras (all isomorphic to e1, e2, e3 , where [e1, e2] = e3, [e2, e3] = e1, [e1, e3] = -e2) that
+do not contain two-dimensional subalgebras. However, the symmetry algebra L1 is solvable,
+therefore, all its three-dimensional subalgebras contain two-dimensional subalgebras and we can
+directly extend the above classification to construction of the three-dimensional subalgebras.
+
+                                                     17
+   In such a way we get an optimal system of 3-dimensional subalgebras of L1 that consists of
+
+        v1, v2, v3 , v2, v3, v4 , v1, v4, v3 + av2 , v1, v2, v4 .
+
+   As one can easily check, the obtained optimal systems coincide with those adduced in [28].
+   Now we consider reductions of equation (21) with respect to the obtained inequivalent sub-
+algebras.
+
+                     Reductions with respect to 1-dimensional subalgebras
+
+   We try to reduce equation (21) with respect to a subalgebra generated by a Lie symmetry of
+the form
+
+ (t, x, y, u)t + (t, x, y, u)x + (t, x, y, u)y + (t, x, y, u)u,
+
+where  , ,  and  are known functions. In order to derive the desired similarity reductions,
+we need to solve a partial differential equation of form
+
+        ut + ux + uy = .
+
+The solution of this equation contains three independent integrals which provide the general
+solution in the form
+
+u = µ(t, x, y, w(p, z)), p = p(t, x, y), z = z(t, x, y),                                                (22)
+
+where µ is known function and v, p, z are arbitrary functions in their arguments. Formula (22)
+defines the Ansatz that maps (21) into a partial differential equation with two independent
+variables p and z, and w being the dependent variable.
+
+   Below in case 1 of the reductions with respect to 1-dimensional subalgebras we consider this
+procedure in details. In the rest of the cases we adduce only the Ansatz, new independent
+variables, the reduced equations and, in some cases, corresponding invariant solutions.
+
+1. v1 + v2 + v3 : We try to construct invariant reduction with respect to the operator
+Q = t + x + ay. In the framework of the above procedure we look for the first integrals of
+the equation ut + ux + auy = 0. They can be chosen as I1 = u, I2 = y - at and I3 = x - t.
+Then, the general solution of the above first-order equation has the form F (I1, I2, I3) = 0, where
+F is an arbitrary function of its variables. Expressing now u from the above equation, we get
+the Ansatz u = w(p, z), p = y - at, z = x - t for the reduction. Substituting this Ansatz to
+the initial equation yields the reduced equation with two independent variables that looks like
+-awp - wz + wzzz + gwzpp + hw2wz = 0.
+
+   Solving this reduced equations and using the above-mentioned ansatz, we can obtain exact
+solutions of the modified ZK equation (21). We succeeded to find some partial solutions of the
+reduced equation that provide us with the following solutions of the modified ZK equation (21).
+
+u = A csc , u = A sec , u = A tanh  , u = A coth  ,
+                                         2                     2                 2  2
+
+u = A sech , u = A csch , u = A tan  , u = A cot  ,
+                                            2                     2              2  2
+
+where A =           6(ac1 +c2 )  ,    =   ac1 +c2          (-(ac1    + c2)t + c2x + c1y),  c1, c2  are  arbitrary
+                         hc2             (c32 +g c2 c21 )
+
+constants which satisfy the constrains   6(ac1 +c2)        >   0,    ac1+c2      < 0 for the first five solutions and
+                                              hc2                    c32+gc2c21
+
+6(ac1 +c2 )  <  0,  ac1+c2      > 0 for the last three solutions.    It should be noted that the third to
+     hc2            c23+gc2c12
+
+                                                           18
+the sixth solutions are solitary wave solutions, while the other four solutions are periodic wave
+solutions.
+
+2. v2 : u = w(t, y), wt = 0 that gives trivial solution u = u(y).
+
+3. v3 + av2 : u = w(p, z), p = t, z = x - ay, wp + wzzz + a2gwzzz + hw2wz = 0. This reduced
+equation is the well-known modified KdV equations, and some of its known invariant solutions
+provide us with the follownig solutions for the modified ZK equation (21):
+
+        u = A csc , u = A sec , u = A tanh  , u = A coth  ,
+                                                          2           2              2              2
+
+        u = A sech , u = A csch , u = A tan  , u = A cot  ,
+                                                             2            2          2              2
+
+where A =        6c1   ,=               c1        (c1t+c2x-ac2y), c1, c2             are arbitrary constants which satisfy
+                 hc2               c23 +a2 g c23
+
+the constrains    6c1  > 0,       c1        < 0 for the first five solutions and               6c1  < 0,       c1        > 0 for the
+                  hc2        c32 +a2 g c23                                                     hc2        c23 +a2 g c23
+
+last three solutions.
+
+4.  v4  :  u  =  t-1/3w(p, z),  p  =  t-1/3y, z        =  t-1/3x,     -  1  w-    1  pwp -  1  zwz  +wzzz +gwppz  +hw2wz  =  0.
+                                                                         3        3         3
+
+5. v1 : u = w(x, y), wxxx + gwxyy + hw2wx = 0. Solving this reduced equation, we can obtain
+stationary solutions of the modified ZK equation (21) of form:
+
+        u = w(kx + ly),
+
+where w is implicitly determined by
+
+                  6(k2 + gl2)       dw      =     ±(kx  +    ly)  +  c0,
+              6c2w + 6c1 - hw4
+
+where c2, c1, c0, k, l are arbitrary constants.
+
+                     Reductions with respect to 2-dimensional subalgebras
+
+1. v2, v1 : leads to the solution u = v(y)
+2. v1, v3 + av2 : u = v(x - ay), (1 + g2)v + hv2v = 0. Solving this reduced equation, we
+obtain stationary solutions of the modified ZK equation (21) in implicit form:
+
+        u = v(),                   6(1 + g2)      hv4     dv    =  ±  +      c0,      = x - ay,
+                             12c2v + 12c1 -
+
+where c2, c1, c0 are arbitrary constants.
+
+3. v2, v3 : leads to the solution u = const.
+4. v3, v1 + v2 : u = v(x - t), v - v + hv2v = 0. Solving this reduced equation, we get a
+y-independent general solutions of the modified ZK equation (21) in implicit form:
+
+        u = v(),                            1                      dv = ± + c0,  = x - t,
+
+                             v2  +  2c2v    +     2c1  -  1  hv4
+                                                          6
+
+where c2, c1, c0 are arbitrary constants.
+
+                                                                  19
+5. v1 + v3, v2 + av3 : u = v(y - ax - t), (a3 + ga)v + v + ahv2v = 0. Solving this reduced
+equation, we find solutions of the modified ZK equation (21) in implicit form:
+
+    u = v(),                     2c2v     +    a(a2     + g)  1  ahv4  dv  =   ±  +   c0,      = y - ax - t,
+                                              2c1 -     v2 -  6
+
+where c2, c1, c0 are arbitrary constants.
+
+6.  v1, v4  :  u  =     v()  ,      =  x  ,  (1 + g2)v + 6gv               + 6gv  + hv2v      =  0.  Integrating      the  equation
+                          y            y
+one time, we obtain
+
+    [(1     +  gw2 )v ]      +  1   hv3   =   c0.
+                                3
+
+Solving this equation, we obtain a stationary solution of the modified ZK equation (21):
+
+    u(x, y) =                    c2              m               +  6h     arctan(g(x/y))        +   c1),  c2   -6gh -     h2  ],
+                 y              + g(x/y)2           sn[m( 36g              6g                                   6g + h
+                           1
+
+where m =               6g       ,  c1,   c2  are arbitrary constants and sn(·, ·) is Jacobi elliptic           sine function.
+                   6g+h-hc22
+
+7.  v4, v3 + av2     :  u  =    t-1/3v(),               =  t-1/3(x - ay),  (1  +  a2  g)v  -  1  v  -  1  v  +  hv2v  =  0.  Solving
+                                                                                              3        3
+this equation, we obtain stationary solution of the modified ZK equation (21):
+
+    u=±            -    6(1  +   a2  g)       1      ,
+                              h              -
+                                         x       ay
+
+where  6(1+a2 g)   <    0.
+            h
+
+8. v4, v2 : leads to the solution of form u = v(y).
+
+                        Reductions with respect to 3-dimensional subalgebras
+
+   Since equation (21) is 3-dimensional, its reductions with respect to 3-dimensional subalge-
+bras L1 lead to algebraic equations. From invariance of (21) with respect to v1, v4, v3 + av2
+we obtain that
+
+    u  =    x   c  ay   .
+               -
+
+Substituting this expression to (21) we get an algebraic equation on c of form c(6+6a2 +hc2) = 0.
+Its solutions are
+
+    c = 0,         c=±           -h(a2       +   1)  .
+                                     h
+
+   It is not difficult to show that all other reductions with respect to 3-dimensional subalgebras
+lead, at most, to the trivial solution
+
+    u = u(y).
+
+                                                                 20
+5.2 Zakharov­Kuznetsov equation
+
+In this subsection perform reductions of the Zakharov­Kuznetsov equation
+
+ut + uxxx + guxyy + huux = 0.                                                              (23)
+
+with respect to 1- and 2-dimensional subalgebras of its maximal Lie symmetry algebra
+
+v1 = t, v2 = x, v3 = y, v4 = htx + u, v5 = 3tt + xx + yy - 2uu .
+
+   As the computations are very similar to the ones from the previous subsection, we skip
+all technical details and summarize the results only. (Some of the reduced with respect to 1-
+dimensional subalgebras equations together with their solutions can be found also in [22].) The
+table of commutation relations is
+
+[vi, vj ] v1 v2 v3 v4 v5
+
+v1          0         0 0 hv2 3v1
+
+v2          0         0 0 0 v2
+
+v3          0         0 0 0 v3
+
+v4 -hv2 0 0 0 -2v4
+
+v5 -3v1 -v2 -v3 2v4 0
+
+Then, the corresponding adjoint representations look like
+
+Ad          v1        v2 v3                    v4       v5
+
+v1          v1        v2 v3 v4 - hv2 v5 - 3v1
+
+v2          v1        v2 v3                    v4   v5 - v2
+
+v3          v1        v2 v3                    v4   v5 - v3
+
+v4 v1 + hv2 v2 v3                             v4    v5 + 2v4
+         e3v1 ev2 ev3                       e-2 v4      v5
+v5
+
+An optimal system of 1-dimensional subalgebras can be chosen as
+
+v1 , v2 , v3 + a2v2 , v3 + 1v1 , v4 + a3v3 + a1v1 , v5 .
+
+Here and below i = 0, ±1, ai, bi = const.
+   An optimal system of 2-dimensional subalgebras is
+
+v2, v1 , v3, v2 , v3 + 2v2, v1 ,                    v4 + 3v3, v1 ,        v4 + a3v3, v2 ,
+v4 + a1v1, v3 , v5, v2 , v5, v1 ,                   v5, v3 - b2v2 ,       v5, v4
+
+            Reductions with respect to 1-dimensional subalgebras
+
+1. v1 : u = w(x, y), wxxx + gwxyy + hwwx = 0. An invariant solution arising from this case is
+
+w(x, y)  =  8   (c22  + gc32)  -  12  (c22  +  gc23) tanh2(c1  +  c2x  +  c3y),
+            h                     h
+
+where c1, c2, c3 are arbitrary constants.
+
+2. v2 : u = w(t, y), wt = 0, u = w(y)
+
+3. v3 + a2v2 : u = w(t, z), z = x - a2y, wt + (1 + a22g)wzzz + hwwz = 0. This equation is the
+famous KdV equation. Using some of its invariant solutions we can easily construct some exact
+solutions for the ZK equation (23):
+
+                                                    21
+        u = A csc2 ,             u = A sec2 ,                   u  =   -   A   (1  -   3   tanh2    ),       u    =  -    A  (1   -   3  coth2        ),
+                                                                           3                                              3
+
+        u = A sech2 ,                u = -A csch2 ,                    u   =   -   A   (1  +  3  tan2     ),      u  =    -    A  (1   +  3     cot2  ),
+                                                                                   3                                           3
+
+where    A   =    -  3c1  ,          =   1         c1           (c1t + c2x - a2c2y),                    c1, c2    are   arbitrary         constants           which
+                     hc2                 2    c23 +a22 g c32
+
+satisfy   the  constrains                 c1         >    0  for   the     first   five    solutions      and          c1         <0     for       the  last     three
+                                     c32 +a22 g c23                                                               c32 +a22 g c32
+solutions. It should be noted that the third to the sixth solutions are solitary wave solutions,
+
+while the other four solutions are periodic wave solutions.
+
+4. v3 + 1v1 : u = w(p, x), p = t - 1y, wp + wxxx + 12gwppx + hwwx = 0. Solving this reduced
+equation, we can obtain the following exact solutions of the ZK equation (23):
+
+        u = A csc2 ,             u = A sec2 ,                   u  =   -   A   (1  -   3   tanh2    ),       u    =  -    A  (1   -   3  coth2        ),
+                                                                           3                                              3
+
+        u = A sech2 ,                u = -A csch2 ,                    u   =   -   A   (1  +  3  tan2     ),      u  =    -    A  (1   +  3     cot2  ),
+                                                                                   3                                           3
+
+where    A   =   -  3c1  ,       =      1           c1             (c1t + c2x - a2c2y),                   c1, c2  are     arbitrary       constants           which
+                    hc2                 2     c32+12gc21c2
+
+satisfy   the   constrains                 c1           >    0  for     the    first   five     solutions         and           c1        <        0  for  the   last
+                                     c32+21gc12c2                                                                         c23+12gc12c2
+three solutions.
+
+5.  v4 + a3v3 + a1v1 :                   if a1       = 0,       then u =           x   +   w(t, z),       z  =      a3 x  -    y,    h3t3wt        +    wz z z (a33  +
+                                                                                   ht                                ht
+ga3h2t2) + h3t2w + h3t2a3wwz                                                                t                                        ht2
+                                                     = 0.       If a1 = 0, u =             a1       + w(p, z),       z  =    x    -  2a1  ,     p  =    a1y   - a3t,
+
+1   -  a3wp    +  wzzz      +    ga21wzpp     +      hwwz       =   0.
+a1
+
+6. v5 : u = t-2/3w(p, z), p = t-1/3y, z = t-1/3x, -2w-pwp-zwz +3wzzz +3gwzpp +3hwwz = 0.
+
+                     Reductions with respect to 2-dimensional subalgebras
+
+1. v2, v1 : u = v(y) is a solution
+
+2. v3, v2 : u = v(t), vt = 0, therefore, u = const.
+3. v3 + 2v2, v1 : u = v(x - 2y), (1 + g22)v + hvv = 0. Solving this reduced equation, we
+obtain stationary solution of the ZK equation (23) in implicit form:
+
+        u = v(),                          (1         + g22)            dv  =     ±     +   c0,       = x - 2y,
+                                     2c2v +
+                                                     2c1  -  1  hv3
+                                                             3
+
+where c2, c1, c0 are arbitrary constants.
+
+4. v4 + a3v3, v2 : if a3 =                  0 then there is            no reduction,            if  a3    =  0,   then    u  =    y    + v(t),        vt   =  0  that
+             y                              is an arbitrary            constant.                                                  a3
+gives  u  =  a3   +  c,   where         c
+
+5.  v4   + a1v1, v3      :   if  a1     = 0,  then        u  =     x   + v(t),     v +     v    =   0     that    gives   u  =     x   +     c  ,  where      c  is  an
+                                                                   ht                      t                                       ht        t
+                                                                        t                   h   t2      v + hvv +            1
+arbitrary    constant.           If  a1    = 0,      then    u=        a1  + v(x -         2a1      ),                       a1   = 0.       Integrating         this
+
+equation     one  time,      we      obtain          v  +    1  hv2    +   1      =    c,  where          =  x   -    h   t2.
+                                                             2             a1                                        2a1
+
+6. v5, v2 : u = t-2/3v(),  = t-1/3y, 2v + v = 0. Solving this equation, we obtain solution
+                                                                c0
+of  the  ZK    equation        (23)      of  form       u    =  y2  .
+
+                                                                                  22
+7.  v5, v1  :  u  =  1   v(  ),     =  x  ,  (1 + g2)v + 12gv + 8gv + hvv              =    0.  Integrating      the  equation
+                     y2                y
+one time, we obtain
+
+      (1  +    gw2 )v    +  6g(wv)     +     1  hv2  =  c0.
+                                             2
+
+Solving this reduced equation with c0 = 0, we obtain stationary solution of the ZK equation (23)
+in implicit form:
+
+      u  =   1    v(),       1   arctan(g)           ±  3        9c1  -     1    -  3hZ 3  dZ   -  c2  =  0,       =   x  ,
+             y2             g                                            36gZ 2                                        y
+
+where Z = v + gv2, c2, c1 are arbitrary constants.
+
+8. v5, v3 - b2v2 : u = t-2/3v(),  = t-1/3(x + b2y), 3(1 + gb22)v - 2v - v + 3hvv = 0.
+                                                              1
+This  reduced      equation      has   a  solution      v  =  h  ,  thus  we   obtain  a   rational    solution    of   the      ZK
+
+equation    (23):  u  =   x+b2y  .
+                            ht
+
+9.  v5, v4  :  u  =   x   + t-2/3v(),             =  t-1/3y,  v - v      =  0  that  gives  u   =  x   +  cy  ,  where    c  is  an
+                      ht                                                                           ht     t
+arbitrary constant.
+
+Note 7. In both cases of the modified Zakharov­Kuznetsov equation and of the classical
+Zakharov­Kuznetsov equation, we do not solve all the reduced equations. One of the possi-
+ble ways of constructing their solutions is, again, group analysis. More precisely, one can derive
+Lie symmetries for the reduced partial differential equations with the ultimate goal to con-
+struct similarity reductions that transform these equations into ordinary differential equations
+or algebraic equations that are easier to solve.
+
+6 Conclusion and Discussion
+
+In summary, we have described an algorithmic framework for group classification of (systems
+of) partial differential equations. More precisely, we have revised the classical Lie­Ovsiannikov
+method of construction of symmetries (of system) of differential equations in more details and
+written down the precise formulation of the algorithm of group classification of a class (of
+systems) of differential equations. We also described a systematic way of finding all possible
+invariant solutions of (of systems) of differential equations. All the theory and algorithms were
+illustrated by the running example of the GZK equations (2). Specifically, we performed a
+complete group classification of the class of GZK equations (2) by using the equivalence trans-
+formations and the compatibility method. The main results of classification are collected in
+Tables 1­2 where we list all inequivalent cases of extensions with the corresponding Lie invari-
+ance algebras. It is shown that the symmetry algebras of invariant models of form (2), are at
+most six-dimensional. For the classical Zakharov­Kuznetsov (23) and the modified Zakharov­
+Kuznetsov (21) we construct optimal systems of inequivalent subalgebras, corresponding Lie
+ansa¨tze and invariant solutions.
+
+   The present paper should be an inspiration for further investigations of other properties of
+class (2). For example, one can classify the nonclassical (conditional) symmetries. Furthermore,
+one can perform conservation law classification, then to use these results to systematical calcu-
+lation of nonlocal symmetries, higher order local and potential conservation laws, nonclassical
+potential solutions and linearizations, etc. Motivated by Craddock and Dooley's work on the
+equivalence of Lie symmetries and group representations [7], we can also consider the global
+action of the Lie symmetries of the GZK equations (2). We will investigate these subjects else-
+where. The algorithmic framework for group analysis of differential equations presented in this
+paper can also be applied to other nonlinear PDEs in mathematical physics.
+
+                                                             23
+Acknowledgements
+
+Research of D.J.H. was supported by the special Postdoctoral Science Foundation of China
+under Grant No. 201104247. Research of N.M.I. was partially supported by Cyprus Research
+Promotion Foundation (project number POEKYH/PONE/0308/01).
+
+References
+
+  [1] K. Batiha, Approximate analytical solution for the Zakharov­Kuznetsov equations with fully nonlinear
+       dispersion, J. Comput. Appl. Math., 2008, 216, 157-163.
+
+  [2] A. Bihlo and R.O. Popovych, Invariant discretization schemes for the shallow-water equations, SIAM J. Sci.
+       Comput. 2012, 34(6), B810-B839.
+
+  [3] R. Blaha, E.W. Laedke, and K.H. Spatschek, Collapsing states of generalized Korteweg­de Vries equations,
+       Physica D, 1989, 40, 249­264.
+
+  [4] G. Bluman and S.C. Anco, Symmetry and integration methods for differential equations, Applied Mathe-
+       matical Sciences, V.154, New-York, Springer-Verlag, 2002.
+
+  [5] T.J. Bridges, S. Reich, Multi-symplectic spectral discretizations for the Zakharov­Kuznetsov and shallow
+       water equations, Physica D, 2001, 152-153, 491-504.
+
+  [6] J.B. Chen, Multisymplectic geometry, local conservation laws and a multisymplectic integrator for the
+       Zakharov­Kuznetsov Equation, Lett. Math. Phys., 2003, 63, 115-124.
+
+  [7] M. Craddock, A.H. Dooley, On the equivalence of Lie symmetries and group representations, J. Differential
+       Equations, 2010, 249, 621-653.
+
+  [8] M. Craddock, K. Lennox, Lie group symmetries as integral transforms of fundamental solutions, J. Differ-
+       ential Equations, 2007, 232, 652-674.
+
+  [9] A.V. Faminskii, Well-posed initial-boundary value problems for the Zakharov­Kuznetsov equation, Elec-
+       tronic Journal of Differential Equations, 2008, 127, 1-23.
+
+[10] V. Galaktionov, S. Svirshchevskii, Exact Solutions and Invariant Subspaces of Nonlinear Partial Differential
+       Equations in Mechanics and Physics, Chapman and Hall/CRC, 2006.
+
+[11] E. Hairer, C. Lubich, and G. Wanner, Geometric Numerical Integration, Springer-Verlag, New York, 2002.
+
+[12] A. Hasegawa and Ch. Uberoi, The Alfv´en Wave, DOE Critical Rev. Ser. (Technical Information Center,
+       U.S. Department of Energy), Springfield, VA, 1982.
+
+[13] H.C. Hu, New exact solutions of Zakharov­Kuznetsov equation, Commun. Theor. Phys., 2008, 49, 559-561.
+
+[14] D.J. Huang and N.M. Ivanova, Group analysis and exact solutions of a class of variable coefficient nonlinear
+       telegraph equations, J. Math. Phys., 2007, 48, 073507, 23 p. (math-ph/0702072).
+
+[15] D.J. Huang, S.G. Zhou, Group-theoretical analysis of variable coefficient nonlinear telegraph equations, Acta
+       Appl. Math., 2012, 117, 135-183. (arXiv:[math-ph]1101.4755)
+
+[16] N.M. Ivanova, R.O. Popovych and C. Sophocleous, Group analysis of variable coefficient diffusion-convection
+       equations. I. Enhanced group classification, Lobachevskii Journal of Mathematics, 2010, 31(2), 100­122
+       (arXiv:0710.2731).
+
+[17] H. Iwasaki, S. Toh and T. Kawahara, Cylindrical quasi-solitons of the Zakharov­Kuznetsov equation, Physica
+       D, 1990, 43, 293-303.
+
+[18] M.A. Johnson, The transverse instability of periodic waves in Zakharov­Kuznetsov type equations,
+       arXiv:0905.4553.
+
+[19] T. Kakutani and H. Ono, Weak nonlinear hydromagnetic waves in a cold collision-free plasma, J. Phys. Soc.
+       Japan, 1965, 26, 1305­1318.
+
+                                                             24
+[20] J.G. Kingston and C. Sophocleous, On form-preserving point transformations of partial differential equa-
+      tions, J. Phys. A: Math. Gen., 1998, 31, 1597­1619.
+
+[21] H. Liu, Y. Geng, Symmetry reductions and exact solutions to the systems of carbon nanotubes conveying
+      fluid, J. Differential Equations, 2013, 254, 2289-2303.
+
+[22] M.H.M. Moussa, Symilarity solutions to non-linear partial differential equation of physical phenomena rep-
+      resented by the Zakharov­Kuznetsov equation, Int. J. Eng. Sci, 2001, 39, 1561­1575.
+
+[23] S. Munro and E.J. Parkes, The derivation of a modified Zakharov­Kuznetsov equation and the stability of
+      its solutions, J. Plasma Physics, 1999, 62(3), 305­317.
+
+[24] S. Munro and E.J. Parkes, Stability of solitary-wave solutions to a modified Zakharov­Kuznetsov equation,
+      J. Plasma Physics, 2000, 64(4), 411­426.
+
+[25] A.G. Nikitin and R.O. Popovych, Group classification of nonlinear Schr¨odinger equations, Ukr. Math. J.,
+      2001 53, 1053­1060.
+
+[26] P. Olver, Applications of Lie groups to differential equations, Springer-Verlag, New York, 1986.
+[27] L.V. Ovsiannikov, Group analysis of differential equations, Academic Press, New York, 1982.
+[28] J. Patera and P. Winternitz. Subalgebras of real three- and four-dimensional Lie algebras Jour. of Math.
+
+      Phys. 1977, 18, 1449­1455.
+[29] R.O. Popovych and N.M. Ivanova, New results on group classification of nonlinear diffusion­convection
+
+      equations, J. Phys. A: Math. Gen., 2004, 37, 7547­7565 (math-ph/0306035).
+[30] C. Qu, Nonclassical analysis for the Zakharov­Kuznetsov equation, Int. J. Theor. Phys., 1995, 34(1), 99-
+
+      108.
+[31] H. Schamel, Stationary solitary, snoidal and sinusoidal ion acoustic waves, Plasma Phys., 1972, 14, 905­924.
+[32] B.K. Shivamoggi and D.K. Rollins, Generalized Painlev´e formulation and Lie group symmetries of the
+
+      Zakharov­Kuznetsov equation, Physics Letters, 1991, 160, 263­266.
+[33] B.K. Shivamoggi, D.K. Rollins and R. Fanjul, Analytic aspects of the Zakharov­Kuznetsov equation, Physica
+
+      Scripta, 1993, 47, 15­17.
+[34] W. Sinkala, P. Leach, J. OHara, Invariance properties of a general-pricing equation, J. Differential Equations,
+
+      2008, 244, 2820-2835.
+[35] R. Sipcic and D.J. Benney, Lump interactions and collapse in the modified Zakharov­Kuznetsov equation,
+
+      Stud. Appl. Math., 2000, 105, 385-403.
+[36] Temuerchaolu, J. Pang, An algorithm for the complete symmetry classification of differential equations based
+
+      on Wus method, J. Engrg. Math., 2010, 66, 181-199.
+[37] A.-M. Wazwaz, Special types of the nonlinear dispersive Zakharov­Kuznetsov equation with compactons,
+
+      solitons, and periodic solutions, Int. J. of Computer Mathematics, 2004, 81, 1107­1119.
+[38] V.E. Zakharov and E.A. Kuznetsov, On three-dimensional solitons, Soviet Physics JETP, 1974, 39, 285­288.
+
+                                                            25
+

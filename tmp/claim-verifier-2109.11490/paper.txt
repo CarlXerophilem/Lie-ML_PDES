@@ -1,0 +1,4348 @@
+arXiv:2109.11490v2 [math.AP] 7 Apr 2022
+
+Mapping method of group classification
+Stanislav Opanasenko and Roman O. Popovych
+ Department of Mathematics and Statistics, Memorial University of Newfoundland, St. John's (NL) A1C 5S7, Canada
+ Mathematical Institute, Silesian University in Opava, Na Rybn´icku 1, 746 01 Opava, Czech Republic Fakult¨at fu¨r Mathematik, Universit¨at Wien, Oskar-Morgenstern-Platz 1, A-1090 Wien, Austria Institute of Mathematics of NAS of Ukraine, 3 Tereshchenkivska Str., 01024 Kyiv, Ukraine
+E-mail: sopanasenko@mun.ca, rop@imath.kiev.ua
+We revisit the entire framework of group classification of differential equations. After introducing the notion of weakly similar classes of differential equations, we develop the mapping method of group classification for such classes, which generalizes all the versions of this method that have been presented in the literature. The mapping method is applied to group classification of various classes of Kolmogorov equations and of Fokker­Planck equations in the case of space dimension one. The equivalence groupoids and the equivalence groups of these classes are computed. The group classification problems for these classes with respect to the corresponding equivalence groups are reduced to finding all inequivalent solutions of heat equations with inequivalent potentials admitting Lie-symmetry extensions. This reduction allows us to exhaustively solve the group classification problems for the classes of Kolmogorov and Fokker­Planck equations with time-independent coefficients.
+1 Introduction
+Problems of group classification of classes of differential equations were first considered by Sophus Lie himself. Thus, in [27] he solved the group classification problem for the entire class of second-order linear partial differential equations in two complex independent variables. The research interest in such classifications was renewed by Ovsiannikov late 1950s, who in particular revisited the above Lie's classification in invariant terms [37]. In the past decades the field of group classification has been steadily developed, but until this very day the consideration of complicated classes of differential equations, e.g., of those appearing in problems of invariant parameterization [39], within the framework of group classification is mostly avoided. The reason is partly in a lack of methods to handle such classes. The applicability of the powerful algebraic method of group classification [4, 18, 20, 41] is rather limited to classes with nice transformational properties, which includes various kinds of normalized classes [25, 26, 41], see [47] for a recent breakthrough in extending the algebraic method to specific non-normalized classes. (Definitions of related notions are presented in Section 2 below.) For generic classes, the simplest version of the direct method of group classification is still heavily used although there are better alternatives such as the partition of the class under study into its normalized subclasses [26, 41, 49], the furcate splitting method [6, 32, 36] and the mapping method [48, 35].
+The generalization of the mapping method of group classification is the primary objective of the present paper. For this purpose, we update basic notions of the field of group classification and formalize the generalized group classification problem for a general class of differential equations. The efficiency of the developed method is demonstrated by means of its application to group classification of various classes of (1+1)-dimensional second-order linear evolution equations, including classes of Kolmogorov and Fokker­Planck equations.
+The history of the group analysis of (1+1)-dimensional second-order linear evolution equations dates back to the aforementioned seminal paper [27] of Sophus Lie, where the group classi-
+1
+
+fication problem for these equations was solved as a part of the group classification problem for the entire class of second-order linear partial differential equations in two complex independent variables. After Ovsiannikov's revision [37], there were a number of papers restating, specifying or developing the above Lie's result. We refer the reader to [42] for a list of these papers and a modern treatment of the problem. The equivalence problem for (1+1)-dimensional second-order linear evolution equations was initiated in [8, 12, 27] and further considered in [19, 22, 31]. Darboux transformations between such equations were studied, e.g., in [9, 10, 29, 42].
+In general, a group classification list for a class L of differential equations may not be contained in a reasonable group classification list for its superclass L¯. Thus, although the general point equivalence within the class L¯ is obviously consistent with that within the subclass L with respect to the inclusion L  L¯, no system from L may belong to the known classification list for L¯ at all. If the group classification problem for the class L¯ is solved up to the equivalence generated by its equivalence group or a subgroup thereof, then this equivalence may even be inconsistent with the analogous equivalence in L with respect to the inclusion L  L¯, and the known classification list for L¯ cannot be easily adjusted to obtain a group classification list for the class L. For example, the group classification problem for the class E of (1+1)-dimensional second-order linear evolution equations
+
+ut = A(t, x)uxx + B(t, x)ux + C(t, x)u + D(t, x)
+
+(1)
+
+with A = 0 is traditionally solved by reducing it to that for the class P of heat equations with potentials,
+
+ut = uxx + C(t, x)u,
+
+which is actually a simple incarnation of the mapping method of group classification. Then all the listed equations representing Lie-symmetry extensions in the class E belong to P and thus, this classification list is not appropriate for various classes of Kolmogorov or Fokker­ Planck equations. Moreover, the equivalence groups of these classes are not consistent with the equivalence groups of the classes E and P in several senses, e.g., with respect to the relations of inclusion and of weak similarity.
+The Fokker­Planck equations are prominent equations in stochastic analysis by virtue of the fact that they describe the evolution of the transition probability density in diffusion processes [16]. In the case of one spatial variable, the entire class F¯ of the Fokker­Planck equations consists of equations of the form
+
+ut = (A(t, x)u)xx + (B(t, x)u)x,
+where A and B are functions of (t, x), called the diffusion coefficient and the drift, respectively, with A = 0. Besides stochastic analysis, Fokker­Planck equations play an important role in various natural sciences, including biology and physics [43].
+The study of equations from the class F¯ within the framework of the group analysis of differential equations commenced in the middle of the 1980s, when the Fokker­Planck equations describing the Ornstein­Uhlenbeck and the Rayleigh processes were considered in [2] and [44], respectively. Point transformations that reduce these and a number of other physically important Fokker­Planck equations to the heat equation were constructed in [45]. Lie symmetries of general (1+1)-dimensional Fokker­Planck equations were discussed in [13, 24, 46].
+The adjoint class K¯ is constituted by Kolmogorov equations,
+
+ut = A(t, x)uxx + B(t, x)ux
+with A = 0, which are formally adjoint to Fokker­Planck equations if A is replaced by -A. This fact reflects on the similarity of transformational properties of the classes F¯ and K¯. In particular, the maximal Lie invariance algebras of Kolmogorov and Fokker­Planck equations with the
+
+2
+
+arbitrary-element tuples (-A, B) and (A, B), respectively, are isomorphic. Furthermore, there is a connection between the equivalence groups of these classes, see [42] and Section 3. Thus, we can switch between considerations of these classes whenever we feel this simplifies a problem at hand [42, Section 5].
+Our personal interest in the class K¯ lies in the fact that reaction­diffusion equations of the form ut = f (ux)uxx + g(u) with f = 0 are linearized by the hodograph transformation t~ = t, x~ = u, u~ = x to Kolmogorov equations if f (ux) = cux-2, where c is an arbitrary nonzero constant. In [36], the class of equations of the above form with arbitrary f = 0 was represented as a union of four subclasses, and three of them were classified up to the equivalences generated by their equivalence groups. At the same time, the fourth subclass, which consists of linearizable equations, was classified only up to the general point equivalence. The group classification of the last subclass modulo the equivalence generated by its equivalence group is reduced to the analogous classification of the similar class K+1 of the reduced (A = 1) Kolmogorov equations with stationary drifts. Unfortunately, there are no group classifications of classes of Kolmogorov and Fokker­Planck equations with respect to the corresponding equivalence groups in the literature, including the class K+1. We fill this gap in the present paper.
+The classes K¯ and F¯ are not normalized, and their group classification problems cannot be tackled with the algebraic method. Moreover, the action groupoids of their equivalence groups constitute only small portions of the corresponding equivalence groupoids. In other words, within each of the classes K¯ and F¯ there are too many admissible transformations that are not generated by equivalence transformations. Firstly, this suggests us that a partition of any of these classes into normalized subclasses is unlikely, and secondly, it means that the number of inequivalent cases of Lie-symmetry extensions in both K¯ and F¯ modulo the corresponding equivalence groups is significantly higher than the analogous number up to the general point equivalence. At the same time, we show that the group classification problems for K¯ and F¯ modulo the corresponding equivalence groups are equivalent to the analogous problems for the subclasses K  K¯ and F  F¯ of reduced Kolmogorov and Fokker­Planck equations, which are singled out by the constraint A = . Here and in what follows  is a fixed number in {-1, 1}. Moreover, the subclasses K and F are weakly similar to the class P of heat equations with potentials, see Definition 3. The class P is disjointedly semi-normalized with respect to the linear superposition of solutions [42]. Hence the equivalences generated by its equivalence group GP and by its equivalence groupoid are the same. The group classification of this class is quite simple, and the well-known classification list contains only three inequivalent cases of essential Lie-symmetry extensions [27, 37]. In [42] with the help of the standard version of the mapping method of group classification, this list was mapped to the group classification lists for the classes K and F up to the general point equivalence, each of which is comprised of four cases of inequivalent essential Lie-symmetry extensions.
+In the present paper, we apply the advanced version of the mapping method to the group classification of the classes K and F modulo the equivalences generated by the corresponding equivalence groups. Here, the image of any equation from P is a set of equations from K (resp. F) that necessarily contains equations that are inequivalent with respect to the corresponding equivalence group. Thus, the mapping method is applied for the first time to classes with so general weak similarity. It reduces the group classification problems for the classes K and F, and hence for the classes K¯ and F¯, to finding all solutions of the GP -inequivalent heat equations with potentials that are inequivalent with respect to the essential point symmetry groups thereof. This means that these classification problems are in fact no-go problems in the sense of explicitly listing inequivalent Lie-symmetry extensions. Nonetheless, the mapping method allows us to solve, in a closed form, the group classification problems for the classes K¯ and F¯ of Kolmogorov and Fokker­Planck equations with time-independent coefficients and their reduced subclasses K and F modulo the equivalences generated by the corresponding equivalence groups. The basis for this application of the mapping method is the
+3
+
+well-known group classification of the subclass P of P constituted by the heat equations with time-independent potentials C. It is necessary to note that Fokker­Planck equations arising in applications, in particular those describing the Ornstein­Uhlenbeck and the Rayleigh processes, have time-independent coefficients.
+The rest of the paper is organized as follows. The advanced theory of point transformations between differential equations is given in Section 2. Thus, Sections 2.1, 2.2 and 2.3 are devoted to the notions of admissible and equivalence transformations within classes of differential equations, a revisited formulation of the group classification problem and developing the mapping method of group classification, respectively. In Section 3, we compute the equivalence groupoids and the equivalence groups of the class E, of its reparameterization E and of various subclasses of E and E. In particular, we first construct a minimal self-consistent generating set of admissible transformations for the class P of the heat equations with time-independent potentials C. Using the known group classification of the class P and the developed version of the mapping method, in Section 4 we revisit the solution of the group classification problems for the classes K¯, K, F¯ and F up to the general point equivalence and exhaustively study the analogous problems up to the equivalences generated by the corresponding equivalence groups. Applying the same approach, in Section 5 we completely solve the group classification problems, up to the equivalences generated by the corresponding equivalence groups, for the subclasses of the above classes that consists of the equations with time-independent coefficients. The most interesting results of the present paper are discussed in Section 6.
+
+2 Point transformations in classes of differential equations
+and the mapping method of group classification
+Let L = {L |   S} be a class (of systems) of differential equations, L, of order r in independent variables x = (x1, . . . , xn) and dependent variables u = (u1, . . . , um) with the arbitrary-element tuple  = 1(x, u(r)), . . . , k(x, u(r)) running through the solution set S of an auxiliary system S of differential equations and differential inequalities. (The notation of variables in this section differs from that in the other sections.) The systems L have the form L(x, u(r)) := L x, u(r), (q)(x, u(r)) = 0, where L is a fixed tuple of rth order differential functions in u parameterized by derivatives of . The short-hand notations u(r) and (q) are used for the tuples of derivatives of the corresponding functions with respect to their arguments up to orders r and q, respectively. In the auxiliary system S, the jet variables (x, u(r)) and the arbitrary elements  play the role of the independent and the dependent variables, respectively.
+
+2.1 Admissible and equivalence transformations
+
+Admissible transformations of the class L are triples T of the form (1, , 2), where 1, 2  S
+
+and  is a point transformation1 relating the systems L1 and L2, L1 = L2. Here L1 is
+
+the pushforward of the system L1 by the transformation , and the equality L1 = L2 should
+
+tbieonund.erIsntotohdisacsa(spe,r(wr)ea)lsLo2sa|Ly1= 01 ,=wh2e.reFporr(ra) n
+
+is the rth admissible
+
+prolongation of transformation
+
+the transformaT = (1, , 2),
+
+1 and 2 are respectively called the source and the target of T , s(T ) := 1 and t(T ) := 2. The composition T  T  of admissible transformations T = (1, , 2) and T  = (1 , , 2 ) is defined if and only if 1 = s(T ) = t(T ) = 2, and it is equal to T  T  := (1,   , 2 ), which gives a partial multiplication for admissible transformations of L. For any   S, the unit at 
+
+is id := (, id(x,u), ), where id(x,u) is the identity transformation of (x, u). The inverse of T is
+
+1In the case of one dependent variable, one can also consider various structures consisting of contact transformations instead of point ones.
+
+4
+
+T -1 := (2, -1, 1), where -1 is the inverse of . This makes the set
+
+GL = {(1, , 2) | 1, 2  S,
+
+
+
+
+
+Diff
+
+loc (x,u)
+
+:
+
+L1
+
+= L2}
+
+of admissible transformations of the class L a groupoid, GL  S, called the equivalence groupoid of this class, where the set of objects is s(GL) = t(GL) = S and the base groupoid is S  S := {id |   S}.
+Usual equivalence transformations of the class L are the point transformations (i.e., local
+diffeomorphisms) in the space coordinatized by (x, u(r), ) that are projectable to the spaces coordinatized by (x, u) and (x, u(r)), are consistent with the contact structure of the jet space Jr(Rxn × Rmu ) and leave L in L for any value of the arbitrary-element tuple  of L. Such transformations constitute the usual equivalence (pseudo)group GL of the class L. In what follows, we omit the attribute "usual" for such groups since we do not deal with other types
+of equivalence transformations in the present paper. Most objects that are called groups in
+the present paper are in fact pseudogroups of local diffeomorphisms but we omit the attribute
+"pseudo" as well.
+Let  be the natural projection from the space coordinatized by (x, u(r), ) onto the space coordinatized by (x, u). There are two particularly important subgroupoids of GL, the action groupoid of the equivalence group GL and the fundamental groupoid GLf of the class L,
+
+GGL = G(GL ) := {(, T, T) |   S, T  GL},
+
+GLf := {T  GL | s(T ) = t(T )} = {(, , ) |   S,   G} = G.
+S
+
+Here for each   S, G is the vertex group of the system L, G = {T  GL | s(T ) = t(T ) = }.
+
+It is associated with the complete point symmetry group G of L: (, , )  G if and only if
+
+  G. The fundamental groupoid GLf of L is a normal subgroupoid of GL. eaxleinsAtcneTy1r,ewTlai2dtieo2nUsufosburgcerholeutmhpaeontidtT~sUo=foGfTL1th.eTMeqourTei2v.sa3pleeWncciefieccgaarlllloyuT, pTo,idTG~LGLcGoomLf ptahorseeaccblalaelsleswdLitUhg-eTenquerivaatGelLesnautnpifettqohuteihvreeU -equivalence if an admissible transformation that is U -equivalent to T is composable with T 
+
+or, equivalently, if T is composable with an admissible transformation that is U -equivalent to T .
+
+A set B = {T  GL |   }, where  is an index set, is called a generating set of admissible
+
+transformations for the class L up to the U -equivalence if any admissible transformation of this
+
+class can be represented as the composition of a finite number of elements of the set B  B^  U .
+
+HtheerecoB^m=po{sTab-il1it|yTofelBem}.enAtssuobf sBetBB^oufpGtLo
+
+is self-consistent with respect to the U -equivalence if the U -equivalence implies their usual composability.
+
+The standard choice for U is instead of `GGL -equivalence'.
+
+U= For
+
+GGL [47], and specific classes
+
+then one can use the term `GL-equivalence' of differential equations, e.g., for classes of
+
+linear homogeneous systems of differential equations, other choices of U can be more convenient,
+
+see Section 3.2.
+
+The class groupoid GL
+
+L is called normalized in the coincides with the Frobenius
+
+pursoudaul cstenosfeGiGf LGLan=d
+
+G GL GLf ,
+
+and
+
+semi-normalized
+
+if
+
+the
+
+GL = GGL  GLf := T  T  | T  GGL, T   GLf , t(T ) = s(T ) .
+
+More generally, consider a subgroup H of GL and a family NS := {N < G |   S} of subgroups of the groups G that is uniform with respect to H, i.e., Ns(T )  T = T  Nt(T ) for any T  GH . Here GH := {(, T, T) |   S, T  H} is the action groupoid of H, and for
+
+2A subgroupoid U of a groupoid G is called wide if the sets of objects of U and G coincide, s(U) = s(G).
+More generally, a subset M of a groupoid G is called wide if the set s(M) coincides with the set of objects of G, s(M) = s(G).
+3One can also introduce other kinds of equivalence with respect to U for elements of GL, see [47].
+
+5
+
+any   S, N := {(, , ) |   S,   N} is the subgroup of the vertex group G that is associated with N. Denote N f := SN. Then the Frobenius product
+N f  GH := T  T  | T  N f , T   GH , t(T ) = s(T ) ,
+
+is a subgroupoid of GL. We call the class L|S semi-normalized with respect to the subgroup H of GL and the family NS of subgroups of the point symmetry groups if N f  GH = GL, and we add the modifier "disjointedly" to "semi-normalized" if additionally N f  GH = S  S.
+
+In particular, if the class L consists of linear homogeneous systems of differential equations,
+
+H = GL, and for any   S, N is the subgroup of G that is constituted by the point symmetry transformations of the linear superposition of solutions, N = {  G |  : x~ = x, u~ = u+f (x)} with f (x) = f 1(x), . . . , f m(x) running through the solution set of L, then the class L is called
+
+(disjointedly) semi-normalized with respect to the linear superposition of solutions.
+
+See [47] and references therein for more definitions of structures related to point or contact
+
+transformations within classes of differential equations.
+
+A subclass L of the class L is a specific subset of L, L = {L |   S  S}  L, where S is the solution set of an auxiliary system S obtained by supplementing the system S with the system S of additional auxiliary differential equations and/or differential inequalities. We say that subclass L is singled out from the class L by the system S of differential constraints on the
+
+arbitrary-element tuple . Among such constraints, we distinguish those that can be imposed by relating the class L via wide subsets of admissible transformations (usually, from GGL ) to its
+
+proper subclasses. In contrast to the general constraints on the arbitrary-element tuple, these
+
+specific constraints are called gauges. More precisely, let L be a subclass of L that is singled out from L by the additional auxiliary system S on the arbitrary-element tuple . We say that
+
+a wide subset M subset S if t(M)
+
+of GL gauges the class = S. Then the system
+
+L to its subclass L or, S is called the gauge on
+
+equivalently, the set S  associated with M.
+
+to
+
+its
+
+Suppose that the system S contains algebraic equations Si(x, u(r), ) = 0 in , where the index i runs through a finite index set I, |I| # = k, and the function tuple S := (Si, i  I)
+
+is of the maximal rank with respect to . Here the attribute "algebraic" means "not being
+
+genuinely differential". The arbitrary-element tuple  can (locally) be split into "parametric" and "leading" parts ^ and  with # = |I| and det(S/) = 0.4 Solving the system S = 0 with respect to , we can assume without loss of generality that S =  - (x, u(r), ^). Excluding  from the system L due to the substitution  = (x, u(r), ^) for  and considering ^ as the only arbitrary elements, we reparameterize the class L to a class Lr with a less number of arbitrary elements. A benefit of the reparameterization is that it allows one to avoid the consideration
+
+of insignificant equivalence transformations [11, Appendix A], whose presence complicates the
+
+computation of equivalence transformations of the class L. At the same time, in contrast to L,
+
+the reparameterized class Lr is not formally a subclass of L, although it can be embedded in L via naturally identifying with its counterpart L, Lr  L. This is why we can still informally say that the class Lr is a subclass of L.
+If the system S contains genuinely differential constraints that can algebraically be solved with respect to a subtuple  of ,  = (x, u(r), ^(q)), where ^ is the complement of  in , i.e., the subtuple  can be expressed in terms of derivatives of ^, the class L can be reparameterized in
+
+an analogous way. Nevertheless, this is not so important in this case as in the previous one since
+
+such constraints are not related to the existence of insignificant equivalence transformations.
+
+2.2 Revisited statement of group classification problem
+Loosely speaking, the group classification problem for the class L is to classify the maximal Lie invariance algebras g of the systems L from the class L up to an appropriate equivalence
+4Throughout the paper, any inequality of the form f = 0 with a function f means that this function is nonzero for each point in its domain.
+
+6
+
+related to point transformations between such systems. To solve the group classification problem for the class L is to list all inequivalent values of  for each of which the algebra g is wider than a Lie invariance algebra of L that is in a certain sense common or general for all systems in the class L. Thus, for a rigorous formulation of the group classification problem, one should precisely specify the equivalence to be used, invariance algebras to be assumed "common" or "general" and in which sense these algebras are "common" or "general".
+There are two standard equivalences used in the course of group classification of the class L, the GL-equivalence and the GL -equivalence. The classification with respect to the equivalence groupoid GL is the classification up to all point transformations within the class L or, in other words, up to the general point equivalence called the similarity of systems of differential equations. The GL-equivalence coincides with the equivalence with respect to the equivalence group GL if the class L is semi-normalized but for a general class of differential equations, the latter equivalence is weaker. If the class L is not semi-normalized, then one may try to partition it into semi-normalized subclasses that are invariant under the action of GL and to solve the group classification problem for each of these subclasses with respect to its own equivalence group. If such a partition is not feasible, one should carry out the group classification of the class L with respect to its equivalence group and additionally indicate which GL-inequivalent cases of Lie-symmetry extensions are GL-equivalent. Such equivalences are called additional, and are realized by admissible transformations of the class L that do not belong to the action groupoid GGL of the equivalence group GL. One can also use the equivalence with respect to the generalized, the extended or the extended generalized equivalence groups instead of the usual one [21]. In some classification problems, e.g., in partial preliminary group classification problems [5] or in group classifications of potential systems or potential equations [40], the corresponding equivalence groups are replaced by their proper subgroups.
+Likewise, there are two approaches to assigning which invariance algebras are regarded "common" or "general" for systems in the class L. The traditional approach is to take the common part gL = Sg of all the algebras g as basic for the further classification of its extensions [37]. It is called the kernel of maximal Lie invariance algebras of systems from the class L or, briefly, the kernel algebra of L. Although this approach is applicable to a generic class of differential equations, there may be better alternatives for some classes. In fact, the algebras g,   S, may have more in common than merely the common part gL. Within the more general second approach, one considers a family {gunf  g |   S} of uniform subalgebras of the algebras g,   S.5 The uniformity of these subalgebras means that their parameterization by  is consistent with the equivalence used in the course of the group classification of the class L. More specifically, (T)gunf = gTunf for any   S and any T  GL in the case of the GL-uniformity and gu1nf = gu2nf for any T = (1, , 2)  GL in the case of the GL-uniformity. The uniform subalgebras from the same family usually have a similar structure, e.g., they are simultaneously abelian or their dimensions are the same or, more generally, they have the same arbitrariness of their parameters. Note that, under classifying up to the GL-equivalence, the first (traditional) approach can be considered as a particular case of the second approach, where each GL-uniform subalgebra coincides with the kernel algebra of L, gunf = gL for any   S. This is due to the fact that the kernel algebra gL is invariant under the GL-action,
+(T)gL = (T) (S g) = S gT = S g = gL for any T  GL.
+5For each   S, the Lie algebra g is defined by a homogeneous linear system of differential equations [v] = 0 in components of vector fields v on the space with coordinates (x, u). Here  = [v] is a tuple of homogeneous linear differential functions in components of v that is parameterized by derivatives of . In other words, a vector field v belongs to g if and only if [v] = 0. We assume that the subalgebra gunf of g is defined by an analogous system ¯ [v] = 0, which contains the system [v] = 0 as a subsystem.
+7
+
+Proposition 1. Given a family {gunf  g |   S} of GL-uniform subalgebras, for each   S, the subalgebra gunf is invariant under the adjoint action of the point symmetry group G of the system L on g and, moreover, it is an ideal of g.
+
+Proof. We fix an arbitrary   S and an arbitrary   G. Then T := (, , ) belongs to the vertex group G  GL and thus gunf = gunf . In other words, the subalgebra gunf is invariant under the adjoint action of the point symmetry group G of the system L on g.
+To prove the second claim of the proposition, we follow the proof of [35, Corollary 25]. Let
+v  g and thus {exp(v)}, where the parameter  runs through a neighborhood of zero in R, is a local one-parameter point symmetry group of the system L, {exp(v)}  G. For any w  gunf we have (exp(v))w  gunf . Recall that
+
+[v, w]
+
+=
+
+Lv w
+
+:=
+
+dw d
+
+=0
+
+= lim
+0
+
+w
+
+- 
+
+w0
+
+,
+
+where w p := exp(-v)w exp(v)(p)
+
+for any point p in the space coordinatized by (x, u). The vector field u = (w - w0)/ clearly
+
+b¯el[oung] s=to0.thReecaalglleinbgrathgauntfcfoomr paonnyent=s
+
+0, of
+
+and thus it satisfies u are smooth in (x,
+
+the system defining this algebra, u, ), we use the continuity of ¯ 
+
+in components of vector fields to show
+
+¯  [v, w]
+
+= ¯ 
+
+lim
+0
+
+u
+
+=
+
+lim
+0
+
+¯ [u]
+
+=
+
+0,
+
+implying that [v, w]  gunf . Therefore, gunf is an ideal of g.
+
+In practice, uniform subalgebras are either known a priori from the very form of the systems L or can be easily computed at the preliminary step of group classification of L. From a known family {gunf  g |   S} of GL -uniform subalgebras one can easily construct a family of GL-uniform subalgebras each of which contains the kernel algebra gL.
+Proposition 2. Given a family {gunf  g |   S} of GL -uniform subalgebras, for an arbitrary   S, let g¯unf be the minimal subalgebra of g that contains both gL and gunf . Then {g¯unf |   S} is a family of GL-uniform subalgebras of the algebras g,   S.
+Proof. We fix an arbitrary T  GL and an arbitrary   S and recall that the kernel algebra gL is invariant under the GL -action, (T)gL = gL. Since in addition (T)gunf = guTnf , we have that (T)g¯unf  gTunf and (T)g¯unf  gL. The fact that g¯unf is a subalgebra of g directly implies that (T)¯gunf is a subalgebra of (T)g = gT. Therefore, (T)g¯unf  g¯uTnf . Analogously, we derive (T-1)¯guTnf  ¯gunf and thus g¯uTnf  (T)¯gunf . Hence (T)¯gunf = ¯guTnf .
+On the other hand, attaching the kernel algebra gL to each of the chosen uniform subalgebras may backfire. First of all, Proposition 2 does in general not hold in the case of the GL-uniformity since the kernel algebra gL is not necessarily GL-invariant, cf. [14, Example 1]. Moreover, the family {¯gunf |   S} may not have important properties of the family {gunf |   S}. In a best-case scenario, the class L is disjointedly semi-normalized with respect to a family of subgroups H of the complete point symmetry groups G, and we can choose the family of Lie algebras of the subgroups H as a family of uniform subalgebras gunf of the algebras g, see [25, Definition 1]. In this case, for each   S, the subalgebra gunf is an ideal of g and has a complement subspace in g that is a subalgebra of g, called the essential Lie invariance algebra gess of L, g = gess  gunf , and moreover gess = g  gL . Therefore, the group classification of L reduces to the classification of appropriate subalgebras of gL. Even if the family of uniform subalgebras of g cannot be chosen in the above way, one may want to ensure at least some of the aforementioned properties.
+To summarize, the statement of group classification problem can be revisited as follows.
+
+8
+
+To carry out the group classification of a class L of systems of differential equations with respect to its equivalence groupoid GL (resp. its equivalence group GL ) is to list all GL-inequivalent (resp. GL-inequivalent) values of its arbitrary-element tuple   S such that the maximal Lie invariance algebras g of the systems L are wider than the corresponding elements of the chosen family {gunf |   S} of GL-uniform (resp. GL-uniform) subalgebras of the algebras g.
+The problem can be reformulated in the case when the essential Lie invariance algebra gess is defined for each   S in a canonical way.
+Let L be a class of systems of differential equations, where for any value of its arbitraryelement tuple   S one can canonically define the essential subalgebra gess of g. The group classification of this class with respect to its equivalence groupoid GL (resp. its equivalence group GL ) reduces to listing all GL-inequivalent (resp. GL -inequivalent) values   S such that the essential Lie invariance algebras gess of the systems L are wider than the kernel gLess = Sgess of the essential Lie invariance algebras of the class L.
+As an example, consider a class L of linear homogeneous systems of differential equations. Any system L  L admits, in view of the linear superposition of solutions, the point symmetry transformations of the form x~ = x, u~ = u+f (x), where f (x) = f 1(x), . . . , f m(x) is an arbitrary solution of L. This reflects on the structure of both the complete point symmetry group G and the maximal Lie invariance algebra g thereof. In fact, if the admissible transformations of the class L are fiber-preserving and their u-components are affine with respect to u,6 then the maximal Lie invariance algebra g of the system L can be represented as g := gess  glin. Here
+
+glin = gess =
+
+m
+
+f i(x)ui f is a solution of L ,
+
+i=1
+
+n
+
+m
+
+Q = a(x)xa +
+
+ij (x)uj ui Q  g
+
+a=1
+
+i,j=1
+
+are an ideal of g corresponding to the linear superposition of solutions and the essential sub-
+
+algebra of g, respectively. The family {glin |   S} is taken here to be a family of uniform
+
+subalgebras of the algebras g, and thus it is natural to classify extensions not of the algebra gL
+
+but of the algebra gLess. If additionally the class L is disjointedly semi-normalized with respect
+
+to the linear system L 
+
+superposition of solutions, L admits the vector field I
+
+=thenim=g1esus i=uigasits
+
+gL Lie
+
+for any   symmetry,
+
+S. i.e.,
+
+Note that every I  gLess  gL.7
+
+Therefore, it may be tempting to consider the family of the wider uniform subalgebras g¯lin of
+
+the algebras g than the subalgebras glin that are obtained by attaching I to glin for each   S,
+
+g¯lin = I  glin. Although the subalgebra ¯glin may share, with glin, the property to be ideal
+
+of g, it may not have a complement subspace in g that is closed with respect to the Lie bracket
+
+of vector fields. This leads to artificial complications in applying the algebraic method of group
+
+classification. As a result, the family {glin |   S} is a natural and convenient choice for a
+
+family of uniform subalgebras of the algebras g when solving the group classification problem
+
+for the class L.
+
+6These properties are quite common for classes of linear homogeneous systems of differential equations. At the
+
+same time, see [11, Section 4] for an example of a class of such systems, where admissible transformations are not
+
+fiber-preserving, and for any value of the corresponding arbitrary-element tuple , glin is not an ideal of g and any complement subspace to glin in g contains vector fields of a different form although such a subspace can be chosen to be a subalgebra of g. This is the class L0 in the notation of [11], which consists of the linear homogeneous
+
+systems of second-order ordinary differential equations that are similar with respect to point transformations to
+
+the elementary (free particle) system.
+
+7Under the above conditions, gL = gLess  gLlin, where gLlin = {
+
+m i=1
+
+f
+
+i(x)ui
+
+|
+
+f
+
+is
+
+a
+
+solution
+
+of
+
+L
+
+for
+
+any
+
+  S}. In other words, gLlin = {0} if and only if the systems from the class L have a common nonzero solution.
+
+This is the case, e.g., for the class K¯ of Kolmogorov equations whose set of common solutions consists of the
+
+constant functions, and hence gK¯lin = u .
+
+9
+
+2.3 Extension of the mapping method of group classification
+
+We develop the mapping method of group classification proposed in [48] to solve the group classification problem for the classes K¯ and F¯ and their subclasses.
+Let L and L~ be related classes of differential equations and let the group classification problem for the class L be already solved. The underlying idea of the mapping method is to derive a group classification list for the class L~ from the known group classification list for the class L. A natural choice for the relation between classes of differential equations within the framework of the mapping method is their weak similarity although there are also other options [47]; see also [48] and Definition 6 below for the more restricted notion of (usual) similarity of classes of differential equations.
+
+Definition 3. Classes L and L~ of systems of differential equations with the same number of independent variables, the same number of dependent variables, the same number of equations in systems and the same order of systems are called weakly similar if for each system L from the class L there exists a system L~~ from the class L~ that is similar to L, and vice versa.
+
+Weak similarity is an equivalence relation for classes of differential equations.
+
+The mapping method straightforwardly works for weakly similar classes of differential equa-
+
+tions in the case of group classification up to the general point equivalence if one looks for
+
+extensions of the subalgebras of g that are chosen as uniform with respect to this equivalence. Let CL be a known classification list for the class L up to the general point equivalence with
+
+respect to a family {gunf |   S} of GL-uniform subalgebras of g. The list CL is a complete set
+
+of the GL-inequivalent values   with the corresponding maximal
+
+S such that g gunf . Lie invariance algebra
+
+Each   g. Then
+
+CL should for any ~ 
+
+be S~,
+
+supplemented we define the
+
+candidate for the uniform subalgebra
+point transformation  are such that there exist another   S and a point
+
+otL~fra~gn=~sfaosrmgLu~ant.f9io:=nThisgsucuancfhn,d8tihdwaahtteeLr~ei~st=hweelvl-aLdleufie,ntehde.n
+
+S and the Indeed, if
+
+ gunf = (  -1  )gunf =  (-1  )gunf = gunf = gu~nf
+
+since (, -1  , )  GL and thus (-1
+
+the family any (~1, ~ , (i)Li =
+
+{~2g)u nf L~~i ,
+
+| GL~ i=
+
+ S}. there 1, 2.
+
+Moreover, the exist 1, 2  S Then the triple
+
+ )gunf = family {gu~nf
+
+|gu~nfinS~}vieiswGoL~f -uthneifoGrLm-.unIinfodremedit,y
+
+of for
+
+and point transformations 1 and 2 such that
+
+(1, , 2) with  = -2 1  ~  1 belongs to GL.
+
+Representing ~ = 21-1, in view of the GL-uniformity of the family {gunf |   S} we derive
+
+~ gu~1nf = (2    1-1) (1)gu1nf = (2  )gu1nf = (2)gu2nf = gu~2nf .
+
+tW fiTnohhrveauatecrsatia,achlghnleictvGeheLena-lfgCaaaenmLcbdo,rilmaaGysLp~s{gil-ngeuetung~qenfluefiliniv|vsaat~tlhleuCeneLcSc~e~l}aossfatsoGrSL~eLb,cs-euoainncnaehssaqisstnuothacievailnaoatttglteewohnduiettswhsLlyiiritsseehtt-sesCptymheLmceLtmf~oft~areomittstrhihylseyeimecwx{liagteleasuansrnkfsLt~iso|oiimnsLsiolaob. rfStTiatG}iyh.nLeoe-IdfultiLnsbitsiyfaCoontrbLadmvkLpii~oLnr.uo1gie0s-, ivnidtehseGcLl~a-sisneL~q.uTivhaleenlitstLCieL-scyomnmtaeintrsyoenxlyteGnLs~io-innseqoufivthaleenGtL~v-aulnuiefosromf ~LsieinicnevaorthiaenrcweisaelgtehberlaisstgCu~nLf
+8The tildes over  in g~ and gu~nf indicate that these are the maximal Lie invariance algebra of the system L~~ and a uniform subalgebra of this algebra, respectively.
+9At the same time, the kernel algebras gL and gL~ of the classes L and L~ are not directly related in the general case, and thus the algebra gL~ should be computed independently.
+10Given a binary relation R over sets M and M , equivalence relations E and E defined on M and M , respectively, are called consistent with respect to R if for any m1, m2  M and any m1, m2  M  with m1Rm1 and m2Rm2, the equivalence m1 E m2 implies m1 E m2, and vice versa.
+
+10
+
+would contain GL-equivalent values of . The list CL is exhaustive because if there exists ~0  S~
+
+GthLa-tiniesqGuLi~v-ainleenqtutivoaalennyt
+
+to any of the values value in the list CL,
+
+in CL, then its which is absurd.
+
+associated
+
+value
+
+0
+
+The transition between the group classifications of the weakly similar classes
+
+ L
+
+S would be and L~ with
+
+respect to the corresponding equivalence groups, except for some special cases where the direct
+
+relation between these group classifications exists, is more challenging. Firstly, one can require
+
+strong normalization properties for such a transition between weakly similar classes.
+
+Proposition 4. Let L and L~ be weakly similar semi-normalized classes of differential equations, and there is a family {gunf |   S} of GL-uniform subalgebras of the algebras g that is ia{ngnvud~anrfL~i|awn~itthwSi~rte}hsporefecsGtpetL~co-tutthnoeiftcohorermrfeussnupdobaanmldgieenbngrtaaeslqugoirfvoatuhlpeeonicadelgGgerLbforuaospf sLga~.,nTdahntehdnethathebeorgvereoisusupbaancllgaaessbssriofiaccifaaattmieodinlisfeasomfairlLye
+equivalent.
+
+tstPoeermmoLosi-fn.Li~,o~Cr1imoan=ansldiidz1eL,e~d2r~..2aSrabSwriuetiptrscapihmroyinsilega1rtt,hhtoae2teroatlchSehesaoosntfydhstethareer,mbacislntardLsasrtey1hsua~Ls1n,tadh~n2edLyL2~aS~rsaehsruGoewcLh~Gs-eLttqhh-uaeaqtitvutatihhlveeeanlssteyynssstittn.eecmmeTstLh~hLe~ein1cisltaahsnsiesdmLsLi~ylasi2sr-
+
+are GL -equivalent if and only if the GL~S-einqcueivtahleenfcaems ialyre{cgounnfsi|stentSw}itohf
+
+rseysspteemctstoL~~t1heanwdeaL~k~2simarielaGriLt~y-eoqfuLivaalnendt,L~i..e., the GL- and GL -uniform subalgebras of g is in addition invariant with
+
+wsotrhuefisebttphraheelectgihtessbetearomfaawtim-ihesneliollG-yrgdmLr~e{o-figauunulnpinezifodafio|tdrifoamGnm.Lf io,lSyft}hL{evg,niu~awniftthh|iicse~hawmefSaa~emk}anisolsiyfmtGoihlLf~aeG-ruirLteny-piufroonefrsimfetohnretsmauctblisaoausnlbgseeaGsblgLrLeabs=aronafsGdgGoL~~fL.gthAaGnatLfsy.iwsGeTLa~lslh-sueionnrceiifvfaooitreremwed,
+
+Proposition 4 is particularly important when the class L~ is a subclass of the class L. In this case, we can reduce the group classification of the class L to that of its subclass L~.
+
+Corollary 5. Group classifications of weakly similar normalized classes L and L~ with respect to associated families of GL - and GL~-uniform subalgebras of the algebras g and g~, respectively, are equivalent.
+
+Alternatively, instead of considering classes with strong normalization properties, one can require stronger similarity of classes of differential equations to ensure the equivalence of their group classifications with respect to the corresponding equivalence groups. More precisely, we consider similar classes that are related by a fixed point transformation. Let p be the projection from the space with coordinates (x, u(r), ) on the space with coordinates (x, u(p)), p = 0, . . . , r, and thus 0 := .
+Definition 6. A class L of differential equations is called similar to a class L~ if these classes have the same number of independent variables, the same number of dependent variables, the same number of equations in systems and the same order of systems, and there exists a point transformation  : (x, u(r), )  (x~, u~(r), ~) that is projectable on the space of (x, u(p)) for any 0 p r, whereas (p) is the pth order prolongation of , S = S~ and L = L~ for any   S. The transformation  is called a similarity transformation between classes L and L~.
+
+Since the similarity of classes of differential equations is an equivalence relation, the classes L and L~ are said to be similar.
+Proposition 7. Let L and L~ be similar classes of differential equations. Then their group classifications with respect to the corresponding equivalence groups are equivalent.
+
+11
+
+Proof. Let  be a similarity transformation between the classes L and L~. Then by construction,
+
+GL = {  T  -1 | T  GL} is the equivalence group GL~ of the class L~. This implies that
+
+the GL- and GL~-equivalences are consistent with respect to the similarity of L and L~.
+
+The kernel algebra gL of the class L is mapped by  onto the kernel algebra of the class L~,
+
+gL~ = ()gL. Indeed, if is a Lie-symmetry vector
+
+v is field
+
+a Lie-symmetry vector of the system L~ 
+
+field of L~, and
+
+any 
+
+system L  L, then ()v runs through S~ when  runs
+
+through S, i.e., gL~  ()gL. Analogously, (-1)gL~  gL, and thus gL~ = ()gL.
+
+wfa~ohf=laliIomcfwh{islgiysuf.rn{oofgFbmu|~ovnriftoahu|nes~SylGy}T~LdSi~s-eu}fianGnofiefLaf~doGm,rbtLmi~hly-yieutTryonefi:ofe=GofxrLitmsh-tu-essn1ufaiabfumoaT~rnligmliyqebus{rue.gabtuTsarnoahlfgfne|etsbGhforeLar~ams-Sulgoan}eft,ibitfoohrnaremsTagiltg~yeaGbosrfLgatu~shsnugfec:fh,=atmth(heialnytoT{~)ngeu~gncufan=|fn,~dwehfieSn~Tr}ee,
+
+(T~)gu~nf = (T~) ()gunf = (T~)  () gunf = (T~  ) gunf = (  T) gunf = () (T)gunf = ()gTunf = guT~nf~.
+
+The last equality follows from the identity T~~ = T~() = (T~ ) = (T) = (T).
+
+Lastly, when neither normalization properties of weakly similar classes nor their specific sim-
+
+ilarity are strong enough to satisfy the conditions of Propositions 4 or 7, one can still ensure
+
+the consistency of the equivalences with respect to the corresponding equivalence groups of such
+
+classes in certain special cases [48, Propositions 4 and 5]. For general weakly similar classes L and L~, one needs to check the consistence of the GL - and GL~-equivalences by a direct computation. Thus, the mapping method was successfully applied to weakly similar classes of (1+1)-
+
+dimensional reaction­diffusion equations in [48] to show the equivalence of their group classi-
+
+fications. These classes are related by a family of point transformations parameterized by the
+
+arbitrary-element tuple of the source class, and there is a closed expression of the arbitrary ele-
+
+ments of the target class via those of the source class. At the same time, it is not the most general
+
+case of weak similarity of classes of differential equations. For example, the classes K (resp. F)
+
+and P are weakly similar, and each equation PC from the class P is related to a set of equations in the class K (resp. F) by a family of point transformations parameterized by an arbitrary solu-
+
+tion of the equation PC (resp. of the adjoint equation to PC ), see Section 4.2. In contrast to [48], there is no closed form for values of the arbitrary element of K (resp. F) in terms of associated
+
+values of the arbitrary element of P. As a result, a more general version of the mapping method
+
+than that in [48] is required to tackle the group classification problems for the classes K and F. To obtain the group classification of the class L~ modulo the GL~-equivalence from that of its
+weakly similar class L with the help of the mapping method, one should start with a classification
+
+list CL for the class L modulo the GL-equivalence, which coincides with the GL-equivalence if the
+
+aaadtotchhlnrrfiaseeaedtsjtohssaGoiielLLnmLgn~tae~l-iiybelslu=gaqrsneirauefbismoitLrvongaaiL-sl1Lone,fgno.ao.tr~tnn,hmSdeIiewinfancLslhaaciouzienntc2behdhdstcaeeh.orarotenerFnwNse~lsiGtyroyrtLsroushtdift-cufoiestsnsm,ftyeahafGsqoseltsluLre~,iamims-bgeveuaiaositvnlcslvaeeiihenfrnnL~oittLtLra~.~yhm1~efwTaiasfamihnatsLa~emdhilrnwyeinL~leftye{oolhqlgr2.{Leuuergni,icLeevuf~ot-enaie|shtfnlyxeec|Lmin~sic~dctmleseaSb.esar}estSe~rMpol}tLya~hfotooeeiGcinrfxoaLestntGnoe-e,Ltvut~nrbesn-saoreyuiinf,ofsnorsntsLi~efreyfsopmomsr1arrtmsemnessumdaLebtsLn~stiuaot1hblie2ngnedaae=lsnLbga~edretsasbtsuLhstrL~hcaaoihe2tsff
+
+each of which is associated with a Lie-symmetry extension case, L~ = N~  CL L~ . For
+
+any   CL, all elements of L~ are GL~ -equivalent mapping method reduces the group classification problem of finding, for each   CL, a complete
+
+olbifsuttthoenf ocGtlaLn~s-seicnLe~esqusuaprivitlaoyletGnhtLe~ -sGeyqLs~ut-eievmqausleivinnatl.etnhTcehesutesot,
+
+the the L~ .
+
+In its turn, the latter problem may be alternatively seen as constructing, for each   CL, a
+
+12
+
+set of point transformations from the system L to systems from L~ such that the transformed systems constitute a complete set of GL~-equivalent systems in L~.
+For weakly similar classes with certain additional properties, other mapping procedures can be applied. Suppose that for each   S there exists a subset M of L~ having the following properties:11
+
+1. L~ = S M.
+
+2. If 1, 2  S are GL-equivalent, then M2 = TM1 for some T  GL~.
+
+3.
+
+IafnLd~~12isMGL1
+
+and ~2 is GL~-equivalent -equivalent to 1.
+
+to ~1,
+
+then there exists 2  S
+
+such
+
+that L~~2
+
+ M2
+
+The third property necessarily holds if the class L is semi-normalized. Let CL be a known
+
+classification list for the class L modulo the GL -equivalence with respect to a family {gunf 
+
+g |  family
+
+ S} {gu~nf
+
+of 
+
+GgL~|-u~nifoS~r}mosfuGbLa~l-guenbirfaosrmof
+
+uniform as well. The classification list for
+
+the algebras g. We again construct the associated
+
+subalgebras the class L~
+
+of is
+
+the algebras g~, which are thus GL~obtained by merging complete lists of
+
+GL~-inequivalent values of ~ with L~~ in the sets M for all values of  in CL.
+
+3 Equivalence groups and equivalence groupoids
+
+3.1 General second-order linear evolution equations
+
+We use the paper [42] as a reference point for known results on admissible transformations of the class E of equations of the form (1).
+
+Proposition 8. The class E is normalized in the usual sense. Its equivalence group GE consists of the transformations of the form12
+
+t~ = T (t), x~ = X(t, x), u~ = U 1(t, x)u + U 0(t, x),
+
+(2)
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+A
+
+-
+
+Xt
+
+- XxxA Tt
+
+,
+
+C~
+
+=
+
+-
+
+U1 Tt
+
+E
+
+1 U1
+
+,
+
+(3)
+
+D~ = U 1 Tt
+
+D
+
++
+
+E
+
+U U
+
+0 1
+
+,
+
+where T , X, U 0 and U 1 are arbitrary smooth functions of their arguments with TtXxU 1 = 0, and E := t - Axx - Bx - C.
+
+The class E is a natural choice for a superclass of the classes of Kolmogorov and heat equations considered below due to its normalization in the usual sense.
+
+Remark 9. For convenience of further singling out classes of Fokker­Planck equations, we can reparameterize the equations from the class E to the form
+
+ut = A(t, x)u xx + B(t, x)u x + C(t, x)u + D(t, x),
+where the arbitrary elements A and D are the same as in (1), and B and C in (1) are expressed in terms of the new arbitrary elements as B + 2Ax and C + Bx + Axx, respectively. In addition, we extend the arbitrary-element tuple (A, B, C, D) with the derivatives Ax, Axx and Bx. The
+11The second property can be weakened, e.g., as follows. If 1, 2  S are GL-equivalent, then for any ~2  M2 there exists ~1  M1 that is GL~ -equivalent to ~2.
+12Recall that in the course of working with the equivalence group of a class of differential equations, the arbitrary elements of the class and their derivatives are considered as coordinates in a certain extended jet space and not as functions, cf. Section 2.1.
+
+13
+
+reparameterized class E is normalized as well. The (t, x, u, A, D)-components of equivalence transformations in the class E are of the same form as in Proposition 8, where instead of E we use the proper expression E = t - xx  A - x  B - C for the differential operator associated with the reparameterized source equation, and the (B, C)-components are
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+A
+
+-
+
+Xt
+
++
+
+3XxxA Tt
+
+,
+
+C~
+
+=
+
+-
+
+E (XxU 1) TtXxU 1
+
+.
+
+(4)
+
+Here E = -t - Axx + Bx - C is the formal adjoint of the operator E. The components for Ax, Axx and Bx are obtained via the standard prolongation of the components for A and B to these derivatives.
+
+In the subsequent subsections we single out various subclasses of the class E or of its reparameterization E via gauging arbitrary elements of these classes by wide families of admissible transformations from the action groupoids of the corresponding equivalence groups or imposing the condition that the arbitrary elements of a subclass do not depend on t. (This condition cannot be realized as a gauge.) We study admissible transformations of the subclasses singled out. The order of gauging is as follows.
+Firstly, we single out the subclass E0 of homogeneous equations, gauging D = 0 by a wide subset ME of GGE and excluding D from the arbitrary-element tuple. Here for each element of ME , we set T (t) = t, X(t, x) = x, U 1(t, x) = 1, and the parameter function U 0 is a solution of the equation from E with the source value of the arbitrary-element tuple (A, B, C, D).
+
+Proposition 10. The class E0 is disjointedly semi-normalized with respect to the linear superposition of solutions. Its equivalence group GE0 consists of the transformations of the form
+
+t~ = T (t), x~ = X(t, x), u~ = U 1(t, x)u,
+
+(5)
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+A
+
+-
+
+Xt
+
+- XxxA Tt
+
+,
+
+C~
+
+=
+
+-U1 Tt
+
+E
+
+1 U1
+
+,
+
+(6)
+
+where T , X and U 1 are smooth functions of their arguments with TtXxU 1 = 0 and E = t - Axx - Bx - C is the differential operator associated with the source equation.
+
+Remark 11. The subclass E0 of homogenous equations in the reparameterization E of the class E is a similar reparameterization of the class E0. At the same time, in contrast to E, the class E0 does not need the extension of the arbitrary-element tuple (A, B, C) to derivatives for preserving normalization properties of this class. More specifically, as its non-reparameterized counterpart E0, the class E0 with the arbitrary-element tuple (A, B, C) is disjointedly seminormalized with respect to the linear superposition of solutions. The (t, x, u)-, A- and (B, C)cdoemfinpeodnbenyttshoefeqthueattiorannss(f5o)r,mthateiofinrsstceoqnusattitiountining(6th)eanedqutihvealeeqnucaetigornosu(p4)G, rEe0spofectthiveeclyla, swshEe0reaTre, X and U 1 are smooth functions of their arguments with TtXxU 1 = 0.
+
+The obvious second choice would be the gauge A = 1, because this gauge does not affect
+
+the normalization property, cf. [42]. Nevertheless, at this stage we prefer to single out the desired classes P¯, K¯ and F¯ from the class E0 with the gauge B = 0, from the class E0 with the gauge C = 0 and from the class E0 with the gauge C = 0, respectively. Note that all these
+
+gauges are carried out by wide families of elements of the action groupoids of the corresponding equivalence groups. The subsequent gauge A =  with fixed   {-1, 1} in the classes K¯ and F¯ is of the same nature, whereas the same gauge in the class P¯ can only be realized by admissible transformations that do not necessarily belong to GGP¯ . In this way, we derive the respective
+
+subclasses P, K and F of reduced equations. A similar procedure is then carried out for the
+
+subclasses of equations with time-independent coefficients from the classes E, E0, P¯, K¯ and F¯.
+
+Consider the classes E the constraints At = Bt =
+
+aCntd=E00.th(aTthaereclsaisnsgelsedEoauntdfrEo0m ctahnebcelacsosenssiEdearnedd
+
+E0, respectively, by in a similar way.)
+
+14
+
+Proposition 12. (i) The equivalence group GE of the class E consists of the transformations of the form
+
+t~ = c1t + c2, x~ = X(x), u~ = ec3tW (x)u + U 0(t, x),
+
+A~
+
+=
+
+Xx2 c1
+
+A,
+
+B~
+
+=
+
+Xx c1
+
+B
+
+-
+
+2
+
+Wx W
+
+A
+
++
+
+Xxx c1
+
+A,
+
+C~
+
+=
+
+W c1
+
+E
+
+1 W
+
++
+
+c3 c1
+
+,
+
+D~
+
+=
+
+ec3tW c1
+
+D
+
++
+
+E
+
+U0 ec3tW
+
+.
+
+(ii) The equivalence group GE0 of the class E0 consists of the transformations of the form
+
+t~ = c1t + c2, x~ = X(x), u~ = ec3tW (x)u,
+
+A~
+
+=
+
+Xx2 c1
+
+A,
+
+B~
+
+=
+
+Xx c1
+
+B
+
+-
+
+2
+
+Wx W
+
+A
+
++
+
+Xxx c1
+
+A,
+
+C~
+
+=
+
+W c1
+
+E
+
+1 W
+
++
+
+c3 c1
+
+.
+
+Here c1, c2 and c3 are arbitrary constants with c1 = 0, X, W and U 0 are arbitrary smooth functions of their arguments with XxW = 0, E := t -Axx -Bx-C and E := Axx +Bx+C.
+
+Proof. The class E is normalized in the usual sense, the class E0 is disjointedly semi-normalized
+
+with respect to the linear superposition of solutions, and the equations from the class E0 have
+
+no common nonzero groups GE and GE0 ,
+
+rseoslputeicotnivse.lyT, hthearetfocroen,sitshteofgrtohuepesleGmEenatsndprGesEe0rvairneg
+
+the the
+
+subgroups of the constraints At =
+
+Bt = Ct = 0.
+
+We act on the A-, B- and C-components of T  GE , which are of the form (3), by the operator Dt~ = (Tt)-1Dt - Xt(TtXx)-1Dx. Here Dt and Dx are the operators of total derivatives
+
+with respect to the variables t and x in the jet space with independent variables (t, x, u) and
+
+the arbitrary elements of the class under consideration as the dependent variables, and Dt~ is
+
+the operator Dt in At = Bt = Ct = 0
+
+the transformed and A~t~ = B~t~ =
+
+C~vat~r=iab0leasn, dDst~p=litTthDet.obWtaeintaekdeeiqnutaotaiocncsouwnitththreescpoencsttrtaoinAts,
+
+B, C, Ax, Bx and Cx, which leads to the equations Ttt = 0, Xt = 0, (Ux1/U 1)t = (Ut1/U 1)t = 0,
+
+i.e., T = c1t + c2, X = X(x) and U 1 = ec3tW (x).
+
+Since the A-, which are given
+
+Bby
+
+and (3),
+
+tChe-cpomropceodnuenretso(f6s)inogf ltinragnosfuotrmGaE0t iofrnosminGGE0E0iscotihnecisdaemwe.ith
+
+those
+
+in
+
+GE,
+
+3.2 Heat equations with potentials
+The classification technique to be applied for classes of Kolmogorov and Fokker­Planck equations requires the knowledge of the group classification of the class P, which is constituted by the reduced heat equations with potentials, PC : ut = uxx + C(t, x)u with fixed   {-1, 1}.
+Starting with the class E0, one can reach its subclass P via successively gauging A =  and B = 0 by wide subsets of the action groupoids of the equivalence groups of the class E0 and its subclass singled out by the gauge A = , respectively. In general, as was emphasized in [34], the order of gauging arbitrary elements of a class of differential equations may be important if one is to ensure normalization properties of gauged subclasses. To demonstrate the importance of the choice of the order, let us gauge the arbitrary element B of the class E0 to zero first, B = 0. It is achieved by the wide subset of G(GE0 ), where T (t) = t, U 1(t, x) = 1 and the parameter function X is an arbitrary solution of the Kolmogorov equation Xt = AXxx + BXx with the source value of (A, B). The gauged subclass is the class P¯ of equations of the form
+P¯ : ut = A(t, x)uxx + C(t, x)u with  := (A, C).
+
+15
+
+Proposition where  = (A,
+
+13. The C) runs
+
+equivalence through the
+
+groupoid GP¯ of the class P¯ consists set of values of the arbitrary-element
+
+of the triples (, , tuple of P¯, and  is
+
+~), an
+
+arbitrary point transformation of the form (2),
+
+ : t~ = T (t), x~ = X(t, x), u~ = U 1(t, x)u + U 0(t, x),
+
+where T and X are smooth functions of their arguments with TtXx = 0, U 1 is found from the relation
+
+Ux1 U1
+
+=
+
+Xxx 2Xx
+
+-
+
+1 Xt 2A Xx
+
+with U 1 = 0, and U 0/U 1 is a solution of the equation P¯. The value ~ = (A~, C~) of the arbitraryelement tuple of P¯ is related to  by
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+C~
+
+=
+
+-
+
+U1 Tt
+
+P
+
+1 U1
+
+with the differential operator P := t - Axx - C, which defines the source equation.
+
+The class P¯ is not normalized since each admissible transformations of P¯ satisfies the relation from Proposition 13. Even though this condition can be solved for U 1, the result cannot be in-
+
+terpreted in terms of extended generalized equivalence groups of classes of differential equations.
+
+Recall that parameters of such groups may nonlocally depend on the arbitrary elements of the
+
+class in a specific way only. In particular, an introduction of virtual arbitrary elements should
+
+make the dependence of group elements of the extended arbitrary-element tuple completely local, which is not the case for the class P¯. A similar example can be found in [38, Proposition 21].
+
+See a correct construction of an extended generalized equivalence group, e.g., in [34, Section 9]. At the same time, it is easy to compute the usual equivalence group of the class P¯, splitting the above classifying condition and the equation for U 0/U 1 with respect to .
+
+Proposition 14. The usual equivalence group of the class P¯ is constituted by the point transformations of the form
+
+t~ = T (t), x~ = X(x), u~ = c |Xx| u,
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+C~
+
+=
+
+1 Tt
+
+C-
+
+Xxxx 2Xx
+
+-
+
+3 4
+
+Xxx Xx
+
+2
+
+A
+
+,
+
+where T and X are arbitrary smooth functions of their arguments with TtXx = 0, and c is an arbitrary nonzero constant.
+
+Carrying out the further gauge A =  with fixed   {-1, 1} by the wide subset of GP¯ singled out by the constraints Tt =  sgn A, Xx = |A|-1/2, U 0 = 0 and Ux1/U 1 = (AXxx - Xt)/(2AXx) with the source value of A, we obtain the subclass P. One can easily switch between the classes P-1 and P+1 using the transformation (t, C)  (-t, -C). For convenience, we also use the alternative notation P := P+1.
+
+Proposition 15. The equivalence group GP of the class P consists of the point transformations with components of the form
+
+t~ = T (t),
+
+x~ = X1(t)x + X0(t),
+
+u~ = V (t) exp
+
+-
+
+Xt1 4X 1
+
+x2
+
+-
+
+Xt0 2X 1
+
+x
+
+u,
+
+(7a)
+
+C~
+
+=
+
+1 (X 1 )2
+
+C
+
++
+
+ 4
+
+X
+
+1
+
+1 X1
+
+tt
+
+x2
+
+-
+
+ 2
+
+X
+
+1
+
+Xt0 (X 1 )2
+
+t
+
+x
+
++
+
+Vt V
+
++
+
+Xt1 2X 1
+
++
+
+ 4
+
+Xt0 2 X1
+
+,
+
+(7b)
+
+where X0, X1 and V run through the set of smooth functions of t with X1V = 0, and Tt = (X1)2. Moreover, the class P is disjointedly semi-normalized with respect to the linear superposition of solutions.
+
+16
+
+Thus, normalization that is lost at the first stage of gauging is recovered at the second one. If we reverse the order of the gauges, A =  first and B = 0 second (both realized by wide subsets of the action groupoids of the corresponding equivalence groups), normalization is preserved at each step.
+The following lemma may be seen as a corollary of Proposition 15 but it is also of interest per wscefh.. i[Dc4h2e,ncSooetncestibisoytnsG2oeP]fsCsatnhtdehee[2se5sse,sneStneitacitlailopnsoui3nb]tg. rsToyuhmpumso,feGttrhPyeC tpr=oainnGstfePossCsrymmamGtiPleointCnr,yswoghfroePureCp,GG13PlPinCGC iPeossCsftth=heeG(enPqoCuramtaiol)nGsPuPCb-,, group of GPC related to the linear superposition of solutions.
+Lemma 16. If the projection T of an equivalence transformation T of the class P maps a nonzero solution f of an equation PC  P to a solution f~ thereof, then this projection belongs to the group GePsCs .
+Proof. As an element of the group GP, the transformation T is of the form (7) and, acting on eleianqqtcuutlaaeurttdiiioomnnngessaffnPr,sCotmtohanaaPtdst,oPhliCuet~t.pmiooAanipnnoytsfttnPrhoaeCn~n.zesefqTorurohametsiraooetlnufiootrPnieoC,nttohTofeotafhfnue(netce,qtqxuiuo,anuatti)oif~opnniusisnPhaCet~(hsnfefrooocnrmlwzaesartsrohd)Pe essaoacclmuohmteisopocnlllueatostesifolybnPodot.ehffiTPnthhCeees, the value of the arbitrary element C associated with this equation and thus the equation itself. Therefore, C = C~ as functions, i.e., C(t, x) = C~(t, x) for any (t, x) in the domain running by the independent variables. In other words, the transformation T maps each solution of the equation PC to a solution of the same equation, and this in turn means that T  GePsCs .
+The class P of reduced heat equations with time-independent potentials and fixed   {-1, 1} consists of the equations of the form
+
+ut = uxx + C(x)u.
+
+This class can be obtained via gauging the arbitrary elements A and B in the class E0 to A =  and B = 0 by the wide subset ME0 of G(GE0 ) singled out by the constraints Tt =  sgn A, Xx = |A|-1/2 and 2Wx = (B/A + Xxx/Xx)W with the source value of (A, B). Nevertheless, since the class E0 is not normalized in any sense, the class P is the most appropriate superclass for P in the course of studying transformational properties of P.
+
+Corollary 17. The equivalence group GP of the class P of reduced heat equations with timeindependent potentials consists of the transformations of the form
+
+t~ = c21t + c2,
+
+x~ = c1x + c3,
+
+u~ = c4ec5tu,
+
+C~
+
+=
+
+1 c12
+
+(C
+
++
+
+c5)
+
+,
+
+(8)
+
+where c1, . . . , c5 are arbitrary constants with c1c4 = 0.
+
+Proof. We follow the proof of Proposition 12 and use the notation Dt, Dx and Dt~ of this proof. As the class P is disjointedly semi-normalized with respect to the linear superposition of solutions,
+
+the group GP consists of the elements of GP that preserve the constraint Ct = 0. We act on
+
+the relation that Ct = 0
+
+(7b) and
+
+by C~t~
+
+the operator Dt~ = = 0. Splitting the
+
+(X1)-2Dt - (X1)-3(Xt1x + Xt0)Dx derived equation with respect to C
+
+and take and Cx,
+
+into account we yield the
+
+system Xt0 = Xt1 = (Vt/V )t = 0.
+
+13More specifically, for any equation PC  P, its point symmetry transformations are of the form
+
+t~ = T (t),
+
+x~ = X1(t)x + X0(t),
+
+u~ = V (t) exp
+
+-
+
+Xt1 4X 1
+
+x2
+
+-
+
+Xt0 2X 1
+
+x
+
+u + U 0(t, x),
+
+where the parameter functions T , X, V and U 0 satisfy a system of equations involving C. The group GePsCs is the subgroup of GPC associated with the constraint U 0 = 0.
+
+17
+
+The rest of the section is devoted to the description of the equivalence groupoid GP of the class P := P+1. The analogous result for  = -1 is easily derived from this description by the
+
+transformation (t, C)  (-t, -C).
+
+Since the class P consists of linear homogeneous differential equations, it is natural to classify the admissible transformations of this class up to the GGP  GPlin -equivalence instead of the standard GP-equivalence, i.e., the linear superposition of solutions should additionally be taken into account. Here GPlin is the normal subgroupoid of both GP and GPf  that is associated with this superposition. In other words, it consists of all the triples of the form (C, , C), where
+
+C is an arbitrary smooth function of x and the point transformation  is of the form t~ = t,
+
+x~ = x, u~ = u + f (t, x) with an arbitrary solution f (t, x) of the equation PC . The symbol `' denotes the semidirect -product. Let GPess be the subgroupoid of GP that consists of triples with u-components of the transformational parts being of the form u~ = U (t, x)u for some nonzero
+
+functions U of (t, x). The groupoid GP can be represented as the semidirect -product of GPess
+
+and GPlin , GP = GPess  GPlin . Moreover, the intersection GPess and GPlin is trivial since it coincides
+
+with the base groupoid of the class P. Hence for any T  GP , there exist unique T0  GPess
+
+and T1, T2  GPlin such transformations of the
+
+that class
+
+T P
+
+= T0  T1 up to the
+
+= T2  T0. Thus, the classification of the admissible GGP  GPlin -equivalence reduces to the classification of
+
+the elements of GPess up to the GP -equivalence.
+
+Theorem 18. A minimal self-consistent generating (up to the GP-equivalence and the linear superposition of solutions) set B of admissible transformations for the class P is the union of the following families of admissible transformations (C, , C~) (below µ  R):
+
+T1µ :=
+
+µ x2
+
++
+
+x2, 1,
+
+µ x~2
+
+,
+
+1 :
+
+t~ = 1 tan 2t, x~ = x , u~ = | cos 2t|1/2e- tan(2t)x2/2u;
+
+2
+
+cos 2t
+
+T2µ :=
+
+µ x2
+
+-
+
+x2, 2,
+
+µ x~2
+
+,
+
+2 :
+
+t~ =
+
+1 4
+
+e4t
+
+,
+
+x~ = e2tx,
+
+u~ = e-x2/2-tu;
+
+T3 := (x, 3, 0) , 3 : t~ = t, x~ = x - t2, u~ = etx-t3/3u.
+
+Proof. Since the class P is a subclass of the class P, the equivalence groupoid of P is a
+subgroupoid of the equivalence groupoid of P. The class P is disjointedly semi-normalized
+with respect to the linear superposition of solutions. Hence the classification of the admissible transformations of P up to the GP-equivalence and the linear superposition of solutions reduces to finding, modulo the GP-equivalence, the point transformations of the form (7a) between equations in P, i.e., transformations preserving the independence of the arbitrary element C
+on t. In other words, the relation between (time-independent) source and target arbitrary elements C and C~ is given by the equality (7b) that is interpreted as a relation between functions, i.e., C~ should be substituted by C~. We act on this relation by the operator -(X1)2t~ = -t + (X1)-1(Xt1x + Xt0)x taking into account the aforementioned time-independence of the arbitrary elements. This amounts to the relation
+
+Xt1x + Xt0 (X 1 )3
+
+Cx
+
++
+
+2Xt1 (X 1 )3
+
+C
+
+-
+
+(X 1 )2 4
+
+1 (X 1 )3
+
+1 X1
+
+tt
+
+x2 +
+t
+
+Xt0 2(X 1 )3
+
+x
+tt
+
+(9)
+
+-
+
+1 Vt (X1)2 V
+
++
+t
+
+1 4(X 1 )2
+
+-
+tt
+
+(Xt0)2 2(X 1 )4
+
+= 0.
+t
+
+To analyze solutions of the equation (9), we employ the extension of the method of furcate split-
+ting [7, 32, 36] to classifying admissible transformations [34, 48]. It allows us to find precisely the GP-equivalent values of the arbitrary element C that are sources of admissible transformations in P not generated by the equivalence group GP. (The exact form of the corresponding
+
+18
+
+point transformations is to be computed directly thereafter.) The template form of equations for such C is
+
+(a1x + a2)Cx + 2a1C + a3x2 + a4x + a5 = 0
+
+for some constants a's. The complete system of template-form equations for a specific value of the arbitrary element C is obtained by varying admissible transformations with the source C and fixing values of t in (9). Denote by k the number of linearly independent tuples (a1, a2, a3, a4, a5) associated with these equations. It is obvious that any system of template-form equations with k > 2 has no solutions. Consider the possible values k  {0, 1, 2} separately.
+k = 0. Each value of the tuple of parameter functions X0, X1 and V that leads only to the identity template-form equation corresponds to a wide family of admissible transformations with the same transformational parts. Any such family is contained in the action groupoid of the equivalence group GP .
+k = 2. Up to linearly recombining two fixed independent template-form equations, we can assume without loss of generality that they have the form
+
+xCx + 2C + a3x2 + a4x + a5 = 0, Cx + a3 x2 + a4x + a5 = 0.
+
+Integrating the second equation we see that C(x) is at most a cubic polynomial, but the first equation implies that the coefficient of x3 in C(x) vanishes. Thus, C(x) is at most a quadratic polynomial in x, and thus up to the GP-equivalence it belongs to {-x2, x2, x, 0}. Moreover, k = 2 for each such C.
+
+k = 1. Let (a1, a2, a3, a4, a5) be the corresponding (nonzero) coefficient tuple. For admissible transformations in GP \ (GGP  Glin), the coefficient tuple of (xCx, Cx, x2, x1, x0) in the equation (9) is proportional to the tuple (a1, a2, a3, a4, a5) with a nonzero multiplier (t).
+If a1 = 0, then a2 = 0 and Xt1 = 0. Hence a3 = 0 as well, and without loss of generality we
+can set a2 = 1. The template-form equation assumes the form
+
+Cx + a4x + a5 = 0,
+
+meaning that C(x) is at most a quadratic polynomial and should be excluded from consideration here since k = 2 for any such C.
+If a1 = 0, then we can set a1 = 1 without loss of generality and a2 = 0 ( mod GP). Therefore Xt0 = 0, which implies a4 = 0. The template-form equation takes the form
+xCx + 2C + a3x2 + a5 = 0,
+
+which has the general solution C(x) = µ/x2 - a3x2/4 - a5/2, where µ = 0 in view of k = 1, and therefore C(x) = µ/x2 ± x2 up to the GP-equivalence.
+The heat equations with the potentials µ/x2 ± x2, µ  R, and x are related via point transformations to the heat equations with the canonical potentials µ/x2 and 0, respectively. The heat equations with potentials µ/x2 and µ~/x2, where µ = µ~, are not similar to each other with respect to point transformations.14 Therefore, a generating (up to the GP-equivalence and the linear superposition of solutions) set of admissible transformations for the class P consists of T1µ, T2µ, µ  R, T3 and GP-inequivalent essential point symmetries of the heat equations with canonical potentials µ/x2, µ  R. The essential point symmetry groups of the equations Pµ/x2, µ = 0, and P0 are constituted by the point transformations of the form
+
+t~ =
+
+t t
+
++ +
+
+ 
+
+,
+
+x~
+
+=
+
+x t +
+
+
+
+,
+
+u~ = 
+
+|t
+
++
+
+|
+
+u
+
+exp
+
+x2 4(t +
+
+)
+
+(10)
+
+14Indeed, it follows immediately from Proposition 15 that if Pµ/x2  Pµ/x2 ( mod GP), then µ = µ.
+
+19
+
+and
+
+t~ =
+
+t t
+
++ +
+
+ 
+
+,
+
+x~
+
+=
+
+x + t + t + 
+
+,
+
+u~ = 
+
+|t
+
++
+
+|
+
+u
+
+exp
+
+2x2
+
+- 2x 42(t
+
++ +
+
+(t )
+
++
+
+)
+
+,
+
+respectively, where , , , , ,  and  are arbitrary constants with  -  > 0 and  = 0,
+
+and therespective tuples  := ±  - ,  := 
+
+(, , - .
+
+, ) and (, , , , , ) are defined Each element of the vertex group at
+
+up to nonzero C(t, x) = µ/x2
+
+multipliers, with µ  R
+
+is GP-equivalent to either the unit at C or the triple
+
+T4µ :=
+
+µ x2
+
+,
+
+4,
+
+µ x~2
+
+,
+
+4 :
+
+t~
+
+=
+
+-
+
+1 t
+
+,
+
+x~ =
+
+x t
+
+,
+
+u~ =
+
+|t| e-x2/(4t)u.
+
+In particular, any transformation of the form (10) with  = 0 is the successive composition of a
+scale transformation, a shift with respect to t, the transformation 4 and one more shift with respect to t, whereas any Galilean boost is the successive composition of the transformation 4 with a shift with respect to x and with one more copy of 4. At the same time, the admissible transformation T4µ itself can be decomposed as T4µ = T0µ T1µ T0µ T1µ-1, where the admissible transformations
+
+T0µ := T0µ :=
+
+µ x2
+
++
+
+x2, 0,
+
+µ x~2
+
++
+
+x~2
+
+,
+
+0 :
+
+t~ = t -
+
+ 4
+
+,
+
+x~ = x,
+
+u~ = u,
+
+µ x2
+
+,
+
+ 0,
+
+µ x~2
+
+,
+
+ 0 :
+
+t~ = 4t,
+
+x~ = 2x,
+
+u~ = u 2
+
+from the vertex groups at C(t, x) = µ/x2 +x2 and at C(t, x) = µ/x2, respectively, belong to GGP as well.
+The minimality and the self-consistency of the set B = {T1µ, T2µ, T3 | µ  R} is obvious.
+
+Remark 19. Recall that point transformations are interpreted as local diffeomorphisms. Thus, the transformation 1 becomes invertible after restricting it on an interval k/2, (k + 1)/2 with k  Z. The range of the t-component of 2 is (0, +). To get, e.g., the range (-, 0), we should take the composition T4µ  T2µ, and to get other ranges, we should compose T2µ with other elements of the vertex group at C(t, x) = µ/x2.
+In view of the self-consistency of the generating set B up to the GGP  Glin-equivalence, any admissible transformation T between equations from the GP -orbit of Pµ /x2 can be presented as the composition
+
+T = T  T 1  T32  T   T3-3  T¯ -4  T  T0,
+
+where 1, . . . , 4  {0, 1}, T , T  GGP , T , T¯  {T1µ, T2µ}, T   Gµ/x2 , T0  GPlin , and each
+
+two successive admissible transformations in the decomposition are composable, in particular,
+
+12 = 34 = 0 and, if µ = 0, 2 = 3 = 0. Furthermore, either T   Gµ/x2  GGP or
+
+T  = T1  T4µ  T2 with T1, T2  Gµ/x2  GGP , and T4µ = T0µ  T1µ  T0µ  T1µ-1.
+
+If the source of T µ  R, in P, then T
+
+ =
+
+TGP
+
+belongs to the T0, where T 
+
+complement GGP and T0
+
+of the  GPlin .
+
+union
+
+of
+
+the
+
+GP -orbits
+
+of
+
+Pµ /x2 ,
+
+Theorem 18 combined with Theorem 47 below implies the following assertion.
+
+Corollary 20. A point transformation that is, up to the linear superposition of solutions, not the projection of a transformation from the equivalence group GP to the space of independent and dependent variables connects two similar equations from the class P if and only if their essential Lie invariance algebras strictly contain the (essential) kernel algebra gPess = gP of the class P.
+
+20
+
+In other words, extension cases for admissible transformations of the class P are the same as extension cases for essential Lie symmetries within this class,
+
+T  GP \ (GGP  Glin)  ges(sTs ), gte(sTs ) gPess.
+
+Theorem 18 and Corollary 20 can be extended to the subclasses E and E0 of the classes E and E0, respectively, that consist of the equations with time-independent coefficients A, B and C.
+
+Corollary 21. (i) A minimal self-consistent generating (up to the GE-equivalence) set of ad-
+
+missible transformations for the class E is B = {T1µ, T2µ, T3 | µ  R}.
+
+(ii) tion of
+
+A minimal self-consistent generating (up to solutions) set of admissible transformations
+
+the for
+
+GthEe0
+
+-equivalence class E0 is B
+
+and the = {T1µ,
+
+linear superposiT2µ, T3 | µ  R}.
+
+Proof. The class E0 is of Proposition 12 and
+
+related to the class P via Corollary 17, two equations
+
+the wide from P
+
+asruebsGetPM -eqEu0 ivoafleGn(tGiEf0 a).ndInonvlyiewif
+
+they are GE0 -equivalent. The subgroupoid GEli0n of GEf 0 that is related to the linear superposition
+
+of solutions for equations
+Theorem 18 is a minimal superposition of solutions)
+
+from E0 is the normal subgroupoid self-consistent generating (up to the set of admissible transformations for
+
+oGtfhEe0G -Ece0lqa.ussivHEael0ne.ncecethane dsettheB
+
+from linear
+
+The argumentation for the class E is similar.
+
+Corollary 22. (i) A point transformation that is not the projection of a transformation from the equivalence group GE to the space of independent and dependent variables connects two similar equations from the class E if and only if the essential Lie invariance algebras of their homogenous counterparts strictly contain the (essential) kernel algebra gE0ess = gE0 of the class E0 .
+(ii) A point transformation that is, up to the linear superposition of solutions, not the projection of an equivalence transformation of the class E0 to the space of independent and dependent variables connects two similar equations from this class if and only if their essential Lie invariance algebras strictly contain the (essential) kernel algebra gE0ess = gE0 of the class E0 .
+Thus, Corollaries 20 and 22 give the second series of examples of classes of differential equa-
+tions with such a relation between admissible transformations and Lie symmetries in the lit-
+erature after the class of the general Burgers­Korteweg­de Vries equations of an arbitrary or-
+der n 2 with time-independent arbitrary elements, see [34, Section 10] and [33].
+
+3.3 Kolmogorov equations
+
+The class K¯ of Kolmogorov equations, K¯A,B : ut = A(t, x)uxx + B(t, x)ux, is singled out from
+
+the class E0 via gauging its arbitrary elements by the T (t) = t, X(t, x) = x, U 1(t, x) = 1/U (t, x), where U
+
+wide family of elements is an arbitrary nonzero
+
+osof lGut(iGonE0
+
+) with of the
+
+source equation, Ut = AUxx + BUx + CU . The equivalence groupoid GK¯ of the class K¯ is easily derived from that of E0 or E.
+
+Proposition 23. A point transformation  connects two equations K¯A,B and K¯A~,B~ from the class K¯ if and only if its components are of the form (2),
+
+t~ = T (t), x~ = X(t, x), u~ = U 1(t, x)u + U 0(t, x),
+
+where T and X are arbitrary smooth functions of their arguments with TtXx = 0, U 1 = 0, and 1/U 1 and U 0/U 1 run through the solution set of the equation K¯A,B. The arbitrary elements of the source and the target equations are related by
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+A
+
+-
+
+Xt
+
+- Xxx Tt
+
+A
+
+.
+
+21
+
+Corollary 24. The equivalence group GK¯ of the class K¯ of Kolmogorov equations is constituted by the point transformations of the form
+
+t~ = T (t),
+
+x~ = X(t, x),
+
+u~ = U 1u + U 0,
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+Xt
+
+- XxxA Tt
+
+,
+
+where T and X run through the set of smooth functions of their arguments with TtXx = 0, and U 0 and U 1 are arbitrary constants with U 1 = 0.
+
+It follows from Proposition 23 and Corollary 24 that the class K¯ is not normalized in any sense.
+The class K¯ is related to its subclass K with fixed   {-1, 1} of reduced (backward for  = -1 and forward for  = 1) Kolmogorov equations
+
+KB : ut = uxx + B(t, x)ux
+
+(11)
+
+via the wide subset MK¯ of elements of GGK¯ with Tt =  sgn A, Xx = |A|-1/2, U 0 = 0 and U 1 = 1, which imposes the gauge A = . Within the framework of group analysis of differential equations, the difference between forward and backward equations is not essential. The classes K+1 and K-1
+are obviously similar with respect to alternating the signs of t and B, and thus their equivalence
+groups coincide.
+
+Proposition 25. A point transformation  connects two equations KB and KB~ from the class K if and only if its components are of the form
+
+t~ = T (t), x~ = X1(t)x + X0(t), u~ = U 1(t, x)u + U 0(t, x),
+
+where T , X0 and X1 are arbitrary smooth functions of t with X1 = 0 and Tt = (X1)2, U 1 = 0, and 1/U 1 and U 0/U 1 are arbitrary solutions of the equation KB . The relation between the arbitrary elements of the source and the target equations is given by
+
+B~
+
+=
+
+1 X1
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+-
+
+Xt1x + Xt0 (X 1 )2
+
+.
+
+The admissible transformations (B, , B~) described in Proposition 25 constitute the equivalence groupoid GK of the class K.
+Corollary 26. The equivalence group GK of the class K consists of the point transformations of the form
+
+t~ = T (t),
+
+x~ = X1(t)x + X0(t),
+
+u~ = c1u + c2,
+
+B~
+
+=
+
+1 X1
+
+B
+
+-
+
+Xt1x + Xt0 (X 1 )2
+
+,
+
+(12)
+
+where T , X0 and X1 are arbitrary smooth functions of t with X1 = 0 and Tt = (X1)2, and c1 and c2 are arbitrary constants with c1 = 0.
+
+Corollary 27. mations therein
+
+The group GK to the arbitrary
+
+can be embedded via the trivial prolongation of point transforelement A, A~ = A, to the group GK¯ as a subgroup thereof.
+
+Corollary 27 is not trivial since the class K¯ is not normalized. Let us discuss the computation of the equivalence group GK¯ of the class K¯ of Kolmogorov equations with time-independent diffusion and drift coefficients,
+
+ut = A(x)uxx + B(x)ux.
+Since the class K¯ is not normalized or disjointedly semi-normalized with respect to the linear superposition of solutions, we cannot directly prove that the elements of GK¯ preserving the
+
+22
+
+tatiasmkaee-aisnnudobetgphreeornudpaepnopcfreoGaoKcf¯hA,isiannntdeortBparectopinnrosgtpitethruetwecaltayhsesfoeK¯nr tciarosemtgphruoeutsipunbgGcKGl¯a Ks.¯sI.nofoFEtoh0retrthhwaitsoripsduss,rinpsgionlsegedl,inowguetousbhtyoGuthKl¯de constraint At = Bt = C = 0 and reparameterized by excluding C from the tuple of arbitrary elements. The constraint At = Bt = 0 cannot be realized via relating the class K¯ to its subclass via a wide subset of its admissible transformations, and hence this is not a gauge. Since the explicit description of the equivalence groupoid of K¯ is cumbersome and in fact is not needed in what follows, we present the group GK¯ only.
+Proposition 28. The equivalence group GK¯ of the class K¯ is constituted by the point transformations of the form
+
+t~ = c1t + c2,
+
+x~ = X(x),
+
+u~ = c3u + c4,
+
+A~
+
+=
+
+Xx2 c1
+
+A,
+
+B~
+
+=
+
+Xx c1
+
+B
+
++
+
+Xxx c1
+
+A,
+
+where X is an arbitrary function of x with Xx = 0 and c1, . . . , c4 are arbitrary constants with c1c3 = 0.
+Once again, it is convenient for further purposes to consider the subclass K of K¯ with fixed   {-1, 1} that consists of reduced (backward for  = -1 and forward for  = 1) Kolmogorov equations with time-independent drifts,
+
+ut = uxx + B(x)ux.
+
+The corresponding gauging A =  is imposed by a wide subset of the action groupoid of GK¯.
+Proposition 29. The equivalence group GK of the class K of reduced Kolmogorov equations with time-independent drifts consists of the point transformations of the form
+
+t~ = c12t + c2,
+
+x~ = c1x + c3,
+
+u~ = c4u + c5,
+
+B~
+
+=
+
+1 c1
+
+B
+
+,
+
+where c1, . . . , c5 are arbitrary constants with c1c4 = 0.
+
+3.4 Fokker­Planck equations
+
+The class E0 is related to its subclass F¯ of Fokker­Planck equations
+
+F¯A,B : ut = A(t, x)u xx + B(t, x)u x,
+
+where A and B singled out by
+
+are the
+
+arbitrary smooth functions of (t, x) with A = 0, by the constraint T (t) = t, X(t, x) = x and Ut1 = -AUx1x +
+
+wide BUx1
+
+-subCsUet1owf Git(hGtEh0e)
+
+source values of (A, B, C).
+
+Proposition 30. A point transformation  connects Fokker­Planck equations F¯A,B and F¯A~,B~ if and only if its components are of the form (2),
+
+t~ = T (t), x~ = X(t, x), u~ = U 1(t, x)u + U 0(t, x),
+
+where T and X run through the set of arbitrary functions of their arguments with TtXx = 0, U 1 is an arbitrary nonzero smooth function of (t, x) such that XxU 1 satisfies the adjoint equation to F¯A,B, (XxU 1)t = -A(XxU 1)xx + B(XxU 1)x, and U 0 is an arbitrary solution of F¯A,B. The arbitrary elements of the target equation are defined by
+
+A~
+
+=
+
+Xx2 Tt
+
+A,
+
+B~
+
+=
+
+Xx Tt
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+A
+
+-
+
+Xt
+
++
+
+3XxxA Tt
+
+.
+
+23
+
+Ptgurropouolepfs.ooiTdf htGheEee0qc=uorivGrae(slGepnEoc0ne)dginroGguElai0pndoomifditsGhsFie¯blcoelfattsrhsaenEcs0lf,aowsrsmhFe¯arteiisotnfhoseusnsaodtuiasrfscyethtahenesducobthngesrtotruaapringoteisdt
+
+of the equivalence arbitrary-element C = 0 and C~ = 0,
+
+respectively. of solutions.
+
+Here
+
+GEli0n
+
+denotes
+
+the
+
+subgroupoid
+
+of
+
+GEf0
+
+associated
+
+with
+
+the
+
+linear
+
+superposition
+
+Either directly or using the duality between Fokker­Planck and Kolmogorov equations [42, Section 5], we can show the following result.
+
+Corollary 31. The equivalence group GF¯ of the class F¯ consists of the point transformations of the form
+
+t~ = T (t), x~ = X(t, x), u~ = c1 u, A~ = Xx2 A, B~ = Xx B - Xt + XxxA ,
+
+Xx
+
+Tt
+
+Tt
+
+Tt
+
+where T and X are smooth functions of their arguments with TtXx = 0, and c1 is an arbitrary nonzero constant.
+
+Similarly to K¯, we relate the class F¯ via the wide subset of G(GF¯), where Tt =  sgn A and Xx = |A|-1/2, to its subclass F with fixed   {-1, 1} of reduced (backward for  = -1 and forward for  = 1) Fokker­Planck equations of the form
+
+ut = uxx + (B(t, x)u)x,
+
+cf. [30]. Note that the equation FB is formally adjoint to KB-.
+
+Proposition 32. The equivalence groupoid the form (B, , B~), where B and B~ are the
+
+GF of drifts
+
+the class F of the source
+
+is constituted by the triples of and the target Fokker­Planck
+
+equations, respectively, and  is a point transformation with the components
+
+t~ = T (t), x~ = X1(t)x + X0(t), u~ = U 1(t, x)u + U 0(t, x),
+
+where T , X0 and X1 are arbitrary smooth functions of t with X1 = 0 and Tt = (X1)2, X1U 1 is an arbitrary nonzero solution of the adjoint equation to FB , (X1U 1)t = -X1Ux1x + BX1Ux1, and U 0 is an arbitrary solution of the source equation FB . The relation between the source and the target drifts is given by
+
+B~
+
+=
+
+1 X1
+
+B
+
+-
+
+2
+
+Ux1 U1
+
+-
+
+Xt1x + Xt0 (X 1 )2
+
+.
+
+Corollary 33. The equivalence group GF of the class F consists of point transformations of the form
+
+t~ = T (t),
+
+x~ = X1(t)x + X0(t),
+
+u~
+
+=
+
+c1 X1
+
+u
+
++
+
+c2,
+
+B~
+
+=
+
+1 X1
+
+B
+
+-
+
+Xt1x + Xt0 (X 1 )2
+
+,
+
+where T , X0 and X1 are arbitrary smooth functions of t with X1 = 0 and Tt = (X1)2, and c1 and c2 are arbitrary constants with c1 = 0.
+The class F¯ of Fokker­Planck equations with time-independent diffusion and drift coefficients,
+
+ut = (A(x)u)xx + (B(x)u)x,
+is of high interest in view of physical importance of such equations. Thus, all the Fokker­Planck equations mentioned in the introduction as those modeling various stochastic processes have time-independent diffusion and drift coefficients. The equivalence groupoid of the class F¯ is found analogously to that of the class K¯, see a discussion before Proposition 28. However, since it is irrelevant in what follows, we opt to present the equivalence group of F¯ only.
+
+24
+
+Proposition 34. The equivalence group GF¯ of the class F¯ consists of the point transformations of the form
+
+t~ = c1t + c2,
+
+x~ = X(x),
+
+u~
+
+=
+
+c3 Xx
+
+u,
+
+A~
+
+=
+
+Xx2 c1
+
+A,
+
+B~
+
+=
+
+Xx c1
+
+B
+
+-
+
+Xxx c1
+
+A,
+
+where X is an arbitrary function of x with Xx = 0, and c1, c2 and c3 are arbitrary constants with c1c3 = 0.
+
+Similarly as before, we gauge the arbitrary element A of the class F¯ to a fixed   {-1, 1} by a wide subset of G(GF¯ ), thus relating this class to its subclass of reduced (backward for  = -1 and forward for  = 1) Fokker­Planck equations with time-independent drifts
+
+FB : ut = uxx + (B(x)u)x.
+Again, the equation FB is formally adjoint to KB-.
+Proposition 35. The equivalence group GF of the class F of reduced Fokker­Planck equations with time-independent drifts consists of the point transformations of the form
+
+t~ = c12t + c2,
+
+x~ = c1x + c3,
+
+u~ = c4u,
+
+B~
+
+=
+
+1 c1
+
+B,
+
+(13)
+
+where c1, . . . , c4 are arbitrary constants with c1c4 = 0.
+
+4 Group classifications of classes of Kolmogorov and Fokker­Planck equations
+
+Any equation E from the class E0 admits, in view of the linear superposition of solutions, the point symmetry transformations of the form t~ = t, x~ = x, u~ = u + f (t, x), where f (t, x) is an
+arbitrary solution of E. Therefore, the maximal Lie invariance algebra gE of E is of the form gE = gEess  gElin. Here glEin is the infinite-dimensional ideal of gE that corresponds to the linear superposition of solutions, glEin := {f (t, x)u | f is a solution of E}, and gEess = gE  gE0 is a finite-dimensional subalgebra of gE, which is called the essential Lie invariance algebra of the equation E. In what follows, we classify the essential Lie invariance algebras of Kolmogorov and
+Fokker­Planck equations. The following proposition is an obvious consequence of Proposition 10.
+
+Proposition 36. the corresponding
+
+The family family {glEin
+
+{glEin | |E
+
+E L}
+
+isEG0}L-ius nGiEfo0-rumn.iform,
+
+and
+
+thus
+
+for
+
+any
+
+subclass
+
+L
+
+of
+
+E0,
+
+The and P
+
+class E0 is related via a wide subset of G(GE0 ) to its subclass are disjointedly semi-normalized with respect to the linear
+
+P, and both superposition
+
+the classes principle.
+
+E0 In
+
+view of Proposition 4, the group classification problem for the class E0 reduces to that for the class P. These problems were solved by S. Lie himself [27]. Below, we revisit the classification
+
+result for the class P using Theorem 18.
+
+Theorem 37. A complete list of GP -inequivalent (resp. GP-inequivalent) essential Lie-symme-
+
+try
+
+extensions
+
+of
+
+the
+
+(essential)
+
+kernel
+
+algebra
+
+gP
+
+ess
+
+
+=
+
+gP 
+
+=
+
+uu
+
+in the class P is exhausted
+
+by the following cases:
+
+1. C = C(x) : t; 2. C = µx-2 : t, D, ; 3. C = 0 : t, D, , x, G.
+
+25
+
+Here µ = 0, D = 2tt + xx,  = 4t2t + 4txx - (x2 + 2t)uu, G = 2tx - xuu, and only basis vector fields of essential Lie-symmetry extensions are presented. The similar assertion on the class E0 is obtained via setting A =  and B = 0 for each element of the list.
+Remark 38. For the Lie-symmetry extension in Case 1 to be maximal, the potential C should take a general value, which is not equivalent to the values from the other cases, i.e., for any , ,   R and µ  R \ {0} we have C(x) = µ(x + )-2 + (x + )2 +  and C(x) = x2 + x + . In view of Theorem 18, the GP -equivalence, which coincides with the GP-equivalence, reduces within Case 1 to the GP -equivalence, cf. Corollary 17.
+We use the classification list for the class P presented in Theorem 37 as a base for applying the mapping method in order to solve group classification problems for classes K¯, K, F¯ and F, which are weakly similar to the class P.
+
+4.1 Group classifications with respect to equivalence groupoids
+
+The group classification problems for the entire classes of Kolmogorov and Fokker­Planck equations with respect to the associated equivalence groupoids were solved in [42]. We revisit those results via taking into account Remark 38 and involving more assertions from Sections 3 and 5.
+
+rkTkeeehsrrpnneeeeocllrtiaeavlmleggleeybb.3rr9aaC.oggTmFK¯¯ehpesselsse=tk=eerglinFs¯uetlsauaroelfgGaeebxnK¯rhd-aaisunosfegtqKe¯GudFi¯avb-naiydlneetnghqtFue¯eifvsoosaflelletnohnwteitiancLl lgLaiesic-esase-syssemysKm¯:mmeatnertdyryFe¯exxtaetrenensisoionuns,suooffutthhaeeneedsssseeunnttuiiaa,ll
+
+1. B = B(x) : t;
+
+2. B = x-1 1 - 2a tan(a ln |x|) :
+
+t,
+
+D
+
+-
+
+1 2
+
+xB
+
+(x)uu,
+
+ - 2txB(x)uu;
+
+3. B = bx-1 : t, D,  - 2btuu;
+
+4. B = 0 : t, x, D, , G.
+
+In all the cases, A =  with  taking a single value in {-1, 1}, and only basis vector fields of essential Lie-symmetry algebras besides uu are presented. In addition, a > 0, b 1, b = 2, D = 2tt + xx,  = 4t2t + 4txx - (x2 + 2t)uu, G = 2tx - xuu,  = 1 for the class K¯ and  = -1 for the class F¯.
+
+Proof. The class K¯ is related to its subclass K via a wide subset of the action groupoid of
+
+its equivalence group, and thus these classes are weakly similar. The kernel algebras of these
+
+classes coincide, and the family of uniform subalgebras corresponding to the linear superposition
+
+of solutions in K¯ is clearly mapped to its counterpart in K. Then the consideration after
+
+Definition 3 implies that group classification of K
+
+the group classification of up to the GK -equivalence.
+
+TK¯huepsatmoethcleaiGmK¯ i-seqaulsiovatlreuneceforretdhueccelsastsoesthF¯e
+
+and F. (See also the beginning of the next Section 4.2 for a stronger relation between the above
+
+classes.)
+
+The classes K and F are weakly similar to the class P. Indeed, given an equation PC : ut = uxx + C(t, x)u, point transformations of the form
+
+(t~, x~) = (t, x),
+
+u~ =
+
+u U^ (t, x)
+
+and
+
+(t~, x~) = (t, x), u~ = U (t, x)u
+
+(14)
+
+with arbitrary nonzero solutions U^ and U of the equations PC and (PC ) = P--C map it to the reduced Kolmogorov and Fokker­Planck equations
+
+KB : u~t = u~xx + B(t, x)u~ with B := 2U^x/U^ , FB : u~t = u~xx + B(t, x)u~ x with B := -2Ux/U ,
+
+26
+
+respectively. Furthermore, all reduced Kolmogorov and Fokker­Planck equations can be ob-
+
+tained in this way.
+
+There is a clear correspondence between the families of uniform subalgebras corresponding
+
+to the linear superposition of solutions in K (resp. F) and P. Moreover, the essential kernel
+
+algebras of the classes K, F  and P coincide, gKess = gFess = gPess = uu . Thus, the group classification problems up to the general point equivalence for the classes P
+
+and K (resp. F) are equivalent. In accordance with Section 2.3, to obtain a classification list for
+
+the class K (resp. F) up to this equivalence, one needs to find a single element from the image
+
+of each representative of the classification list for the class P that is presented in Theorem 37.
+
+In other words, (resp. P--C ) for
+
+one should each of the
+
+find a particular (e.g., time-independent) solution of the equation PC potentials C from Theorem 37 and recover the corresponding drift B.
+
+Then an arbitrary time-independent potential C leads to an arbitrary time-independent drift,
+
+which gives Case 1 of Theorem 39. For the potential C = µ/x2 with µ = 0, each time-
+independent solution of PC (resp. P--C ) satisfies the Euler equation x2uxx + µu = 0, whose general solution depends on the value of µ. This results in splitting a single classification case
+
+in the class P to Cases 2 and 3 for the group classification of Fokker­Planck and Kolmogorov
+
+equations. The potential C = 0 trivially gives Case 4. The corresponding essential Lie invariance
+
+algebras are obtained via pushing forward, by the relevant point transformation of the form (14),
+
+the basis vector fields of the essential Lie invariance algebras of the corresponding heat equations
+
+with potentials.
+
+Remark 40. It follows from Remark 38 and results of Sections 5.2 and 5.3 that the Liesymmetry extension in Case 1 of Theorem 39 is maximal if and only if the corresponding value B = B(x) is general, i.e., it is GP -inequivalent to values collected in Table 2 except the general Case 0 of this table. Moreover, Theorem 18 with its consequences, Propositions 25, c2a19nB,d~3(Fc2¯1B~ax)n+dwc3i2t5)h=aAnBd=(lxem)a+mn2daswWfirtoxhm(xg)eS/neWecrtai(oxln)vs,aw5lu.h2eesarBne dc=15a.B3nd(imxc)p2 alaynrdtehaBa~rtb=eitqrBu~aar(ytxi)ocnoansresK¯tsaBinmtasinlawdriKt¯ihfB~acn1(rd=esop0n.layF¯nBidf W is an arbitrary nonvanishing solution of the equation Wxx + BWx = W for a constant .
+Remark 41. It is clear from the proof that, after replacing K¯ and F¯ by K and F, respectively, Theorem 39 also gives the solutions of the group classification problems for the classes K and F up to the general point equivalence.
+
+4.2 Group classifications with respect to equivalence groups
+
+Recall that the paragraph with
+
+class K is the equation
+
+related to (11). The
+
+its superclass K¯ via the subset MK¯ essential kernel algebras of the classes
+
+of GGK¯ , K¯ and K
+
+see are
+
+the the
+
+same, gK¯ess = gKess the space with the
+
+= uu . If coordinates
+
+the projection of an equivalence (t, x, u, B) relates two equations
+
+transformation of the class from the class K, then, in
+
+K¯ to view
+
+of Corollaries 24 and 26, this projection belongs to the group GK . This implies that the GK -
+
+acwcllneaadismcsoGifinhKc¯coa-lluetdiqdosuenifvotoahrflaetKthnectehucselpaagsrtsreoeosuctophF¯necsaGliasntKsdesni-Ffietcqav.utiiaivoanMleonK¯fc.eK¯.AuIdnpdivttioieownthaoellfyGCtK¯oa-rkeoiqnlluagirviinaeslteon31caecacrnoedudnu3tc3eP,strhotope
+
+osition 36, the group analogous
+
+To solve the group classification problems for the classes K and F, we apply the version of
+
+the mapping method described at the end of Section 2.3 using the class P of heat equations
+
+with potentials as that whose group classification is known.
+
+We begin with the class K. Consider the following set of point transformations mapping a
+
+fixed heat equation PC with potential C = C(t, x) to equations in the class K:
+
+TC := U : t~ = t, x~ = x, u~ = u/U (t, x) | U = 0 : Ut = Uxx + CU .
+
+27
+
+Thus, a transformation U  TC with a fixed nonzero solution U of PC maps the equation PC to the Kolmogorov equation KB with the drift B = 2Ux/U , cf. [8, 9]. By KC we denote the set of Kolmogorov equations that are the images of PC under such maps,
+KC := (TC )PC = KB | B = 2Ux/U, U = 0 : Ut = Uxx + CU .
+
+Lemma 42. (i) For any equation KB  K, there exists a function C of (t, x) such that KB  KC.
+
+(ii) If reduced Kolmogorov equations KB equations PC and PC~ are GP -equivalent.
+
+
+
+KC
+
+and
+
+KB~
+
+
+
+KC~
+
+are
+
+GK -equivalent,
+
+then
+
+the
+
+Proof. (i) An equation KB belongs to KC for any C of the form C = (Ut - Uxx)/U , where U is a nonzero solution of the equation 2Ux = BU .
+(ii) The equations PC and PC~ are similar, and the class P is semi-normalized.
+
+In what follows, for each of the classes under consideration,  denotes the projection from the space with coordinates (t, x, u, ) to the space with coordinates (t, x), where  is the corresponding arbitrary-element tuple.
+
+Lemma 43. If C~ = TC for some T  GP , then the transformation T  GK with T = T and the identity u-component maps KC onto KC~, KC~ = TKC.
+
+Proof. It is convenient to put tildes for the arguments t and x of functions with tildes. For an
+
+oaofrf bPPiCtC~~r.acrSayinnKcbeoetlmhreeoptgrroearsnoesvnftoeerdqmuiaanttiitoohnneTKfobBr~emlonKgCs~
+
+, we have B~ = 2U~x~/U~ to GP and, therefore, is
+
+for some nonzero of the form (7), the
+
+solution solution
+
+U~ U~
+
+U~ (t~, x~) = V (t)U (t, x) exp
+
+-
+
+Xt1(t) 4X 1 (t)
+
+x2
+
+-
+
+
+
+Xt0(t) 2X 1 (t)
+
+x
+
+(15)
+
+for some solution U of PC , where the expression of (t~, x~) via (t, x) is defined in (12). Setting B := 2Ux/U , we obtain
+
+B~(t~, x~)
+
+=
+
+2Ux(t, x) X1(t)U (t, x)
+
+-
+
+Xt1(t)x + Xt0(t) (X 1 (t))2
+
+=
+
+B(t, x) X 1 (t)
+
+-
+
+Xt1(t)x + Xt0 (X 1 (t))2
+
+(t)
+
+.
+
+(16)
+
+This means that the Kolmogorov equation KB with the drift B = 2Ux/U , which belongs
+
+to KC, is mapped to KB~ by the point transformation t~ = T (t), x~ = X1(t)x + X0(t), u~ = u
+
+of (t, x, u) with Tt = (X1)2, which is prolonged to B according to (16). This defines the required
+
+transformation T  GK , which does not
+
+Reverting the argumentation, inverse inclusion. As a result,
+
+(KB KC~
+
+ =
+
+KC ) TKC
+
+.
+
+depend on (U  PC )
+
+the choice of (U~  PC~ )
+
+B~. Hence KC~  TKC . (KB~  KC~ ), we derive the
+
+Corollary 44. Kolmogorov equations KB = (U )PC and KB~ = (U~ )PC from KC are GK equivalent if and only if the corresponding nonzero solutions U and U~ of the equation PC are GPesCs -equivalent.
+Proof. Since the class P is disjointedly semi-normalized with respect to the linear superposition soptfraosbooiflliuoztfeiroLnseusm,bmgthraoeu4ep3ssfoeofnrttiahGlePppoaiwrntititchusylramersmpveaecltutryetoCg~rP=oCu.CpTGohrePe,sCnsmtoohfreetlhsepemeemcqifiauc'asatlislotyna, tfePrmoCmencttohifneoclelioqdwuesisvawfrloietnmhcetthhoeef the equations (15) and (16).
+
+28
+
+The above assertions on equations from the class K constitute the theoretical basis for
+
+analyzing the group classification problem for this class with respect to its equivalence group GK. aIimnndavgieKewBo~of faLseKimnC~gmlaearer4e2Gp,rKiefse-eiqnnuteaaqttuiiovivneaslPePnCCt.oafnLedeamPchCm~ GaarPe43G-oPirmb -iptin.lieeIqsnutiohvtaahlteenrittw,stouhrffiednsc,easCnytosehqcououanltdsiiodrneusrnKotBnhlryoutKghChe the set of all potentials of the canonical GP-inequivalent equations that admit extensions of the essential kernel algebra of the class P, see Theorem 37. Corollary 44 shows how to distinguish
+
+inequivalent inequivalent
+
+Kolmogorov equations in the solutions U  of the equation
+
+set KC. It is necessary PC , where  indexes
+
+to find a this set,
+
+complete and then
+
+set of GePsCs to map the
+
+equation PC by each of the point transformations U  TC.
+
+The procedure for group classification of the class F up to the GF-equivalence can be
+
+described similarly. with potential C =
+
+It is based on C(t, x) and the
+
+the set
+
+following construction. Consider a TC of point transformations that are
+
+heat equation parameterized
+
+PC by
+
+solutions of the heat equation P--C and map PC to Fokker­Planck equations from the class F,
+
+TC = U : t~ = t, x~ = x, u~ = U (t, x)u | U = 0 : Ut = -Uxx - CU .
+
+By FC we denote the set of Fokker­Planck equations that are the images of PC under such maps,
+
+FC := (TC )PC = FB | B = -2Ux/U, U = 0 : Ut = -Uxx - CU .
+
+Lemma 45. (i) For any equation FB  F, there exists a function C of (t, x) such that FB  FC.
+
+(ii) If reduced Kolmogorov equations FB equations PC and PC~ are GP -equivalent.
+
+
+
+FC
+
+and
+
+FB~
+
+
+
+FC~
+
+are
+
+GF -equivalent,
+
+then
+
+the
+
+(iii) If C~ = TC for some T  GP , then the transformation T  GF with T = T and
+
+the identity u-component maps FC onto (iv) Fokker­Planck equations FB =
+
+(FC~U,)FPC~C=aTndFCF.B~
+
+alent if and only if the corresponding nonzero solutions
+
+= U
+
+(anU~d)UP~C offrothme
+
+FC are GF -equivequation P--C are
+
+GePs--s C -equivalent.
+
+Summing up the results of this section, we obtain the following joint description of the group classifications of the classes K¯, K, F¯ and F up to the equivalences generated by the
+
+corresponding equivalence groups. Recall that  takes a fixed value in {-1, 1}, and in the classes K¯ and F¯ we can choose any of these two values.
+
+Theorem 46. Let L be one of the classes K¯, K, F¯ and F. A complete list of GL-inequivalent
+
+essential Lie-symmetry extensions by the cases with A =  if L 
+
+of the essential {K¯, F¯} and B
+
+kernel algebra gLess = = 2Ux/U , where 
+
+uu =1
+
+of L is exhausted for L  {K¯, K}
+
+and  = -1 for L  {F¯, F}, the function U of (t, x) inequivalent nonzero solutions of the equations PC , and
+
+runs through a complete set of the potential C runs through the
+
+vGaePlsusCes-
+
+listed in Theorem 37 subject to the conditions of Remark 38. Depending on C, basis vector fields
+
+of essential Lie invariance algebras besides uu are the following:
+
+1. C = C(x) : P^Ut ;
+
+2. C = µx-2 : P^Ut , D^ U , ^ U ;
+
+3. C = 0 : P^Ut , D^ U , ^ U , P^Ux, G^U .
+
+Here
+
+P^Ut := t - R(t, x)uu,
+
+D^U := 2tt + xx -
+
+2tR(t, x) +
+
+1 2
+
+xB
+
+(t,
+
+x)
+
+uu,
+
+^ U := 4t2t + 4txx - x2 + 2t + 4t2R(t, x) + 2txB(t, x) uu,
+
+P^Ux
+
+:=
+
+x
+
+-
+
+1 2
+
+B(t,
+
+x)uu,
+
+G^U := 2tx -  x + tB(t, x) uu,
+
+and R := Ut/U .
+
+29
+
+4.3 Constructing an explicit classification list is a no-go problem
+
+In principle, the only difference of the group classification of the class K up to the GK equivalence from that up to the general point equivalence lies in the necessity of finding, in
+
+a closed form, all instead of a single
+
+pGaePrsCtsi-ciunleaqrusivoaluletniotnstohluerteioonf.s
+
+of each (For the
+
+selected equation PC from the class class F, the equation PC is replaced
+
+P by
+
+the equation P--C .) At the same time, it is the biggest obstacle to accomplish the classification
+
+procedure and solutions of an
+
+present an explicit classification list. The problem of equation PC is equivalent to representing the entire
+
+fisonlduitniognalsleGt oPesfCs t-hiniseqeuqiuvaatleionnt
+
+in
+
+a closed form15 In general, the
+
+apnrodbslienmglionfgfionudtincgansoonluictaiolnrseporfesaendtiaffteirveenstaiaml oenqguaGtiePosCns -etqhuaitvaalreentinseoqluuitvioanlesn.t
+
+with respect to its point symmetry group can be considered with the help of the group foliation method, see [37, Chapter VII] and [3, 28].16 Let us discuss the equation PC := PC+1 with the potential C(t, x) = µx-2, where µ  R \ {0}, within this framework.
+
+The group GPesCs =: G is constituted by the point transformations of the form (10). Prolonging these transformations to derivatives and invariantizing [17] the coordinate function ut of the underlying jet space under the normalization condition (t~, x~, u~, u~x~) = (0, 1, 1, 0), we find the
+
+first-order normalized differential invariant I10 of this group,
+
+I10
+
+=
+
+x2
+
+ut u
+
+-
+
+x2
+
+u2x u2
+
+-
+
+x
+
+ux u
+
+.
+
+All differential invariants of the group G can be expressed in terms of I10 by means the operators D1i and Di2 of invariant differentiation,
+
+Di1 = x2
+
+Dt
+
+-
+
+2ux u
+
+Dx
+
+,
+
+Di2 = xDx
+
+with
+
+[D1i , Di2] = 2(I02 + I10)Di2 - 2D1i ,
+
+where I02 is the invariantization of uxx, I02 = x2(uxx - ut)/u. In particular, a functional basis of such invariants of order less than or equal to two is constituted by I10 and17
+
+I^20 := D1i I10,
+
+I^11 := D2i I10,
+
+I02
+
+=
+
+[D1i , Di2]I10 + 2I^20 2I^11
+
+- I10.
+
+The highest rank for G-automorphic systems is equal to the number of independent variables
+of the equation PC, which is two. The order k of automorphic systems to be considered in the course of constructing a group foliation for PC is equal to two, which follows from the following conditions. It should not be less than the order of the equation PC whereas the cardinality of a functional basis of differential invariants of G whose order is not less than k should be greater
+than or equal to the joint number of independent and dependent variables in PC, which is equal to three.
+
+15Integral representations, which are known, e.g., for the general solutions of the equations PC with C = µx-2, are not appropriate for using in the course of presenting a group classification list.
+16We revisit basic notions of the theory of group foliations using the notation of Section 2. A system of
+differential equations is called automorphic with respect to a group G of point transformations in the space
+coordinatized by the independent and dependent variables of this system (or, briefly, G-automorphic) if its
+solution set is the G-orbit of its fixed solution. Each G-automorphic system can be rewritten in terms of differential
+invariants of G in a special way. If a system of differential equations E with independent variables x and dependent
+variables u admits a group G as its point symmetry group, then there exists a group foliation of E with respect to G, which is a (finite) set of classes Li = {Li i | i  Si}, i = 1, . . . , N , of (systems of) differential equations with the same independent and dependent variables such that for any i  {1, . . . , N } and for any i  Si the system Lii is G-automorphic and the solution set of E is the (disjoint) union of the solution sets of Lii , i  Si, i = 1, . . . , N . For each i  {1, . . . , N }, the set Si is the solution set of an auxiliary system Si for the arbitrary-element tuple i of the class Li, which is called the resolving system for the ith component of the group foliation.
+17In contrast to the normalized differential invariants Iij , (i, j)  N × N0 with N0 := N  {0}, which are obtained
+by invariantizing, under the above normalization condition, the jet variables uij associated with the derivatives i+ju/tixj, the notation I^ij is used for differentiated differential invariants having a similar association.
+
+30
+
+Thus, each of such rank-two systems A2F takes the form
+
+I02 = -µ, I^11 = F (I10, I^20),
+
+(17)
+
+where F is a smooth function of (I10, I^20) satisfying the compatibility condition for A2F . The first equation in (17) is the representation of the equation PC in terms of differential invariants of G. Treating now the third-order differential invariants
+
+I^30 := (Di1)2I10, I^21 := Di2D1i I10, I^12 := (D2i )2I10, I^03 := D2i I02 as functions of (I10, I^20), we rewrite the operators of invariant differentiation on solutions of A2F as
+D1i = I^20I10 + I^30I^20 , Di2 = F I10 + I^21I^20 . The third-order syzygy
+
+Di1I02 - D2i (I^11 + I02) = -I^20 - 5I^11 + 2(I02 + I10)2 + 4(I10 - I02)
+can be seen as a cross-differentiation of the equations of the automorphic system AF2 , when restricted to its solution set. Thus, the left hand side of this equality is -I^12 = -Di2I^11, which upon further expansion gives
+
+-F F1 - I^21F2 = -5F - I^20 + 2I120 + 4(1 - µ)I10 + 2µ(µ + 2),
+
+where F1 := F/I10 and F2 := F/I^20. Assuming first that F2 = 0, we obtain the following expressions for I^21 and I^12 in terms of F :
+
+I^21
+
+=
+
+5F
+
++
+
+I^20
+
+-
+
+2I120
+
+-
+
+4(1
+
+- µ)I10 F2
+
+-
+
+2µ(µ
+
++
+
+2)
+
+-
+
+F F1 ,
+
+I^12 = 5F + I^20 - 2I120 - 4(1 - µ)I10 - 2µ(µ + 2).
+
+A similar expression for I^30 can be found by representing I^21 as I^21 = D2i D1i I^10 = (Di1D2i - 2(I02 + I10)D2i + 2Di1)I^10 = I^20F1 + I^30F2 - 2(I02 + I10)F + 2I^20,
+
+and hence
+
+I^30
+
+=
+
+(5-F1)F
+
++
+
+I^20
+
+-
+
+2(I10 + 1 F22
+
+-
+
+µ)2
+
++
+
+2(1
+
+-
+
+4µ)
+
+-
+
+I^20(F1
+
++
+
+2)
+
+- 2(I10 F2
+
+-
+
+µ)F
+
+,
+
+while I^03 vanishes on solutions of A2F . The compatibility conditions in pairs of the above equations for third-order differential invariants,
+
+Di1I^21 - Di2I^30 = -2I^30 + 2I^21(I10 + I02), Di2I^21 - D1i I^12 = 4I^21 - 4I^12(I10 + I02) - 2I^03I^11 - 4I^20 - 2I^121 - 4I^11(I10 + I02),
+when restricted to the solution set of the automorphic system AF2 , give the same resolving equation,
+
+(F Fy - 2F¯)2Fzz - 2F (F Fy - F¯)FzFyz + F 2Fz2Fyy + (-4F¯y - 2F 2 + 14F y - 4yz - 18z)Fz3 + (FFy + 6F y + 22F + 2F + 2F¯)Fz2 = 0,
+
+(18)
+
+where y := I10 - µ, z := I^20, F¯ := 5F + z - 2y2 - 4y - 8µ and F := -4F - 2y2 - 4y - 8µ.
+
+31
+
+If F2 = 0, then I^11 becomes a function F^ of I10 only, and I^20 is treated as a function F of I10 as well, which leads to the rank-one automorphic system A1 with  = (F^, F),
+
+I02 = -µ, I^11 = F^(I10), I^20 = F(I10).
+
+(19)
+
+Abusing notations, we rewrite the operators of invariant differentiation on solutions of A1 as Di1 = FI10 and Di2 = F^I10 . The syzygies
+Di1I02 - Di2(I^11 + I02) = -I^20 - 5I^11 + 2(I02 + I10)2 + 4(I10 - I02), D2i I20 - Di1I^11 = 2I^20 - 2(I02 + I10)I^11
+
+on the solution set of A1 become
+
+F^F^ = 5F^ + F - 2Q(y),
+
+F^F - FF^ = 2F - 2yF^,
+
+(20)
+
+where the prime denotes the differentiation with respect to y, and Q(y) := y2 + 2y + 4µ. It is reduced by substituting F^ from the first equation to the second one to
+
+F^2F^ - 2(F^ + Q(y))F^ + (6y + 14)F^ - 4Q(y) = 0.
+
+Every value of the function F or of the pair (F^, F), which satisfies the equations (18) or (20), respectively, gives the orbit of a solution of PC, and different values correspond to different orbits. In other words, the problem of finding all G-inequivalent solutions of the equation PC is equivalent to solving the system (17) or the system (19) for each of such values, which is of
+course a no-go problem.
+
+5 Group classifications of equations with time-independent coefficients
+All the canonical (up to the general point equivalence) extensions of the essential kernel algebras within the classes K¯ and F¯ correspond to equations with constant diffusion coefficients and timeindependent drifts, see Theorem 39. Besides, physically meaningful Fokker­Planck equations, in particular those mentioned in the introduction, have time-independent coefficients. Moreover, in contrast to the classes K¯ and F¯, complete closed-form lists of inequivalent essential Liesymmetry extensions within the classes F¯ and K¯ can be constructed in an explicit form. The group classification technique to be applied to the latter classes coincides with that used in Section 4.2, but now the class P is to be mapped instead of the class P. In Section 4.2 we describe in detail the procedure of obtaining Lie-symmetry extensions within the class K¯, so below we focus on Fokker­Planck equations from the class F¯ and then just formulate the classification result for the class K¯.
+5.1 Group classifications of heat equations with time-independent potentials
+The equations in the class P that admit extensions of the essential kernel algebra of P were described using no equivalence, e.g., in [19]. The list of such equations modulo the GP -equivalence is presented in Theorem 37, where Case 1 should be interpreted as the general case within the class P. Below we develop another approach and solve the group classification problem for this class up to the GP -equivalence, simultaneously obtaining the group classification of the class E0 up to the GE0 -equivalence.
+32
+
+Table 1. Complete group classifications of the classes P and E0 up to the GP - and GE0 -equivalences, respectively.
+
+no.
+
+C
+
+Basis elements of geCss besides t and uu
+
+0
+
+C(x)
+
+­
+
+1
+
+µx-2
+
+D(t), D(t2)
+
+1a µx-2 + x2 D(cos 4t), D(sin 4t)
+
+1b µx-2 - x2 D(e4t), D(e-4t)
+
+2
+
+0
+
+P (1), P (t), D(t), D(t2)
+
+2a
+
+x2
+
+P (cos 2t), P (sin 2t), D(cos 4t), D(sin 4t)
+
+2b
+
+-x2
+
+P (e2t), P (e-2t), D(e4t), D(e-4t)
+
+2c
+
+x
+
+P¯(1),
+
+P¯(t),
+
+D(t)
+
+-
+
+3 2
+
+P¯
+
+(t2
+
+),
+
+D(t2)
+
+-
+
+P¯(t3)
+
+Here
+
+µ
+
+= 0,
+
+D(f )
+
+=
+
+f t +
+
+1 2
+
+ft
+
+xx
+
+-
+
+(
+
+1 8
+
+fttx2
+
++
+
+1 4
+
+ft
+
+)uu
+
+,
+
+P (f ) =
+
+f x -
+
+1 2
+
+ftxuu
+
+,
+
+P¯(f )
+
+= P (f ) + F uu,
+
+and
+
+F
+
+is
+
+a fixed antiderivative of f = f (t).
+
+Theorem 47. The (essential) kernel algebras of the classes P and E0 coincide with t, uu .
+
+A in
+
+complete the class
+
+list P 
+
+o(freGspP.t-hienecqluaisvsaEle0n)tis(reexsph.auGsEte0 d-inbeyquthievacleanset)s
+
+essential Lie-symmetry given in Table 1.
+
+extensions
+
+Proof. Case 1 of Theorem 37 with the general value C = C(x) is the general case in the class P.
+To obtain all GP -inequivalent Lie-symmetry extensions in the class P, we take the following simple steps:
+
+· For each of Cases 2 and 3 of Theorem 37, we determine its counterpart with the most general time-independent potential, say C¯, in its GP -orbit.
+
+·
+
+Using the equivalence transformations in GP -inequivalent Lie-symmetry extension
+
+GP , we simplify the cases in the class P.
+
+equation
+
+PC¯ ,
+
+obtaining
+
+Thus, the general equation in the GP -orbit of the heat equation with the potential µ/x2, where µ = 0, has the potential
+
+C¯(t, x)
+
+=
+
+(x
+
+µ + )2
+
+-
+
+ 4
+
+
+
+1 
+
+tt
+
+(x
+
++
+
+ )2
+
++
+
+ 2
+
+ttx
+
++
+
+,
+
+where ,  and  are arbitrary smooth functions of t with  = 0, cf. Proposition 15. The time-independence of this potential implies that it is at most as general as
+
+C¯(t, x)
+
+=
+
+(x
+
+µ + )2
+
++
+
+(x
+
++
+
+)2
+
++
+
+
+
+for some constants c3 = ||1/4, c4 =
+
+,  and 1 and c5
+
+. =
+
+Then, using the transformation from -, see Corollary 17, we can reduce
+
+GC¯ P(x)
+
+with c1 = ||1/4, c2 = to µ/x2 + x2 sgn .
+
+0,
+
+The GP-orbit of the equation P0 consists of the equations with at most quadratic potentials,
+
+and a complete set of GP -inequivalent equations among them is exhausted by the equations PC
+
+with C  {0, x2, -x2, x}.
+
+Another way to obtain the group classification of P up to the GP -equivalence is to extend Cases 2 and 3 of Theorem 37 by the inverses of the admissible transformations listed in Theo-
+
+rem 18. The corresponding essential Lie invariance algebras are obtained via pushing forward
+
+the algebras geµs/sx2 by these inverses. The GP - and GE0 -equivalences are consistent via the wide subset ME0 of G(GE0 ), cf. the
+paragraph before Corollary 17 and the proof of Corollary 21.
+
+33
+
+5.2 Group classifications of Fokker­Planck equations with time-independent coefficients
+
+cFliarssstifiocf aatlilo, nthoefgtrhoeupclcalsasssFificautpiotnootfhteheGcFlas-seqF¯uivuapletnocteh,ecGf. F¯th-eeqduiisvcaulessnicoenraedt utchees
+
+to the group beginning of
+
+Section 4.2. The procedure of the latter classification is similar to that described in Section 4.2
+
+for the classes F and K, but for F we can solve the corresponding problem completely by
+
+finding inequivalent solutions of the ordinary differential equations Wxx + C(x)W = -W ,
+
+where the coefficient C runs through the set of potentials of canonical representatives of the
+
+Lie-symmetry extensions in the class P.
+
+For each time-independent potential C = C(x), we consider the family TC of point trans-
+
+formations U : t~ = t, x~ = x, u~ = U (t, x)u mapping the equation PC = PC to Fokker­Planck
+
+equations FB the equation
+
+P=--FC B,
+
+with time-independent drifts B = B(x). The parameter function and B = -2Ux/U . In view of time-independence of drifts B
+
+U satisfies within the
+
+class F, the function U takes the form U (t, x) = V (t)W (x). Substituting this expression for U
+
+into the equation P--C , we separate the variables and obtain that, up to a negligible nonzero constant multiplier, V (t) = et,   R, while the function W satisfies the equation WC,:
+
+Wxx + CW = -W . Thus,
+
+TC := ,W : t~ = t, x~ = x, u~ = etW (x)u | Wxx + CW = -W, W (x) = 0,   R .
+
+The image of this family of point transformations acting on the equation PC is the set FC of reduced Fokker­Planck equations with drifts of the form B = -2Ux/U , where U runs through the set of nonzero solutions of the equation P--C in separated variables, U (t, x) = etW (x),
+FC := FB | B = -2Wx/W, W = W (x) = 0 : Wxx + CW = -W,   R .
+
+Lemma 48. Given Fokker­Planck equations FB  FC and FB~ being GF -equivalent to FB , there exists a potential C~ such that the equation PC~ is GP -equivalent to PC , and FB~  FC~.
+
+Proof. Since the equation FB~ is GF -equivalent to FB , there exists the equivalence transforma-
+
+tion T  function
+
+CG~ Fwitshu(ch tTh)atC~(=
+
+T)B~ c1-2C
+
+= c-1 1B satisfies
+
+for a nonzero constant c1. It is the requirements of the lemma.
+
+easy
+
+to
+
+see
+
+that
+
+the
+
+Lemma 49. If C~ = TC for some T  GP , then the transformation T  GF with T = T and the identity u-component maps FC onto FC~, FC~ = TFC .
+
+Proof. For an arbitrary Fokker­Planck equation FB~  FC~, we have B~ = -2U~x~/U~ for some
+
+nonzero solution U~ of P--C~ of the form U~ (t~, x~) = e~t~W~ (x~). As an element of GP , the transfor-
+
+mation T has the form (8). Thus, we have U~ (t~, x~) = c4ec5tU (t, x) for some solution U of P--C of
+
+the form U (t, x) = etW (x). Setting B := -2Ux/U = -2Wx/W , we obtain B~(x~) = c1-1B(x).
+
+This means that the Fokker­Planck equation FB with the drift B = -2Wx/W , which belongs
+
+ttrroeaqFnusCirf,oerdimstramataniopsnfpoert~dm=atotcio21FtnB~+T
+
+by the equivalence transformation obtained via prolonging the point
+
+c2, x~ =  GF ,
+
+c1x + which
+
+c3, u~ = does not
+
+u of (t, depend
+
+x, u) as B~ = on the choice
+
+ocf-1B1~B. .HeTnhceisFdC~efineTsFthC e.
+
+Reverting the argumentation we derive the inverse inclusion.
+
+Lemma ae~retW~G(Fx)
+
+50. The Fokker­Planck equations FB := (,W )PC and FB~ -equivalent if and only if the associated solutions U (t, x) = of the equation P--C are HC -equivalent, where HC := GPes--s C 
+
+:= (~,W~ etW (x) GP- .
+
+a)nPdC U~f(rt~o,mx~)F=C
+
+34
+
+Proof. Let Fokker­Planck equations equivalence transformation T of F,
+
+FwBh,icFhB~isoFf CthbeefoGrmF(-1eq3u),ivsaulcehntt,htahtatB~
+
+is, =
+
+there TB.
+
+exists an The last
+
+equality implies that the associated functions U and U~ satisfy U~ (t~, x~) = f (t)U (t, x) with a
+
+nonzero function f of t. This function can be found from the representations with separated variables for U and U~ , f (t) = e(-c12~)t-~c2. The point transformation
+
+T :
+
+t~ = c12t + c2,
+
+x~ = c1x + c3,
+
+u~ = e(-c12~)t-~c2 u,
+
+C~
+
+=
+
+1 c21
+
+C + ( - c12~)
+
+belongs to GP- . Since its projection T maps the solution U of P--C to the solution U~ thereof,
+
+then
+
+T
+
+
+
+Gess
+P--C
+
+.
+
+Thus,
+
+Conversely, let U and
+
+constants c1, . . . , c5 with
+
+the solutions U and
+U~ be HC-equivalent c1c4 = 0 such that
+
+U~ are HC-equivalent. Us~o(lut~,tx~io)n=s ocf4tehc5etUeq(ut,axti)o, nwPh-e-rCe.
+
+Then there exist t~ = c12t + c2 and
+
+x~ = c1x + c3. The corresponding drifts B and B~ are related via B~(x~) = B(x)/c1, and thus the
+
+equations FB and FB~ are GF -equivalent.
+
+Having at our disposal the group classification of the class P and Lemmas 48­50, we solve the group classification problems for the classes F and F¯ with respect to the corresponding equivalence groups using the mapping method.
+
+Theorem 51. The (essential) kernel algebras of the classes F and F¯ coincide with t, uu .
+
+A in
+
+complete the class
+
+list F 
+
+o(freGspF.t-hienecqluaisvsaFl¯en)t
+
+(resp. GF¯ -inequivalent) is exhausted by the cases
+
+essential given in
+
+Lie-symmetry Table 2.
+
+extensions
+
+Proof. Recall that the class F is related to its superclass F¯ via a subset M of GGF¯ . If the
+
+projection of an equivalence transformation of the class F¯ to the space with the coordinates
+
+(t, x, u, B) relates two equations from the class F, then in view of Propositions 34 and 35,
+
+this are
+
+projection consistent
+
+belongs via M.
+
+to the group GF . This means The essential kernel algebras
+
+that the GF of the classes
+
+-F¯andantdheFGF¯a -reequthivealseanmcees,
+
+gF¯ess = gFess classification
+
+= of
+
+t, uu F¯ up to
+
+GF -equivalence.
+
+. These two facts together with Proposition 36 imply the GF¯-equivalence reduces to the group classification
+
+that the of F  up
+
+group to the
+
+For the latter classification, we again use the procedure described at the end of Section 2.3.
+
+The application of this procedure to the class F is based on Lemmas 48­50. To each po-
+
+tential C listed in Table 1, we relate the set FC of Fokker­Planck equations that are similar ttfrohoemthfaetmheeiqlyuseatTtiCFonC oPfarCpe.oainsTstohctisriaastneestdfoiwrsmidtahetfiiHonneCds-.intoeIqnbuevivieathwleenotimfpLaageretmicmouflaatrh5e0so,elquGutFiaotni-osinnoefqPtuChivewaelieqtnhutarteeiqospunaePctit-o-nCtos: Ut = -Uxx - C(x)U that are of the form U (t, x) = etW (x). The group HC from Lemma 50
+
+induces a subgroup HWC of the equivalence group of the class WC of linear ordinary differential equations WC,: Wxx + C(x)W = -W , which are parameterized by   R. Here C is a fixed
+
+function of x. In other words, instead of describing HC-inequivalent special solutions of the equa-
+
+tion P--C, we Therefore, to
+
+can classify solutions of equations in obtain a group classification list for
+
+the the
+
+class WC class F 
+
+umpodtoultohethHe WGCF-eq-euqiuvaivleanlecnec.1e8,
+
+we should cation list
+
+find an for the
+
+exhaustive class F  is
+
+list of HWC -inequivalent solutions constituted by the Fokker­Planck
+
+of equations in WC. A classifiequations FB whose drifts are
+
+constructed with the help of the It is convenient to denote 
+
+found := 
+
+solutions W
+
+and
+
+
+
+:=
+
+1 2
+
+, B1
+
+= -2Wx/W . - 4µ. Thus,
+
+
+
+
+
+R
+
+0
+
+if
+
+4µ
+
+1 and
+
+  iR>0 if 4µ > 1. Thereafter a1 and a2 are arbitrary real constants with (a1, a2) = (0, 0),
+
+18Given a class L of (systems of) differential equations, a solution f of a system L  L is called GL -equivalent to a solution f~ of a system L~  L if there exists T  GL such that ~ = T and (T)f~ = f .
+
+35
+
+Table 2. The group classifications of the classes F , F¯, K and K¯ up to the GF -, GF¯ -, GK - and GK¯ equivalences, respectively.
+
+no.
+
+W
+
+Basis elements of geBss besides t and uu
+
+0 W (x)
+
+­
+
+1
+
+|x| cos( ln |x|), |x|, |x| ln |x|,
+
+|x| a1|x| + a2|x|-
+
+1
+
+|x| Z (x), |x| Z~ (x)
+
+1
+
+|x| C(x), |x| C~(x)
+
+DB,0(t), DB,0(t2)
+DB,1(t), DB,1(t2) DB,-1(t), DB,-1(t2)
+
+1a
+
+|x|-1/2 Re
+
+(a1
+
+-
+
+a2i)W-
+
+1 4
+
+i,
+
+1 2
+
+ (ix2)
+
+1b
+
+|x|-1/2
+
+a1W
+
+1 4
+
+,
+
+1 2
+
+
+
+(x2)
+
++
+
+a2W-
+
+1 4
+
+,
+
+1 2
+
+
+
+(-x2)
+
+2 1, x 2 cos x 2 ex, cosh x, sinh x
+
+2a
+
+|x|-1/2 Re
+
+(a1
+
+-
+
+a2i)W-
+
+1 4
+
+i,
+
+1 4
+
+(ix2)
+
+2b
+
+|x|-1/2
+
+a1W
+
+1 4
+
+,
+
+1 4
+
+(x2)
+
++
+
+a2 W-
+
+1 4
+
+,
+
+1 4
+
+(-x2)
+
+2c a1Ai(x) + a2Bi(x)
+
+DB,(cos 4t), DB,(sin 4t)
+
+DB,(e4t), DB,(e-4t)
+
+PB (1), PB(t), DB,0(t), DB,0(t2) PB (1), PB(t), DB,1(t), DB,1(t2) PB (1), PB(t), DB,-1(t), DB,-1(t2)
+
+PB(sin 2t), PB(cos 2t), DB,(cos 4t), DB,(sin 4t)
+
+PB (e2t), PB(e-2t), DB,(e4t), DB,(e-4t)
+
+P¯B (1),
+
+P¯B (t),
+
+DB,0 (t)
+
++
+
+3 2
+
+P¯B
+
+(t2),
+
+DB,0 (t2 )
+
++
+
+P¯B (t3)
+
+Here A =  for the classes F¯ and K¯; B = 2Wx/W with  = -1 for the classes F and F¯ and  = 1 for
+
+the are
+
+classes K defined up
+
+and to a
+
+K¯;   R,   R 0  iR>0, nonzero multiplier; Z, C,
+
+,   R>0 Z~ and C~
+
+, are
+
+R
+
+0,
+
+, , 
+
+=
+
+1 2
+
+;
+
+cylinder functions,
+
+(a1, a2) = (0, 0) see the proof of
+
+and (a1, a2) Theorem 51
+
+for details; Ai and Bi are the Airy functions of the first and the second kind, respectively; Wk,m is a Whittaker
+
+function; P¯B(f ) =
+
+DB,(f ) PB(f ) -
+
+= F
+
+f t
+
++
+
+1 2
+
+ft
+
+uu, and
+
+xx - F is a
+
+
+
+1 8
+
+ftt
+
+fixed
+
+x2
+
++
+
+1 4
+
+ft
+
+-
+
+f
+
++
+
+1 4
+
+antiderivative of f
+
+ft xB (x) = f (t).
+
+uu,
+
+PB(f ) =
+
+f x -
+
+1 2
+
+
+
+ftx + f B(x)
+
+uu,
+
+which are defined up to a nonzero multiplier when they appear in expressions for B. The numeration below is associated with the corresponding cases of Table 1, and the proof goes on a case-by-case basis. For basic results on involved special functions, see, e.g., [1, 23].
+
+0. If C is a general function of x, then W is such a function as well.
+1. C(x) = µx-2 with µ = 0. Consider first the case  = 0. The general solution of the equation WC,: x2Wxx + (x2 + µ)W = 0 is W (x) = |x| Z|| || x , where the cylinder function Z|| is Z, C, Z~|| or C~|| if 4µ 1 and  > 0, 4µ 1 and  < 0, 4µ > 1 and  > 0 or 4µ > 1 and  < 0, respectively. Here Z and C are linear combinations of linearly independent Bessel and of linearly independent modified Bessel functions, respectively. The cylinder tfuhnecHtiaonnkZe~l|f|unisctainonasrHbi(t1r)arayndlinHe(a2r), combination of the (linearly independent) modifications of
+
+Z~||(x) = a1H~ (1)(x) + a2H~ (2)(x)
+
+= a1 2
+
+e-
+
+1 2
+
+
+
+
+
+H(1)
+
+(x)
+
++
+
+e
+
+1 2
+
+
+
+
+
+H(2)
+
+(x)
+
++ a2 2i
+
+e-
+
+1 2
+
+  H(1) (x)
+
+-
+
+e
+
+1 2
+
+  H(2) (x)
+
+,
+
+and the cylinder function C~|| is an arbitrary linear combination of the modified Bessel function K and the modification ~I of the modified Bessel function I (for  = 0),
+
+C~||(x)
+
+=
+
+a1~I (x)
+
++
+
+a2K (x)
+
+=
+
+a1i 2 sin()
+
+I(x) + I-(x)
+
++ a2K(x).
+
+36
+
+It is not possible to define a numerically satisfactory companion to K, which remains finite as
+
+  0. All the above functions are real-valued and represent the general solution of WC, for each related values of parameters, see [15] for more details on the functions H~ (1), H~ (2), ~I and K. The group HWC consists of the transformations x~ = c1x, W~ = c2W , ~ = c1-2, where c1 and c2 are nonzero arbitrary constants. Therefore, the arguments of the above cylinder functions can
+
+be scaled to x using transformations from HWC . If  = 0, then the equation WC, degenerates
+
+to
+
+the
+
+Euler
+
+equation
+
+x2Wxx + µW
+
+=
+
+0.
+
+Depending on the value of sgn(1 - 4µ), -1, 0 or 1, its general solution assumes the form
+
+W (x) = |x| a1 cos(|| ln |x|) + a2 sin(|| ln |x|) , W (x) = |x| a1 + a2 ln |x| or W (x) = |x| a1|x| + a2|x|- ,
+
+and up to the HWC -equivalence, each of the first two values of W reduces to an element of |x| cos(|| ln |x|) or |x|, |x| ln |x| , respectively, whereas the last value cannot be sim-
+plified. Note that the values W (x) = |x| with   R \ {0, 1} and W (x) = |x| cos(|| ln |x|) with   iR \ {0} give the drifts from Cases 2 and 3 of Theorem 39.
+
+1a. C(x) = µx-2 + x2 with µ = 0. The equation WC, is x2Wxx + (x4 + x2 + µ)W = 0. As
+
+a pair of its real-valued linearly independent solutions, we can take the real and imaginary parts
+
+of
+
+|x|-1/2
+
+W-
+
+1 4
+
+i,
+
+1 2
+
+
+
+(ix2
+
+),
+
+where
+
+Wk,m
+
+is
+
+a
+
+Whittaker
+
+function,
+
+and
+
+
+
+= 1/2.
+
+If
+
+
+
+ 2N0 + 1,
+
+the
+
+function W (x) can be represented in terms of regular and irregular Coulomb functions,
+
+W (x) = |x|-1/2
+
+a1F -1 2
+
+-,
+
+1 2
+
+x2
+
++ a2G -1 2
+
+-,
+
+1 2
+
+x2
+
+.
+
+The group HWC , which is constituted by the point transformations x~ = ±x, W~ = c1W , ~ = , where c1 is a nonzero arbitrary constant, does not allow us to gauge the parameters of W .
+1b. C(x) = µx-2 - x2 with µ = 0. The equation WC, is x2Wxx + (-x4 + x2 + µ)W = 0. Its (real-valued) general solution can be represented in the form
+
+W (x) = |x|-1/2
+
+a1W
+
+1 4
+
+,
+
+1 2
+
+ (x2)
+
++
+
+a2W-
+
+1 4
+
+,
+
+1 2
+
+ (-x2)
+
+for any value of , and  = 1/2. The group HWC is the same as that in Case 1a, and hence no gauging of parameters in W is possible.
+
+2. C = 0. The ~ = c1-2, where
+
+group c1, c2,
+
+HWC consists of the and c3 are arbitrary
+
+point transformations constants with c1c3 =
+
+x~ 0.
+
+= c1x + c2, W~ = c3W , The general solution of
+
+the equation  < 0 and W values of W
+
+WC,: Wxx +W = 0 (x) = a1 sin( x)+a2 reduces to an element
+
+ocisof sW{(1,(xx)}x,)=oiffa1{xe>x+,0sa.in2Uhifpx,tco=otsh0he,xWH} Wa(xnC)d-e=tqouaic1voeaslex-n,cxree+,sepaae2cchet-iovfe-ltyh.xesief
+
+2a, 2b. C(x) = ±x2. These cases are specifications of Cases 1a and 1b for  = 1/2 with the
+
+same group HWC .
+
+2c. C(x) = x. We replace this potential by the GP -equivalent potential C(x) = -x. Then the equation WC, takes the form Wxx - (x - )W = 0, and its general solution is
+
+W (x) = a1 Ai(x - ) + a2 Bi(x - ). Here Ai and Bi are the Airy functions of the first and
+
+the second W~ = c3W ,
+
+k~in=dsc.1-2Th, ewhgreorue pc1H, cW2Canisd
+
+constituted by the point transformations c3 are arbitrary constants with c1c3 = 0.
+
+x~ = c1x + Therefore,
+
+c2, up
+
+to the HWC -equivalence, we can set W (x) = a1 Ai(x) + a2 Bi(x).
+
+Remark 52. It is evident from the classification procedure that there are additional equivalences
+between classification cases listed in Table 2, cf. also Theorem 39. More specifically, the Fokker­ Planck equations corresponding to Cases 1, 1, 1, 1a and 1b (resp. Cases 2, 2, 2, 2a, 2b
+
+37
+
+and
+
+2c)
+
+with
+
+the
+
+same
+
+value
+
+of
+
+
+
+:=
+
+1 2
+
+1
+
+-
+
+4µ
+
+(see
+
+the
+
+proof
+
+of
+
+Theorem
+
+51)
+
+are
+
+pairwise
+
+GF -
+
+equivalent. It is easy to construct transformations realizing the additional equivalences between
+
+equations related to classification list. such equations, where C(x) = µx-2
+
+Let with
+
+FB 1 = µ=0
+
+(1,W1 ) in Cases
+
+PC 1
+
+and and
+
+FB 2 = (2,W2)PC be two C = 0 in Cases 2. Then
+
+the transformation  representatives of the
+
+:c=orresp2,oWn2din(gG1F,W -1e)q-u1ivmalaepnsceFcBl1astso
+
+FB 2 , FB 2 = are presented
+
+FB 1 . The in Theorem
+
+canonical 39.
+
+Remark 53. Cases 2, 2, 2, 2a and 2b of Table 2 are counterparts of Cases 1, 1, 1, 1a and 1b
+
+for
+
+
+
+=
+
+1 2
+
+with
+
+further
+
+Lie-symmetry
+
+extensions
+
+(see
+
+the
+
+proof
+
+of
+
+Theorem
+
+51)
+
+but
+
+Case
+
+2c
+
+does
+
+not admit such an interpretation. It is a consequence of the fact that the set t s-1(C) with
+
+C = 0 in GP is wider than the similar set with C(x) = µ/x2, where µ = 0.
+
+5.3 Group classifications of Kolmogorov equations with time-independent coefficients
+
+We only formulate the assertions constituting the theoretical basis of the procedure of classifying
+reduced Kolmogorov equations with time-independent drifts; their proofs are analogous to those of Lemmas 48­50. For each time-independent potential C = C(x), by TC and KC we denote the family of the point transformations mapping the equation PC to such Kolmogorov equations and the set of corresponding images, respectively,
+
+TC = ,W : t~ = t, x~ = x, u~ = etu/W (x) |   R, W = 0 : Wxx + CW = -W , KC := (TC )PC = KB | B = 2Wx/W, W = W (x) = 0 : Wxx + CW = -W,   R .
+
+Lemma 54. there exists a
+
+(fui)ncGtiiovnenC~KooflmxosguocrhovtheaqtuathtieoneqsuKatBion
+
+and KB~  KC~ .
+
+KC PC~
+
+iasnGd PKB-~eqbueiivnagleGnKt to-etqhueiveaqluenattioton
+
+KB , PC ,
+
+ethqeu((iiiivdiiai)e)lenITntfithtC~yeif=uKa-oncToldmmCoopngofolonyrreoinvfstoetmhmqeueaapaTtssiosKoncsCGiaKPoteBnd,to:=tshoKel(uCn~t,itoK,hWneC~s)t=erPatnTCWsfKao(nCrxdm.) KaatnBi~odn:=e~T(tW~~(G,Wx~K))oPfwCtihthferoemquTaKtC=ionarePTCG aKanrde-
+
+GPesCs  GP -equivalent.
+
+The group classification of the class classification of the class K up to the
+
+GK¯K u-epqutoivatlheencGe,K¯a -nedqutihvaelelantcteerrecdlauscseisfictaotiotnheisgrvoeurpy
+
+similar to that done in Theorem 51. Its result can be summarized by Table 2 as well, cf.
+
+Theorem 39.
+
+Theorem 55. The essential kernel algebras of the classes K and K¯ coincide with t, uu .
+
+A in
+
+complete the class
+
+list K
+
+o(freGspK.t-hienecqluaisvsaKl¯en)t
+
+(resp. GK¯ -inequivalent) is exhausted by the cases
+
+essential given in
+
+Lie-symmetry Table 2.
+
+extensions
+
+6 Conclusion
+The mapping method of group classification is an efficient tool for solving group classification problems. Its simplest version is related to similar classes of differential equations, where the respective equivalences are obviously consistent and there is a clear one-to-one correspondence between the associated kernel algebras and between classification lists.
+Another simple version of the method is the reduction of the group classification of a class L¯ to that of its subclass L with the help of mapping L¯ onto L by a wide family of admissible transformations from the action groupoid of the equivalence group of L¯. If the stabilizer subgroup
+38
+
+of this group with respect to L coincides with the equivalence group of L, then any classification list for L is a classification list for L¯.
+
+In the present paper, we have extended the mapping method of group classification to weakly
+
+similar classes. But the weaker a relation between classes is, the less interrelated their group
+
+classifications are. Thus, in general there is no relation between the kernel algebras of (gen-
+
+uinely) weakly similar classes. This urged us to reformulate the classical statement of the group
+
+classification problem in Section 2.2, replacing the kernel algebra of the class under study by
+
+a family of uniform subalgebras of the maximal Lie invariance algebras of systems from this
+
+class and thus revisiting the entire framework of group classification of classes of differential equations. Given weakly similar classes L and L~, each of such families for L is associated with such a family for L~, and vice versa. We have suggested various techniques within the frame-
+
+work of the mapping method of group classification depending on normalization properties of
+
+involved classes of differential equations and on the equivalences to be used in the course of
+
+group classification.
+
+Before discussing the obtained results for Kolmogorov and Fokker­Planck equations, we note that the classes in the pairs (K¯, F¯), (K, F-), (K¯, F¯) and (K, F-) are the adjoint of each
+
+other in the sense that the adjoint of any equation in the first class belongs to the second
+
+class, and vice versa. The adjointness leads to an intimate connection between the equivalence
+
+groupoids of the first and the second classes, between their equivalence groups as well as between
+
+the maximal Lie invariance algebras of equations from these classes, and thus the studies of these
+
+objects for the first and the second classes are similar. This is why we have considered in detail
+
+only one of the classes in each pair for particular purposes. We follow the same convention in
+
+the rest of the conclusion as well.
+
+The fact underlying the application of the mapping method to group classification of the
+
+classes weakly
+
+K¯ and similar
+
+K to
+
+up the
+
+to the class P
+
+GoK¯f
+
+- and GK -equivalences, respectively, is that these classes are heat equations with potentials. Moreover, the group classifica-
+
+tion of the class K¯ is reduced to the group classification of the class K via mapping K¯ onto K
+
+by a wide family of admissible transformations is particularly convenient since the class K is
+
+wfreoamklythseimacitlaiorntogrtohuepcoliadssofPG K¯in.
+
+This reduction a specific way,
+
+namely, point transformations establishing the similarity can be chosen to have the identity
+
+(t, x)-components. Unfortunately, it appeared that the explicit listing of all Lie-symmetry extension cases in the class K up to the GK-equivalence is actually a "no-go" problem because it is equivalent to finding all GPC -inequivalent solutions of the heat equations PC , where C runs through the list from Theorem 37. This claim has additionally been interpreted by means of the
+
+group foliation method in Section 4.3. On the other hand, the mapping method allowed us at least to describe the solution of the group classification problems for K¯ and K in Theorem 46.
+Although the classification procedures for the classes K¯ and K¯ are analogous, the mapping method has demonstrated much better results for the class K¯, which is weakly similar to the class P. More specifically, we have reduced the group classification of the class K¯ to that of the class K via mapping K¯ onto K by a wide family of admissible transformations from the action groupoid of the equivalence group GK¯ of K¯. The class K is weakly similar to the class P with respect to point transformations with the identity (t, x)-components. While the technical crux of the mapping method for the class K lies in solving the equations Ut = Uxx + C(t, x)U for the values of the potential C collected in Theorem 37, for the class K the corresponding
+
+equations are Uxx + (C(x) + )U = 0, whose explicit general solutions can be found for all
+
+associated potentials and   R in terms of elementary or special functions. This allows us to
+
+present an explicit classification list for the class class K¯ up to the GK¯ -equivalence) in Table 2.
+
+K
+
+up
+
+to
+
+the
+
+GK -equivalence
+
+(resp.
+
+for
+
+the
+
+However nice this result is, it also indirectly confirms that the difficulty level of problems
+
+concerning admissible transformations in the superclass K¯ and Lie symmetries of equations
+
+therein is too high. Firstly, let us discuss Lie symmetries of equations in K¯. There are only four
+
+39
+
+(resp. three) families of Lie-symmetry extension cases in the class and K¯ (resp. K¯) modulo its
+
+equivalence groupoid and they are parameterized by at most one real parameter, but there are
+
+already eleven (in an "optimistical" count, which became nineteen in a "pessimistic" count, see Table 2) GK¯-inequivalent Lie-symmetry extension cases in the class K¯. Furthermore, in some of these cases the corresponding values of arbitrary elements are expressed in terms of special
+
+functions and parameterized by up to three real parameters. Recall that arbitrary-element
+
+values expressed in terms of special functions arose in [48] as well, where the mapping method
+
+was applied to another extension cases are also list of the class K¯ with
+
+pair of weakly similar classes. Moreover,
+
+GK¯ -equivalent, and therefore all respect to its equivalence group
+
+of them GK¯ but
+
+GK¯ -inequivalent Lie-symmetry are contained in a classification this is only a small part of the
+
+list. In fact, this list is much wider since Lie-symmetry extension cases with time-dependent
+
+drifts are therein as well in view of the weakness of the GK¯ -equivalence, and as discussed above, it cannot be presented in an explicit form.
+
+To discuss the classification of admissible transformations of the class K (resp. K¯), let
+
+us look first at its counterpart for the class P in accordance with the mapping technique.
+
+Theorem 18 states that the class P possesses the minimal self-consistent generating (up to the
+
+GP-equivalence and the linear superposition of solutions) set B of admissible transformations, which consists of three families. The admissible transformations from B are precisely those
+
+that induce all independent extension cases in the class
+
+Pad dtihtaiotnaarleelqisutievdalienncTeasbbleet1w.eAenntahneaGloPgo-uinsegqeunivearaletnintgLsiee-tsyB~mfomretthrye
+
+class K is constituted by the admissible transformations inducing all independent additional
+
+equivalences are collected
+
+between in Table
+
+the 2;
+
+cGf.KRe-imneaqrkui5va2l.enTthLeies-estyBm~ misedtreyfineixtteelnysmioninicmasaelsfoinr
+
+the the
+
+class class
+
+K K
+
+that but,
+
+as with Lie symmetries, is significantly more voluminous than its counterpart B. Each element of B is associated with a family of elements of B~. Moreover, many elements of B~ correspond to admissible identity transformations in P. It is then clear that no generating set of admissible transformations of the class K¯ can be presented in an explicit form.
+
+Justifying our interest in the subject of the paper in the introduction, we have mentioned the class L of reaction­diffusion equations Lc,g: ut = cu-x 2uxx + g(u) with c = 0, which was under study in [36]. Using results obtained in the present paper, we can solve the group classification problem for the class L up to the GL-equivalence. More specifically, we can translate the group classification list for the class K that is given in Table 2 to that for the class L. Thus, the
+
+constant arbitrary element c of L can be gauged to  by scaling equivalence transformations of L, and the gauged subclass of equations with c =  is similar to the class K via the hodograph transformation t~ = t, x~ = u, u~ = x, g = -B. The Lie symmetries of equations from the class L
+
+should be classified within the revisited framework of group classification, see Section 2.2. The uniform family {glKinB | Bt = 0} of subalgebras of the algebras gKB that are related to the linear superposition of solutions is mapped by the hodograph transformation onto the uniform family of subalgebras gLun,fg = f (t, u)x of the algebras gL,g , where for each fixed value of the arbitrary element g, the parameter function f = f (t, u) runs through the solution set of the equation ft = fuu - g(u)fu. A complete list of GL-inequivalent essential Lie-symmetry extensions in L is given by the modification of Table 2 with g = -B and permuted x and u.
+
+Acknowledgments
+The authors are grateful to the anonymous reviewer for valuable remarks. The research of ROP was supported by the Austrian Science Fund (FWF), projects P28770 and P33594, while SO acknowledges the support of NSERC. Also ROP expresses his gratitude to Memorial University of Newfoundland for hospitality during his stay in St. John's, while SO to the University of Vienna.
+40
+
+References
+[1] Abramowitz M. and Stegun I., Handbook of mathematical functions with formulas, graphs, and mathematical tables, Government Printing Office, Washington, D.C., 1964.
+[2] An I., Chen S. and Guo H., Search for the symmetry of the Fokker­Planck equation, Phys. A 128 (1984), 520­528.
+[3] Anco S., Ali S. and Wolf T., Exact solutions of nonlinear partial differential equations by the method of group foliation reduction, SIGMA 7 (2011), 066, arXiv:1105.5303.
+[4] Basarab-Horwath P., Lahno V. and Zhdanov R., The structure of Lie algebras and the classification problem for partial differential equations, Acta Appl. Math. 69 (2001), 43­94, arxiv:math-ph/0005013.
+[5] Bihlo A., Dos Santos Cardoso-Bihlo E. and Popovych R.O., Complete group classification of a class of nonlinear wave equations, J. Math. Phys. 53 (2012), 123515, arXiv:1106.4801.
+[6] Bihlo A., Poltavets N. and Popovych R.O., Lie symmetries of two-dimensional shallow water equations with variable bottom topography, Chaos 30 (2020), 073132, arXiv:1911.02097.
+[7] Bihlo A. and Popovych R.O., Zeroth-order conservation laws of two-dimensional shallow water equations with variable bottom topography, Stud. Appl. Math. 145 (2020), 291­321, arXiv:1912.11468.
+[8] Bluman G., On the transformation of diffusion processes into the Wiener process, SIAM J. Appl. Math. 39 (1980), 238­247.
+[9] Bluman G. and Shtelen V., Nonlocal transformations of Kolmogorov equations into the backward heat equation, J. Math. Anal. Appl. 291 (2004), 419­437.
+[10] Bluman G.W. and Yu¨zba¸si Z.K., How symmetries yield non-invertible mappings of linear partial differential equations, J. Math. Anal. Appl. 491 (2020), 124354.
+[11] Boyko V. and Lokazyuk O. and Popovych R.O., Admissible transformations and Lie symmetries of linear systems of second-order ordinary differential equations, arXiv:2105.05139, 49 pp.
+[12] Cherkasov I.D., On the transformation of the diffusion process to a Wiener process, Theory Probab. Appl. 2 (1957), 373­377.
+[13] Cicogna G. and Vitali D., Classification of the extended symmetries of Fokker­Planck equations, J. Phys. A 23 (1990), L85­L88.
+[14] Dos Santos Cardoso-Bihlo E. M. and Bihlo A. and Popovych R. O. Enhanced preliminary group classification of a class of generalized diffusion equations, Commun. Nonlinear Sci. Numer. Simul. 16 (2011), 3622­3638, arXiv:1012.0297.
+[15] Dunster T.M., Bessel functions of purely imaginary order, with an application to second-order linear differential equations having a large parameter, SIAM J. Math. Anal. 21 (1990), 995­1018.
+[16] Feller W., An introduction to probability theory and its applications, John Wiley & Sons, New York ­ London ­ Sydney, 1968.
+[17] Fels M. and Olver P. J., Moving coframes. II. Regularization and theoretical foundations, Acta Appl. Math. 55 (1999), 127­208.
+[18] Gazeau J.P. and Winternitz P., Symmetries of variable coefficient Korteweg­de Vries equations, J. Math. Phys. 33 (1992), 4087­4102.
+[19] Gu¨ng¨or F., Equivalence and symmetries for variable coefficient linear heat type equations. I, J. Math. Phys. 59 (2018), 051507, arXiv:1501.01481.
+[20] Gu¨ng¨or F., Lahno V.I. and Zhdanov R.Z., Symmetry classification of KdV-type nonlinear evolution equations, J. Math. Phys. 45 (2004), 2280­2313, arXiv:nlin/0201063.
+[21] Ivanova N.M., Popovych R.O. and Sophocleous C., Group analysis of variable coefficient diffusion-convection equations. I. Enhanced group classification, Lobachevskii J. Math. 31 (2010), 100­122, arXiv:0710.2731.
+[22] Johnpillai I.K. and Mahomed F.M., Singular invariant equation for the (1+1) Fokker­Planck equation, J. Phys. A 34 (2001), 11033­11051.
+[23] Kamke E., Differentialgleichungen. L¨osungsmethoden und L¨osungen. I: Gew¨ohnliche Differentialgleichungen, B. G. Teubner, Stuttgart, 1977.
+[24] Kozlov R., On symmetries of the Fokker­Planck equation, J. Engrg. Math. 82 (2013), 39­57.
+[25] Kurujyibwami C. and Basarab-Horwath P. and Popovych, R., Algebraic method for group classification of (1+1)-dimensional linear Schr¨odinger equations, Acta Appl. Math., 157 (2018), 171­203, arXiv:1607.04118.
+[26] Kurujyibwami C. and Popovych R.O., Equivalence groupoids and group classification of multidimensional nonlinear Schr¨odinger equations, J. Math. Anal. Appl. 491 (2020), 124271, arXiv:2003.02781.
+41
+
+[27] Lie S., U¨ ber die Integration durch bestimmte Integrale von einer Klasse linear partieller Differentialgleichungen, Arch. for Math. 6 (1881), 328­368; translation by N.H. Ibragimov: Lie S. On integration of a class of linear partial differential equations by means of definite integrals, in CRC Handbook of Lie group analysis of differential equations, vol. 2, CRC Press, Boca Raton, FL, 1995, pp. 473­508.
+[28] Martina L., Sheftel M. and Winternitz P., Group foliation and non-invariant solutions of the heavenly equation, J. Phys. A 34 (2001), 9243­9263, arXiv:math-ph/0108004.
+[29] Matveev V.B. and Salle M.A., Darboux transformations and solitons, Springer-Verlag, Berlin, 1991. [30] Miyadzawa T., Theory of the one-variable Fokker­Planck equation, Phys. Rev. A 39 (1989), 1447­1468. [31] Morozov O., Contact equivalence problem for linear parabolic equations, 2003, arXiv:math-ph/0304045. [32] Nikitin A.G. and Popovych R.O., Group classification of nonlinear Schr¨odinger equations, Ukrainian Math. J.
+53 (2001), 1255­1265, arXiv:math-ph/0301009. [33] Opanasenko S., Equivalence groupoid of a class of general Burgers­Korteweg­de Vries equations with space-
+dependent coefficients, in Collection of Works of Institute of Mathematics 16 (2019), no. 1, 131­154, arXiv:1909.00036. [34] Opanasenko S., Bihlo A. and Popovych R.O., Group analysis of general Burgers­Korteweg­de Vries equations, J. Math. Phys. 58 (2017), 081511, arXiv:1703.06932. [35] Opanasenko, S. and Bihlo, A. and Popovych, R. O., Equivalence groupoid of variable-coefficient Burgers equations, J. Math. Anal. Appl. 491 (2020), 124215, arXiv:1910.13500. [36] Opanasenko S., Boyko V. and Popovych R.O., Enhanced group classification of reaction­diffusion equations with gradient-dependent diffusion, J. Math. Anal. Appl. 484 (2020), 123739, arXiv:1804.08776. [37] Ovsiannikov L.V., Group analysis of differential equations, Academic Press, New York ­ London, 1982. [38] Pocheketa O. and Popovych R.O., Extended symmetry analysis of generalized Burgers equations, J. Math. Phys. 58 (2017), 101501, arXiv:1603.09377. [39] Popovych R. O. and Bihlo A., Symmetry preserving parameterization schemes, J. Math. Phys. 53 (2010), 073102, arXiv:1010.3010. [40] Popovych R.O. and Ivanova N.M., Potential equivalence transformations for nonlinear diffusion-convection equations, J. Phys. A 38 (2005), 3145­3155, arXiv:math-ph/0402066. [41] Popovych R.O., Kunzinger M. and Eshraghi H., Admissible transformations and normalized classes of nonlinear Schr¨odinger equations, Acta Appl. Math. 109 (2010), 315­359, arXiv:math-ph/0611061. [42] Popovych R.O., Kunzinger M. and Ivanova N.M., Conservation laws and potential symmetries of linear parabolic equations, Acta Appl. Math. 100 (2008), 113­185, arXiv:0706.0443. [43] Risken H., The Fokker­Planck equation. Methods of solution and applications, Springer Series in Synergetics, vol. 18, Springer-Verlag, Berlin, 1989. [44] Sastri C. and Dunn K., Lie symmetries of some equations of the Fokker­Planck type, J. Math. Phys. 26 (1985), 3042­3047. [45] Shtelen W. and Stogny V., Symmetry properties of one- and two-dimensional Fokker­Planck equations, J. Phys. A 22 (1989), L539­L543. [46] Spichak S. and Stogny V., Symmetry classification and exact solutions of the one-dimensional Fokker­Planck equation with arbitrary coefficients of drift and diffusion, J. Phys. A 32 (1999), 8341­8353. [47] Vaneeva O., Bihlo A. and Popovych R., Generalization of the algebraic method of group classification with application to nonlinear wave and elliptic equations, Commun. Nonlinear Sci. Numer. Simul. 91 (2020), 105419, arXiv:2002.08939. [48] Vaneeva O.O., Popovych R.O. and Sophocleous C., Enhanced group analysis and exact solutions of variable coefficient semilinear diffusion equations with a power source, Acta Appl. Math. 106 (2009), 1­46, arXiv:0708.3457. [49] Vaneeva O. and Posta S., Equivalence groupoid of a class of variable coefficient Korteweg­de Vries equations, J. Math. Phys. 58 (2017), 101504, arXiv:1604.06880.
+42
+
+
