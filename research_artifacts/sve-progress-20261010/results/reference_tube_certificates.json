@@ -1,0 +1,76 @@
+{
+  "certificates": [
+    {
+      "model": "printed",
+      "scope": {
+        "g": "1",
+        "kappa": "1/30",
+        "m_closed_interval": [
+          "1",
+          "4"
+        ],
+        "z_closed_interval": [
+          "1",
+          "7/5"
+        ],
+        "initial": [
+          "2",
+          "1/2",
+          "1/10"
+        ]
+      },
+      "proof_type": "analytic continuation bootstrap with exact rational inequalities",
+      "F_bounds": [
+        "2",
+        "56/25"
+      ],
+      "Fp_bounds": [
+        "1/2",
+        "3/5"
+      ],
+      "velocity_lower": "29/25",
+      "leading_lower": "98/45",
+      "I0_upper": "11/25",
+      "Fp_increase_upper": "99/1225",
+      "Fp_increase_upper_decimal": 0.08081632653061224,
+      "barrier_slack": "47/2450",
+      "applies_to": "exact reference family; neural candidate guards remain sampled"
+    },
+    {
+      "model": "physical_corrected",
+      "scope": {
+        "g": "1",
+        "kappa": "1/30",
+        "m_closed_interval": [
+          "1",
+          "4"
+        ],
+        "z_closed_interval": [
+          "1",
+          "7/5"
+        ],
+        "initial": [
+          "2",
+          "1/2",
+          "1/10"
+        ]
+      },
+      "proof_type": "analytic continuation bootstrap with exact rational inequalities",
+      "F_bounds": [
+        "2",
+        "56/25"
+      ],
+      "Fp_bounds": [
+        "1/2",
+        "3/5"
+      ],
+      "velocity_lower": "29/25",
+      "leading_lower": "19822/3375",
+      "I0_upper": "149/100",
+      "Fp_increase_upper": "4077669383428319865/44109589569940808144",
+      "Fp_increase_upper_decimal": 0.09244405634205025,
+      "barrier_slack": "1666447867828804747/220547947849704040720",
+      "applies_to": "exact reference family; neural candidate guards remain sampled"
+    }
+  ]
+}

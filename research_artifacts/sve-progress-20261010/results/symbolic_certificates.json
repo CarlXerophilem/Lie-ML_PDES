@@ -1,0 +1,78 @@
+{
+  "certificates": [
+    {
+      "model": "printed",
+      "status": "first_order_point_continuation_obstructed",
+      "generator_scope": "arbitrary smooth tau(t,s,u), xi(t,s,u), eta(t,s,u)",
+      "base_generator": "t*d_t - 2*s*d_s",
+      "parameter_path": "m=3+delta; fixed nondimensional g,kappa>0; U*=1",
+      "guards": [
+        "g>0",
+        "kappa>0",
+        "p=phi_t>0",
+        "q=phi_s>0",
+        "regular local jet chart; connected open base domain",
+        "C^1 parameter dependence and enough point-coefficient regularity"
+      ],
+      "on_shell_phi_ttt": "(-a*b + 6*b**2*g*kappa*p/q - 3*b*c*g*kappa*p**2/q**2 - 2*b*c*g/q**3 + 3*g*kappa*p**2*x/q + g*x/q**2)/q",
+      "highest_jet": "x=phi_tss",
+      "cleared_highest_coefficient": "-6*g*kappa*p**3*q**2*Derivative(tau(t, s, u), u) - 6*g*kappa*p**3*q*Derivative(tau(t, s, u), s) + 6*g*kappa*p**2*q**3*Derivative(xi(t, s, u), u) + 3*g*kappa*p**2*q**2 + 6*g*kappa*p**2*q*Derivative(eta(t, s, u), s) + 6*g*kappa*p*q**3*Derivative(xi(t, s, u), t) - 6*g*kappa*p*q**2*Derivative(eta(t, s, u), t) - 5*g*p*q*Derivative(tau(t, s, u), u) - 3*g*p*Derivative(tau(t, s, u), s) - g*q**2*Derivative(xi(t, s, u), u) + 3*g*Derivative(eta(t, s, u), s) + q*(3*g*Derivative(eta(t, s, u), u) - 2*g*Derivative(tau(t, s, u), t) - g*Derivative(xi(t, s, u), s))",
+      "polynomial_variables": [
+        "p",
+        "q"
+      ],
+      "selected_monomial": "p**2*q**2",
+      "selected_coefficient": "3*g*kappa",
+      "reason": "An identity on the positive open p,q branch must have every polynomial coefficient zero.",
+      "common_scaling_identity_remainder": "0",
+      "X5_defect_identity_remainder": "0",
+      "first_integral": "-C*z*(P**3*z**2 - P*g*kappa*m*(-P*z + f)**(m - 1) - g)/P**2",
+      "excluded_claims": [
+        "maximal point classification",
+        "contact/generalized/nonlocal symmetries",
+        "singular parameter continuations",
+        "novelty",
+        "global existence",
+        "shock/weak solutions",
+        "data-independent invariant coverage"
+      ]
+    },
+    {
+      "model": "physical_corrected",
+      "status": "first_order_point_continuation_obstructed",
+      "generator_scope": "arbitrary smooth tau(t,s,u), xi(t,s,u), eta(t,s,u)",
+      "base_generator": "t*d_t - 2*s*d_s",
+      "parameter_path": "m=3+delta; fixed nondimensional g,kappa>0; U*=1",
+      "guards": [
+        "g>0",
+        "kappa>0",
+        "p=phi_t>0",
+        "q=phi_s>0",
+        "regular local jet chart; connected open base domain",
+        "C^1 parameter dependence and enough point-coefficient regularity"
+      ],
+      "on_shell_phi_ttt": "(6*b**2*g*kappa*p/q - 3*b*c*g*kappa*p**2/q**2 - 3*b*c*g/q**3 + 3*c**2*g*p/q**4 + 3*g*kappa*p**2*x/q - g*p*y/q**3 + g*x/q**2 + p*w)/q",
+      "highest_jet": "x=phi_tss",
+      "cleared_highest_coefficient": "-3*g*kappa*p**3*q**2*Derivative(tau(t, s, u), u) - 3*g*kappa*p**3*q*Derivative(tau(t, s, u), s) + 3*g*kappa*p**2*q**2 + 6*g*kappa*p**2*q*Derivative(eta(t, s, u), s) - 6*g*kappa*p*q**2*Derivative(eta(t, s, u), t) - 7*g*p*q*Derivative(tau(t, s, u), u) - 5*g*p*Derivative(tau(t, s, u), s) - g*q**2*Derivative(xi(t, s, u), u) + 3*g*Derivative(eta(t, s, u), s) + p**2*q**3*(6*g*kappa*Derivative(xi(t, s, u), u) + 2*Derivative(xi(t, s, u), u)) + p*q**3*(6*g*kappa*Derivative(xi(t, s, u), t) + 2*Derivative(xi(t, s, u), t)) + q*(3*g*Derivative(eta(t, s, u), u) - 2*g*Derivative(tau(t, s, u), t) - g*Derivative(xi(t, s, u), s))",
+      "polynomial_variables": [
+        "p",
+        "q"
+      ],
+      "selected_monomial": "p**2*q**2",
+      "selected_coefficient": "3*g*kappa",
+      "reason": "An identity on the positive open p,q branch must have every polynomial coefficient zero.",
+      "common_scaling_identity_remainder": "0",
+      "X5_defect_identity_remainder": "0",
+      "first_integral": "-C*(P**3*f*z**2 - P**2*g*kappa*m*z*(-P*z + f)**(m - 1) - f*g)/P**3",
+      "excluded_claims": [
+        "maximal point classification",
+        "contact/generalized/nonlocal symmetries",
+        "singular parameter continuations",
+        "novelty",
+        "global existence",
+        "shock/weak solutions",
+        "data-independent invariant coverage"
+      ]
+    }
+  ]
+}

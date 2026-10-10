@@ -38,9 +38,104 @@ A learned \(\widehat d_k\) never authorizes reduction. Neither does \(d_k\) by i
 
 ---
 
+## Active theorem and exit condition
+
+The project now has one active research question. Freeze the nondimensional printed scalar benchmark
+
+\[
+E_m[\phi]
+=D_t\!\left(\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2}\right)
+-gm\kappa D_s\!\left(\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right)=0,
+\qquad m=3+\delta,
+\]
+
+with fixed \(g,\kappa>0\) and \(\beta_{\rm tr}=m\kappa\). All displayed variables are nondimensional (bars are dropped); in particular
+\(v:=\phi_t=(\partial_{t_{\rm phys}}\phi_{\rm phys})/U_*\). Work locally on the declared regular branch
+\[
+t>0,\qquad s>0,\qquad \phi_s>0,
+\qquad v=\phi_t>0,
+\]
+This is a mathematical benchmark contract, not a claim that the printed scalar equation is already equivalent to the full physical SVE system.
+
+At \(\delta=0\), set
+\[
+X_0=X_5=t\partial_t-2s\partial_s,
+\qquad M_0=-1,
+\qquad \operatorname{pr}^{(3)}X_0(E_0)=M_0E_0.
+\]
+Seek a regular point-symmetry continuation with the **unrestricted** first correction
+\[
+X_\delta=X_0+\delta Y_1+O(\delta^2),
+\qquad
+Y_1=\tau_1(t,s,\phi)\partial_t
+     +\xi_1(t,s,\phi)\partial_s
+     +\eta_1(t,s,\phi)\partial_\phi,
+\]
+and a smooth multiplier \(M_\delta=M_0+\delta M_1+O(\delta^2)\). (The symbol \(Y_1\) avoids collision with the source's translation generator named \(X_1\).) Expand the off-shell identity
+\[
+\operatorname{pr}^{(3)}X_\delta(E_\delta)=M_\delta E_\delta.
+\]
+Here
+\[
+E_\delta=E_0+\delta E_1+O(\delta^2),\qquad
+E_1=-g\kappa D_s\!\left[H(1+3\log v)\right],
+\qquad H=\phi_t^2\frac{\phi_{ts}}{\phi_s}.
+\]
+The decisive first-order problem is
+\[
+\boxed{
+\mathcal D_0(Y_1,M_1)
+:=\operatorname{pr}^{(3)}Y_1(E_0)-M_1E_0
+=-\left(\operatorname{pr}^{(3)}X_0(E_1)-M_0E_1\right)
+=-3g\kappa D_s\!\left(\phi_t^2\frac{\phi_{ts}}{\phi_s}\right).}
+\]
+It must be coefficient-split and differentially completed without first imposing a polynomial, affine, or diagonal-scaling form on \(\tau_1,\xi_1,\eta_1\). Equivalently, one may eliminate a regular leading jet and solve the full on-shell determining system, provided every division and branch is recorded.
+
+The active methodology is therefore
+\[
+\boxed{
+\text{frozen PDE/branch}
+\to\text{unrestricted first-order determining operator}
+\to\text{exact compatibility or cokernel certificate}
+\to\text{continued lift or certified obstruction}
+\to\text{data/flux-compatible reduction}
+\to\text{optional ML}.}
+\]
+
+### Claim/evidence/status ledger
+
+| Claim | Evidence that can authorize it | Current status |
+|---|---|---|
+| \(X_5\) is admitted at \(m=3\) on the frozen scalar branch | Direct symbolic multiplier identity on the original third-order residual | **Exact: verified anchor** |
+| The first-order lift fails in the diagonal-scaling class \(Y_1=a_1t\partial_t+b_1s\partial_s+c_1\phi\partial_\phi\) | Weight equations plus an independent prolonged-residual identity | **Exact only in that restricted class** (`obstruction-verified-scaling`) |
+| No unrestricted regular point correction \(Y_1\) exists | A branch-complete compatibility identity (or exact differential-cokernel functional) for the full operator above | **Open: active gate**; the scaling result is not this certificate |
+| A near-cubic symmetry reduction is admissible | Exact continued or residual subgroup; bracket closure; constant projected rank; chart; PDE/constraint/data/boundary-flux pullbacks | **Not admitted** while the active gate is open |
+| ML may approximate a reduced or correction object | The preceding exact gates plus a named unresolved object, classical control, held-out validation and total-cost accounting | **Deferred/downstream**; historical fixed-\(m=3\) runs are separate evidence |
+
+### Bounded next computation
+
+The next computation is deliberately limited to one perturbation order, this one scalar equation, the regular branch above, and local point generators. It does **not** include higher-order continuation, generalized/nonclassical symmetries, profile training, or a physical full-system claim.
+
+1. Independently derive \(E_1\), the forcing, and every coefficient equation for \((\tau_1,\xi_1,\eta_1,M_1)\).
+2. Complete the resulting linear differential system branch by branch, retaining homogeneous freedom and recording every localization or division.
+3. If a lift is found, substitute it into the off-shell identity and verify the \(O(\delta)\) coefficient exactly. If incompatibility is found, emit the explicit compatibility identity and verify that it annihilates \(\operatorname{im}\mathcal D_0\) but not the forcing on the declared branch.
+4. Stop at one of the following fail-closed exits:
+
+| Exit | Required meaning | Research conclusion |
+|---|---|---|
+| `continued-first-order` | An unrestricted \((Y_1,M_1)\) passes direct exact substitution on every declared regular branch | First-order continuation only; order two remains open |
+| `obstruction-certified` | A branch-complete exact compatibility/cokernel identity rules out the full smooth point correction | First obstruction certified at order one in the declared category |
+| `branch-partial` | Only a restricted ansatz or a proper subset of regular branches was completed | Unresolved outside the completed scope |
+| `backend-unavailable` | Required differential completion could not be executed or independently checked | Unresolved; absence of output is not obstruction |
+| `inconsistent` | Independent derivations or direct substitution disagree | No theorem claim; repair the formulation or implementation |
+
+A finite-ansatz failure, timeout, memory limit, or unavailable completion backend has conclusion **unresolved**. It must never be relabeled `obstruction-certified`. Only the first two exits permit movement along the theorem chain, and neither by itself authorizes reduction or ML.
+
+---
+
 ## Chart 1. Complete paper methodology
 
-This is the recovered and corrected paper-level workflow. It contains three nested loops:
+This broader workflow supports the active theorem above; it is not a list of coequal current projects. Until the unrestricted first-order gate has a decisive exit, the continuation path is primary and the reduction/learning paths remain conditional. The complete workflow contains three nested loops:
 
 - an outer **proposal–verification loop** for symmetry discovery;
 - an **order-adaptive continuation loop** for exceptional symmetries under parameter perturbation;
@@ -530,9 +625,9 @@ and then either uses the exact residual subgroup or a separately verified defect
 
 ---
 
-## Theorem-first research contract
+## General continuation framework
 
-The current paper is **theorem-first**. Its primary unresolved claim is not that a neural model can imitate a symmetry correction; it is whether the exceptional point-symmetry generator at the cubic transport exponent admits a regular continuation when the exponent is perturbed. For a declared parameter path \(\lambda(\delta)=\lambda_0+\delta v\), write
+The active contract above is the paper's first concrete instance of the following order-adaptive framework. For a declared parameter path \(\lambda(\delta)=\lambda_0+\delta v\), write
 
 \[
 \mathcal D_\delta
@@ -561,11 +656,7 @@ The order-\(j\) problem must be solved with all lower-order homogeneous freedom 
 
 is the first certified obstruction order in the declared symmetry category. Failure of a finite ansatz, timeout, or unavailable completion backend is **unresolved**, not an obstruction. If order one fails, no choice of \(X_2\) can cancel its \(O(\delta)\) defect; if order one passes, order two remains a new compatibility test.
 
-For the active near-cubic SVE-inspired case, the project has established only a first-order obstruction inside the declared diagonal-scaling class. The unrestricted smooth point-symmetry determining problem remains open. Therefore the present theorem target is:
-
-> Determine, with explicit regularity and branch assumptions, whether the exceptional cubic generator has an unrestricted regular point-symmetry continuation; if it does, continue order by order until the first certified obstruction or a declared truncation order.
-
-The reusable approximate-symmetry benchmark is supporting infrastructure for this theorem. Real-world shallow-water demonstrations are validation or follow-on studies. Neither displaces the theorem as the paper's primary contribution.
+For the active near-cubic benchmark, only the front-matter first-order problem is in scope now. Its diagonal-scaling obstruction is a necessary restricted test, not evidence that the unrestricted operator is incompatible. The reusable approximate-symmetry benchmark is supporting infrastructure; real-world shallow-water demonstrations are validation or follow-on studies. Neither displaces the active theorem gate.
 
 ## Four symmetry questions that must remain separate
 
