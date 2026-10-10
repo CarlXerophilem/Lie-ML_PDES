@@ -1,19 +1,27 @@
 {
   "README.md": {
-    "size": 3039,
-    "sha256": "0c7a45e6b04472a5f76bbe356413b34e5224915b0e7fefc2ca2cb344881ec4cd"
+    "size": 3265,
+    "sha256": "5c84d8e7ea07b5ede61f12a05470a094829d55dca84a39f17122de706f7aacb0"
   },
   "build_report.py": {
     "size": 6504,
     "sha256": "e9be96a90d7914591a4c303ae3a0402b59ee63a1e0f70938a84c521a86e1295c"
   },
+  "docs/EXPERIMENT_INDEX.md": {
+    "size": 2571,
+    "sha256": "789880f135d5bb72c4e2f89eae6eebda6d6bd97da272e3bd67e103b9c53c450b"
+  },
   "docs/FINDINGS.md": {
     "size": 4111,
     "sha256": "58c6b069f5d048daac578b56e6d5a07fbea8d5c433e4fb75e1a43b5ed32a6502"
   },
+  "docs/LEGACY_MANUSCRIPT_EXPERIMENTS.tex": {
+    "size": 28588,
+    "sha256": "b6c9572a27d661b771ef1f7b0310170cd2a9e8c4f962c63ff5afa555a4766559"
+  },
   "docs/THEORY.md": {
-    "size": 9862,
-    "sha256": "e2386f9d581b1f85ccd95cdd905274088c3cf91c39a6841aec876c4cc02fc8b4"
+    "size": 10667,
+    "sha256": "4ca629d480f252e20ebf13e8f44d25c4488ced83cbf63dcbe75f2703a5977fba"
   },
   "pyproject.toml": {
     "size": 525,
