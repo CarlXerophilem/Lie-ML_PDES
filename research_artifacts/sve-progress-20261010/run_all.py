@@ -1,8 +1,10 @@
 """Reproduce symbolic certificates, classical references and CPU experiments."""
 import argparse
 import csv
+import hashlib
 import json
 import platform
+import re
 import time
 from pathlib import Path
 import numpy as np
@@ -12,7 +14,11 @@ from scipy.optimize import least_squares
 from scipy.stats import qmc
 from scipy.integrate import simpson
 from sve_lab.jets import g,kappa,m,t,s,u,act,model_residual,total,p,q,b
-from sve_lab.symbolic import obstruction,first_integral,reduced_residual,z,f,P,C,H
+from sve_lab.symbolic import (obstruction,first_integral,reduced_residual,
+                              common_scaling_certificate,
+                              principal_symbol_obstruction,
+                              conservation_pullback_certificate,
+                              z,f,P,C,H)
 from sve_lab.numerics import reference,integrated_reference,taylor,functions
 from sve_lab.trials import Trial,original_residual
 from sve_lab.tube import tube_certificate
@@ -20,11 +26,35 @@ from sve_lab.tube import tube_certificate
 def write_json(path,value):
     path.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
 
+def stringify_symbolic(value):
+    if isinstance(value,sp.Basic):
+        return str(value)
+    if isinstance(value,dict):
+        return {key:stringify_symbolic(item) for key,item in value.items()}
+    if isinstance(value,(list,tuple)):
+        return [stringify_symbolic(item) for item in value]
+    return value
+
+def pytest_evidence(out):
+    path=out/'pytest.txt'
+    if not path.exists():
+        return {'pytest_passed':None,'pytest_record_sha256':None}
+    payload=path.read_bytes()
+    match=re.search(rb'(\d+) passed',payload)
+    return {
+        'pytest_passed':int(match.group(1)) if match else None,
+        'pytest_record_sha256':hashlib.sha256(payload).hexdigest(),
+    }
+
 def certificates(out):
     data=[]
     for physical in [False,True]:
         cert=obstruction(physical)
+        principal=principal_symbol_obstruction(physical)
         assert sp.simplify(cert['witness']-3*g*kappa)==0
+        principal_remainder=sp.simplify(
+            principal['highest_polynomial']-cert['highest_polynomial'])
+        assert principal_remainder==0
         E=model_residual(m,physical)
         T=g*m*kappa*total(p**(m-1)*b/q,1)
         common=sp.simplify(act(E,t,s,u)+2*E)
@@ -45,14 +75,30 @@ def certificates(out):
             'polynomial_variables':['p','q'],
             'selected_monomial':'p**2*q**2',
             'selected_coefficient':str(cert['witness']),
+            'selected_coefficient_alias':'const_1',
+            'selected_coefficient_definition':'const_1 := 3*g*kappa',
             'reason':'An identity on the positive open p,q branch must have every polynomial coefficient zero.',
+            'principal_symbol_crosscheck':{
+                'status':'verified',
+                'derivation':principal['derivation'],
+                'remainder':str(principal_remainder),
+                'witness':str(principal['witness']),
+            },
             'common_scaling_identity_remainder':str(common),
             'X5_defect_identity_remainder':str(defect),
             'first_integral':str(first_integral(m,physical)),
             'excluded_claims':['maximal point classification','contact/generalized/nonlocal symmetries',
                                'singular parameter continuations','novelty','global existence',
                                'shock/weak solutions','data-independent invariant coverage']})
-    write_json(out/'symbolic_certificates.json',{'certificates':data})
+    write_json(out/'symbolic_certificates.json',{
+        'certificates':data,
+        'common_scaling_reduction':stringify_symbolic(
+            common_scaling_certificate()),
+        'conservation_pullbacks':[
+            stringify_symbolic(conservation_pullback_certificate(m,physical))
+            for physical in [False,True]
+        ],
+    })
     write_json(out/'reference_tube_certificates.json',{
         'certificates':[tube_certificate(False),tube_certificate(True)]})
 
@@ -184,8 +230,13 @@ def main():
          'learning_scope':'CPU scipy output-weight optimization; no GPU used'})
     certificates(args.out);classical_rows=classical(args.out)
     experiment_rows=[] if args.skip_learning else experiments(args.out,args.quick)
-    write_json(args.out/'run_summary.json',{'classical_cases':len(classical_rows),
+    summary={'classical_cases':len(classical_rows),
         'learning_cases':len(experiment_rows),'elapsed_seconds':time.perf_counter()-started,
-        'symbolic_status':'both unrestricted obstructions and both first integrals verified'})
+        'symbolic_status':'both unrestricted obstructions and both first integrals verified',
+        'reference_tube_status':'analytic bootstrap for continuous m in [1,4]',
+        'optimizer_budget_exhausted':sum(
+            not row['optimizer_success'] for row in experiment_rows)}
+    summary.update(pytest_evidence(args.out))
+    write_json(args.out/'run_summary.json',summary)
 
 if __name__=='__main__':main()

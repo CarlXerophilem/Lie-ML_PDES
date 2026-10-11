@@ -1,31 +1,31 @@
 {
-  "README.md": {
-    "size": 3265,
-    "sha256": "5c84d8e7ea07b5ede61f12a05470a094829d55dca84a39f17122de706f7aacb0"
-  },
   "build_report.py": {
-    "size": 6504,
-    "sha256": "e9be96a90d7914591a4c303ae3a0402b59ee63a1e0f70938a84c521a86e1295c"
+    "size": 6543,
+    "sha256": "a8c9a74bd809f17c08463466a5122d4b9bc7f54d9c685aebef8a6a6a93f4c191"
   },
   "docs/EXPERIMENT_INDEX.md": {
-    "size": 2571,
-    "sha256": "789880f135d5bb72c4e2f89eae6eebda6d6bd97da272e3bd67e103b9c53c450b"
+    "size": 2645,
+    "sha256": "a9f2aa8f6b4c3c10a59b83f760aacfd79bd07e629f7de4b46a465dd4d1d6b23f"
   },
   "docs/FINDINGS.md": {
-    "size": 4111,
-    "sha256": "58c6b069f5d048daac578b56e6d5a07fbea8d5c433e4fb75e1a43b5ed32a6502"
+    "size": 4150,
+    "sha256": "c650e75fc5aab00aa07c5a0bda9c5cf09c9ff946a0c22dc11add66ed021ad493"
   },
   "docs/LEGACY_MANUSCRIPT_EXPERIMENTS.tex": {
     "size": 28588,
     "sha256": "b6c9572a27d661b771ef1f7b0310170cd2a9e8c4f962c63ff5afa555a4766559"
   },
   "docs/THEORY.md": {
-    "size": 10667,
-    "sha256": "4ca629d480f252e20ebf13e8f44d25c4488ced83cbf63dcbe75f2703a5977fba"
+    "size": 11776,
+    "sha256": "faa88cd646f4739809e4566b5caf7ba9baa8c56445b9693e67e3012dd78bee1d"
   },
   "pyproject.toml": {
     "size": 525,
     "sha256": "2c715b8f36231ee989c4c60c90bc58067b120b326aa603cb6cc744acf78fe25d"
+  },
+  "README.md": {
+    "size": 3509,
+    "sha256": "da5c40d589451cf0b6fb2777e46d4a4f70c197bd091a3cfc9a43c5bc56e9d227"
   },
   "requirements-recorded.txt": {
     "size": 55,
@@ -212,8 +212,8 @@
     "sha256": "8eae8dc949d8e5e2bc26cb72b7a342f4f8fe1e86d1eb2006f2a4896fa83a94a5"
   },
   "results/pytest.txt": {
-    "size": 116,
-    "sha256": "4e2f8696ce532faceaa6f777a3280f4957a62921ea797e8ac00e0ad6034d2de5"
+    "size": 101,
+    "sha256": "f1b0e5fa576283d5cb6331ff3ff3432972a2f6fa062cd134ad203fac6bce08ea"
   },
   "results/reference_physical_corrected_m1.npz": {
     "size": 17502,
@@ -268,16 +268,16 @@
     "sha256": "d9592609dc4caa77107195984d61fbac8310aff8d17628b1129697cafc2f6bd6"
   },
   "results/run_summary.json": {
-    "size": 316,
-    "sha256": "4ee14a25412277ef1446cd4b69ada9ef125e13d6c7c882c538e6e1ab31da40b5"
+    "size": 410,
+    "sha256": "da591cbff9d7909d575710a7ff67f15920aa6bd7c39067e19dfa62a06aed9f1e"
   },
   "results/symbolic_certificates.json": {
-    "size": 4197,
-    "sha256": "4c5ef9bb6ecaa3552ab2bcf57da798f33edb5243be89458d12f811c0d479873b"
+    "size": 9040,
+    "sha256": "f9597301e4e5f055b348a74e7b4be3493318f0c49e44e920254edd752c049e96"
   },
   "run_all.py": {
-    "size": 10819,
-    "sha256": "d14002421e03064d1ffcb762f61800296771080b0f488fcf79e14ee06f146cd1"
+    "size": 12871,
+    "sha256": "c1b96c37a6b4a3c65f7e23fca6101fcd2b969e7a3f4f8b1da17f46b64063ccea"
   },
   "sve_lab/__init__.py": {
     "size": 59,
@@ -292,8 +292,8 @@
     "sha256": "bff01d6111602769b73295c185617fb87f3c52eff8ffba9b2b1c59848471448a"
   },
   "sve_lab/symbolic.py": {
-    "size": 2831,
-    "sha256": "6949e71cfa5b91e472b991147e7c63cddf23165fd39769d93b48efa92b506b65"
+    "size": 9099,
+    "sha256": "61f13b67a8a546f20491c295e2a8dd5f2621d25d4630abecd0bf1adc2ad6e728"
   },
   "sve_lab/trials.py": {
     "size": 3568,
@@ -308,7 +308,7 @@
     "sha256": "4ceb774f2c9e4a359e8380bb2dcfa71fcb083b19036719bab36b6229bdb7336d"
   },
   "tests/test_symbolic.py": {
-    "size": 2625,
-    "sha256": "62b011244eab288273ef13e61df4a904fb6d7f3f55eb51ee4b25472551d6ceec"
+    "size": 6842,
+    "sha256": "fec22b27ca8d4fedebb09867668332896d36c98ac19848a9548dc2213eb52573"
   }
 }

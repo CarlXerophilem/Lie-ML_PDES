@@ -1,3 +1,2 @@
-python -m pytest -q
-38 passed in 3.21s
-Additional documented highest-coefficient difference identity: exactly zero.
+...........................................                              [100%]
+43 passed in 5.49s

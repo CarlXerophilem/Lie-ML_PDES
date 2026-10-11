@@ -9,6 +9,8 @@
 2. 一般 m 的共同缩放约化、显式一阶积分和二阶 ODE。
 3. 常规 Eulerian SVE 到材料坐标的对流修正及局部床面重构。
 4. 12 个经典参考算例与 40 次小规模 CPU 近似比较；原始候选和负面记录均保留。
+5. 共同缩放的 Q、二阶微分后果、轨道秩与 Jacobian，以及两条标量
+   balance law 的 density/flux/source/边界协向量通量 pullback 证书。
 
 ## 安装和运行
 
@@ -49,13 +51,13 @@ python build_report.py
 | `docs/EXPERIMENT_INDEX.md` | 当前证据入口、冻结载体和历史材料的优先级 |
 | `docs/LEGACY_MANUSCRIPT_EXPERIMENTS.tex` | 从主文稿逐字移出的旧协议、旧表和实现记录；不作为当前证据 |
 | `sve_lab/jets.py` | 有限 jet、总导数、任意点生成元延拓 |
-| `sve_lab/symbolic.py` | 两种 PDE、约化 ODE、一阶积分、障碍证书 |
+| `sve_lab/symbolic.py` | 两种 PDE、约化 ODE、一阶积分、障碍、群商与标量守恒 pullback 证书 |
 | `sve_lab/numerics.py` | 三阶与独立二阶求解、Taylor 前端、床面重构 |
 | `sve_lab/trials.py` | hard-IVP tanh/Chebyshev 候选及独立原坐标残差 |
 | `run_all.py` | 生成证书、参考解、40 次近似比较及原始候选 |
 | `sve_lab/tube.py` | 参考解族 m∈[1,4] 的精确有理数 bootstrap 证书 |
-| `tests/` | 38 项数学与重构验证 |
-| `results/symbolic_certificates.json` | 含完整多项式的机器可复核障碍证书 |
+| `tests/` | 43 项数学、群商、守恒与重构验证 |
+| `results/symbolic_certificates.json` | 障碍、独立主符号、群商和标量守恒 pullback 的机器证书 |
 | `results/experiment_results.json` | 所有预算、随机种子、状态和误差 |
 
 ## 证据边界

@@ -23,7 +23,15 @@
       ],
       "selected_monomial": "p**2*q**2",
       "selected_coefficient": "3*g*kappa",
+      "selected_coefficient_alias": "const_1",
+      "selected_coefficient_definition": "const_1 := 3*g*kappa",
       "reason": "An identity on the positive open p,q branch must have every polynomial coefficient zero.",
+      "principal_symbol_crosscheck": {
+        "status": "verified",
+        "derivation": "independent principal-symbol calculation",
+        "remainder": "0",
+        "witness": "3*g*kappa"
+      },
       "common_scaling_identity_remainder": "0",
       "X5_defect_identity_remainder": "0",
       "first_integral": "-C*z*(P**3*z**2 - P*g*kappa*m*(-P*z + f)**(m - 1) - g)/P**2",
@@ -60,7 +68,15 @@
       ],
       "selected_monomial": "p**2*q**2",
       "selected_coefficient": "3*g*kappa",
+      "selected_coefficient_alias": "const_1",
+      "selected_coefficient_definition": "const_1 := 3*g*kappa",
       "reason": "An identity on the positive open p,q branch must have every polynomial coefficient zero.",
+      "principal_symbol_crosscheck": {
+        "status": "verified",
+        "derivation": "independent principal-symbol calculation",
+        "remainder": "0",
+        "witness": "3*g*kappa"
+      },
       "common_scaling_identity_remainder": "0",
       "X5_defect_identity_remainder": "0",
       "first_integral": "-C*(P**3*f*z**2 - P**2*g*kappa*m*z*(-P*z + f)**(m - 1) - f*g)/P**3",
@@ -73,6 +89,139 @@
         "shock/weak solutions",
         "data-independent invariant coverage"
       ]
+    }
+  ],
+  "common_scaling_reduction": {
+    "status": "verified",
+    "generator": "t*d_t + s*d_s + u*d_u",
+    "guards": [
+      "t>0",
+      "regular local point-action chart"
+    ],
+    "characteristic": {
+      "status": "verified",
+      "expression": "-p*t - q*s + u",
+      "meaning": "invariant-surface equation eta-tau*u_t-xi*u_s=0"
+    },
+    "differential_consequence_order": 2,
+    "differential_consequences": {
+      "()": "-p*t - q*s + u",
+      "(t)": "-a*t - b*s",
+      "(s)": "-b*t - c*s",
+      "(t,t)": "-a - r*t - s*w",
+      "(t,s)": "-b - s*x - t*w",
+      "(s,s)": "-c - s*y - t*x"
+    },
+    "orbit_ranks": {
+      "base": 1,
+      "total_space": 1
+    },
+    "transversality": {
+      "status": "verified",
+      "criterion": "rank(t,s)=rank(t,s,u)=1 on t>0",
+      "base_rank": 1,
+      "total_space_rank": 1,
+      "meaning": "the one-dimensional point orbit projects with rank one to the base"
+    },
+    "coordinates": {
+      "orbit_parameter": "log(t)",
+      "base_invariant": "s/t",
+      "dependent_invariant": "u/t",
+      "old_to_new_jacobian": "t**(-2)",
+      "new_to_old_jacobian": "t**2",
+      "full_old_to_new_jacobian": "t**(-3)"
+    },
+    "checks": {
+      "Xc_y_minus_one": "0",
+      "Xc_z": "0",
+      "Xc_v": "0",
+      "base_jacobian_product_minus_one": "0",
+      "full_jacobian_product_minus_one": "0",
+      "mixed_DJQ_commutator": "0"
+    }
+  },
+  "conservation_pullbacks": [
+    {
+      "status": "verified_for_declared_scalar_balance_law",
+      "model": "printed",
+      "density": "a*q - c*g/q**2",
+      "spatial_flux": "-b*g*kappa*m*p**(m - 1)/q",
+      "source": "0",
+      "constraints": {
+        "status": "not_declared_for_scalar_benchmark",
+        "items": []
+      },
+      "data": {
+        "status": "not_declared",
+        "compatibility": "not_tested_without_a_specific_initial_boundary_value_problem"
+      },
+      "coordinate_map": {
+        "old_coordinates": [
+          "t",
+          "s"
+        ],
+        "new_coordinates": [
+          "T=t",
+          "z=s/t"
+        ],
+        "jacobian_old_from_new": "t",
+        "guards": [
+          "t>0"
+        ]
+      },
+      "transformed_density": "a*q*t - c*g*t/q**2",
+      "transformed_spatial_flux": "-a*q*s/t - b*g*kappa*m*p**m/(p*q) + c*g*s/(q**2*t)",
+      "boundary_normal_flux_pullback": "-a*q*s/t - b*g*kappa*m*p**m/(p*q) + c*g*s/(q**2*t)",
+      "boundary_flux_convention": "current paired with dz on z=constant",
+      "checks": {
+        "divergence_remainder": "0"
+      },
+      "scope": {
+        "full_bed_field_system": false,
+        "noether_or_variational_claim": false,
+        "weak_or_shock_solutions": false
+      }
+    },
+    {
+      "status": "verified_for_declared_scalar_balance_law",
+      "model": "physical_corrected",
+      "density": "a*q - c*g/q**2",
+      "spatial_flux": "-b*g*kappa*m*p**(m - 1)/q - p*(a*q - c*g/q**2)/q",
+      "source": "0",
+      "constraints": {
+        "status": "not_declared_for_scalar_benchmark",
+        "items": []
+      },
+      "data": {
+        "status": "not_declared",
+        "compatibility": "not_tested_without_a_specific_initial_boundary_value_problem"
+      },
+      "coordinate_map": {
+        "old_coordinates": [
+          "t",
+          "s"
+        ],
+        "new_coordinates": [
+          "T=t",
+          "z=s/t"
+        ],
+        "jacobian_old_from_new": "t",
+        "guards": [
+          "t>0"
+        ]
+      },
+      "transformed_density": "a*q*t - c*g*t/q**2",
+      "transformed_spatial_flux": "-a*p - a*q*s/t - b*g*kappa*m*p**m/(p*q) + c*g*p/q**3 + c*g*s/(q**2*t)",
+      "boundary_normal_flux_pullback": "-a*p - a*q*s/t - b*g*kappa*m*p**m/(p*q) + c*g*p/q**3 + c*g*s/(q**2*t)",
+      "boundary_flux_convention": "current paired with dz on z=constant",
+      "checks": {
+        "divergence_remainder": "0"
+      },
+      "scope": {
+        "full_bed_field_system": false,
+        "noether_or_variational_claim": false,
+        "weak_or_shock_solutions": false
+      }
     }
   ]
 }

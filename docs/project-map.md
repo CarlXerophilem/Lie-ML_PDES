@@ -38,9 +38,9 @@ A learned \(\widehat d_k\) never authorizes reduction. Neither does \(d_k\) by i
 
 ---
 
-## Active theorem and exit condition
+## Certified first-order obstruction and next gate
 
-The project now has one active research question. Freeze the nondimensional printed scalar benchmark
+The project has closed one bounded research question and now separates that result from the remaining global and full-system analysis. Freeze the nondimensional printed scalar benchmark
 
 \[
 E_m[\phi]
@@ -55,7 +55,7 @@ with fixed \(g,\kappa>0\) and \(\beta_{\rm tr}=m\kappa\). All displayed variable
 t>0,\qquad s>0,\qquad \phi_s>0,
 \qquad v=\phi_t>0,
 \]
-This is a mathematical benchmark contract, not a claim that the printed scalar equation is already equivalent to the full physical SVE system.
+This is a mathematical benchmark contract, not a claim that the printed scalar equation is already equivalent to the full physical SVE system. Because \(\phi_s>0\), the third-order equation is locally solvable for \(\phi_{ttt}\). For analytic coefficients and analytic data on a noncharacteristic initial slice, Olver's analytic normal-form result supplies local analytic solution germs and justifies splitting with respect to the remaining free jets. It does not establish global existence, smooth-data well-posedness, or shock-free continuation.
 
 At \(\delta=0\), set
 \[
@@ -63,7 +63,7 @@ X_0=X_5=t\partial_t-2s\partial_s,
 \qquad M_0=-1,
 \qquad \operatorname{pr}^{(3)}X_0(E_0)=M_0E_0.
 \]
-Seek a regular point-symmetry continuation with the **unrestricted** first correction
+The tested regular point-symmetry continuation category permits the **unrestricted** first correction
 \[
 X_\delta=X_0+\delta Y_1+O(\delta^2),
 \qquad
@@ -91,7 +91,7 @@ The decisive first-order problem is
 \]
 It must be coefficient-split and differentially completed without first imposing a polynomial, affine, or diagonal-scaling form on \(\tau_1,\xi_1,\eta_1\). Equivalently, one may eliminate a regular leading jet and solve the full on-shell determining system, provided every division and branch is recorded.
 
-The active methodology is therefore
+The completed first-order methodology and its downstream gate are therefore
 \[
 \boxed{
 \text{frozen PDE/branch}
@@ -107,19 +107,24 @@ The active methodology is therefore
 | Claim | Evidence that can authorize it | Current status |
 |---|---|---|
 | \(X_5\) is admitted at \(m=3\) on the frozen scalar branch | Direct symbolic multiplier identity on the original third-order residual | **Exact: verified anchor** |
-| The first-order lift fails in the diagonal-scaling class \(Y_1=a_1t\partial_t+b_1s\partial_s+c_1\phi\partial_\phi\) | Weight equations plus an independent prolonged-residual identity | **Exact only in that restricted class** (`obstruction-verified-scaling`) |
-| No unrestricted regular point correction \(Y_1\) exists | A branch-complete compatibility identity (or exact differential-cokernel functional) for the full operator above | **Open: active gate**; the scaling result is not this certificate |
-| A near-cubic symmetry reduction is admissible | Exact continued or residual subgroup; bracket closure; constant projected rank; chart; PDE/constraint/data/boundary-flux pullbacks | **Not admitted** while the active gate is open |
+| The first-order lift fails in the diagonal-scaling class \(Y_1=a_1t\partial_t+b_1s\partial_s+c_1\phi\partial_\phi\) | Weight equations plus an independent prolonged-residual identity | **Exact in that restricted class** (`obstruction-verified-scaling`); retained as a historical cross-check |
+| No unrestricted regular point correction \(Y_1\) exists | Define \(\mathrm{const}_1:=3g\kappa>0\); eliminate the regular leading jet, split the on-shell identity in free jets, and independently recover \([p^2q^2](q^3\partial_{\phi_{tss}}\Omega)=\mathrm{const}_1\) | **Certified at first order in the declared local smooth point category**; \(\kappa_{\mathrm{obs}}=1\) for both declared scalar models |
+| An \(X_5\)-based near-cubic symmetry reduction is admissible | Exact continued or residual subgroup; bracket closure; constant projected rank; chart; PDE/constraint/data/boundary-flux pullbacks | **Not admitted:** the required regular first-order \(X_5\) lift is obstructed |
+| The general-\(m\) common-scaling subgroup gives a local reduction | Exact multiplier identity; characteristic and differential consequences; projected orbit rank; invariant chart; direct PDE and scalar balance-law pullbacks | **Exact on the declared \(t,\phi_t,\phi_s>0\) chart**; compatibility with a specific initial-boundary-value problem remains separate |
 | ML may approximate a reduced or correction object | The preceding exact gates plus a named unresolved object, classical control, held-out validation and total-cost accounting | **Deferred/downstream**; historical fixed-\(m=3\) runs are separate evidence |
 
-### Bounded next computation
+### Completed bounded computation and next gate
 
-The next computation is deliberately limited to one perturbation order, this one scalar equation, the regular branch above, and local point generators. It does **not** include higher-order continuation, generalized/nonclassical symmetries, profile training, or a physical full-system claim.
+The completed obstruction computation was deliberately limited to one perturbation order, the two declared scalar equations, the regular branch above, and local point generators. It does **not** include generalized/nonclassical symmetries, singular parameter dependence, profile training, a maximal classification, or a physical full-system claim.
 
-1. Independently derive \(E_1\), the forcing, and every coefficient equation for \((\tau_1,\xi_1,\eta_1,M_1)\).
-2. Complete the resulting linear differential system branch by branch, retaining homogeneous freedom and recording every localization or division.
-3. If a lift is found, substitute it into the off-shell identity and verify the \(O(\delta)\) coefficient exactly. If incompatibility is found, emit the explicit compatibility identity and verify that it annihilates \(\operatorname{im}\mathcal D_0\) but not the forcing on the declared branch.
-4. Stop at one of the following fail-closed exits:
+1. The perturbation derivative, forcing, leading-jet elimination, and every division were recorded on the positive regular branch.
+2. For arbitrary sufficiently smooth \(\tau_1,\xi_1,\eta_1\), free-jet splitting produced the nonzero coefficient \(\mathrm{const}_1:=3g\kappa>0\); no finite-dimensional ansatz was imposed.
+3. A separate principal-symbol calculation reproduced the same coefficient for both the printed and advectively corrected scalar models.
+4. The resulting exit is `obstruction-certified`, with \(\kappa_{\mathrm{obs}}=1\) in this declared category.
+
+The next gate is not another obstruction calculation. It is to state a concrete initial-boundary-value problem for the verified common-scaling subgroup and check data, source, constraints, Jacobian-weighted density, and boundary flux. Full bed-field, FS, global smoothness, shock, and weak-solution questions remain separate.
+
+The fail-closed exit vocabulary remains:
 
 | Exit | Required meaning | Research conclusion |
 |---|---|---|
@@ -135,7 +140,7 @@ A finite-ansatz failure, timeout, memory limit, or unavailable completion backen
 
 ## Chart 1. Complete paper methodology
 
-This broader workflow supports the active theorem above; it is not a list of coequal current projects. Until the unrestricted first-order gate has a decisive exit, the continuation path is primary and the reduction/learning paths remain conditional. The complete workflow contains three nested loops:
+This broader workflow contains the now-completed first-order obstruction as one instance; it is not a list of coequal current projects. The current path is the exact common-scaling reduction plus data/flux compatibility, while learning remains conditional on those certificates. The complete workflow contains three nested loops:
 
 - an outer **proposal–verification loop** for symmetry discovery;
 - an **order-adaptive continuation loop** for exceptional symmetries under parameter perturbation;
@@ -620,14 +625,14 @@ and then either uses the exact residual subgroup or a separately verified defect
 
 - The current executable reducer verifies a **supplied projectable one-generator chart**; it does not compute a maximal symmetry classification. See [`pde_formalization_and_reduction.md`](pde_formalization_and_reduction.md).
 - Existing fixed-\(m=3\) Lie/ML results and their negative controls are historical evidence, not results of the new prospective experiment. See [`three_layer_baselines.md`](three_layer_baselines.md).
-- The active near-cubic program has a verified obstruction only inside the declared diagonal-scaling class. The unrestricted continuation hierarchy remains a research gate. See [`../checklist.md`](../checklist.md).
+- The near-cubic program has \(\kappa_{\mathrm{obs}}=1\) for arbitrary sufficiently smooth local point corrections in the two declared scalar models. This is not a maximal classification and says nothing about singular parameter dependence, FS, generalized symmetries, the full bed-field system, or global/weak solutions. See [`../checklist.md`](../checklist.md).
 - The broad claims in [`The Mathematical Essence of Machine Learning.md`](The%20Mathematical%20Essence%20of%20Machine%20Learning.md) are not used as theorem statements here; that document still requires a separate corrected edition.
 
 ---
 
 ## General continuation framework
 
-The active contract above is the paper's first concrete instance of the following order-adaptive framework. For a declared parameter path \(\lambda(\delta)=\lambda_0+\delta v\), write
+The completed first-order contract above is the paper's first concrete instance of the following order-adaptive framework. For a declared parameter path \(\lambda(\delta)=\lambda_0+\delta v\), write
 
 \[
 \mathcal D_\delta
@@ -656,7 +661,7 @@ The order-\(j\) problem must be solved with all lower-order homogeneous freedom 
 
 is the first certified obstruction order in the declared symmetry category. Failure of a finite ansatz, timeout, or unavailable completion backend is **unresolved**, not an obstruction. If order one fails, no choice of \(X_2\) can cancel its \(O(\delta)\) defect; if order one passes, order two remains a new compatibility test.
 
-For the active near-cubic benchmark, only the front-matter first-order problem is in scope now. Its diagonal-scaling obstruction is a necessary restricted test, not evidence that the unrestricted operator is incompatible. The reusable approximate-symmetry benchmark is supporting infrastructure; real-world shallow-water demonstrations are validation or follow-on studies. Neither displaces the active theorem gate.
+For the near-cubic benchmark, the front-matter first-order problem has exited with \(\kappa_{\mathrm{obs}}=1\) in the declared local smooth point category. The earlier diagonal-scaling calculation remains only an independent restricted cross-check. The reusable approximate-symmetry benchmark is supporting infrastructure; real-world shallow-water demonstrations, the full bed-field system, and global analysis are validation or follow-on studies. None enlarges the scope of the certified local obstruction.
 
 ## Four symmetry questions that must remain separate
 
@@ -744,7 +749,7 @@ Here \(H\) must be exact and verified; \(z\) and \(\mathcal T_H\) come from an a
 
 | Prior work or project artifact | What it reports or provides | What this project may still test | What must not be claimed |
 |---|---|---|---|
-| Paliathanasis--Leon--Leach shallow-water source | A reported point-symmetry classification and similarity solutions for the printed Lagrangian scalar model, including an exceptional cubic case | Independently audit the printed equation/reduction; prove unrestricted perturbative continuation or obstruction; enforce data and reconstruction gates | Discovery of the reported source algebra or exceptional generator; independent certification of every printed reduction before the source discrepancy is resolved |
+| Paliathanasis--Leon--Leach shallow-water source | A reported point-symmetry classification and similarity solutions for the printed Lagrangian scalar model, including an exceptional cubic case | Independently audit the printed equation/reduction; retain the certified first-order local point obstruction; enforce data and reconstruction gates for the surviving common-scaling subgroup | Discovery of the reported source algebra or exceptional generator; maximal classification, global analysis, or independent certification of every printed reduction before the source discrepancy is resolved |
 | Tarayrah--Pitzel--Cheviakov | BGI and FS definitions, conditional relations, distinct PDE classifications, and approximate-solution/wave-breaking comparisons | Reproduce selected controls and apply both frameworks to a declared regular SVE perturbation | That BGI and FS are interchangeable, or that an approximate generator alone gives an accurate solution |
 | Deng--Reid | A local SVD/approximate-completion framework for inferring nearby Lie algebras, including closure/reliability questions | Use as a distinct numerical-reliability track and compare its stable regions with formal perturbative results; separately quantify equation proximity if needed | Exact symmetry of the observed PDE, or reconstruction/proximity of a nearby equation, from a small singular value alone |
 | LieSolver v2 (2026) | Symmetry-generated solution bricks fitted to IB data for linear homogeneous PDEs, using superposition; the supplied v2 states well-posedness/Lipschitz error-control arguments and demonstrates a heat-equation case | Use linear controls and compare its architectural and version-qualified error-estimation principles with certified nonlinear reduction | Direct extension by superposition or transfer of its bounds to nonlinear SVE without a new stability proof |
@@ -775,7 +780,7 @@ These labels describe different evidence types and may be combined when appropri
 - ✅ **Opened and checked locally:** Tarayrah, Pitzel, and Cheviakov, *Two approximate symmetry frameworks for nonlinear partial differential equations with a small parameter: Comparisons, relations, approximate solutions* (2023), DOI `10.1017/S0956792522000407`.
 - ✅ **Opened and checked locally:** Deng and Reid, *Contributions to the Algorithmic Foundations of Approximate Lie Symmetry Algebras of Differential Equations* (arXiv:2410.20608v1, 2024).
 - ✅ **Opened and checked locally:** Klausen et al., *LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries* (arXiv:2510.25731v2, 2026).
-- ✅ **Project evidence:** the fixed-cubic certificate, diagonal-scaling P0 obstruction, historical experiment manifests, and their negative controls are linked below.
+- ✅ **Project evidence:** the fixed-cubic certificate, the unrestricted first-order local point obstruction for both declared scalar models, the common-scaling orbit/invariant and scalar conservation-pullback certificates, historical experiment manifests, and their negative controls are linked below.
 - 🟡 **Prospective:** public real-world datasets and additional physical demonstrations remain proposed until the exact data files, licenses, parameter mappings, and reference-solver convergence records are acquired.
 
 A quantum-physics idea enters the methodology only when four objects are specified:

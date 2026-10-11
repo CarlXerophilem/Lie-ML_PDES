@@ -14,7 +14,8 @@ protocols, outputs, and historical records live here.
 - [FINDINGS](FINDINGS.md): measured classical and approximation results,
   including failed or budget-exhausted runs.
 - [Symbolic certificates](../results/symbolic_certificates.json): exact
-  machine-readable witness data.
+  machine-readable obstruction, principal-symbol, quotient-chart, and scalar
+  conservation-pullback data.
 - [Reference tube certificates](../results/reference_tube_certificates.json):
   exact rational bootstrap certificate for the reference family.
 - [Experiment results](../results/experiment_results.json): run-level budgets,
@@ -23,7 +24,7 @@ protocols, outputs, and historical records live here.
   [frozen ZIP](../lie-ml-sve-progress-20261010.zip): frozen package inventory
   and complete evidence carrier.
 
-The current package records 38 passing tests, 12 classical reference cases,
+The current package records 43 passing tests, 12 classical reference cases,
 and 40 bounded approximation runs. Sixteen learned runs reached the evaluation
 budget. The Chebyshev control was most accurate on this small smooth benchmark,
 so the artifact makes no ML speedup or neural-superiority claim.

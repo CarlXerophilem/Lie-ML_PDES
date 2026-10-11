@@ -35,18 +35,21 @@ contract. Standard point-symmetry, Frobenius and invariant-section results
 are stated with hypotheses, local proofs and attribution. The construction
 separates equation symmetry from graph invariance, gives the full coordinate
 map and derivative pullback, and retains data, branch and residual-measure
-conditions. A published scalar shallow-water-inspired equation is used only
-after the general core, to verify an exceptional-exponent reduction and audit
-its physical interpretation. For the near-cubic family, an exact free-jet
-coefficient now obstructs a lift that is $C^1$ in the perturbation parameter
-and has sufficiently smooth point coefficients, in each of two declared
-scalar models. On the positive
-branch, $\partial \mathcal E_m/\partial\phi_{ttt}=\phi_s>0$ gives an analytic
-normal form and the local-solvability bridge needed for the infinitesimal
-criterion. This is a scoped point/BGI-type result, not a maximal point-algebra,
-FS, generalized-symmetry or full bed-field SVE classification. Detailed
-symbolic and numerical evidence is maintained in an external artifact; its
-bounded runs do not establish neural speedup or a uniform error certificate.
+conditions. We make the effect of parameter position explicit. On a fixed
+regular finite determining problem, symmetry nullity is generically minimal
+and can increase only on determinantal rank-drop strata. A complete local
+calculation for $u_t=(u^\alpha u_x)_x$ gives respectively four, five and
+infinitely many point generators on its generic, resonant and linear strata.
+By contrast, a proved equivalence transformation shows why the magnitude of
+a nonzero coefficient in $u_t=u_{xx}+\kappa u^2$ does not change its
+three-dimensional point algebra, while $\kappa=0$ is a singular
+infinite-dimensional stratum. Thus neither exponent size nor coefficient
+size gives a monotone symmetry count. A published scalar
+shallow-water-inspired equation is used only after the general core to
+illustrate an exceptional exponent and to audit its physical interpretation.
+Detailed symbolic and numerical evidence is maintained in an external
+artifact; its bounded runs do not establish neural speedup or a uniform error
+certificate.
 \end{abstract}
 
 \section{Introduction}
@@ -67,153 +70,257 @@ about the maximal point algebra requires a stronger classification proof.
 The mathematical core is independent of the motivating PDE and credits
 standard theory \cite{olver,anderson2000}. Section~\ref{sec:examples}
 then provides worked examples and an audit of a published scalar benchmark
-\cite{ap}. Section~\ref{sec:active-theorem} states the certified obstruction
-and its fail-closed scope before presenting the reusable general framework.
+\cite{ap}. Section~\ref{sec:parameter-effects} derives the parameter-stratum
+principles and two complete model calculations before presenting the reusable
+reduction framework.
 The external evidence index in Section~\ref{sec:experiment-artifact} separates
 exact certificates from bounded numerical comparisons. We separate fixed
 model parameters $\lambda$, data parameters $a$, group parameters
-$\varepsilon$ and model perturbations $\delta$ throughout. The appendix
-contains only supporting context outside the reduction claim.
+$\varepsilon$ and approximation parameters throughout. The appendix contains
+only supporting context outside the reduction claim.
 
-\section{Certified first-order obstruction and exit condition}
-\label{sec:active-theorem}
-The completed calculation freezes the nondimensional
-printed scalar benchmark
+\section{How parameter position changes symmetry dimension}
+\label{sec:parameter-effects}
+Let
 \begin{equation}
- \mathcal E_m[\phi]
- =D_t\!\left(\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2}\right)
- -gm\kappa D_s\!\left(\phi_t^{m-1}\frac{\phi_{ts}}{\phi_s}\right)=0,
- \qquad m=3+\delta,
- \label{eq:active-family}
+ \mathcal E_\lambda
+ =\{\Delta_A(t,\mathbf x,u^{(n)};\lambda)=0\}_{A=1}^r,
+ \qquad
+ \mathfrak g_\lambda
+ =\left\{X:\left.\pr^{(n)}X(\Delta_A)\right|_{\mathcal E_\lambda}=0
+ \text{ for every }A\right\}.
+ \label{eq:parameter-algebra}
 \end{equation}
-with fixed $g,\kappa>0$ and $\beta_{\rm tr}=m\kappa$. All displayed variables
-are nondimensional (bars are dropped); in particular
-$v:=\phi_t=(\partial_{t_{\rm phys}}\phi_{\rm phys})/U_*$. Work locally on the
-regular branch
-\begin{equation}
- t>0,\qquad s>0,\qquad \phi_s>0,
- \qquad v=\phi_t>0.
- \label{eq:active-branch}
-\end{equation}
-This is a mathematical benchmark contract. It does not assert that the
-printed scalar equation is already equivalent to the full physical
-Saint--Venant--Exner system.
+When this point algebra is finite-dimensional, the intrinsic count is
+$d_{\rm sym}(\lambda)=\dim\mathfrak g_\lambda$, not the length of a redundant
+list of generators. We use \emph{semi-essential exponent} and
+\emph{quasi-inessential coefficient} only as project bookkeeping labels; they
+are not standard Lie-theory categories. The first label means that generic
+exponents may share one algebra but resonant exponents must be split. The
+second is earned only after an equivalence transformation proves that a
+nonzero coefficient is removable under the declared equation-class
+equivalence group. This does not by itself preserve fixed numerical data or
+boundary fluxes.
 
-At $\delta=0$, set
+\begin{theorem}[Rank strata in a declared generator class]
+\label{thm:parameter-rank-strata}
+Let $\Lambda_0$ be a connected real-analytic parameter cell on which the
+differential order, regular jet chart, branch guards and a rank-$N$ ansatz
 \[
- X_0=X_5=t\partial_t-2s\partial_s,
- \qquad M_0=-1,
- \qquad \pr^{(3)}X_0(\mathcal E_0)=M_0\mathcal E_0.
+ V_\lambda=\operatorname{span}\{Y_1(\lambda),\ldots,Y_N(\lambda)\}
 \]
-Test a regular point-symmetry continuation with the unrestricted first
-correction
+are fixed. Suppose exact prolongation, on-shell elimination and free-jet
+splitting are equivalent to the finite system
 \begin{equation}
- X_\delta=X_0+\delta Y_1+o(\delta),\qquad
- Y_1=\tau_1(t,s,\phi)\partial_t
-     +\xi_1(t,s,\phi)\partial_s
-     +\eta_1(t,s,\phi)\partial_\phi,
- \label{eq:active-generator}
+ A(\lambda)c=0,
+ \qquad A(\lambda)\in\mathbb R^{M\times N},
+ \qquad d_V(\lambda)=N-\operatorname{rank}A(\lambda),
+ \label{eq:determining-rank}
 \end{equation}
-and a smooth multiplier
-$M_\delta=M_0+\delta M_1+o(\delta)$. The notation $Y_1$ avoids a
-collision with the source's translation generator named $X_1$. Expanding the
-off-shell identity
+where the entries of $A$ are real analytic. Put
+$r_*=\max_{\lambda\in\Lambda_0}\operatorname{rank}A(\lambda)$. If $r_*>0$, let
 \[
- \pr^{(3)}X_\delta(\mathcal E_\delta)=M_\delta\mathcal E_\delta
+ \Sigma=\{\lambda:\text{every }r_*\text{-minor of }A(\lambda)
+                    \text{ vanishes}\};
 \]
-where
-\[
- \mathcal E_\delta=\mathcal E_0+\delta\mathcal E_1+O(\delta^2),\qquad
- \mathcal E_1=-g\kappa D_s\!\left[H(1+3\log v)\right],
- \qquad H=\phi_t^2\frac{\phi_{ts}}{\phi_s}.
-\]
-gives the decisive first-order problem
+for $r_*=0$, set $\Sigma=\varnothing$. Then
 \begin{equation}
- \boxed{\begin{aligned}
- \mathcal D_0(Y_1,M_1)
- &:={\pr}^{(3)}Y_1(\mathcal E_0)-M_1\mathcal E_0 \\
- &=-\bigl({\pr}^{(3)}X_0(\mathcal E_1)-M_0\mathcal E_1\bigr)
- =-3g\kappa D_s\!\left(\phi_t^2\frac{\phi_{ts}}{\phi_s}\right).
- \end{aligned}}
- \label{eq:active-first-order}
+ d_V(\lambda)=N-r_*\quad(\lambda\in\Lambda_0\setminus\Sigma),
+ \qquad
+ d_V(\lambda)>N-r_*\quad(\lambda\in\Sigma).
+ \label{eq:nullity-strata}
 \end{equation}
-No polynomial, affine or diagonal-scaling form is imposed on
-$\tau_1,\xi_1,\eta_1$. Put $p=\phi_t$, $q=\phi_s$,
-$r=\phi_{ttt}$ and $x=\phi_{tss}$. Since
-$\partial\mathcal E_0/\partial r=q>0$, the equation is a maximal-rank
-hypersurface and can be solved exactly for $r$. For fixed real $m$, its
-coefficients are analytic on $p,q>0$, so the resulting equation is analytic
-and normal; Olver's local-solvability criterion therefore supplies the bridge
-from the equation-manifold calculation to the local infinitesimal symmetry
-criterion \cite{olver}.
+The generic set is open and dense. Thus nullity is upper semicontinuous on
+this fixed regular problem: it is generically minimal and can jump upward on
+an exceptional determinantal stratum.
+\end{theorem}
 
-Let $\Omega$ be the left side of the on-shell first-order condition after
-eliminating $r$, with the forcing in equation~\eqref{eq:active-first-order}
-moved to the left. The remaining compatible jets are free local coordinates.
-Recursive prolongation, differentiation with respect to $x$, and multiplication
-by the declared nonzero denominator $q^3$ give the exact coefficient
+\begin{proof}
+Equation~\eqref{eq:determining-rank} is rank--nullity. At least one maximal
+minor is a nonzero analytic function. Its nonzero set is open and dense on a
+connected analytic cell, while all maximal minors vanish exactly when the
+rank is below $r_*$. This proves~\eqref{eq:nullity-strata}.
+\end{proof}
+
+The theorem does not turn an ansatz into a maximal classification. If $V$ is
+not bracket-stable, its admitted kernel need not be a subalgebra inside $V$;
+if the unrestricted determining system has arbitrary-function solutions, the
+full algebra may be infinite-dimensional. A sampled SVD is also not the exact
+matrix $A$. Maximality requires the full determining system and every branch.
+These qualifications agree with the distinction between symmetry and
+equivalence transformations in standard treatments \cite{olver,oliveri2026}.
+
+\subsection{Position I: a semi-essential exponent}
+Consider the nonlinear diffusion family, on the real-power branch $u>0$,
 \begin{equation}
- \boxed{[p^2q^2]\!\left(q^3\frac{\partial\Omega}{\partial x}\right)
- =3g\kappa\ne0.}
- \label{eq:general-point-witness}
+ \mathcal P_\alpha:
+ \qquad E_\alpha=u_t-D_x(u^\alpha u_x)=0,
+ \qquad \alpha\in\mathbb R.
+ \label{eq:power-diffusion}
 \end{equation}
-The arbitrary point functions and their point-coordinate derivatives are
-independent of the jet coordinates $p,q$. Hence an identity $\Omega=0$ on an
-open positive branch would force this coefficient to vanish, a contradiction.
-The same witness is obtained for the independently derived, advectively
-corrected scalar model. Thus no lift $X_0+\delta Y_1+o(\delta)$ that is $C^1$
-in $\delta$ and has sufficiently smooth point coefficients exists in either
-declared scalar model on the stated branch.
-
-The resulting methodology is
+Here $\alpha$ changes an algebraic power, not the differential order: every
+member remains second order. For
+$X=\tau\partial_t+\xi\partial_x+\eta\partial_u$, complete splitting of
+$\pr^{(2)}X(E_\alpha)|_{E_\alpha=0}=0$ gives, when $\alpha\ne0$,
 \begin{equation}
  \begin{gathered}
- \text{frozen PDE/branch}
- \longrightarrow \text{unrestricted first-order determining operator}\\
- \longrightarrow \text{exact compatibility or cokernel certificate}\\
- \longrightarrow \text{continued lift or certified obstruction}\\
- \longrightarrow \text{data/flux-compatible reduction}
- \longrightarrow \text{optional ML}.
+ \tau=\tau(t),\qquad \xi=\xi(t,x),\qquad \eta=a(t,x)u,\\
+ \alpha a=2\xi_x-\tau_t,\qquad
+ \xi_t=0,\qquad a_t=a_{xx}=0,\qquad
+ \xi_{xx}=2(\alpha+1)a_x.
  \end{gathered}
- \label{eq:active-chain}
+ \label{eq:power-determining}
 \end{equation}
+Differentiating the first relation in $x$ gives
+$\alpha a_x=2\xi_{xx}$. Combining it with the last relation produces the
+decisive compatibility factor
+\begin{equation}
+ \boxed{(3\alpha+4)\xi_{xx}=0.}
+ \label{eq:power-resonance}
+\end{equation}
+For $\alpha\ne0,-4/3$, solving~\eqref{eq:power-determining} gives the complete
+four-dimensional local point algebra
+\begin{equation}
+ \mathfrak g_\alpha
+ =\operatorname{span}\left\{
+ \partial_t,\ \partial_x,\ 2t\partial_t+x\partial_x,\
+ \alpha t\partial_t-u\partial_u
+ \right\}.
+ \label{eq:power-generic-algebra}
+\end{equation}
+At the resonant exponent $\alpha=-4/3$, $\xi$ may contain a quadratic term
+and one additional generator is
+\begin{equation}
+ X_5=x^2\partial_x-3xu\partial_u,
+ \qquad \dim\mathfrak g_{-4/3}=5.
+ \label{eq:power-extra-generator}
+\end{equation}
+Indeed, direct prolongation gives
+\[
+ \left.\pr^{(2)}X_5(E_\alpha)\right|_{E_\alpha=0}
+ =(3\alpha+4)\left[xD_x(u^\alpha u_x)+2u^\alpha u_x\right].
+\]
+At $\alpha=0$, equation~\eqref{eq:power-diffusion} is the heat equation and
+$X_f=f(t,x)\partial_u$ is admitted for every $f_t=f_{xx}$. Consequently
+\begin{equation}
+ \dim\mathfrak g_\alpha=
+ \begin{cases}
+  \infty,&\alpha=0,\\
+  5,&\alpha=-4/3,\\
+  4,&\alpha\ne0,-4/3.
+ \end{cases}
+ \label{eq:power-dimension-table}
+\end{equation}
+The count is not monotone in $\alpha$. A numerical exponent is special only
+when the determining system proves a rank loss or a change of functional
+type. If a parameter instead changes the derivative order, for example from
+$D_x^2u$ to $D_x^3u$ or to a fractional operator, the fixed-jet hypothesis of
+Theorem~\ref{thm:parameter-rank-strata} fails and each order requires a
+separate local or nonlocal contract.
 
-\subsection*{Claim, evidence and current status}
-\begin{center}\small
-\renewcommand{\arraystretch}{1.13}
-\begin{tabularx}{\linewidth}{@{}p{3.0cm}Xp{3.0cm}@{}}
-\toprule
-Claim & Evidence that can authorize it & Current status \\
-\midrule
-$X_5$ is admitted at $m=3$ on the frozen scalar branch & Direct symbolic multiplier identity on the original third-order residual & Exact: verified anchor \\
-No parameter-$C^1$ lift with sufficiently smooth point correction $Y_1$ exists & Leading-jet chart, free-jet split and coefficient~\eqref{eq:general-point-witness} & Exact on the declared positive branch for both scalar models \\
-The result is a BGI-type point obstruction & The same first-order generator equation with unrestricted point coefficients & Certified only for this point lift; no FS conclusion \\
-General $m$ still has a useful reduction & Exact common scaling, rank/transversality, invariant chart and a separate first integral & Verified locally; conservation and boundary-flux certification remain open \\
-ML improves cost or accuracy & Matched controls, held-out residuals, failures and total-cost accounting & Not established; Chebyshev is best in the current small experiment \\
-\bottomrule
-\end{tabularx}
-\end{center}
+\subsection{Position II: a quasi-inessential nonzero coefficient}
+First record the exact test behind the word ``quasi.'' If a local point
+diffeomorphism $\Phi_{\lambda\to\mu}$ maps $\mathcal E_\lambda$ to
+$\mathcal E_\mu$, push-forward gives a Lie-algebra isomorphism
+\begin{equation}
+ \mathfrak g_\lambda\longrightarrow\mathfrak g_\mu,
+ \qquad X\longmapsto(\Phi_{\lambda\to\mu})_*X.
+ \label{eq:equivalence-isomorphism}
+\end{equation}
+Equivalent parameter values therefore have the same maximal point-algebra
+dimension. Likewise, replacing a residual vector $\Delta$ by $B\Delta$, with
+$B$ invertible on the declared branch, leaves its zero set and point algebra
+unchanged. A coefficient multiplying only one term is not automatically
+covered by either statement.
 
-\subsection*{Completed computation and fail-closed interpretation}
-The certificate is limited to one perturbation order, the two declared scalar
-models, branch~\eqref{eq:active-branch}, and local point generators. The
-completed proof path was:
-\begin{enumerate}
- \item independently derive the exact multiplier/defect identity and its
- first-order forcing;
- \item use $q>0$ to eliminate $\phi_{ttt}$, retain all other free jets, and
- split the unrestricted point-coefficient identity;
- \item reproduce the nonzero coefficient $3g\kappa$ for both models and check
- the printed-model highest-order term by an independent principal-symbol route.
-\end{enumerate}
-The exit is \texttt{obstruction-certified-point-first-order}. A direct
-incompatibility makes full differential completion unnecessary for this
-existence question, but it does not establish a maximal algebra. Singular
-parameter dependence, higher-order lifts with a different zero-order term,
-contact/generalized/nonlocal/nonclassical symmetries, FS field expansion and
-the full bed-field SVE system remain unresolved. A finite-ansatz failure,
-timeout or unavailable backend would still mean \emph{unresolved}; none of
-those weaker events is being used as the certificate here.
+For a complete scalar example, consider
+\begin{equation}
+ \mathcal R_\kappa:
+ \qquad u_t=u_{xx}+\kappa u^2.
+ \label{eq:quadratic-reaction}
+\end{equation}
+The highest-jet determining equations have the form
+\begin{equation}
+ \tau=\tau(t),\qquad
+ \xi=\tfrac12\tau_t x+\sigma(t),\qquad
+ \eta=a(t,x)u+b(t,x),
+ \qquad 2a_x=-\xi_t.
+ \label{eq:quadratic-highest}
+\end{equation}
+The remaining identity is
+\begin{equation}
+ (a_t-a_{xx}-2\kappa b)u+(b_t-b_{xx})
+ -\kappa(a+\tau_t)u^2=0.
+ \label{eq:quadratic-determining}
+\end{equation}
+For $\kappa\ne0$, splitting in $u$ yields
+$a=-\tau_t$, $b=0$, $\tau_{tt}=0$ and $\sigma_t=0$. Hence
+\begin{equation}
+ \mathfrak g_\kappa
+ =\operatorname{span}\left\{
+ \partial_t,\ \partial_x,\
+ 2t\partial_t+x\partial_x-2u\partial_u
+ \right\},
+ \qquad \dim\mathfrak g_\kappa=3\quad(\kappa\ne0).
+ \label{eq:quadratic-algebra}
+\end{equation}
+This independence is structural, not numerical. Under $v=cu$ with any real
+$c\ne0$,
+\[
+ u_t=u_{xx}+\kappa u^2
+ \quad\Longleftrightarrow\quad
+ v_t=v_{xx}+\frac{\kappa}{c}v^2.
+\]
+Taking $c=\kappa$ normalizes every nonzero real coefficient to $+1$, so all
+$\kappa\ne0$ belong to one stratum under unrestricted real point equivalence.
+If a positivity branch, field orientation or unit convention restricts the
+admissible maps to $c>0$, then $c=|\kappa|$ removes only the magnitude and the
+two signs remain separate restricted strata. Neither statement identifies
+fixed-data problems: initial and Dirichlet data scale by $c$, while derivative,
+Robin and boundary-flux data must be pulled back separately. At $\kappa=0$
+the equation is linear and again admits $f(t,x)\partial_u$ for every heat
+solution $f$; the zero stratum is infinite-dimensional and cannot be reached
+by an invertible scaling.
+
+Nonzero does not by itself mean quasi-inessential. For example, in the
+constant internal-linear ansatz $X_B=(BU)\cdot\partial_U$ for
+\[
+ U_t-U_{xx}-K_\rho U=0,
+ \qquad K_\rho=\operatorname{diag}(1,\rho),
+\]
+the condition is $[B,K_\rho]=0$. This ansatz has dimension two for
+$\rho\ne1$ and four at the nonzero exceptional value $\rho=1$. The full
+linear PDE algebra is infinite because of superposition, so this is an exact
+ansatz-level counterexample, not a maximal-algebra count. The lesson is to
+normalize only coefficients proved equivalent and to apply the rank-stratum
+test to every remaining dimensionless ratio.
+
+Finally, algebra dimension is not reduction dimension. For a selected
+subalgebra $\mathfrak h=\operatorname{span}\{X_1,\ldots,X_s\}$, define
+\begin{equation}
+ \ell_{\mathfrak h}
+ =\operatorname{rank}
+ \begin{pmatrix}
+  \tau_1&\xi_1^1&\cdots&\xi_1^d\\
+  \vdots&\vdots&&\vdots\\
+  \tau_s&\xi_s^1&\cdots&\xi_s^d
+ \end{pmatrix}.
+ \label{eq:parameter-projected-rank}
+\end{equation}
+On a regular transverse chart, invariant profiles depend on
+$d+1-\ell_{\mathfrak h}$ independent variables. Five algebra generators do
+not imply five removed variables, and a purely vertical symmetry has projected
+rank zero. The verified workflow is therefore
+\begin{equation}
+ \boxed{\begin{gathered}
+ \text{fix order/branch}
+ \to\text{quotient proved equivalences}
+ \to\text{split parameter strata}\\
+ \to\text{solve and verify generators}
+ \to\text{check closure and projected rank}
+ \end{gathered}}
+ \label{eq:parameter-workflow}
+\end{equation}
 
 \clearpage
 \section{General reduction core and local proofs}
@@ -236,7 +343,7 @@ Notation & Fixed meaning throughout the reduction core \\
 $p,q,r,n$ & Counts of independent variables, fields, equations, and original differential order; $r=q$ is not required. \\
 $\pi:E\to M$ & Local field bundle; $x=(x^1,\ldots,x^p)$ are base coordinates, $u=(u^1,\ldots,u^q)$ are fibre coordinates. \\
 $\sigma:M\to E$ & A physical field/section; $j^n\sigma$ is its derivative jet. The coordinate $u$ and a section are distinct objects. \\
-$\lambda,a,\varepsilon,\delta$ & Fixed model parameters, data/integration parameters, group-flow displacement, and model perturbation, respectively. \\
+$\lambda,a,\varepsilon$ & Fixed model parameters, data/integration parameters, and group-flow displacement, respectively. \\
 $H,\mathfrak h,k,\ell$ & Selected local symmetry subgroup, its Lie algebra, $k=\dim\mathfrak h$, and base-orbit rank $\ell$. \\
 $y,z,v,F$ & Orbit coordinates, quotient coordinates, invariant field coordinates, and the unknown reduced profile. \\
 $\Delta,\mathcal R,\mathcal T$ & Original residual, reduced residual, and reconstruction map. \\
@@ -527,7 +634,7 @@ therefore supplies inherited reduced-symmetry candidates, possibly with an
 additional kernel. Other symmetries can appear only after reduction. Further
 ODE order reduction requires a separate symmetry/data/regularity check.
 
-\subsection{Classification, parameter strata and approximate persistence}
+\subsection{Classification and parameter strata}
 \label{sec:classification-core}
 The full local point algebra is the solution space
 $\mathfrak g_\lambda=\{X:\pr^{(n)}X\Delta|_{\mathcal E_\lambda}=0\}$.
@@ -563,44 +670,16 @@ optimal system. Intertwining neural feature channels is a further design choice:
 $W\,d\rho_{\rm in}(X)=d\rho_{\rm out}(X)\,W$ applies only when those
 representations have actually been specified \cite{otto}.
 
-For a smooth scalar model perturbation on a regular jet neighbourhood, write
-$\Delta_\delta=\Delta_0+\delta\Delta_1+O(\delta^2)$,
-$X_\delta=X_0+\delta Y+O(\delta^2)$ and
-$M_\delta=M_0+\delta M_1+O(\delta^2)$. Expanding the off-shell multiplier
-identity $\pr X_\delta(\Delta_\delta)=M_\delta\Delta_\delta$ gives
-\begin{equation}
- \mathcal D_0(Y,M_1):=\pr Y\Delta_0-M_1\Delta_0
- =-(\pr X_0\Delta_1-M_0\Delta_1).
- \label{eq:first-order-core}
-\end{equation}
-On shell the $M_1\Delta_0$ term vanishes, so this is equivalent to the usual
-infinitesimal condition after a regular leading jet has been eliminated. The
-off-shell form makes the unknown multiplier and the image of
-$\mathcal D_0$ explicit. A finite-ansatz cokernel obstruction is an obstruction
-only in that ansatz; an unrestricted obstruction requires a compatibility
-identity for the full smooth point-coefficient system on every declared
-branch. If persistence is verified, its invariants and bracket closure must be
-continued consistently. Otherwise retain a surviving subgroup or the
-unreduced problem.
-
-This generator expansion is of Baikov--Gazizov--Ibragimov (BGI) type, but the
-label does not remove the verification obligations. In the BGI framework one
-expands $X_\varepsilon=X_0+\varepsilon X_1+\cdots$ and asks whether the exact
-unperturbed symmetry $X_0$ has a nontrivial approximate lift. The distinct
-Fushchich--Shtelen (FS) framework expands the field
-$u=v+\varepsilon w+o(\varepsilon)$ and computes exact symmetries of the
-resulting triangular coefficient system. These frameworks can give different
-PDE classifications \cite{tarayrah2023}. The current near-cubic calculation
-certifies that the specified zero-order generator has no first-order lift with
-arbitrary smooth point coefficients in either declared scalar model on the
-positive branch. This is a point BGI-type obstruction, not a maximal point
-classification. No FS coefficient system has been constructed, and the
-evolutionary characteristic of $X_5$ depends on first jets, so the sufficient
-BGI-to-FS result in \citet{tarayrah2023} does not transfer the obstruction.
-Both notions are also distinct from an equivalence
-transformation moving model parameters and from a nearby-equation approximate
-algebra inferred by numerical rank and completed determining systems
-\cite{kovalev,approxalg}.
+Exact group classification, equivalence classification and approximate
+symmetry are different problems. The first freezes $\lambda$ and solves the
+determining system; the second moves $\lambda$ while mapping one member of a
+PDE class to another; the third assigns a stated defect order to an
+approximate action. The rank-stratum and equivalence tests in
+Section~\ref{sec:parameter-effects} concern the first two only. BGI, FS and
+nearby-equation constructions remain distinct optional extensions
+\cite{kovalev,tarayrah2023,approxalg}; none is needed to decide the exact
+dimension tables~\eqref{eq:power-dimension-table} and
+\eqref{eq:quadratic-algebra}.
 
 \subsection{Analytical approximation, complexity and the ML interface}
 \label{sec:complexity-core}
@@ -1184,7 +1263,7 @@ primitive. This recovers only the printed two-equation model; it does not
 repair the missing advective term in the physical pullback. A scalar PDE
 certificate and a physical full-system certificate are therefore distinct.
 
-\subsection{Certified point obstruction and surviving common scaling}
+\subsection{An exceptional exponent and a surviving common scaling}
 For the printed scalar equation, weighted prolongation gives the off-shell
 identity
 \begin{equation}
@@ -1194,16 +1273,16 @@ identity
  \label{eq:sve-defect}
 \end{equation}
 It verifies $X_5$ at $m=3$ and exhibits its generic defect away from that
-stratum. More importantly, equation~\eqref{eq:general-point-witness} closes
-the formerly separate deformed-generator question at first order: no arbitrary
-smooth point correction cancels the defect on the declared positive branch.
-The advectively corrected scalar model has the same witness. This rules out a
-lift with zero-order term $X_5$ that is $C^1$ in the parameter and has
-sufficiently smooth point coefficients; it is not a maximal point
-classification and says nothing about an FS two-field coefficient system,
-singular parameter dependence, or generalized symmetries.
+stratum. The right-hand side is not an identically vanishing differential
+function for $m\ne3$, so this particular vector field is not admitted there.
+This is the model-specific analogue of the resonance
+factor~\eqref{eq:power-resonance}: the value $m=3$ is exceptional because an
+exact determining identity says so, not because the number three has an
+independent universal meaning. The calculation verifies one generator and
+does not prove that the reported algebra is maximal.
 
-This obstruction does not remove every useful reduction for $m\ne3$. Both
+The loss of this candidate does not remove every useful reduction for
+$m\ne3$. Both
 scalar models admit the exact common scaling
 \begin{equation}
  X_c=t\partial_t+s\partial_s+\phi\partial_\phi,
@@ -1246,10 +1325,12 @@ information and neural PDE solvers is not a novelty claim. A one-dimensional SVE
 also predates this study, and the selected Lagrangian source already reports
 its symmetry algebra and similarity reductions \cite{sveold,ap}; discovery of
 SVE symmetries or of $X_5$ is not claimed. The present contribution is the
-scoped first-order point-continuation obstruction, the independently checked
-common-scaling reduction for general $m$, and an evidence package that keeps
-exact certificates separate from negative numerical results. A learned
-profile is only a downstream consumer and is not the Lie-space result.
+explicit rank-stratum contract, two complete parameter-position calculations,
+the independently checked common-scaling reduction for general $m$, and an
+evidence package that keeps exact certificates separate from negative
+numerical results. The rank--nullity mechanism itself is elementary and is not
+claimed as a new theorem of Lie theory. A learned profile is only a downstream
+consumer and is not the Lie-space result.
 Otto et al.'s 2025 review unifies symmetry enforcement,
 discovery, and promotion through Lie-derivative constraints; LieLAC uses
 infinitesimal generators to canonicalize inputs for pre-trained models,
@@ -1291,16 +1372,17 @@ model and available conservation laws.
 \section{Publication review: claims, missing proofs and evidence gates}
 \label{sec:publication-review}
 The standard local reduction theorems above make the mathematical argument
-auditable; they do not constitute the paper's research novelty. The primary
-theorem target has now been met at first order in a precise category:
-equation~\eqref{eq:general-point-witness} obstructs an arbitrary smooth point
-correction to $X_5$ for two declared scalar models on the positive branch.
-This strengthens the earlier diagonal-scaling calculation but is still not a
-maximal point classification. A reusable exact, BGI, FS and nearby-equation
-benchmark is supporting infrastructure; real-world shallow-water demonstrations
-are validation or follow-on studies. The manuscript remains a research draft
-because conservation pullback, boundary-flux compatibility, the complete
-bed-field system and any ML advantage are not yet established.
+auditable; they do not constitute the paper's research novelty. The present
+mathematical result is narrower and cleaner: Theorem~\ref{thm:parameter-rank-strata}
+states exactly what a finite analytic determining matrix proves, while
+equations~\eqref{eq:power-dimension-table} and~\eqref{eq:quadratic-algebra}
+solve two unrestricted scalar point-determining systems. The SVE identity
+\eqref{eq:sve-defect} verifies a model-specific exceptional generator but not
+a maximal classification. Real-world shallow-water demonstrations are
+validation or follow-on studies. The manuscript remains a research draft
+because a distinct publishable novelty claim, conservation pullback,
+boundary-flux compatibility, the complete bed-field system and any ML
+advantage are not yet established.
 
 \begin{center}\small
 \renewcommand{\arraystretch}{1.14}
@@ -1308,7 +1390,7 @@ bed-field system and any ML advantage are not yet established.
 \toprule
 Issue & Required formal action & Claim allowed after the action \\
 \midrule
-Contribution and attribution & State and independently review the first-order point obstruction with its model, branch and regularity assumptions. Credit existing SVE classification and symmetry-informed neural PDE work. & A scoped continuation-obstruction proposition; not discovery of $X_5$, maximal classification or universal Lie--ML novelty. \\
+Contribution and attribution & Separate the elementary rank-stratum theorem, the two complete model classifications, and the source-reported SVE algebra. Credit standard determining and equivalence theory. & A verified parameter-position methodology and worked examples; not a claim that rank--nullity or $X_5$ was discovered here. \\
 Model interpretation & Keep the printed and advectively corrected scalar equations distinct; retain units, bed variable, closure and local reconstruction hypotheses. & Physical interpretation only for the independently derived corrected model on its smooth local branch. \\
 Reduction proof & Retain inverse/Jacobian checks, branch guards, equation equivalence, pulled-back data and reconstruction. Cover or list every excluded stratum. & Local invariant solutions on the stated branch; not all solutions or a global classification. \\
 Classifications and tables & Distinguish source classification, finite-ansatz verification and maximality. Recompute brackets with a declared convention. & Precisely stated algebra coverage and subgroup selection. \\
@@ -1319,14 +1401,14 @@ Scope and presentation & Keep general theory before Examples, isolate speculativ
 \end{tabularx}
 \end{center}
 
-The theorem-first contract in Section~\ref{sec:active-theorem} now records the
-certified first obstruction rather than an open gate. It rules out using a
-deformed $X_5$ as the near-cubic reduction mechanism in the stated category;
-the separate common scaling~\eqref{eq:common-scaling} supplies the verified
-general-$m$ quotient. The external artifact tests numerical approximations only
-after that exact reduction and reports its negative controls. Those comparisons
-are not a general sample-complexity theorem. If maximal symmetry classification
-is later claimed, the full determining system and all parameter and singular
+The parameter-first contract in Section~\ref{sec:parameter-effects} replaces a
+perturbation about one numerical exponent. It first quotients proved
+equivalences and then computes exact rank strata. The separate common
+scaling~\eqref{eq:common-scaling} supplies the verified general-$m$ SVE
+quotient. The external artifact tests numerical approximations only after that
+exact reduction and reports its negative controls. Those comparisons are not a
+general sample-complexity theorem. If maximal SVE symmetry classification is
+later claimed, the full determining system and all parameter and singular
 branches must still be completed; a useful supplied subgroup does not require
 that stronger claim.
 
@@ -1348,13 +1430,13 @@ manuscript under \path{research_artifacts/}, in
 \path{results/experiment_results.json} define the reproducible entry points,
 mathematical scope, exact certificates, and run-level records.
 
-The package reports 38 passing tests, 12 classical reference cases, and 40
+The package reports 43 passing tests, 12 classical reference cases, and 40
 bounded approximation runs. Sixteen learned runs exhausted their evaluation
 budget, and the Chebyshev control was the most accurate method in this small
 smooth benchmark. These observations do not establish neural speedup, a
-continuous error bound, or superiority of deep PINNs. The exact point-symmetry
-obstruction and common-scaling reduction are certified separately from those
-performance comparisons.
+continuous error bound, or superiority of deep PINNs. The exact exceptional-
+exponent identity and common-scaling reduction are certified separately from
+those performance comparisons.
 
 The former prospective protocol, historical numerical tables, and
 implementation listing have been moved verbatim to
@@ -1374,10 +1456,10 @@ $E_{ij}=a_i^\dagger a_j$ satisfy
 [E_{ij},E_{\ell r}]=\delta_{j\ell}E_{ir}-\delta_{ir}E_{\ell j}.
 \end{equation}
 Their skew-Hermitian combinations generate $U(k)$; perturbations can reduce
-this symmetry \cite{tong}. First-order continuation requires cancellation of
-the corresponding symmetry defect. This is an analogy for testing, not
-assuming, persistence near $m=3$. Noether's correspondence yields a conserved
-current only for a variational symmetry \cite{noether}.
+this symmetry \cite{tong}. This is only an analogy for the rank-stratum lesson:
+enhanced symmetry at one parameter value must be verified rather than assumed
+nearby. Noether's correspondence yields a conserved current only for a
+variational symmetry \cite{noether}.
 
 The decoherence literature gives distinct precedents. A Lindblad symmetry
 analysis characterizes continuous symmetries and conserved quantities under
@@ -1418,12 +1500,12 @@ Section~\ref{sec:experiment-artifact}. The current artifact separately records
 40 new bounded approximation runs, all seeds, budgets and failure statuses;
 16 runs exhausted their evaluation budget and are not labelled converged.
 
-The present mathematical checks independently verify the multiplier identity,
-the normal leading-jet chart and the general point-obstruction coefficient.
-They also verify the common-scaling rank and coordinate map, profile first
-integral, local bed reconstruction and reference-family bounds. They do not
-certify a maximal algebra, FS obstruction, general conservation pullback,
-arbitrary boundary flux or a uniform learned solution error.
+The present mathematical checks independently verify the two determining
+systems in Section~\ref{sec:parameter-effects}, the SVE multiplier identity,
+the common-scaling rank and coordinate map, the profile first integral, local
+bed reconstruction and reference-family bounds. They do not certify a maximal
+SVE algebra, a general conservation pullback, arbitrary boundary flux or a
+uniform learned solution error.
 
 Supporting fluid reductions
 \cite{shearflows,twovelocities,compressiblens,fushchych1,fushchych2,passivescalar},
@@ -1455,6 +1537,14 @@ Peter~J. Olver.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-4350-2}.
 \newblock Archived Olver PDF in repository is identified separately; do not
   infer that an excerpt is the full book.
+
+\bibitem[Oliveri(2026)]{oliveri2026}
+Francesco Oliveri.
+\newblock \emph{{Lie Symmetries of Differential Equations: Theory,
+  Applications, and Symbolic Computation}}.
+\newblock Birkh{\"a}user, 2026.
+\newblock \doi{10.1007/978-3-032-12791-4}.
+\newblock URL \url{https://doi.org/10.1007/978-3-032-12791-4}.
 
 \bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
 Ian~M. Anderson, Mark~E. Fels, and Charles~G. Torre.

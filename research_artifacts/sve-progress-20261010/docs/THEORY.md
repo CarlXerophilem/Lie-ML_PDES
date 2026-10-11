@@ -157,7 +157,8 @@ N_{\mathrm{phys}}-N_{\mathrm{print}}
 
 `symbolic_certificates.json` 保存两种模型的完整最高阶系数多项式、
 壳消元公式、强迫项来源、选取的单项式和分支条件。
-原文模型的最高阶系数还通过独立的主符号推导核对。
+两种模型的最高阶系数现均通过独立的主符号推导核对；该路径不调用
+完整三阶递归延拓，并对修正模型单独加入上式的输运修正。
 
 该结果排除参数依赖为 C^1、而点系数关于 (t,s,φ) 足够光滑的正则延续，
 也排除具有上述非零零阶项的标准一阶 BGI 型点生成元提升。允许任意 Y
@@ -189,8 +190,10 @@ base Jacobian det D_(t,s)(y,z)=1/t² 非零。
 Q_c=\phi-t\phi_t-s\phi_s=0.
 \]
 
-不变图还满足 D_JQ_c=0（|J|≤2）。轨道对依赖变量竖直方向横截，
-而上述 Jacobian 保证 (y,z) 是合法的局部基坐标。因此 v=F(z)，故
+机器证书现在显式保存 Q_c 以及 D_JQ_c=0（|J|≤2）的六个表达式。
+总空间与基空间轨道秩均为 1，故投影作用横截于依赖变量方向；
+base Jacobian 为 t^(-2)，完整 (t,s,φ)→(y,z,v) Jacobian 为 t^(-3)。
+因此 (y,z,v) 是合法的局部坐标，v=F(z)，故
 φ=tF(s/t)，是正则局部不变图，而不只是一次形式代换。
 设 P=F'，V=F-zP>0，P>0，β=mκ，令
 
@@ -258,6 +261,35 @@ b=b0+(I0/g)log t。任意已有渠段边界或通量不能自动满足这些条�
 ## 6. 测度与解析前端
 
 在 1≤t≤2、1≤z≤1.4 上，dt ds=t dt dz。
+两条标量方程本身都具有声明范围内的散度形式
+
+\[
+D_t\rho+D_sJ_s=S,\qquad
+\rho=A,\quad S=0,
+\]
+
+其中
+
+\[
+J_s^{\rm print}=-gm\kappa C_m,\qquad
+J_s^{\rm phys}=-\frac{\phi_tA}{\phi_s}-gm\kappa C_m.
+\]
+
+令 T=t、z=s/t，则 \(\det\partial(t,s)/\partial(T,z)=T\)，守恒 current
+作为向量密度的 pullback 为
+
+\[
+\widetilde\rho=T\rho,\qquad
+\widetilde J_z=J_s-z\rho,\qquad
+D_T\widetilde\rho+D_z\widetilde J_z=T E_m.
+\]
+
+因此在 z=常数边界上，与协向量 dz 配对的边界通量是
+\(\widetilde J_z\)。这里没有引入度量或单位法向约定。
+`symbolic_certificates.json` 保存该恒等式、Jacobian、density、flux、source
+和边界通量。标量基准没有声明额外 constraints 或具体初边值数据，故这两项
+明确标为未给定/未测试；此证书也不是完整床面场系统或 Noether/变分证书。
+
 共同缩放不变候选的原坐标残差积分为
 
 \[
