@@ -26,7 +26,9 @@ collapses to an ODE. See ../../intro.tex sections 2-4 for the why.
 dim (exact, invariant) | algebra type | reductions (residual 0) | defect delta |
 index rho in [0,1] | params pi | status. LATENT-ONLY = "no symmetry, saved anyway".
 delta and rho are defined precisely in
-docs/superpowers/specs/2026-06-26-lie-symmetry-engine-v1-design.tex (section 6).
+the preserved 2026-06-26 engine design (section 6), available in the external
+archive described in docs/archive.md. The engine remains a finite polynomial
+search; its nullity does not independently prove unrestricted maximality.
 
 ## 5. Resume
 The engine checkpoints each degree to symm/runs/<name>/checkpoint-NNN.json and saves the final

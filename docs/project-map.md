@@ -8,6 +8,15 @@ This document is the visual map for the LieML research program. It separates thr
 
 The diagrams are deliberately fail-closed. A timeout, exhausted search budget, failed chart, or failed numerical gate remains a recorded negative or unresolved result; it is never silently promoted to a theorem.
 
+The primary reading path is [`../draft/main.tex`](../draft/main.tex), this map, and the current [experiment index](../research_artifacts/sve-progress-20261010/docs/EXPERIMENT_INDEX.md). From the repository root:
+
+```bash
+python scripts/project.py workflow --out build/workflow
+python scripts/project.py data-flux --out build/data-flux
+```
+
+The first command produces the manuscript evidence report and workflow diagram. The second verifies the constructed common-scaling family with \(g=1,\kappa=1/30\), \(\phi/t=2,\phi_s=1/2,t\phi_{ss}=1/10\) on \(s/t=1\). Both retain the distinction between these verified scalar identities/data and unresolved arbitrary initial-boundary data or the full bed-field system.
+
 ## Notation contract
 
 | Symbol | Meaning | What it may authorize |
@@ -110,7 +119,9 @@ The completed first-order methodology and its downstream gate are therefore
 | The first-order lift fails in the diagonal-scaling class \(Y_1=a_1t\partial_t+b_1s\partial_s+c_1\phi\partial_\phi\) | Weight equations plus an independent prolonged-residual identity | **Exact in that restricted class** (`obstruction-verified-scaling`); retained as a historical cross-check |
 | No unrestricted regular point correction \(Y_1\) exists | Define \(\mathrm{const}_1:=3g\kappa>0\); eliminate the regular leading jet, split the on-shell identity in free jets, and independently recover \([p^2q^2](q^3\partial_{\phi_{tss}}\Omega)=\mathrm{const}_1\) | **Certified at first order in the declared local smooth point category**; \(\kappa_{\mathrm{obs}}=1\) for both declared scalar models |
 | An \(X_5\)-based near-cubic symmetry reduction is admissible | Exact continued or residual subgroup; bracket closure; constant projected rank; chart; PDE/constraint/data/boundary-flux pullbacks | **Not admitted:** the required regular first-order \(X_5\) lift is obstructed |
-| The general-\(m\) common-scaling subgroup gives a local reduction | Exact multiplier identity; characteristic and differential consequences; projected orbit rank; invariant chart; direct PDE and scalar balance-law pullbacks | **Exact on the declared \(t,\phi_t,\phi_s>0\) chart**; compatibility with a specific initial-boundary-value problem remains separate |
+| The general-\(m\) common-scaling subgroup gives a local reduction | Exact multiplier identity; characteristic and differential consequences; projected orbit rank; invariant chart; direct PDE and scalar balance-law pullbacks | **Exact on the declared \(t,\phi_t,\phi_s>0\) chart**; the normalized-ray family below is verified separately from arbitrary initial-boundary-value data |
+| The two declared scalar currents and boundary-covector fluxes pull back correctly | In \((T,z)=(t,s/t)\), Jacobian-weighted density \(tA\), flux \(J-(s/t)A\), and transformed divergence \(tE_m\); exact zero remainder for both models | **Exact for these scalar balance laws**; the boundary current is paired with \(dz\), without a metric unit-normal convention or arbitrary-data claim |
+| Constructed normalized-ray data and flux are compatible | \(g=1,\kappa=1/30\); \(\phi/t=2,\phi_s=1/2,t\phi_{ss}=1/10\) on \(s/t=1\); \(\det D(t,s)/D(T,z)=T\); positive-\(z\) boundary current \(I_0/T\) | **Verified for both scalar models and symbolic real \(m\) on the recorded positive branch**; no arbitrary IBVP existence/uniqueness theorem |
 | ML may approximate a reduced or correction object | The preceding exact gates plus a named unresolved object, classical control, held-out validation and total-cost accounting | **Deferred/downstream**; historical fixed-\(m=3\) runs are separate evidence |
 
 ### Completed bounded computation and next gate
@@ -122,7 +133,7 @@ The completed obstruction computation was deliberately limited to one perturbati
 3. A separate principal-symbol calculation reproduced the same coefficient for both the printed and advectively corrected scalar models.
 4. The resulting exit is `obstruction-certified`, with \(\kappa_{\mathrm{obs}}=1\) in this declared category.
 
-The next gate is not another obstruction calculation. It is to state a concrete initial-boundary-value problem for the verified common-scaling subgroup and check data, source, constraints, Jacobian-weighted density, and boundary flux. Full bed-field, FS, global smoothness, shock, and weak-solution questions remain separate.
+The scalar current/Jacobian, boundary-covector flux, and constructed normalized-ray data gates are complete. `data-flux` verifies both exact symbolic model paths and five negative controls. Separately, 12 classical cases pass the \(10^{-9}\) cross-solver/first-integral-drift gate (maximum \((F,F',F'')\) disagreement \(3.33\times10^{-15}\), drift \(1.80\times10^{-14}\)). Existing rational tube bounds certify only the reference family with \(g=1,\kappa=1/30,m\in[1,4],z\in[1,7/5]\); sampled diagnostics do not replace those bounds. Full bed-field, arbitrary-data, FS, global smoothness, shock, and weak-solution questions remain separate.
 
 The fail-closed exit vocabulary remains:
 
@@ -624,9 +635,10 @@ and then either uses the exact residual subgroup or a separately verified defect
 ## Project evidence boundary
 
 - The current executable reducer verifies a **supplied projectable one-generator chart**; it does not compute a maximal symmetry classification. See [`pde_formalization_and_reduction.md`](pde_formalization_and_reduction.md).
-- Existing fixed-\(m=3\) Lie/ML results and their negative controls are historical evidence, not results of the new prospective experiment. See [`three_layer_baselines.md`](three_layer_baselines.md).
+- Existing fixed-\(m=3\) Lie/ML results and their negative controls are historical evidence, not results of the new prospective experiment. See [archive details](archive.md).
 - The near-cubic program has \(\kappa_{\mathrm{obs}}=1\) for arbitrary sufficiently smooth local point corrections in the two declared scalar models. This is not a maximal classification and says nothing about singular parameter dependence, FS, generalized symmetries, the full bed-field system, or global/weak solutions. See [`../checklist.md`](../checklist.md).
-- The broad claims in [`The Mathematical Essence of Machine Learning.md`](The%20Mathematical%20Essence%20of%20Machine%20Learning.md) are not used as theorem statements here; that document still requires a separate corrected edition.
+- The current scalar certificates include \(Q_c\), its order-two differential consequences, both orbit ranks, chart Jacobians, both independent obstruction derivations, scalar density/current/boundary-covector pullbacks, and compatible normalized-ray data for the constructed family. This completed compatibility gate is not a general IBVP theorem.
+- The broad claims in [archive details](archive.md) are not used as theorem statements here; that document still requires a separate corrected edition.
 
 ---
 

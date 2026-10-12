@@ -4,3 +4,7 @@ pykan==0.2.8
 scipy
 sympy
 torch
+scikit-learn
+pandas
+pyyaml
+tqdm

@@ -1,6 +1,6 @@
 # Lie 对称、近似对称与符号计算：基础文献阅读笔记
 
-日期：2026-10-10  
+初读日期：2026-10-10；证据状态同步：2026-10-11
 用途：为 LieML/SVE 的确定方程自动化、参数延拓判定和守恒约化提供可审查的理论基线。本文是阅读与方法审计，不是新的最大对称分类。
 
 ## 结论先行
@@ -23,14 +23,23 @@
 2. 该结论可称为“声明正则分支上的一阶 \(C^1\) 点对称延拓障碍”，也排除以 \(X_5\) 为零阶项的标准一阶 BGI 点生成元提升。它不是最大点代数分类，也不是 generalized/contact/nonlocal/nonclassical 或 FS 障碍。
 
 3. Olver 的条件使该证书不仅是形式代数矛盾。在 \(q>0\) 上，
-   \(\partial E_m/\partial\phi_{ttt}=q\ne0\)，故方程零集是最大秩的正则超曲面；固定实数 \(m\) 时，\(p,q>0\) 分支上的系数为解析函数，方程可对纯时间 leading jet \(\phi_{ttt}\) 求解。由解析 normal-form 的局部可解性结果，可使用 Olver 的充要无穷小判据。现有 `THEORY.md` 应把这座桥明确写出。
+   \(\partial E_m/\partial\phi_{ttt}=q\ne0\)，故方程零集是最大秩的正则超曲面；固定实数 \(m\) 时，\(p,q>0\) 分支上的系数为解析函数，方程可对纯时间 leading jet \(\phi_{ttt}\) 求解。由解析 normal-form 的局部可解性结果，可使用 Olver 的充要无穷小判据。现有 [THEORY.md](../research_artifacts/sve-progress-20261010/docs/THEORY.md) 已明确写出这座局部解析桥梁；它不是全局或光滑数据适定性证明。
 
 4. BGI 与 FS 是不同问题。BGI 展开生成元；FS 展开场并求两场系数系统的精确对称。Tarayrah--Pitzel--Cheviakov 的 Theorem 3.1 是带强假设的单向充分命题，而且 \(X_5\) 的演化特征
    \(Q_5=-t\phi_t+2s\phi_s\) 依赖一阶 jets，不满足其中 \(\zeta^0(x,t)\) 的假设。因此当前证书对 FS 没有结论。
 
 5. 当前共同缩放 \(X_c=t\partial_t+s\partial_s+\phi\partial_\phi\) 的一变量约化有理论依据；但“由两个自变量降为一个”来自群商，“三阶降为二阶”来自另一个一阶积分 \(R_m=(LF'')'\)，两者必须分开陈述。
 
-6. 当前工作树中的 `docs/project-map.md`（尤其现行第 110--112、623、659 行附近）和 `draft/main.tex`（现行第 167--170、586--588 行附近）仍把任意点修正写成未解决。它们与 2026-10-10 新证据不同步，但不应在未完成下述理论补丁和独立复核前直接改成更宽的主张。
+6. 当前 [project-map.md](project-map.md) 与 [main.tex](../draft/main.tex) 按两标量模型、正则分支、一阶、\(C^1\) 参数依赖及任意足够光滑点系数同步证据。两条独立障碍推导、\(Q_c,D_JQ_c\)、轨道秩/Jacobian 和所声明的标量 current pullback 已完成；任意初边值数据、FS 与完整床面场结论仍未建立。
+
+复核入口（仓库根目录）：
+
+```bash
+python scripts/project.py workflow --out build/workflow
+python scripts/project.py data-flux --out build/data-flux
+```
+
+第一条生成主文稿证据报告和流程图；第二条已验证两标量模型的构造共同缩放 ray-data/flux 家族：\(g=1,\kappa=1/30\)，在 \(s/t=1\) 上指定 \(\phi/t=2,\phi_s=1/2,t\phi_{ss}=1/10\)。这一完成状态不推广到任意 IBVP。
 
 ## 一、第一性原理图景
 
@@ -98,7 +107,7 @@ Olver 扫描件中印刷页 119--122 的顺序异常；本笔记按印刷页与�
 
 若一阶点延拓存在，\(\Omega\) 必须在正开集上恒为零。对自由 jet \(x=\phi_{tss}\) 求偏导、乘 \(q^3\) 清除已声明非零的分母，再对自由 \(p,q\) 作多项式分裂，得到不可消去的 \(3g\kappa\)。这与 Olver §2.4 的逻辑完全一致：它不是采样残差，也不是有限 generator ansatz 的失败。
 
-需要补入正式证书的正则性链是：
+正式证据采用的局部正则性链是：
 
 \[
 q>0
@@ -127,8 +136,8 @@ Q_c=\phi-t\phi_t-s\phi_s=0,
 \]
 
 坐标 \(y=\log t,\ z=s/t\) 的基 Jacobian 为 \(1/t^2\ne0\)，因此
-\(\phi=tF(s/t)\) 是合法的局部 invariant graph。证书还应显式记录
-\(D_JQ_c=0\)（\(|J|\le2\)），而不只记录最终 substitution。
+\(\phi=tF(s/t)\) 是合法的局部 invariant graph。当前机器证书已显式记录
+\(Q_c,D_JQ_c=0\)（\(|J|\le2\)）、两种轨道秩和 Jacobians，而不只记录最终 substitution。
 
 ## 四、Oliveri：符号程序应保存什么
 
@@ -244,20 +253,24 @@ SVE 当前首先得到的是“不存在点 BGI lift”，而且
 |---|---|---|
 | \(X_5\) at \(m=3\) | exact anchor | 两模型 multiplier/defect identity remainder 为 0 |
 | 任意光滑点 \(Y\) 的一阶延拓 | obstruction certified on declared branch | 两模型 selected coefficient 均为 \(3g\kappa\ne0\) |
-| Olver nondegeneracy | 数学条件满足，文档未完整写出 | \(q>0\)、解析 normal form、Cor. 2.80 |
-| 一般 \(m\) 的共同缩放约化 | local reduction verified | exact symmetry、rank/transversality、有效不变量；应补 \(Q_c,D_JQ_c\) 字段 |
+| Olver nondegeneracy | 局部解析条件已写入证据 | \(q>0\)、解析 normal form、Cor. 2.80；不含全局适定性 |
+| 一般 \(m\) 的共同缩放约化 | local reduction verified | exact symmetry、rank/transversality、有效不变量、\(Q_c,D_JQ_c\) 和 Jacobians |
 | 二阶 profile ODE | verified after an extra first integral | 对称商先产生三阶 \(R_m=0\)；\(R_m=(LF'')'\) 才降阶 |
-| physical-corrected witness | exact symbolic route passed | 仍宜增加独立 principal-symbol derivation；目前该交叉测试只覆盖 printed model |
+| physical-corrected witness | 两条独立符号路径通过 | recursive prolongation 与独立 principal-symbol derivation 给出相同系数 \(3g\kappa\) |
+| 两条标量 balance-law 与边界协向量通量 | exact pullback verified | \((T,z)=(t,s/t)\) 下 density 为 \(tA\)，flux 为 \(J-(s/t)A\)，divergence 为 \(tE_m\)；边界通量与 \(dz\) 配对 |
+| 构造的 ray-data/flux 相容性 | 两模型 exact symbolic checks 已通过 | \(g=1,\kappa=1/30\)，\(s/t=1\) 上 \(\phi/t=2,\phi_s=1/2,t\phi_{ss}=1/10\)；\(\det D(t,s)/D(T,z)=T\)，正 \(z\) 方向边界 current 为 \(I_0/T\)；不推广到任意 IBVP |
+| 构造家族的负控 | 5 个拒绝检查通过 | 两模型均拒绝不相容的常数物理 \(\phi\) 数据和零 chart determinant；另拒绝 \(t=0\) |
+| 构造家族的数值复核 | 12 个参考算例通过 | \((F,F',F'')\) 最大跨求解器差 \(3.33\times10^{-15}\)，积分漂移 \(1.80\times10^{-14}\)，均低于 \(10^{-9}\)；数值证据与精确 reference-tube 界分开 |
 | FS SVE 分类 | not run | 必须构造 \((\phi_0,\phi_1)\) 系数系统并单独求精确对称 |
 | 最大点分类/optimal system | not established | 未求完整确定系统和所有共轭子代数 |
 | ML 优越性或加速 | unsupported | 经典 Chebyshev 控制在本小实验中最好；16/40 优化运行耗尽预算 |
 
-本轮独立运行
+初读时的独立运行记录（历史）
 
     python -B -m pytest -q -p no:cacheprovider
     38 passed in 7.36s
 
-这验证代码路径和已编码恒等式，不单独证明数学完备性。另一个证据包装问题是：未解压目录缺少 manifest 中的 52 个 `.npz`，而随附 ZIP 含全部 76 个 manifest 条目且哈希匹配；冻结候选的完整复核应以 ZIP 为证据载体。
+现行证据包另记录 43 项通过测试，见 [experiment index](../research_artifacts/sve-progress-20261010/docs/EXPERIMENT_INDEX.md)。这些运行验证代码路径和已编码恒等式，不单独证明数学完备性。初读时发现未解压目录缺少 manifest 中的 52 个 `.npz`，而随附 ZIP 含全部 78 个 manifest 条目且哈希匹配；冻结候选的完整复核应以 ZIP 为证据载体。
 
 ## 七、建议的精确算法
 
@@ -318,20 +331,18 @@ D_t\rho_a(U)+\sum_{i=1}^{d}D_{x_i}J_a^i(U^{(n)};\lambda)
 - FS 或 Oliveri-consistent 的 SVE 障碍；
 - 含独立床面场的完整 Eulerian/Lagrangian SVE 分类；
 - shock/weak-solution regime、全局存在或真实渠段数据覆盖；
-- 守恒 pullback、Noether 结构、ML 加速或连续误差界已经认证。
+- 一般守恒 pullback 定理、任意数据/边界通量相容性、Noether 结构、ML 加速或连续误差界已经认证。所声明的两条标量 balance-law 与边界协向量 current pullback 是已完成的有限范围证书。
 
-最小的后续理论补丁是：
+已完成 analytic normal-form 论证、\(Q_c,D_JQ_c\)/轨道/Jacobian 字段、修正模型独立主符号复核、标量 current pullback 与构造的 normalized-ray 数据/通量相容性。后续复核与开放问题是：
 
-1. 在 `THEORY.md` 和主文稿写出 analytic normal form \(\Rightarrow\) local solvability 的论证。
-2. 将 \(Q_c,D_JQ_c\)、两种 orbit rank、transversality 和 Jacobian 加入机器证书。
-3. 为 `physical_corrected` 路线增加独立 principal-symbol witness 测试。
-4. 同步 `project-map.md`/`main.tex` 的旧状态，但只改成“任意光滑点 \(Y\)、一阶、\(C^1\)、两标量模型、声明正则分支”。
-5. 若要讨论 FS，单独构造 \((\phi_0,\phi_1)\) 系数系统；不要从 BGI 结果类推。
-6. 把 conservation certificate 和 boundary-flux compatibility 做成独立 gate，再训练任何结构模型。
+1. 用 `workflow` 独立复核主文稿的已有恒等式与覆盖边界，保留失败状态。
+2. 用 `data-flux` 重现已通过的构造数据面、profile jets 和边界 current 检查；符号恒等式针对正分支上的 real \(m\)，精确参考管界限于 \(g=1,\kappa=1/30,m\in[1,4],z\in[1,7/5]\)。
+3. 若要讨论 FS，单独构造 \((\phi_0,\phi_1)\) 系数系统；不要从 BGI 结果类推。
+4. 完整床面场、一般 IBVP、全局/弱解和 ML 性能分别需要新的问题契约与证据。
 
 ## 参考文献与本地来源
 
-1. P. J. Olver, *Applications of Lie Groups to Differential Equations*, selected Chapters 2--3. 本地文件：[Olver PDF](../ref/applications-of-lie-groups-to-differential-equations-graduate-texts-in-mathematics-9781468402766-9781468402742-1468402765_compress.pdf).
-2. F. Oliveri, *Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation*, selected Chapters 11--12 and supporting exact-symmetry sections. 本地文件：[Oliveri PDF](../ref/lie-symmetries-of-differential-equations-theory-applications-and-symbolic-computation_compress.pdf).
-3. M. R. Tarayrah, B. Pitzel, and A. Cheviakov, “Two approximate symmetry frameworks for nonlinear partial differential equations with a small parameter: Comparisons, relations, approximate solutions,” *European Journal of Applied Mathematics* 34 (2023), 1017--1045, DOI `10.1017/S0956792522000407`. 本地文件：[article PDF](../ref/two-approximate-symmetry-frameworks-for-nonlinear-partial-differential-equations-with-a-small-parameter-comparisons-relations-approximate-solutions.pdf).
+1. P. J. Olver, *Applications of Lie Groups to Differential Equations*, selected Chapters 2--3. 本地文件：[Olver PDF](../ref/pdfs/applications-of-lie-groups-to-differential-equations-graduate-texts-in-mathematics-9781468402766-9781468402742-1468402765_compress.pdf).
+2. F. Oliveri, *Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation*, selected Chapters 11--12 and supporting exact-symmetry sections. 本地文件：[Oliveri PDF](../ref/pdfs/lie-symmetries-of-differential-equations-theory-applications-and-symbolic-computation_compress.pdf).
+3. M. R. Tarayrah, B. Pitzel, and A. Cheviakov, “Two approximate symmetry frameworks for nonlinear partial differential equations with a small parameter: Comparisons, relations, approximate solutions,” *European Journal of Applied Mathematics* 34 (2023), 1017--1045, DOI `10.1017/S0956792522000407`. 本地文件：[article PDF](../ref/pdfs/two-approximate-symmetry-frameworks-for-nonlinear-partial-differential-equations-with-a-small-parameter-comparisons-relations-approximate-solutions.pdf).
 4. 当前实验理论：[THEORY.md](../research_artifacts/sve-progress-20261010/docs/THEORY.md)；机器证书：[symbolic_certificates.json](../research_artifacts/sve-progress-20261010/results/symbolic_certificates.json)；结果边界：[FINDINGS.md](../research_artifacts/sve-progress-20261010/docs/FINDINGS.md).

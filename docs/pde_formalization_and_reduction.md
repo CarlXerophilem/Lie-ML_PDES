@@ -136,7 +136,8 @@ The last file is an existing standalone check script that exits at module
 level, so importing it during bare pytest collection aborts collection.
 Run it separately as shown. On 2026-09-25, the pytest suite passed 130 tests
 (including 19 new tests), and the standalone script passed 22 internal checks.
-The Windows pytest cleanup warning and PDF build details are in `checklist.md`.
+The Windows pytest cleanup warning and the preceding build records are historical;
+see `docs/archive.md`. Current entrypoints and validation commands are in README.md.
 
 The classical local invariant-reduction framework is described by Olver,
 *Applications of Lie Groups to Differential Equations*, 2nd edition (1993).

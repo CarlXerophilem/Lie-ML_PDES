@@ -24,5 +24,10 @@ pdf2md/
 ref/kb
 docs/2014_Book_IntroductionToPartialDifferent.pdf
 
-# tmp
-tmp
+# tmp and generated reports
+tmp/
+build/
+.venv/
+
+# archives
+docs/.old

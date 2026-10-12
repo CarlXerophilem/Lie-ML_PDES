@@ -803,7 +803,7 @@ Step & Operation & Required output/check \\
 \midrule
 1 & Specify $\mathcal P_\lambda$ & Coordinates, jets, fixed parameters, data, scales and branch guards. \\
 2 & Verify or solve determining equations & Every original equation; supplied-candidate and maximality statuses kept separate. \\
-3 & Brackets and subgroup choice & Lie closure, effective orbit ranks, data compatibility; optional optimal-system coverage. \\
+3 & Subgroup filter & Lie closure, effective orbit ranks, regular invariant-graph eligibility and data compatibility; optional optimal-system coverage. \\
 4 & Construct $\chi,\chi^{-1}$ & Invariants, inverse identities, base/fibre Jacobians, connected chart and excluded strata. \\
 5 & Pull back all jets & Recursion~\eqref{eq:pullback-recursion}; original equations and all data/sign constraints. \\
 6 & Certify reduced equations & Quotient zero-set equivalence; factorization and nonzero/full-rank guards when used. \\
@@ -814,21 +814,64 @@ Step & Operation & Required output/check \\
 \end{tabularx}
 \end{center}
 
-The earlier draft's supplied-chart API is a restricted realization of steps
+The supplied-chart API in \texttt{symm.generic} is a restricted realization of steps
 1--6: one projectable generator, $p\ge2$, affine reconstruction
 $u=C(x)F(z)+b(x)$, a supplied multiplier identity, and componentwise
 nonzero pullback factors. It records pulled-back data separately. Nonlinear
 $\Psi$, multiple generators and differential completion are general-theory
-capabilities, not automatically implemented capabilities. The recovered
-archive does not contain the cited newer \texttt{symm.generic} source;
-its API descriptions and historical results require source recovery before
-being described as freshly reproducible. A verified scalar control and a
+capabilities, not automatically implemented capabilities. The source is present
+in the current branch; its supplied-chart verification is distinct from
+unrestricted symmetry discovery or differential completion. A verified scalar control and a
 declared finite-ansatz analyzer have narrower coverage.
 
 Use explicit exits: verified local reduction; unresolved data; singular
 chart; inconclusive ansatz; partial branch coverage; unsupported action;
 or unavailable backend. Failure of a supplied
 multiplier identity or a solver timeout is not a proof that no symmetry exists.
+
+\subsection{Task-aware filtration of candidate symmetries}
+\label{sec:task-filter-core}
+A symmetry is not useless in an absolute sense. The filter here asks whether a
+verified subgroup reduces the \emph{declared} PDE or fixed-data problem by a
+regular invariant graph, and whether that reduction helps the declared solution
+workload. Apply it separately on each parameter stratum and real branch:
+\begin{enumerate}
+\item \emph{Validity and closure.} Check the prolonged action on every original
+equation and the brackets of the proposed subalgebra. A verified failure of
+on-shell tangency on an admissible solution jet rejects the candidate as a
+symmetry; failure of one sufficient multiplier identity, an incomplete
+determining search or an undecided test is recorded as unresolved.
+\item \emph{Effective reduction.} Compute the total orbit rank $o_H$ and the
+projected base rank $\ell_H$ on a constant-rank region. For this regular
+invariant-graph route require $o_H=\ell_H>0$, solve $Q_X=0$ for every
+$X\in\mathfrak h$ with its required differential consequences, and construct
+a nonsingular local chart. If $\ell_H=0$,
+there is no reduction in independent-variable count; if $o_H>\ell_H$, the
+regular transverse-graph route is unavailable. Neither outcome says that the
+group has no other use or rules out nontransverse solutions.
+\item \emph{Problem and quotient compatibility.} Check domain, boundary and
+data tangency for the posed problem, then pull back every required jet and
+constraint. Certify that the reduced equations have the stated zero-set
+equivalence to the original equations on the guarded chart. A PDE symmetry
+that moves prescribed data remains a PDE symmetry, but is not admitted for
+that fixed-data reduction.
+\item \emph{Task value.} Record $p-\ell_H$, retained fields, actual equation
+order, singular factors, error evidence and full setup/query costs. Compare
+admissible subgroups with each other and with an unreduced or classical route
+at matched accuracy. A slower or unmeasured route is respectively
+noncompetitive or unresolved for that workload, not mathematically invalid.
+\end{enumerate}
+For the SVE scalar example, $X_3=\partial_\phi$ is an exact equation symmetry
+but has $\ell=0$ and $Q=1$, so it supplies no fixed scalar invariant graph.
+The generic scaling $X_4=X_c$ has $o_H=\ell_H=1$ on $t>0$ and yields
+$\phi=tF(s/t)$, yet fixed positive-time data fail its boundary tangency test.
+At $m\ne3$, the particular $X_5$ fails the equation-symmetry gate, whereas
+$X_c$ remains available. These are three different exits, not three examples
+of a false symmetry. Equivalent subgroups may be deduplicated only under maps
+that also preserve the parameter branch and the posed data. The current
+supplied-chart code checks selected candidates; it does not enumerate all
+subgroups or automate this entire task-value filter.
+
 \subsection{Parameter-aware complexity and selection of a reduction}
 \label{sec:selection-core}
 There is no equation-only scalar that determines how easy a family is to
@@ -893,7 +936,7 @@ subgroup. Maximal classification is required only if it is a stated claim.
  \node[geom,text width=5.3cm] (verify) at (5,-1.6)
   {2. Verify candidates or solve determining equations\\Keep maximality and parameter-branch status explicit};
  \node[geom,text width=5.3cm] (select) at (5,-3.2)
-  {3. Brackets and subgroup $H$\\Lie closure and effective base/total ranks};
+  {3. Task-filter subgroup $H$\\Closure, effective ranks and graph eligibility};
  \node[geom,text width=5.3cm] (chart) at (5,-4.8)
   {4. Construct $\chi$ and $\chi^{-1}$\\Invariants, orbit coordinates and Jacobians};
  \node[diamond,aspect=4,draw=fundgeometry,fill=fundgeometry!5,
@@ -1262,6 +1305,11 @@ are additionally necessary. Prescribed bed data must agree with this
 primitive. This recovers only the printed two-equation model; it does not
 repair the missing advective term in the physical pullback. A scalar PDE
 certificate and a physical full-system certificate are therefore distinct.
+Retaining the advective term instead gives the separate corrected scalar
+compatibility equation
+$\E_m^{\rm phys}=\E_m-D_s(\phi_tA/\phi_s)=0$
+on the smooth $\phi_s>0$ branch. Its local bed reconstruction uses the
+advectively corrected time derivative; it is not the printed benchmark.
 
 \subsection{An exceptional exponent and a surviving common scaling}
 For the printed scalar equation, weighted prolongation gives the off-shell
@@ -1281,6 +1329,30 @@ exact determining identity says so, not because the number three has an
 independent universal meaning. The calculation verifies one generator and
 does not prove that the reported algebra is maximal.
 
+The current artifact separately certifies a local first-order continuation
+obstruction for both the printed and advectively corrected scalar models. Freeze
+dimensionless $g,\kappa>0$, set $m=3+\delta$, and work locally on
+$t,s,\phi_t,\phi_s>0$. A $C^1$ regular point-symmetry continuation
+$X_\delta=X_5+\delta Y+o(\delta)$, with arbitrary sufficiently smooth
+point coefficients in $Y=\tau(t,s,\phi)\partial_t+
+\xi(t,s,\phi)\partial_s+\eta(t,s,\phi)\partial_\phi$, would require
+$\Omega=(\pr^{(3)}Y\E_3+T_3)|_{\E_3=0}=0$, using the corresponding
+cubic residual in each model, where
+$T_3=3g\kappa D_s(\phi_t^2\phi_{ts}/\phi_s)$.
+Writing $p=\phi_t$, $q=\phi_s$, the regular leading jet
+$\phi_{ttt}$ can be eliminated because its coefficient is $q>0$.
+Both recursive prolongation and an independent principal-symbol calculation give
+\[
+ [p^2q^2]\!\left(q^3\frac{\partial\Omega}{\partial\phi_{tss}}\right)
+ =3g\kappa\ne0.
+\]
+Free-jet splitting therefore rules out this first-order point correction.
+The coefficients are analytic on the positive branch and the equation is in
+analytic normal form, supplying local analytic solvability for the tangency
+criterion \cite{olver}. This is neither a maximal classification nor a result
+about FS, generalized symmetries, singular parameter dependence, or the full
+bed-field system.
+
 The loss of this candidate does not remove every useful reduction for
 $m\ne3$. Both
 scalar models admit the exact common scaling
@@ -1299,9 +1371,35 @@ integral of the form $\mathcal R_m=(L_mF'')'$ produces a second-order normal
 form on $L_m\ne0$; that order reduction must not be attributed to the Lie
 quotient itself.
 
-The external artifact verifies this calculation, local bed reconstruction and
-a bounded reference family. It does not yet certify the pullback of a general
-conservation law, arbitrary initial-boundary data, or boundary normal flux.
+The external artifact verifies this calculation, local bed reconstruction,
+a bounded reference family, and the current pullback for each declared scalar
+balance law. With $A$ as above and
+$C_m=\phi_t^{m-1}\phi_{ts}/\phi_s$, write either residual as
+$E=D_tA+D_sJ$; here
+$J=-gm\kappa C_m$ for the printed model and
+$J=-gm\kappa C_m-\phi_tA/\phi_s$ for the corrected model.
+In $(T,z)=(t,s/t)$ the transformed density and flux are
+$\widetilde A=tA$ and $\widetilde J=J-(s/t)A$, and their divergence is
+$tE$. The flux is paired with the boundary covector $dz$ on
+$z=\mathrm{constant}$; a metric unit-normal convention is not asserted.
+These scalar certificates do not establish arbitrary initial-boundary data,
+a general conservation-law theorem, or full bed-field compatibility.
+
+The constructed data gate is now verified for both scalar models at
+$g=1$, $\kappa=1/30$. On the invariant ray $s/t=1$, the normalized data
+\[
+ \phi/t=2,\qquad \phi_s=1/2,\qquad t\phi_{ss}=1/10
+\]
+pull back exactly to $(F,F',F'')(1)=(2,1/2,1/10)$.
+The chart, graph, equation, data and current identities hold for symbolic
+real $m$ on the recorded positive branch. In $(T,z)$ the Jacobian is
+\[
+ \det\!\left(\frac{D(t,s)}{D(T,z)}\right)=T.
+\]
+The positive-$z$ boundary current is
+$I_0/T$, where $I_0=L_mF''$ is the corresponding constant first integral.
+This certifies the constructed normalized-ray family, not an existence or
+uniqueness theorem for arbitrary initial-boundary data.
 
 
 \clearpage
@@ -1326,7 +1424,8 @@ also predates this study, and the selected Lagrangian source already reports
 its symmetry algebra and similarity reductions \cite{sveold,ap}; discovery of
 SVE symmetries or of $X_5$ is not claimed. The present contribution is the
 explicit rank-stratum contract, two complete parameter-position calculations,
-the independently checked common-scaling reduction for general $m$, and an
+the scoped first-order point-continuation obstruction, the independently checked
+common-scaling reduction and scalar current pullbacks for general $m$, and an
 evidence package that keeps exact certificates separate from negative
 numerical results. The rank--nullity mechanism itself is elementary and is not
 claimed as a new theorem of Lie theory. A learned profile is only a downstream
@@ -1380,8 +1479,8 @@ solve two unrestricted scalar point-determining systems. The SVE identity
 \eqref{eq:sve-defect} verifies a model-specific exceptional generator but not
 a maximal classification. Real-world shallow-water demonstrations are
 validation or follow-on studies. The manuscript remains a research draft
-because a distinct publishable novelty claim, conservation pullback,
-boundary-flux compatibility, the complete bed-field system and any ML
+because a distinct publishable novelty claim, arbitrary initial-boundary data
+and flux compatibility, the complete bed-field system and any ML
 advantage are not yet established.
 
 \begin{center}\small
@@ -1429,6 +1528,20 @@ manuscript under \path{research_artifacts/}, in
 \path{results/symbolic_certificates.json}, and
 \path{results/experiment_results.json} define the reproducible entry points,
 mathematical scope, exact certificates, and run-level records.
+
+From the repository root, \texttt{python scripts/project.py workflow --out
+build/workflow} runs the manuscript evidence workflow and produces a compact
+status report and workflow diagram. The companion
+\texttt{python scripts/project.py data-flux --out build/data-flux} reports the
+verified constructed common-scaling data/flux family separately. Both models
+pass exact symbolic chart/data/current checks; the combined report also passes
+five negative controls.
+Twelve classical cases compare $(F,F',F'')$ from independent second- and
+third-order formulations: maximum disagreement $3.33\times10^{-15}$ and
+first-integral drift $1.80\times10^{-14}$ pass the $10^{-9}$ numerical gate.
+These numerical diagnostics are separate from the existing exact rational
+reference-tube bounds on $m\in[1,4]$, $z\in[1,7/5]$; neither gives a
+general IBVP or learned-error theorem.
 
 The package reports 43 passing tests, 12 classical reference cases, and 40
 bounded approximation runs. Sixteen learned runs exhausted their evaluation
@@ -1500,11 +1613,13 @@ Section~\ref{sec:experiment-artifact}. The current artifact separately records
 40 new bounded approximation runs, all seeds, budgets and failure statuses;
 16 runs exhausted their evaluation budget and are not labelled converged.
 
-The present mathematical checks independently verify the two determining
-systems in Section~\ref{sec:parameter-effects}, the SVE multiplier identity,
+The present mathematical checks independently verify the admitted generators
+and compatibility identities in Section~\ref{sec:parameter-effects}, the SVE multiplier identity,
 the common-scaling rank and coordinate map, the profile first integral, local
-bed reconstruction and reference-family bounds. They do not certify a maximal
-SVE algebra, a general conservation pullback, arbitrary boundary flux or a
+bed reconstruction, reference-family bounds, both unrestricted first-order
+point-continuation obstructions, and the declared scalar current and
+boundary-covector flux pullbacks. They do not certify a maximal SVE algebra,
+a general conservation-law theorem, arbitrary boundary data/flux, or a
 uniform learned solution error.
 
 Supporting fluid reductions

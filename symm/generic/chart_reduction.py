@@ -187,8 +187,20 @@ ones. Callers must retain them when using the reduced equations.
 
         domains = tuple(pull(e) for e in (*problem.domain,*system.assumptions))
         inequations = tuple(pull(e) for e in system.inequations)
-        data = tuple(DataCondition(d.name,pull(d.surface),tuple(pull(e) for e in d.residuals))
-                     for d in problem.data)
+        from .boundary import normalize_zero_condition, restrict_to_constraints
+        data_units = []
+        data_list = []
+        for source_data in problem.data:
+            normalized_surface, units = normalize_zero_condition(pull(source_data.surface))
+            data_units.extend(units)
+            normalized_residuals = []
+            for expression in source_data.residuals:
+                normalized, units = normalize_zero_condition(pull(expression))
+                normalized_residuals.append(normalized)
+                data_units.extend(units)
+            data_list.append(DataCondition(source_data.name, normalized_surface,
+                                           tuple(normalized_residuals)))
+        data = tuple(data_list)
         data_checks = []
         data_invariance_residuals = []
         for source_data, pulled_data in zip(problem.data, data):
@@ -196,9 +208,15 @@ ones. Callers must retain them when using the reduced equations.
             residual_actions = tuple(sp.simplify(prolonged_action(space, expression, generator))
                                      for expression in source_data.residuals)
             data_invariance_residuals.extend((surface_action, *residual_actions))
-            data_checks.append((f"{source_data.name}.surface_invariant", zero(surface_action)))
+            boundary_test = restrict_to_constraints(surface_action, (source_data.surface,))
+            data_tests = tuple(restrict_to_constraints(expression,
+                               (source_data.surface, *source_data.residuals))
+                               for expression in residual_actions)
+            data_units.extend(pull(e) for e in boundary_test.denominator_guards)
+            data_units.extend(pull(e) for test in data_tests for e in test.denominator_guards)
+            data_checks.append((f"{source_data.name}.surface_invariant", boundary_test.verified))
             data_checks.append((f"{source_data.name}.residuals_invariant",
-                                all(zero(expression) for expression in residual_actions)))
+                                all(test.verified for test in data_tests)))
             data_checks.append((f"{source_data.name}.quotient_data",
                                 not pulled_data.surface.has(rho)
                                 and all(not expression.has(rho)
@@ -208,7 +226,7 @@ ones. Callers must retain them when using the reduced equations.
         expressions = (*chart.invariants,chart.orbit_coordinate,*chart.field_reconstruction,
                        *generator.xi,*generator.phi,*matrix,*rules.values())
         raw_guards += [sp.denom(sp.together(e)) for e in expressions]
-        mapped_guards = [pull(e) for e in raw_guards]
+        mapped_guards = [pull(e) for e in raw_guards] + data_units
         mapped_guards += [sp.denom(sp.together(e)) for e in
                           (*chart.inverse_coordinates,*equations,*mapped_guards)]
         mapped_guards = tuple(dict.fromkeys(e for e in mapped_guards if e not in (sp.S.One,-sp.S.One)))

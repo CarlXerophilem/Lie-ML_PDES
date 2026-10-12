@@ -24,7 +24,7 @@ _ROOT = Path(__file__).resolve().parents[2]
 _SOURCE_PDF = (
     _ROOT
     / "ref"
-    / "main"
+    / "pdfs"
     / "Lie Symmetries and Similarity Solutions for a Shallow-Water Model "
     "with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf"
 )
