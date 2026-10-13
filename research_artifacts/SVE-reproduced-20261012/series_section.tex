@@ -3,11 +3,11 @@ The existence question is answered for each invariant graph, rather than
 inferred from a plotted numerical trajectory. For a regular third-order row
 write its corrected pullback as
 \[
- A(z,F,P,C)H+B(z,F,P,C)=0,\qquad
- P=F',\quad C=F'',\quad H=F''',\quad R=-B/A.
+ L(z,F,P,C)H+N(z,F,P,C)=0,\qquad
+ P=F',\quad C=F'',\quad H=F''',\quad R=-N/L.
 \]
 At an initial jet $(z_0,F_0,P_0,C_0)$ satisfying the recorded positive-chart
-conditions and $A_0\ne0$, the right-hand side of
+conditions and $L_0\ne0$, the right-hand side of
 \[
  (F,P,C)'=(P,C,R(z,F,P,C))
 \]
@@ -50,7 +50,7 @@ For common scaling, set $(m,g,\kappa)=(3,1,1/30)$ and use initial data
  (z_0,F_0,P_0,C_0)=(1,2,1/2,1/10).
 \]
 Direct substitution gives
-$A_0=79/20$, the remaining residual term is $B_0=11/100$, and $F'''(1)=-11/395$, hence
+$L_0=79/20$, the remaining residual term is $N_0=11/100$, and $F'''(1)=-11/395$, hence
 \[
  F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
              -\frac{11\xi^3}{2370}+O(\xi^4).
@@ -63,11 +63,11 @@ The following cubic data make the five regular solution families explicit
 at $m=3$, $g=1$ and $\kappa=1/30$. Each row starts
 $F(z_0+\xi)=F_0+P_0\xi+C_0\xi^2/2+a_3\xi^3+O(\xi^4)$;
 the recurrence determines the subsequent coefficients. The nonzero values
-of $A_0$ and positive chart margins justify the regular local construction.
+of $L_0$ and positive chart margins justify the regular local construction.
 \begin{center}\small
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Case & $z_0$ & $(F_0,P_0,C_0)$ & $A_0$ & $a_3$\\
+Case & $z_0$ & $(F_0,P_0,C_0)$ & $L_0$ & $a_3$\\
 \midrule
 3.4 & $1$ & $(2,1/2,1/10)$ & $79/20$ & $-11/2370$\\
 3.5 & $1$ & $(2,1/2,1/10)$ & $-22/5$ & $83/1100$\\

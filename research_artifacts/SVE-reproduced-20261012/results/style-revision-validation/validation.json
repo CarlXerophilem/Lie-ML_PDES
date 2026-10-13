@@ -1,0 +1,172 @@
+{
+  "revision": "boussinesq-table-led-sve",
+  "created_utc": "2026-10-13T18:31:09.340427+00:00",
+  "checks": [
+    {
+      "name": "regression",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--import-mode=importlib",
+        "-o",
+        "faulthandler_timeout=30",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=build/boussinesq-style-20261014/pytest",
+        "scripts/tests",
+        "symm/tests/test_chart_reduction.py",
+        "symm/tests/test_engine.py",
+        "research_artifacts/sve-progress-20261010/tests",
+        "research_artifacts/SVE-reproduced-20261012/tests"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 45.414902448654175,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\regression.log"
+    },
+    {
+      "name": "audit",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "audit"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 1,
+      "seconds": 0.3436756134033203,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\audit.log"
+    },
+    {
+      "name": "data-flux",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "data-flux",
+        "--out",
+        "build/boussinesq-style-20261014/data-flux"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 7.034611940383911,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\data-flux.log"
+    },
+    {
+      "name": "workflow",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "workflow",
+        "--out",
+        "build/boussinesq-style-20261014/workflow"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 4.18327260017395,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\workflow.log"
+    }
+  ],
+  "audit_issue_count": 218,
+  "audit_categories": {
+    "available_history_preserved": 1,
+    "canonical_reference_integrity": 30,
+    "active_markdown_links": 41,
+    "temporary_outputs_untracked": 146
+  },
+  "latex": {
+    "command": [
+      "latexmk",
+      "-pdf",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-outdir=build/boussinesq-style-20261014/latex",
+      "draft/main.tex"
+    ],
+    "pages": 46,
+    "citation_reference_warnings": 0,
+    "overfull_boxes": 0,
+    "visual_review": {
+      "pages": "22-41 and bibliography45-46",
+      "final_detail_pages": [
+        22,
+        26,
+        29,
+        30,
+        31,
+        32,
+        35,
+        40,
+        45,
+        46
+      ],
+      "defects": []
+    }
+  },
+  "claims": [
+    {
+      "id": "C-STYLE",
+      "revision": 1,
+      "statement": "The chapter is used for classification/invariant/reduced-equation table arrangement and explanation only; all SVE transformations follow the displayed SVE generators.",
+      "scope": "marked SVE replication block",
+      "evidence_ids": [
+        "chapter",
+        "style-research.md",
+        "draft/main.tex"
+      ],
+      "reviewer_verdict": "accepted"
+    },
+    {
+      "id": "C-KEEP",
+      "revision": 1,
+      "statement": "Verified source discrepancies, omitted m=1 boost, first integrals and singular-profile chart distinction justify retaining a replication/correction section; no literature-wide novelty is claimed.",
+      "scope": "printed scalar equation on declared charts",
+      "evidence_ids": [
+        "merit-research.md",
+        "main.py",
+        "source_manifest.json"
+      ],
+      "reviewer_verdict": "qualified"
+    },
+    {
+      "id": "C-TABLES",
+      "revision": 2,
+      "statement": "Same source case labels connect invariant graphs to undivided pullbacks; nonregular outcomes remain explicit.",
+      "scope": "nine source cases, not complete optimal list",
+      "evidence_ids": [
+        "draft/main.tex"
+      ],
+      "reviewer_verdict": "accepted",
+      "repair": "Case3.9 now explicitly labels alpha=0 identity on its admitted positive chart."
+    },
+    {
+      "id": "C-DIRECT",
+      "revision": 1,
+      "statement": "Direct common/cubic scaling jets, time factors and current derivatives replace generic two-exponent template without changing the SVE equations.",
+      "scope": "cases3.4 and3.5; positive local charts",
+      "evidence_ids": [
+        "draft/main.tex",
+        "main.py"
+      ],
+      "reviewer_verdict": "accepted"
+    }
+  ],
+  "main_py_unchanged": true,
+  "all_prior_manifest_files_unchanged_except": [
+    "README.md",
+    "draft/main.pdf",
+    "draft/main.tex",
+    "research_artifacts/SVE-reproduced-20261012/README.md",
+    "research_artifacts/SVE-reproduced-20261012/manuscript_section.tex",
+    "research_artifacts/SVE-reproduced-20261012/series_section.tex"
+  ],
+  "outside_sve_section_byte_identical": true,
+  "freeze_preserved": true,
+  "artifacts": {
+    "draft/main.tex": "d95cdd75a7e6b46dde49d5343eff8d415239293ffc4b0f7bf6186a27a85c97df",
+    "draft/main.pdf": "eadc4010449feb574f256bd35cfa73286d76ee2baa9ed557ab757c4f6ffd02c7",
+    "research_artifacts/SVE-reproduced-20261012/manuscript_section.tex": "2e8200fee229dd1c406b86712cf9040b9ff7bd079562b647a2fb36bd188c6312",
+    "research_artifacts/SVE-reproduced-20261012/series_section.tex": "3cf6b676bc5c01a524d2db3a6bee268f42ba9308e43abac8f407c6dc1eba86ad"
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "run": {
+    "id": "boussinesq-style-20261014",
+    "mode": "full-automatic",
+    "objective": "Revise only the SVE replication in main.tex using the exact Boussinesq chapter arrangement and table explanations, retaining it only for defensible substantive results.",
+    "deliverables": [
+      "draft/main.tex",
+      "draft/main.pdf",
+      "synchronized replication fragment",
+      "review and validation receipts"
+    ],
+    "non_claims": [
+      "No Boussinesq transformations transplanted to SVE",
+      "No literature-wide novelty from replication",
+      "No full physical SVE theorem or global solution claim",
+      "No invented numeric evidence"
+    ],
+    "permissions": {
+      "local_writes": "requested manuscript and derived package records; preserve unrelated work",
+      "external_mutations": "prior explicit commit/push to GitHub and Priestess authorization"
+    },
+    "deadline": null,
+    "hard_caps": [],
+    "status": "reviewed_local_release"
+  },
+  "tasks": [
+    {
+      "id": "style",
+      "depends_on": [],
+      "evidence_target": "Exact chapter arrangement and table interpretation",
+      "acceptance": "page-specific source map and actionable writing guidance",
+      "context_pack": [
+        "chapter.txt",
+        "chapter-170.png",
+        "chapter-171.png",
+        "chapter-172.png"
+      ],
+      "tools": "read files/PDF; write own report only",
+      "token_policy": "no user cap; concise return",
+      "cpu_class": "text",
+      "timeout": "10 minutes internal target",
+      "outputs": [
+        "style-research.md"
+      ],
+      "stop_rule": "report missing evidence, do not infer source formulas",
+      "state": "accepted"
+    },
+    {
+      "id": "merit",
+      "depends_on": [],
+      "evidence_target": "Does SVE replication have substantial results worth keeping? Identify a,b provenance and warranted non-novelty qualifiers.",
+      "acceptance": "trace source and computation; concrete retain/discard ruling recommendation",
+      "context_pack": [
+        "draft/main.tex",
+        "research_artifacts/SVE-reproduced-20261012"
+      ],
+      "tools": "read; bounded independent symbolic checks; write own report only",
+      "token_policy": "no user cap; concise return",
+      "cpu_class": "light",
+      "timeout": "12 minutes internal target",
+      "outputs": [
+        "merit-research.md"
+      ],
+      "stop_rule": "bounded replication assessment, no new literature-wide novelty claim",
+      "state": "accepted"
+    },
+    {
+      "id": "rewrite",
+      "depends_on": [
+        "style:evidence-ready",
+        "merit:evidence-ready"
+      ],
+      "evidence_target": "SVE-specific accessible table-led exposition",
+      "acceptance": "preserve derivations; remove ambiguous borrowed-parameter impression; retain only worthwhile evidence",
+      "context_pack": [
+        "draft/main.tex"
+      ],
+      "tools": "root-only edits",
+      "token_policy": "none imposed",
+      "cpu_class": "text",
+      "timeout": "bounded current request",
+      "outputs": [
+        "draft/main.tex"
+      ],
+      "stop_rule": "do not change numerical evidence without mathematical reason",
+      "state": "accepted"
+    },
+    {
+      "id": "review",
+      "depends_on": [
+        "rewrite:evidence-ready"
+      ],
+      "evidence_target": "fresh falsification of wording, equations, table completeness, retain decision",
+      "acceptance": "accepted/qualified/rejected claims with concrete findings",
+      "context_pack": [
+        "contract.json",
+        "ledger.json",
+        "draft/main.tex",
+        "research reports"
+      ],
+      "tools": "read and independent checks; report only",
+      "token_policy": "no user cap",
+      "cpu_class": "light",
+      "timeout": "10 minutes internal target",
+      "outputs": [
+        "fresh-review.md"
+      ],
+      "stop_rule": "one bounded repair round, reject unsupported claims",
+      "state": "accepted"
+    },
+    {
+      "id": "release",
+      "depends_on": [
+        "review:accepted/qualified"
+      ],
+      "evidence_target": "built manuscript and authorized publication",
+      "acceptance": "native compile; citations clean; visual review; required regressions; remote hashes",
+      "context_pack": [
+        "README.md"
+      ],
+      "tools": "root only edits/git/ssh",
+      "token_policy": "none imposed",
+      "cpu_class": "heavy lease root-validation, max1 job",
+      "timeout": "per command <=300s, SSH <=60s per attempt",
+      "outputs": [
+        "validation records",
+        "release manifest"
+      ],
+      "stop_rule": "retain unresolved audit findings and publication failures honestly",
+      "state": "qualified"
+    }
+  ],
+  "sources": [
+    {
+      "id": "chapter",
+      "path": "ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf",
+      "title": "Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations",
+      "authors": "M. S. Bruzon and M. L. Gandarias",
+      "pages": "153-171; PDF166-184",
+      "sha256": "7ad2a827b4b2a994b12df0a1ea0c9a435ddcbab715fa8639595688c46b1cdba6",
+      "accessed": "2026-10-14",
+      "verification": "primary-checked",
+      "supports": "exposition organization only",
+      "not_supports": "SVE transformations"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C-STYLE",
+      "revision": 1,
+      "statement": "The chapter is used for classification/invariant/reduced-equation table arrangement and explanation only; all SVE transformations follow the displayed SVE generators.",
+      "scope": "marked SVE replication block",
+      "evidence_ids": [
+        "chapter",
+        "style-research.md",
+        "draft/main.tex"
+      ],
+      "reviewer_verdict": "accepted"
+    },
+    {
+      "id": "C-KEEP",
+      "revision": 1,
+      "statement": "Verified source discrepancies, omitted m=1 boost, first integrals and singular-profile chart distinction justify retaining a replication/correction section; no literature-wide novelty is claimed.",
+      "scope": "printed scalar equation on declared charts",
+      "evidence_ids": [
+        "merit-research.md",
+        "main.py",
+        "source_manifest.json"
+      ],
+      "reviewer_verdict": "qualified"
+    },
+    {
+      "id": "C-TABLES",
+      "revision": 2,
+      "statement": "Same source case labels connect invariant graphs to undivided pullbacks; nonregular outcomes remain explicit.",
+      "scope": "nine source cases, not complete optimal list",
+      "evidence_ids": [
+        "draft/main.tex"
+      ],
+      "reviewer_verdict": "accepted",
+      "repair": "Case3.9 now explicitly labels alpha=0 identity on its admitted positive chart."
+    },
+    {
+      "id": "C-DIRECT",
+      "revision": 1,
+      "statement": "Direct common/cubic scaling jets, time factors and current derivatives replace generic two-exponent template without changing the SVE equations.",
+      "scope": "cases3.4 and3.5; positive local charts",
+      "evidence_ids": [
+        "draft/main.tex",
+        "main.py"
+      ],
+      "reviewer_verdict": "accepted"
+    }
+  ],
+  "receipts": [
+    {
+      "name": "regression",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--import-mode=importlib",
+        "-o",
+        "faulthandler_timeout=30",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=build/boussinesq-style-20261014/pytest",
+        "scripts/tests",
+        "symm/tests/test_chart_reduction.py",
+        "symm/tests/test_engine.py",
+        "research_artifacts/sve-progress-20261010/tests",
+        "research_artifacts/SVE-reproduced-20261012/tests"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 45.414902448654175,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\regression.log"
+    },
+    {
+      "name": "audit",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "audit"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 1,
+      "seconds": 0.3436756134033203,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\audit.log"
+    },
+    {
+      "name": "data-flux",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "data-flux",
+        "--out",
+        "build/boussinesq-style-20261014/data-flux"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 7.034611940383911,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\data-flux.log"
+    },
+    {
+      "name": "workflow",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "scripts/project.py",
+        "workflow",
+        "--out",
+        "build/boussinesq-style-20261014/workflow"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 4.18327260017395,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\workflow.log"
+    }
+  ],
+  "rulings": [
+    {
+      "decision": "retain replication with correction-focused lead and detailed derivations",
+      "reason": "independent merit review supports concrete counterexamples and omitted boost; user previously required detailed step-by-step explanation, so retain proof details rather than shorten into unexplained tables",
+      "cost_if_wrong": "unsupported priority would overstate novelty; explicitly withhold literature-wide novelty"
+    },
+    {
+      "decision": "remove A,B similarity template from manuscript, retain direct cases and derived mixed lambda case",
+      "reason": "reduce notation ambiguity; existing math not shown to be borrowed"
+    }
+  ],
+  "resources": {
+    "token_actual": null,
+    "prefix_cache_actual": null,
+    "cpu_heavy_lease": "root-validation",
+    "concurrency": 1
+  },
+  "visual_review": {
+    "pages": "22-41 and bibliography45-46",
+    "final_detail_pages": [
+      22,
+      26,
+      29,
+      30,
+      31,
+      32,
+      35,
+      40,
+      45,
+      46
+    ],
+    "defects": []
+  }
+}

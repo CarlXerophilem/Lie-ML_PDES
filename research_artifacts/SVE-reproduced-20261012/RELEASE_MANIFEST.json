@@ -1,11 +1,11 @@
 {
   "release": "SVE-reproduced-20261012",
-  "revision": "formal-exposition-with-audit-fixture-fix",
-  "created_utc": "2026-10-13T17:45:34.588698+00:00",
+  "revision": "boussinesq-table-led-sve-replication",
+  "created_utc": "2026-10-13T18:32:34.487921+00:00",
   "status": "completed_with_qualifications",
   "prior_release_archive": {
-    "path": "research_artifacts/SVE-reproduced-20261012/archive/release-before-git-publication-20261014.zip",
-    "sha256": "82c31c452fa84bd8a09fbcdf57186781a5b670f1913103cd849d629a78eea494"
+    "path": "research_artifacts/SVE-reproduced-20261012/archive/release-before-boussinesq-style-20261014.zip",
+    "sha256": "03f43b1de0f865b1420c01e3236211ed0ea092988db42dce7e33dbb5f6c3d925"
   },
   "accepted_claims": [
     "C-MODEL",
@@ -43,8 +43,8 @@
     "report-only source-hash check",
     "HTML generation removed"
   ],
-  "validation": "research_artifacts/SVE-reproduced-20261012/results/formal-exposition-validation/validation.json",
-  "limitations": "research_artifacts/SVE-reproduced-20261012/FORMAL_EXPOSITION_VALIDATION.md",
+  "validation": "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/validation.json",
+  "limitations": "research_artifacts/SVE-reproduced-20261012/BOUSSINESQ_STYLE_VALIDATION.md",
   "files": {
     ".gitattributes": {
       "sha256": "8138f56152870d262f94b342e88dff2dd42670abecf7404aa99fb68aeb6d9a7d",
@@ -63,16 +63,16 @@
       "bytes": 78639
     },
     "draft/main.pdf": {
-      "sha256": "88c49dbc6d4b97fac1c139435cd5c228770d7a6352ad790e95adf9e799aad803",
-      "bytes": 712662
+      "sha256": "eadc4010449feb574f256bd35cfa73286d76ee2baa9ed557ab757c4f6ffd02c7",
+      "bytes": 724081
     },
     "draft/main.tex": {
-      "sha256": "da87dfa04b7ef76e7cb5db5332bc443c58abf74c0180ded7e0ce28874c38e7af",
-      "bytes": 157247
+      "sha256": "d95cdd75a7e6b46dde49d5343eff8d415239293ffc4b0f7bf6186a27a85c97df",
+      "bytes": 164894
     },
     "README.md": {
-      "sha256": "7889a87aa59806992c473f12eea80b7e21efa73b3fdb0b6c6534a7283cbf2fd1",
-      "bytes": 5829
+      "sha256": "3685bd106d832ed784730a08f743aef4e22458e9ec2fd00a97eb039bfac2e06c",
+      "bytes": 5828
     },
     "ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf": {
       "sha256": "7ad2a827b4b2a994b12df0a1ea0c9a435ddcbab715fa8639595688c46b1cdba6",
@@ -199,8 +199,8 @@
       "bytes": 144388
     },
     "research_artifacts/SVE-reproduced-20261012/manuscript_section.tex": {
-      "sha256": "f7d3b5e3165f032645812ade175ed329880a01d812d52ea49c65238ef6e192ca",
-      "bytes": 61296
+      "sha256": "2e8200fee229dd1c406b86712cf9040b9ff7bd079562b647a2fb36bd188c6312",
+      "bytes": 69085
     },
     "research_artifacts/SVE-reproduced-20261012/PRESENTATION_PLAN.md": {
       "sha256": "6053731a518a2ccfb0610b67b5e7aa25640dac1547f91a95397589c08e3f8e31",
@@ -211,8 +211,8 @@
       "bytes": 6224
     },
     "research_artifacts/SVE-reproduced-20261012/README.md": {
-      "sha256": "a1611222fcceeaf3729f075f907fafc35aa4fb2fa8eba01cc9165ed7945857d1",
-      "bytes": 8419
+      "sha256": "9804068aebad0f3015f1dd8422b9fcdba19e60a5e7e401788396f442316ee0e4",
+      "bytes": 8645
     },
     "research_artifacts/SVE-reproduced-20261012/requirements.txt": {
       "sha256": "7e4e6da77a9f631281c1e8f13384354c0f1693f6e842df42fc7210c8fd26d8bd",
@@ -927,7 +927,7 @@
       "bytes": 2403
     },
     "research_artifacts/SVE-reproduced-20261012/series_section.tex": {
-      "sha256": "e090de069fba93d1a4a69f46175655a6262207c4d56ef34b9d49bd63641ab96f",
+      "sha256": "3cf6b676bc5c01a524d2db3a6bee268f42ba9308e43abac8f407c6dc1eba86ad",
       "bytes": 4969
     },
     "research_artifacts/SVE-reproduced-20261012/SERIES_VALIDATION.md": {
@@ -997,6 +997,74 @@
     "scripts/tests/test_project_audit.py": {
       "sha256": "993cbe7180837f1f9ef0ec7c814f5e2af209e0f0afe6e6888ab51542154de684",
       "bytes": 3586
+    },
+    "research_artifacts/SVE-reproduced-20261012/BOUSSINESQ_STYLE_VALIDATION.md": {
+      "sha256": "9d57410f68df35ad4ca217d0812f3d9c0bf9772969e659548e34223b85fb3a9e",
+      "bytes": 4610
+    },
+    "research_artifacts/SVE-reproduced-20261012/docs/BOUSSINESQ_STYLE_MAP.md": {
+      "sha256": "4577d66f2dd7580d825300b1493f32e1fefd079da4922a68cee42657be7fea84",
+      "bytes": 8880
+    },
+    "research_artifacts/SVE-reproduced-20261012/docs/REPLICATION_MERIT.md": {
+      "sha256": "635e9b3c91e780b03de5aef70edbcfdc071502fbd223efc2b99f0ea438729f46",
+      "bytes": 9567
+    },
+    "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_BOUSSINESQ_STYLE.md": {
+      "sha256": "5ab4e4f3d79bd0eec30a0c4ac6a06574de2e6710dc83f2abe94a158e80cecf13",
+      "bytes": 5024
+    },
+    "research_artifacts/SVE-reproduced-20261012/archive/release-before-boussinesq-style-20261014.zip": {
+      "sha256": "03f43b1de0f865b1420c01e3236211ed0ea092988db42dce7e33dbb5f6c3d925",
+      "bytes": 683029
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/audit.json": {
+      "sha256": "0c57607ea96e2669cf42a7822c145487ddd09c979e6019e715327d364173ec31",
+      "bytes": 23880
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/audit.log": {
+      "sha256": "dd21ed57e9b809faf11da7f2ddb61b6e0d45f1543ddecad0bb1eefb9408ecb3d",
+      "bytes": 105
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/checks.json": {
+      "sha256": "f3da78b83efd02964a7b17ab7f159a9470e25f0aef787934b3db1086bce8804d",
+      "bytes": 1877
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/contract.json": {
+      "sha256": "be5916377f18df39c42ec806a95c78dc330e11c79cdb5bf4374cddd20e36ff4a",
+      "bytes": 5580
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/data-flux.log": {
+      "sha256": "6a7039503421f48aa71ef22b06f3a10f8abe5e2b493893f416d0fc10981fb326",
+      "bytes": 142
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/direct-jets-check.json": {
+      "sha256": "55129cced6dfa2ab9fd88749de8cb489952fa8d4a46ebd5a92866f72d06f6b27",
+      "bytes": 1432
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/latex-build.log": {
+      "sha256": "ce310906a280aff4fd7bb3ab422b381f454e42f7b6ef0be8ff73d01f59a55090",
+      "bytes": 21705
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/latex-final.log": {
+      "sha256": "a5a92a3fca847174aebffcd4528df3baa439f03b494eae058079f0b77179a18d",
+      "bytes": 43670
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/ledger.json": {
+      "sha256": "705ba3f9a81f694ef5c7fe0424c40403c881a42f09ad5e9c1fc1a4f817f1aba8",
+      "bytes": 10336
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/regression.log": {
+      "sha256": "16a3a5cb64d9876aeca53ed760a181eb2460171a5431c0d9ba78b54095d370b0",
+      "bytes": 265
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/validation.json": {
+      "sha256": "232a60a1197ef030b56ec7f41cdded3d6c35de9209f76b1b9be2bdcbdb4ace0e",
+      "bytes": 5654
+    },
+    "research_artifacts/SVE-reproduced-20261012/results/style-revision-validation/workflow.log": {
+      "sha256": "283df8f007e037ec445f7b5ed23514edda26cd8f79599ee9471ce32602c73f94",
+      "bytes": 138
     }
   },
   "exposition_revision": [
@@ -1007,5 +1075,58 @@
     "Verified Boussinesq chapter attribution and native PDF visual validation"
   ],
   "followup_validation": "research_artifacts/SVE-reproduced-20261012/results/audit-fixture-validation/validation.json",
-  "publication_note": "Exact-byte Git attributes preserve hashed release files across Windows and Linux. The preceding manuscript-validation report is historical; the follow-up regression set has 174 passes."
+  "publication_note": "Exact-byte Git attributes preserve hashed release files across Windows and Linux. The preceding manuscript-validation report is historical; the follow-up regression set has 174 passes.",
+  "style_revision": {
+    "claims": [
+      {
+        "id": "C-STYLE",
+        "revision": 1,
+        "statement": "The chapter is used for classification/invariant/reduced-equation table arrangement and explanation only; all SVE transformations follow the displayed SVE generators.",
+        "scope": "marked SVE replication block",
+        "evidence_ids": [
+          "chapter",
+          "style-research.md",
+          "draft/main.tex"
+        ],
+        "reviewer_verdict": "accepted"
+      },
+      {
+        "id": "C-KEEP",
+        "revision": 1,
+        "statement": "Verified source discrepancies, omitted m=1 boost, first integrals and singular-profile chart distinction justify retaining a replication/correction section; no literature-wide novelty is claimed.",
+        "scope": "printed scalar equation on declared charts",
+        "evidence_ids": [
+          "merit-research.md",
+          "main.py",
+          "source_manifest.json"
+        ],
+        "reviewer_verdict": "qualified"
+      },
+      {
+        "id": "C-TABLES",
+        "revision": 2,
+        "statement": "Same source case labels connect invariant graphs to undivided pullbacks; nonregular outcomes remain explicit.",
+        "scope": "nine source cases, not complete optimal list",
+        "evidence_ids": [
+          "draft/main.tex"
+        ],
+        "reviewer_verdict": "accepted",
+        "repair": "Case3.9 now explicitly labels alpha=0 identity on its admitted positive chart."
+      },
+      {
+        "id": "C-DIRECT",
+        "revision": 1,
+        "statement": "Direct common/cubic scaling jets, time factors and current derivatives replace generic two-exponent template without changing the SVE equations.",
+        "scope": "cases3.4 and3.5; positive local charts",
+        "evidence_ids": [
+          "draft/main.tex",
+          "main.py"
+        ],
+        "reviewer_verdict": "accepted"
+      }
+    ],
+    "review": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_BOUSSINESQ_STYLE.md",
+    "merit": "retained as paper-specific corrections; no literature-wide novelty claim",
+    "code_and_canonical_numerics_unchanged": true
+  }
 }

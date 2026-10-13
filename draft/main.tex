@@ -1524,10 +1524,23 @@ Leach~\cite{ap} from the scalar equation itself. The order of the argument is
 important: expand the equation, derive its infinitesimal symmetries, find
 invariant graphs, and only then solve and check the resulting profile
 equations. Each step supplies the input needed by the next one. The
-worked Boussinesq analysis of Bruz\'{o}n and Gandarias~\cite[Sec.~2, pp.~157--159]{bruzon-gandarias-2021}
-provides a useful expository model for this progression from prolongation
-and determining equations to reductions and conservation laws. Its
-Boussinesq-specific generators and conservation laws are not assumed for SVE.
+arrangement follows the worked chapter of Bruz\'{o}n and
+Gandarias~\cite[Sec.~2, Tables~1--3, pp.~157--159]{bruzon-gandarias-2021}:
+a classification table states when each symmetry is admitted; a second
+table identifies the invariant variable and solution form; a third lists
+the resulting equations using the same case labels. The text explains how
+to pass from one table to the next. Their Boussinesq transformations and
+constitutive constants play no role in the SVE calculation.
+
+The substantive replication findings are a missing endpoint symmetry at
+$m=1$, corrections to displayed reductions, and first integrals that make
+the corrected profile equations simpler to solve and independently check.
+The exact power profile also exposes a solution branch that a divided ODE
+would exclude. These are the principal results of this
+\emph{replication and correction study}. The Taylor and numerical examples
+make the corrected equations usable; they do not establish new solution
+families relative to the whole literature. We retain the derivations needed
+to support these findings and distinguish them from proposed future work.
 
 Our target is the source's \emph{printed scalar equation}. It is distinct
 from the advectively corrected scalar equation and from the full coupled
@@ -1570,7 +1583,8 @@ expression. Introduce the derivative coordinates
  a=\phi_{tt},\quad b=\phi_{ts},\quad c=\phi_{ss},\qquad
  r=\phi_{ttt},\quad w=\phi_{tts},\quad x=\phi_{tss},\quad y=\phi_{sss}.
 \]
-In this subsection $x$ is a third derivative, not the Eulerian position.
+These letters abbreviate derivatives, not adjustable model or group
+parameters. In this subsection $x$ is a third derivative, not the Eulerian position.
 For expressions through second order, the relevant parts of the total
 derivative operators are
 \begin{align}
@@ -1623,6 +1637,10 @@ coefficient functions:
  \widetilde\phi=\phi+\varepsilon\eta(t,s,\phi)+O(\varepsilon^2).
  \label{eq:sve-small-transformation}
 \end{equation}
+Here $\varepsilon$ is the single continuous group parameter. The SVE
+parameters $m,g,\kappa$ are held fixed while the transformation acts.
+The coefficient functions $\tau,\xi,\eta$ must be found from the SVE
+equation; none is prescribed by the Boussinesq example.
 Its infinitesimal generator is
 \[
  X=\tau\partial_t+\xi\partial_s+\eta\partial_\phi.
@@ -1804,6 +1822,33 @@ Consequently $B=c_\phi+vt$ and
 \]
 \end{description}
 
+The classification is organized by the value of the SVE exponent in
+Table~\ref{tab:sve-classification}. Each row describes one fixed equation:
+choose its exponent, then read the complete admitted basis in that row.
+The explicit vector fields appear in Table~\ref{tab:sve-generators}.
+For example, at $m=2$ only $X_1,\ldots,X_4$ are available; at $m=3$
+one may also use $X_5$. The extra field at $m=1$ is $X_6$, not $X_5$.
+An extra symmetry at an isolated exponent cannot be used for a neighboring
+exponent merely because the numerical values are close.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}llXc@{}}
+\toprule
+Stratum & Exponent & Admitted basis & Dimension\\
+\midrule
+Generic & $m\geq1,\ m\notin\{1,3\}$ & $X_1,X_2,X_3,X_4$ & $4$\\
+Cubic & $m=3$ & $X_1,X_2,X_3,X_4,X_5$ & $5$\\
+Linear flux & $m=1$ & $X_1,X_2,X_3,X_4,X_6$ & $5$\\
+\bottomrule
+\end{tabularx}
+\caption{Point-symmetry classification of the printed scalar SVE equation.
+Every row assumes fixed $g,\kappa>0$ and the local chart $p,q>0$.
+The rows partition the stated range of $m$; they are not alternative
+transformations borrowed from another equation.}
+\label{tab:sve-classification}
+\end{table}
+
 \begin{table}[htbp]
 \centering\small
 \begin{tabularx}{\linewidth}{@{}lXll@{}}
@@ -1824,6 +1869,17 @@ $d\widetilde s/d\varepsilon=\xi$, $d\widetilde\phi/d\varepsilon=\eta$
 with the identity initial condition at $\varepsilon=0$.}
 \label{tab:sve-generators}
 \end{table}
+
+Table~\ref{tab:sve-generators} also gives the meaning of each field.
+The first three translate time, material label, and particle position.
+$X_4$ dilates all three together, $X_5$ changes the two independent
+variables at different rates, and $X_6$ adds a uniform velocity.
+Each displayed flow uses one parameter $\varepsilon$ and follows by
+integrating that field. For example, $X_5$ gives
+$d\widetilde t/d\varepsilon=\widetilde t$ and
+$d\widetilde s/d\varepsilon=-2\widetilde s$, hence the exponential
+factors in its row. At $m=1$ the boost is a local symmetry: its flow must
+remain in $p+\varepsilon>0$ when the positive chart is imposed.
 
 Necessity is only half of the classification argument. Direct substitution
 of the resulting fields into~\eqref{eq:sve-prolonged-master} verifies
@@ -1877,6 +1933,7 @@ Table~\ref{tab:sve-repro-brackets}; its upper-left block gives the generic
 algebra. At $m=1$ use $X_6$ instead of $X_5$, with the additional nonzero
 pair $[X_1,X_6]=X_3$, $[X_6,X_1]=-X_3$; all its other brackets with
 $X_2,X_3,X_4$ vanish.
+
 \begin{table}[htbp]
 \centering\small
 \begin{tabular}{@{}c|ccccc@{}}
@@ -1925,6 +1982,7 @@ $\mathbb{RP}^2$, with the three disjoint coordinate charts shown in
 Table~\ref{tab:sve-optimal-generic}. In particular, $X_2+X_3$ cannot
 be changed into a pure translation or into a line with a nonzero $X_1$
 component. This gives a concrete omission from the printed optimal list.
+
 \begin{table}[htbp]
 \centering\small
 \begin{tabular}{@{}lll@{}}
@@ -1932,8 +1990,8 @@ component. This gives a concrete omission from the printed optimal list.
 Coefficient condition & Representative & Free parameters\\
 \midrule
 $h\ne0$ & $\langle X_4\rangle$ & none\\
-$h=0,\ v_1\ne0$ & $\langle X_1+aX_2+bX_3\rangle$ & $a,b\in\mathbb R$\\
-$h=v_1=0,\ v_2\ne0$ & $\langle X_2+aX_3\rangle$ & $a\in\mathbb R$\\
+$h=0,\ v_1\ne0$ & $\langle X_1+\nu_2X_2+\nu_3X_3\rangle$ & $\nu_2,\nu_3\in\mathbb R$\\
+$h=v_1=0,\ v_2\ne0$ & $\langle X_2+\nu_3X_3\rangle$ & $\nu_3\in\mathbb R$\\
 $h=v_1=v_2=0$ & $\langle X_3\rangle$ & $v_3\ne0$\\
 \bottomrule
 \end{tabular}
@@ -1942,11 +2000,11 @@ $h=v_1=v_2=0$ & $\langle X_3\rangle$ & $v_3\ne0$\\
 \end{table}
 
 At $m=3$, put $Z=v_1X_1+v_2X_2+v_3X_3+\mathcal H$ with
-$\mathcal H=aX_4+bX_5$. The three weights of
+$\mathcal H=d_4X_4+d_5X_5$. The three weights of
 $\operatorname{ad}_{\mathcal H}$ on translations are
-$-(a+b)$, $-(a-2b)$ and $-a$. An $X_i$ adjoint therefore removes
+$-(d_4+d_5)$, $-(d_4-2d_5)$ and $-d_4$. An $X_i$ adjoint therefore removes
 $v_i$ exactly when its corresponding weight is nonzero. The direction
-$(a:b)$ cannot be changed by an inner adjoint. There are three exceptional
+$(d_4:d_5)$ cannot be changed by an inner adjoint. There are three exceptional
 directions where a translation survives:
 \[
  X_5+cX_3,\qquad X_4-X_5+cX_1,\qquad
@@ -1954,7 +2012,7 @@ directions where a translation survives:
 \]
 For a nonzero survivor, a complementary dilation normalizes its magnitude
 to one; its sign remains. The case $c=0$ is already the pure dilation.
-When $a=b=0$, the exact translation equivalence is
+When $d_4=d_5=0$, the exact translation equivalence is
 \begin{equation}
  (v_1,v_2,v_3)\sim\lambda(e^\varepsilon v_1,e^{-2\varepsilon}v_2,v_3),
  \qquad \lambda\ne0,\quad\varepsilon\in\mathbb R.
@@ -1976,18 +2034,25 @@ cubic line orbits.
 At $m=1$, write instead $Z=v_1X_1+v_2X_2+v_3X_3+hX_4+cX_6$.
 The $X_6$ adjoint changes $v_3$ to $v_3+\varepsilon v_1$, and the
 $X_1$ adjoint changes it to $v_3-\varepsilon c$. If $h\ne0$,
-translations can be removed, leaving $X_4+aX_6$. If $h=0,c\ne0$,
+translations can be removed, leaving $X_4+\nu X_6$. If $h=0,c\ne0$,
 normalize $c=1$, remove $v_3$, and use positive common scaling on
 $(v_1,v_2)$. If $h=c=0$, remove $v_3$ whenever $v_1\ne0$.
 The resulting disjoint families are
 \[
  \begin{array}{c|l}
- h\ne0 & X_4+aX_6\\
- h=0,\ c\ne0 & X_6,\quad X_6+\sigma X_1+aX_2,\quad X_6+\sigma X_2\\
- h=c=0 & X_1+aX_2,\quad X_2+aX_3,\quad X_3
+ h\ne0 & X_4+\nu X_6\\
+ h=0,\ c\ne0 & X_6,\quad X_6+\sigma X_1+\nu X_2,\quad X_6+\sigma X_2\\
+ h=c=0 & X_1+\nu X_2,\quad X_2+\nu X_3,\quad X_3
  \end{array}
- \quad(a\in\mathbb R,\ \sigma=\pm1).
+ \quad(\nu\in\mathbb R,\ \sigma=\pm1).
 \]
+The symbols $\nu_2,\nu_3,\nu,d_4,d_5$ label choices of a line in the
+\emph{derived SVE algebra}; they are fixed before following its flow.
+They are neither extra physical parameters nor additional group parameters.
+For instance, $X_1+\nu_2X_2+\nu_3X_3$ generates the single-parameter
+flow $(t+\varepsilon,s+\nu_2\varepsilon,\phi+\nu_3\varepsilon)$.
+The source notation $\alpha,\alpha_3$ for these two fixed translation
+coefficients is used in the reduction tables below.
 These are algebraic orbit classifications. The additional requirements
 for an invariant graph, a regular reduced equation, and compatible data
 must still be checked; the next subsection makes that distinction concrete.
@@ -2022,29 +2087,49 @@ It fixes $z=s-\alpha t$ and $W=\phi-\alpha_3t$, giving
 $\phi=\alpha_3t+F(s-\alpha t)$. In each example the equation
 $W=F(z)$ is precisely the integrated graph condition $Q=0$.
 
+Table~\ref{tab:sve-repro-invariants} is read from left to right.
+The generator in column two must first be admitted by
+Table~\ref{tab:sve-classification}. Column three gives two functions
+constant along its orbits. Setting the second equal to an arbitrary
+function of the first gives column four. The corresponding equation and
+its admissibility appear under the \emph{same} case number in
+Table~\ref{tab:sve-reduced-equations}. Thus an invariant form is a
+candidate solution, not yet a solution of the master equation.
+
 \begin{table}[htbp]
 \centering\small
-\begin{tabularx}{\linewidth}{@{}p{.85cm}p{2.6cm}p{2.7cm}X@{}}
+\begin{tabularx}{\linewidth}{@{}p{.85cm}p{3.3cm}p{3.0cm}X@{}}
 \toprule
-Case & Generator & Invariants $(z,W)$ & Invariant graph and outcome\\
+Case & SVE generator & Invariants $(z,W)$ & Form of $\phi(t,s)$\\
 \midrule
-3.1 & $X_1$ & $(s,\phi)$ & $\phi=F(s)$; identity, outside $p>0$\\
-3.2 & $X_2$ & $(t,\phi)$ & $\phi=F(t)$; $q=0$, PDE undefined\\
-3.3 & $X_3$ & $(t,s)$ & $Q=1$; no invariant graph\\
-3.4 & $X_4$ & $(s/t,\phi/t)$ & $\phi=tF(z)$; common-scaling ODE\\
-3.5 & $X_5$, $m=3$ & $(st^2,\phi)$ & $\phi=F(z)$; cubic-scaling ODE\\
-3.6 & $X_1+\alpha X_2$ & $(s-\alpha t,\phi)$ & $\phi=F(z)$; traveling ODE\\
-3.7 & $X_1+\alpha X_3$ & $(s,\phi-\alpha t)$ & $\phi=\alpha t+F(s)$; identity\\
-3.8 & $X_2+\alpha X_3$ & $(t,\phi-\alpha s)$ & $\phi=\alpha s+F(t)$; $\alpha F'''=0$\\
-3.9 & $X_1+\alpha X_2+\alpha_3X_3$ & $(s-\alpha t,\phi-\alpha_3t)$ & $\phi=\alpha_3t+F(z)$; traveling ODE\\
+3.1 & $X_1$ & $(s,\phi)$ & $F(s)$\\
+3.2 & $X_2$ & $(t,\phi)$ & $F(t)$\\
+3.3 & $X_3$ & $(t,s)$ & No invariant graph\\
+3.4 & $X_4$ & $(s/t,\phi/t)$ & $tF(s/t)$\\
+3.5 & $X_5$, only $m=3$ & $(st^2,\phi)$ & $F(st^2)$\\
+3.6 & $X_1+\alpha X_2$ & $(s-\alpha t,\phi)$ & $F(s-\alpha t)$\\
+3.7 & $X_1+\alpha X_3$ & $(s,\phi-\alpha t)$ & $\alpha t+F(s)$\\
+3.8 & $X_2+\alpha X_3$ & $(t,\phi-\alpha s)$ & $\alpha s+F(t)$\\
+3.9 & $X_1+\alpha X_2+\alpha_3X_3$ & $(s-\alpha t,\phi-\alpha_3t)$ & $\alpha_3t+F(s-\alpha t)$\\
 \bottomrule
 \end{tabularx}
-\caption{Lie invariants and corrected graphs for the source's nine numbered
-cases. This is the audited source selection, not a complete optimal system
-for every parameter stratum. Scaling graphs use $t>0$; regular ODE
-evolution additionally requires its leading coefficient to be nonzero.}
+\caption{One-dimensional subalgebras and Lie invariants for the source's
+nine numbered cases, with the graphs of 3.7 and 3.8 corrected.
+This audited selection is drawn from the SVE algebra; it is not a complete
+optimal system for every stratum. The scalings use $t>0$.}
 \label{tab:sve-repro-invariants}
 \end{table}
+
+For a worked reading, take row 3.6 with a fixed nonzero speed $\alpha$.
+The equation $Q=-\phi_t-\alpha\phi_s=0$ says that $\phi$ stays
+constant along curves with $ds/dt=\alpha$. Those curves have label
+$z=s-\alpha t$, so $\phi=F(z)$. Its first derivatives are
+$\phi_t=-\alpha F'$ and $\phi_s=F'$. The positive chart therefore
+requires $F'>0$ and $\alpha<0$ for this row. Substitution into the PDE,
+carried out below, supplies the ODE for $F$; the symmetry condition alone
+does not. Row 3.9 permits different speed signs provided
+$\alpha_3-\alpha F'>0$. In both rows $\alpha$ is fixed during the
+one-parameter group action.
 
 The word ``Lagrangian'' needs care here. A \emph{material coordinate}
 labels particles, whereas a \emph{variational Lagrangian} is an action
@@ -2065,7 +2150,7 @@ identity can instead be verified directly, as the Boussinesq chapter
 illustrates with multipliers before deriving traveling-wave first
 integrals~\cite[Sec.~4, pp.~166--169]{bruzon-gandarias-2021}.
 
-\subsection{Direct calculation of all nine reduced equations}
+\subsection{Reduced equations: table and direct calculations}
 Write $P=F'$, $C=F''$ and $H=F'''$, where primes differentiate the
 specified invariant coordinate. When $G=G(z,F,P,C)$ is an expression
 on a profile, its total derivative is
@@ -2076,6 +2161,54 @@ on a profile, its total derivative is
 The derivative $G_z$ on the right is the partial derivative at fixed
 $F,P,C$; the remaining terms account for their dependence on $z$.
 This convention makes every current calculation below unambiguous.
+The reduced equations are collected first in
+Table~\ref{tab:sve-reduced-equations}, as in the separate reduced-equation
+table of the Boussinesq chapter. Here their coefficients are defined by
+the SVE currents:
+\begin{align*}
+ K_4&=-z^3P+\frac{gz}{P^2}
+           +\frac{gm\kappa z(F-zP)^{m-1}}P,\\
+ \mathcal B(P)&=\alpha^2P-\frac g{P^2}
+           -\frac{gm\kappa(\alpha_3-\alpha P)^{m-1}}P,\\
+ \chi&=12g\kappa-4,\\
+ \mathcal C_5&=P(\chi z^2P^3+g)H+(\chi z^2P^3-2g)C^2\\
+ &\hspace{1.6cm}+(60g\kappa-12)zP^4C+(24g\kappa-2)P^5.
+\end{align*}
+The derivations following the table recover these coefficients term by term.
+In rows 3.6 and 3.9, $\mathcal B'$ means differentiation with respect to
+its slope argument $P$; $D$ differentiates along the profile in $z$.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{.85cm}p{4.6cm}X@{}}
+\toprule
+Case & Pullback of $E_m$ & Equation or exceptional outcome\\
+\midrule
+3.1 & $0$ in current form & Stationary family; $P>0$, outside $p>0$\\
+3.2 & Undefined & $q=0$ violates the master-equation domain\\
+3.3 & No graph & $Q=1$ cannot vanish\\
+3.4 & $t^{-2}D(K_4C)$ & $K_4H+(DK_4)C=0$; $P,F-zP>0$\\
+3.5 & $-2z\mathcal C_5/(tP^3)$ & $\mathcal C_5=0$; $m=3$, $z,P>0$\\
+3.6 & $-\alpha D(\mathcal B C)$, $\alpha_3=0$ & $\mathcal B H+\mathcal B'C^2=0$ for $\alpha\ne0$; $P,-\alpha P>0$\\
+3.7 & $0$ & Arbitrary $F(s)$; $\alpha,P>0$\\
+3.8 & $\alpha H$ & $F'''=0$; $\alpha,P>0$\\
+3.9 & $-\alpha D(\mathcal B C)$ & $\mathcal B H+\mathcal B'C^2=0$ for $\alpha\ne0$; identity for $\alpha=0$; $P,\alpha_3-\alpha P>0$\\
+\bottomrule
+\end{tabularx}
+\caption{SVE reduced equations with the same case labels as
+Table~\ref{tab:sve-repro-invariants}. The displayed pullbacks retain their
+coordinate factors. Regular third-order evolution also requires
+$K_4\ne0$ in 3.4, $\chi z^2P^3+g\ne0$ in 3.5, and
+$\mathcal B\ne0$ in the traveling rows.}
+\label{tab:sve-reduced-equations}
+\end{table}
+
+An identity row leaves a profile arbitrary; it is not a uniquely specified
+ODE initial-value problem. An undefined row cannot be repaired by canceling
+a denominator after substitution. Finally, a zero leading coefficient
+invalidates the divided evolution equation, but may still admit a solution
+of the undivided equation. These distinctions explain why nine listed
+symmetry cases lead to five regular families in the numerical study.
 
 \subsubsection{Translations and exceptional graph outcomes: cases 3.1--3.3, 3.7 and 3.8}
 For case 3.1, $Q=-\phi_t=0$ gives $\phi=F(s)$. Then
@@ -2116,67 +2249,49 @@ the temporal profile in 3.8 is. For example,
 $\phi=t+s+s^3/6$ gives $p=1$, $q=1+s^2/2>0$ and $E_m=0$, although
 its spatial profile has $F'''=1$.
 
-\subsubsection{Scaling pullbacks and the common-scaling equation: case 3.4}
-Both scaling examples can be calculated once with the template
+\subsubsection{Common scaling: direct substitution for case 3.4}
+Use the graph already derived from $X_4$, with no additional scaling
+parameters:
 \begin{equation}
- \phi=t^A F(z),\qquad z=st^B,\qquad
- V=AF+BzP,\qquad t>0.
+ \phi=tF(z),\qquad z=s/t,\qquad V=F-zP,\qquad t>0.
  \label{eq:sve-repro-scale}
 \end{equation}
-The generator is $t\partial_t-Bs\partial_s+A\phi\partial_\phi$.
-Since $z_t=Bz/t$ and $z_s=t^B$, any profile expression $G$ satisfies
+Since $z_t=-z/t$ and $z_s=1/t$, a profile expression $G$ obeys
 \begin{equation}
- D_t(t^dG)=t^{d-1}(dG+BzDG),\qquad
- D_s(t^dG)=t^{d+B}DG.
+ D_tG=-\frac zt DG,\qquad D_sG=\frac1t DG.
  \label{eq:sve-scaling-chain}
 \end{equation}
-For example, $\phi_t=t^{A-1}V$ and $\phi_s=t^{A+B}P$.
-Applying~\eqref{eq:sve-scaling-chain} repeatedly gives the complete
-derivative substitution
+In particular, $DV=D(F-zP)=P-P-zC=-zC$. Repeated differentiation
+therefore gives
 \begin{align}
- p&=t^{A-1}V,&q&=t^{A+B}P,\notag\\
- a&=t^{A-2}a_*,&b&=t^{A+B-1}DV,&c&=t^{A+2B}C,\notag\\
- r&=t^{A-3}((A-2)a_*+BzDa_*),&
- w&=t^{A+B-2}Da_*,\notag\\
- x&=t^{A+2B-1}D^2V,&y&=t^{A+3B}H,
- \qquad a_*=(A-1)V+BzDV.
+ p&=V,&q&=P,&a&=z^2C/t,\notag\\
+ b&=-zC/t,&c&=C/t,&r&=-(3z^2C+z^3H)/t^2,\notag\\
+ w&=(2zC+z^2H)/t^2,&x&=-(C+zH)/t^2,&y&=H/t^2.
  \label{eq:sve-scaling-jets}
 \end{align}
-In particular the time dependence is retained; the calculation is not
-only a substitution on the slice $t=1$.
+For example, differentiating $a=t^{-1}z^2C$ in time differentiates
+both $t^{-1}$ and $z$, producing all three contributions to $r$.
+Keeping these factors is essential; a calculation confined to $t=1$
+would not by itself verify a two-variable similarity solution.
 
-The terms $qa$ and $gc/q^2$ have time exponents $2A+B-2$ and $-A$.
-They match when $3A+B=2$. Meanwhile $D_s\mathcal J$ has exponent
-$(m-1)(A-1)-1+B$. For it to match $D_t\mathcal A$, this exponent
-must equal $-A-1$. Together the two conditions are
+Substitution into the two master currents gives
 \[
- 3A+B=2,\qquad (m-3)(A-1)=0.
+ \mathcal A=t^{-1}\mathcal U_4,\qquad
+ \mathcal J=t^{-1}\mathcal V_4,\qquad
+ \mathcal U_4=(z^2P-g/P^2)C,\quad
+ \mathcal V_4=-m\kappa zV^{m-1}C/P.
 \]
-These are the same restrictions already supplied by the symmetry
-classification. For admitted scalings define
-\[
- J_A=Pa_*-gC/P^2,\qquad J_s=m\kappa V^{m-1}(DV)/P.
-\]
-The current derivatives then yield
+Differentiating these expressions by~\eqref{eq:sve-scaling-chain},
 \begin{equation}
- E_m[t^AF(st^B)]=t^{-A-1}\mathcal R_{A,B},\qquad
- \mathcal R_{A,B}=-A J_A+BzD J_A-gD J_s.
+ E_m[tF(s/t)]=t^{-2}\mathcal R_4,\qquad
+ \mathcal R_4=-\mathcal U_4-zD\mathcal U_4-gD\mathcal V_4.
  \label{eq:sve-repro-scale-residual}
 \end{equation}
-Thus $E_m=0$ is equivalent to the single profile ODE
-$\mathcal R_{A,B}=0$ on $t>0$, with $V,P>0$.
-
-For case 3.4, $(A,B)=(1,-1)$. Successive derivatives are especially simple:
-\[
- V=F-zP,\qquad DV=-zC,\qquad a_*=z^2C,
- \qquad J_A=(z^2P-g/P^2)C,\quad
- J_s=-m\kappa zV^{m-1}C/P.
-\]
-Because $\mathcal R_{1,-1}=-J_A-zDJ_A-gDJ_s$, the product rule
-$D(zJ_A)=J_A+zDJ_A$ gives
+The product rule $D(z\mathcal U_4)=\mathcal U_4+zD\mathcal U_4$
+then turns the residual into a total derivative:
 \begin{equation}
- \mathcal R_{1,-1}=D I_4,\qquad
- I_4=K_4 C,\qquad
+ \mathcal R_4=D I_4,\qquad
+ I_4=-z\mathcal U_4-g\mathcal V_4=K_4C,\qquad
  K_4=-z^3P+\frac{gz}{P^2}
                  +\frac{gm\kappa z(F-zP)^{m-1}}P.
  \label{eq:sve-repro-first-integral}
@@ -2194,24 +2309,35 @@ $I_0=K_4(z_0,F_0,P_0)C_0$. No initial datum is discarded: the third
 initial value is encoded in $I_0$.
 
 \subsubsection{The cubic scaling and its further reduction: case 3.5}
-Here $m=3$, $A=0$, $B=2$, so direct use of the same chain rule gives
-\[
- V=2zP,\qquad DV=2P+2zC,\qquad a_*=2zP+4z^2C,
-\]
-and hence
-\[
- J_A=2zP^2+(4z^2P-g/P^2)C,\qquad
- J_s=24\kappa z^2P^2+24\kappa z^3PC.
-\]
-Put $\chi=12g\kappa-4$. The derivatives of these two explicit
-currents reduce~\eqref{eq:sve-repro-scale-residual} to
+Here $m=3$, and the admitted field $X_5$ has already given
+$\phi=F(z)$ with $z=st^2$. Thus $z_t=2z/t$, $z_s=t^2$, and
+$D_tG=(2z/t)DG$, $D_sG=t^2DG$ for profile expressions. The derivatives are
 \begin{align}
- \mathcal R_{0,2}=-\frac{2z}{P^3}\big\{&
+ p&=2zP/t,&q&=t^2P,&a&=(2zP+4z^2C)/t^2,\notag\\
+ b&=2t(P+zC),&c&=t^4C,&r&=(12z^2C+8z^3H)/t^3,\notag\\
+ w&=2P+10zC+4z^2H,&x&=t^3(4C+2zH),&y&=t^6H.
+ \label{eq:sve-cubic-jets}
+\end{align}
+Consequently the master currents now have the forms
+\[
+ \mathcal A=\mathcal U_5=2zP^2+(4z^2P-g/P^2)C,\qquad
+ \mathcal J=t^{-3}\mathcal V_5,\quad
+ \mathcal V_5=24\kappa z^2P^2+24\kappa z^3PC.
+\]
+It follows directly that
+\[
+ E_3[F(st^2)]=t^{-1}\mathcal R_5,\qquad
+ \mathcal R_5=2zD\mathcal U_5-gD\mathcal V_5.
+\]
+Put $\chi=12g\kappa-4$. Expanding the derivatives of these two explicit
+currents gives
+\begin{align}
+ \mathcal R_5=-\frac{2z}{P^3}\big\{&
     P(\chi z^2P^3+g)H+(\chi z^2P^3-2g)C^2\notag\\
     &+(60g\kappa-12)zP^4C+(24g\kappa-2)P^5\big\}=0.
  \label{eq:sve-cubic-expanded}
 \end{align}
-Since $P>0$ and $V=2zP>0$, this
+Since $P>0$ and $p=2zP/t>0$ with $t>0$, this
 chart requires $z>0$. Its leading coefficient is
 \[
  L_5=-2z(\chi z^2P^3+g)/P^2.
@@ -2267,14 +2393,21 @@ Calling an equation ``Abel-type'' is not a substitute for specifying the
 equation and the chart on which it was obtained.
 
 The source also lists the mixed cubic generator $X_4+\lambda X_5$.
-When $\lambda\ne-1$, division by its nonzero time coefficient gives
-$A=1/(1+\lambda)$ and $B=(2\lambda-1)/(1+\lambda)$ in the preceding
-template. At $\lambda=-1$, one instead has
-$X_4-X_5=3s\partial_s+\phi\partial_\phi$. Its invariants on $s>0$
-are $t$ and $\phi s^{-1/3}$, so the graph is $\phi=s^{1/3}F(t)$.
-This is a separate coordinate chart, not a permissible substitution into
-a formula divided by $1+\lambda$. The mixed family is a companion to the
-nine numbered source cases, rather than an extra numerical campaign here.
+Here $\lambda$ is a fixed coefficient selecting a line in the cubic SVE
+algebra. Its coordinate components are
+$((1+\lambda)t,(1-2\lambda)s,\phi)$, so direct differentiation
+verifies the invariants
+\[
+ z=s\,t^{(2\lambda-1)/(1+\lambda)},\qquad
+ W=\phi\,t^{-1/(1+\lambda)},\qquad \lambda\ne-1,\quad t>0.
+\]
+The associated graph is $\phi=t^{1/(1+\lambda)}F(z)$.
+Its powers follow from this SVE generator; they are not freely assigned
+exponents. At $\lambda=-1$, the generator instead becomes
+$3s\partial_s+\phi\partial_\phi$; on $s>0$ its invariants are
+$t$ and $\phi s^{-1/3}$, giving $\phi=s^{1/3}F(t)$.
+This is a separate coordinate chart. The mixed family is a companion to
+the nine numbered source cases, rather than an extra numerical campaign here.
 
 \subsubsection{Traveling graphs, first integrals, and quadratures: cases 3.6 and 3.9}
 
@@ -2295,14 +2428,14 @@ are therefore
 Inserting them into the current equation and factoring the common
 constant $-\alpha$ gives, without division,
 \begin{equation}
- E_m=-\alpha D\{B(P)C\},\qquad
- B(P)=\alpha^2P-\frac g{P^2}-\frac{gm\kappa v^{m-1}}P.
+ E_m=-\alpha D\{\mathcal B(P)C\},\qquad
+ \mathcal B(P)=\alpha^2P-\frac g{P^2}-\frac{gm\kappa v^{m-1}}P.
  \label{eq:sve-repro-travel}
 \end{equation}
-Here $B(P)$ is a function of the slope, distinct from the scaling exponent
-$B$ of the previous subsection. Its derivative with respect to $P$ is
+Here $\mathcal B(P)$ is the slope-dependent coefficient listed in
+Table~\ref{tab:sve-reduced-equations}. Its derivative with respect to $P$ is
 \begin{equation}
- B'(P)=\alpha^2+\frac{2g}{P^3}
+ \mathcal B'(P)=\alpha^2+\frac{2g}{P^3}
     +gm\kappa\left(\frac{\alpha(m-1)v^{m-2}}P
                          +\frac{v^{m-1}}{P^2}\right).
  \label{eq:sve-travel-Bprime}
@@ -2310,24 +2443,24 @@ $B$ of the previous subsection. Its derivative with respect to $P$ is
 For $\alpha\ne0$, expansion of the derivative in
 \eqref{eq:sve-repro-travel} yields
 \begin{equation}
- B(F')F'''+B'(F')(F'')^2=0,
- \qquad B(P)P''+B'(P)(P')^2=0.
+ \mathcal B(F')F'''+\mathcal B'(F')(F'')^2=0,
+ \qquad \mathcal B(P)P''+\mathcal B'(P)(P')^2=0.
  \label{eq:sve-travel-orders}
 \end{equation}
 These are the corrected versions of source (28) and its
 $P=F'$ rewriting (29) when $\alpha_3=0$. Source (33) concerns the same
 calculation with the nonzero drift $\alpha_3$ retained. The original
-third-order leading coefficient is $-\alpha B(P)$; regular evolution
-requires $P,v>0$ and $B(P)\ne0$.
+third-order leading coefficient is $-\alpha \mathcal B(P)$; regular evolution
+requires $P,v>0$ and $\mathcal B(P)\ne0$.
 
 There are two transparent routes to the further reduction. First,
 integrate~\eqref{eq:sve-repro-travel} directly:
 \[
- B(P)C=I_0,\qquad I_0=B(P_0)C_0.
+ \mathcal B(P)C=I_0,\qquad I_0=\mathcal B(P_0)C_0.
 \]
 This gives the second-order equation for $F$ in the concrete form
 \begin{equation}
- F'=P,\qquad P'=\frac{I_0}{B(P)}.
+ F'=P,\qquad P'=\frac{I_0}{\mathcal B(P)}.
  \label{eq:sve-travel-two-state}
 \end{equation}
 Second, where $P$ is nonconstant and locally invertible as a function of
@@ -2335,39 +2468,39 @@ $z$, put $\Xi=P$ and $M(\Xi)=P'(z)$. The chain rule is
 $P''=(dM/d\Xi)(d\Xi/dz)=M_\Xi M$. Hence the second equation
 in~\eqref{eq:sve-travel-orders} becomes
 \[
- B(\Xi)M_\Xi M+B'(\Xi)M^2=0.
+ \mathcal B(\Xi)M_\Xi M+\mathcal B'(\Xi)M^2=0.
 \]
-On the additional chart $M\ne0$, division by $BM$ and integration give
+On the additional chart $M\ne0$, division by $\mathcal B M$ and integration give
 the corrected counterparts of source (30)--(31):
 \begin{equation}
- \frac{dM}{d\Xi}=-\frac{B'(\Xi)}{B(\Xi)}M,
- \qquad \frac{d}{d\Xi}\{B(\Xi)M(\Xi)\}=0,
- \qquad M(\Xi)=\frac{I_0}{B(\Xi)}.
+ \frac{dM}{d\Xi}=-\frac{\mathcal B'(\Xi)}{\mathcal B(\Xi)}M,
+ \qquad \frac{d}{d\Xi}\{\mathcal B(\Xi)M(\Xi)\}=0,
+ \qquad M(\Xi)=\frac{I_0}{\mathcal B(\Xi)}.
  \label{eq:sve-travel-further}
 \end{equation}
 For $m=3$, $\alpha=-1$, $\alpha_3=0$, this is the real expression
 \[
- B(P)=(1-3g\kappa)P-\frac g{P^2},\qquad
+ \mathcal B(P)=(1-3g\kappa)P-\frac g{P^2},\qquad
  M(\Xi)=\frac{I_0\Xi^2}{(1-3g\kappa)\Xi^3-g}.
 \]
 No complex power of a negative traveling speed is needed: the real-power
 argument throughout was the positive velocity $v$.
 
 To obtain the quadrature, define a primitive
-$\mathcal Y(P)=\int^P B(\rho)\,d\rho$. Then
+$\mathcal Y(P)=\int^P \mathcal B(\rho)\,d\rho$. Then
 \[
- \frac{d}{dz}\mathcal Y(P(z))=B(P)P'=I_0,\qquad
+ \frac{d}{dz}\mathcal Y(P(z))=\mathcal B(P)P'=I_0,\qquad
  \mathcal Y(P(z))-\mathcal Y(P_0)=I_0(z-z_0).
 \]
-If $B\ne0$, the inverse-function theorem allows $P(z)$ to be recovered
+If $\mathcal B\ne0$, the inverse-function theorem allows $P(z)$ to be recovered
 locally, and finally $F(z)=F_0+\int_{z_0}^zP(\zeta)\,d\zeta$.
 Equivalently, $Y(z)=\mathcal Y(P(z))$ satisfies $Y''=0$.
 This invertible point change of the dependent variable in the
 second-order $P$ equation establishes its local free-particle form and
 the associated eight-dimensional point algebra. It does not validate the
-source's erroneous expanded formulas or pass through zeros of $B$.
+source's erroneous expanded formulas or pass through zeros of $\mathcal B$.
 
-The constant branch must be kept separately. If $I_0=0$ and $B\ne0$,
+The constant branch must be kept separately. If $I_0=0$ and $\mathcal B\ne0$,
 then $P'=0$, so $F$ is affine. It is lost if one divides by $M$ or $I_0$
 without recording the exception. Likewise, $\alpha=0$ makes the
 original pullback an identity: case 3.6 returns to stationary case 3.1,
@@ -2377,7 +2510,7 @@ not five independent numerical problems.
 
 The first integral also provides an independent numerical check.
 A third-order solver evolves $(F,P,C)$ using the differentiated equation
-without enforcing $B(P)C=I_0$. Evaluating that expression along its
+without enforcing $\mathcal B(P)C=I_0$. Evaluating that expression along its
 trajectory tests a consequence of the equation. Solving
 \eqref{eq:sve-travel-two-state} with the fixed initial $I_0$ tests a
 different, lower-order differential formulation. A small drift or
@@ -2391,7 +2524,7 @@ Yet the 3.4 coefficient of $F'''$ vanishes \emph{on that very profile}; it
 is an exact singular-normal-form branch, not an initial value to insert in
 the divided regular ODE. Its reconstruction
 $\phi=a_\star s^{1/3}t^{2/3}$ increases with $t$ at fixed $s>0$, contrary
-to the printed decay description. The amplitude $a_\star$ is distinct from the scaling exponent $A$. Singular behavior at $t=0$ alone is not
+to the printed decay description. Here $a_\star$ is the fixed amplitude satisfying that cubic condition. Singular behavior at $t=0$ alone is not
 a shock or a weak-solution jump certificate.
 
 Table~\ref{tab:sve-repro-source-errors} records the remaining printed
@@ -2400,6 +2533,7 @@ set to zero but the \emph{original} equation was not; the full literal
 transcriptions and substitutions are in the reproducible artifact. Unless
 noted, use $m=3$, $g=1$, $\kappa=1/30$, $z=1$, $P=1/2$, $C=1/10$ on the
 positive chart.
+
 \begin{table}[ht]
 \centering\small
 \begin{tabularx}{\linewidth}{@{}p{1.35cm}X@{}}
@@ -2410,8 +2544,8 @@ Source & Decisive comparison\\
 (25), (26) & Their printed zero at $H=-88/25$ gives $437/25$; (26) inherits the same failed $\mu=F'$ rewrite.\\
 (27) & Printed $M_\Sigma=89/117$ versus correct $-187/65$; the chain-rule denominator is missing.\\
 (28), (29) & At $\alpha=-1,H=0$ (or $\mu''=0$), printed zero gives $169/1000$.\\
-(30) & Printed $M_\Xi/M=172/35$ versus required $-B'/B=338/71$.\\
-(31) & Its nonzero-$M_0$ branch gives $(B(P)M(P))'=960/8281$ at $P=1/2$, not zero.\\
+(30) & Printed $M_\Xi/M=172/35$ versus required $-\mathcal B'/\mathcal B=338/71$.\\
+(31) & Its nonzero-$M_0$ branch gives $(\mathcal B(P)M(P))'=960/8281$ at $P=1/2$, not zero.\\
 (32) & Quadratic is sufficient but not necessary for its printed, non-invariant graph.\\
 (33) & At $\alpha=-1,\alpha_3=1,H=-5/119$, printed zero gives $40337/119000$.\\
 (34) & Literal integral uses $-\alpha^2\kappa$ in place of the integration-variable term; its implied jet gives residual $-118420/328509$.\\
@@ -2420,6 +2554,7 @@ Source & Decisive comparison\\
 \caption{Short witnesses for source Eqs.~(24)--(34); $H=F'''$. These refute universal displayed formulas, not every special solution.}
 \label{tab:sve-repro-source-errors}
 \end{table}
+
 For example, the first row substitutes the paper's literal (24) at
 $(F,P,C,z,g,\kappa,m)=(2,1/2,1/10,1,1,1/30,3)$ and solves that
 printed equation for $H=23/250$. Evaluating the independently reconstructed
@@ -2457,11 +2592,11 @@ The existence question is answered for each invariant graph, rather than
 inferred from a plotted numerical trajectory. For a regular third-order row
 write its corrected pullback as
 \[
- A(z,F,P,C)H+B(z,F,P,C)=0,\qquad
- P=F',\quad C=F'',\quad H=F''',\quad R=-B/A.
+ L(z,F,P,C)H+N(z,F,P,C)=0,\qquad
+ P=F',\quad C=F'',\quad H=F''',\quad R=-N/L.
 \]
 At an initial jet $(z_0,F_0,P_0,C_0)$ satisfying the recorded positive-chart
-conditions and $A_0\ne0$, the right-hand side of
+conditions and $L_0\ne0$, the right-hand side of
 \[
  (F,P,C)'=(P,C,R(z,F,P,C))
 \]
@@ -2504,7 +2639,7 @@ For common scaling, set $(m,g,\kappa)=(3,1,1/30)$ and use initial data
  (z_0,F_0,P_0,C_0)=(1,2,1/2,1/10).
 \]
 Direct substitution gives
-$A_0=79/20$, the remaining residual term is $B_0=11/100$, and $F'''(1)=-11/395$, hence
+$L_0=79/20$, the remaining residual term is $N_0=11/100$, and $F'''(1)=-11/395$, hence
 \[
  F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
              -\frac{11\xi^3}{2370}+O(\xi^4).
@@ -2517,11 +2652,11 @@ The following cubic data make the five regular solution families explicit
 at $m=3$, $g=1$ and $\kappa=1/30$. Each row starts
 $F(z_0+\xi)=F_0+P_0\xi+C_0\xi^2/2+a_3\xi^3+O(\xi^4)$;
 the recurrence determines the subsequent coefficients. The nonzero values
-of $A_0$ and positive chart margins justify the regular local construction.
+of $L_0$ and positive chart margins justify the regular local construction.
 \begin{center}\small
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Case & $z_0$ & $(F_0,P_0,C_0)$ & $A_0$ & $a_3$\\
+Case & $z_0$ & $(F_0,P_0,C_0)$ & $L_0$ & $a_3$\\
 \midrule
 3.4 & $1$ & $(2,1/2,1/10)$ & $79/20$ & $-11/2370$\\
 3.5 & $1$ & $(2,1/2,1/10)$ & $-22/5$ & $83/1100$\\
@@ -2587,6 +2722,7 @@ of length $\Delta z$ computes
 \end{align}
 The coefficients are shown explicitly in Table~\ref{tab:sve-rkf-tableau};
 thus the term ``RKF45'' specifies a method, not just a software label.
+
 \begin{table}[htbp]
 \centering\small
 \begin{tabular}{@{}c|rrrrrr@{}}
@@ -2649,7 +2785,7 @@ near roundoff are controls, not measured convergence orders.
 \paragraph{First integrals as checks and as lower-order solvers.}
 For the cubic 3.4, 3.6 and 3.9 IVPs, the exact initial constants are
 $79/200$, $-71/200$ and $-79/200$, respectively. We evaluate
-$I_4$ or $B(P)C$ on the saved three-state RKF45 trajectory. Separately,
+$I_4$ or $\mathcal B(P)C$ on the saved three-state RKF45 trajectory. Separately,
 we solve the two-state system obtained from that integral: use
 $F'=P$, $P'=I_0/(I_4/C)$ in 3.4 and
 \eqref{eq:sve-travel-two-state} in the traveling cases.
@@ -2723,16 +2859,22 @@ velocity and depth are
  x_{\rm phys}=\phi(t,s),\qquad u(t,s)=\phi_t(t,s),\qquad
  h(t,s)=\frac1{\phi_s(t,s)}.
 \]
-The verified formulas give, for the admitted scaling graph,
-\[
- \phi=t^AF(st^B),\qquad u=t^{A-1}(AF+BzF'),\qquad
- h=\frac{t^{-A-B}}{F'},\qquad z=st^B,
-\]
-and for a traveling graph,
-\[
- \phi=\alpha_3t+F(s-\alpha t),\qquad
- u=\alpha_3-\alpha F',\qquad h=1/F'.
-\]
+For the invariant graph families considered above, reconstruction gives
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Case & Particle position $\phi$ & Velocity $u$ & Depth $h$\\
+\midrule
+3.4 & $tF(s/t)$ & $F-zF'$ & $1/F'$\\
+3.5 & $F(st^2)$ & $2zF'/t$ & $1/(t^2F')$\\
+3.6, 3.9 & $\alpha_3t+F(s-\alpha t)$ & $\alpha_3-\alpha F'$ & $1/F'$\\
+3.7 & $\alpha t+F(s)$ & $\alpha$ & $1/F'$\\
+3.8 & $\alpha s+F(t)$ & $F'$ & $1/\alpha$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The invariant variable $z$ is the one in the corresponding row of
+Table~\ref{tab:sve-repro-invariants}; case 3.6 sets $\alpha_3=0$.
 These equations explain the shape and evolution of the reconstructed
 surfaces. If a numerical profile is only known on $z\in[z_0,z_1]$,
 only points whose invariant coordinate lies in that interval are

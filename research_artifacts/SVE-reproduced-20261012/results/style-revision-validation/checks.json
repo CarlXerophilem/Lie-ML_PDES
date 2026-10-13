@@ -1,0 +1,67 @@
+[
+  {
+    "name": "regression",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "--import-mode=importlib",
+      "-o",
+      "faulthandler_timeout=30",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=build/boussinesq-style-20261014/pytest",
+      "scripts/tests",
+      "symm/tests/test_chart_reduction.py",
+      "symm/tests/test_engine.py",
+      "research_artifacts/sve-progress-20261010/tests",
+      "research_artifacts/SVE-reproduced-20261012/tests"
+    ],
+    "cwd": "D:\\MATHs\\math 4890 LieML",
+    "exit_code": 0,
+    "seconds": 45.414902448654175,
+    "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\regression.log"
+  },
+  {
+    "name": "audit",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "scripts/project.py",
+      "audit"
+    ],
+    "cwd": "D:\\MATHs\\math 4890 LieML",
+    "exit_code": 1,
+    "seconds": 0.3436756134033203,
+    "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\audit.log"
+  },
+  {
+    "name": "data-flux",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "scripts/project.py",
+      "data-flux",
+      "--out",
+      "build/boussinesq-style-20261014/data-flux"
+    ],
+    "cwd": "D:\\MATHs\\math 4890 LieML",
+    "exit_code": 0,
+    "seconds": 7.034611940383911,
+    "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\data-flux.log"
+  },
+  {
+    "name": "workflow",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "scripts/project.py",
+      "workflow",
+      "--out",
+      "build/boussinesq-style-20261014/workflow"
+    ],
+    "cwd": "D:\\MATHs\\math 4890 LieML",
+    "exit_code": 0,
+    "seconds": 4.18327260017395,
+    "log": "D:\\MATHs\\math 4890 LieML\\build\\boussinesq-style-20261014\\workflow.log"
+  }
+]

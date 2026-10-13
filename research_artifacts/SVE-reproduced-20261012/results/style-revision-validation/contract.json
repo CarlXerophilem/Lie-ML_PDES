@@ -1,0 +1,156 @@
+{
+  "run": {
+    "id": "boussinesq-style-20261014",
+    "mode": "full-automatic",
+    "objective": "Revise only the SVE replication in main.tex using the exact Boussinesq chapter arrangement and table explanations, retaining it only for defensible substantive results.",
+    "deliverables": [
+      "draft/main.tex",
+      "draft/main.pdf",
+      "synchronized replication fragment",
+      "review and validation receipts"
+    ],
+    "non_claims": [
+      "No Boussinesq transformations transplanted to SVE",
+      "No literature-wide novelty from replication",
+      "No full physical SVE theorem or global solution claim",
+      "No invented numeric evidence"
+    ],
+    "permissions": {
+      "local_writes": "requested manuscript and derived package records; preserve unrelated work",
+      "external_mutations": "prior explicit commit/push to GitHub and Priestess authorization"
+    },
+    "deadline": null,
+    "hard_caps": [],
+    "status": "running"
+  },
+  "tasks": [
+    {
+      "id": "style",
+      "depends_on": [],
+      "evidence_target": "Exact chapter arrangement and table interpretation",
+      "acceptance": "page-specific source map and actionable writing guidance",
+      "context_pack": [
+        "chapter.txt",
+        "chapter-170.png",
+        "chapter-171.png",
+        "chapter-172.png"
+      ],
+      "tools": "read files/PDF; write own report only",
+      "token_policy": "no user cap; concise return",
+      "cpu_class": "text",
+      "timeout": "10 minutes internal target",
+      "outputs": [
+        "style-research.md"
+      ],
+      "stop_rule": "report missing evidence, do not infer source formulas",
+      "state": "queued"
+    },
+    {
+      "id": "merit",
+      "depends_on": [],
+      "evidence_target": "Does SVE replication have substantial results worth keeping? Identify a,b provenance and warranted non-novelty qualifiers.",
+      "acceptance": "trace source and computation; concrete retain/discard ruling recommendation",
+      "context_pack": [
+        "draft/main.tex",
+        "research_artifacts/SVE-reproduced-20261012"
+      ],
+      "tools": "read; bounded independent symbolic checks; write own report only",
+      "token_policy": "no user cap; concise return",
+      "cpu_class": "light",
+      "timeout": "12 minutes internal target",
+      "outputs": [
+        "merit-research.md"
+      ],
+      "stop_rule": "bounded replication assessment, no new literature-wide novelty claim",
+      "state": "queued"
+    },
+    {
+      "id": "rewrite",
+      "depends_on": [
+        "style:evidence-ready",
+        "merit:evidence-ready"
+      ],
+      "evidence_target": "SVE-specific accessible table-led exposition",
+      "acceptance": "preserve derivations; remove ambiguous borrowed-parameter impression; retain only worthwhile evidence",
+      "context_pack": [
+        "draft/main.tex"
+      ],
+      "tools": "root-only edits",
+      "token_policy": "none imposed",
+      "cpu_class": "text",
+      "timeout": "bounded current request",
+      "outputs": [
+        "draft/main.tex"
+      ],
+      "stop_rule": "do not change numerical evidence without mathematical reason",
+      "state": "queued"
+    },
+    {
+      "id": "review",
+      "depends_on": [
+        "rewrite:evidence-ready"
+      ],
+      "evidence_target": "fresh falsification of wording, equations, table completeness, retain decision",
+      "acceptance": "accepted/qualified/rejected claims with concrete findings",
+      "context_pack": [
+        "contract.json",
+        "ledger.json",
+        "draft/main.tex",
+        "research reports"
+      ],
+      "tools": "read and independent checks; report only",
+      "token_policy": "no user cap",
+      "cpu_class": "light",
+      "timeout": "10 minutes internal target",
+      "outputs": [
+        "fresh-review.md"
+      ],
+      "stop_rule": "one bounded repair round, reject unsupported claims",
+      "state": "queued"
+    },
+    {
+      "id": "release",
+      "depends_on": [
+        "review:accepted/qualified"
+      ],
+      "evidence_target": "built manuscript and authorized publication",
+      "acceptance": "native compile; citations clean; visual review; required regressions; remote hashes",
+      "context_pack": [
+        "README.md"
+      ],
+      "tools": "root only edits/git/ssh",
+      "token_policy": "none imposed",
+      "cpu_class": "heavy lease root-validation, max1 job",
+      "timeout": "per command <=300s, SSH <=60s per attempt",
+      "outputs": [
+        "validation records",
+        "release manifest"
+      ],
+      "stop_rule": "retain unresolved audit findings and publication failures honestly",
+      "state": "queued"
+    }
+  ],
+  "sources": [
+    {
+      "id": "chapter",
+      "path": "ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf",
+      "title": "Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations",
+      "authors": "M. S. Bruzon and M. L. Gandarias",
+      "pages": "153-171; PDF166-184",
+      "sha256": "7ad2a827b4b2a994b12df0a1ea0c9a435ddcbab715fa8639595688c46b1cdba6",
+      "accessed": "2026-10-14",
+      "verification": "primary-checked",
+      "supports": "exposition organization only",
+      "not_supports": "SVE transformations"
+    }
+  ],
+  "claims": [],
+  "receipts": [],
+  "rulings": [],
+  "resources": {
+    "token_actual": null,
+    "prefix_cache_actual": null,
+    "cpu_heavy_lease": "root-validation",
+    "concurrency": 1
+  }
+}

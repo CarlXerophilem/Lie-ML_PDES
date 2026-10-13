@@ -19,6 +19,10 @@ All implementation code is ordinary source in **one `main.py`**. The HTML
 viewer has been removed. The prior modular release is preserved in
 `archive/release-before-animation.zip`.
 
+The revised manuscript follows the exact Boussinesq chapter's table-led
+exposition, with direct SVE transformations and a reviewed retain/discard
+assessment. See [presentation validation](BOUSSINESQ_STYLE_VALIDATION.md).
+
 ## Run
 
 From the repository root, with Python, SymPy, NumPy, SciPy, Matplotlib,

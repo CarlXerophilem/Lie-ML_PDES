@@ -13,7 +13,7 @@ checks and static scientific plots. Its
 [computation map](research_artifacts/SVE-reproduced-20261012/docs/COMPUTATION.md)
 distinguishes live calculations from transcribed source inputs.
 Its reviewed section is included in `draft/main.tex`; see its
-[revision validation](research_artifacts/SVE-reproduced-20261012/FORMAL_EXPOSITION_VALIDATION.md)
+[revision validation](research_artifacts/SVE-reproduced-20261012/BOUSSINESQ_STYLE_VALIDATION.md)
 for passed checks and remaining repository-wide failures.
 
 ## Read in this order
