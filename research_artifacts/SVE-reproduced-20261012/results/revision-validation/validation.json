@@ -1,0 +1,137 @@
+{
+  "timestamp_utc": "2026-10-12T14:17:05.401881+00:00",
+  "status": "completed_with_qualifications",
+  "demo": {
+    "exit_code": 0,
+    "symbolic_passed": true,
+    "numerical_passed": 21,
+    "numerical_total": 21,
+    "source_audit_complete": true,
+    "all_printed_claims_reproduced": false
+  },
+  "convergence": {
+    "completed": 21,
+    "fixed_runs": 147,
+    "resolved_errors": 55,
+    "resolved_orders": 39,
+    "limitations": [
+      "Finite endpoint diagnostics; no continuous error certificate.",
+      "Traveling rows have one resolved pair only and no demonstrated adaptive tolerance convergence.",
+      "Quadratic control has no measurable nontrivial order."
+    ]
+  },
+  "tests": {
+    "passed": 148,
+    "failed": 1,
+    "active_package_passed": 55,
+    "frozen_package_passed": 43,
+    "duration_seconds": 30.68,
+    "failure": "scripts/tests/test_project_audit.py::test_missing_expanded_evidence_is_not_a_false_carrier_failure",
+    "diagnosis": "Pre-existing Windows CRLF fixture bytes differ from expected LF hash.",
+    "receipt": "regressions.txt"
+  },
+  "project_checks": {
+    "audit": {
+      "exit_code": 1,
+      "issues": 218,
+      "categories": {
+        "available_history_preserved": 1,
+        "canonical_reference_integrity": 30,
+        "active_markdown_links": 41,
+        "temporary_outputs_untracked": 146
+      },
+      "active_package_issues": []
+    },
+    "data_flux": "verified",
+    "workflow": "passed"
+  },
+  "latex": {
+    "exit_code": 0,
+    "pages": 33,
+    "undefined_references_or_citations": 0,
+    "overfull_boxes": 0,
+    "underfull_boxes": 20,
+    "visually_inspected_pages": [
+      22,
+      24,
+      25,
+      31
+    ],
+    "main_pdf_copied": true
+  },
+  "single_script": {
+    "runtime_local_implementation_imports": false,
+    "source_exec_or_eval": false,
+    "retired_module_removed": true,
+    "copied_script_receipt": "standalone.json",
+    "portability_check_scope": "Copied-script run preceded final axis alignment and default-settings centralization; final code passed the complete canonical run and regression tests."
+  },
+  "browser": {
+    "offline_reload_passed": true,
+    "datasets": 21,
+    "source_equations": [
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "mobile_scroll_width": 390,
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "external_resources": 0,
+    "play_pause_reset": "passed",
+    "field_switching": "passed",
+    "equation_and_exponent_switching": "passed",
+    "console_errors_or_warnings": 0,
+    "receipt": "browser-final.json",
+    "final_desktop_devtools_capture": "timed_out",
+    "final_mobile_visual_check": "passed",
+    "final_desktop_headless_capture": "passed and visually inspected",
+    "desktop_capture": "desktop.png"
+  },
+  "integrity": {
+    "frozen_inputs": {
+      "MANIFEST.json": {
+        "sha256": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+        "unchanged": true
+      },
+      "lie-ml-sve-progress-20261010.zip": {
+        "sha256": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16",
+        "unchanged": true
+      }
+    },
+    "prior_release_archive_sha256": "7037220a73dcfeb8f5b6928de46993d2086b0278fa643261b97e28f9fc9c09eb",
+    "inline_manuscript_matches": true,
+    "ten_required_headings": [
+      "[master equation]",
+      "[infinitesimal generator]",
+      "[Symmetries of the SVE Equation]",
+      "[Commutators of the admitted Lie symmetries for the SVE equation]",
+      "[listed Lie symmetries]",
+      "[One-Dimensional Optimal System]",
+      "[Similarity Transformations]",
+      "[One dimensional optimal system and Lie invariants Table]",
+      "[Solution ODE with all 9 reductions]",
+      "[Numeric solutions to the ODEs]"
+    ],
+    "main_sha256": "99e05cb557d86cc6f4fdb45631525f7e99172868739d1032e0851dd41362444f",
+    "git_diff_check_passed": true
+  },
+  "independent_review": {
+    "path": "docs/REVIEW_REVISION.md",
+    "sha256": "c390ab840ed83c9bc66a9121bb1a61cd06c2ed8e3eea823634c179c0c5752b1d",
+    "scope": "Convergence and reconstruction mathematics accepted with qualifications; final code and HTML integration validated by director."
+  }
+}

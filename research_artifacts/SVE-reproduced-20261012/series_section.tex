@@ -1,0 +1,100 @@
+\paragraph{Local existence and Taylor solutions.}
+The existence question is answered for each invariant graph, rather than
+inferred from a plotted numerical trajectory. For a regular third-order row
+write its corrected pullback as
+\[
+ A(z,F,P,C)H+B(z,F,P,C)=0,\qquad
+ P=F',\quad C=F'',\quad H=F''',\quad R=-B/A.
+\]
+At an initial jet $(z_0,F_0,P_0,C_0)$ satisfying the recorded positive-chart
+conditions and $A_0\ne0$, the right-hand side of
+\[
+ (F,P,C)'=(P,C,R(z,F,P,C))
+\]
+is real analytic in a neighborhood. This remains true for fixed noninteger
+$m$ on a strictly positive velocity branch. The analytic local ODE theorem
+\cite[Section~4.1]{teschl2012}
+therefore gives a unique analytic profile germ for the specified three
+initial values. The verified similarity pullback then gives a local invariant
+solution of the printed scalar master equation. Continuity preserves the
+strict chart inequalities on a sufficiently small neighborhood. This
+argument supplies neither a numerical convergence radius nor a global
+solution, and does not establish the full bed-field model.
+
+For $\xi=z-z_0$ put $F=\sum_{j\geq0}a_j\xi^j$, where
+$a_0=F_0$, $a_1=P_0$ and $a_2=C_0/2$. If
+$F_{n+2}=\sum_{j=0}^{n+2}a_j\xi^j$, coefficient matching gives
+\begin{equation}
+ a_{n+3}=
+ \frac{[\xi^n]R(z_0+\xi,F_{n+2},F_{n+2}',F_{n+2}'')}
+ {(n+3)(n+2)(n+1)},\qquad n\geq0.
+ \label{eq:sve-series-recurrence}
+\end{equation}
+The recurrence constructs these coefficients successively. At order zero,
+$F'''(z_0)=R_0$ gives $a_3=R_0/6$. Differentiating the normal form once
+along its solution gives the next coefficient explicitly:
+\[
+ a_4=\frac1{24}\left(R_z+P_0R_F+C_0R_P+R_0R_C\right)_0.
+\]
+All derivatives on the right are evaluated at the same initial jet. Higher
+coefficients follow by the same coefficient-matching rule; they are not
+fitted to numerical values. Substitution of the resulting polynomial into
+the corrected undivided ODE provides a separate algebraic check. For degree $N\geq3$, it checks the coefficients of
+$\xi^0,\ldots,\xi^{N-3}$ exactly. The remaining ODE residual is
+$O(\xi^{N-2})$; the local truncation errors in $F,F',F''$ are respectively
+$O(\xi^{N+1})$, $O(\xi^N)$ and $O(\xi^{N-1})$. A finite polynomial with
+this residual property is not normally an exact solution.
+
+For common scaling, set $(m,g,\kappa)=(3,1,1/30)$ and use initial data
+\[
+ (z_0,F_0,P_0,C_0)=(1,2,1/2,1/10).
+\]
+Direct substitution gives
+$A_0=79/20$, the remaining residual term is $B_0=11/100$, and $F'''(1)=-11/395$, hence
+\[
+ F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
+             -\frac{11\xi^3}{2370}+O(\xi^4).
+\]
+This determines a local similarity solution $\phi(t,s)=tF(s/t)$, including
+the initial point $t=s=1$. For row 3.8 with initial jet $(0,1,1/10)$ at
+$t=0$, the series terminates: $F(t)=t+t^2/20$ is exact.
+
+The following cubic data make the five regular solution families explicit
+at $m=3$, $g=1$ and $\kappa=1/30$. Each row starts
+$F(z_0+\xi)=F_0+P_0\xi+C_0\xi^2/2+a_3\xi^3+O(\xi^4)$;
+the recurrence determines the subsequent coefficients. The nonzero values
+of $A_0$ and positive chart margins justify the regular local construction.
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Case & $z_0$ & $(F_0,P_0,C_0)$ & $A_0$ & $a_3$\\
+\midrule
+3.4 & $1$ & $(2,1/2,1/10)$ & $79/20$ & $-11/2370$\\
+3.5 & $1$ & $(2,1/2,1/10)$ & $-22/5$ & $83/1100$\\
+3.6 & $1$ & $(2,1/2,1/10)$ & $-71/20$ & $169/21300$\\
+3.8 & $0$ & $(0,1,1/10)$ & $1$ & $0$\\
+3.9 & $1$ & $(2,1/2,1/10)$ & $-79/20$ & $173/23700$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The other rows need different conclusions. Row 3.7 admits
+$\phi=\alpha t+F(s)$ with arbitrary sufficiently smooth $F$, $\alpha>0$
+and $F'>0$; its identity pullback cannot determine a unique Taylor
+recurrence. Row 3.1 is stationary and lies outside the positive-velocity
+chart. Row 3.2 violates $\phi_s>0$, and row 3.3 has no invariant graph.
+A zero leading coefficient means the regular existence test is inconclusive,
+not that no solution exists: the separately verified exact cubic power
+profile lies on such a common-scaling normal-form singularity. Numerical
+comparisons of Taylor truncations with the established IVPs are local
+diagnostics, separate from the analytic-germ existence statement.
+
+The degree-six campaign constructs all $21$ regular IVP series and checks
+all four residual coefficients, from $\xi^0$ through $\xi^3$, exactly.
+Comparisons use four saved RKF45/DOP853 grid nodes per IVP, without
+interpolation, and retain separate errors for $F,F',F''$. For the cubic
+common-scaling example, the profile differences from DOP853 are
+$3.28\times10^{-9}$ at $\xi=0.2$ and $3.24\times10^{-13}$ at $\xi=0.05$.
+At $\xi=0.025$ the difference is below the operational resolution threshold;
+it is not another measured convergence order. The numerical comparisons
+neither bound the series remainder nor locate its convergence radius.

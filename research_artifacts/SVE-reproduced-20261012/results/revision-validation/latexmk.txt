@@ -1,0 +1,439 @@
+latexmk.exe : perl: warning: Setting locale failed.
+At line:3 char:1
++ & 'C:/Users/Administrator/AppData/Local/Programs/MiKTeX/miktex/bin/x6 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (perl: warning: Setting locale failed.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	LC_CTYPE = "C.UTF-8",
+	LC_NUMERIC = (unset),
+	LC_COLLATE = (unset),
+	LC_TIME = (unset),
+	LC_MONETARY = (unset),
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the system default locale ("Chinese (Simplified)_China.936").
+Initial Win CP for (console input, console output, system): (CP936, CP65001, CP936)
+I changed them all to CP936
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  draft/main.tex
+Category 'changed_user':
+  draft/main.tex
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder -output-directory="build/latex"  "draft/main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(draft/main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cl
+s
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.
+sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.cfg))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/cmap\cmap.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.st
+y<<t1.cmap>>)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty)
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bookta
+bs.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.
+sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlay
+er\tikz.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgf.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfrcs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-common.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-latex.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfrcs.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revis
+ion.tex)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgfcore.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer
+\pgfsys.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeyslibraryfiltered.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgf.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-pdftex.def
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-common-pdf.def)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsyssoftpath.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsysprotocol.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.s
+ty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\co
+lor.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathco
+lor.ltx))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcore.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athutil.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athparser.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.basic.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.trigonometric.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.random.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.comparison.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.base.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.round.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.misc.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.integerarithmetics.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athcalc.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfloat.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfi
+nt.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepoints.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathconstruct.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathusage.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorescopes.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoregraphicstate.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransformations.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorequick.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreobjects.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathprocessing.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorearrows.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreshade.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreimage.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreexternal.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorelayers.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransparency.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepatterns.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorerdf.code.tex)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleshapes.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleplot.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-0-65.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-1-18.sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gffor.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfkeys.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmat
+h.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgffor.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz\tikz.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryplothandlers.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmodulematrix.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/listings\listin
+gs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpat
+ch.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmis
+c.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/listings\listin
+gs.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryarrows.meta.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarypositioning.code.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/shapes\pgflibraryshapes.geometric.code.tex))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvset
+keys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\
+kvdefinekeys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdf
+escape.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcm
+ds.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\inf
+warerr.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcou
+nt.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestrin
+g\gettitlestring.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvopt
+ions.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\str
+ingenc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intca
+lc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bi
+gintcalc.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\
+rerunfilecheck.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter
+\uniquecounter.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def) (D:\MATHs\math 4890 LieML\build/latex\main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg)) (D:\MATHs\math 4890 LieML\build/latex\main.out)
+(D:\MATHs\math 4890 LieML\build/latex\main.out)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd)<<
+ot1.cmap>>
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd)<<
+oml.cmap>>
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd)<
+<oms.cmap>>
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd)<
+<omx.cmap>>
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueuf.f
+d) [1{C:/Users/Administrator/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{
+C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.e
+nc}{C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-
+mathit.enc}{C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/enc/dvip
+s/lm/lm-rm.enc}] [2{C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/
+enc/dvips/lm/lm-mathsy.enc}{C:/Users/Administrator/AppData/Local/Programs/MiKTe
+X/fonts/enc/dvips/lm/lm-mathex.enc}] [3] [4] [5] [6] [7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 814--814
+[]|\T1/lmr/m/n/10 Certify re-duced
+
+Underfull \hbox (badness 10000) in paragraph at lines 814--814
+[]|\T1/lmr/m/n/10 Approximate the
+[10]
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd)
+[11]
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmss.fd)
+[12] [13] [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1163
+[]|\T1/lmr/m/n/10 Reference ob-
+
+Underfull \hbox (badness 3514) in paragraph at lines 1163--1163
+[]|\T1/lmr/m/n/10 Equation sym-me-try ver-sus in-vari-ant so-lu-tion
+
+Underfull \hbox (badness 1264) in paragraph at lines 1163--1163
+[]|$\OML/lmm/m/it/10 X[]$\T1/lmr/m/n/10 ; equa-tions (13)--
+
+Underfull \hbox (badness 1231) in paragraph at lines 1163--1163
+[]|\T1/lmr/m/n/10 Explicit jet chain rule and multiplier/zero-set
+
+Underfull \hbox (badness 7907) in paragraph at lines 1163--1163
+[]|$\OML/lmm/m/it/10 W[]; W[]$\T1/lmr/m/n/10 ; equa-tions
+
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1163
+[]|\T1/lmr/m/n/10 Similarity
+
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1163
+\T1/lmr/m/n/10 ansatz/reduced equa-
+
+Underfull \hbox (badness 1558) in paragraph at lines 1163--1163
+[]|\T1/lmr/m/n/10 Proposition 1, Ta-bles
+[16] [17] [18] [19] [20] [21] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 1689--1689
+[]|\T1/lmr/m/n/10 (25),
+
+Underfull \hbox (badness 10000) in paragraph at lines 1689--1689
+[]|\T1/lmr/m/n/10 (28),
+[23] [24] [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 1912--1912
+[]|\T1/lmr/m/n/10 Contribution and
+
+Underfull \hbox (badness 3128) in paragraph at lines 1912--1912
+\T1/lmr/m/n/10 si-fi-ca-tions, and the source-reported
+
+Underfull \hbox (badness 10000) in paragraph at lines 1912--1912
+[]|\T1/lmr/m/n/10 Model in-ter-pre-ta-
+
+Underfull \hbox (badness 7168) in paragraph at lines 1912--1912
+[]|\T1/lmr/m/n/10 Classifications and
+
+Underfull \hbox (badness 3323) in paragraph at lines 1912--1912
+[]|\T1/lmr/m/n/10 Prove normal-form IVP con-di-tions;
+
+Underfull \hbox (badness 10000) in paragraph at lines 1912--1912
+\T1/lmr/m/n/10 add uni-form sta-bil-ity and resid-
+
+Underfull \hbox (badness 10000) in paragraph at lines 1912--1912
+\T1/lmr/m/n/10 ual/quadrature bounds for any
+
+Underfull \hbox (badness 3503) in paragraph at lines 1912--1912
+[]|\T1/lmr/m/n/10 Reproducible mea-sured per-for-mance
+[27] [28] [29] [30] [31] [32] [33]
+(D:\MATHs\math 4890 LieML\build/latex\main.aux) )
+(see the transcript file for additional information)<C:/Users/Administrator/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Use
+rs/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb
+><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lm
+bx12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/lm/lmex10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmmi10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmmi6.pfb><C:/Users/Administrator/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/Administrator/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Administrator/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Administrator/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Administr
+ator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Adm
+inistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Use
+rs/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><
+C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri
+10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/lm/lmss10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmsy10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmsy6.pfb><C:/Users/Administrator/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/Administrator/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Administrator/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Administrator/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt8.pfb><C:/Users/Administra
+tor/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pf
+b>
+Output written on "D:\MATHs\math 4890 LieML\build\latex\main.pdf" (33 pages, 62
+4181 bytes).
+Transcript written on "D:\MATHs\math 4890 LieML\build\latex\main.log".
+Latexmk: Getting log file 'build/latex/main.log'
+Latexmk: Examining 'build/latex/main.fls'
+Latexmk: Examining 'build/latex/main.log'
+Latexmk: Log file says output to 'build/latex/main.pdf'
+Latexmk: Log file says output to 'build/latex/main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+Latexmk: All targets (build/latex/main.pdf) are up-to-date
+
+Reverting Windows console CPs to (in,out) = (936,65001)

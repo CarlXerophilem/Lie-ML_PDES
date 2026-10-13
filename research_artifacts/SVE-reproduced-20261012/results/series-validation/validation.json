@@ -1,0 +1,183 @@
+{
+  "status": "completed_with_qualifications",
+  "created_utc": "2026-10-12T17:28:19.923679+00:00",
+  "run": {
+    "started_utc": "2026-10-12T17:23:17.737246+00:00",
+    "stage": "all",
+    "selection": "all",
+    "case": "all",
+    "complete_audit": true,
+    "source_agreement": "assessed_per_claim",
+    "numerical_scope": "constructed dimensionless local IVPs",
+    "elapsed_seconds": 18.63584410000476,
+    "execution_status": "finished",
+    "all_printed_claims_reproduced": false,
+    "symbolic_passed": true,
+    "symbolic_failures": [],
+    "numerical_passed": true
+  },
+  "series": {
+    "order": 6,
+    "verified_ivps": 21,
+    "matched_comparisons": 21,
+    "component_comparisons": 252,
+    "below_operational_resolution": 118,
+    "nine_statuses": {
+      "3.1": "outside_positive_chart",
+      "3.2": "undefined_chart",
+      "3.3": "no_invariant_graph",
+      "3.4": "regular_analytic_germ",
+      "3.5": "regular_analytic_germ",
+      "3.6": "regular_analytic_germ",
+      "3.7": "identity_family",
+      "3.8": "regular_analytic_germ",
+      "3.9": "regular_analytic_germ"
+    }
+  },
+  "tests": {
+    "final_package": {
+      "passed": 75,
+      "failed": 0,
+      "seconds": 15.3
+    },
+    "final_series": {
+      "passed": 20,
+      "failed": 0,
+      "seconds": 9.39
+    },
+    "combined_before_last_three_negative_controls": {
+      "passed": 165,
+      "failed": 1,
+      "seconds": 42.05,
+      "failure": "Windows CRLF fixture hash mismatch in scripts/tests/test_project_audit.py"
+    },
+    "frozen_package_in_combined": 43
+  },
+  "project_checks": {
+    "audit": {
+      "status": "failed",
+      "issues": 218,
+      "categories": {
+        "available_history_preserved": 1,
+        "canonical_reference_integrity": 30,
+        "active_markdown_links": 41,
+        "temporary_outputs_untracked": 146
+      }
+    },
+    "data_flux": "verified",
+    "workflow": "passed"
+  },
+  "manuscripts": {
+    "main": {
+      "bibliography_entries": 19,
+      "unresolved_citation_keys": [],
+      "unused_keys": [],
+      "pdf_pages": 33,
+      "pdf_sha256": "ef893135a817657657a86ef03f93401747db634ad5724787357c06e4be5f9c37",
+      "tex_sha256": "fa8764be5efdeabb1af12ad799cbb94b6327b69e6deb550725a74dcf1c7aa074",
+      "final_log_warnings": []
+    },
+    "dissertation": {
+      "bibliography_entries": 12,
+      "unresolved_citation_keys": [],
+      "unused_keys": [],
+      "pdf_pages": 47,
+      "pdf_sha256": "2b2df0f73b89394efbe6eeba67bb988803fb29810a57c9ed409f330b231f1dab",
+      "tex_sha256": "93c306e5b186682b4e94374b18db773357093dc947ed249828ebb42d1b8e0160",
+      "final_log_warnings": []
+    }
+  },
+  "visual_review": {
+    "method": "rendered changed pages, director inspection",
+    "main_pdf_pages": [
+      1,
+      2,
+      3,
+      27,
+      28,
+      30,
+      31,
+      32,
+      33
+    ],
+    "dissertation_pdf_pages": [
+      2,
+      9,
+      10,
+      11,
+      28,
+      29,
+      30,
+      46,
+      47
+    ]
+  },
+  "independent_review": "docs/REVIEW_SERIES.md",
+  "accepted_claims": [
+    "C-LOCAL-EXISTENCE",
+    "C-TAYLOR",
+    "C-MANUSCRIPT-FOCUS"
+  ],
+  "qualified_claims": [
+    "C-SERIES-NUMERICAL-COMPARISON"
+  ],
+  "nonclaims": [
+    "global existence",
+    "computed convergence radius",
+    "certified numerical remainder",
+    "full bed model",
+    "learned order-reducing object"
+  ],
+  "frozen_hashes": {
+    "MANIFEST.json": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+    "lie-ml-sve-progress-20261010.zip": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16"
+  },
+  "prior_release_archive_sha256": "9a5237ce7bf4a894ec8aec5a478a4aab9f2f6e9a27e74ceb50dc4bb1ba7c36bc",
+  "logs": {
+    "series-canonical-demo.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-canonical-demo.log",
+      "sha256": "b7ca8d6dfcbaa7f4d4395f39a71ecea8df0642b9ad8e35b9af98e5da40cdedb0"
+    },
+    "series-data-flux.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-data-flux.log",
+      "sha256": "b1c6a4a2a795662195f5a4ca4696ad5768c585b251a4e03fc47c61f31e03fcdf"
+    },
+    "series-dissertation-latexmk.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-dissertation-latexmk.log",
+      "sha256": "25e105500b16ba6fcdd69f03e7e3f243210416ce970f81fb186e9a1d92c15b63"
+    },
+    "series-final-focused.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-final-focused.log",
+      "sha256": "1a2c23290b752fd7eb4d57eec514bb5ea50d88d183991daf849cb4273a029e90"
+    },
+    "series-main-latexmk.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-main-latexmk.log",
+      "sha256": "6cc599cd737056bc73f7906b4fab1ed2b1f62f4b721a656677d7817652a4bddf"
+    },
+    "series-package-tests.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-package-tests.log",
+      "sha256": "863c9ffeaa763331e93396f214e22bd12c61ec420f8b7f95304cfbbf655ef812"
+    },
+    "series-project-audit.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-project-audit.log",
+      "sha256": "d6c636c92bee534de5d0519e1066e07ea217bba45fe7f8cacdd118df36586893"
+    },
+    "series-provenance-tests.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-provenance-tests.log",
+      "sha256": "7f2d3d2629c7ea4aa6f65ff537ad56a0a8d3fa31be1b20365e7f2c90ace900f5"
+    },
+    "series-regressions.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-regressions.log",
+      "sha256": "5a274d6f5a66c78f69906103e4fc89b4930ebda2c656c6672593bae0b2c798cd"
+    },
+    "series-workflow.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/series-validation/series-workflow.log",
+      "sha256": "b491e3eae20506f3950afce85d08f2c57ce07e685e0fa2c235d86442524b950e"
+    }
+  },
+  "diff_check": {
+    "source_paths": "passed",
+    "unrestricted": "PDF treated as text; stream/xref whitespace diagnostics",
+    "pdf_validation": "native build, parse and rendered changed pages"
+  }
+}

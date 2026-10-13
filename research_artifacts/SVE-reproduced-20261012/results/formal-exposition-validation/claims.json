@@ -1,0 +1,64 @@
+[
+  {
+    "id": "C-DERIVATION",
+    "revision": 1,
+    "statement": "Expanded currents, graph Q, recursive prolongation, master partial derivatives and unrestricted coefficient splitting derive the declared local point bases.",
+    "scope": "printed scalar SVE on g,kappa>0, m>=1, p,q>0 unless explicitly exceptional",
+    "evidence": [
+      "draft/main.tex",
+      "research_artifacts/SVE-reproduced-20261012/results/formal-exposition-validation/derivation.md",
+      "research_artifacts/SVE-reproduced-20261012/main.py"
+    ],
+    "reviewer_verdict": "accepted_with_scope_qualifications",
+    "review_receipt": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_FORMAL_EXPOSITION.md"
+  },
+  {
+    "id": "C-REDUCTIONS",
+    "revision": 1,
+    "statement": "Explicit chain rules derive scaling/traveling ODEs and integral identities; cubic first-order reduction records all required denominators.",
+    "scope": "printed scalar SVE on g,kappa>0, m>=1, p,q>0 unless explicitly exceptional",
+    "evidence": [
+      "draft/main.tex",
+      "research_artifacts/SVE-reproduced-20261012/results/formal-exposition-validation/reduction_formula_check.json",
+      "research_artifacts/SVE-reproduced-20261012/docs/REDUCTIONS.md"
+    ],
+    "reviewer_verdict": "accepted_with_scope_qualifications",
+    "review_receipt": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_FORMAL_EXPOSITION.md"
+  },
+  {
+    "id": "C-REFERENCE",
+    "revision": 1,
+    "statement": "Bruzón and Gandarias 2021 chapter supplies methodological example and verified bibliography; none of its Boussinesq-specific claims is transferred.",
+    "scope": "printed scalar SVE on g,kappa>0, m>=1, p,q>0 unless explicitly exceptional",
+    "evidence": [
+      "research_artifacts/SVE-reproduced-20261012/docs/BOUSSINESQ_REFERENCE.md",
+      "ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf"
+    ],
+    "reviewer_verdict": "accepted_with_scope_qualifications",
+    "review_receipt": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_FORMAL_EXPOSITION.md"
+  },
+  {
+    "id": "C-EXPOSITION",
+    "revision": 1,
+    "statement": "Generator tables, invariant table and mathematical pseudocode replace prompt headings and executable paths/commands in Section 8.",
+    "scope": "printed scalar SVE on g,kappa>0, m>=1, p,q>0 unless explicitly exceptional",
+    "evidence": [
+      "draft/main.tex"
+    ],
+    "reviewer_verdict": "accepted",
+    "review_receipt": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_FORMAL_EXPOSITION.md"
+  },
+  {
+    "id": "C-NUMERICAL",
+    "revision": 1,
+    "statement": "Taylor recurrence steps and classic Fehlberg tableau describe the unchanged computed numerical implementation; existing finite-diagnostic limitations remain.",
+    "scope": "printed scalar SVE on g,kappa>0, m>=1, p,q>0 unless explicitly exceptional",
+    "evidence": [
+      "draft/main.tex",
+      "research_artifacts/SVE-reproduced-20261012/main.py",
+      "research_artifacts/SVE-reproduced-20261012/results/evidence.json"
+    ],
+    "reviewer_verdict": "accepted_with_scope_qualifications",
+    "review_receipt": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_FORMAL_EXPOSITION.md"
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "status": "completed_with_qualifications",
+  "objective": "convergence, reconstructed animation and plain single-script implementation",
+  "started_utc": "2026-10-12T13:39:59.402356+00:00",
+  "baseline": {
+    "path": "research_artifacts/SVE-reproduced-20261012/archive/release-before-animation.zip",
+    "sha256": "7037220a73dcfeb8f5b6928de46993d2086b0278fa643261b97e28f9fc9c09eb"
+  },
+  "tasks": {
+    "convergence_revision": {
+      "status": "completed",
+      "model": "GPT-6-Sol",
+      "reasoning_effort": "high",
+      "evidence": "results/convergence/convergence.json"
+    },
+    "animation_html_revision": {
+      "status": "completed",
+      "model": "GPT-6-Sol",
+      "reasoning_effort": "high",
+      "evidence": "solutions.html"
+    },
+    "single_script_consolidation": {
+      "status": "completed",
+      "evidence": "main.py"
+    },
+    "review_convergence_reconstruction": {
+      "status": "accepted_with_scope",
+      "evidence": "docs/REVIEW_REVISION.md"
+    },
+    "director_integration": {
+      "status": "completed_with_qualifications",
+      "evidence": "results/revision-validation/validation.json"
+    }
+  },
+  "claims": [
+    {
+      "id": "C-CONVERGENCE",
+      "status": "qualified",
+      "revision": 1,
+      "statement": "Scaling IVPs and exact nonpolynomial control approach fifth order; traveling and quadratic cases retain recorded floor/plateau limitations."
+    },
+    {
+      "id": "C-RECONSTRUCTION",
+      "status": "accepted",
+      "revision": 1,
+      "statement": "Local reconstructed phi,u,h follow the audited ansatzes and mask unsolved/nonpositive coordinates."
+    },
+    {
+      "id": "C-SINGLE-SCRIPT",
+      "status": "accepted",
+      "revision": 1,
+      "statement": "All runtime implementation and HTML template reside in readable main.py; copied script runs without reference sources and reports their absence."
+    },
+    {
+      "id": "C-HTML",
+      "status": "accepted",
+      "revision": 1,
+      "statement": "Offline viewer covers (24)-(33) as mapped representations of 21 computed IVPs."
+    }
+  ],
+  "reviews": [
+    {
+      "path": "docs/REVIEW_REVISION.md",
+      "sha256": "c390ab840ed83c9bc66a9121bb1a61cd06c2ed8e3eea823634c179c0c5752b1d",
+      "scope": "Convergence and reconstruction mathematics accepted with qualifications; final code and HTML integration validated by director."
+    }
+  ],
+  "receipts": [
+    "results/revision-validation/validation.json",
+    "REVISION_VALIDATION.md"
+  ],
+  "resources": {
+    "model": "GPT-6-Sol",
+    "reasoning_effort": "high",
+    "heavy_cpu_concurrency": 1,
+    "actual_tokens": null,
+    "provider_cache_telemetry": null,
+    "wall_time_note": "UTC timestamps measure elapsed revision time, not summed agent CPU or token usage."
+  },
+  "completed_utc": "2026-10-12T14:17:05.401881+00:00"
+}

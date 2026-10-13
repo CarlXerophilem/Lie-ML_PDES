@@ -1,5 +1,18 @@
 # Project map: certificate-gated Lie reduction and machine learning
 
+**Writing order updated 2026-10-13.** Lead with the
+[SVE replication](../research_artifacts/SVE-reproduced-20261012/README.md),
+corrected ODE solutions and discoveries. Derive the infinitesimal point
+generators from the master equation, then investigate ML-assisted ODE order
+reduction through verified nontrivial first integrals or ODE symmetries.
+The latter is a proposed research stage; existing neural profile fits do not
+establish order reduction. The three interests are the Lagrange coordinate
+option, parameter and distribution of symmetry-breaking, and trivial-symmetry
+filtration. Hybrid structure design and conservation analogies are later work.
+The detailed [revision contract](../research_artifacts/SVE-reproduced-20261012/SERIES_PLAN.md)
+sets this order; the older evidence maps below remain useful records of the
+completed mathematical and numerical infrastructure.
+
 This document is the visual map for the LieML research program. It separates three objects that must not be conflated:
 
 1. a **learned proposal**, which may rank or propose a symmetry candidate but proves nothing;

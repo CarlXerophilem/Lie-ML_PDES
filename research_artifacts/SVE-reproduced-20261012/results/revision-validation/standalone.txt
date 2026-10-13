@@ -1,0 +1,73 @@
+SVE reproduction: source formulas are checked against independent calculations.
+
+[master equation]
+  01. Coordinate definitions
+      x=phi(t,s), h=1/phi_s, u=phi_t, b(t,s)=B(t,phi(t,s))
+  02. Eulerian derivative operators
+      D_x=(1/q)D_s; D_T=D_t-(p/q)D_s
+  03. Continuity pullback
+      0
+  04. Momentum pullback
+      a + b_s*g/q - c*g/q**3
+  05. Exner pullback
+      b*kappa*m*p**(m - 1)/q - b_s*p/q + b_t
+  06. Printed Exner expression
+      b*kappa*m*p**(m - 1)/q + b_t
+  07. Missing term under the pullback interpretation
+      -b_s*p/q
+  08. Define A
+      a*q - c*g/q**2
+  09. Printed b_s
+      (-a*q + c*g/q**2)/g
+  10. Printed b_t
+      -b*kappa*m*p**(m - 1)/q
+  11. Compatibility b_st-b_ts
+      -a*b/g + b**2*kappa*m**2*p**m/(p**2*q) - b**2*kappa*m*p**m/(p**2*q) - b*c*kappa*m*p**m/(p*q**2) - 2*b*c/q**3 + kappa*m*p**m*x/(p*q) + x/q**2 - q*r/g
+  12. Printed master equation E=0
+      a*b + 2*b*c*g/q**3 - g*(b**2*kappa*m**2*p**m/(p**2*q) - b**2*kappa*m*p**m/(p**2*q) - b*c*kappa*m*p**m/(p*q**2) + kappa*m*p**m*x/(p*q)) - g*x/q**2 + q*r
+  13. Advectively corrected compatibility equation
+      -b**2*g*kappa*m**2*p**m/(p**2*q) + b**2*g*kappa*m*p**m/(p**2*q) + b*c*g*kappa*m*p**m/(p*q**2) + 3*b*c*g/q**3 - 3*c**2*g*p/q**4 - g*kappa*m*p**m*x/(p*q) + g*p*y/q**3 - g*x/q**2 - p*w + q*r
+
+Computing point-symmetry and Lie-algebra certificates...
+[Symmetries of the SVE Equation] computed; full formulas saved in evidence.json
+[One-Dimensional Optimal System] computed; full formulas saved in evidence.json
+
+Deriving the nine source reductions and Table 3 companion...
+
+Reduction 3.1: identity
+  residual: 0  guards: ['P>0', 'velocity=0 is outside the positive-velocity chart']
+
+Reduction 3.2: undefined
+  residual: None  guards: ['phi_s=0 violates the PDE domain']
+
+Reduction 3.3: no_invariant_graph
+  residual: None  guards: ['vertical orbit has no invariant graph']
+
+Reduction 3.4: regular_ode
+  residual: (-3*C**2*F**2*P*g*kappa*z + 3*C**2*P**3*g*kappa*z**3 - C**2*P**3*z**3 - 2*C**2*g*z + 3*C*F**2*P**2*g*kappa - 6*C*F*P**3*g*kappa*z + 3*C*P**4*g*kappa*z**2 - 3*C*P**4*z**2 + C*P*g + 3*F**2*H*P**2*g*kappa*z - 6*F*H*P**3*g*kappa*z**2 + 3*H*P**4*g*kappa*z**3 - H*P**4*z**3 + H*P*g*z)/P**3  guards: ['t>0', 'profile gradient P>0', 'profile velocity A*F+B*z*P>0', 'highest-derivative coefficient nonzero']
+
+Reduction 3.5: regular_ode
+  residual: -2*z*(12*C**2*P**3*g*kappa*z**2 - 4*C**2*P**3*z**2 - 2*C**2*g + 60*C*P**4*g*kappa*z - 12*C*P**4*z + 12*H*P**4*g*kappa*z**2 - 4*H*P**4*z**2 + H*P*g + 24*P**5*g*kappa - 2*P**5)/P**3  guards: ['t>0', 'profile gradient P>0', 'profile velocity A*F+B*z*P>0', 'highest-derivative coefficient nonzero']
+
+Reduction 3.6: regular_ode
+  residual: -(3*C**2*P**3*g*kappa - C**2*P**3 - 2*C**2*g + 3*H*P**4*g*kappa - H*P**4 + H*P*g)/P**3  guards: ['P>0', 'alpha3-alpha*P>0', 'alpha!=0', 'highest-derivative coefficient nonzero']
+
+Reduction 3.7: identity
+  residual: 0  guards: ['P>0', 'alpha>0 for positive-velocity chart']
+
+Reduction 3.8: regular_ode
+  residual: H  guards: ['alpha>0', 'P>0', 'alpha!=0']
+
+Reduction 3.9: regular_ode
+  residual: -(3*C**2*P**3*g*kappa - C**2*P**3 - 3*C**2*P*g*kappa - 2*C**2*g + 3*H*P**4*g*kappa - H*P**4 + 6*H*P**3*g*kappa + 3*H*P**2*g*kappa + H*P*g)/P**3  guards: ['P>0', 'alpha3-alpha*P>0', 'alpha!=0', 'highest-derivative coefficient nonzero']
+
+Reduction table3-mixed: regular_ode
+  residual: 2*(-48*C**2*F**2*P*g*kappa*z + 12*C**2*P**3*g*kappa*z**3 - 4*C**2*P**3*z**3 - 50*C**2*g*z + 48*C*F**2*P**2*g*kappa + 48*C*F*P**3*g*kappa*z + 4*C*F*P**3*z - 36*C*P**4*g*kappa*z**2 - 12*C*P**4*z**2 + 50*C*P*g + 48*F**2*H*P**2*g*kappa*z - 48*F*H*P**3*g*kappa*z**2 - 48*F*P**4*g*kappa + 8*F*P**4 + 12*H*P**4*g*kappa*z**3 - 4*H*P**4*z**3 + 25*H*P*g*z + 24*P**5*g*kappa*z + 10*P**5*z)/(125*P**3)  guards: ['t>0', 'profile gradient P>0', 'profile velocity A*F+B*z*P>0', 'highest-derivative coefficient nonzero']
+
+Running true Fehlberg RKF 4(5) and independent numerical checks...
+Checking fixed-step order and adaptive-tolerance convergence...
+Convergence cases completed: 21
+Animated solutions: C:\Users\Administrator\AppData\Local\Temp\sve-standalone-bvos2gvd\solutions.html
+
+Evidence report: C:\Users\Administrator\AppData\Local\Temp\sve-standalone-bvos2gvd\results\REPORT.md
+Read per-claim statuses; source discrepancies are retained.

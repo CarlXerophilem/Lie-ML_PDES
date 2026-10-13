@@ -1,0 +1,109 @@
+{
+  "timestamp_utc": "2026-10-12T11:22:24.598247+00:00",
+  "status": "completed_with_repository_validation_limitations",
+  "environment": "Windows 11; PYTHONUTF8=1; native MiKTeX; package versions in results/source_manifest.json",
+  "required_headings": {
+    "expected": 10,
+    "present_in_report": 10,
+    "present_in_manuscript": 10
+  },
+  "source_inventory": {
+    "equations": 34,
+    "tables": 3,
+    "numbered_reductions": 9,
+    "all_printed_claims_reproduced": false
+  },
+  "demo": {
+    "command": "python -B research_artifacts/SVE-reproduced-20261012/main.py --trace full",
+    "exit_code": 0,
+    "symbolic_passed": true,
+    "numeric_runs": 21,
+    "numeric_passed": 21,
+    "elapsed_seconds": 8.963179400001536,
+    "accepted_numeric_snapshot_equal_except_output_paths": true
+  },
+  "tests": {
+    "command": "python -B -m pytest -q --import-mode=importlib -p no:cacheprovider --basetemp=research_artifacts/SVE-reproduced-20261012/build/pytest-release scripts/tests symm/tests/test_chart_reduction.py symm/tests/test_engine.py research_artifacts/sve-progress-20261010/tests research_artifacts/SVE-reproduced-20261012/tests",
+    "exit_code": 1,
+    "passed": 137,
+    "failed": 1,
+    "new_package_passed": 44,
+    "historical_package_passed": 43,
+    "seconds": 29.52,
+    "failure": "scripts/tests/test_project_audit.py::test_missing_expanded_evidence_is_not_a_false_carrier_failure",
+    "diagnosis": "Existing fixture writes CRLF but manifest hashes LF. Normalizing fixture bytes to LF matches the expected hash.",
+    "earlier_attempts": [
+      {
+        "result": "collection error",
+        "cause": "duplicate test_numerics module names; resolved using importlib mode"
+      },
+      {
+        "result": "134 passed, 3 failed, 1 error",
+        "cause": "three cross-drive relpath errors plus CRLF fixture; same-drive basetemp resolves relpath issues",
+        "additional_notice": "pytest-current cleanup PermissionError"
+      }
+    ]
+  },
+  "project_checks": [
+    {
+      "command": "python scripts/project.py data-flux --out build/data-flux",
+      "exit_code": 0,
+      "status": "verified"
+    },
+    {
+      "command": "python scripts/project.py workflow --out build/workflow",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "python scripts/project.py audit",
+      "exit_code": 1,
+      "status": "failed",
+      "issue_count": 218,
+      "categories": {
+        "archive_unavailable": 1,
+        "canonical_reference_integrity": 30,
+        "active_markdown_links": 41,
+        "temporary_outputs_untracked": 146
+      },
+      "new_package_issues": 0,
+      "initial_attempt": "GBK decoding error without PYTHONUTF8; rerun completed with UTF-8"
+    }
+  ],
+  "latex": {
+    "command": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex draft/main.tex",
+    "backend": "native MiKTeX",
+    "exit_code": 0,
+    "pages": 32,
+    "undefined_citations_or_references": false,
+    "overfull_boxes": 0,
+    "underfull_boxes": 20,
+    "visually_inspected_pages": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      32
+    ],
+    "draft_pdf_matches_build": true,
+    "section_matches_inline": true
+  },
+  "frozen_inputs": {
+    "research_artifacts\\sve-progress-20261010\\MANIFEST.json": {
+      "sha256": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+      "matches_baseline": true
+    },
+    "research_artifacts\\sve-progress-20261010\\lie-ml-sve-progress-20261010.zip": {
+      "sha256": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16",
+      "matches_baseline": true
+    }
+  },
+  "non_claims": [
+    "No agreement with every printed formula",
+    "No global, weak-shock, full-bed-system or arbitrary-IBVP result",
+    "No continuous numerical error or positivity certificate",
+    "No isolated tolerance convergence order",
+    "No ML superiority or novelty priority claim"
+  ]
+}

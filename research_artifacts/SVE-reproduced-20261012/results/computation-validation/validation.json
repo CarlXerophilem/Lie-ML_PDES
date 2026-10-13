@@ -1,0 +1,176 @@
+{
+  "status": "completed_with_qualifications",
+  "created_utc": "2026-10-13T05:25:28.121366+00:00",
+  "contract": "COMPUTATION_PLAN.md",
+  "source_sha256": "71224cf2e4a3ed456dc0cf9b5bb467fdf484b3ce7b4a7b7d713f649aa9747aa9",
+  "run": {
+    "started_utc": "2026-10-13T05:15:23.694644+00:00",
+    "stage": "all",
+    "selection": "all",
+    "case": "all",
+    "calculation_mode": "fresh symbolic derivation and requested numerical stages",
+    "complete_audit": true,
+    "source_agreement": "assessed_per_claim",
+    "numerical_scope": "constructed dimensionless local IVPs",
+    "elapsed_seconds": 19.57746099997894,
+    "execution_status": "finished",
+    "all_printed_claims_reproduced": false,
+    "symbolic_passed": true,
+    "symbolic_failures": [],
+    "numerical_passed": true
+  },
+  "removed": [
+    "HTML template",
+    "viewer data packaging",
+    "viewer-only map",
+    "--stage html",
+    "--html-out",
+    "active solutions.html"
+  ],
+  "symbolic": {
+    "table2_cells": 25,
+    "table2_status": "agrees",
+    "graph_rows": 25,
+    "direct_master_substitutions": 23,
+    "first_integral_identities": 3,
+    "all_passed": true,
+    "scope": "selected invariant graphs; symbolic positive time; campaign exponents; alpha=-1 traveling cases; integral identities symbolic in m"
+  },
+  "numerical": {
+    "ivps": 21,
+    "main_rkf_rhs_evaluations": 10080,
+    "series": 21,
+    "convergence_completed": 21,
+    "fixed_order_status_counts": {
+      "measured_pairwise": 16,
+      "unresolved_at_reference_roundoff_floor": 5
+    },
+    "max_original_pde_residual_dop853": 7.984503500590989e-07,
+    "max_original_pde_residual_rkf45": 9.361751006145558e-07
+  },
+  "clean_run_receipt": {
+    "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/clean-run.json",
+    "sha256": "f2b18aaa2f222918e4fafc607c5026eb6bb7e9259930a4cc9bd1b8e9e3a50ad5"
+  },
+  "tests": {
+    "focused": {
+      "passed": 10,
+      "failed": 0,
+      "seconds": 5.89
+    },
+    "required_combined": {
+      "passed": 173,
+      "failed": 1,
+      "seconds": 46.91,
+      "package_tests_passed_within_combined_run": 80,
+      "failure": "scripts/tests/test_project_audit.py::test_missing_expanded_evidence_is_not_a_false_carrier_failure",
+      "qualification": "existing Windows fixture CRLF/hash mismatch"
+    }
+  },
+  "negative_controls": [
+    "master +q fails direct pullback gate",
+    "corrupted adjoint sign fails Table 2",
+    "new initial jet gives freshly integrated quadratic and Taylor coefficients",
+    "obsolete HTML CLI and stale report hashes rejected",
+    "reviewer altered 3.9 residual fails five pullbacks and integral",
+    "reviewer falsified eq25 audit flag fails symbolic summary"
+  ],
+  "project_checks": {
+    "audit": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/audit.json",
+      "sha256": "0244618df458052a479e93221ea1ffbf6fee34e7cfe6c59c26d5b9f4c84a41a7",
+      "status": "failed",
+      "issues": 218,
+      "categories": {
+        "available_history_preserved": 1,
+        "canonical_reference_integrity": 30,
+        "active_markdown_links": 41,
+        "temporary_outputs_untracked": 146
+      }
+    },
+    "data_flux": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/data_flux.json",
+      "sha256": "28f8ce27c6a4db0dff23960fd572238a71b7f4b6cc48c2cd1ad0c6d7af505da5",
+      "status": "verified"
+    },
+    "workflow": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/workflow.json",
+      "sha256": "f19be406d839ef0e91f1f47db54d62bf55493f4159c97d3554bd2a45cf72569a",
+      "status": "passed"
+    }
+  },
+  "manuscript": {
+    "pages": 36,
+    "pdf_sha256": "42d7c11ad5dee58e9033d879cef2e705d3b62aa8f88aea60c32bd0c73fc7278d",
+    "tex_sha256": "f2bf980e9bf1394bb3a4a132cd503cd4eec3408e1b402835a07ff467718fa8cc",
+    "bibliography_entries": 19,
+    "final_warning_matches": [],
+    "underfull_box_diagnostics": 21,
+    "rendered_page": 30,
+    "visual_inspection": "passed",
+    "render_sha256": "2024df4e8d2da6136a8809052d715b977c7c77411264e1423b05aaca1158c2b8",
+    "fragments_match": true
+  },
+  "dissertation_unchanged": true,
+  "frozen_hashes": {
+    "MANIFEST.json": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+    "lie-ml-sve-progress-20261010.zip": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16"
+  },
+  "prior_archive": {
+    "path": "research_artifacts/SVE-reproduced-20261012/archive/release-before-computation-only-20261013.zip",
+    "sha256": "e865d2c0ecbb59b473bea42dbfef6ab7d39a7c8e9e8a284e270cc95f4b221643"
+  },
+  "source_diff_check": "passed",
+  "report_only_exit_code": 0,
+  "independent_review": {
+    "path": "research_artifacts/SVE-reproduced-20261012/docs/REVIEW_COMPUTATION.md",
+    "sha256": "200db64f74f0727427668bf07a87b76cda5f7a6a3639697852953e45ac098674",
+    "status": "accepted_with_scope_qualifications"
+  },
+  "limitations": [
+    "authored source formulas, ansatzes and hand-derived orbit classification remain inputs",
+    "constructed local IVPs, not source-supplied numerical experiments",
+    "printed scalar target distinct from physically corrected and full bed-field models",
+    "finite diagnostics and local Taylor germs do not establish global or continuous error bounds",
+    "five quadratic convergence orders unresolved at reference floor",
+    "one existing regression failure and project audit failures retained"
+  ],
+  "logs": {
+    "computation-audit.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-audit.log",
+      "sha256": "dd21ed57e9b809faf11da7f2ddb61b6e0d45f1543ddecad0bb1eefb9408ecb3d"
+    },
+    "computation-canonical.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-canonical.log",
+      "sha256": "5b4104d0359a71ea490f825245e3c2e237f3f1e709f7d19a654351584f13e28c"
+    },
+    "computation-clean-run.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-clean-run.log",
+      "sha256": "688c251cd2c6aebdd0b65561645bcb2c877e0f943df245f5f5148d8c4e429a3a"
+    },
+    "computation-data-flux.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-data-flux.log",
+      "sha256": "40db5ac164aaefd92d7dc6f677d9f634b2c1ed4daf5390d333fd564591136552"
+    },
+    "computation-focused.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-focused.log",
+      "sha256": "cbb7b981b26d5a9812f9b5b179a0b2bbee8c0cb3c9242653063ca3c8d251dca9"
+    },
+    "computation-latexmk.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-latexmk.log",
+      "sha256": "dc5c966a9e64d178e6d95fff323bcfc29785bc8c0f737b0a4ec71054e199bd27"
+    },
+    "computation-regressions.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-regressions.log",
+      "sha256": "2e0fdc5fc26b1c4b5804b2562f804b442b53282c18a6f26cae3f8d5b79d8d4ec"
+    },
+    "computation-report.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-report.log",
+      "sha256": "25a4e2a53c5392c5b9430793a30a294343d2119dc2857478c439cb2cc296216d"
+    },
+    "computation-workflow.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/computation-validation/computation-workflow.log",
+      "sha256": "c4dd870cb8de174208b71e073147d9bd505fff7a3a27578b7df314cb0d42f8aa"
+    }
+  }
+}

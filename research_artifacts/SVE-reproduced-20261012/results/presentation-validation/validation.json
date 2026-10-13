@@ -1,0 +1,151 @@
+{
+  "status": "completed_with_qualifications",
+  "created_utc": "2026-10-13T04:07:00.192796+00:00",
+  "contract": "PRESENTATION_PLAN.md",
+  "run": {
+    "started_utc": "2026-10-13T03:56:03.488267+00:00",
+    "stage": "all",
+    "selection": "all",
+    "case": "all",
+    "complete_audit": true,
+    "source_agreement": "assessed_per_claim",
+    "numerical_scope": "constructed dimensionless local IVPs",
+    "elapsed_seconds": 18.95745280000847,
+    "execution_status": "finished",
+    "all_printed_claims_reproduced": false,
+    "symbolic_passed": true,
+    "symbolic_failures": [],
+    "numerical_passed": true
+  },
+  "three_purposes": {
+    "completeness": "explicit source28-31,33 mapping with chart guards",
+    "clarity": "finite transformation, invariants, ansatz, chain rule, PDE-to-ODE compression",
+    "verification": "exact integral, initial constant, drift and independently solved lower-order equations"
+  },
+  "plot_receipt": "results/presentation/plots.json",
+  "plot_cases": {
+    "3.4": {
+      "integral_constant": 0.395,
+      "max_scaled_drift": 3.7192471324942744e-15,
+      "max_two_state_disagreement": 5.551115123125783e-16
+    },
+    "3.6": {
+      "integral_constant": -0.355,
+      "max_scaled_drift": 4.996003610813204e-16,
+      "max_two_state_disagreement": 1.5226451375354087e-15
+    },
+    "3.9": {
+      "integral_constant": -0.395,
+      "max_scaled_drift": 8.326672684688674e-16,
+      "max_two_state_disagreement": 6.607477084810666e-16
+    }
+  },
+  "test_runs": {
+    "final_package": {
+      "passed": 76,
+      "failed": 0,
+      "seconds": 16.6
+    },
+    "focused_plot": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 3.47
+    },
+    "broad_before_plot_test": {
+      "passed": 168,
+      "failed": 1,
+      "seconds": 38.76,
+      "failure": "pre-existing Windows CRLF fixture/hash mismatch"
+    },
+    "initial_quiet_package": {
+      "status": "terminated_after_stall",
+      "completed_dots": 41,
+      "cause": "unresolved; not counted as passing"
+    }
+  },
+  "project_checks": {
+    "audit": {
+      "status": "failed",
+      "issues": 218,
+      "categories": {
+        "available_history_preserved": 1,
+        "canonical_reference_integrity": 30,
+        "active_markdown_links": 41,
+        "temporary_outputs_untracked": 146
+      }
+    },
+    "data_flux": "verified",
+    "workflow": "passed"
+  },
+  "manuscript": {
+    "pages": 36,
+    "pdf_sha256": "78b9939bb04a0ab5170c4db10135ec2a67080b3cc964861bc018d282daea3e16",
+    "tex_sha256": "90c975ff7081a6dde7bc68e46e08bb309080a37923f1bdcbe64216d0c1a14c8c",
+    "bibliography_entries": 19,
+    "final_warning_matches": [],
+    "rendered_pages": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      34,
+      35,
+      36
+    ],
+    "underfull_box_diagnostics": 21
+  },
+  "review": "docs/REVIEW_ODE_PRESENTATION.md",
+  "frozen_hashes": {
+    "MANIFEST.json": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+    "lie-ml-sve-progress-20261010.zip": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16"
+  },
+  "prior_archive": {
+    "path": "archive/release-before-presentation-20261013.zip",
+    "sha256": "e79e53730096dc1a15c40cea2d297790d581c4a492dedb4b25a07621e1525279"
+  },
+  "source_diff_check": "passed",
+  "dissertation_unchanged": true,
+  "logs": {
+    "presentation-audit.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-audit.log",
+      "sha256": "d6c636c92bee534de5d0519e1066e07ea217bba45fe7f8cacdd118df36586893"
+    },
+    "presentation-canonical.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-canonical.log",
+      "sha256": "0f7e991683e311f51ffea508453140c978e477220fba42ed39580e264cf1b445"
+    },
+    "presentation-data-flux.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-data-flux.log",
+      "sha256": "b1c6a4a2a795662195f5a4ca4696ad5768c585b251a4e03fc47c61f31e03fcdf"
+    },
+    "presentation-latexmk.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-latexmk.log",
+      "sha256": "3e84964ac3eb06c3712df96e7a66f946a2a5582e689c3fc81a89225ff00c58a7"
+    },
+    "presentation-package-tests-retry.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-package-tests-retry.log",
+      "sha256": "aec520299965f185b45ffbac0305e0a626f23c70ac96be98eef447f83b56593d"
+    },
+    "presentation-package-tests.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-package-tests.log",
+      "sha256": "0523b7f1dacf8ee7318e46fda3d156ae4bc941b06340f6682ec70f59e1786ddb"
+    },
+    "presentation-plot-diagnostic.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-plot-diagnostic.log",
+      "sha256": "5ff6a2bc1c039450b1baf653768c9ab642d6d22a2a19c51eb93c62ca8e6134d7"
+    },
+    "presentation-regressions.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-regressions.log",
+      "sha256": "a1b0df2e640476f62cdac91a57082b0b0ba870fcaca22d0c79f8a552564545bf"
+    },
+    "presentation-workflow.log": {
+      "path": "research_artifacts/SVE-reproduced-20261012/results/presentation-validation/presentation-workflow.log",
+      "sha256": "b491e3eae20506f3950afce85d08f2c57ce07e685e0fa2c235d86442524b950e"
+    }
+  },
+  "independent_review_status": "accepted_with_scope_qualifications",
+  "independent_review_sha256": "864da7fc6221f7bad59b0b887d0f141bbe75bfdb8ff463fe94fd3c5734fc72f1"
+}

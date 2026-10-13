@@ -1,0 +1,32 @@
+{
+  "id": "Teschl-analytic-ODE",
+  "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf",
+  "author": "Gerald Teschl",
+  "title": "Ordinary Differential Equations and Dynamical Systems",
+  "version": "Author-hosted preliminary version made available with AMS permission; locators refer to this downloaded copy",
+  "accessed_date": "2026-10-13",
+  "sha256": "362433156525216abf596c17ce843204510e96d57afa4284a37c7aa5a9ffc36e",
+  "pages": 364,
+  "verification": "primary_text_and_theorem_page_checked",
+  "locators": {
+    "section": "4.1",
+    "theorems": [
+      "4.1",
+      "4.2"
+    ],
+    "printed_pages": [
+      111,
+      112,
+      113
+    ],
+    "pdf_pages": [
+      122,
+      123,
+      124
+    ]
+  },
+  "supports": "Analytic normal-form ODEs have locally unique analytic solution germs; vector system set up on page111",
+  "does_not_support": "No computed radius, global solution, full bed model or certified numerical remainder for our data",
+  "reading_summary": "Section 4.1 sets up analytic vector ODEs, relates analyticity to convergent local power series, and proves local existence and uniqueness by analytic Picard iteration. A bounded complex neighborhood supplies a radius estimate only after its bounds are established; our code does not calculate those bounds.",
+  "distribution_note": "The downloaded book is kept only in ignored local build scratch; this receipt contains metadata and a paraphrase, not a redistributed PDF."
+}

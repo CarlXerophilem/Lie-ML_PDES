@@ -1,2 +1,14 @@
-ref/applications-of-lie-groups-to-differential-equations-graduate-texts-in-mathematics-9781468402766-9781468402742-1468402765_compress.pdf filter=lfs diff=lfs merge=lfs -text
-ref/*.pdf filter=lfs diff=lfs merge=lfs -text
+ref/applications-of-lie-groups-to-differential-equations-graduate-texts-in-mathematics-9781468402766-9781468402742-1468402765_compress.pdf filter=lfs diff=lfs merge=lfs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+ref/*.pdf filter=lfs diff=lfs merge=lfs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve release hashes across Windows and Linux checkouts.
+.gitattributes -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/SVE-reproduced-20261012/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+README.md -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/project-map.md -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+draft/main.tex -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+draft/dissertation.tex -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+draft/main.pdf binary
+draft/dissertation.pdf binary
+scripts/tests/test_project_audit.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf binary

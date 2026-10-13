@@ -1,0 +1,1351 @@
+=== PDF PAGE 1 ===
+ORIGINAL ARTICLE
+Two parameters Lie group analysis and numerical
+solution of unsteady free convective flow
+of non-Newtonian fluid
+M.J. Uddin a,*, M.M. Rashidi b,c, Hamed H. Alsulami d, S. Abbasbandy e,
+N. Freidoonimeh b
+a Department of Mathematics, American International University-Bangladesh, Banani, Dhaka, 1213, Bangladesh
+b Shanghai Key Lab of Vehicle Aerodynamics and Vehicle Thermal Management Systems, Tongji University, 4800 Cao An
+Rd., Jiading, Shanghai 201804, China
+c ENN-Tongji Clean Energy Institute of Advanced Studies, Tongji University, China
+d Department of Mathematics, Faculty of Science, King Abdulaziz University, Jeddah 21589, Saudi Arabia
+e Department of Mathematics, Science and Research Branch, Islamic Azad University, Tehran, Iran
+Received 15 February 2016; revised 19 April 2016; accepted 11 May 2016
+KEYWORDS
+Non-Newtonian ﬂuid;
+Numerical solution;
+Runge–Kutta–Fehlberg
+method;
+Lie group
+Abstract
+The two-dimensional unsteady laminar free convective heat and mass transfer ﬂuid ﬂow
+of a non-Newtonian ﬂuid adjacent to a vertical plate has been analyzed numerically. The two
+parameters Lie group transformation method that transforms the three independent variables into
+a single variable is used to transform the continuity, the momentum, the energy and the concentra-
+tion equations into a set of coupled similarity equations. The transformed equations have been
+solved by the Runge–Kutta–Fehlberg fourth-ﬁfth order numerical method with shooting technique.
+Numerical calculations were carried out for the various parameters entering into the problem. The
+dimensionless velocity, temperature and concentration proﬁles were shown graphically and the skin
+friction, heat and mass transfer rates were given in tables. It is found that friction factor and heat
+transfer (mass transfer rate) for methanol are higher (lower) than those of hydrogen and water
+vapor. Friction factor decreases while heat and mass transfer rate increase as the Prandtl number
+increases. Friction (heat and mass transfer rate) factor of Newtonian ﬂuid is higher (lower) than
+the dilatant ﬂuid.
+ 2016 Faculty of Engineering, Alexandria University. Production and hosting by Elsevier B.V. This is an
+open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+1. Introduction
+Studies of non-Newtonian ﬂuids ﬂow have received much
+attention and importance than Newtonian ﬂuids, due to their
+various technological and industrial applications. If there is a
+* Corresponding author. Tel.: +880 60104625506.
+E-mail
+addresses:
+jashim_74@yahoo.com
+(M.J.
+Uddin),
+mm_rashidi@tongji.edu.cn (M.M. Rashidi).
+Peer review under responsibility of Faculty of Engineering, Alexandria
+University.
+Alexandria Engineering Journal (2016) xxx, xxx–xxx
+HO STED  BY
+Alexandria University
+Alexandria Engineering Journal
+www.elsevier.com/locate/aej
+www.sciencedirect.com
+http://dx.doi.org/10.1016/j.aej.2016.05.009
+1110-0168  2016 Faculty of Engineering, Alexandria University. Production and hosting by Elsevier B.V.
+This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 2 ===
+nonlinear relationship between stress and the rate of strain, a
+ﬂuid could be said to be non-Newtonian, such that the viscos-
+ity is a function of variables such as temperature and density.
+Examples of non-Newtonian ﬂuids are mud, paste, personal
+care products, ice cream, paints, oils, cheese, asphalt. Many
+biological ﬂuids with higher molecular weight components
+are also non-Newtonian in nature. Non-Newtonian ﬂuids have
+many applications in industries such as coal slurries, polymers
+solution or melts, paints, greases, drilling mud and hydrocar-
+bon
+oils
+[1–6].
+For
+describing
+the
+properties
+of
+non-
+Newtonian ﬂuids, there are many models. These models or
+constitutive equations, however cannot describe all the behav-
+iors of these non-Newtonian ﬂuids, for example, normal stress
+differences, shear thinning or shear thickening, stress relax-
+ation, elastic effects and memory effects. A rigorous study of
+the boundary layer ﬂow and heat transfer of different non-
+Newtonian ﬂuids past a stretching sheet was required due to
+its immense industrial applications. Many authors have
+embarked on the study of non-Newtonian ﬂow for various rea-
+sons and using different methods of solution. Advancement in
+the study of various non-Newtonian ﬂuids has been made even
+by many investigators (see Refs. [7–12]). Recently, Hayat et al.
+[13] studied third grade ﬂuid over an unsteady permeable
+stretching
+sheet
+using
+HM.
+Shaﬁq
+et
+al.
+[14]
+studied
+magnetohydrodynamic axisymmetric ﬂow of a third grade
+ﬂuid between two porous disks. It is to certify that there are
+several limitations for the applied model for the analysis based
+on the non-Newtonian ﬂuids; however, these models are still
+useful tools and employed in different analysis in order to
+formulate and study the roles of non-Newtonian ﬂuids in
+different conditions and geometries (See these related papers
+[15–19]).
+The
+steady
+viscous
+incompressible
+ﬂow
+of
+a
+non-
+Newtonian power-law ﬂuid on a two-dimensional body in
+the presence of a magnetic ﬁeld was studied by Sarpkaya [20]
+and Djukic [21,22]. Andersson et al. [23] have considered the
+steady MHD ﬂow of a power-law ﬂuid over a linearly stretch-
+ing surface. The ﬂow and heat transfer of a power-law ﬂuid
+over a uniform moving surface with a constant parallel free
+stream in the presence of a magnetic ﬁeld have been studied
+by Kumari and Nath [24]. Liao [25] has obtained an analytical
+solution of the MHD of a non-Newtonian power-law ﬂuid
+over a linearly stretching surface. Among the most popular
+useful models for non-Newtonian ﬂuids is the power-law or
+Ostwald-de Waele model [26]. The steady ﬂow and heat trans-
+fer of a viscous incompressible power-law ﬂuid over a rotating
+inﬁnite disk have been investigated by Ming et al. [27]. This
+model is a simple nonlinear equation of state for inelastic ﬂuids
+which includes linear Newtonian ﬂuids as a special case. The
+power-law model provides an adequate representation of many
+non-Newtonian ﬂuids over the most important range of shear
+rates. This, together with its apparent simplicity, has made it a
+very attractive model in both analytical research and numerical
+research. Pascal [28] presented similarity solutions to some
+unsteady ﬂows of non-Newtonian ﬂuids of power law behav-
+ior. Pascal and Pascal [29] studied the nonlinear effects on
+some unsteady non-Darcian ﬂows through porous media.
+Unsteady forced convection heat transfer on a ﬂat plate
+embedded in the ﬂuid-saturated porous medium with inertia
+effect and thermal dispersion is investigated by Wen and Hsiao
+[30]. Israel-Cookey et al. [31] discussed the inﬂuence of viscous
+dissipation and radiation on unsteady MHD free-convection
+ﬂow past an inﬁnite heated vertical plate in a porous medium
+with time-dependent suction. Recently, Chiem and Zhao [32]
+Nomenclature
+A
+constant
+B
+constant
+C
+concentration
+Cf
+skin friction factor
+D
+mass diffusivity
+f
+dimensionless velocity functions
+g
+acceleration due to gravity
+Gr
+Grashof number
+K
+consistency coefﬁcient
+L
+reference length
+N
+buoyancy ratio
+n
+exponents identifying non-Newtonian behavior
+Nb
+Brownian motion
+Nu
+Nusselt number
+Pr
+Prandtl number
+Ra
+Rayleigh number
+Re
+Reynolds number
+Ri
+Richardson number
+Sc
+Schmidt number
+Sh
+Sherwood number
+T
+temperature
+t
+time
+u
+velocity in the x-direction
+U
+reference velocity
+v
+velocity in the y-direction
+x
+distance along the surface
+y
+distance normal to the surface
+Greek letters
+a
+molecular diffusivity
+ai
+constant
+bi
+constant
+bC
+coefﬁcient of mass expansion
+bT
+coefﬁcient of thermal expansion
+/
+dimensionless concentration
+g
+similarity variable
+h
+dimensionless temperature
+q
+density of the ambient ﬂuid
+w
+stream function
+Subscript, Superscript
+1
+conditions far away from the surface
+0
+differentiation with respect to g
+w
+wall
+2
+M.J. Uddin et al.
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 3 ===
+studied the problem of numerical study of steady/unsteady
+ﬂow and heat transfer in porous media using a characteris-
+tic-based matrix-free implicit FV method on unstructured
+grids.
+Some of the most related papers in this area are as follows:
+Lee et al. [33] presented a theoretical analysis that brings
+steady, laminar free convection from a vertical ﬂat plate
+immersed in a power-law stratiﬁed ﬂuid within the framework
+of classical boundary-layer theory. Laminar two-dimensional
+unsteady mixed-convection boundary-layer ﬂow of a viscous
+incompressible ﬂuid past a sharp wedge has been studied by
+Hossain et al. [34]. Ece and Buyuk [35] investigate steady, lam-
+inar free-convection boundary-layer ﬂow of a power-law ﬂuid
+over a vertical heated plate under mixed thermal boundary
+conditions. A numerical examination of the problem of
+unsteady free convection with heat and mass transfer from
+an isothermal vertical ﬂat plate to a non-Newtonian ﬂuid sat-
+urated porous medium has been done by Elgazery [36]. Merkin
+and Pop [37] considered the similarity equations for mixed
+convection boundary-layer ﬂow over a vertical semi-inﬁnite
+at plate in which the free stream velocity is uniform and the
+wall temperature is inversely proportional to the distance
+along the plate. Rashidi et al. [38] presented new analytical
+method for the study of natural convection ﬂow of a non-
+Newtonian. Similar problems have been investigated by others
+[39,40]. Most of foregoing researchers investigate the steady
+free convection to power-law ﬂuids. However, all the process
+at early time are time dependent phenomena. To better design
+and control them, knowing this dependency is important.
+Some new published papers regarding convective ﬂow can be
+found in [50–54].
+In this paper, the unsteady laminar incompressible free con-
+vective heat and mass transfer ﬂow of a non-Newtonian ﬂuid
+adjacent to a vertical plate is considered. The coupled govern-
+ing equations are transformed into ordinary differential equa-
+tions using tow parameter Lie group of transformations. The
+fourth
+ﬁfth
+order
+Runge–Kutta–Fehlberg
+and
+shooting
+method are applied to solve the ODEs.
+2. Mathematical model
+Consider unsteady two dimensional laminar free convective
+heat and mass transfer ﬂow of a non-Newtonian ﬂuid adjacent
+to a vertical plate. The physical scenario is shown in Fig. 1.
+The ﬁeld variables within boundary-layers are the velocity
+components u and v along (the x-axis) and normal to the plate
+(the y-axis), the temperature T and the concentration C. By
+using the standard power-law viscosity model and the Boussi-
+nesq
+assumption,
+the
+coupled
+boundary-layer
+equations
+describing mass, momentum and energy conservation are
+@u
+@x þ @v
+@y ¼ 0;
+ð1Þ
+@u
+@t þ u @u
+@x þ v @u
+@y ¼ K
+q
+@
+@y
+@u
+@y
+
+
+n1 @u
+@y
+"
+#
+þ gbT T  T1
+ð
+Þ
+þ gbCðC  C1Þ;
+ð2Þ
+@T
+@t þ u @T
+@x þ v @T
+@y ¼ a @
+@y
+@u
+@y
+
+
+n1 @T
+@y
+"
+#
+;
+ð3Þ
+@C
+@t þ u @C
+@x þ v @C
+@y ¼ D @2C
+@y2 :
+ð4Þ
+The boundary conditions are
+v x; 0; t
+ð
+Þ ¼ uðx; 0; tÞ ¼ 0; T x; 0; t
+ð
+Þ ¼ Tw þ Tw  T1
+
+ x
+t2 ;
+C x; 0; t
+ð
+Þ ¼ Cw þ Cw  C1
+
+ x
+t2 ; u x; 1; t
+ð
+Þ ! 0;
+T x; 1; t
+ð
+Þ ! T1; C x; 1; t
+ð
+Þ ! C1:
+ð5Þ
+Here g is the acceleration due to gravity, a is the molecular dif-
+fusivity, D is the mass diffusivity, K is the consistency coefﬁ-
+cient, q is the density of the ambient ﬂuid, bT is the
+coefﬁcient of thermal expansion, bC is the coefﬁcient of mass
+expansion. The sufﬁxes w, 1 indicate the conditions at the
+plate and in the ambient medium respectively. We non-
+dimensionalized the governing equations using the following
+variables:
+x ¼ x
+L ; y ¼ y
+L Re
+1
+ðnþ1Þ
+n
+; u ¼ u
+U ; v ¼ v
+U Re
+1
+ðnþ1Þ
+n
+;
+T ¼ T  T1
+Tw  T1
+; C ¼ C  Cw
+C1  Cw
+; t ¼
+tU
+L ;
+ð6Þ
+where U ¼
+ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+gbT Tw  T1
+ð
+ÞL
+p
+is the reference velocity, L is the
+reference length, and Ren = qU2nLn/K is the generalized Rey-
+nolds number, Re = qUL/l is the Reynolds number. Also,
+introducing stream function w(x, y, t) deﬁned as u ¼ @w
+@y,
+v ¼  @w
+@x, which automatically satisﬁes the mass conservation
+Eq. (1) and Eqs. (2)–(4) becomes
+Figure 1
+The schematic of the problem and coordinate system.
+Unsteady free convective ﬂow of non-Newtonian ﬂuid
+3
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 4 ===
+@2w
+@y@t þ @w
+@y
+@2w
+@x@y  @w
+@x
+@2w
+@y2 ¼ @
+@y
+@2w
+@y2
+
+
+n1 @2w
+@y2
+"
+#
+þ RiT
+þ RiNC;
+ð7Þ
+@T
+@t þ @w
+@y
+@T
+@x  @w
+@x
+@T
+@y ¼ 1
+Pr
+@
+@y
+@2w
+@y2
+
+
+n1 @T
+@y
+"
+#
+;
+ð8Þ
+Sc @C
+@t þ @w
+@y
+@C
+@x  @w
+@x
+@C
+@y
+
+
+¼ @2C
+@y2 :
+ð9Þ
+The boundary conditions (5) now become
+@w
+@x ¼ @w
+@y ¼ 0; T ¼ x
+t2 ; C ¼ x
+t2 at y ¼ 0;
+@w
+@y ! 0; T ! 0; C ! 0 as y ! 1:
+ð10Þ
+Here Pr = K/qa is the Prandtl number, Sc ¼ DRe
+1
+ðnþ1Þ
+n
+UL
+is the
+Schmidt
+number,
+Ri = Gr/Re2 = 1
+is
+the
+Richardson
+number, Gr = q2gbT(Tw  T1)L3/K2 is the Grashof number,
+N = bC(Cw  C1)/bT(Tw  T1)
+is
+the
+buoyancy
+ratio
+parameters.
+3. Lie group of transformations
+It is known that similarity solution is important in many ﬁelds
+in sciences and engineering. It is necessary to seek a general
+approach to apply it to those novel problems. The Lie group
+transformation technique is a well-developed theory about con-
+tinuous symmetry of mathematical objects and structures and
+can be used for many subjects of contemporary mathematics
+and modern theoretical physics. It is expected that this theory
+can provide us with a new methodology for analyzing the con-
+tinuous symmetries of governing equations of heat ﬂuid ﬂows
+in non-Newtonian ﬂuids. It reduces the number of independent
+variables of the partial differential equations under considera-
+tion and keeps the system and associated initial and boundary
+condition invariant. It should be noted that several researchers
+have made attempts to incorporate the Lie group transforma-
+tion technique. Examples include Asghar et al. [41], and Uddin
+et al. [42]. Reviews for the fundamental theory and applications
+of Lie group analysis to differential equations may be found in
+the texts by Olver [43], Bluman and Kumei [44], Cantwell [45].
+We select following two parameters linear group of transforma-
+tions (a special form of Lie group transformation)
+x ¼ tAa1; x ¼ xBb1; w ¼ wAa2Bb2;
+y ¼ yAa3Bb3; T ¼ TAa4Bb4; C ¼ CAa5Bb5;
+ð11Þ
+where A, B, ai, bi(i = 1, 2, . . . , 5) are constants. We seek the
+values of ai, bi such that the form of Eqs. (7)–(9) is invariant
+under the transformations. Eqs. (7)–(9) will be invariant if
+ai, bi, are connected by
+a2 ¼ 1  2n
+ð1 þ nÞ a1; a3 ¼ 2  n
+ð1 þ nÞ a1; a4 ¼ 2a1; a5 ¼ 2a1;
+b2 ¼
+2n
+ð1 þ nÞ b1; b3 ¼ n  1
+ð1 þ nÞ b1; b4 ¼ b1; b5 ¼ b1:
+ð12Þ
+With these relationship of ai, bi, Eq. (11) becomes
+x ¼ tAa1; x ¼ xBb1; w ¼ wAð12n
+1þn Þa1Bð 2n
+1þnÞb1;
+y ¼ yAð2n
+1þnÞa1Bðn1
+1þnÞb1; T ¼ TA2a1Bb1; C ¼ CA2a1Bb1:
+ð13Þ
+Next, we seek ‘‘absolute invariants” under this group of
+transformations, i.e., functions having the same form before
+and after the transformation.
+3.1. Similarity transformations (absolute invariants)
+It is seen from Eqs. (11) and (13) that
+y
+t 2n
+1þn
+ð
+Þx n1
+1þn
+ð
+Þ ¼
+y
+t
+2n
+1þn
+ð
+Þx
+n1
+1þn
+ð
+Þ :
+ð14Þ
+This combination is therefore absolute invariant, and we
+denote this invariant by
+g ¼
+y
+t
+2n
+1þn
+ð
+Þx
+n1
+1þn
+ð
+Þ :
+ð15Þ
+By the same argument, other absolute invariants are
+fðgÞ ¼
+w
+t
+2n1
+1þn
+ð
+Þx
+2n
+1þn
+ð
+Þ ; hðgÞ ¼ t2
+x T; /ðgÞ ¼ t2
+x C:
+ð16Þ
+3.2. Similarity differential equations
+Using the similarity transformations in Eqs. (15) and (16) into
+Eqs. (7)–(9), we obtain the following similarity equations,
+n f00
+j j
+n1f000 þ f0 þ
+2  n
+n þ 1
+
+	
+gf00  f02 þ
+2n
+n þ 1
+
+	
+ff00 þ h þ N/ ¼ 0;
+ð17Þ
+1
+Pr ðn  1Þ f00
+j j
+n2f000h0 þ f00
+j j
+n1h00
+h
+i
+þ 2h þ
+2  n
+n þ 1
+
+	
+gh0  f0h
+þ
+2n
+n þ 1
+
+	
+fh0 ¼ 0;
+ð18Þ
+1
+Sc /00 þ 2/ þ
+2  n
+n þ 1
+
+	
+g/0  f0/ þ
+2n
+n þ 1
+
+	
+f/0 ¼ 0:
+ð19Þ
+The transformed boundary conditions are
+fð0Þ ¼ f0ð0Þ ¼ 0; hð0Þ ¼ /ð0Þ ¼ 1; f0ð1Þ ¼ hð1Þ
+¼ /ð1Þ ¼ 0:
+ð20Þ
+Here primes denote derivatives with respect to the similarity
+independent variable g.
+3.3. Validity of our group analysis
+It is interesting to note that for n = 1, we can recover the sim-
+ilarity solutions reported by Kolomenskiy and Mofatt [46] and
+Bachok et al. [47] which conﬁrm our two parameters group
+method. In the absence of the heat and mass transfer, it is
+worth mentioning that Eq. (17) for n = 1 becomes identical
+with Eq. (6) found by Fang et al. [48] for the unsteady two-
+dimensional shrinking sheet when b = 1
+4
+M.J. Uddin et al.
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 5 ===
+4. Physical quantities
+The quantities of interest are the skin friction factor Cfx, the
+local Nusselt number Nux and the local Sherwood number
+Shx can be found from the following deﬁnition:
+Cfx ¼ 2sw
+qU2 ; Nux ¼
+xqw
+k Tw  T1
+ð
+Þ ; Shx ¼
+xJw
+D Cw  C1
+ð
+Þ ;
+ð21Þ
+where sw, qw, Jw are shear stress, the wall heat ﬂux and the wall
+mass ﬂux (dimensional) and are deﬁned as
+sw ¼ l @u
+@y
+
+	n
+y¼0
+; qw ¼ k @u
+@y
+
+	n1
+y¼0
+@T
+@y
+
+	
+y¼0
+; Jw ¼ D @C
+@y
+
+	
+y¼0
+:
+ð22Þ
+Using variables (6), (15), (16) and (22), we can show that
+normalized Cfx; Nux and Shx are proportional f00ð0Þ
+j
+j
+n, h0ð0Þ
+and –/0(0).
+5. Results and discussion
+The transformation of the governing equations reduces the
+numerical work signiﬁcantly. The resulting system of coupled
+equations and associated boundary conditions is solved by
+the
+Runge–Kutta–Fehlberg
+fourth-ﬁfth
+order
+numerical
+method with shooting technique [49]. Graphical representation
+of results is very useful to discuss the physical features pre-
+sented by the solutions. This section describes the inﬂuence
+of some interesting parameters on the dimensionless velocity,
+temperature and concentration ﬁelds. The inﬂuences of the
+entering parameters on the dimensionless velocity, temperature
+and concentration are shown in Figs. 2–13.
+5.1. Velocity proﬁles
+The behavior of velocity when the foreign mass within the
+boundary layer is Hydrogen (Sc = 0.22 approx.), water vapor
+(Sc = 0.60 approx.) and methanol (Sc = 1.0) at approxi-
+mately
+25 C
+and
+1 atm
+is
+shown
+in
+Fig.
+2
+when
+Ri = n = N = 1 and Pr = 6.2 (air). Schmidt number is the
+ratio of viscous diffusion to molecular (species) diffusion.
+For Sc < 1, molecular diffusion rate exceeds the momentum
+diffusion rate and vice versa for Sc > 1. Sub-unity values of
+Schmidt number will therefore result in a deceleration in the
+ﬂow (reduced skin friction), which will also decrease thermal
+diffusion rates. Conversely mass transfer will be accentuated
+in the regime with increasing Sc values. This can be observed
+in Table 1. The parameter n = 1 stands for Newtonian ﬂuid
+and the buoyancy parameter N = 1 stands for buoyancy aid-
+ing ﬂow where thermal buoyancy and concentration buoyancy
+are of comparable order. It is found that in the vicinity of the
+plate, the velocity of the methanol is higher than that of
+Hydrogen. However, the velocity of the water vapor is lower
+than that of methanol of Hydrogen gas. The boundary layer
+thickness of water vapor is higher than that of methanol and
+Hydrogen. This ﬁgure also shows the effects of the similarity
+variable g(x, y, t) on the velocity. It is found that the nondi-
+mensional velocity enhances as nondimensional time pro-
+gresses from the beginning to the steady-state condition.
+Fig. 3 shows the dimensionless velocity proﬁles in the bound-
+ary layer for different values of the Prandtl number Pr when
+Ri = n = N = 1 and Sc = 1.0. Pr is the ratio of momentum
+diffusivity to thermal diffusivity for a given nanoﬂuid. With
+lower Pr ﬂuids, heat diffuses faster than momentum (the
+energy diffusion rate exceeds the viscous diffusion rate) and
+vice versa for higher Pr ﬂuids. With an increase in Pr, velocity
+will rise when Pr changes from 1 to 6.2. Reverse trends of
+velocity are noticed when Pr changes from 0.2 to 1. The buoy-
+ancy ratio N = bC(Cw  C1)/bT(Tf  T1) represents the rela-
+tive magnitude of species buoyancy and thermal buoyancy
+forces. For N = 1 these two forces are of the same magnitude.
+For N > 0, species buoyancy is dominant and opposite for
+N < 1. The weaker contribution of thermal buoyancy force
+for N < 1 results in a depletion in local Nusselt number.
+The stronger contribution of species buoyancy force for
+N > 1 induces enhancement in the local Sherwood number.
+The momentum ﬁeld is coupled to the concentration (species)
+ﬁeld via the linear species buoyancy force, N/, in the momen-
+tum Eq. (17). Effect of the buoyancy ratio N on the dimension-
+less velocity proﬁles is investigated in Fig. 4 for constant values
+Ri = n = Sc = 1.0 and Pr = 6.2. As expected when the buoy-
+ancy ratio increases boundary layer thickness increases. In this
+state for N = 0.0 ﬁrstly boundary layer grows on the opposite
+side and then returns to regular side. Fig. 5 presents the
+Figure 2
+Effect of the Schmidt number Sc on the dimensionless
+velocity proﬁle.
+Table 1
+Values of skin friction factor, Nusselt number and
+Sherwood number for different values of the parameters Sc, Pr,
+N and n.
+Sc
+Ri
+Pr
+N
+n
+Cfx
+Nux
+Shx
+1
+1
+6.2
+1
+1
+2.08464
+3.75463
+3.17568
+0.6
+1
+6.2
+1
+1
+1.27488
+4.87027
+4.01747
+0.2
+1
+6.2
+1
+1
+1.02746
+4.23367
+1.94564
+1
+1
+0.2
+1
+1
+2.90657
+0.85986
+0.02343
+1
+1
+1
+1
+1
+2.25657
+1.87947
+2.56748
+1
+1
+6.2
+0
+1
+1.94098
+3.98048
+7.49086
+1
+1
+6.2
+2
+1
+2.37469
+2.59017
+1.84765
+1
+1
+6.2
+1
+2
+2.08464
+3.75463
+3.17568
+Unsteady free convective ﬂow of non-Newtonian ﬂuid
+5
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 6 ===
+variations of the velocity boundary layer for the different
+values of power ﬂow n when Ri = Sc = 1.0, and Pr = 6.2.
+It is clear that for n = 2 boundary layer thickness is much
+larger. In addition, for n = 1 ﬁrstly boundary layer grows on
+the opposite side and then returns to regular side.
+5.2. Temperature proﬁles
+Fig. 6 shows the dimensionless temperature distributions in the
+thermal boundary layer for different values of the Schmidt
+number
+when
+Ri = n = N = 1.0
+and
+Pr = 6.2.
+As
+Sc
+increases, the thermal boundary layer thickness increases
+ﬁrstly and then decreases but this trend is also associated with
+side changes. It is noteworthy that for Sc = 1.0 the tempera-
+ture gradient at the edge of vertical plate is positive and for
+Sc = 0.2, 0.6 this amount is negative. This ﬁgure also shows
+the effects of the similarity variable g(x, y, t) on the tempera-
+ture. It is found that as the non-dimensional temperature
+enhances as non-dimensional time progresses from the begin-
+ning to the steady-state condition. Effect of the Prandtl num-
+ber on the thermal boundary-layer when Ri = n = N = 1.0
+and Sc = 1.0 is shown in Fig. 7. It is clear that as the Prandtl
+number increases, the thickness of the thermal boundary-layer
+decreases as the curves become increasingly steeper. This is in
+agreement with the physical fact that the thermal boundary-
+layer thickness decreases with increasing Prandtl number.
+Fig. 8 illustrates the effect of the buoyancy ratio N on the
+temperature proﬁle for constant values Ri = n = Sc = 1.0
+and Pr = 6.2. As expected when the buoyancy ratio increases
+thermal boundary layer thickness decreases, but for N = 0.0
+η
+f '(η)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+Pr=0.2
+Pr=1.0
+Pr=6.2
+Ri=1.0,n=1.0,
+N=1.0,Sc=1.0
+Figure 3
+Effect of the Prandtl number Pr on the dimensionless
+velocity proﬁle.
+Figure 4
+Effect of the buoyancy ratio N on the dimensionless
+velocity proﬁle.
+Figure 5
+Effect of the power law n on the dimensionless velocity
+proﬁle.
+Figure 6
+Effect of the Schmidt number Sc on the dimensionless
+temperature proﬁle.
+6
+M.J. Uddin et al.
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 7 ===
+ﬁrstly boundary-layer grows on the opposite side and then
+returns to regular side. The temperature proﬁles are depicted
+in Fig. 9 for different values of power law n and ﬁx parameters
+Ri = Sc = 1.0, N = 0.0, and Pr = 6.2. It is clear that for
+n = 2 thermal boundary-layer thickness is much larger. In
+addition, for n = 1 ﬁrstly boundary-layer grows on the oppo-
+site side and then returns to regular side. Temperature
+increases as the index n increases.
+5.3. Concentration proﬁles
+Fig. 10 reveals variation of the dimensionless concentration
+graph in response to a change in Schmidt number when
+Ri = n = N = 1.0 and Pr = 6.2. The inﬂuence of Schmidt
+number on the dimensionless concentration proﬁle graph is
+as the values of Schmidt number increase, the curves of con-
+centration boundary-layer become increasingly steeper. But
+variation of concentration boundary layer thickness with inde-
+terminate is indeterminate. Fig. 11 shows that as the Prandtl
+number decreases, the species concentration drops more
+rapidly as the thickness of the concentration boundary-layer
+decreases. Resent results are obtained for Ri = n = N = 1.0
+as ﬁx values. For constant values Ri = n = N = 1.0 and
+Pr = 6.2. It was observed in Fig. 12 that as the buoyancy ratio
+increases, the concentration boundary-layer decreases. It is
+highlighted that for N = 0.0 manner of graph is different. In
+this statue concentration gradient at the edge of vertical plate
+is negative; therefore, concentration boundary-layer grows on
+the opposite side and then returns to positive position. It
+should be mentioned that boundary-layer thickness at negative
+Figure 7
+Effect of the Prandtl number Pr on the dimensionless
+temperature proﬁle.
+Figure 8
+Effect of the buoyancy ratio N on the dimensionless
+temperature proﬁle.
+Figure 9
+Effect of the power law n on the dimensionless
+temperature proﬁle.
+Figure 10
+Effect of the Schmidt number Sc on the dimensionless
+concentration proﬁle.
+Unsteady free convective ﬂow of non-Newtonian ﬂuid
+7
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 8 ===
+side is rather than positive side. Finally in Fig. 13 the concen-
+tration proﬁles are depicted for different values of power ﬂow
+n and ﬁx parameters Ri = Sc = 1.0, N = 0.0 and Pr = 6.2.
+Similar to velocity and temperature proﬁles, trend of concen-
+tration
+proﬁles
+is
+different
+for
+n = 1.0
+and
+n = 2.0.
+Boundary-layer thickness for n = 2.0 is thinner rather than
+n = 1.0 but for recent case concentration gradient at the edge
+of vertical plate is negative; therefore, concentration boundary
+layer grows on the opposite side and then returns to positive
+position.
+Also, for investigation of the parameters of physical inter-
+est, Table 1 is presented. In this table numerical values of
+the skin friction factor, Nusselt number and Sherwood number
+for different values of the parameters Sc, Pr, N and n are
+included. The mentioned notiﬁcation of Figs. 2–16 can be
+observed in Table 1. Particularly, it should be highlighted that
+sign of the skin friction factor Cfx, the local Nusselt number
+Nux and the local Sherwood number Shx (slope of velocity,
+temperature and concentration proﬁles, respectively) can be
+changed by variations of Sc, Ri and N. Also it is observed that
+in contrast to changing the parameters there is not a regular
+manner for physical quantities, generally. Because of unavail-
+ability of theoretical or experimental data for the problem of
+unsteady non-Newtonian free convection (power-law ﬂuids),
+it is not possible to compare our results. Therefore, there is a
+need for more systematic studies to compare and evaluate
+the ﬂow and the heat/mass transfer situations.
+6. Conclusions
+A mathematical model for the unsteady ﬂow of a non-
+Newtonian ﬂuid adjacent to a vertical plate has been devel-
+oped. The governing partial differential equations for mass,
+momentum, energy and concentration have been reduced to
+a triplet of coupled, nonlinear ordinary differential equations
+as well as relevant boundary conditions via the single applica-
+tions of two parameters Lie group transformation method.
+These equations are solved by a numerical method (fourth-
+order Runge–Kutta scheme with the shooting method). The
+novel aspect of this paper can be extracted as follows:
+(i) Friction factor and heat transfer for methanol are higher
+than those of hydrogen and water vapor, and reversed
+trend is noticed for mass transfer rate.
+(ii) Friction factor decreases while heat and mass transfer
+rates increase as the Prandtl number increases.
+(iii) Friction factor increases while heat and mass transfer
+rates decrease as the buoyancy ration increases.
+(iv) Friction factor increases while heat and mass transfer
+rates decrease as the buoyancy ration increases.
+(v) Friction (heat and mass transfer rate) factor of Newto-
+nian ﬂuid is higher (lower) than the dilatant ﬂuid.
+Figure 13
+Effect of the power law n on the dimensionless
+concentration proﬁle.
+Figure 12
+Effect of the buoyancy ratio N on the dimensionless
+concentration proﬁle.
+Figure 11
+Effect of the Prandtl number Pr on the dimensionless
+concentration proﬁle.
+8
+M.J. Uddin et al.
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 9 ===
+The present study has been restricted to regular ﬂuid ﬂows.
+Future investigations will consider non-Newtonian nanoﬂuids
+and will be communicated shortly.
+References
+[1] M.M.
+Rashidi,
+S.A.
+Mohimanian
+pour,
+S.
+Abbasbandy,
+Analytic
+approximate
+solutions
+for
+heat
+transfer
+of
+a
+micropolar ﬂuid through a porous medium with radiation,
+Commun. Nonlinear Sci. Numer. Simul. 16 (2011) 1874–1889.
+[2] M. Sajid, T. Hayat, S. Asghar, Comparison between the HAM
+and HPM solutions of thin ﬁlm ﬂows of non-Newtonian ﬂuids
+on a moving belt, Nonlinear Dynam. 50 (2007) 27–35.
+[3] M.J. Uddin, N.H.Md. Yusoff, O. Anwar Be´ g, A.I.Md. Ismail,
+Lie group analysis and numerical solutions of boundary layer
+ﬂow of non-Newtonian nanoﬂuids along a horizontal plate in
+porous medium with internal heat generation, Phys. Scr. 87
+(2013) 025401.
+[4] O.D. Makinde, Thermal stability of a reactive third grade ﬂuid
+in
+a
+cylindrical
+pipe:
+an
+exploitation
+of
+Hermite-Pade
+approximation technique, Appl. Math. Comput. 189 (2007)
+690–697.
+[5] O.D. Makinde, Hermite-Pade approximation approach to
+thermal criticality for a reactive third-grade liquid in a channel
+with isothermal walls, Int. Commun. Heat Mass Transfer 34 (7)
+(2007) 870–877.
+[6] J.B.R. Loureiroa, A.P. Silva Freirea, Asymptotic analysis of
+turbulent boundary-layer ﬂow of purely viscous non-Newtonian
+ﬂuids, J. Non-Newtonian Fluid Mech. 199 (2013) 20–28.
+[7] G.
+Davaa,
+T.
+Shigechi,
+S.
+Momoki,
+Effects
+of
+viscous
+dissipation on fully developed heat transfer of non-Newtonian
+ﬂuids in plane laminar Poiseuille-Couette ﬂow, Int. Commun.
+Heat Mass Transfer 31 (5) (2004) 663–672.
+[8] M. El-Shahed, MHD of a fractional viscoelastic ﬂuid in a
+circular tube, Mech. Res. Commun. 33 (2006) 261–268.
+[9] M.
+Firouzi,
+S.H.
+Hashemabadi,
+Analytical
+solution
+for
+Newtonian-Bingham
+plastic
+two-phase
+pressure
+driven
+stratiﬁed ﬂow through the circular ducts, Int. Commun. Heat
+Mass Transfer 35 (5) (2008) 666–673.
+[10] T. Hayat, R. Ellahi, S. Asghar, The inﬂuence of variable
+viscosity and viscous dissipation on the non-Newtonian ﬂow: an
+analytical solution, Commun. Nonlinear Sci. Numer. Simul. 12
+(2007) 300–313.
+[11] O. Jambal, T. Shigechi, G. Davaa, S. Momoki, Effects of
+viscous dissipation and ﬂuid axial heat conduction on heat
+transfer for non-Newtonian ﬂuids in ducts with uniform wall
+temperature. Part I: parallel plates and circular ducts,, Int.
+Commun. Heat Mass Transfer 32 (9) (2005) 1165–1173.
+[12] M. Sajid, T. Hayat, S. Asghar, On the analytic solution of the
+steady ﬂow of a fourth grade ﬂuid, Phys. Lett. A 355 (2006) 18–
+26.
+[13] Tasawar Hayat, Anum Shaﬁq, Ahmed Alsaedi, Effect of joule
+heating and thermal radiation in ﬂow of third grade ﬂuid over
+radiative surface, PLoS ONE (2014).
+[14] A.
+Shaﬁq,
+M.
+Nawaz,
+T.
+Hayat,
+A.
+Alsaedi,
+Magnetohydrodynamic axisymmetric ﬂow of a third grade
+ﬂuid between two porous disks, Braz. J. Chem. Eng. 30 (3)
+(2013).
+[15] R. Dhanai, P. Rana, L. Kumar, Critical values in slip ﬂow and
+heat transfer analysis of non-Newtonian nanoﬂuid utilizing heat
+source/sink and variable magnetic ﬁeld: multiple solutions, J.
+Taiwan Inst. Chem. Eng. 58 (2016) 155–164.
+[16] A. Pantokratoras, Non-similar Blasius and Sakiadis ﬂow of a
+non-Newtonian Carreau ﬂuid, J. Taiwan Inst. Chem. Eng. 56
+(2015) 1–5.
+[17] M. Shojaeian, M. Yildiz, A. Kosar, Convective heat transfer
+and second law analysis of non-Newtonian ﬂuid ﬂows with
+variable thermophysical properties in circular channels, Int.
+Commun. Heat Mass Transfer 60 (2015) 21–31.
+[18] X. Sia, X. Zhua, L. Zhenga, X. Zhangc, P. Lin, Laminar ﬁlm
+condensation
+of
+pseudo-plastic
+non-Newtonian
+ﬂuid
+with
+variable thermal conductivity on an isothermal vertical plate,
+Int. J. Heat Mass Transf. 92 (2016) 979–986.
+[19] A.M. Megahed, Flow and heat transfer of a non-Newtonian
+power-law ﬂuid over a non-linearly stretching vertical surface
+with heat ﬂux and thermal radiation, Meccanica 50 (2015) 1693–
+1700.
+[20] T. Sarpkaya, Flow of non-Newtonian ﬂuids in a magnetic ﬁeld,
+AIChE. J. 7 (1961) 324–328.
+[21] D.S. Djukic, On the use of Crocco’s equation for the ﬂow of
+power-law ﬂuids in a transverse magnetic ﬁeld, AIChE J. 19
+(1973) 1159–1163.
+[22] D.S. Djukic, Hiemenz magnetic ﬂow of power-law ﬂuids, J.
+Appl. Mech. 41 (1974) 822–823.
+[23] H.I.
+Andersson,
+K.H.
+Bach,
+B.S.
+Dandapat,
+Magnetohydrodynamic ﬂow of a power-law ﬂow over a
+stretching sheet, Int. J. Non-Linear Mech. 27 (1992) 929–936.
+[24] M. Kumari, G. Nath, MHD boundary layer ﬂow of a non-
+Newtonian ﬂuid over a continuously moving surface with a
+parallel free stream, Acta Mech. 146 (2001) 139–150.
+[25] S.J. Liao, On the analytic solution of magnetohydrodynamic
+ﬂows of non-Newtonian ﬂuids over a stretching sheet, J. Fluid
+Mech. 488 (2003) 189–212.
+[26] R.B. Bird, Useful non-Newtonian models, Ann. Rev. Fluid
+Mech. 8 (1976) 13–34.
+[27] C. Ming, L. Zheng, X. Zhang, Steady ﬂow and heat transfer of
+the power-law ﬂuid over a rotating disk, Int. Commun. Heat
+Mass Transfer 38 (2011) 280–284.
+[28] J.P. Pascal, Similarity solutions for axisymmetric plane radial
+power law ﬂuid ﬂows through a porous medium, Comput.
+Math. Appl. 23 (1992) 25–41.
+[29] J.P. Pascal, H. Pascal, Non-linear effects on some unsteady non-
+Darcian ﬂows through porous media, Int. J. Non-Linear Mech.
+32 (1997) 361–376.
+[30] T.Ch. Wen, T. Hsiao, Unsteady forced convection heat transfer
+on a ﬂat plate embedded in the ﬂuid-saturated porous medium
+with inertia effect and thermal dispersion, Int. J. Heat Mass
+Transf. 45 (2002) 1563–1569.
+[31] C.I. Cookey, A. Ogulu, V.B. Omubo-Pepple, Inﬂuence of
+viscous dissipation and radiation on unsteady MHD free-
+convection ﬂow past an inﬁnite heated vertical plate in a
+porous medium with time-dependent suction, Int. J. Heat Mass
+Transf. 46 (2003) 2305–2311.
+[32] K.S. Chiem, Y. Zhao, Numerical study of steady/unsteady ﬂow
+and heat transfer in porous media using a characteristics-based
+matrix-free implicit FV method on unstructured grids, Int. J.
+Heat Fluid Flow 25 (2004) 1015–1033.
+[33] J.K. Lee, R.S.R. Gorla, I. Pop, Natural convection to power-
+law
+ﬂuids
+from
+a
+heated
+vertical
+plate
+in
+a
+stratiﬁed
+environment, Int. J. Heat Fluid Flow 13 (1992) 259–265.
+[34] A. Hossain, S. Bhowmick, R.S.R. Gorla, Unsteady mixed-
+convection boundary layer ﬂow along a symmetric wedge with
+variable surface temperature, Int. J. Eng. Sci. 44 (2006) 607–620.
+[35] M.C. Ece, E. Buyuk, Similarity solutions for free convection to
+power-law ﬂuids from a heated vertical plate, Appl. Math. Lett.
+15 (2002) 1–5.
+[36] N.S. Elgazery, Transient analysis of heat and mass transfer by
+natural convection in power-law ﬂuid past a vertical plate
+immersed in a porous medium (numerical study), Appl. Appl.
+Math. 3 (6) (2008) 267–285.
+[37] J.H. Merkin, I. Pop, Mixed convection along a vertical surface:
+similarity solutions for uniform ﬂow, Fluid Dyn. Res. 30 (2002)
+233–250.
+[38] M.M. Rashidi, T. Hayat, M. Keimanesh, A.A. Hendi, New
+analytical method for the study of natural convection ﬂow of a
+Unsteady free convective ﬂow of non-Newtonian ﬂuid
+9
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009
+
+
+=== PDF PAGE 10 ===
+non-Newtonian, Int. J. Numer. Meth. Heat Fluid Flow 23 (3)
+(2013) 436–450.
+[39] M.M. Rashidi, O. Anwar Be´ g, M.T. Rastegari, A study of non-
+Newtonian ﬂow and heat transfer over a non-isothermal wedge
+using the homotopy analysis method, Chem. Eng. Commun. 199
+(2) (2012) 231–256.
+[40] N.
+Galanis,
+M.M.
+Rashidi,
+Entropy
+generation
+in
+non-
+Newtonian ﬂuids due to heat and mass transfer in the
+entrance region of ducts, Heat Mass Transf. 48 (9) (2012)
+1647–1662.
+[41] S. Asghar, M. Jalil, M. Hussan, M. Turkyilmazoglu, Lie group
+analysis of ﬂow and heat transfer over a stretching rotating disk,
+Int. J. Heat Mass Transf. 69 (2014) 140–146.
+[42] M.J. Uddin, O.A. Be´ g, N. Amin, Hydromagnetic transport
+phenomena
+from
+a
+stretching
+or
+shrinking
+nonlinear
+nanomaterial sheet with Navier slip and convective heating: a
+model for bio-nano-materials processing, J. Magn. Magn.
+Mater. 2014 (38) (2014) 252–261.
+[43] P.J. Olver, Application of Lie Groups to Differential Equations,
+Springer, New York, NY, USA, 1989.
+[44] G.M.
+Bluman,
+S.
+Kumei,
+Symmetries
+and
+Differential
+Equations, Springer-Verlag, 1989.
+[45] B.J. Cantwell, Introduction to Symmetry Analysis, Cambridge
+University Press, 2003.
+[46] D. Kolomenskiy, H.K. Mofatt, Similarity solutions for unsteady
+stagnation point ﬂow, J. Fluid Mech. 711 (2012) 394–410.
+[47] N. Bachok, A. Ishak, I. Pop, Unsteady boundary-layer ﬂow and
+heat transfer of a nanoﬂuid over a permeable stretching/
+shrinking sheet, Int. J. Heat Mass Transf. 55 (7) (2012) 2102–
+2109.
+[48] T. Fang, J. Zhang, S.-S. Yao, Viscous ﬂow over an unsteady
+shrinking sheet with mass transfer, Chin. Phys. Lett. 26 (2009)
+014703.
+[49] F.M. White, Viscous Fluid Flow, second ed., McGraw-Hill,
+New York, 1991.
+[50] M.M. Rashidi, E. Erfani, Analytical method for solving steady
+MHD convective and slip ﬂow due to a rotating disk with
+viscous dissipation and ohmic heating, Eng. Comput. 29 (6)
+(2012) 562–579.
+[51] M.M. Rashidi, M. Ali, N. Freidoonimehr, B. Rostami, M.
+Anwar Hossain, Mixed convective heat transfer for MHD
+viscoelastic ﬂuid ﬂow over a porous wedge with thermal
+radiation, Adv. Mech. Eng. 2014 (2014) 735939.
+[52] M.M. Rashidi, E. Momoniat, M. Ferdows, A. Basiriparsa, Lie
+group solution for free convective ﬂow of a nanoﬂuid past a
+chemically reacting horizontal plate in a porous media, Math.
+Probl. Eng. (2014) 239082.
+[53] F. Garoosi, L. Jahanshaloo, M.M. Rashidi, A. Badakhsh, M.A.
+Ali, Numerical simulation of natural convection of the nanoﬂuid
+in heat exchangers using a Buongiorno model, Appl. Math.
+Comput. 254 (2015) 183–203.
+[54] N. Freidoonimehr, M.M. Rashidi, S. Mahmud, Unsteady MHD
+free convective ﬂow past a permeable stretching vertical surface
+in a nano-ﬂuid, Int. J. Therm. Sci. 87 (2015) 136–145.
+10
+M.J. Uddin et al.
+Please cite this article in press as: M.J. Uddin et al., Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian
+fluid, Alexandria Eng. J. (2016), http://dx.doi.org/10.1016/j.aej.2016.05.009

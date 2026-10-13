@@ -1,0 +1,487 @@
+{
+  "sources": [
+    {
+      "id": "SVE",
+      "path": "ref/main/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf",
+      "doi": "10.3390/math14030433",
+      "sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5",
+      "pages": 11,
+      "verification": "local_primary_pdf_checked",
+      "accessed": "2026-10-13"
+    },
+    {
+      "id": "RKF-reference",
+      "path": "ref/Two parameters Liegroup analysis and numerical solution of unsteady free convective flow of non-Newtonian fluid.pdf",
+      "doi": "10.1016/j.aej.2016.05.009",
+      "sha256": "aa6d304b132dc9804be653b0dca590136d96ab1a08320c0e0d1333588baa714b",
+      "pages": 10,
+      "verification": "local_primary_pdf_checked",
+      "accessed": "2026-10-13"
+    }
+  ],
+  "source_verification_complete": true,
+  "environment": {
+    "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "sympy": "1.14.0",
+      "numpy": "2.3.5",
+      "scipy": "1.17.1",
+      "matplotlib": "3.10.7",
+      "pytest": "9.0.1",
+      "pymupdf": "1.27.2.3"
+    }
+  },
+  "method_scope": "Uddin et al. use RKF fourth-fifth order plus shooting for a different BVP; SVE initial data and algorithm tolerances here are newly specified.",
+  "equations": [
+    {
+      "equation": 1,
+      "page": 2,
+      "description": "Eulerian mass balance",
+      "evidence_module": "models",
+      "status": "model_assumption",
+      "evidence": "models: coordinate pullback; the Eulerian balances and power closure are input assumptions, not empirical validation."
+    },
+    {
+      "equation": 2,
+      "page": 2,
+      "description": "Eulerian conservative momentum balance",
+      "evidence_module": "models",
+      "status": "model_assumption",
+      "evidence": "models: coordinate pullback; the Eulerian balances and power closure are input assumptions, not empirical validation."
+    },
+    {
+      "equation": 3,
+      "page": 2,
+      "description": "Exner bed balance",
+      "evidence_module": "models",
+      "status": "model_assumption",
+      "evidence": "models: coordinate pullback; the Eulerian balances and power closure are input assumptions, not empirical validation."
+    },
+    {
+      "equation": 4,
+      "page": 2,
+      "description": "Power-law sediment closure",
+      "evidence_module": "models",
+      "status": "model_assumption",
+      "evidence": "models: coordinate pullback; the Eulerian balances and power closure are input assumptions, not empirical validation."
+    },
+    {
+      "equation": 5,
+      "page": 2,
+      "description": "Lagrange momentum equation",
+      "evidence_module": "models",
+      "status": "verified",
+      "evidence": "models.checks.momentum_pullback_zero"
+    },
+    {
+      "equation": 6,
+      "page": 2,
+      "description": "Printed Lagrange bed equation",
+      "evidence_module": "models",
+      "status": "corrected_under_declared_bed_pullback",
+      "evidence": "models.discrepancies.D-MODEL-06; missing -(phi_t/phi_s)b_s"
+    },
+    {
+      "equation": 7,
+      "page": 2,
+      "description": "Printed third-order scalar master equation",
+      "evidence_module": "models",
+      "status": "verified_for_printed_pair",
+      "evidence": "models.checks.printed_compatibility_zero; source equation retained"
+    },
+    {
+      "equation": 8,
+      "page": 3,
+      "description": "General PDE notation",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 9,
+      "page": 3,
+      "description": "Infinitesimal time transformation",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 10,
+      "page": 3,
+      "description": "Infinitesimal label transformation",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 11,
+      "page": 3,
+      "description": "Infinitesimal field transformation",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 12,
+      "page": 3,
+      "description": "General point infinitesimal generator",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 13,
+      "page": 3,
+      "description": "Finite-to-infinitesimal invariance limit",
+      "evidence_module": "symmetries",
+      "status": "qualified",
+      "evidence": "Use pr(X)E=0 ON E=0, or pr(X)E=lambda E off shell; the literal unconditional zero condition rejects scaling."
+    },
+    {
+      "equation": 14,
+      "page": 3,
+      "description": "Prolonged infinitesimal criterion (on the equation manifold)",
+      "evidence_module": "symmetries",
+      "status": "qualified",
+      "evidence": "Use pr(X)E=0 ON E=0, or pr(X)E=lambda E off shell; the literal unconditional zero condition rejects scaling."
+    },
+    {
+      "equation": 15,
+      "page": 3,
+      "description": "Lie derivative of a scalar function",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 16,
+      "page": 4,
+      "description": "First prolongation recursion",
+      "evidence_module": "symmetries",
+      "status": "verified",
+      "evidence": "core.prolongation recursive formula; unrestricted determining split and direct polynomial substitution tests"
+    },
+    {
+      "equation": 17,
+      "page": 4,
+      "description": "Ellipsis in the displayed prolongation sequence",
+      "evidence_module": "symmetries",
+      "status": "definition_reproduced",
+      "evidence": "symmetries and core.prolongation"
+    },
+    {
+      "equation": 18,
+      "page": 4,
+      "description": "Higher prolongation recursion",
+      "evidence_module": "symmetries",
+      "status": "verified",
+      "evidence": "core.prolongation recursive formula; unrestricted determining split and direct polynomial substitution tests"
+    },
+    {
+      "equation": 19,
+      "page": 5,
+      "description": "Linear combinations of algebra basis elements",
+      "evidence_module": "algebra",
+      "status": "definition_reproduced",
+      "evidence": "algebra.formulas.adjoints and orbits"
+    },
+    {
+      "equation": 20,
+      "page": 5,
+      "description": "Adjoint equivalence",
+      "evidence_module": "algebra",
+      "status": "definition_reproduced",
+      "evidence": "algebra.formulas.adjoints and orbits"
+    },
+    {
+      "equation": 21,
+      "page": 5,
+      "description": "Nonzero generator rescaling",
+      "evidence_module": "algebra",
+      "status": "definition_reproduced",
+      "evidence": "algebra.formulas.adjoints and orbits"
+    },
+    {
+      "equation": 22,
+      "page": 6,
+      "description": "Invariant characteristic equation",
+      "evidence_module": "reductions",
+      "status": "verified_on_recorded_charts",
+      "evidence": "reductions.cases and table3_mixed: Q, invariant coordinates and complete jet pullbacks"
+    },
+    {
+      "equation": 23,
+      "page": 6,
+      "description": "Functions of invariants",
+      "evidence_module": "reductions",
+      "status": "verified_on_recorded_charts",
+      "evidence": "reductions.cases and table3_mixed: Q, invariant coordinates and complete jet pullbacks"
+    },
+    {
+      "equation": 24,
+      "page": 7,
+      "description": "X4 reduced ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq24",
+      "detail": {
+        "printed_H_zero": "23/250",
+        "original_residual_at_zero": "2367/5000",
+        "source": "p.7 eq(24)",
+        "printed": "Literal displayed expanded beta terms; positive jet F=2,P=1/2,C=1/10",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 25,
+      "page": 7,
+      "description": "X5 reduced ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq25",
+      "detail": {
+        "printed_H_zero": "-88/25",
+        "original_residual_at_zero": "437/25",
+        "source": "p.7 eq(25)",
+        "printed": "Displayed X5 third-order equation",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 26,
+      "page": 7,
+      "description": "Derivative reduction of X5 ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq26",
+      "detail": {
+        "printed_mu_second_zero": "-88/25",
+        "correct_mu_equation_at_zero": "437/25",
+        "source": "p.7 eq(26)",
+        "printed": "Equation (25) with mu=phi_sigma, hence same failed zero",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 27,
+      "page": 7,
+      "description": "Claimed Abel equation",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq27",
+      "detail": {
+        "printed_Mprime_at_sample": "89/117",
+        "correct_Mprime_at_sample": "-187/65",
+        "correct_rhs": "-(36*M**2*Sigma**3*g*kappa - 12*M**2*Sigma**3 - 6*M**2*g + 120*M*Sigma**4*g*kappa - 16*M*Sigma**4 - 5*M*Sigma*g + 72*Sigma**5*g*kappa - 6*Sigma**5)/(Sigma*(3*M + 2*Sigma)*(12*Sigma**3*g*kappa - 4*Sigma**3 + g))",
+        "source": "p.7 eq(27)",
+        "printed": "Displayed Abel-type polynomial RHS for M_Sigma",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 28,
+      "page": 7,
+      "description": "Traveling-wave third-order ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq28",
+      "detail": {
+        "printed_H_zero": "0",
+        "original_residual_at_zero": "169/1000",
+        "source": "p.7 eq(28)",
+        "printed": "Traveling expanded equation with alpha=-1,m=3",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 29,
+      "page": 8,
+      "description": "Traveling-wave derivative ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq29",
+      "detail": {
+        "printed_H_zero": "0",
+        "original_residual_at_zero": "169/1000",
+        "source": "p.8 eq(29)",
+        "printed": "Displayed mu second-order equation, alpha=-1,m=3",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 30,
+      "page": 8,
+      "description": "Autonomous order reduction",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq30",
+      "detail": {
+        "printed_Mprime_over_M_at_sample": "172/35",
+        "correct_Mprime_over_M_at_sample": "338/71",
+        "source": "p.8 eq(30)",
+        "printed": "Displayed M_Xi/M logarithmic derivative",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 31,
+      "page": 8,
+      "description": "Claimed explicit reduced solution",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq31",
+      "detail": {
+        "printed_M": "3*P**2*g*kappa/(P**3*(3*g*kappa + 1) + g)",
+        "d_of_correct_integral_dP_at_sample": "960/8281",
+        "source": "p.8 eq(31)",
+        "printed": "Displayed complex-form M(Xi), real cubic slice M0=1",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 32,
+      "page": 8,
+      "description": "Claimed quadratic profile in subsection 3.8",
+      "evidence_module": "reductions",
+      "status": "qualified",
+      "evidence": "reductions.source_witnesses.eq32",
+      "detail": {
+        "not_necessary_witness": "phi=t+s+s^3/6 has p=1, q=1+s^2/2>0, E=0, but F_sss=1",
+        "source": "p.8 eq(32)",
+        "printed": "Quadratic F(s) is sufficient but not necessary for printed wrong 3.8 graph",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "printed_quadratic_is_solution": true,
+        "quadratic_residual": "0",
+        "audit_verified": true,
+        "status": "qualified"
+      }
+    },
+    {
+      "equation": 33,
+      "page": 8,
+      "description": "Shifted traveling-wave ODE",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq33",
+      "detail": {
+        "printed_H_zero": "-5/119",
+        "original_residual_at_zero": "40337/119000",
+        "source": "p.8 eq(33)",
+        "printed": "Mixed traveling expanded equation alpha=-1,alpha3=1,m=3",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "printed_residual_at_witness": "0",
+        "status": "refuted_as_printed"
+      }
+    },
+    {
+      "equation": 34,
+      "page": 9,
+      "description": "Claimed implicit quadrature",
+      "evidence_module": "reductions",
+      "status": "refuted_as_printed",
+      "evidence": "reductions.source_witnesses.eq34",
+      "detail": {
+        "literal_implicit_first_derivative": "D(z,P)*C-(P-1)-1=0, D=g/P^2-z+beta*g*(1+P)^2/P",
+        "literal_implied_C": "10/69",
+        "literal_implied_H": "60200/328509",
+        "original_residual_at_implied_jet": "-118420/328509",
+        "correct_integrand": "g/tau^2-alpha^2*tau+beta*g*(alpha3-alpha*tau)^(m-1)/tau",
+        "note": "Even corrected integrand with coefficient 1 fixes first-integral constant I=-1; general I0 must be retained.",
+        "source": "p.9 eq(34)",
+        "printed": "Literal -alpha^2*kappa in integrand; lower limit P0=1",
+        "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+        "audit_verified": true,
+        "status": "refuted_as_printed"
+      }
+    }
+  ],
+  "tables": [
+    {
+      "table": 1,
+      "page": 5,
+      "status": "corrected",
+      "evidence": "algebra.formulas.brackets; two source sign errors"
+    },
+    {
+      "table": 2,
+      "page": 5,
+      "status": "verified",
+      "evidence": "algebra.formulas.adjoints; convention exp(-epsilon ad)"
+    },
+    {
+      "table": 3,
+      "page": 6,
+      "status": "qualified",
+      "evidence": "recorded invariants verified; alpha=-1 requires a separate chart and the list omits other orbit families"
+    }
+  ],
+  "unnumbered_claims": [
+    {
+      "source": "p.4 Proposition 1",
+      "status": "corrected",
+      "evidence": "symmetries.claims.maximal_classification; the m=1 stratum has X6=t*d_phi"
+    },
+    {
+      "source": "p.4 printed determining system",
+      "status": "refuted_as_printed",
+      "evidence": "symmetries.discrepancies.printed_determining_X4_witness"
+    },
+    {
+      "source": "pp.5-6 optimal system",
+      "status": "corrected",
+      "evidence": "algebra.formulas.orbits; missing projective/resonant families"
+    },
+    {
+      "source": "p.7 reduced generators after (25) and (26)",
+      "status": "corrected",
+      "printed": "3*sigma*d_sigma+phi*d_sigma and 3*sigma*d_sigma-2*mu*d_sigma",
+      "derived": "3*sigma*d_sigma+phi*d_phi and 3*sigma*d_sigma-2*mu*d_mu",
+      "evidence": "X4(s*t^2)=3*s*t^2 and X4(phi)=phi; prolongation to mu=phi_sigma gives mu-3*mu=-2*mu."
+    },
+    {
+      "source": "p.8 eight-generator/free-particle statement",
+      "status": "qualified",
+      "evidence": "corrected traveling derivative ODE has invertible Y(P)=Integral(B(P),dP) on B!=0, giving Y_second=0"
+    },
+    {
+      "source": "pp.7-8 shock/nonsingular descriptions",
+      "status": "unsupported_as_global_claim",
+      "evidence": "local smooth-profile checks do not establish weak shock balances or global absence of singularities"
+    },
+    {
+      "source": "p.9 variational Lagrangian",
+      "status": "author_reported_negative",
+      "evidence": "authors report not finding a formulation; no nonexistence proof follows"
+    },
+    {
+      "source": "p.9 initial-value discussion",
+      "status": "source_text_inconsistent",
+      "evidence": "conclusion both says IVP was examined and later says it was not discussed; paper supplies no numerical initial data"
+    }
+  ],
+  "inventory_complete": true,
+  "all_printed_claims_reproduced": false
+}

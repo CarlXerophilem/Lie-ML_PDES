@@ -22,9 +22,11 @@ def small_project(tmp_path, monkeypatch):
     (root / "docs").mkdir(parents=True)
     (root / "ref/pdfs").mkdir(parents=True)
     archive.mkdir()
-    (archive / "history.md").write_text("unique history\n")
+    # Preserve the exact manifest bytes without platform newline translation.
+    history = b"unique history\n"
+    (archive / "history.md").write_bytes(history)
     (archive / "ARCHIVE_MANIFEST.json").write_text(json.dumps({"files": {
-        "history.md": {"sha256": _hash(b"unique history\n"), "type": "file"}}}))
+        "history.md": {"sha256": _hash(history), "type": "file"}}}))
     (root / "ref/inventory.json").write_text(json.dumps({"records": []}))
     package = root / "research_artifacts/sve-progress-20261010"
     package.mkdir(parents=True)

@@ -1,0 +1,7 @@
+{
+  "R35": "-2*z*(12*C**2*P**3*g*kappa*z**2 - 4*C**2*P**3*z**2 - 2*C**2*g + 60*C*P**4*g*kappa*z - 12*C*P**4*z + 12*H*P**4*g*kappa*z**2 - 4*H*P**4*z**2 + H*P*g + 24*P**5*g*kappa - 2*P**5)/P**3",
+  "L35": "-2*z*(12*P**3*g*kappa*z**2 - 4*P**3*z**2 + g)/P**2",
+  "N35": "-4*z*(6*C**2*P**3*g*kappa*z**2 - 2*C**2*P**3*z**2 - C**2*g + 30*C*P**4*g*kappa*z - 6*C*P**4*z + 12*P**5*g*kappa - P**5)/P**3",
+  "first_order": "-(36*M**2*Sigma**3*g*kappa - 12*M**2*Sigma**3 - 6*M**2*g + 120*M*Sigma**4*g*kappa - 16*M*Sigma**4 - 5*M*Sigma*g + 72*Sigma**5*g*kappa - 6*Sigma**5)/(Sigma*(3*M + 2*Sigma)*(12*Sigma**3*g*kappa - 4*Sigma**3 + g))",
+  "source_hash": "71224cf2e4a3ed456dc0cf9b5bb467fdf484b3ce7b4a7b7d713f649aa9747aa9"
+}

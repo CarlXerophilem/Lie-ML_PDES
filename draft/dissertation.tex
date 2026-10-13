@@ -13,7 +13,7 @@
 \usepackage{listings}
 \usepackage{microtype}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
- pdftitle={Lie Symmetry Reduction for Parameter-Dependent PDEs: Theory, Boundary Compatibility and Verified Computation}}
+ pdftitle={Replicated Scalar SVE Reductions and a Verified Lie-Point Reducer}}
 \onehalfspacing
 \setlength{\parindent}{1.5em}
 \setlength{\parskip}{2pt}
@@ -39,17 +39,17 @@
 \vspace*{22mm}
 {\Large Research Dissertation Draft\par}
 \vspace{20mm}
-{\LARGE\bfseries Lie Symmetry Reduction for\par
-Parameter-Dependent Partial Differential Equations\par}
+{\LARGE\bfseries Replicated Scalar SVE Reductions\par
+and a Verified Lie-Point Reducer\par}
 \vspace{12mm}
-{\Large Theory, Boundary Compatibility,\par
-and Verified Semi-Analytical Computation\par}
+{\Large Corrected Local Solutions and a Proposal\par
+for Machine-Assisted ODE Order Reduction\par}
 \vfill
 {\large A structured expansion of the project manuscript\par}
 \vspace{6mm}
 {\large Lie-ML\_PDES\par}
 \vspace{12mm}
-{\large 11 October 2026\par}
+{\large 13 October 2026\par}
 \vspace{10mm}
 \begin{minipage}{.8\textwidth}\small
 This research draft follows a dissertation structure. Institutional cover-sheet
@@ -61,35 +61,36 @@ stated models and evidence; no priority or novelty claim is made.
 \pagenumbering{roman}
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
-Lie symmetries offer a principled way to reduce the number of independent
-variables in a differential equation. They do not automatically preserve an
-initial or boundary value problem, lower the order of the resulting ordinary
-differential equation, or justify neural approximation. This dissertation
-organizes these tasks into a reproducible nine-stage workflow, progressing
-from mathematical claims to techniques, data compatibility and solver selection.
+This dissertation starts with an independent replication of a published
+printed scalar Saint-Venant--Exner (SVE) symmetry calculation. Its displayed
+source equations (24)--(33) are checked against the original scalar PDE;
+corrected local scaling and traveling profile equations, exact first
+integrals and constructed numerical IVPs are distinguished from refuted
+source formulas. The printed scalar, advectively corrected scalar and full
+bed-field systems remain separate. Reconstructed particle position,
+velocity and normalized depth are local calculated fields, not measured
+flow data or a global solution theorem.
 
-The symbolic component constructs prolongations on finite jet spaces and
-certifies parameter rank strata for explicit polynomial ansatzes. Nonlinear
-diffusion recovers four selected generators generically and five at exponent
-$-4/3$; quadratic reaction--diffusion recovers three at nonzero reaction
-coefficient. An independent infinite heat-superposition family is proved
-separately, since finite matrices cannot have infinite nullity.
+The next stage derives a Lie-point reducer from arbitrary coefficient
+functions $\tau(t,s,\phi)$, $\xi(t,s,\phi)$ and $\eta(t,s,\phi)$ through the
+prolonged original equation. Determining equations, exceptional parameter
+strata, graph rank, chart guards and posed data are checked before a PDE
+quotient is admitted. This is an application and implementation of standard
+infinitesimal theory, not a claim to have invented it. Reducing independent
+variables is distinct from lowering the order of the resulting ODE.
 
-A scalar shallow-water/bed-transport benchmark is studied in printed and
-advectively corrected forms. Both admit common scaling for arbitrary
-transport exponent on the positive branch. Their invariant graphs yield
-third-order profile equations, with separately derived exact first integrals.
-Selected lifts to the corrected momentum/bed system are verified without
-claiming maximal classification.
-
-The implementation compares adaptive integration, nonlinear Chebyshev
-collocation, hard-data neural profiles and smooth polynomial-edge KAN
-profiles. It records actual interpolant residuals, tolerance floors, sampled
-guards, negative outcomes and workload costs. Boundary restrictions follow
-Hijazi's equation, boundary and data criteria. The distinction between local
-jet solvability and continuous-space well-posedness follows the consulted
-Olver and Oliveri fundamentals. Extended-interval tests supply neither a
-uniform tube certificate nor a learned-error or arbitrary boundary-value theorem.
+The proposed machine-learning stage seeks a nonconstant first integral or
+admitted symmetry of a verified reduced ODE and accepts it only after exact
+determining and independence tests on a regular chart. No learned
+order-reducing object has yet passed these gates. The previous neural and
+spectral profile-fitting campaign remains as bounded historical evidence,
+including its failed runs and classical controls; profile approximation alone
+does not lower ODE order. The three present research interests are a
+Lagrange-coordinate option, exceptional parameter and orbit-rank strata of
+symmetry breaking, and task-dependent filtration of unhelpful but possibly
+valid symmetries. Hybrid architecture design and conservation analogies are
+deferred. None of the finite checks proves an arbitrary-data, continuous
+error, shock or full-system result.
 
 \chapter*{Notation and evidence conventions}
 \addcontentsline{toc}{chapter}{Notation and evidence conventions}
@@ -125,25 +126,117 @@ positive margin is not a proof of positivity between samples.
 \clearpage
 \pagenumbering{arabic}
 
-\chapter{Synopsis and research design}\label{ch:synopsis}
+\chapter{Replication, discoveries and research design}\label{ch:synopsis}
 \section{Problem and organizing principle}
-The project manuscript, \code{draft/main.tex}, proposes a workflow in which
-symmetry analysis precedes approximation. Its central scientific question is
-when a parameter-dependent PDE can be reduced on a regular chart, supplied
-with compatible data, and solved efficiently by a profile approximation.
-The present dissertation expands that question in a summary-to-techniques
-order. It consolidates the executable evidence rather than treating every
-suggestion in the implementation prompt as an established theorem.
+The first question is what survives direct replication of the printed scalar
+SVE source \cite{ap}. A source equation number identifies an audit target,
+not a separate initial-value problem. The corrected profiles and exact first
+integrals are completed work on stated regular charts; singular, undefined
+and identity branches remain explicit. The active reproduction package is
+\code{research_artifacts/SVE-reproduced-20261012}. The frozen
+\code{sve-progress-20261010} campaign and its negative records remain
+available as earlier, separate evidence.
 
-The active evidence package is
-\code{research_artifacts/sve-progress-20261010}. Its frozen carrier, manifest
-and negative records remain preserved. New certificates and experiments are
-written to \code{build/week-4}; the maintained symbolic engine is extended
-in \code{symm} to avoid maintaining a second prolongation implementation.
-Foundations follow Olver and Oliveri
-\cite{olver,olver1986,oliveri2026}. The supplied Olver PDF is the 1986 first
-edition: its page and theorem locators are cited as such. The main manuscript's
-1993 second-edition entry is retained separately.
+The second question is how to derive, rather than import, useful point
+generators for a target PDE. The third is whether a learned candidate can
+\emph{certifiably lower the order} of an already reduced ODE. This last
+question is proposed, not answered by the older profile-fitting runs.
+Foundations follow Olver and Oliveri \cite{olver,olver1986,oliveri2026}.
+The supplied Olver PDF is the 1986 first edition, with its own page locators;
+the main manuscript's 1993 entry denotes a different edition.
+
+\section{Replication result and corrected-solution scope}
+\label{sec:dissertation-replication}
+The source's formulas (24)--(33) and nine symmetry cases are audited on the
+positive chart $\phi_t,\phi_s>0$. The scalar equation admits a corrected
+common-scaling reduction for general declared $m$, a cubic-only exceptional
+scaling at $m=3$, and regular traveling reductions. The exponent $m=1$ is
+also a distinct determining stratum; symmetry count is not monotone in
+exponent size. In source case 3.8 the correct invariant graph has a
+quadratic \emph{time} profile, not the source's asserted spatial profile.
+Some source formula failures coexist with valid special solutions, and the
+cubic power law lies on a singular normal-form branch. These distinctions,
+the corrected ODEs and source witnesses are documented in the active package.
+
+The constructed corrected-profile IVPs and their sampled $(t,s)$
+reconstructions are local numerical illustrations. Positive velocity,
+gradient and leading-factor guards apply only where checked. A finite
+convergence ladder does not prove continuous accuracy or an arbitrary-data
+solution. The exact first integrals in Chapter~\ref{ch:sve} lower ODE order
+independently of the reduction from two independent variables to one.
+
+The corrected solution data can be stated directly. For common scaling with
+$m=3$, $g=1$, $\kappa=1/30$ and initial jet $(F,F',F'')=(2,1/2,1/10)$
+at $z=1$, the local analytic profile begins
+\[
+ F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
+                -\frac{11\xi^3}{2370}+O(\xi^4),\qquad
+ \phi(t,s)=tF(s/t).
+\]
+The corrected case 3.8 has the exact constructed solution
+$\phi(t,s)=s+t+t^2/20$. Equation~\eqref{eq:sve-series-recurrence} gives the
+coefficient recurrence, with explicit regularity and residual checks. The
+nonlinear Taylor polynomial is a local truncation, not a global closed form.
+
+\section{First-principles reducer and the proposed next stage}
+For the scalar PDE $E_m(t,s,\phi^{(n)})=0$, begin with unrestricted smooth
+coefficient functions in
+\begin{equation}\label{eq:dissertation-master}
+ X=\tau(t,s,\phi)\partial_t+\xi(t,s,\phi)\partial_s
+   +\eta(t,s,\phi)\partial_\phi,\qquad
+ Q=\eta-\tau\phi_t-\xi\phi_s.
+\end{equation}
+Generate $\pr^{(n)}X$ by total derivatives and impose
+$\pr^{(n)}X(E_m)|_{E_m=0}=0$ on each regular branch. Splitting in free jets
+produces the determining system; exact substitution checks each candidate.
+Only then do $Q=0$, orbit ranks, an inverse quotient chart, the original
+PDE pullback and prescribed data decide whether it is a useful reducer.
+This is classical Lie theory \cite{olver1986,oliveri2026}, implemented here
+with explicit evidence boundaries. The active package's
+\code{build_symmetry_report} solves the unrestricted determining problem for
+the \emph{printed scalar SVE equation}; \code{derive_reduction} independently
+checks selected generators and their profile pullbacks. The source-formula
+comparison is a separate reproduction test. There is no implemented
+unrestricted determining solver for arbitrary PDEs in this claim.
+
+For a regular reduced ODE $F'=P$, $P'=C$, $C'=R(z,F,P,C)$, a proposed learner
+could output $I(z,F,P,C)$. Its acceptance gate is the exact identity
+\begin{equation}\label{eq:dissertation-learned-I}
+ I_z+P I_F+C I_P+R I_C=0
+\end{equation}
+on an open chart, nonconstancy and independence from known integrals, and
+$I_C\ne0$ if $I=I_0$ is to solve locally for $C$ and reduce this ODE's order.
+Alternatively, a proposed reduced-ODE generator must pass its prolonged
+determining equation and produce an actual regular order-reducing quotient.
+Neither a small sampled residual nor an accurate fitted profile passes this
+gate. No such learned candidate is reported as completed work.
+
+\section{Three research interests and their safeguards}
+\begin{enumerate}
+\item \emph{Lagrange-coordinate option.} The material coordinate $s$ follows
+a particle and can make a particular scalar reduction transparent, but a
+coordinate choice does not prove equivalence to a full Eulerian bed system.
+It is also not a variational Lagrangian. A proposed action must separately
+recover the intended equations under Euler--Lagrange variation before
+Noether statements are made.
+\item \emph{Parameter and distribution of symmetry breaking.} Exceptional
+values such as $m=1$ and $m=3$ arise from exact determining factors or
+minors. For a chosen generator, the projected orbit rank may change across
+the regular coordinate domain; its rank strata determine where a graph
+quotient is available. ``Distribution'' here means these strata and their
+locations, not a probability law unless a measure is explicitly supplied.
+\item \emph{Trivial-symmetry filtration.} A task-dependent sequence checks
+equation validity, subgroup closure, projected and total orbit ranks,
+invariant graphs, chart denominators, data compatibility and actual solver
+value. It is not automatically a filtration by Lie subalgebras or an ideal
+quotient. Translation generators can be useful. In the SVE cases, an
+undefined divided PDE, a valid vertical generator with no fixed graph,
+an identity-only reduction and a valid but data-incompatible quotient have
+different statuses; ``trivial'' must not collapse them into ``invalid''.
+\end{enumerate}
+Hybrid architecture design and conservation analogies are later questions.
+The existing exact traveling and scaling first integrals are mathematical
+evidence in the replication, not a proposed conservation-analogy result.
 
 \section{Claims and their limits}
 \begin{table}[htbp]
@@ -151,6 +244,7 @@ edition: its page and theorem locators are cited as such. The main manuscript's
 \begin{tabular}{p{.35\textwidth}p{.54\textwidth}}
 \toprule
 Result & Scope of evidence\\\midrule
+Printed scalar SVE source audit & Exact substitution witnesses for source (24)--(33); corrected regular IVPs are local numerical examples.\\
 Parameter rank drops & Exact in the stated finite polynomial ansatz.\\
 Heat superposition & Exact independent family, separate from finite nullity.\\
 Common-scaling identities & Exact for each declared scalar model and branch.\\
@@ -158,6 +252,7 @@ Third-order quotient and first integral & Two separate exact reductions.\\
 Corrected coupled generators & Selected verified lifts; maximal classification unresolved.\\
 Boundary/data checks & Constructed compatible family and negative controls.\\
 Neural and spectral accuracy & Empirical on the declared grid and parameters.\\
+Learned ODE order reduction & Proposed; no learned $I$ or reduced-ODE generator has passed the exact gate.\\
 Amortization & Measured workload and arithmetic extrapolation.\\
 Continuous error control & Conditional estimate requiring a common regular tube.\\
 \bottomrule
@@ -182,8 +277,11 @@ output that the next stage can inspect.
 compatibility; certify an adapted chart and inverse for each admitted route.
 \item Restrict to invariant jets and derive the reduced differential equation.
 \item Test boundary geometry, prescribed data and transformed current/flux.
-\item Determine actual ODE order and independently test a first integral.
-\item Compare classical and constrained learned profiles with matched measures.
+\item Determine actual ODE order and independently test a first integral;
+future learned candidates must pass Equation~\eqref{eq:dissertation-learned-I}
+or an equivalent exact reduced-ODE symmetry gate.
+\item Compare classical and, where justified, learned profiles with matched
+measures; historical profile fitting is not order reduction.
 \item Select a solver using admissibility, recorded complexity and workload costs.
 \end{enumerate}
 The order is logical rather than an excuse to skip a failed gate. For example,
@@ -192,13 +290,14 @@ its use in a data-driven solver still requires the data gate. The maintained
 HTML workflow links these stages to exact checks and retained experiments.
 
 \section{Questions addressed by the implementation}
-The implementation asks whether the resonant parameter behavior can be
+The maintained implementation asks whether the resonant parameter behavior can be
 recovered without rank decisions based on floating point arithmetic; whether
 the common scaling survives a corrected bed transport law; whether the
-quotient residual uses the original measure; and whether learned profiles
-beat appropriate spectral controls after setup and validation costs are
-counted. It also distinguishes accuracy of an IVP state from accuracy of the
-third derivative of its dense scalar interpolant.
+quotient residual uses the original measure. The earlier learning campaign
+asked whether fitted profiles beat spectral controls after setup and
+validation costs. That historical experiment does not test discovery of a
+new ODE first integral. It also distinguishes accuracy of an IVP state from
+accuracy of the third derivative of its dense scalar interpolant.
 
 These questions motivate three chart labels used everywhere in the outputs:
 \code{cubic_X5} for the printed cubic benchmark,
@@ -712,7 +811,108 @@ anchor because the printed equation contains no undifferentiated $F$.
 This cubic chart is a separate benchmark; its first integral is not replaced
 by Equations~\eqref{eq:Lp}--\eqref{eq:Lc} from the common-scaling chart.
 
-\chapter{Constrained approximation, measures and error control}\label{ch:learning}
+\section{Local analytic existence and series solutions}
+% BEGIN VERIFIED SVE SERIES INSERTION 20261013
+\paragraph{Local existence and Taylor solutions.}
+The existence question is answered for each invariant graph, rather than
+inferred from a plotted numerical trajectory. For a regular third-order row
+write its corrected pullback as
+\[
+ A(z,F,P,C)H+B(z,F,P,C)=0,\qquad
+ P=F',\quad C=F'',\quad H=F''',\quad R=-B/A.
+\]
+At an initial jet $(z_0,F_0,P_0,C_0)$ satisfying the recorded positive-chart
+conditions and $A_0\ne0$, the right-hand side of
+\[
+ (F,P,C)'=(P,C,R(z,F,P,C))
+\]
+is real analytic in a neighborhood. This remains true for fixed noninteger
+$m$ on a strictly positive velocity branch. The analytic local ODE theorem
+\cite[Section~4.1]{teschl2012}
+therefore gives a unique analytic profile germ for the specified three
+initial values. The verified similarity pullback then gives a local invariant
+solution of the printed scalar master equation. Continuity preserves the
+strict chart inequalities on a sufficiently small neighborhood. This
+argument supplies neither a numerical convergence radius nor a global
+solution, and does not establish the full bed-field model.
+
+For $\xi=z-z_0$ put $F=\sum_{j\geq0}a_j\xi^j$, where
+$a_0=F_0$, $a_1=P_0$ and $a_2=C_0/2$. If
+$F_{n+2}=\sum_{j=0}^{n+2}a_j\xi^j$, coefficient matching gives
+\begin{equation}
+ a_{n+3}=
+ \frac{[\xi^n]R(z_0+\xi,F_{n+2},F_{n+2}',F_{n+2}'')}
+ {(n+3)(n+2)(n+1)},\qquad n\geq0.
+ \label{eq:sve-series-recurrence}
+\end{equation}
+The implementation \texttt{compute\_ode\_series()} constructs these
+coefficients and substitutes the resulting polynomial into the corrected
+undivided ODE. For degree $N\geq3$, it checks the coefficients of
+$\xi^0,\ldots,\xi^{N-3}$ exactly. The remaining ODE residual is
+$O(\xi^{N-2})$; the local truncation errors in $F,F',F''$ are respectively
+$O(\xi^{N+1})$, $O(\xi^N)$ and $O(\xi^{N-1})$. A finite polynomial with
+this residual property is not normally an exact solution.
+
+For common scaling, set $(m,g,\kappa)=(3,1,1/30)$ and use initial data
+\[
+ (z_0,F_0,P_0,C_0)=(1,2,1/2,1/10).
+\]
+Direct substitution gives
+$A_0=79/20$ and $F'''(1)=-11/395$, hence
+\[
+ F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
+             -\frac{11\xi^3}{2370}+O(\xi^4).
+\]
+This determines a local similarity solution $\phi(t,s)=tF(s/t)$, including
+the initial point $t=s=1$. For row 3.8 with initial jet $(0,1,1/10)$ at
+$t=0$, the series terminates: $F(t)=t+t^2/20$ is exact.
+
+The following cubic data make the five regular solution families explicit
+at $m=3$, $g=1$ and $\kappa=1/30$. Each row starts
+$F(z_0+\xi)=F_0+P_0\xi+C_0\xi^2/2+a_3\xi^3+O(\xi^4)$;
+the recurrence determines the subsequent coefficients. The nonzero values
+of $A_0$ and positive chart margins justify the regular local construction.
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Case & $z_0$ & $(F_0,P_0,C_0)$ & $A_0$ & $a_3$\\
+\midrule
+3.4 & $1$ & $(2,1/2,1/10)$ & $79/20$ & $-11/2370$\\
+3.5 & $1$ & $(2,1/2,1/10)$ & $-22/5$ & $83/1100$\\
+3.6 & $1$ & $(2,1/2,1/10)$ & $-71/20$ & $169/21300$\\
+3.8 & $0$ & $(0,1,1/10)$ & $1$ & $0$\\
+3.9 & $1$ & $(2,1/2,1/10)$ & $-79/20$ & $173/23700$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The other rows need different conclusions. Row 3.7 admits
+$\phi=\alpha t+F(s)$ with arbitrary sufficiently smooth $F$, $\alpha>0$
+and $F'>0$; its identity pullback cannot determine a unique Taylor
+recurrence. Row 3.1 is stationary and lies outside the positive-velocity
+chart. Row 3.2 violates $\phi_s>0$, and row 3.3 has no invariant graph.
+A zero leading coefficient means the regular existence test is inconclusive,
+not that no solution exists: the separately verified exact cubic power
+profile lies on such a common-scaling normal-form singularity. Numerical
+comparisons of Taylor truncations with the established IVPs are local
+diagnostics, separate from the analytic-germ existence statement.
+
+The degree-six campaign constructs all $21$ regular IVP series and checks
+all four residual coefficients, from $\xi^0$ through $\xi^3$, exactly.
+Comparisons use four saved RKF45/DOP853 grid nodes per IVP, without
+interpolation, and retain separate errors for $F,F',F''$. For the cubic
+common-scaling example, the profile differences from DOP853 are
+$3.28\times10^{-9}$ at $\xi=0.2$ and $3.24\times10^{-13}$ at $\xi=0.05$.
+At $\xi=0.025$ the difference is below the operational resolution threshold;
+it is not another measured convergence order. The numerical comparisons
+neither bound the series remainder nor locate its convergence radius.
+% END VERIFIED SVE SERIES INSERTION 20261013
+
+\chapter{Historical profile approximation, measures and error control}\label{ch:learning}
+This chapter records the earlier bounded experiment in fitting a profile
+\emph{after} a verified quotient. It is retained for its positive and negative
+controls, but does not address the proposed search for an order-reducing
+first integral in Equation~\eqref{eq:dissertation-learned-I}.
 \section{Hard Cauchy data and smooth remainder models}
 For Cauchy derivatives $a_j=F^{(j)}(z_0)$ through order $K$, set
 \begin{equation}\label{eq:hardprofile}
@@ -953,7 +1153,10 @@ velocity, depth, bed quadrature and residual reconstruction. The numerical
 bed integral in the query is a reconstruction cost; it is not a new exact
 bed-error bound.
 
-\chapter{Measured outcomes and solver decisions}\label{ch:results}
+\chapter{Historical measured outcomes and solver decisions}\label{ch:results}
+The following generated table and figure belong to the older profile-fitting
+campaign. Their accuracy, failures and costs remain evidence for that
+declared workload only, not for learned ODE order reduction.
 \section{Generated benchmark summary}
 Table~\ref{tab:measured} is generated from the complete experiment JSON.
 Medians include unsuccessful attempted runs. For a family model, its reported
@@ -1065,14 +1268,15 @@ campaign's negative evidence.
 
 \chapter{Conclusions and research directions}\label{ch:conclusion}
 \section{Established results}
-The implemented workflow joins exact prolongation, finite parameter strata,
-regular chart reduction, boundary/data checks, independent first-integral
-certification, matched residual measures and reproducible numerical controls.
-The common scaling survives in both declared scalar models for arbitrary
-transport exponent on the positive branch. Their general-exponent first
-integrals are Equations~\eqref{eq:Lp} and \eqref{eq:Lc}. The corrected bed
-system requires the displayed bed lifts, and its constructed profiles can
-have logarithmic bed drift.
+The primary established result is the independent audit of the printed
+scalar SVE source, its corrected local reductions and constructed solutions.
+The first-principles reducer keeps prolongation, exceptional parameter
+strata, invariant-graph rank, chart denominators and data compatibility
+separate. Common scaling survives in both declared scalar models for the
+stated positive branch; their verified general-exponent first integrals are
+Equations~\eqref{eq:Lp} and \eqref{eq:Lc}. These mathematical integrals are
+not learned outputs. Selected corrected bed-system lifts are checked, but
+no maximal coupled-system classification follows.
 
 The strongest change prompted by the boundary reference is the explicit
 separation of equation symmetry, boundary tangency and data compatibility.
@@ -1081,7 +1285,15 @@ nonzero fixed walls are counterexamples. Local solvability is treated with
 Olver's nondegeneracy hypotheses, rather than elevated into a claim about
 arbitrary continuous-space boundary data.
 
-\section{Unresolved questions}
+\section{Proposed order-reduction stage and unresolved questions}
+The next learning question is whether a model can propose a nontrivial
+$I(z,F,P,C)$ or an admitted reduced-ODE generator more usefully than direct
+symbolic search. Equation~\eqref{eq:dissertation-learned-I}, independence,
+regular chart and data checks decide acceptance. Total training, symbolic
+verification and repeated-query costs must be compared with direct algebra
+and one classical ODE solve. The historical profile-fitting runs do not
+answer this question; their negative outcomes remain in Chapter~\ref{ch:results}.
+
 A maximal symmetry classification of the corrected coupled system remains
 open in this implementation. So do weak/shock solutions, arbitrary physical
 IBVP well-posedness, global chart coverage and parameter-uniform error bounds
@@ -1095,36 +1307,33 @@ submissions or an online literature survey. The consulted fundamentals and
 selected manuscript bibliography support derivations and scope, not a claim
 that each technique or formula is newly discovered.
 
-\section{Two next goals, ranked by research need}
-The first recommended goal is a continuous regular-tube and residual-error
-certificate on $[1,1.5]$ for a bounded curvature/transport family. A Python
-implementation can subdivide the interval and parameter box, bound $P$, $V$
-and $L_m$ using interval or polynomial enclosures, bound the normal-form
-Jacobian, and apply Equation~\eqref{eq:gronwall}. It should explicitly return
-unresolved boxes when an enclosure crosses a singular factor. Subjective
-planning ranges are urgency 85--95\% and usefulness 90--95\%; they are not
-measured probabilities. This goal addresses the remaining gap between
-sampled local computations and continuous-space claims.
+\section{Research agenda}
+First compare alternative Lagrange and Eulerian descriptions with explicit
+model-equivalence and chart checks; a coordinate option is not a variational
+action. Second map the exact exceptional parameter strata and projected
+orbit-rank strata of candidate symmetries; no probability distribution is
+claimed without a specified sampling law. Third apply the task-dependent
+filtration of validity, graph reduction, data preservation and solver value.
+A valid symmetry can fail a particular filter without becoming invalid.
 
-The second recommended goal is an independent determining-system audit of
-the corrected coupled momentum/bed model, followed by a boundary-compatible
-classification for a specified data problem. A Python script can export
-unrestricted determining equations and leading-jet splits, verify candidate
-lifts and commutators, and track unsolved conditions. A maximality claim must
-wait for a complete argument or a certified solver result. Subjective urgency
-is 65--80\% and usefulness 80--90\%. A novelty review becomes relevant once
-the proposed new theorem and its precise model are defined; until then the
-work remains offline.
-
-These recommendations use the accessible project history and current
-experimental evidence. Cloud and Windows ChatGPT memories were not
-available. They are future designs, not implementations certified by this
-campaign. A learning-budget expansion is a lower-priority alternative unless
-the measured profile family demonstrates a plausible query saving.
+A separate analytical goal is a continuous regular-tube and residual-error
+certificate for a bounded family. Interval enclosures that cross a singular
+factor must return unresolved. A coupled bed-system classification requires
+its own unrestricted determining and boundary analysis. Hybrid architecture
+design and conservation analogies are deferred beyond these gates. A
+variational or Noether claim would require a checked action for the intended
+equations, not just the existence of a Lie point symmetry.
 
 \appendix
 \chapter{Reproduction and evidence artifacts}\label{app:reproduction}
-Run the full campaign from the repository root:
+Run the active scalar SVE reproduction from the repository root:
+\begin{lstlisting}[language=bash]
+python research_artifacts/SVE-reproduced-20261012/main.py
+\end{lstlisting}
+Its
+\code{README.md} gives the focused numerical and test commands. The following
+commands replay the retained earlier profile-fitting campaign and project
+checks; they do not produce a learned order-reducing integral:
 \begin{lstlisting}[language=bash]
 python3 run_pipeline.py
 python -B -m pytest -q -p no:cacheprovider tests symm/tests scripts/tests research_artifacts/sve-progress-20261010/tests

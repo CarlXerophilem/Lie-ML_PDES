@@ -1,0 +1,19 @@
+{
+  "scripts/tests/test_project_audit.py": {
+    "sha256": "993cbe7180837f1f9ef0ec7c814f5e2af209e0f0afe6e6888ab51542154de684",
+    "bytes": 3586
+  },
+  "scripts/project.py": {
+    "sha256": "d25c7e6f17c89a20c36ee74e9f22eda2e9295a2541b23b4bedf760f0f1babc94",
+    "bytes": 9079
+  },
+  "research_artifacts/sve-progress-20261010/MANIFEST.json": {
+    "sha256": "31299d1eeb82032968f5468f18340d4d85fe8fdea3a096434702b2ac27c7dc85",
+    "bytes": 12575
+  },
+  "research_artifacts/sve-progress-20261010/lie-ml-sve-progress-20261010.zip": {
+    "sha256": "1403eab6b761de911a10279b7e396ad80f06c21c0f6fb3c2b4a4bb8f1075bd16",
+    "bytes": 1119761
+  },
+  "production_audit_matches_git_head": true
+}

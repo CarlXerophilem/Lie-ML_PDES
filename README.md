@@ -6,6 +6,16 @@ fundamentals, boundary/data restrictions, derivations, implementation and result
 The project separates exact symmetry/reduction certificates, constructed
 data compatibility, numerical diagnostics, and bounded approximation results.
 
+The [2026-10-12 SVE reproduction](research_artifacts/SVE-reproduced-20261012/README.md)
+audits all nine source reductions, records verified corrections, and runs
+classic Fehlberg 4(5) numerical examples, exact local series, convergence
+checks and static scientific plots. Its
+[computation map](research_artifacts/SVE-reproduced-20261012/docs/COMPUTATION.md)
+distinguishes live calculations from transcribed source inputs.
+Its reviewed section is included in `draft/main.tex`; see its
+[revision validation](research_artifacts/SVE-reproduced-20261012/FORMAL_EXPOSITION_VALIDATION.md)
+for passed checks and remaining repository-wide failures.
+
 ## Read in this order
 
 1. [Workflow and current status](docs/project-map.md).
@@ -56,7 +66,7 @@ selected manuscript entries and distinguishes the consulted 1986 Olver edition
 from the manuscript's 1993 entry. A smaller independent campaign uses
 `python3 run_pipeline.py --quick --seeds 17 --out build/week-4-quick`.
 
-Build the self-contained manuscript with a TeX distribution containing latexmk,
+Build the manuscript with a TeX distribution containing latexmk,
 pdfLaTeX, natbib and TikZ:
 
 ```bash
@@ -65,25 +75,29 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex draft/m
 
 The embedded bibliography needs no external `.bib` database. Read the final
 LaTeX log for unresolved citations/references and inspect the resulting PDF.
+The two ODE comparison figures are included under the reproduction package's
+`results/presentation/`; regenerate them with its `main.py --stage plots`
+after generating the matching numerical data, or run its default full demo.
 On this machine, the local TeX tools are in
 `$HOME/.local/share/.TinyTeX/bin/x86_64-linux`; add that directory to `PATH`.
 Git LFS must be installed before checking out the canonical PDF corpus.
 
 ## Research priorities
 
-1. **Executable manuscript workflow:** synchronize claims with replayed exact
-   evidence and show all nine analysis stages. Subjective urgency 85–95%,
-   usefulness 90–95%.
-2. **Common-scaling data/flux example:** certify one constructed invariant
-   data family and boundary flux for each scalar model. Subjective urgency
-   65–80%, usefulness 80–90%.
+1. **Replication and ODE solutions:** present the source audit, corrected
+   reductions, local existence, Taylor series and numerical evidence first.
+2. **Infinitesimal reduction:** derive point generators from the master
+   equation's determining system. The implemented SVE calculation is distinct
+   from the proposed reusable generic-PDE reducer.
+3. **ML-assisted ODE order reduction:** propose a nontrivial first integral
+   or admitted ODE generator, then verify it and its order-reduction chart.
+   This is a future experiment; profile fitting alone does not lower order.
 
-These ranges are planning judgments, not measured probabilities. Urgency means
-deferral is likely to delay manuscript progress; usefulness means completion
-is likely to supply manuscript evidence. They reflect the available partial
-project chats: analysis first, verified reduction before ML, classical controls,
-positivity/error evidence, readable workflows, and low compute cost. Cloud and
-Windows ChatGPT memories were not accessible.
+The three research interests are the Lagrange coordinate option, parameter
+and distribution of symmetry-breaking, and trivial-symmetry filtration.
+Hybrid structure design and conservation analogies are deferred. The dated
+[revision plan](research_artifacts/SVE-reproduced-20261012/SERIES_PLAN.md)
+records this instructor-directed scope.
 
 ## Preserved history
 
