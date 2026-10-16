@@ -15,6 +15,6 @@ ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf bi
 
 # Keep the reviewed research receipts byte-identical across checkouts.
 research_artifacts/SVE-2D-extension-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-build/free-boundary-scope-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-build/dissertation-title-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/free-boundary-scope-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/dissertation-title-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 research_artifacts/publication-20261016/** -text
