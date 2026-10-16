@@ -1,0 +1,9 @@
+{
+  "request_url": "https://export.arxiv.org/api/query?search_query=ti:%22Formal%20deduction%22%20AND%20ti:%22Exner%22&max_results=3",
+  "final_url": "https://export.arxiv.org/api/query?search_query=ti:%22Formal%20deduction%22%20AND%20ti:%22Exner%22&max_results=3",
+  "retrieved_utc": "2026-10-13T18:25:36.970811+00:00",
+  "status_code": 200,
+  "bytes": 3599,
+  "sha256": "155afe861aeaccb6af1b19ebe6ca6cd84d52b2f5593cbb6bf76d8427d6f945dc",
+  "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv-search.xml"
+}

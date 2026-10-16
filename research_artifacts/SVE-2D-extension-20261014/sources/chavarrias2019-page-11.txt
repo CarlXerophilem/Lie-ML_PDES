@@ -1,0 +1,55 @@
+                     Ill posedness in two-dimensional problems                            471
+
+                         u (m s−1 )    v (m s−1 )        h (m)       Cf (−)
+                            1                0               1        0.007
+                                TABLE 1. Reference state.
+
+
+             Case      Model          Fr         Stability       Mathematical character
+             I1        iSWE           0.32    Stable                  Well posed
+             B1     iSWE+Exner        0.32   Unstable                 Well posed
+             I2        iSWE           2.01   Unstable                  Ill posed
+TABLE 2. Cases of a stable well-posed model (I1), an unstable well-posed model (B1)
+and an ill-posed model (I2). Case I2 has the same parameter values as Case I1 but for a
+mean flow velocity which is equal to 6.30 m s−1 .
+
+
+
+of wavenumbers in the x and y directions yield a negative growth rate (ωi (2.31)). An
+example of a stable system in hydrodynamics is the inviscid shallow water equations
+(iSWE) for a Froude number smaller than 2 (Jeffreys 1925; Balmforth & Mandre
+2004; Colombini & Stocchino 2005). In figure 1(a) we show the maximum growth
+rate of perturbations to a reference solution (Case I1, tables 1 and 2) of the iSWE
+on an inclined plane (i.e. the first three equations of the complete system (2.24),
+with neither secondary flow nor diffusion). The growth rate is obtained numerically
+by computing the eigenvalues of the reduced matrix M 0 (the first three rows and
+columns in (2.33)) for wavenumbers between 0 and 250 rad m−1 , which is equivalent
+to wavelengths (lwx = 2π/kwx and equivalently for y) down to 1 cm. Figure 1(b)
+presents the same information as figure 1(a) in terms of wavelength rather than
+wavenumber to better illustrate the behaviour for large wavelengths. The growth rate
+is negative for all wavenumbers, which confirms that the iSWE for Fr < 2 yield a
+stable solution.
+   A system is unstable when perturbations to an equilibrium state grow and the
+solution diverges from the initial equilibrium state. The growth of river bars is an
+example of an unstable system in river morphodynamics. A straight alluvial channel
+
+
+
+
+is stable if the width-to-depth ratio is sufficiently small and, above a certain threshold
+value, the channel becomes unstable and free alternate bars grow (Engelund &
+Skovgaard 1973; Fredsøe 1978; Colombini, Seminara & Tubino 1987; Schielen et al.
+1993). Mathematically, an unstable system has a region, a domain in the wavenumber
+space, in which the growth rate of perturbations is positive. In figure 1(c,d) we present
+the growth rate of perturbations to a reference solution consisting of uniform flow
+(table 1) on an alluvial bed composed of unisize sediment with a characteristic grain
+size equal to 0.001 m (Case B1, table 2). The sediment transport rate is computed
+using the relation by Engelund & Hansen (1967) (B 4) and the effect of the bed slope
+on the sediment transport direction is accounted for using the simplest formulation,
+gs = 1. Figure 1(d) confirms the classical result of linear bar theory: there exists
+a critical transverse wavelength (lwyc ) below which all perturbations decay. In our
+particular case lwyc = 40.2 m. Impermeable boundary conditions at the river banks
+limit the possible wavelengths to fractions of the channel width B (m) such that
+lwy = 2B/m for m = 1, 2, . . . (Callander 1969). As the most unstable mode is the
+first one (i.e. m = 1, alternate bars) (Colombini et al. 1987; Schielen et al. 1993),
+the minimum channel width above which perturbations grow is Bc = lwyc /2 = 20.1 m,

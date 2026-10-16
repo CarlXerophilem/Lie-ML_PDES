@@ -1,0 +1,41 @@
+[
+  {
+    "name": "audit-utf8",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "scripts/project.py",
+      "audit",
+      "--out",
+      "D:\\MATHs\\math 4890 LieML\\build\\free-boundary-scope-inspection-20261014\\validation\\audit-utf8"
+    ],
+    "env": {
+      "PYTHONUTF8": "1"
+    },
+    "exit_code": 1,
+    "elapsed_seconds": 0.364,
+    "log": "audit-utf8.log"
+  },
+  {
+    "name": "project-regressions-utf8",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=D:\\MATHs\\math 4890 LieML\\build\\free-boundary-scope-inspection-20261014\\validation\\pytest-tmp",
+      "scripts/tests",
+      "symm/tests/test_chart_reduction.py",
+      "symm/tests/test_engine.py",
+      "research_artifacts/sve-progress-20261010/tests"
+    ],
+    "env": {
+      "PYTHONUTF8": "1"
+    },
+    "exit_code": 0,
+    "elapsed_seconds": 26.093,
+    "log": "project-regressions-utf8.log"
+  }
+]

@@ -1,0 +1,62 @@
+                      Ill posedness in two-dimensional problems                      467
+            PN                                N
+where qbx = k=1 qbxk (m2 s−1 ) and qby = k=1 qbyk (m2 s−1 ) are the total specific (i.e.
+                                            P
+per unit of differential length) sediment transport rates including pores in the x and y
+direction, respectively. The variables qbxk (m2 s−1 ) and qbyk (m2 s−1 ) are the specific
+sediment transport rates of size fraction k including pores. For simplicity we assume
+a constant porosity and density of the bed sediment. The sediment transport rate is
+assumed to be locally at capacity, which implies that we do not model the temporal
+and spatial adaptation of the sediment transport rate to capacity conditions (Bell &
+Sutherland 1983; Phillips & Sutherland 1989; Jain 1992).
+  Changes in the bed surface grain size distribution are accounted for using the active
+layer model (Hirano 1971). For simplicity, we assume a constant active layer thickness
+La (m). Conservation of sediment mass of size fraction k in the active layer reads:
+                 ∂Mak       ∂η ∂qbxk ∂qbyk
+                      + fkI    +    +      =0                 k ∈ {1, N − 1},      (2.17)
+                  ∂t        ∂t   ∂x   ∂y
+and in the substrate (Chavarrías et al. 2018):
+                           ∂Msk       ∂η
+                                − fkI    = 0 k ∈ {1, N − 1},                        (2.18)
+                            ∂t        ∂t
+                                    R η +η−La
+where Mak = Fak La (m) and Msk = η00          fsk (z) dz (m) are the volume of sediment of
+size fraction k per unit of bed area in the active layer and the substrate, respectively.
+Parameter η0 (m) is a datum for bed elevation. Parameters Fak ∈ [0, 1], fsk ∈ [0, 1]
+and fkI ∈ [0, 1] are the volume fraction content of sediment of size fraction k in the
+active layer, substrate and at the interface between the active layer and the substrate,
+respectively. By definition, the sum of the volume fraction content over all size
+fractions equals 1:
+                      N
+                      X                N
+                                       X                      N
+                                                              X
+                            Fak = 1,         fsk (z) = 1,           fkI = 1.    (2.19a−c)
+                      k=1              k=1                    k=1
+
+  Under degradational conditions, the volume fraction content of size fraction k at
+the interface between the active layer and the substrate is equal to that at the top
+part of the substrate ( fkI = fsk (z = η − La ) for ∂η/∂t < 0). This allows for modelling
+
+
+
+
+of arbitrarily abrupt changes in grain size due to erosion of previous deposits. Under
+aggradational conditions the sediment transferred to the substrate is a weighted
+mixture of the sediment in the active layer and the bed load (Parker 1991; Hoey &
+Ferguson 1994; Toro-Escobar, Paola & Parker 1996). Here we simplify the analysis
+and we assume that the contribution of the bed load to the depositional flux is
+negligible (i.e. fkI = Fak for ∂η/∂t > 0) (Hirano 1971).
+  The magnitude of the sediment transport rate is assumed to be a function of the
+local bed shear stress. We apply the sediment transport relation by Engelund &
+Hansen (1967) in a fractional manner (Blom, Viparelli & Chavarrías 2016; Blom
+et al. 2017) as well as the one by Ashida & Michiue (1971) (appendix B).
+  The direction of the sediment transport (ϕsk (rad)) is affected by the secondary flow
+and the bed slope (Van Bendegom 1947):
+                                            1 ∂η
+                                   sin ϕτ −
+                                           gsk ∂y
+                        tan ϕsk =                           k ∈ {1, N},            (2.20)
+                                            1 ∂η
+                                  cos ϕτ −
+                                           gsk ∂x

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\MATHs\math 4890 LieML\scripts\project.py", line 182, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\MATHs\math 4890 LieML\scripts\project.py", line 170, in main
+    result = audit(ROOT, out)
+  File "D:\MATHs\math 4890 LieML\scripts\project.py", line 102, in audit
+    for target in markdown_targets(path.read_text()):
+                                   ~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\pathlib\__init__.py", line 788, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 472: illegal multibyte sequence

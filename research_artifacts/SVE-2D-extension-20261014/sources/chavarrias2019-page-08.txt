@@ -1,0 +1,54 @@
+468               V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+where gsk (−) is a function that accounts for the influence of the bed slope on the
+sediment transport direction and ϕτ (rad) is the direction of the sediment transport
+accounting for the secondary flow only:
+                                                     qx
+                                                        I
+                                                 qy − hαI
+                                                     Q
+                                    tan ϕτ =         qy .                               (2.21)
+                                             qx − hαI I
+                                                     Q
+Assuming a mild curvature, uniform flow conditions and a logarithmic profile of the
+primary flow, the constant αI (−) is (De Vriend 1977):
+                                               2
+                                        αI =      (1 − α).                              (2.22)
+                                               κ2
+The effect of the bed slope on the sediment transport direction depends on the grain
+size (Parker & Andrews 1985). We account for this effect setting:
+                                  gsk = As θkBs      k ∈ {1, N},                        (2.23)
+where As (−) and Bs (−) are non-dimensional parameters and θk (−) is the Shields
+(1936) stress (appendix B). Different values of the coefficients As and Bs have been
+proposed (for a recent review, see Baar et al. (2018)). We consider two possibilities:
+(i) As = 1, Bs = 0 (Schielen et al. 1993) and (ii) As = 1.70 and Bs = 0.5 (Talmon
+et al. 1995). In the first and simpler case, the bed slope effect is independent of the
+bed shear stress (Engelund & Skovgaard 1973; Engelund 1975). In the second, more
+complex, case, the bed slope effect is assumed to be dependent on the fluid drag force
+on the grains, which is assumed to depend on the Shields stress (Koch & Flokstra
+1981).
+
+                          2.4. Linearised system of equations
+The system of equations describing the flow, change of bed level and change of the
+bed surface texture is highly nonlinear. Here we linearise the system of equations to
+provide insight on the fundamental properties of the model and to study the stability
+
+
+
+
+of perturbations. To this end we consider a reference state that is a solution to the
+system of equations. The reference state is a steady uniform straight flow in the x
+direction over an inclined plane bed composed of an arbitrary number of size fractions.
+Mathematically: h0 = ct., qx0 = ct., qy0 = 0, I0 = 0, ∂η/∂x = ct. = −Cf q2x0 /gh30 , ∂η/∂y = 0,
+Mak0 = ct. ∀k ∈ {1, N − 1}, where ct. denotes a constant different from 0 and subscript
+0 indicates the reference solution.
+  We add a small perturbation to the reference solution denoted by 0 and we linearise
+the resulting system of equations. After substituting the reference solution we obtain
+a system of equations of the perturbed variables:
+              ∂Q0       ∂ 2 Q0   ∂ 2 Q0   ∂Q0       ∂Q0
+                  + D x0 2 + D y0 2 + Ax0     + Ay0     + B 0 Q0 = 0,                   (2.24)
+               ∂t        ∂x       ∂y      ∂x        ∂y
+where the vector of dependent variables is:
+                              Q0 = [h0 , q0x , q0y , I 0 , η0 , [Mak
+                                                                  0
+                                                                     ]]T ,              (2.25)
+where the square bracket indicates the vector character.

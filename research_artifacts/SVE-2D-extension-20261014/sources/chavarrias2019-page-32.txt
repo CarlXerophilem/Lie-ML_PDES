@@ -1,0 +1,55 @@
+492              V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+Appendix E. Well-posed domain under mixed-size sediment conditions
+  In this section we show that the shallow water equations in combination with
+the active layer model (Hirano 1971) used to account for mixed-size sediment
+morphodynamics may yield an ill-posed model depending on the closure relation
+used to account for the effect of the bed slope on the sediment transport direction.
+  We consider a model with two sediment size fractions. The system of equations is
+composed of the first three, the fifth and the sixth rows and columns of the full system
+of equations in (2.24). We neglect diffusive processes in the momentum equations. The
+system of equations has five unknowns (h, qx , qy , η and Ma1 ). We consider that the
+Froude number is sufficiently small such that the quasi-steady approximation is valid
+(appendix D) and we assume that the celerity associated with changes in the grain size
+distribution of the bed surface is of the same order of magnitude as the celerity of the
+bed elevation changes (Ribberink 1987; Sieben 1997; Stecca, Siviglia & Blom 2016).
+Under these conditions it is valid to decouple the system and consider steady flow
+to study the propagation of perturbations in bed elevation and bed surface grain size
+distribution. In this manner we reduce the number of unknowns to two (η and Ma1 ),
+which means that there are two angular frequencies to find. We obtain ω equating to
+0 the determinant of matrix:
+                                                    
+                                   0 0 0 0 0
+                                 0 0 0 0 0 
+                           R =  0 0 0 0 0  − M 0.                                 (E 1)
+                                                    
+                                 0 0 0 ω 0 
+                                   0 0 0 0 ω
+
+   We define a set of physically meaningful parameters useful to simplify the
+expression of the growth rate. Subscripts k and l refer to the grain size fraction
+while the subscript j refers to the direction (i.e. x and y). The parameters are a
+generalisation of the parameters used by Stecca et al. (2014) and Chavarrías et al.
+(2018) to the x and y directions.
+   Parameter ψj (−) represents the sediment transport intensity (e.g. De Vries 1965;
+Lyn & Altinakar 2002; Stecca et al. 2014) and ranges between 0 (no sediment
+transport) and O(10−2 ) (high sediment discharge):
+
+
+
+
+                                             ∂qbj
+                                     ψj =         .                                (E 2)
+                                             ∂qj
+
+Parameter cjk ∈ [0, 1] (−) represents the sediment transport intensity of fraction k
+relative to the total sediment transport intensity:
+
+                                            1 ∂qbjk
+                                    cjk =           .                              (E 3)
+                                            ψj ∂qj
+
+Parameter γjk (−) represents the sediment transport intensity of fraction k relative to
+the fraction content of sediment of fraction k at the interface between the active layer
+and the substrate:
+
+                                    γjk = cjk − fkI ,                              (E 4)

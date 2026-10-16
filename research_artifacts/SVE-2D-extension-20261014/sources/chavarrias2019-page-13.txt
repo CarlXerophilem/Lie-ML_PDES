@@ -1,0 +1,55 @@
+                     Ill posedness in two-dimensional problems                        473
+of roll waves (Balmforth & Mandre 2004; Balmforth & Vakil 2012; Rodrigues &
+Zumbrun 2016; Barker et al. 2017a,b).
+   Chaotic models, just as ill-posed models, are sensitive to the initial and boundary
+conditions and lose their predictive capabilities in a deterministic sense (Lorenz 1963).
+Yet, there are two essential differences. First, chaotic systems lose their predictive
+capabilities after a certain time (Devaney 1989; Banks et al. 1992), yet there exists
+a finite time in which the dynamics is predictable. In ill-posed models infinitesimal
+perturbations to the initial condition cause a finite divergence in the solution in an
+arbitrarily (but fixed) short time. Second, while the dynamics of a chaotic model is not
+predictable in deterministic terms after a certain time, these continue to be predictable
+in statistical terms. For this reason, although being sensitive to the initial and boundary
+conditions, a model presenting chaotic properties can be used, for instance, to capture
+the essential dynamics and spatio-temporal features of river braiding (Murray & Paola
+1994, 1997). On the contrary, the dynamics of an ill-posed model cannot be analysed
+in statistical terms.
+   The numerical solution of an ill-posed problem continues to change as the grid is
+refined because a smaller grid size resolves larger wavenumbers with faster growth
+rates (Joseph & Saut 1990; Kabanikhin 2008; Barker et al. 2015; Woodhouse et al.
+2012). In other words, the numerical solution of an ill-posed problem does not
+converge when the grid cell size is reduced. This property emphasises the unrealistic
+nature of ill-posed problems and shows that ill-posed models cannot be applied in
+practice.
+   We present an example of grid dependence specifically related to river morpho-
+dynamics under conditions with mixed-size sediment. We consider a case of
+degradation into a substrate finer than the active layer, as this is a situation in
+which the active layer model is prone to be ill posed (§ 1). The reference state
+is the same as in Case B1, yet the sediment is a mixture of two sizes equal to
+0.001 m and 0.010 m. The bed surface is composed of 10 % fine sediment. The
+active layer thickness is equal to 0.05 m, which in this case is representative of
+small dunes covering the bed (e.g. Deigaard & Fredsøe 1978; Armanini & di Silvio
+1988; Blom 2008). Depending on the substrate composition, this situation yields an
+ill-posed model (Chavarrías et al. 2018). When the substrate is composed of 50 %
+fine sediment (Case H1, table 3), the problem is well posed and it is ill posed when
+
+
+
+
+the substrate is composed of 90 % fine sediment (Case H2, table 3).
+   We use the software package Delft3D (Lesser et al. 2004) to solve the system
+of equations. We stress that the problem of ill posedness is inherent to the system
+of equations and independent from the numerical solver. We have implemented
+a subroutine that assesses the well posedness of the system of equations at each
+node and time step. The domain is 100 m long and 10 m wide. The downstream
+water level is lowered at a rate of 0.01 m h−1 to induce degradational conditions. The
+upstream sediment load is constant and equal to the equilibrium value of the reference
+state (Blom et al. 2017). The cells are square and we consider three different sizes
+(table 3). The time step varies between simulations to maintain a constant value of
+the CFL (Courant, Friedrichs & Lewy 1928) number.
+   Figure 2 presents the bed elevation after 10 h. The result of the well-posed case
+(H1, left column) is grid independent. The result of the ill-posed case (H2, right
+column) changes as the grid is refined and presents an oscillatory pattern characteristic
+of ill-posed simulations (Joseph & Saut 1990; Woodhouse et al. 2012; Barker et al.
+2015; Chavarrías et al. 2018). The bed seems to be flat in the ill-posed simulation
+with a coarser grid (figure 2b). This is because oscillations grow slowly on a coarse

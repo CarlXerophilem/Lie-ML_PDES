@@ -1,0 +1,21 @@
+{
+  "url": "https://export.arxiv.org/api/query?search_query=au%3ASideris%20AND%20ti%3A%22affine%20motion%22&start=0&max_results=4",
+  "final_url": "https://export.arxiv.org/api/query?search_query=au%3ASideris%20AND%20ti%3A%22affine%20motion%22&start=0&max_results=4",
+  "retrieved_utc": "2026-10-14T13:34:10.861980+00:00",
+  "headers": {
+    "Connection": "close",
+    "Content-Length": "4591",
+    "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+    "content-type": "application/atom+xml; charset=utf-8",
+    "server": "Google Frontend",
+    "x-cloud-trace-context": "6699c81bd1908a72f3a46f58b6c65ea8",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 14 Oct 2026 13:36:38 GMT",
+    "X-Served-By": "cache-lga-kjfk8660079-LGA, cache-lga-kjfk8660079-LGA, cache-lga-kjfk8660065-LGA, cache-lax-kwhp1940145-LAX",
+    "X-Cache": "MISS, MISS, MISS",
+    "X-Cache-Hits": "0, 0, 0",
+    "X-Timer": "S1791984998.827105,VS0,VE201",
+    "Strict-Transport-Security": "max-age=300"
+  }
+}

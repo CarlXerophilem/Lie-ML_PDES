@@ -1,0 +1,5 @@
+{
+  "command": "workflow",
+  "status": "passed",
+  "out": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\workflow"
+}

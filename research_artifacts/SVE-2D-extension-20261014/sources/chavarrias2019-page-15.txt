@@ -1,0 +1,77 @@
+                                                Ill posedness in two-dimensional problems                                              475
+
+                                                                                  t = 10 h
+                                     Surface mean grain size (m) (÷ 10-3)
+                            5          6        7     8        9             10                           Well posed
+                                                                                                          Ill posed
+
+(a)                                        H1, Îx = 0.50 m                             (b)           H2, Îx = 0.50 m
+Bed elevation (m)
+
+
+
+
+                    -0.98
+
+                    -1.00
+
+                    -1.02
+
+
+(c)                                        H1, Îx = 0.25 m                             (d)           H2, Îx = 0.25 m
+Bed elevation (m)
+
+
+
+
+                    -0.98
+
+                    -1.00
+
+                    -1.02
+
+
+(e)                                        H1, Îx = 0.10 m                            (f)            H2, Îx = 0.10 m
+Bed elevation (m)
+
+
+
+
+                    -0.98
+
+                    -1.00
+                                                                              10                                                       10
+                    -1.02                                                                                                                   )
+                                                                   5           m)                                           5
+                                                                                                                                    n (m
+                                80         90                          ition (               80
+                                                                                                     90                         itio
+                       Streamwis
+                                 e position          100 0
+                                                             ral   pos                  Streamw
+                                                                                               is e positio    100 0
+                                                                                                                       al   pos
+                                            (m        ) Late                                               n (m) Later
+
+F IGURE 2. (Colour online) Simulated bed elevation (surface) and mean grain size at the
+bed surface (colour) of a well-posed case (left column, H1, table 3) and an ill-posed case
+
+
+
+
+(right column, H2, table 3). In each row we present the results for varying cell size. The
+colour of the x–y plane shows the result of the routine that checks whether the conditions
+at each node yield a well-posed (green) or an ill-posed (red) model.
+
+
+implies ill posedness. Note that ellipticity (i.e. the eigenvalues of A are all complex)
+is not required for the problem to be ill posed, as it suffices that the problem is
+not hyperbolic. When considering diffusion and friction even when A has complex
+eigenvalues, the imaginary part of the eigenvalues of M 0 may all be negative and the
+problem well posed.
+  Finally, well posedness and hyperbolicity are similar terms when dealing with
+problems arising from conservation laws and changes with time, as hyperbolicity
+guarantees the existence of wave solutions (Lax 1980; Courant & Hilbert 1989;
+Strikwerda 2004; Toro 2009; Dafermos 2010; Bressan 2011; Dafermos 2016). In
+communities such as materials science, it is the term hyperbolicity that is associated
+with ill posedness, as a smooth solution of, for instance the stress, requires that the

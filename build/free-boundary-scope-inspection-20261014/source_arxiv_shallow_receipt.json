@@ -1,0 +1,21 @@
+{
+  "url": "https://export.arxiv.org/api/query?search_query=au%3ADorodnitsyn%20AND%20ti%3A%22shallow%20water%22&start=0&max_results=4",
+  "final_url": "https://export.arxiv.org/api/query?search_query=au%3ADorodnitsyn%20AND%20ti%3A%22shallow%20water%22&start=0&max_results=4",
+  "retrieved_utc": "2026-10-14T13:34:06.138059+00:00",
+  "headers": {
+    "Connection": "close",
+    "Content-Length": "7996",
+    "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+    "content-type": "application/atom+xml; charset=utf-8",
+    "server": "Google Frontend",
+    "x-cloud-trace-context": "06e36dd8dc46ee2df5b11abd49481026",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 14 Oct 2026 13:36:33 GMT",
+    "X-Served-By": "cache-lga-kjfk8660067-LGA, cache-lga-kjfk8660067-LGA, cache-lga-kjfk8660056-LGA, cache-hhr-khhr2060058-HHR",
+    "X-Cache": "MISS, MISS, MISS",
+    "X-Cache-Hits": "0, 0, 0",
+    "X-Timer": "S1791984993.035566,VS0,VE297",
+    "Strict-Transport-Security": "max-age=300"
+  }
+}

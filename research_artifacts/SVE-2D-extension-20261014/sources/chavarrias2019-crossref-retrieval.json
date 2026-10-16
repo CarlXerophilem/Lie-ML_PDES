@@ -1,0 +1,11 @@
+{
+  "paper": "chavarrias2019",
+  "kind": "crossref",
+  "request_url": "https://api.crossref.org/works/10.1017/jfm.2019.166",
+  "final_url": "https://api.crossref.org/works/10.1017/jfm.2019.166",
+  "retrieved_utc": "2026-10-13T18:25:00.957714+00:00",
+  "status_code": 200,
+  "sha256": "dc88038dd055de6c0d98c5f07504d042e83a5355427b4a3c40d0d7c970256126",
+  "bytes": 23001,
+  "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019-crossref.json"
+}

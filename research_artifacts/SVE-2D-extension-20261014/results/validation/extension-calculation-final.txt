@@ -1,0 +1,121 @@
+symmetry.time_translation: [0, 0, 0, 0]
+symmetry.x_translation: [0, 0, 0, 0]
+symmetry.y_translation: [0, 0, 0, 0]
+symmetry.bed_datum_shift: [0, 0, 0, 0]
+symmetry.rotation: [0, 0, 0, 0]
+symmetry.common_spacetime_scaling: [0, 0, 0, 0]
+symmetry.cubic_scaling_defect_formula: [0, 0, 0, 0]
+symmetry.cubic_scaling_at_m3: [0, 0, 0, 0]
+symmetry.conservative_primitive_equivalence: [0, 0, 0, 0]
+symmetry.diagonal_scaling_stratum: [0]
+radial.radial_pullback: [0, 0, 0, 0]
+radial.speed_is_rotation_invariant: [0]
+cubic.cartesian_cubic_factorization: [0, 0, 0, 0]
+cubic.cartesian_cubic_on_ode: [0, 0, 0, 0]
+cubic.swirl_first_integral: [0]
+cubic.rotation_scaling_base_bracket: [0, 0]
+cubic.projected_rank_determinant: [0]
+cubic.annular_water_balance: [0]
+cubic.annular_solid_bed_balance: [0]
+cubic.rotation_graph_invariance: [0, 0, 0, 0]
+cubic.shifted_scaling_graph_invariance: [0, 0, 0, 0]
+cubic.exact_evolving_swirl_cartesian: [0, 0, 0, 0]
+Negative controls (must be nonzero): {'galilean_boost': -1, 'rotation_without_velocity': -1, 'noncubic_scaling_m2': -2, 'missing_radial_geometry': 1, 'using_1d_factor_in_2d': 1}
+{
+  "status": "passed",
+  "exact_zero_count": 68,
+  "numerical": {
+    "label": "constructed dimensionless rotating cubic IVP",
+    "g": 1.0,
+    "kappa": 0.03,
+    "p": 0.4,
+    "K": 0.05,
+    "m": 3,
+    "initial": {
+      "H": 1.0,
+      "A": 0.15,
+      "W": 0.2,
+      "B": 0.05
+    },
+    "interval": [
+      0.0,
+      0.2
+    ],
+    "samples": 201,
+    "spatial_chart": "1 <= r <= 2; periodic theta; boundary values/fluxes are solution traces",
+    "runs": [
+      {
+        "method": "DOP853",
+        "rtol": 1e-08,
+        "atol": 1e-10,
+        "max_step": 0.1,
+        "nfev": 47,
+        "seconds": 0.0009398999973200262,
+        "success": true
+      },
+      {
+        "method": "DOP853",
+        "rtol": 1e-12,
+        "atol": 1e-14,
+        "max_step": 0.01,
+        "nfev": 302,
+        "seconds": 0.003494599979603663,
+        "success": true
+      },
+      {
+        "method": "Radau",
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "max_step": 0.01,
+        "nfev": 1051,
+        "seconds": 0.032333600014681,
+        "success": true
+      }
+    ],
+    "refinement_max_abs": 1.2822916062305012e-09,
+    "cross_solver_max_abs": 1.7392753903777702e-12,
+    "first_integral_max_abs_drift": 2.0816681711721685e-17,
+    "H_min": 0.9782863027785879,
+    "speed_on_r1_min": 0.1978186211845709,
+    "finite_difference_defect_fine": 7.319824450346957e-06,
+    "finite_difference_defect_coarse": 2.8948634761771785e-05,
+    "finite_difference_ratio": 3.9548263702416566,
+    "final_state": [
+      1.0445313314705404,
+      -0.2632823751483644,
+      0.2044046312068825,
+      0.050188539312969654
+    ],
+    "exact_control": {
+      "interval": [
+        1.0,
+        1.2
+      ],
+      "omega": 1.0,
+      "initial": [
+        0.5625,
+        0.5,
+        1.0,
+        0.0625
+      ],
+      "max_abs_error": 3.3306690738754696e-16,
+      "method": "DOP853",
+      "rtol": 1e-12,
+      "atol": 1e-14
+    },
+    "thresholds": {
+      "cross_solver": 1e-08,
+      "refinement": 1e-08,
+      "first_integral": 1e-09,
+      "exact_control": 1e-09
+    },
+    "sample_sha256": "c2aa0e5d2a47a26c0c8d34d7afc77ed480b129e5b65d506b1659ec38884a5a6a",
+    "limitations": [
+      "sampled numerical consistency, not a continuous error certificate",
+      "constructed data, not measured or source-paper data",
+      "ODE reference, not a full 2D PDE-solver comparison"
+    ],
+    "passed": true
+  },
+  "seconds": 1.9502166000020225
+}

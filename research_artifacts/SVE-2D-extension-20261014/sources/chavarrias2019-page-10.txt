@@ -1,0 +1,64 @@
+470              V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+The matrix of linear terms is:
+                                                                               
+                            0             0           0         0       0   0
+                       −3Cf q2x0       2Cf qx0                             
+                                                     0         0       0 0 
+                           h30           h20                               
+                                                    Cf qx0
+                                                                           
+                                                                           
+                B0 = 
+                           0               0                   0       0 0 
+                                                                            .      (2.30)
+                                                     h20
+                                                              qx0          
+                           0               0         0                 0 0 
+                                                              h20 LI∗
+                                                                           
+                                                                           
+                           0               0         0         0       0 0 
+                            0               0         0         0       0 0
+
+  We assume that the perturbations can be represented as a Fourier series, which
+implies that they are piecewise smooth and bounded for x = ±∞. Using this
+assumption the solution of the perturbed system is expressed in the form of normal
+modes:
+
+                                 Q0 = Re(Vei(kwx +kwy −ωt) ),                       (2.31)
+
+where i is the imaginary unit, kwx (rad m−1 ) and kwy (rad m−1 ) are the real
+wavenumbers in the x and y direction, respectively, ω = ωr + iωi (rad s−1 ) is the
+complex angular frequency, V is the complex amplitude vector and Re denotes the
+real part of the solution (which we will omit in the subsequent steps). The variable
+ωr is the angular frequency and ωi the attenuation coefficient. A value of ωi > 0
+implies growth of perturbations and ωi < 0 decay. Substitution of (2.31) in (2.24)
+yields:
+
+                                     [M 0 − ω1]V = 0,                               (2.32)
+
+where:
+                               2            2
+                   M 0 = D x0 kwx i + D y0 kwy i + Ax0 kwx + Ay0 kwy − B 0 i,       (2.33)
+
+and 1 denotes the unit matrix. Equation (2.32) is an eigenvalue problem in which
+
+
+
+
+the eigenvalues of M 0 (as a function of the wavenumber) are the values of ω
+satisfying (2.32).
+   The solution of the linear model provides information regarding the development of
+small amplitude oscillations only, but for an arbitrary wavenumber. For this reason the
+linear model is convenient for studying the well posedness of the model, which we
+will assess in the following section.
+
+3. Instability, hyperbolicity and ill posedness
+   Ill posedness has been related to the system of governing equations losing its
+hyperbolic character. Stability analysis investigates growth and decay of perturbations
+of a base state. The two mathematical problems may seem unrelated but in fact they
+are strongly linked. In this section we clarify the terms unstable, hyperbolic and
+ill posed, and present the mathematical framework that we use to study the well
+posedness of the system of equations.
+   A system is stable if perturbations to an equilibrium state decay and the solution
+returns to its original state. This is equivalent to saying that all possible combinations

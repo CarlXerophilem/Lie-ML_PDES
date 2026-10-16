@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-13T18:48:13.804799+00:00",
+  "reviewer": "fresh_review independent agent",
+  "review_status": "complete",
+  "overall_verdict": "accepted",
+  "scientific_claim_revision": 1,
+  "claims": [
+    {
+      "id": "C1",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "Classical introductory model in Fernandez-Nieto et al. equation (1.1)",
+        "Constant porosity 0<=p<1; g,kappa>0",
+        "Source Grass range 1<=m<=4; other real exponents mathematical extensions",
+        "Frictionless idealization; not later energy-consistent model"
+      ],
+      "evidence": [
+        "Actual journal p.116 text and image",
+        "Actual journal p.117 limitations",
+        "JFM p.467 pore-inclusive convention",
+        "Source PDF and title-page identities"
+      ]
+    },
+    {
+      "id": "C2",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "Smooth wet positive-speed chart for general real m",
+        "Fixed nonzero g,K",
+        "Diagonal ansatz only; no maximal classification"
+      ],
+      "evidence": [
+        "Replay of candidate prolongation identities",
+        "Independent general diagonal prolongation; (m-3)*c=0",
+        "Negative controls nonzero"
+      ]
+    },
+    {
+      "id": "C3",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "r>0 with local angle chart",
+        "Full coordinate and velocity rotation",
+        "Positive speed for general real m; cubic extension separate"
+      ],
+      "evidence": [
+        "Replayed four polar pullback identities",
+        "Independent moving-basis calculation at rotation section"
+      ]
+    },
+    {
+      "id": "C4",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "m=3; r>0; H>0",
+        "Constant added bed datum uses conjugate generator",
+        "Initial and boundary traces come from same constructed solution",
+        "Fixed annulus is not scaling-invariant"
+      ],
+      "evidence": [
+        "Independent original conservative Cartesian factorization",
+        "Full seven-component commutator zero",
+        "Independent annular integrated water and solid-bed balances",
+        "Projected determinant -r^2"
+      ]
+    },
+    {
+      "id": "C5",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "H>0 for W^2/H",
+        "Fixed W sign for square-root elimination; W=0 separate",
+        "Exact family: t>0,r>0,g,K>0,2*g*K<1,omega real"
+      ],
+      "evidence": [
+        "Independent first-integral differentiation",
+        "Four exact original conservative PDE residuals vanish for explicit family"
+      ]
+    },
+    {
+      "id": "C6",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "Constructed dimensionless IVP on [0,0.2]",
+        "Sampled numerical consistency only",
+        "No continuous error certificate, full PDE solver, general stability, or real-data claim"
+      ],
+      "evidence": [
+        "Complete fresh replay passed",
+        "Profile CSV hash identical",
+        "Cross-solver, refinement, invariant, exact-control gates pass",
+        "Resource-only repair independently traced and probed"
+      ]
+    },
+    {
+      "id": "C7",
+      "revision": 1,
+      "verdict": "accepted",
+      "assumptions": [
+        "Source-scope comparison only",
+        "No certification of every step of JFM stability proof",
+        "No transferred ill-posedness or well-posedness result"
+      ],
+      "evidence": [
+        "Actual JFM Appendix D text and image",
+        "Low-Froude quasi-steady assumption",
+        "Friction factor retained in D2; n>1 in D7",
+        "Unisize four-field model explicitly acknowledged"
+      ]
+    }
+  ],
+  "unresolved_material_findings": 0,
+  "unresolved_actionable_findings": 0,
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "minor",
+      "status": "resolved",
+      "location": "main.py:20 and original evidence thread_cap metadata",
+      "finding": "setdefault preserved inherited thread values greater than one while metadata asserted thread_cap=1",
+      "correction": "Force each of the three thread environment variables to 1 before numerical-library imports",
+      "material_scientific_change": false
+    }
+  ],
+  "repair_trace": {
+    "old_script_sha256": "5d9c37687bdda8c0799787922c3f53c31150f9077427a64498af85e28476c1e2",
+    "new_script_sha256": "3e5c2b4daaa12bb234fbaa37c3846d223e2ad57c02a9907ebc2509f712177c16",
+    "reversing_single_changed_line_restores_old_hash": true,
+    "independent_probe_incoming_thread_values": {
+      "OMP_NUM_THREADS": "7",
+      "OPENBLAS_NUM_THREADS": "7",
+      "MKL_NUM_THREADS": "7"
+    },
+    "independent_probe_observed_thread_values": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "numerical_artifacts_match_reviewer_replay": {
+      "profiles.csv": true,
+      "profiles.png": true,
+      "numerical_table.tex": true
+    },
+    "updated_evidence_status": "passed",
+    "updated_exact_zero_count": 68,
+    "updated_numerical_passed": true
+  },
+  "computation_receipts": {
+    "replay_exact_zero_count": 68,
+    "replay_negative_controls": {
+      "galilean_boost": -1,
+      "rotation_without_velocity": -1,
+      "noncubic_scaling_m2": -2,
+      "missing_radial_geometry": 1,
+      "using_1d_factor_in_2d": 1
+    },
+    "independent_exact_zero_count": 28,
+    "independent_script_imports_reviewed_math": false,
+    "source_manifest_artifact_hashes_verified": 58,
+    "sample_sha256": "c2aa0e5d2a47a26c0c8d34d7afc77ed480b129e5b65d506b1659ec38884a5a6a",
+    "cross_solver_max_abs": 1.7392753903777702e-12,
+    "refinement_max_abs": 1.2822916062305012e-09,
+    "first_integral_max_abs_drift": 2.0816681711721685e-17,
+    "exact_control_max_abs_error": 3.3306690738754696e-16,
+    "finite_difference_ratio": 3.9548263702416566,
+    "finite_difference_ratio_is_acceptance_gate": false,
+    "reviewer_simplification_failures": "Two false negatives from uncombined powers; retained in separate receipts and resolved by expansion before simplification."
+  },
+  "reviewed_files_sha256": {
+    "RUN_CONTRACT.md": "eb478cabca3e703ef765d65ffb5a5d9526263a0dbcd3f13dd5e36eb4386d99cc",
+    "CLAIMS.json": "c72c43c5e086cb882fed58be9bdcbad64c98d75755c1b38111aae6bd3e789c02",
+    "SOURCE_AUDIT.md": "88dc003d472d421f7c18b92beb18f58f7a8d82551b89c0d0c7f8d0ec62bd446d",
+    "sources/source_manifest.json": "feda0b67764f2b2805e0bae6c4ebe5a079e2d589b82f63d4040fc0cd390d4d49",
+    "main.py": "3e5c2b4daaa12bb234fbaa37c3846d223e2ad57c02a9907ebc2509f712177c16",
+    "tests/test_extension.py": "922346405c1231403bbc42fa310612c03bb382a2e60fae863c38890ac2ce136e",
+    "results/evidence.json": "084670266c410d961ac7c1c9bdceb9c86f87ade457be283bd7662bde8398b9c3",
+    "results/thread_cap_repair.json": "53b192bfa7ef284a2a0e7bc03eee2783dd0f8c975920955f29d754d93e75bf51",
+    "report.tex": "501c496a06d73922e7d0109edd55694995b69e7851cde0202f00025a12f62529",
+    "DERIVATION_RESEARCH.md": "3cbe912025afc679e6b1a1b98b6f91857f4dbb6be0751ebe25e855abe9ab3457"
+  },
+  "primary_evidence_inspected": {
+    "fernandez2017": [
+      "Title-page extracted identity",
+      "Journal pp.116-117 extracted text",
+      "PDF p.2 image"
+    ],
+    "chavarrias2019": [
+      "Title-page extracted identity",
+      "Journal pp.467 and 491 extracted text",
+      "PDF p.31 image"
+    ]
+  },
+  "not_judged": [
+    "Unrestricted maximal point algebra",
+    "Publication novelty",
+    "General arbitrary-data PDE well-posedness or perturbation stability",
+    "Global continuation or shocks",
+    "Physical validity against observations",
+    "Complete JFM stability proof",
+    "Controller-owned project-wide validation and final report PDF visual release"
+  ],
+  "reviewer_artifact_directory": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\reviewer-replay",
+  "re_review_required_for": "Material changes to claims, equations, scope, or load-bearing evidence"
+}

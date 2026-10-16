@@ -1,0 +1,10 @@
+{
+  "status": "confirmed",
+  "requested_url": "https://arxiv.org/pdf/1506.05642v1",
+  "final_url": "https://arxiv.org/pdf/1506.05642v1",
+  "retrieved_at": "2026-10-13T18:26:03.937491+00:00",
+  "media_type": "application/pdf",
+  "bytes": 824543,
+  "sha256": "1ff43451d519e0510666fbb2c1953392399b660fd8def64d164e570929c6bdc5",
+  "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv1506.05642v1.pdf"
+}

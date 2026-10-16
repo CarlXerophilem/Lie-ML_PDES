@@ -1,0 +1,17 @@
+{
+  "source_artifacts_checked": 58,
+  "source_hash_mismatches": [],
+  "script_hash_matches": true,
+  "numerical_csv_hash_matches": true,
+  "latex_final_log_warnings": [],
+  "pages_rendered_and_visually_inspected": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "visual_findings": [],
+  "report_sha256": "e4fb3c97f212ed584552289d55e329bb4a4a167d61294cd1d16d1b8c8ac84b10",
+  "primary_equation_page_parent_visually_checked": "sources/fernandez2017-page02.png"
+}

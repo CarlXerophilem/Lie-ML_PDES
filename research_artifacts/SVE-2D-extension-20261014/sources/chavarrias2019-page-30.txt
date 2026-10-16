@@ -1,0 +1,78 @@
+490                   V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+exposed than in unisize conditions coarse sediment (Einstein 1950). Ashida & Michiue
+(1971) propose θc = 0.05 and the relation:
+                                −1
+                                   dk                dk
+                          0.843                 for     ⩽ 0.4
+                        
+                        
+                        
+                        
+                        
+                        
+                                 Dm                 Dm
+                                          2
+                   ξk =                                         ,              (B 6)
+                           log10 (19)              dk
+                                                        > 0.4
+                        
+                        
+                                         for
+                                            
+                                       d
+                        
+                                                   Dm
+                         log10 19 k
+                        
+                        
+                                      Dm
+
+where Dm is a characteristic mean grain size of the sediment mixture.
+
+Appendix C. Proof of ill posedness due to secondary flow without diffusion
+  In this section we prove that the model based on the shallow water equations
+accounting for secondary flow without diffusion is ill posed.
+  The system of equations is composed of the first four rows and columns of the full
+system of equations in (2.24). Neglecting diffusive processes matrices D x0 and D y0 are
+equal to 0. As we are interested in the short-wave domain, friction can be neglected.
+The resulting matrix M 0 of the linearised eigenvalue problem (2.33) is:
+
+                                        M 0 = Ax0 kwx + Ay0 kwy .                                     (C 1)
+
+   We compute the fourth-order characteristic polynomial of matrix M 0 . The roots of
+the characteristic polynomial are the eigenvalues (i.e. the angular frequencies ω in
+(2.31)). The discriminant of a fourth-order polynomial p(ω) = p4 ω4 + p3 ω3 + p2 ω2 +
+p1 ω + p0 = 0 is equal to (Beeler, Gosper & Schroeppel 1972):
+
+      ∆4 = (p21 p22 p23 − 4p31 p33 − 4p21 p32 p4 + 18p31 p2 p3 p4 − 27p41 p24 + 256p30 p34 )
+              + p0 (−4p32 p23 + 18p1 p2 p33 + 16p42 p4 − 80p1 p22 p3 p4 − 6p21 p23 p4 + 144p21 p2 p24 )
+              + p20 (−27p43 + 144p2 p23 p4 − 128p22 p24 − 192p1 p3 p24 ).                             (C 2)
+
+
+
+
+  We find that the discriminant of the characteristic polynomial is:
+
+                                          16gh2 T 2 βu 2 2
+                                  ∆4 =                kwx (kwx − kwy
+                                                                  2
+                                                                     ),                               (C 3)
+                                             LI
+
+where βu = β ∗ q2x /h2 and:
+                                   2
+                    T = LI g[LI g(kwx    2 2
+                                      + kwy ) + βu (6kwx
+                                                      2 2        4
+                                                         kwy − 2kwx )] + βu2 kwx
+                                                                              4
+                                                                                 .                    (C 4)
+
+As the coefficients of the characteristic polynomial p(ω) are all real, a positive
+discriminant indicates that either all the roots are real or all the roots are complex.
+A negative discriminant indicates that there are two real and two complex roots.
+The complex roots come in pairs of complex conjugates. For this reason, if
+the discriminant is negative there exists an eigenvalue with a positive imaginary
+component. As the discriminant is negative for kwx < kwy independently of the
+wavenumber, there exists always a region of growth. This implies that the model
+is ill posed.

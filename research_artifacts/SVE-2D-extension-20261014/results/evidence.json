@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "created_utc": "2026-10-13T18:44:52.818780+00:00",
+  "command": [
+    "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\main.py",
+    "--out",
+    "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\results"
+  ],
+  "script_sha256": "3e5c2b4daaa12bb234fbaa37c3846d223e2ad57c02a9907ebc2509f712177c16",
+  "environment": {
+    "python": "3.14.2",
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "scipy": "1.17.1",
+    "thread_cap": 1
+  },
+  "assumptions": [
+    "smooth classical fields",
+    "h>0",
+    "g>0",
+    "kappa>0",
+    "0<=p<1",
+    "K=kappa/(1-p)",
+    "speed>0 for arbitrary real m",
+    "polar chart r>0",
+    "source Grass range 1<=m<=4; other real exponents are mathematical extensions",
+    "g,kappa,p fixed under symmetry transformations",
+    "no friction or external forcing"
+  ],
+  "exact_zero_count": 68,
+  "groups": {
+    "symmetry": {
+      "exact_checks": {
+        "time_translation": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "x_translation": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "y_translation": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "bed_datum_shift": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "rotation": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "common_spacetime_scaling": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "cubic_scaling_defect_formula": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "cubic_scaling_at_m3": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "conservative_primitive_equivalence": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "diagonal_scaling_stratum": [
+          "0"
+        ]
+      },
+      "diagonal_weights": [
+        "a + c - k",
+        "-2*c + d",
+        "-d + e",
+        "-a - c*m + d + k"
+      ],
+      "diagonal_solution": "c=k-a, d=e=2*(k-a), (3-m)*(k-a)=0",
+      "cubic_scaling_defect": "K*(m - 3)*(2*u*u_y*v*(m/2 - 1/2)*(u**2 + v**2)**(m/2 - 1/2)/(u**2 + v**2) + 2*u*v*v_x*(m/2 - 1/2)*(u**2 + v**2)**(m/2 - 1/2)/(u**2 + v**2) + u_x*(2*u**2*(m/2 - 1/2)*(u**2 + v**2)**(m/2 - 1/2)/(u**2 + v**2) + (u**2 + v**2)**(m/2 - 1/2)) + v_y*(2*v**2*(m/2 - 1/2)*(u**2 + v**2)**(m/2 - 1/2)/(u**2 + v**2) + (u**2 + v**2)**(m/2 - 1/2)))",
+      "negative_controls": {
+        "galilean_boost": "-1",
+        "rotation_without_velocity": "-1",
+        "noncubic_scaling_m2": "-2"
+      }
+    },
+    "radial": {
+      "exact_checks": {
+        "radial_pullback": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "speed_is_rotation_invariant": [
+          "0"
+        ]
+      },
+      "radial_equations": [
+        "Derivative(h(t, r), t) + (r*a(t, r)*Derivative(h(t, r), r) + r*h(t, r)*Derivative(a(t, r), r) + a(t, r)*h(t, r))/r",
+        "g*(Derivative(b(t, r), r) + Derivative(h(t, r), r)) + a(t, r)*Derivative(a(t, r), r) + Derivative(a(t, r), t) - w(t, r)**2/r",
+        "a(t, r)*Derivative(w(t, r), r) + Derivative(w(t, r), t) + a(t, r)*w(t, r)/r",
+        "K*(r*a(t, r)*Derivative(f(t, r), r) + r*f(t, r)*Derivative(a(t, r), r) + a(t, r)*f(t, r))/r + Derivative(b(t, r), t)"
+      ],
+      "sediment_factor": "f=(a(t,r)**2+w(t,r)**2)**((m-1)/2)",
+      "missing_geometry_witness": "1"
+    },
+    "cubic": {
+      "exact_checks": {
+        "cartesian_cubic_factorization": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "cartesian_cubic_on_ode": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "swirl_first_integral": [
+          "0"
+        ],
+        "rotation_scaling_base_bracket": [
+          "0",
+          "0"
+        ],
+        "projected_rank_determinant": [
+          "0"
+        ],
+        "annular_water_balance": [
+          "0"
+        ],
+        "annular_solid_bed_balance": [
+          "0"
+        ],
+        "rotation_graph_invariance": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "shifted_scaling_graph_invariance": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "exact_evolving_swirl_cartesian": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "profile_residuals": [
+        "4*A(t)*H(t) + Derivative(H(t), t)",
+        "2*g*(B(t) + H(t)) + A(t)**2 - W(t)**2 + Derivative(A(t), t)",
+        "2*A(t)*W(t) + Derivative(W(t), t)",
+        "4*K*(A(t)**2 + W(t)**2)*A(t) + Derivative(B(t), t)"
+      ],
+      "cartesian_fields": [
+        "(x**2 + y**2)*H(t)",
+        "x*A(t) - y*W(t)",
+        "x*W(t) + y*A(t)",
+        "b0 + (x**2 + y**2)*B(t)"
+      ],
+      "first_integral": "W(t)**2/H(t)",
+      "exact_time_family": {
+        "H(t)": "(-K + 1/(2*g))*(omega**2 + 1/4)/t**2",
+        "A(t)": "1/(2*t)",
+        "W(t)": "omega/t",
+        "B(t)": "K*(omega**2 + 1/4)/t**2"
+      },
+      "exact_time_family_guards": [
+        "t>0",
+        "r>0",
+        "2*g*K<1",
+        "g,K>0",
+        "omega real"
+      ],
+      "missing_factor_witness": "1",
+      "noncubic_bed_residual": "r**2*Bprime + K*(m+1)*A*(A**2+W**2)**((m-1)/2)*r**(m-1)"
+    }
+  },
+  "negative_controls": {
+    "galilean_boost": "-1",
+    "rotation_without_velocity": "-1",
+    "noncubic_scaling_m2": "-2",
+    "missing_radial_geometry": "1",
+    "using_1d_factor_in_2d": "1"
+  },
+  "numerical": {
+    "label": "constructed dimensionless rotating cubic IVP",
+    "g": 1.0,
+    "kappa": 0.03,
+    "p": 0.4,
+    "K": 0.05,
+    "m": 3,
+    "initial": {
+      "H": 1.0,
+      "A": 0.15,
+      "W": 0.2,
+      "B": 0.05
+    },
+    "interval": [
+      0.0,
+      0.2
+    ],
+    "samples": 201,
+    "spatial_chart": "1 <= r <= 2; periodic theta; boundary values/fluxes are solution traces",
+    "runs": [
+      {
+        "method": "DOP853",
+        "rtol": 1e-08,
+        "atol": 1e-10,
+        "max_step": 0.1,
+        "nfev": 47,
+        "seconds": 0.0009324999991804361,
+        "success": true
+      },
+      {
+        "method": "DOP853",
+        "rtol": 1e-12,
+        "atol": 1e-14,
+        "max_step": 0.01,
+        "nfev": 302,
+        "seconds": 0.0032167000172194093,
+        "success": true
+      },
+      {
+        "method": "Radau",
+        "rtol": 1e-11,
+        "atol": 1e-13,
+        "max_step": 0.01,
+        "nfev": 1051,
+        "seconds": 0.030938400013837963,
+        "success": true
+      }
+    ],
+    "refinement_max_abs": 1.2822916062305012e-09,
+    "cross_solver_max_abs": 1.7392753903777702e-12,
+    "first_integral_max_abs_drift": 2.0816681711721685e-17,
+    "H_min": 0.9782863027785879,
+    "speed_on_r1_min": 0.1978186211845709,
+    "finite_difference_defect_fine": 7.319824450346957e-06,
+    "finite_difference_defect_coarse": 2.8948634761771785e-05,
+    "finite_difference_ratio": 3.9548263702416566,
+    "final_state": [
+      1.0445313314705404,
+      -0.2632823751483644,
+      0.2044046312068825,
+      0.050188539312969654
+    ],
+    "exact_control": {
+      "interval": [
+        1.0,
+        1.2
+      ],
+      "omega": 1.0,
+      "initial": [
+        0.5625,
+        0.5,
+        1.0,
+        0.0625
+      ],
+      "max_abs_error": 3.3306690738754696e-16,
+      "method": "DOP853",
+      "rtol": 1e-12,
+      "atol": 1e-14
+    },
+    "thresholds": {
+      "cross_solver": 1e-08,
+      "refinement": 1e-08,
+      "first_integral": 1e-09,
+      "exact_control": 1e-09
+    },
+    "sample_sha256": "c2aa0e5d2a47a26c0c8d34d7afc77ed480b129e5b65d506b1659ec38884a5a6a",
+    "limitations": [
+      "sampled numerical consistency, not a continuous error certificate",
+      "constructed data, not measured or source-paper data",
+      "ODE reference, not a full 2D PDE-solver comparison"
+    ],
+    "passed": true
+  },
+  "failures": [],
+  "elapsed_seconds": 1.8487063999928068,
+  "claim_scope": "verified candidates and diagonal-scaling stratum, not maximal classification"
+}

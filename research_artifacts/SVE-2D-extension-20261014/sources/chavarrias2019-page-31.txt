@@ -1,0 +1,69 @@
+                     Ill posedness in two-dimensional problems                           491
+Appendix D. Proof of ill posedness due to lack of bed slope effect under unisize
+conditions
+   In this section we prove that the model based on the shallow water equations
+without accounting for the effect of secondary flow in combination with the Exner
+(1920) equation to model bed elevation changes is ill posed if the effect of the bed
+slope on the direction of the sediment transport is not taken into consideration.
+   The system of equations is composed of the first three and the fifth rows and
+columns of the system of equations in (2.24). Neglecting diffusive processes in the
+momentum equations and the effect of the bed slope, matrices D x0 and D y0 are equal
+to 0. The system of equations has four unknowns (h, qx , qy and η). The unknowns are
+coupled, meaning that a change in bed elevation influences the flow and vice versa.
+The celerity of the perturbations associated with the flow variables (i.e. h, qx and qy )
+is orders of magnitude larger than the celerity of perturbations in bed elevation if the
+Froude number is sufficiently small (Fr / 0.7 (De Vries 1965, 1973; Lyn & Altinakar
+2002)). Under this condition we can decouple the system and consider steady flow
+to study the propagation of perturbations in bed elevation (i.e. quasi-steady flow
+assumption (De Vries 1965; Cao & Carling 2002; Colombini & Stocchino 2005)). In
+this manner we reduce the number of unknowns to one (η), which means that there
+is only one eigenvalue (ω). We obtain ω equating to 0 the determinant of matrix:
+                                   0 0 0 0
+                                                
+                                  0 0 0 0 
+                            R=                    − M 0.                          (D 1)
+                                   0 0 0 0 
+                                   0 0 0 ω
+The growth rate (the imaginary part of ω) is:
+                                         2
+                                  qb Cf kwx
+                         ωi =    2 w2 + w2
+                                              (w3 + (n − 1)kwy
+                                                            4
+                                                               ),                       (D 2)
+                                kwx  2      1
+
+where w1 , w2 and w3 are second degree polynomials on kwy :
+                            w1 = Cf [(1 − 4Fr2 )kwx
+                                                 2      2
+                                                    + 2kwy ],                           (D 3)
+                            w2 = b1 + (1 − Fr )kwx22   2
+                                                    + kwy ,                             (D 4)
+
+
+
+
+      w3 = −3Fr2 nkwx
+                   4         2
+                      − b1 nkwx + [n(2 − Fr2 ) − (2 + Fr2 )]kwx
+                                                             2 2
+                                                                kwy + b1 (n − 3)kwy
+                                                                                 2
+                                                                                    ,   (D 5)
+where b1 is:
+                                             3Cf2 Fr2
+                                      b1 = .                             (D 6)
+                                     h2
+  Parameter n is the degree of nonlinearity of the sediment transport relation
+(Mosselman, Sloff & Van Vuren 2008):
+                                             Q ∂qb
+                                       n=          ,                                    (D 7)
+                                             qb ∂Q
+which is larger than 1. For instance, n = 5 in the relation developed by Engelund &
+Hansen (1967) and n > 3 in the one by Meyer-Peter & Müller (1948). In general n > 3
+for the sediment transport relation to be physically realistic (Mosselman 2005).
+  For kwy tending to infinity, parameter w3 becomes negligible with respect to
+(n − 1)kwy
+         4
+           . As all other terms in (D 2) are positive, for a large wavenumber the
+growth rate is positive which implies that the model is ill posed.

@@ -1,0 +1,66 @@
+464              V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+                        q            q              q  
+                            x                      x          y
+                ∂  ∂ h             ∂  ∂ h            ∂
+                                                             h
+             = 2 νh           +      νh           +           − ghSfx ,         (2.2)
+                                                                 
+                ∂x        ∂x        ∂y           ∂y        ∂x
+                                              q q 
+                                                   x y
+          ∂qy     ∂(q2y /h + gh2 /2)      ∂∂η
+              +              +     h   + gh − Fsy
+           ∂t        ∂y           ∂x       ∂y
+                      q         q          q  
+                          y                 y        x
+                ∂   ∂         ∂      ∂       ∂
+             = 2 νh     h  +
+                            
+                                  νh     h  +     h    − ghSfy ,
+                                                        
+                                                                                      (2.3)
+                ∂y      ∂y     ∂x         ∂x      ∂y
+
+where (x, y) (m) are Cartesian coordinates and t (s) is the time coordinate. The
+variables (qx , qy ) = (uh, vh) (m2 s−1 ) are the specific water discharges in the x
+and y direction, respectively, where h (m) is the flow depth and u (m s−1 ) and
+v (m s−1 ) are the depth-averaged flow velocities. The variable η (m) is the bed
+elevation and g (m s−2 ) the acceleration due to gravity. The friction slopes are
+(Sfx , Sfy ) (−) and the diffusion coefficient ν (m2 s−1 ) is the horizontal eddy viscosity.
+The depth-averaging procedure of the equations of motion introduces terms that
+originate from the difference between the actual velocity at a certain elevation in the
+water column and the depth-averaged velocity. We separate the contributions due to
+turbulent motion and secondary flow caused by the flow curvature. The contribution
+due to turbulent motion is accounted for by the diffusion coefficient. Elder (1959)
+derived an expression for the diffusion coefficient that accounts for the effect of
+turbulent motion on the depth-averaged flow assuming a logarithmic profile for the
+primary flow and negligible effect of molecular viscosity:
+                                          νE = 61 κhu∗ ,                              (2.4)
+
+where κ = 0.41 (−) is the von Kármán constant and u∗ = Cf Q/h (m s−1 ) is the
+                                                                  p
+friction velocity. Parameter Cf (−) is a non-dimensional friction coefficient, which we
+assume to be constant
+                  q       (Ikeda, Parker & Sawai 1981; Schielen, Doelman & De Swart
+1993) and Q = q2x + q2y (m2 s−1 ) is the module of the specific water discharge. In
+
+
+
+
+the numerical simulations we will assume the eddy viscosity to be a constant equal
+to the value given by νE in a reference state (e.g. Falconer 1980; Lien et al. 1999).
+Appendix A presents the limitations of the coefficient derived by Elder (1959).
+   The terms (Fsx , Fsy ) (m2 s−2 ) account for the effect of secondary flow. These terms
+are responsible for a transfer of momentum that shifts the maximum velocity to the
+outer bend (Kalkwijk & De Vriend 1980), as well as for a sink of energy in the
+secondary circulation (Flokstra 1977; Begnudelli, Valiani & Sanders 2010). We deal
+with these terms in § 2.2.
+   We assume a Chézy-type friction:
+                                       Cf qx Q               Cf qy Q
+                              Sfx =            ,     Sfy =           .             (2.5a,b)
+                                        gh3                   gh3
+  One underlying assumption of the system of equations presented above is that
+the vertical length and velocity scales are negligible with respect to the horizontal
+ones. Another assumption is the fact that the concentration of sediment (the ratio
+between the solid and liquid discharge) is small (below 6 × 10−3 (Garegnani, Rosatti
+& Bonaventura 2011, 2013)), such that we apply the clear water approximation.

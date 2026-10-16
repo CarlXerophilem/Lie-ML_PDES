@@ -1,0 +1,11 @@
+{
+  "paper": "chavarrias2019",
+  "kind": "publisher",
+  "request_url": "https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/ill-posedness-in-modelling-twodimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow/08209F5A84D3444B17BB05C8717D9A63",
+  "final_url": "https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/ill-posedness-in-modelling-twodimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow/08209F5A84D3444B17BB05C8717D9A63",
+  "retrieved_utc": "2026-10-13T18:25:02.653615+00:00",
+  "status_code": 200,
+  "sha256": "1dc051bbff4dc4946a2a53fdd16d28b5d8f1adb9958eda69ce2e9935728cfd01",
+  "bytes": 2460786,
+  "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019-publisher.html"
+}

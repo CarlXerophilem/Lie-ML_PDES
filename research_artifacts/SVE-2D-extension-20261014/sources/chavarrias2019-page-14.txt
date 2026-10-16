@@ -1,0 +1,56 @@
+474              V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+
+                    Case   f1I (−)   1x (m)   Mathematical character
+                    H1a      0.5      0.50          Well posed
+                    H1b      0.5      0.25          Well posed
+                    H1c      0.5      0.10          Well posed
+                    H2a      0.9      0.50           Ill posed
+                    H2b      0.9      0.25           Ill posed
+                    H2c      0.9      0.10           Ill posed
+   TABLE 3. Cases showing the effect of grid cell size on the numerical solution of
+                        well-posed and ill-posed models.
+
+
+
+grid and require more time to be perceptible. The waviness of the bed is seen in
+the result of the check routine, as it predicts ill posedness only at those locations
+where the bed degrades (the stoss face of the oscillations). The fact that the model
+is well posed in almost the entire domain in the ill-posed case solved using a cell
+size equal to 0.25 m (H2b, figure 2d) and 0.10 m (H2c, figure 2f ) does not mean
+that the results are realistic. Non-physical oscillations have grown and vertically mixed
+the sediment such that the situation is well posed after 10 h (Chavarrías et al. 2018).
+We provide a movie of figure 2 in the online supplementary material available at
+https://doi.org/10.1017/jfm.2019.166.
+   In the above idealised situations it is evident that the oscillations are non-physical
+and it is straightforward to do a converge test to clarify that the solution is grid
+dependent. In complex domains in which several processes play a role, it is
+more difficult to associate oscillations with ill posedness. Moreover, in long term
+applications the growth rate of perturbations may be fast compared to the frequency at
+which model results are assessed, which may hide the consequences of ill posedness.
+If one studies a process that covers months or years (and consequently analyses
+the results on a monthly basis) but perturbations due to ill posedness grow on an
+hourly scale, it may be difficult to identify that the problem is ill posed. Using poor
+numerical techniques to solve the system of equations also contributes to hiding
+the consequences of ill posedness as numerical diffusion dampens perturbations.
+These factors may explain why the problem of ill posedness in mixed-sediment river
+
+
+
+
+morphodynamics is not widely acknowledged.
+   In the river morphodynamics community, the term ellipticity has been used to
+refer to the ill posedness of the system of equations in contrast to hyperbolicity,
+which is associated with well posedness (Ribberink 1987; Mosselman 2005; Stecca
+et al. 2014; Siviglia, Stecca & Blom 2017; Chavarrías et al. 2018). In general
+the terms are equivalent, but not always. We consider a unit vector n̂ in the
+direction (x, y), n̂ = (n̂x , n̂y ). The system of equations (2.24) is hyperbolic if matrix
+A = Ax0 n̂x + Ay0 n̂y diagonalises with real eigenvalues ∀n̂ (e.g. LeVeque 2004; Castro
+et al. 2009). Neglecting friction and diffusive processes (i.e. B 0 = D x0 = D y0 = 0),
+hyperbolicity implies that the eigenvalues of M 0 (2.33) are real. In this case, as the
+growth rate of perturbations (i.e. the imaginary part of the eigenvalues of M 0 ) is equal
+to 0 regardless of the wavenumber, the system of equations is well posed. As the
+coefficients of A are real, complex eigenvalues appear in conjugate pairs. This means
+that if A has a complex eigenvalue (i.e. the problem is not hyperbolic), at least one
+wave will have a positive growth rate. Neglecting friction and diffusive processes,
+non-hyperbolicity implies that infinitely large wavenumbers have a positive growth
+rate. We conclude that, in the absence of diffusion and friction, lack of hyperbolicity

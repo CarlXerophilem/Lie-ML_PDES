@@ -1,0 +1,61 @@
+                     Ill posedness in two-dimensional problems                       493
+Parameter χjk (−) represents the non-dimensional rate of change of the total sediment
+transport rate with respect to the change of volume of sediment of size fraction k in
+the active layer:
+                                             1 ∂qbj
+                                    χjk =            .                              (E 5)
+                                             uj ∂Mak
+
+Parameter djk,l (−) represents the non-dimensional rate of change of the sediment
+transport rate of size fraction l with respect to the volume of sediment of size fraction
+k in the active layer:
+                                              1 ∂qbjl
+                                  djk,l =               .                           (E 6)
+                                            uj χjk ∂Mak
+
+Parameter µjk,l (−) represents the rate of change of the sediment transport rate with
+respect to the volume of sediment in the active layer relative to the fraction content
+of sediment of fraction k at the interface between the active layer and the substrate:
+
+                                   µjk,l = djk,l − fkI .                            (E 7)
+
+Parameter Rj < 0 (m2 s−1 ) represents the effect of the bed slope on the direction of
+the sediment transport rate:
+                                               ∂qbj
+                                        Rj =        ,                               (E 8)
+                                               ∂sj
+
+where sj = ∂η/∂j. Parameter rjk (−) represents the effect of the bed slope on the
+direction of the sediment transport rate of fraction k relative to the total effect:
+                                             1 ∂qbjk
+                                    rjk =            .                              (E 9)
+                                             Rj ∂sj
+
+Parameter ljk (−) represents the effect of the bed slope on the direction of the
+sediment transport rate of fraction k relative to the fraction content of sediment at
+
+
+
+
+the interface between the active layer and the substrate:
+
+                                       ljk = rjk − fkI .                          (E 10)
+
+  The largest of the two growth rates (i.e. the largest imaginary part of the two
+eigenvalues ω of the system) is:
+                                   √             !
+                                 1   2p
+                           ωi =          f1 − f2 ,
+                                              p
+                                                                            (E 11)
+                                 2  2
+
+where:
+                                       q
+                                f1 =       m21 + m2 − m1 ,                        (E 12)
+
+and:
+
+                                        f2 = R2y kwy
+                                                  4
+                                                     .                            (E 13)

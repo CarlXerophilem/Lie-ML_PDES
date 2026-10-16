@@ -1,0 +1,56 @@
+                    Ill posedness in two-dimensional problems                     463
+Chavarrías, Stecca & Blom 2018). In particular, the active layer is prone to be ill
+posed under degradational conditions into a substrate finer than the active layer (i.e.
+an armoured bed (Parker & Sutherland 1990)) for any value of the Froude number.
+   Previous analyses of river morphodynamic models regarding their well posedness
+have been focused on conditions of one-dimensional flow (Ribberink 1987; Cordier
+et al. 2011; Stecca et al. 2014; Chavarrías et al. 2018). Our objective is to extend
+these analyses to conditions of two-dimensional flow. More specifically we include
+the secondary flow and the bed slope effect in the analysis of the well posedness of
+the system of equations.
+   As the flow is intrinsically three-dimensional, the depth-averaging procedure
+eliminates an important flow component: the secondary flow (Van Bendegom
+1947; Rozovskii 1957). The secondary flow causes, for instance, an increase in
+the amplitude of meanders (Kitanidis & Kennedy 1984) and plays an important role
+in bar development (Olesen 1982). To understand the morphology of two-dimensional
+features, it is necessary to account for the fact that the sediment transport direction
+is affected by the gravitational pull when the bed slope in the transverse direction
+is significant (Dietrich & Smith 1984; Seminara 2006). This is usually done using
+a closure relation that sets the angle between the flow and the sediment transport
+directions as a function of the flow and sediment parameters (Van Bendegom 1947;
+Engelund 1974; Talmon, Struiksma & Mierlo 1995; Seminara, Solari & Parker 2002;
+Parker, Seminara & Solari 2003; Francalanci & Solari 2007, 2008; Baar et al. 2018).
+   In this paper we show that combining these two effects, secondary flow and
+sediment deflection by the bed slope, leads in some cases to an ill-posed system of
+equations. The paper is organised as follows. In § 2 we present the model equations
+describing the primary and secondary flow, as well as changes in bed elevation
+and surface texture. In § 3 we extend the explanation of ill posedness and relate
+it to growth of perturbations. We subsequently conduct a stability analysis of the
+equations, which indicates the conditions under which the secondary flow model and
+the closure relation for the bed slope effect yield an ill-posed model (§ 4). In § 5
+we run numerical simulations of idealised cases to test the validity of the analytical
+results and study the consequences of ill posedness.
+
+2. Mathematical model
+
+
+
+
+  In this section we present the two-dimensional mathematical model of flow,
+accounting for secondary flow, coupled to a morphodynamic model for mixed-size
+sediment. We subsequently introduce the equations describing the primary flow (§ 2.1),
+the secondary flow (§ 2.2) and morphodynamic change (§ 2.3). In § 2.4 we linearise
+the system of equations to study the stability of perturbations.
+
+                            2.1. Primary flow equations
+The primary flow is described using the depth-averaged shallow water equations (e.g.
+Vreugdenhil 1994):
+                             ∂h ∂qx ∂qy
+                                +      +     = 0,                                (2.1)
+                             ∂t    ∂x     ∂y
+                                   q q 
+                                      x y
+          ∂qx ∂(qx /h + gh /2)
+                 2        2      ∂              ∂η
+              +                +      h    + gh − Fsx
+           ∂t        ∂x             ∂y          ∂x

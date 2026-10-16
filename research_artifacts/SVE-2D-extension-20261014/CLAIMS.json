@@ -1,0 +1,135 @@
+[
+  {
+    "id": "C1",
+    "statement": "The frozen frictionless Eulerian 2D SVE/Grass model is a documented specialization of Fernandez-Nieto et al. 2017 eq. (1.1), with K=kappa/(1-p).",
+    "scope": "Source Grass m in [1,4]; constant porosity and fixed coefficients; no claim to later energy-consistent models.",
+    "evidence": [
+      "SOURCE_AUDIT.md",
+      "sources/source_manifest.json"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "Classical introductory model in Fernandez-Nieto et al. equation (1.1)",
+      "Constant porosity 0<=p<1; g,kappa>0",
+      "Source Grass range 1<=m<=4; other real exponents mathematical extensions",
+      "Frictionless idealization; not later energy-consistent model"
+    ]
+  },
+  {
+    "id": "C2",
+    "statement": "Translations, bed shift, full planar rotation, and common space-time scaling are admitted; the fixed-parameter diagonal scaling condition is (3-m)c=0.",
+    "scope": "Candidate verification and diagonal ansatz only; nonzero speed for arbitrary real m; no maximality.",
+    "evidence": [
+      "main.py:symmetry_checks",
+      "results/evidence.json:groups.symmetry"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "Smooth wet positive-speed chart for general real m",
+      "Fixed nonzero g,K",
+      "Diagonal ansatz only; no maximal classification"
+    ]
+  },
+  {
+    "id": "C3",
+    "statement": "Rotation-invariant graphs yield the four radial PDEs with swirl, retaining all 1/r geometric terms.",
+    "scope": "Smooth fields on r>0; reduction 3 independent variables to 2, not yet ODE.",
+    "evidence": [
+      "main.py:radial_checks",
+      "results/evidence.json:groups.radial",
+      "report.tex"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "r>0 with local angle chart",
+      "Full coordinate and velocity rotation",
+      "Positive speed for general real m; cubic extension separate"
+    ]
+  },
+  {
+    "id": "C4",
+    "statement": "At m=3 the commuting R,D reduction yields Hprime=-4AH, Aprime=W^2-A^2-2g(H+B), Wprime=-2AW, Bprime=-4KA(A^2+W^2), with direct Cartesian factorization and annular balances.",
+    "scope": "r>0,H>0, matched traces; D does not preserve fixed annular radii; use D-2*b0*d_b for constant shifted bed.",
+    "evidence": [
+      "main.py:cubic_checks",
+      "results/evidence.json:groups.cubic",
+      "report.tex"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "m=3; r>0; H>0",
+      "Constant added bed datum uses conjugate generator",
+      "Initial and boundary traces come from same constructed solution",
+      "Fixed annulus is not scaling-invariant"
+    ]
+  },
+  {
+    "id": "C5",
+    "statement": "W^2/H is an ODE first integral and the stated cstar/t^2 evolving family exactly solves the original cubic PDE.",
+    "scope": "Integral H>0; W sign branch for elimination; exact family t>0,r>0,2gK<1.",
+    "evidence": [
+      "main.py:cubic_checks",
+      "results/evidence.json:groups.cubic",
+      "report.tex"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "H>0 for W^2/H",
+      "Fixed W sign for square-root elimination; W=0 separate",
+      "Exact family: t>0,r>0,g,K>0,2*g*K<1,omega real"
+    ]
+  },
+  {
+    "id": "C6",
+    "statement": "The constructed dimensionless IVP passes recorded cross-solver, refinement, invariant-drift and exact-control gates.",
+    "scope": "Finite sampled checks, not continuous error, general stability, real data or a full 2D solver.",
+    "evidence": [
+      "results/evidence.json:numerical",
+      "results/profiles.csv",
+      "tests/test_extension.py"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "Constructed dimensionless IVP on [0,0.2]",
+      "Sampled numerical consistency only",
+      "No continuous error certificate, full PDE solver, general stability, or real-data claim"
+    ]
+  },
+  {
+    "id": "C7",
+    "statement": "The identified JFM paper is a relevant model-dependent warning; its Appendix D assumptions have not been established for this unsteady frictionless specialization.",
+    "scope": "Source-scope audit only, no transferred ill-posedness or well-posedness theorem.",
+    "evidence": [
+      "SOURCE_AUDIT.md",
+      "sources/source_manifest.json",
+      "report.tex"
+    ],
+    "revision": 1,
+    "status": "accepted",
+    "reviewer_verdict": "accepted",
+    "review_evidence": "REVIEW.json",
+    "review_assumptions": [
+      "Source-scope comparison only",
+      "No certification of every step of JFM stability proof",
+      "No transferred ill-posedness or well-posedness result"
+    ]
+  }
+]

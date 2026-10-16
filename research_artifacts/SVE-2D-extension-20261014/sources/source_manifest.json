@@ -1,0 +1,842 @@
+{
+  "schema_version": 1,
+  "audit_created_utc": "2026-10-13T18:33:52.644421+00:00",
+  "local_date": "2026-10-14",
+  "local_timezone": "Asia/Tokyo",
+  "task": "Primary-source verification for frozen 2D Eulerian frictionless Grass SVE extension",
+  "scope": {
+    "paper_budget": 5,
+    "retained_distinct_papers": 2,
+    "retained_pdf_versions": 3,
+    "citation_depth_limit": 1,
+    "actual_citation_depth": 0,
+    "systematic_or_exhaustive_search": false,
+    "forward_citation_search": false,
+    "request_timeout_seconds": 45,
+    "transient_retry_limit": 1,
+    "transient_retries_used": 0,
+    "sources": [
+      "supplied project bibliography and uploaded link",
+      "Crossref",
+      "OpenAlex open-copy locator",
+      "arXiv",
+      "Numdam",
+      "Cambridge Core"
+    ],
+    "unvisited_references": [
+      "Grass (1981), Fernandez-Nieto reference [29], not independently retrieved"
+    ]
+  },
+  "papers": [
+    {
+      "paper_id": "fernandez2017",
+      "canonical_doi": "10.1051/m2an/2016018",
+      "title": "Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy",
+      "authors": [
+        "Enrique D. Fernández-Nieto",
+        "Tomás Morales de Luna",
+        "Gladys Narbona-Reina",
+        "Jean de Dieu Zabsonré"
+      ],
+      "venue": "ESAIM: Mathematical Modelling and Numerical Analysis",
+      "volume": "51",
+      "issue": "1",
+      "pages": "115–145",
+      "issue_year": 2017,
+      "crossref_online_date": "2016-11-28",
+      "identity_status": "confirmed",
+      "relevance": "direct: classical 2D model and Grass closure; not the later energy-consistent model",
+      "citation_depth": 0,
+      "versions": [
+        {
+          "version": "journal version of record hosted by Numdam",
+          "authoritative_for_this_audit": true,
+          "local_pdf": "sources/fernandez2017-journal.pdf",
+          "retrieval": {
+            "status": "confirmed",
+            "requested_url": "https://www.numdam.org/item/10.1051/m2an/2016018.pdf",
+            "final_url": "https://www.numdam.org/item/10.1051/m2an/2016018.pdf",
+            "retrieved_at": "2026-10-13T18:26:29.821734+00:00",
+            "media_type": "application/pdf",
+            "bytes": 1395379,
+            "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc",
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-journal.pdf"
+          },
+          "inspection": {
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-journal.pdf",
+            "bytes": 1395379,
+            "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc",
+            "status": "confirmed_file",
+            "pdfinfo_status": "confirmed",
+            "pages": 31,
+            "encrypted": "no",
+            "pdf_version": "1.3",
+            "text_characters": 118649,
+            "text_status": "extracted"
+          },
+          "license": {
+            "status": "unknown",
+            "statement": "Copyright EDP Sciences, SMAI 2016 on title page; no open reuse license verified",
+            "evidence": "journal p.115 / PDF p.1"
+          }
+        },
+        {
+          "version": "arXiv:1506.05642v1",
+          "authoritative_for_this_audit": false,
+          "version_date": "2015-06-18",
+          "local_pdf": "sources/fernandez2017-arxiv1506.05642v1.pdf",
+          "retrieval": {
+            "status": "confirmed",
+            "requested_url": "https://arxiv.org/pdf/1506.05642v1",
+            "final_url": "https://arxiv.org/pdf/1506.05642v1",
+            "retrieved_at": "2026-10-13T18:26:03.937491+00:00",
+            "media_type": "application/pdf",
+            "bytes": 824543,
+            "sha256": "1ff43451d519e0510666fbb2c1953392399b660fd8def64d164e570929c6bdc5",
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv1506.05642v1.pdf"
+          },
+          "inspection": {
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv1506.05642v1.pdf",
+            "bytes": 824543,
+            "sha256": "1ff43451d519e0510666fbb2c1953392399b660fd8def64d164e570929c6bdc5",
+            "status": "confirmed_file",
+            "pdfinfo_status": "confirmed",
+            "pages": 44,
+            "encrypted": "no",
+            "pdf_version": "1.5",
+            "text_characters": 124330,
+            "text_status": "extracted"
+          },
+          "license": {
+            "status": "confirmed_nonexclusive_distribution",
+            "url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+            "evidence": "sources/fernandez2017-arxiv-abstract.html",
+            "note": "Not a general Creative Commons reuse license"
+          },
+          "comparison_note": "44-page preprint is distinct from 31-page journal; equation numbering differs; do not merge page/equation anchors."
+        }
+      ],
+      "evidence": [
+        {
+          "journal_page": 116,
+          "pdf_page_one_based": 2,
+          "equation_or_span": "(1.1) and definitions immediately below",
+          "kind": "source_statement",
+          "claim": "Two horizontal coordinates; water depth h1; discharge q1=h1 u1; vector momentum with bed gradient of h2+b0; sediment continuity h2_t+div qb=0.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 116,
+          "pdf_page_one_based": 2,
+          "equation_or_span": "Unnumbered Grass paragraph below (1.1)",
+          "kind": "source_statement",
+          "claim": "qb=Ag |u1|^(mg−1)u1 with 1<=mg<=4; flux points along the horizontal velocity vector.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 116,
+          "pdf_page_one_based": 2,
+          "equation_or_span": "(1.2) and porosity definition",
+          "kind": "source_statement",
+          "claim": "The example sediment-flux convention contains 1/(1−varphi), with varphi averaged porosity.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 117,
+          "pdf_page_one_based": 3,
+          "equation_or_span": "Classical-model limitations (ii) and (1.7)",
+          "kind": "source_statement",
+          "claim": "Classical transport closures are discussed under nearly horizontal-bed assumptions; sediment slope correction is separate from the bed force in momentum.",
+          "visually_compared": true
+        }
+      ]
+    },
+    {
+      "paper_id": "chavarrias2019",
+      "canonical_doi": "10.1017/jfm.2019.166",
+      "title": "Ill posedness in modelling two-dimensional morphodynamic problems: effects of bed slope and secondary flow",
+      "authors": [
+        "Víctor Chavarrías",
+        "Ralph Schielen",
+        "Willem Ottevanger",
+        "Astrid Blom"
+      ],
+      "venue": "Journal of Fluid Mechanics",
+      "volume": "868",
+      "pages": "461–500",
+      "issue_year": 2019,
+      "online_date": "2019-04-11",
+      "identity_status": "confirmed",
+      "relevance": "direct corroboration of porosity convention; background warning whose precise ill-posedness conclusion is not transferred",
+      "citation_depth": 0,
+      "versions": [
+        {
+          "version": "publisher version of record",
+          "authoritative_for_this_audit": true,
+          "local_pdf": "sources/chavarrias2019.pdf",
+          "retrieval": {
+            "status": "confirmed",
+            "requested_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/08209F5A84D3444B17BB05C8717D9A63/S0022112019001666a.pdf/ill-posedness-in-modelling-two-dimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow.pdf",
+            "final_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/08209F5A84D3444B17BB05C8717D9A63/S0022112019001666a.pdf/ill-posedness-in-modelling-two-dimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow.pdf",
+            "retrieved_at": "2026-10-13T18:25:38.282026+00:00",
+            "media_type": "application/pdf",
+            "bytes": 2171290,
+            "sha256": "d90b30921b98b5fecd356ce565ced7e532b53ef734af74346db831fd17bdd1f7",
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019.pdf"
+          },
+          "inspection": {
+            "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019.pdf",
+            "bytes": 2171290,
+            "sha256": "d90b30921b98b5fecd356ce565ced7e532b53ef734af74346db831fd17bdd1f7",
+            "status": "confirmed_file",
+            "pdfinfo_status": "confirmed",
+            "pages": 40,
+            "encrypted": "no",
+            "pdf_version": "1.5",
+            "text_characters": 374542,
+            "text_status": "extracted"
+          },
+          "license": {
+            "status": "confirmed",
+            "spdx": "CC-BY-4.0",
+            "url": "https://creativecommons.org/licenses/by/4.0/",
+            "evidence": [
+              "journal p.461 / PDF p.1",
+              "Crossref license field"
+            ]
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "journal_page": "463–464",
+          "pdf_page_one_based": "3–4",
+          "equation_or_span": "(2.1)–(2.5)",
+          "kind": "source_statement",
+          "claim": "Shallow-water flow with Chézy friction, horizontal eddy viscosity and secondary-flow forces; qx=uh, qy=vh.",
+          "visually_compared": false
+        },
+        {
+          "journal_page": 464,
+          "pdf_page_one_based": 4,
+          "equation_or_span": "(2.3), (2.5) and surrounding definitions",
+          "kind": "source_statement",
+          "claim": "Velocity/discharge mapping and nonzero frictional model structure directly inspected.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 466,
+          "pdf_page_one_based": 6,
+          "equation_or_span": "(2.11), (2.16)",
+          "kind": "source_statement",
+          "claim": "Secondary-flow intensity has its own transport equation; Exner is eta_t+qbx_x+qby_y=0.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 467,
+          "pdf_page_one_based": 7,
+          "equation_or_span": "Opening paragraph and (2.17)–(2.20)",
+          "kind": "source_statement",
+          "claim": "Fluxes include pores, constant porosity is assumed, and active-layer/transport-direction closures enlarge the model.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 468,
+          "pdf_page_one_based": 8,
+          "equation_or_span": "(2.21)–(2.25) and reference-state paragraph",
+          "kind": "source_statement",
+          "claim": "Sediment slope and secondary-flow direction laws; steady straight reference flow over inclined bed balances friction.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": 491,
+          "pdf_page_one_based": 31,
+          "equation_or_span": "Appendix D, paragraph before (D1), (D2), (D7)",
+          "kind": "source_statement",
+          "claim": "The no-slope-correction unisize calculation assumes low-Froude quasi-steady decoupling and n>1; its growth formula retains Cf.",
+          "visually_compared": true
+        },
+        {
+          "journal_page": "478–479",
+          "pdf_page_one_based": "18–19",
+          "equation_or_span": "Section 4.2 and Table 5",
+          "kind": "source_statement",
+          "claim": "Includes unisize cases with and without slope correction, as well as mixed-size cases.",
+          "visually_compared": false
+        }
+      ]
+    }
+  ],
+  "model": {
+    "status": "confirmed_with_explicit_specialization",
+    "independent_variables": [
+      "t",
+      "x",
+      "y"
+    ],
+    "dependent_variables": [
+      "h",
+      "u",
+      "v",
+      "B"
+    ],
+    "constants": {
+      "g": ">0",
+      "kappa": ">0",
+      "p": "0<=p<1, spatially and temporally constant"
+    },
+    "equations": [
+      "h_t + (h*u)_x + (h*v)_y = 0",
+      "(h*u)_t + (h*u^2 + g*h^2/2)_x + (h*u*v)_y = -g*h*B_x",
+      "(h*v)_t + (h*u*v)_x + (h*v^2 + g*h^2/2)_y = -g*h*B_y",
+      "(1-p)*B_t + div(kappa*|U|^(m-1)*U) = 0"
+    ],
+    "isotropic_flux_components": [
+      "kappa*(u^2+v^2)^((m-1)/2)*u",
+      "kappa*(u^2+v^2)^((m-1)/2)*v"
+    ],
+    "source_to_project_mapping": {
+      "h1": "h",
+      "u1": "U=(u,v)",
+      "q1": "h*U",
+      "h2+b0": "B",
+      "tau": "0 by chosen specialization",
+      "q_b_source": "q_solid/(1-p)",
+      "A_g": "kappa/(1-p)",
+      "m_g": "m",
+      "b0": "fixed bedrock, so B_t=(h2)_t"
+    },
+    "source_exponent_range": "1<=m<=4",
+    "project_extension": "arbitrary real m on h>0 and |U|>0; cubic polynomial extension at |U|=0 handled separately",
+    "evidence_kind": "source equations plus elementary change of variables and declared modeling specialization",
+    "non_claims": [
+      "No inference of arbitrary-slope physical accuracy or energy law for the simple Grass model",
+      "No maximal symmetry or well-posedness classification",
+      "No automatic identification with the existing 1D Lagrangian scalar equation",
+      "No physical sediment-thickness positivity or supply guarantee without an additional datum/condition"
+    ]
+  },
+  "ill_posedness_transfer": {
+    "status": "not_established",
+    "source_conclusion": "Source reports ill-posedness of specified 2D morphodynamic models and includes unisize no-slope-correction cases.",
+    "operative_limits": [
+      "frictional reference state",
+      "low-Froude quasi-steady decoupling in Appendix D",
+      "n>1 in D7",
+      "Cf factor in D2",
+      "transport closures and optional active-layer/secondary-flow structure differ"
+    ],
+    "permitted_use": "Model-dependent warning; no direct well-posedness or ill-posedness conclusion for the full unsteady Cf=0 Grass system."
+  },
+  "retrieval_records": [
+    {
+      "record": "sources/chavarrias2019-crossref-retrieval.json",
+      "data": {
+        "paper": "chavarrias2019",
+        "kind": "crossref",
+        "request_url": "https://api.crossref.org/works/10.1017/jfm.2019.166",
+        "final_url": "https://api.crossref.org/works/10.1017/jfm.2019.166",
+        "retrieved_utc": "2026-10-13T18:25:00.957714+00:00",
+        "status_code": 200,
+        "sha256": "dc88038dd055de6c0d98c5f07504d042e83a5355427b4a3c40d0d7c970256126",
+        "bytes": 23001,
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019-crossref.json"
+      }
+    },
+    {
+      "record": "sources/chavarrias2019-pdf-retrieval.json",
+      "data": {
+        "status": "confirmed",
+        "requested_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/08209F5A84D3444B17BB05C8717D9A63/S0022112019001666a.pdf/ill-posedness-in-modelling-two-dimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow.pdf",
+        "final_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/08209F5A84D3444B17BB05C8717D9A63/S0022112019001666a.pdf/ill-posedness-in-modelling-two-dimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow.pdf",
+        "retrieved_at": "2026-10-13T18:25:38.282026+00:00",
+        "media_type": "application/pdf",
+        "bytes": 2171290,
+        "sha256": "d90b30921b98b5fecd356ce565ced7e532b53ef734af74346db831fd17bdd1f7",
+        "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019.pdf"
+      }
+    },
+    {
+      "record": "sources/chavarrias2019-publisher-retrieval.json",
+      "data": {
+        "paper": "chavarrias2019",
+        "kind": "publisher",
+        "request_url": "https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/ill-posedness-in-modelling-twodimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow/08209F5A84D3444B17BB05C8717D9A63",
+        "final_url": "https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/ill-posedness-in-modelling-twodimensional-morphodynamic-problems-effects-of-bed-slope-and-secondary-flow/08209F5A84D3444B17BB05C8717D9A63",
+        "retrieved_utc": "2026-10-13T18:25:02.653615+00:00",
+        "status_code": 200,
+        "sha256": "1dc051bbff4dc4946a2a53fdd16d28b5d8f1adb9958eda69ce2e9935728cfd01",
+        "bytes": 2460786,
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\chavarrias2019-publisher.html"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-arxiv-abstract-retrieval.json",
+      "data": {
+        "request_url": "https://arxiv.org/abs/1506.05642v1",
+        "final_url": "https://arxiv.org/abs/1506.05642v1",
+        "status_code": 200,
+        "retrieved_utc": "2026-10-13T18:28:44.596382+00:00",
+        "bytes": 45228,
+        "sha256": "3d6987a65b922b4eb72f27a0873bf94c9d1280ee3ebcfc95f9ae862e5ee8342a",
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv-abstract.html"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-arxiv-pdf-retrieval.json",
+      "data": {
+        "status": "confirmed",
+        "requested_url": "https://arxiv.org/pdf/1506.05642v1",
+        "final_url": "https://arxiv.org/pdf/1506.05642v1",
+        "retrieved_at": "2026-10-13T18:26:03.937491+00:00",
+        "media_type": "application/pdf",
+        "bytes": 824543,
+        "sha256": "1ff43451d519e0510666fbb2c1953392399b660fd8def64d164e570929c6bdc5",
+        "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv1506.05642v1.pdf"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-arxiv-search-retrieval.json",
+      "data": {
+        "request_url": "https://export.arxiv.org/api/query?search_query=ti:%22Formal%20deduction%22%20AND%20ti:%22Exner%22&max_results=3",
+        "final_url": "https://export.arxiv.org/api/query?search_query=ti:%22Formal%20deduction%22%20AND%20ti:%22Exner%22&max_results=3",
+        "retrieved_utc": "2026-10-13T18:25:36.970811+00:00",
+        "status_code": 200,
+        "bytes": 3599,
+        "sha256": "155afe861aeaccb6af1b19ebe6ca6cd84d52b2f5593cbb6bf76d8427d6f945dc",
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv-search.xml"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-crossref-retrieval.json",
+      "data": {
+        "paper": "fernandez2017",
+        "kind": "crossref",
+        "request_url": "https://api.crossref.org/works/10.1051/m2an/2016018",
+        "final_url": "https://api.crossref.org/works/10.1051/m2an/2016018",
+        "retrieved_utc": "2026-10-13T18:24:57.127641+00:00",
+        "status_code": 200,
+        "sha256": "03f1ab03ac841b0afdc1907560ba99d1e2e0628ece5455ec83bbb675c2d991da",
+        "bytes": 9104,
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-crossref.json"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-journal-pdf-retrieval.json",
+      "data": {
+        "status": "confirmed",
+        "requested_url": "https://www.numdam.org/item/10.1051/m2an/2016018.pdf",
+        "final_url": "https://www.numdam.org/item/10.1051/m2an/2016018.pdf",
+        "retrieved_at": "2026-10-13T18:26:29.821734+00:00",
+        "media_type": "application/pdf",
+        "bytes": 1395379,
+        "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc",
+        "path": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-journal.pdf"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-numdam-retrieval.json",
+      "data": {
+        "request_url": "https://www.numdam.org/articles/10.1051/m2an/2016018/",
+        "final_url": "https://www.numdam.org/articles/10.1051/m2an/2016018/",
+        "status_code": 200,
+        "retrieved_utc": "2026-10-13T18:26:04.527262+00:00",
+        "bytes": 72447,
+        "sha256": "430d2e4ed98821ae1bd7f27676d9cb701e30d97b7afc3c5c3292c29a6ffe86e3",
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-numdam.html"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-openalex-retrieval.json",
+      "data": {
+        "request_url": "https://api.openalex.org/works/https://doi.org/10.1051/m2an/2016018",
+        "final_url": "https://api.openalex.org/works/https://doi.org/10.1051/m2an/2016018",
+        "retrieved_utc": "2026-10-13T18:25:35.234784+00:00",
+        "status_code": 200,
+        "bytes": 20436,
+        "sha256": "37b2eb1e10837c4f50bda09b7c53b4124b8a825af0becb5bd642835399d2656a",
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-openalex.json"
+      }
+    },
+    {
+      "record": "sources/fernandez2017-publisher-retrieval.json",
+      "data": {
+        "paper": "fernandez2017",
+        "kind": "publisher",
+        "request_url": "https://www.esaim-m2an.org/articles/m2an/abs/2017/01/m2an150073/m2an150073.html",
+        "final_url": "https://www.esaim-m2an.org/articles/m2an/abs/2017/01/m2an150073/m2an150073.html",
+        "retrieved_utc": "2026-10-13T18:24:58.652544+00:00",
+        "status_code": 403,
+        "sha256": "0d3e98ca727fc1201b436170af5a63f23348aaf146a3ac6234f6c4da283e8b34",
+        "bytes": 93,
+        "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-publisher.html"
+      }
+    }
+  ],
+  "failures_and_warnings": [
+    {
+      "status": "unreachable",
+      "resource": "Initially attempted ESAIM publisher HTML path",
+      "http_status": 403,
+      "record": "sources/fernandez2017-publisher-retrieval.json",
+      "resolution": "Used independently indexed Numdam journal copy; no access-control bypass; no retry."
+    },
+    {
+      "status": "tool_unavailable",
+      "resource": "alphaXiv callable provider",
+      "resolution": "No alphaXiv tool appeared in exposed tool inventory; used public primary/index fallback."
+    },
+    {
+      "status": "extraction_warning",
+      "resource": "arXiv preprint pdftotext extraction",
+      "message": "Internal Error: xref num 292 not found but needed, try to reconstruct",
+      "resolution": "Text still extracted; operative equation evidence uses visually checked journal PDF."
+    },
+    {
+      "status": "diagnostic_encoding_failure",
+      "resource": "One terminal print from Cambridge HTML under GBK",
+      "message": "UnicodeEncodeError for copyright symbol",
+      "resolution": "Saved HTML was unaffected; subsequent Python output explicitly used UTF-8."
+    }
+  ],
+  "visual_verification": {
+    "tool": "pdftoppm + view_image",
+    "checks": [
+      {
+        "pdf": "sources/fernandez2017-journal.pdf",
+        "visually_compared_pages": [
+          2,
+          3
+        ],
+        "image_files": [
+          "sources/fernandez2017-page02.png",
+          "sources/fernandez2017-page03.png"
+        ]
+      },
+      {
+        "pdf": "sources/chavarrias2019.pdf",
+        "visually_compared_pages": [
+          4,
+          6,
+          7,
+          8,
+          31
+        ],
+        "image_files": [
+          "sources/chavarrias2019-page04.png",
+          "sources/chavarrias2019-page06.png",
+          "sources/chavarrias2019-page07.png",
+          "sources/chavarrias2019-page08.png",
+          "sources/chavarrias2019-page31.png"
+        ]
+      }
+    ],
+    "extra_rendered_uninspected": [
+      "sources/chavarrias2019-page32.png"
+    ]
+  },
+  "project_validation_boundary": "Controller owns project-wide computational and manuscript checks; this task changed only SOURCE_AUDIT.md and sources/.",
+  "artifacts": [
+    {
+      "path": "SOURCE_AUDIT.md",
+      "bytes": 11229,
+      "sha256": "88dc003d472d421f7c18b92beb18f58f7a8d82551b89c0d0c7f8d0ec62bd446d"
+    },
+    {
+      "path": "sources/chavarrias2019-crossref-retrieval.json",
+      "bytes": 480,
+      "sha256": "2de57be21698f3d05f46f7d8796a0fa3f67fe1e27076a7fbbfa600e79f45fb08"
+    },
+    {
+      "path": "sources/chavarrias2019-crossref.json",
+      "bytes": 23001,
+      "sha256": "dc88038dd055de6c0d98c5f07504d042e83a5355427b4a3c40d0d7c970256126"
+    },
+    {
+      "path": "sources/chavarrias2019-inspection.json",
+      "bytes": 413,
+      "sha256": "bb05fc38b0b90ece06cb798e16d0ce42ff573abef135496a67a6bc0bd469dcf3"
+    },
+    {
+      "path": "sources/chavarrias2019-layout.txt",
+      "bytes": 379375,
+      "sha256": "0f87d75abc675a58ce7e9578603e7425a24e3697930167b64298881cebc40c50"
+    },
+    {
+      "path": "sources/chavarrias2019-page-01.txt",
+      "bytes": 3480,
+      "sha256": "49de84dcf2aa9a6917ffc3271d27c5b6dde2a654d37a6acb641f8f629459fa66"
+    },
+    {
+      "path": "sources/chavarrias2019-page-03.txt",
+      "bytes": 3673,
+      "sha256": "f7bfc7e589a89cc99af09f2d9840d937e1d1f1f516d9396d73883f6e2e029fac"
+    },
+    {
+      "path": "sources/chavarrias2019-page-04.txt",
+      "bytes": 4490,
+      "sha256": "c8ccfd723d24dbc5e660c9570ce0fd7e01794a69c1511f4579edb9eae15966f4"
+    },
+    {
+      "path": "sources/chavarrias2019-page-06.txt",
+      "bytes": 3465,
+      "sha256": "40eae43babd434738802ed626c9f1af5b1b9b765626bd32bbf7ffdf2aac8c9ff"
+    },
+    {
+      "path": "sources/chavarrias2019-page-07.txt",
+      "bytes": 4139,
+      "sha256": "81f399f231a7941854d6d97c8d014a7189da2da9c87ac9eeeca04bdbf2ec34d9"
+    },
+    {
+      "path": "sources/chavarrias2019-page-08.txt",
+      "bytes": 3656,
+      "sha256": "62a0f65106b38b31068a225b03ff0f6aade535a8305a0877aa97e626b3ec695d"
+    },
+    {
+      "path": "sources/chavarrias2019-page-10.txt",
+      "bytes": 3871,
+      "sha256": "61fcd72760a3d18045d2c5eaaaf068209a90e807953d1094226c5bdcff578746"
+    },
+    {
+      "path": "sources/chavarrias2019-page-11.txt",
+      "bytes": 3691,
+      "sha256": "1e83b939c40ec9d7a4b0233e8b3752f55ec28a34df58886562f9f0ccec8512ad"
+    },
+    {
+      "path": "sources/chavarrias2019-page-12.txt",
+      "bytes": 7839,
+      "sha256": "aedddc6c64e7ea60c8eb0bcfbf6be797d7c401b4d726482001d88465b2e7edf2"
+    },
+    {
+      "path": "sources/chavarrias2019-page-13.txt",
+      "bytes": 4104,
+      "sha256": "b6f40eee996de6fb975965ca79e64fa71464bb97917d9f501445df288fe41445"
+    },
+    {
+      "path": "sources/chavarrias2019-page-14.txt",
+      "bytes": 3848,
+      "sha256": "9b7e502877d4e1f0bfc2e04f9520cdda5405b33cd0e85b5bcef5b15767c93b98"
+    },
+    {
+      "path": "sources/chavarrias2019-page-15.txt",
+      "bytes": 3866,
+      "sha256": "3d06455d1303619354066464ea253fc0127ad890a1989c5536d9a404c34fdb9a"
+    },
+    {
+      "path": "sources/chavarrias2019-page-16.txt",
+      "bytes": 3472,
+      "sha256": "21164b606a86a9f88f004bdc003c6bc94c529e1821441afa19af78b19819def4"
+    },
+    {
+      "path": "sources/chavarrias2019-page-30.txt",
+      "bytes": 4264,
+      "sha256": "f32e7a6ea037b394220c6c1a835bd56b5d7f31c5d007162c24593ed3bf5d7b90"
+    },
+    {
+      "path": "sources/chavarrias2019-page-31.txt",
+      "bytes": 4329,
+      "sha256": "c594ed39dc9f51d1fd67f3f45816f68cbf6666a7a4c55cf3f2f292c0364f445f"
+    },
+    {
+      "path": "sources/chavarrias2019-page-32.txt",
+      "bytes": 3385,
+      "sha256": "c9de11f02518e138c360ea58a7f00907dc1b6fed9da950d2d9ecce208f3d9147"
+    },
+    {
+      "path": "sources/chavarrias2019-page-33.txt",
+      "bytes": 3089,
+      "sha256": "68851942b634527df46846d3ade9a7ec4b8c092fa1e19788a7f8dd99cea96efe"
+    },
+    {
+      "path": "sources/chavarrias2019-page04.png",
+      "bytes": 464148,
+      "sha256": "2b7dc485bffced98c8960d89c97893cd9dc0de852e6c2f3ada42a07bbced4b06"
+    },
+    {
+      "path": "sources/chavarrias2019-page06.png",
+      "bytes": 315946,
+      "sha256": "c29455048884040dfdf90904f3713226fa0f41ebe1e4edacf8f48fe28d0db477"
+    },
+    {
+      "path": "sources/chavarrias2019-page07.png",
+      "bytes": 455632,
+      "sha256": "a1fb90dd921d735b2ad44a3689657d2ee11f32c9454e9a0b71c8e89343311beb"
+    },
+    {
+      "path": "sources/chavarrias2019-page08.png",
+      "bytes": 398287,
+      "sha256": "32b6a62d59522d62d52d7fe5a28bc359df03195489ac22313812e9a72a2c0560"
+    },
+    {
+      "path": "sources/chavarrias2019-page31.png",
+      "bytes": 411108,
+      "sha256": "1cd8e9be2a8f96d01cff86e128e648461ace738e907c3d5b7477357dd750b334"
+    },
+    {
+      "path": "sources/chavarrias2019-page32.png",
+      "bytes": 391414,
+      "sha256": "4817fdcc19bd31b3ee7533d03855309163e76491466cb862978c0668f3fd580f"
+    },
+    {
+      "path": "sources/chavarrias2019-pdf-retrieval.json",
+      "bytes": 859,
+      "sha256": "c61e57e8f024520e4b3fd4c94828c5cdbcd1a70583c03358a7eddc59a249f836"
+    },
+    {
+      "path": "sources/chavarrias2019-publisher-retrieval.json",
+      "bytes": 806,
+      "sha256": "0669253d3df45b6f62ff0971d18a9373018d2cfa1e89225594cd5a419a50ac31"
+    },
+    {
+      "path": "sources/chavarrias2019-publisher-text.txt",
+      "bytes": 166790,
+      "sha256": "99f34f37ff265745340ea66bb21af581ed0bf84f661e60c8324064b11a9e3726"
+    },
+    {
+      "path": "sources/chavarrias2019-publisher.html",
+      "bytes": 2460786,
+      "sha256": "1dc051bbff4dc4946a2a53fdd16d28b5d8f1adb9958eda69ce2e9935728cfd01"
+    },
+    {
+      "path": "sources/chavarrias2019.pdf",
+      "bytes": 2171290,
+      "sha256": "d90b30921b98b5fecd356ce565ced7e532b53ef734af74346db831fd17bdd1f7"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-abstract-retrieval.json",
+      "bytes": 398,
+      "sha256": "30e14d790a0d15607ca642cb45491c2ad55d226f0b630b9bbbdacf58bda65019"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-abstract.html",
+      "bytes": 45228,
+      "sha256": "3d6987a65b922b4eb72f27a0873bf94c9d1280ee3ebcfc95f9ae862e5ee8342a"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-inspection.json",
+      "bytes": 429,
+      "sha256": "67735a6663ea8457a9838b3fe331885606fba6dfc612b3cb3a4dfd9508f5b35e"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-layout.txt",
+      "bytes": 129511,
+      "sha256": "1317e795e31cffdc82ce71a21349b2c1532638be897271749580f92a657aa8d7"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-pdf-retrieval.json",
+      "bytes": 469,
+      "sha256": "6a2bc999ebec7efd0ba630ec79db8b41a8ebaee2c2a8782bb568061547ed1f2d"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-search-retrieval.json",
+      "bytes": 550,
+      "sha256": "343a43e46b1b983d4e523579adaef3637c2d1a975522b0cb1596217112402829"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv-search.xml",
+      "bytes": 3599,
+      "sha256": "155afe861aeaccb6af1b19ebe6ca6cd84d52b2f5593cbb6bf76d8427d6f945dc"
+    },
+    {
+      "path": "sources/fernandez2017-arxiv1506.05642v1.pdf",
+      "bytes": 824543,
+      "sha256": "1ff43451d519e0510666fbb2c1953392399b660fd8def64d164e570929c6bdc5"
+    },
+    {
+      "path": "sources/fernandez2017-crossref-retrieval.json",
+      "bytes": 477,
+      "sha256": "c5be1005451985e11b7228e1ab6ec76a4e40072b849c41e2431d3549bfc4f03f"
+    },
+    {
+      "path": "sources/fernandez2017-crossref.json",
+      "bytes": 9104,
+      "sha256": "03f1ab03ac841b0afdc1907560ba99d1e2e0628ece5455ec83bbb675c2d991da"
+    },
+    {
+      "path": "sources/fernandez2017-journal-inspection.json",
+      "bytes": 420,
+      "sha256": "ac72ed3b5b03a7252f7dc838c8ba8cebce3bf8b0a142c5a4b6a43dbf483e9bf0"
+    },
+    {
+      "path": "sources/fernandez2017-journal-layout.txt",
+      "bytes": 123890,
+      "sha256": "a4a985618a43a67a1d87afad8c644f3186516359b2c4db8807a33692f1359a5d"
+    },
+    {
+      "path": "sources/fernandez2017-journal-page-01.txt",
+      "bytes": 3697,
+      "sha256": "f139ed122e7356fced2110b7c891bef560d254b33d3312d144bdbb779fe247f3"
+    },
+    {
+      "path": "sources/fernandez2017-journal-page-02.txt",
+      "bytes": 5147,
+      "sha256": "ef4f9202cc99edcc7a35a3a4fae3c3840031a9e11e3394d9f0fa129e985b025e"
+    },
+    {
+      "path": "sources/fernandez2017-journal-page-03.txt",
+      "bytes": 4760,
+      "sha256": "410a47127b0200bfe784d3788217e42962fd47c5a0d8867569797d6941c7cd9b"
+    },
+    {
+      "path": "sources/fernandez2017-journal-pdf-retrieval.json",
+      "bytes": 496,
+      "sha256": "520d4528d808046353cd3ec8c6b7f31070f2e91dbb51104a0f511e0f17cd2fcd"
+    },
+    {
+      "path": "sources/fernandez2017-journal.pdf",
+      "bytes": 1395379,
+      "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc"
+    },
+    {
+      "path": "sources/fernandez2017-numdam-retrieval.json",
+      "bytes": 428,
+      "sha256": "43fe33115db2daebd4fe16fd026c3fd0d46bd610fdce82ca6f219e603e0b0668"
+    },
+    {
+      "path": "sources/fernandez2017-numdam.html",
+      "bytes": 72447,
+      "sha256": "430d2e4ed98821ae1bd7f27676d9cb701e30d97b7afc3c5c3292c29a6ffe86e3"
+    },
+    {
+      "path": "sources/fernandez2017-openalex-retrieval.json",
+      "bytes": 458,
+      "sha256": "34dbcef41a00f861c048d3611ddf021aac45da48ede9a0c4219be5d2b442e907"
+    },
+    {
+      "path": "sources/fernandez2017-openalex.json",
+      "bytes": 20436,
+      "sha256": "37b2eb1e10837c4f50bda09b7c53b4124b8a825af0becb5bd642835399d2656a"
+    },
+    {
+      "path": "sources/fernandez2017-page02.png",
+      "bytes": 474959,
+      "sha256": "5f277c18b7e2797751907f1b4816e71971836e8a58d974d9957959a371b1f315"
+    },
+    {
+      "path": "sources/fernandez2017-page03.png",
+      "bytes": 425314,
+      "sha256": "c88f5af34ffe8fb6152ac77aed1b333582a66f74f734b50578dc5c62016bd999"
+    },
+    {
+      "path": "sources/fernandez2017-publisher-retrieval.json",
+      "bytes": 533,
+      "sha256": "41a0024fca29ce60595d8125b22c2076479eb55ef612607d3a8f79b0db714302"
+    },
+    {
+      "path": "sources/fernandez2017-publisher.html",
+      "bytes": 93,
+      "sha256": "0d3e98ca727fc1201b436170af5a63f23348aaf146a3ac6234f6c4da283e8b34"
+    }
+  ],
+  "validation": {
+    "checked_utc": "2026-10-13T18:35:05.452596+00:00",
+    "status": "passed",
+    "artifact_sha256_checks": 58,
+    "pdf_signature_and_download_sha256_checks": 3,
+    "pdf_inspection_checks": "all unencrypted and text extracted",
+    "visual_comparisons_count": 7,
+    "utf8_json_roundtrip": "passed",
+    "scope_and_porosity_mapping_assertions": "passed",
+    "tests_not_run": "repository-wide tests are owned by controller; no computation code was modified"
+  }
+}

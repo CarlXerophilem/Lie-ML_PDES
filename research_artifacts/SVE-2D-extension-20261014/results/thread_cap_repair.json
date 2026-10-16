@@ -1,0 +1,24 @@
+{
+  "name": "thread-cap-repair",
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\main.py",
+    "--out",
+    "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\results"
+  ],
+  "cwd": "D:\\MATHs\\math 4890 LieML",
+  "exit_code": 0,
+  "seconds": 4.791485786437988,
+  "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\thread-cap-repair.txt",
+  "incoming_thread_values": "all 7",
+  "probe_exit_code": 0,
+  "probe_output": "{'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}\n",
+  "outputs_unchanged": true,
+  "output_sha256": {
+    "results/profiles.csv": "c2aa0e5d2a47a26c0c8d34d7afc77ed480b129e5b65d506b1659ec38884a5a6a",
+    "results/profiles.png": "dd9e7d9a3421fbb2ca04815608f747773ac964ff62944ae8a3ce53fd26479e14",
+    "results/numerical_table.tex": "93f5213da72d396203612885d41b4072549414083db2ee1bfa34ed10185e2fae"
+  },
+  "script_sha256": "3e5c2b4daaa12bb234fbaa37c3846d223e2ad57c02a9907ebc2509f712177c16"
+}

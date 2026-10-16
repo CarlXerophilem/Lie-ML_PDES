@@ -1,0 +1,516 @@
+{
+  "run_id": "sve-2d-extension-20261014",
+  "mode": "full-automatic",
+  "status": "completed",
+  "contract": "RUN_CONTRACT.md",
+  "date_timezone": "Asia/Tokyo",
+  "tasks": [
+    {
+      "id": "sources",
+      "state": "accepted",
+      "depends_on": [],
+      "cpu_class": "light",
+      "outputs": [
+        "SOURCE_AUDIT.md",
+        "sources/"
+      ],
+      "token_policy": "No user token cap; compact evidence return requested.",
+      "timeout_seconds": 60,
+      "tools": "Local read-only sources and isolated artifact writes per RUN_CONTRACT.md",
+      "context_pack": [
+        "RUN_CONTRACT.md",
+        "CLAIMS.json"
+      ],
+      "stop_rule": "Record failure/unresolved evidence at operational bound; do not infer obstruction or approval.",
+      "acceptance": "Traceable primary sources or independently replayable exact/numerical receipts; fresh per-claim review before release."
+    },
+    {
+      "id": "derivation",
+      "state": "accepted",
+      "depends_on": [],
+      "cpu_class": "light",
+      "outputs": [
+        "DERIVATION_RESEARCH.md"
+      ],
+      "token_policy": "No user token cap; compact evidence return requested.",
+      "timeout_seconds": 60,
+      "tools": "Local read-only sources and isolated artifact writes per RUN_CONTRACT.md",
+      "context_pack": [
+        "RUN_CONTRACT.md",
+        "CLAIMS.json"
+      ],
+      "stop_rule": "Record failure/unresolved evidence at operational bound; do not infer obstruction or approval.",
+      "acceptance": "Traceable primary sources or independently replayable exact/numerical receipts; fresh per-claim review before release."
+    },
+    {
+      "id": "computation",
+      "state": "accepted",
+      "depends_on": [
+        "sources"
+      ],
+      "cpu_class": "cpu-heavy-1",
+      "outputs": [
+        "main.py",
+        "results/"
+      ],
+      "token_policy": "No user token cap; compact evidence return requested.",
+      "timeout_seconds": 600,
+      "tools": "Local read-only sources and isolated artifact writes per RUN_CONTRACT.md",
+      "context_pack": [
+        "RUN_CONTRACT.md",
+        "CLAIMS.json"
+      ],
+      "stop_rule": "Record failure/unresolved evidence at operational bound; do not infer obstruction or approval.",
+      "acceptance": "Traceable primary sources or independently replayable exact/numerical receipts; fresh per-claim review before release."
+    },
+    {
+      "id": "fresh-review",
+      "state": "accepted",
+      "depends_on": [
+        "sources",
+        "derivation",
+        "computation"
+      ],
+      "cpu_class": "light",
+      "outputs": [
+        "REVIEW.md"
+      ],
+      "token_policy": "No user token cap; compact evidence return requested.",
+      "timeout_seconds": 60,
+      "tools": "Local read-only sources and isolated artifact writes per RUN_CONTRACT.md",
+      "context_pack": [
+        "RUN_CONTRACT.md",
+        "CLAIMS.json"
+      ],
+      "stop_rule": "Record failure/unresolved evidence at operational bound; do not infer obstruction or approval.",
+      "acceptance": "Traceable primary sources or independently replayable exact/numerical receipts; fresh per-claim review before release."
+    },
+    {
+      "id": "release",
+      "state": "accepted",
+      "depends_on": [
+        "fresh-review"
+      ],
+      "cpu_class": "cpu-heavy-1",
+      "outputs": [
+        "README.md",
+        "report.tex",
+        "VALIDATION.md",
+        "MANIFEST.json"
+      ],
+      "token_policy": "No user token cap; compact evidence return requested.",
+      "timeout_seconds": 600,
+      "tools": "Local read-only sources and isolated artifact writes per RUN_CONTRACT.md",
+      "context_pack": [
+        "RUN_CONTRACT.md",
+        "CLAIMS.json"
+      ],
+      "stop_rule": "Record failure/unresolved evidence at operational bound; do not infer obstruction or approval.",
+      "acceptance": "Traceable primary sources or independently replayable exact/numerical receipts; fresh per-claim review before release."
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The frozen frictionless Eulerian 2D SVE/Grass model is a documented specialization of Fernandez-Nieto et al. 2017 eq. (1.1), with K=kappa/(1-p).",
+      "scope": "Source Grass m in [1,4]; constant porosity and fixed coefficients; no claim to later energy-consistent models.",
+      "evidence": [
+        "SOURCE_AUDIT.md",
+        "sources/source_manifest.json"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "Classical introductory model in Fernandez-Nieto et al. equation (1.1)",
+        "Constant porosity 0<=p<1; g,kappa>0",
+        "Source Grass range 1<=m<=4; other real exponents mathematical extensions",
+        "Frictionless idealization; not later energy-consistent model"
+      ]
+    },
+    {
+      "id": "C2",
+      "statement": "Translations, bed shift, full planar rotation, and common space-time scaling are admitted; the fixed-parameter diagonal scaling condition is (3-m)c=0.",
+      "scope": "Candidate verification and diagonal ansatz only; nonzero speed for arbitrary real m; no maximality.",
+      "evidence": [
+        "main.py:symmetry_checks",
+        "results/evidence.json:groups.symmetry"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "Smooth wet positive-speed chart for general real m",
+        "Fixed nonzero g,K",
+        "Diagonal ansatz only; no maximal classification"
+      ]
+    },
+    {
+      "id": "C3",
+      "statement": "Rotation-invariant graphs yield the four radial PDEs with swirl, retaining all 1/r geometric terms.",
+      "scope": "Smooth fields on r>0; reduction 3 independent variables to 2, not yet ODE.",
+      "evidence": [
+        "main.py:radial_checks",
+        "results/evidence.json:groups.radial",
+        "report.tex"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "r>0 with local angle chart",
+        "Full coordinate and velocity rotation",
+        "Positive speed for general real m; cubic extension separate"
+      ]
+    },
+    {
+      "id": "C4",
+      "statement": "At m=3 the commuting R,D reduction yields Hprime=-4AH, Aprime=W^2-A^2-2g(H+B), Wprime=-2AW, Bprime=-4KA(A^2+W^2), with direct Cartesian factorization and annular balances.",
+      "scope": "r>0,H>0, matched traces; D does not preserve fixed annular radii; use D-2*b0*d_b for constant shifted bed.",
+      "evidence": [
+        "main.py:cubic_checks",
+        "results/evidence.json:groups.cubic",
+        "report.tex"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "m=3; r>0; H>0",
+        "Constant added bed datum uses conjugate generator",
+        "Initial and boundary traces come from same constructed solution",
+        "Fixed annulus is not scaling-invariant"
+      ]
+    },
+    {
+      "id": "C5",
+      "statement": "W^2/H is an ODE first integral and the stated cstar/t^2 evolving family exactly solves the original cubic PDE.",
+      "scope": "Integral H>0; W sign branch for elimination; exact family t>0,r>0,2gK<1.",
+      "evidence": [
+        "main.py:cubic_checks",
+        "results/evidence.json:groups.cubic",
+        "report.tex"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "H>0 for W^2/H",
+        "Fixed W sign for square-root elimination; W=0 separate",
+        "Exact family: t>0,r>0,g,K>0,2*g*K<1,omega real"
+      ]
+    },
+    {
+      "id": "C6",
+      "statement": "The constructed dimensionless IVP passes recorded cross-solver, refinement, invariant-drift and exact-control gates.",
+      "scope": "Finite sampled checks, not continuous error, general stability, real data or a full 2D solver.",
+      "evidence": [
+        "results/evidence.json:numerical",
+        "results/profiles.csv",
+        "tests/test_extension.py"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "Constructed dimensionless IVP on [0,0.2]",
+        "Sampled numerical consistency only",
+        "No continuous error certificate, full PDE solver, general stability, or real-data claim"
+      ]
+    },
+    {
+      "id": "C7",
+      "statement": "The identified JFM paper is a relevant model-dependent warning; its Appendix D assumptions have not been established for this unsteady frictionless specialization.",
+      "scope": "Source-scope audit only, no transferred ill-posedness or well-posedness theorem.",
+      "evidence": [
+        "SOURCE_AUDIT.md",
+        "sources/source_manifest.json",
+        "report.tex"
+      ],
+      "revision": 1,
+      "status": "accepted",
+      "reviewer_verdict": "accepted",
+      "review_evidence": "REVIEW.json",
+      "review_assumptions": [
+        "Source-scope comparison only",
+        "No certification of every step of JFM stability proof",
+        "No transferred ill-posedness or well-posedness result"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "fernandez2017",
+      "doi": "10.1051/m2an/2016018",
+      "status": "primary-checked",
+      "manifest": "sources/source_manifest.json"
+    },
+    {
+      "id": "chavarrias2019",
+      "doi": "10.1017/jfm.2019.166",
+      "status": "primary-checked",
+      "manifest": "sources/source_manifest.json"
+    }
+  ],
+  "receipts": [
+    {
+      "name": "audit-before",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/project.py",
+        "audit",
+        "--out",
+        "build/sve-2d-extension-20261014/audit-before"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 1,
+      "seconds": 0.399,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\audit-before.txt"
+    },
+    {
+      "name": "data-flux",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/project.py",
+        "data-flux",
+        "--out",
+        "build/sve-2d-extension-20261014/data-flux"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 7.872,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\data-flux.txt"
+    },
+    {
+      "name": "workflow",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "scripts/project.py",
+        "workflow",
+        "--out",
+        "build/sve-2d-extension-20261014/workflow"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 4.866,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\workflow.txt"
+    },
+    {
+      "name": "engine-chart",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "scripts/tests",
+        "symm/tests/test_chart_reduction.py",
+        "symm/tests/test_engine.py"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 1,
+      "seconds": 41.978,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\engine-chart.txt"
+    },
+    {
+      "name": "active-package",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "research_artifacts/sve-progress-20261010/tests"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 8.353,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\active-package.txt"
+    },
+    {
+      "name": "extension-calculation",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "research_artifacts/SVE-2D-extension-20261014/main.py",
+        "--out",
+        "research_artifacts/SVE-2D-extension-20261014/results"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 3.439,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\extension-calculation.txt"
+    },
+    {
+      "name": "extension-tests",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "research_artifacts/SVE-2D-extension-20261014/tests",
+        "--basetemp=build/sve-2d-extension-20261014/pytest-extension"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 3.57,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\extension-tests.txt"
+    },
+    {
+      "name": "engine-chart-same-drive",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "scripts/tests",
+        "symm/tests/test_chart_reduction.py",
+        "symm/tests/test_engine.py",
+        "--basetemp=build/sve-2d-extension-20261014/pytest-existing"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 26.97,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\engine-chart-same-drive.txt"
+    },
+    {
+      "name": "extension-calculation-final",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\main.py",
+        "--out",
+        "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\results"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 3.7050256729125977,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\extension-calculation-final.txt"
+    },
+    {
+      "name": "latexmk",
+      "command": [
+        "latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-outdir=D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\latex",
+        "report.tex"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014",
+      "exit_code": 0,
+      "seconds": 3.045330286026001,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\latexmk.txt"
+    },
+    {
+      "name": "thread-cap-repair",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\main.py",
+        "--out",
+        "D:\\MATHs\\math 4890 LieML\\research_artifacts\\SVE-2D-extension-20261014\\results"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 0,
+      "seconds": 4.791485786437988,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\thread-cap-repair.txt",
+      "incoming_thread_values": "all 7",
+      "probe_exit_code": 0,
+      "probe_output": "{'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}\n",
+      "outputs_unchanged": true,
+      "output_sha256": {
+        "results/profiles.csv": "c2aa0e5d2a47a26c0c8d34d7afc77ed480b129e5b65d506b1659ec38884a5a6a",
+        "results/profiles.png": "dd9e7d9a3421fbb2ca04815608f747773ac964ff62944ae8a3ce53fd26479e14",
+        "results/numerical_table.tex": "93f5213da72d396203612885d41b4072549414083db2ee1bfa34ed10185e2fae"
+      },
+      "script_sha256": "3e5c2b4daaa12bb234fbaa37c3846d223e2ad57c02a9907ebc2509f712177c16"
+    },
+    {
+      "name": "audit-after",
+      "command": [
+        "python",
+        "-B",
+        "scripts/project.py",
+        "audit",
+        "--out",
+        "build/sve-2d-extension-20261014/audit-after"
+      ],
+      "cwd": "D:\\MATHs\\math 4890 LieML",
+      "exit_code": 1,
+      "seconds": 0.4143061637878418,
+      "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-2d-extension-20261014\\validation\\audit-after.txt"
+    }
+  ],
+  "resources": {
+    "token_actual": null,
+    "cache_actual": null,
+    "heavy_cpu_concurrency": 1,
+    "symbolic_and_numerical_seconds": 1.9502166000020225,
+    "cpu_leases": [
+      "controller validation and calculation jobs serial",
+      "reviewer brief independent replay serial"
+    ]
+  },
+  "rulings": [
+    {
+      "id": "R1",
+      "decision": "Use the uploaded isotropic frictionless full-system direction as the first extension, with evolving bed slope retained.",
+      "reason": "Concrete authorized starting calculation; no generic classification presumed."
+    },
+    {
+      "id": "R2",
+      "decision": "Use source flux convention K=kappa/(1-p), and distinguish source range 1<=m<=4 from mathematical real-m extension."
+    },
+    {
+      "id": "R3",
+      "decision": "Use same-drive pytest basetemp for Windows path portability; preserve original failed run and do not edit existing project code."
+    },
+    {
+      "id": "R4",
+      "decision": "Enforce thread variables before numerical imports and replay with conflicting incoming settings.",
+      "reason": "Fresh review found that setdefault did not enforce the stated cap.",
+      "evidence": "results/thread_cap_repair.json",
+      "claim_change": false
+    }
+  ],
+  "release": {
+    "review": "REVIEW.json",
+    "artifact_qa": "results/artifact_qa.json",
+    "audit_comparison": "results/validation/audit-comparison.json",
+    "accepted_claims": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7"
+    ],
+    "rejected_claims": [],
+    "limitations": [
+      "No maximal classification or novelty claim",
+      "No general PDE well-posedness or continuous numerical error theorem",
+      "Existing project audit still has 218 issues"
+    ]
+  }
+}

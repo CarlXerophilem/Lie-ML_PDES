@@ -1,0 +1,131 @@
+472                                           V. Chavarrías, R. Schielen, W. Ottevanger and A. Blom
+
+                                                                                        Growth rate (rad s-1)
+                                                                                                 I1
+(a)                                                                                             (b) 100
+      kwy (rad m-1)
+                      200                                                                             80
+
+
+
+
+                                                                                                    lwy (m)
+                      150                            4                          -0.00
+                                                                                      5               60                          .00
+                                                                                                                                        5
+                                                  .00                                                                           -0
+                      100                       -0                                                    40                                           4
+                                                                                                                                            -0.00
+                       50                 5                                                           20
+                                     -0.00
+
+                                                                                                   B1
+(c)                                                                                                (d) 100
+      kwy (rad m-1)
+
+
+
+
+                                                                                    -0
+                      200                                                                .00                  80
+
+
+
+
+                                                                                                    lwy (m)
+                                                                                               6
+                                       -0
+
+
+
+
+                      150                                                                                     60
+                                        .00
+
+
+
+
+                                                                                                                                                    10-6
+                                                                05
+                                          4
+
+
+
+
+                      100                                  .0                                                 40                               0
+                                                        -0                                                                              10-5
+                       50                                                                                     20
+                                     -0.005
+                                        -0.004                             -0.005
+                                                                              -0.004
+
+                                                                                                    I2
+(e)                                                                                                (f) 100
+      kwy (rad m-1)
+
+
+
+
+                                                                                 002                                                                          002
+                      200                                                     -0.                             80                                           -0.
+
+
+                                                                                                    lwy (m)
+                            -0.02
+
+
+
+
+                      150                                                                                     60
+
+
+
+
+                                                                                                                     2
+                                                                                                                      00
+                      100                                                                                     40            0
+
+
+
+
+                                                                                                                   0.0
+                                                                                     0
+                       50               002                                    0.0002                         20         02
+                                     -0. 0                                                                          -0.0
+                                                                                                                    -0.02                                    -0.02
+                                    0.0002
+                                         50         100              150       200                                         20        40            60      80        100
+                                                  kwx (rad m-1)                                                                         lwx (m)
+
+F IGURE 1. (Colour online) Growth rate of perturbations added to the reference case
+(tables 1 and 2) as a function of the wavenumber and the wavelength: (a–b) iSWE,
+Fr < 2 (Case I1, well posed), (c–d) iSWE+Exner (Case B1, well posed) and (e–f ) iSWE,
+Fr > 2 (Case I2, ill posed). The panels in the two columns show the same information
+but highlight the behaviour for large wavenumbers (left column) and for large wavelengths
+(right column). Red and green indicates growth and decay of perturbations, respectively.
+
+which confirms the results of Schielen et al. (1993). Figure 1(c) highlights, as for
+Case I1, the decay of short waves.
+   A particular case of instability is that in which the domain of positive growth
+rate extends to infinitely large wavenumbers (i.e. short waves). Under this condition
+
+
+
+
+there is no cutoff wavenumber above which we can neglect the contribution of ever
+shorter waves with non-zero growth rates. For any unstable perturbation a shorter
+one can be found which is even more unstable. This implies that the growth rate
+of an infinitesimal perturbation (i.e. noise) tends to infinity. Such a system cannot
+represent a physical phenomenon, as the growth rate of any physical process in nature
+is bounded. A system in which the growth rate of infinitesimal perturbations tends
+to infinity does not have a unique solution depending continuously on the initial and
+boundary conditions, which implies that the system is ill posed (Hadamard 1923;
+Joseph & Saut 1990). An example of an ill-posed hydrodynamic model is the iSWE
+for flow with a Froude number larger than 2. In figure 1(e,f ) we show the growth
+rate of perturbations to the reference solution of a case in which the Froude number
+is slightly larger than 2 (Case I2, table 2). The growth rate extends to infinitely large
+wavenumbers, which confirms that this case is ill posed. A model being ill posed is
+an indication that there is a relevant physical mechanism that has been neglected in
+the model derivation (Fowler 1997). Viscous forces regularise the iSWE (i.e. make
+the model well posed) and rather than ill posed, the viscous shallow water equations
+become simply unstable for a Froude number larger than 2, predicting the formation
