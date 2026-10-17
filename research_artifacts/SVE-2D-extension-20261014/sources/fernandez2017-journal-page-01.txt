@@ -1,0 +1,53 @@
+ESAIM: M2AN 51 (2017) 115–145                    ESAIM: Mathematical Modelling and Numerical Analysis
+DOI: 10.1051/m2an/2016018                                                           www.esaim-m2an.org
+
+
+
+
+     FORMAL DEDUCTION OF THE SAINT-VENANT–EXNER MODEL
+ INCLUDING ARBITRARILY SLOPING SEDIMENT BEDS AND ASSOCIATED
+                           ENERGY
+
+
+           Enrique D. Fernández-Nieto1, Tomás Morales de Luna2 , Gladys
+                    Narbona-Reina1 and Jean de Dieu Zabsonré3
+
+         Abstract. In this work we present a deduction of the Saint-Venant–Exner model through an asymp-
+         totic analysis of the Navier–Stokes equations. A multi-scale analysis is performed in order to take into
+         account that the velocity of the sediment layer is smaller than the one of the ﬂuid layer. This leads us
+         to consider a shallow water type system for the ﬂuid layer and a lubrication Reynolds equation for the
+         sediment one. This deduction provides some improvements with respect to the classic Saint-Venant–
+         Exner model: (i) the deduced model has an associated energy. Moreover, it allows us to explain why
+         classic models do not have an associated energy and how they can be modiﬁed in order to recover a
+         model with this property. (ii) The model incorporates naturally a necessary modiﬁcation that must be
+         taken into account in order to be applied to arbitrarily sloping beds. Furthermore, we show that in
+         general this modiﬁcation is diﬀerent from the ones considered classically. Nevertheless, it coincides with
+         a classic one in the case of constant free surface. (iii) The deduced solid transport discharge naturally
+         depends on the thickness of the moving sediment layer, which allows to ensure sediment mass conser-
+         vation. Moreover, we include a simpliﬁed version of the model for the case of quasi-stationary regimes.
+         Some of these simpliﬁed models correspond to a generalization of classic ones such as Meyer-Peter and
+         Müller and Ashida–Michiue models. Three numerical tests are presented to study the evolution of a
+         dune for several deﬁnition of the repose angle, to see the inﬂuence of the proposed deﬁnition of the
+         eﬀective shear stress in comparison with the classic one, and by comparing with experimental data.
+
+         Mathematics Subject Classiﬁcation. 35Q30, 35Q35, 35Q70, 35Q86, 65Z02, 76D05, 76D09,
+         86A05, 93A30.
+
+         Received July 14, 2015. Revised December 23, 2015. Accepted March 8, 2016.
+
+
+
+
+                                                 1. Introduction
+  The Saint-Venant–Exner system (see [17]) is generally used to model the bedload transport in rivers, lakes
+and coastal areas. Sediment transport is usually divided into three types: surface creep, saltation and suspension.
+
+  Keywords and phrases. Saint-Venant–Exner, bedload, Reynolds equation.
+  1 Dpto. Matemática Aplicada I, ETS Arquitectura, Universidad de Sevilla, Avda. Reina Mercedes N. 2, 41012 Sevilla, Spain.
+  edofer@us.es; gnarbona@us.es
+  2 Dpto. de Matemáticas, Universidad de Córdoba, Campus de Rabanales, 14071 Córdoba, Spain. tomas.morales@uco.es
+  3 Institut Universitaire de Technologie, Université Polytechnique de Bobo-Dioulasso, 01, BP 1091 Bobo-Dioulasso 01, Burkina
+  Faso. jzabsonre@gmail.com
+
+Article published by EDP Sciences                                                                
+                                                                                                 c EDP Sciences, SMAI 2016

@@ -2688,40 +2688,6 @@ At $\xi=0.025$ the difference is below the operational resolution threshold;
 it is not another measured convergence order. The numerical comparisons
 neither bound the series remainder nor locate its convergence radius.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{research_artifacts/SVE-reproduced-20261012/results/presentation/series-numerical.pdf}
-\caption{Series and numerical views of the same constructed cubic IVPs.
-Top: common-scaling (3.4) and traveling (3.6) profiles from RKF45, saved
-DOP853 nodes and the degree-six Taylor polynomial; the curves overlap at
-this scale. Bottom: separate absolute differences in $F,F',F''$ at four
-saved nodes, without interpolation. Filled markers exceed the operational
-resolution screen; hollow markers do not. Exact zero differences are omitted
-from logarithmic axes. These finite differences show local truncation and
-floating-resolution effects, not a certified remainder or a convergence
-radius. Both panels use $(z_0,F_0,P_0,C_0)=(1,2,1/2,1/10)$,
-$g=1$, $\kappa=1/30$, $m=3$; 3.6 uses $\alpha=-1$, $\alpha_3=0$.}
-\label{fig:sve-series-numerical}
-\end{figure}
-
-\paragraph{Numerical method and independent comparisons.}
-The numerical method is the classical six-stage embedded Fehlberg
-4(5) pair~\cite{uddin2016rkf}. For the three-state system
-$\boldsymbol y'=\boldsymbol f(z,\boldsymbol y)$ with
-$\boldsymbol y=(F,P,C)$ and $\boldsymbol f=(P,C,R)$, a trial step
-of length $\Delta z$ computes
-\begin{align}
- \boldsymbol k_i&=\boldsymbol f\left(z_n+c_i\Delta z,
-       \boldsymbol y_n+\Delta z\sum_{j<i}a_{ij}\boldsymbol k_j\right),
-             \qquad i=1,\ldots,6,\notag\\
- \boldsymbol y_{n+1}^{(4)}&=\boldsymbol y_n+
-                  \Delta z\sum_{i=1}^6b_i^{(4)}\boldsymbol k_i,\qquad
- \boldsymbol y_{n+1}^{(5)}=\boldsymbol y_n+
-                  \Delta z\sum_{i=1}^6b_i^{(5)}\boldsymbol k_i.
- \label{eq:sve-rkf-step}
-\end{align}
-The coefficients are shown explicitly in Table~\ref{tab:sve-rkf-tableau};
-thus the term ``RKF45'' specifies a method, not just a software label.
 
 \begin{table}[htbp]
 \centering\small
@@ -2798,20 +2764,7 @@ a variational Lagrangian. They are classical verified integrals, not learned
 order-reducing discoveries, and no analogous certified integral is asserted
 here for case 3.5.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{research_artifacts/SVE-reproduced-20261012/results/presentation/first-integral-checks.pdf}
-\caption{Independent checks on the cubic common-scaling (3.4) and traveling
-(3.6, 3.9) profiles. Left: signed integral drift relative to the exact
-initial constant, scaled by $\max(1,|I_0|)$. Right: the maximum over the two
-components $F,P$ of $|y_{\rm second}-y_{\rm third}|/\max(1,|y_{\rm third}|)$
-at each saved node. The second-order equations use the fixed initial
-integral; the third-order RKF45 equations do not enforce it. The horizontal
-coordinate normalizes each solved interval, $[1,1.4]$ for 3.4 and $[1,1.1]$
-for 3.6 and 3.9, for display only. Values near floating precision are
-consistency diagnostics, not certified errors or measured convergence orders.}
-\label{fig:sve-integral-checks}
-\end{figure}
+
 
 The original two-variable field was independently reconstructed and
 differentiated by a nine-point tensor finite-difference stencil, without

@@ -8,7 +8,7 @@
         "sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5",
         "pages": 11,
         "verification": "local_primary_pdf_checked",
-        "accessed": "2026-10-13"
+        "accessed": "2026-10-15"
       },
       {
         "id": "RKF-reference",
@@ -17,7 +17,7 @@
         "sha256": "aa6d304b132dc9804be653b0dca590136d96ab1a08320c0e0d1333588baa714b",
         "pages": 10,
         "verification": "local_primary_pdf_checked",
-        "accessed": "2026-10-13"
+        "accessed": "2026-10-15"
       }
     ],
     "source_verification_complete": true,
@@ -3576,7 +3576,7 @@
     "all_passed": true
   },
   "run": {
-    "started_utc": "2026-10-13T05:15:23.694644+00:00",
+    "started_utc": "2026-10-15T02:41:55.533033+00:00",
     "stage": "all",
     "selection": "all",
     "case": "all",
@@ -3584,7 +3584,7 @@
     "complete_audit": true,
     "source_agreement": "assessed_per_claim",
     "numerical_scope": "constructed dimensionless local IVPs",
-    "elapsed_seconds": 19.57746099997894,
+    "elapsed_seconds": 20.239437700001872,
     "execution_status": "finished",
     "all_printed_claims_reproduced": false,
     "symbolic_passed": true,
@@ -12574,7 +12574,7 @@
     },
     "regular_count": 21,
     "all_verified": true,
-    "elapsed_seconds": 5.8916127999837045,
+    "elapsed_seconds": 5.7520756000012625,
     "scope": "local analytic germs on regular positive chart; no radius or global PDE claim"
   },
   "convergence": {
@@ -18901,7 +18901,7 @@
         }
       ]
     },
-    "elapsed_seconds": 0.9534282000095118,
+    "elapsed_seconds": 0.9411885000008624,
     "complete_count": 21
   },
   "presentation": {
@@ -19538,9 +19538,9 @@
     "source_sha256": "71224cf2e4a3ed456dc0cf9b5bb467fdf484b3ce7b4a7b7d713f649aa9747aa9",
     "status": "passed",
     "figure_sha256": {
-      "series-numerical.pdf": "da272b9b1c9bb4496e57e79a846497a2caf9f4572e95d941329edb392e041624",
+      "series-numerical.pdf": "1bb9abeea209d0f84d58d454e221ab44e51c8f4c2c2322f75018819fee725764",
       "series-numerical.png": "30239297b1dbe9453b490954fb174cc5227f2d7179338d63b3f4c6e20f3acc3d",
-      "first-integral-checks.pdf": "87dbe70ba3a4e11fb12e629ce885424e157121975bb2682608d5e6d4c8512641",
+      "first-integral-checks.pdf": "71f663bc0476658569e2732ecabd26fdae22cc3a1c32a0503a2bd255d0f23b4d",
       "first-integral-checks.png": "63ff2c8aafeca6827fc0cea16552bb439c49587d5a0b6372f295091783f0d071"
     }
   }

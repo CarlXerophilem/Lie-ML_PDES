@@ -1,0 +1,1298 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- bs5/base -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+<link rel="schema.dc" href="http://purl.org/dc/elemtens/1.1/" />
+<meta name="citation_doi" content="10.1051/m2an/2016018">
+<meta name="citation_title" content="Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy">
+<meta name="citation_author" content="Fernández-Nieto, Enrique D."><meta name="citation_author" content="Luna, Tomás Morales de"><meta name="citation_author" content="Narbona-Reina, Gladys"><meta name="citation_author" content="Zabsonré, Jean de Dieu">
+<meta name="citation_publication_date" content="2017">
+
+<meta name="citation_journal_title" content="ESAIM: Mathematical Modelling and Numerical Analysis ">
+<meta name="citation_issn" content="2804-7214">
+<meta name="citation_volume" content="51">
+<meta name="citation_language" content="en">
+<meta name="citation_issue" content="1">
+<meta name="citation_firstpage" content="115">
+<meta name="citation_lastpage" content="145">
+
+<meta name="citation_pdf_url" content="https://www.numdam.org/item/10.1051/m2an/2016018.pdf">
+
+
+
+  <title>
+  Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy
+</title>
+  
+  <link rel="stylesheet" href="/static/ptf/vendors/font-awesome/css/font-awesome.min.css" />
+  
+  <link rel="stylesheet" href="/static/ptf/vendors/bootstrap5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/ptf.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/base.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+  <link rel="shortcut icon" type="image/svg+xml" href="/static/numdam/img/favicon.ico" />
+
+  
+
+  
+  <link rel="stylesheet" href="/static/ptf/css/bs5/style.css" />
+  <link rel="stylesheet" href="/static/ptf/css/bs5/search-bar.css" />
+  
+  <link rel="stylesheet" href="/static/numdam/vendors/owl-carousel/css/owl.carousel.css">
+  <link rel="stylesheet" href="/static/numdam/vendors/owl-carousel/css/owl.theme.css">
+  <link rel="stylesheet" href="/static/numdam/css/numdam.css" type="text/css"/>
+  
+
+
+
+  
+  
+  <link rel="stylesheet" href="/static/m2an/css/style_m2an.css" />
+  
+  
+  
+  
+</head>
+<body class="d-flex flex-column position-relative" >
+  
+    
+
+
+    <div id="top">
+      <div id="bandeau">
+        <div style="float:left">
+          <a href="/" class='no-focus'>
+            <img src="/static/numdam/img/numdam_logo.gif" title='Accueil' alt='Accueil' class='logo no-text-decoration'/>
+          </a>
+        </div>
+        <div class="bandeau-background">
+          <div style="float:left" class="smartphone">
+            <div class="dropdown">
+              <button class="btn light-blue dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <img src='/static/mersenne_cms/img/main-menu.svg' alt='main-menu'/>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="/journals/">Revues</a></li>
+                <li><a href="/actas/">Séminaires</a></li>
+                <li><a href="/proceedings/">Congrès</a></li>
+                <li><a href="/books/">Livres</a></li>
+                <li><a href="/lectures">Notes de cours</a></li>
+                <li><a href="/thesis">Thèses</a></li>
+                <li><a href="/authors">Auteurs</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="onoffswitch-group">
+          <div id="language-switch" title="Cliquer pour afficher le site en anglais">
+            <form id="language-switch-form" action="/i18n/setlang/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="YGYsSQpUj70UB82KXJMixrnLhffWc5cWV6nqfUdp7OCD4RAuSexGB6pcrZRwlSQB">
+              <div class="onoffswitch" id="lang_flags">
+                <input type="checkbox"
+                       name="language"
+                       value="en"
+                       class="onoffswitch-checkbox"
+                       id="lang_onoffswitch"
+                       checked>
+                <label class="onoffswitch-label" for="lang_onoffswitch">
+                  <span class="onoffswitch-inner" data-on="" data-off=""></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </form>
+          </div>
+          <div id="mathml-switch"
+            
+              
+                 title="Cliquer pour afficher le code source TeX"
+              
+            >
+            <form action="/set-formula-display/" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="YGYsSQpUj70UB82KXJMixrnLhffWc5cWV6nqfUdp7OCD4RAuSexGB6pcrZRwlSQB">
+              <div class="onoffswitch">
+                <input type="checkbox" name="formula-display" value="tex" class="onoffswitch-checkbox"
+                       id="tex_onoffswitch"
+                       onclick="this.form.submit();"
+                       >
+                <label class="onoffswitch-label" for="tex_onoffswitch">
+                  <span class="onoffswitch-inner" data-on="TeX" data-off="TeX"></span>
+                  <div class="onoffswitch-switch">
+                    <div class="onoffswitch-switch-label">
+                      OFF</div>
+                  </div>
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-default navbar-expand-md desktop">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li class="nav-item active"><a class="nav-link"
+                href="/journals/">Revues</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/actas/">Séminaires</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/proceedings/">Congrès</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/books/">Livres</a></li>
+            <li class="nav-item"><a class="nav-link"
+            href="/lectures">Notes de cours</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/thesis">Thèses</a></li>
+            
+            
+            <li class="nav-item"><a class="nav-link"
+                href="/authors">Auteurs</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="bandeau3">
+        <div class="container" id="search-bar">
+          
+
+
+
+
+<form class="d-flex gap-2 align-items-center align-items-md-start flex-column flex-md-row" method="post" action="/search"><input type="hidden" name="csrfmiddlewaretoken" value="YGYsSQpUj70UB82KXJMixrnLhffWc5cWV6nqfUdp7OCD4RAuSexGB6pcrZRwlSQB">
+
+
+  
+
+<div class="px-0 text-nowrap browse-button">
+  <a href="/journals/ALL/" class="btn btn-primary search-button">Parcourir les volumes</a>
+</div>
+
+  <div class="flex-grow-1 d-flex gap-2 w-100 align-items-stretch align-items-lg-start">
+    <div class="flex-grow-1" id="line-container">
+      <div class="d-flex input-group search-group flex-nowrap">
+        <div class="search-group-inner input-group w-100" id="search-input-group">
+          <input class="searchinput form-control" type="text" name="q0" value=""
+                  placeholder="Rechercher des articles, des livres..."/>
+          <i class="searchclear fa fa-remove hidden" role="button"></i>
+          <input type="hidden" name="qt0" value="all">
+          <button type="button" class="btn btn-light dropdown-toggle border-0 rounded-0 border-end d-flex flex-nowrap align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            
+              Tout
+            
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Tout</a></li>
+            <li><a href="#" class="dropdown-item">Auteur</a></li>
+            <li><a href="#" class="dropdown-item">Titre</a></li>
+            <li><a href="#" class="dropdown-item">Bibliographie</a></li>
+            
+            
+            <li><a href="#" class="dropdown-item">Plein texte</a></li>
+          </ul>
+          
+          <button id="add-search-field" type="button" class="btn btn-light">
+            <i class="fa fa-plus"></i>
+          </button>
+          
+        </div>
+      </div>
+
+      
+      
+        
+      
+    </div>
+
+    
+    
+
+<div class="search-button-div d-flex">
+  <button type="submit" class="btn btn-primary search-button d-flex flex-nowrap align-items-center gap-1" name="Submit">
+    <i class="fa fa-search"></i>
+    <span id="search-button-text" class="d-none d-sm-block">Rechercher</span>
+  </button>
+  
+  
+    <a href="/help/"><img src="/static/mersenne_cms/img/question.png"></a>
+  
+  
+</div>
+    
+  </div>
+
+  
+</form>
+<div id="template-search-form" style="display:none">
+  
+
+<div class="input-group search-group search-group-added d-none d-lg-flex flex-nowrap">
+  <div  class="input-group flex-nowrap">
+    <div style="display:flex" class="input-group-text flex-nowrap justify-content-center align-items-center gap-1 px-2 search_first_box">
+      <input id="not##i##"" class="bt-checkbox" type="checkbox" name="not##i##" /> <label for="not##i##"">NOT</label>
+    </div>
+    <div  class="search-group-inner input-group w-100 p-0">
+      <input class="searchinput form-control rounded-0 border-0 w-100 h-100 px-2 py-1" type="text" name="q##i##"/>
+      <i class="searchclear fa fa-remove hidden"></i>
+    </div>
+  </div>
+
+  <div style="display:none" class="flex-grow-1 input-group">
+    <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
+    <span class="input-group-text search_first_box">Entre</span>
+    <input class="form-control" type="text" name="q-f-##i##" placeholder="Année" />
+    <span class="input-group-text">et</span>
+    <input class="form-control rounded-0" type="text" name="q-l-##i##" placeholder="Année" />
+  <!-- </div> -->
+  <!-- </div> -->
+</div>
+<div class="input-group-btn d-flex flex-nowrap" id="search-group-btn">
+    <input type="hidden" name="qt##i##" value="author">
+    <button type="button" class="btn btn-light dropdown-toggle rounded-0 border-0 border-start border-end" data-bs-toggle="dropdown" aria-expanded="false">
+      
+        Auteur
+      
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#" class="dropdown-item">Tout</a></li>
+      <li><a href="#" class="dropdown-item">Auteur</a></li>
+      <li><a href="#" class="dropdown-item">Titre</a></li>
+      <li><a href="#" class="dropdown-item">Date</a></li>
+      <li><a href="#" class="dropdown-item">Bibliographie</a></li>
+      <li><a href="#" class="dropdown-item">Mots-clés</a></li>
+      
+      <li><a href="#" class="dropdown-item">Plein texte</a></li>
+    </ul>
+    <button type="button" class="btn btn-light border-0 remove-search-field">
+      <i class="fa fa-minus"></i>
+    </button>
+  </div>
+</div><!-- /input-group -->
+
+
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  
+
+  <main class="container 
+article-container
+" style="flex-grow: 1;">
+    
+    <div class="row justify-content-center">
+      
+        <div class="container-fluid d-flex">
+          
+            <!-- Debut content -->
+            
+            <!-- Debut Left -->
+              <div>
+                
+                
+    <div id="content_left">
+      
+    </div>
+
+              </div>
+            <!-- Fin left -->
+            
+
+            
+            <div class="flex-grow-1" style="max-width: 100%;">
+              <!-- Breadcrumb -->
+              
+  
+    
+
+
+<div class="breadcrumb-row d-flex flex-column flex-xl-row gap-2">
+  
+    <div class="col-12">
+  
+    
+    <div class="breadcrumb-lg flex-wrap" style="font-size: 14px">
+      
+        <div style="float: left;">
+          <ul class="cms-breadcrumb d-flex m-0 mb-1">
+            <li class="breadcrumb-previous">
+              <a href="/articles/10.1051/m2an/2016017/">Précédent</a>
+            </li>
+          </ul>
+        </div>
+      
+      <div class="order-2 order-md-1 col-12 col-md-auto" style="float: left;">
+        <ul class="cms-breadcrumb d-flex flex-nowrap mb-3">
+          
+            
+            
+              <li class="">
+                <a href="/item/M2AN/">ESAIM: Mathematical Modelling and Numerical Analysis </a>
+              </li>
+            
+          
+            
+            
+              <li class="">
+                <a href="/volume/M2AN_2017__51_1/">Tome 51 (2017)</a>
+              </li>
+            
+          
+            
+            
+              <li class="">
+                <a href="/item/M2AN_2017__51_1/">no. 1</a>
+              </li>
+            
+          
+            
+            
+              <li class="active">
+                <a href="/articles/10.1051/m2an/2016018/">p. 115-145</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+      
+        <div class="order-1 order-md-2" style="float: left;">
+          <ul class="cms-breadcrumb d-flex mb-1">
+            <li class="breadcrumb-next">
+              <a href="/articles/10.1051/m2an/2016019/">Suivant</a>
+            </li>
+          </ul>
+        </div>
+      
+    </div>
+    
+    <div class="breadcrumb-sm">
+      
+        <a href="/articles/10.1051/m2an/2016017/" class="btn btn-light border"><i class="fa fa-chevron-left"></i></a>
+      
+
+      
+        
+          
+        
+          
+            <a href="/item/M2AN_2017__51_1/" class="btn btn-light border">no. 1</a>
+          
+        
+          
+        
+          
+        
+      
+
+      
+        <a href="/articles/10.1051/m2an/2016019/" class="btn btn-light border"><i class="fa fa-chevron-right"></i></a>
+      
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+              <!-- center_top -->
+              
+              <!-- center_middle -->
+              
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<div id="article-div" class="article-div">
+  
+  <div >
+    
+
+    
+    <div class="col-12">
+    
+
+      
+        
+      
+      <div style="font-size:18px;margin-bottom:10px">
+        
+
+
+  <span class="common-title article-title">
+    
+    
+    Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy
+    
+    
+  </span>
+  
+  
+
+
+
+
+      </div>
+      
+
+
+
+<div class="article-author" style="display:inline-block">
+  
+    
+
+
+
+
+
+  
+
+
+    
+      
+        
+
+
+
+
+  <div style="margin-bottom:5px; font-size: 16px">
+    <a class="author_link" href="/search?&quot;Fernández-Nieto, Enrique D.&quot;-c">Fernández-Nieto, Enrique D.<span href="#aff_1"></span></a><a class="author_link" href="#affiliation" data-bs-toggle="collapse" aria-controls="affiliation"><sup><span href="#aff_1">1</span></sup></a>&nbsp;<sup><a href="https://www.idref.fr/236044230" target="_blank"><img width="16px" height="16px" style="margin-top:-3px; margin-left:3px" src="/static/ptf/img/logo-idref.png" alt="idref"></a></sup>&nbsp;;&nbsp;<a class="author_link" href="/search?&quot;Luna, Tomás Morales de&quot;-c">Luna, Tomás Morales de<span href="#aff_2"></span></a><a class="author_link" href="#affiliation" data-bs-toggle="collapse" aria-controls="affiliation"><sup><span href="#aff_2">2</span></sup></a>&nbsp;;&nbsp;<a class="author_link" href="/search?&quot;Narbona-Reina, Gladys&quot;-c">Narbona-Reina, Gladys<span href="#aff_1"></span></a><a class="author_link" href="#affiliation" data-bs-toggle="collapse" aria-controls="affiliation"><sup><span href="#aff_1">1</span></sup></a>&nbsp;;&nbsp;<a class="author_link" href="/search?&quot;Zabsonré, Jean de Dieu&quot;-c">Zabsonré, Jean de Dieu<span href="#aff_3"></span></a><a class="author_link" href="#affiliation" data-bs-toggle="collapse" aria-controls="affiliation"><sup><span href="#aff_3">3</span></sup></a>&nbsp;<sup><a href="https://www.idref.fr/139605096" target="_blank"><img width="16px" height="16px" style="margin-top:-3px; margin-left:3px" src="/static/ptf/img/logo-idref.png" alt="idref"></a></sup><a data-bs-toggle="collapse" href="#affiliation" aria-controls="affiliation"><button id="house-affiliation" type="button" class="btn btn-link btn-xs" title="Affiliations des auteurs"><span class="fa fa-home"></span><span id="house-caret" class="caret-icon fa fa-caret-down" style="margin-left:3px"></span></button></a><div class="collapse" id="affiliation"><div class="card card-body"><div class="affiliation-authors"><span id="aff_1"><sup>1</sup>Dpto. Matemática Aplicada I, ETS Arquitectura, Universidad de Sevilla, Avda. Reina Mercedes N. 2, 41012 Sevilla, Spain.</span><br><span id="aff_2"><sup>2</sup>Dpto. de Matemáticas, Universidad de Córdoba, Campus de Rabanales, 14071 Córdoba, Spain.</span><br><span id="aff_3"><sup>3</sup>Institut Universitaire de Technologie, Université Polytechnique de Bobo-Dioulasso, 01, BP 1091 Bobo-Dioulasso 01, Burkina Faso.</span><br></div></div></div>
+</div>
+
+
+      
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+      
+
+
+
+
+
+  
+
+
+    
+    
+      
+        
+
+
+
+
+
+      
+    
+  
+</div>
+
+
+      <div style="margin-bottom:10px">
+        
+
+
+ESAIM: Mathematical Modelling and Numerical Analysis , Tome 51 (2017) no. 1, pp. 115-145
+
+        
+
+
+      </div>
+
+      
+      
+        <div class="binary-file-icon" style="margin-top:20px;margin-bottom:10px">
+          
+<div class="wrapper-float">
+
+
+
+  <div class="d-flex flex-nowrap" style="margin-top:0px">
+    
+      <a href="/item/10.1051/m2an/2016018.pdf" target="_blank">
+        <img src="/static/ptf/img/pdf.svg">
+      </a>
+    
+    
+      <a href="/item/10.1051/m2an/2016018.djvu">
+        <img src="/static/ptf/img/djvu.svg">
+      </a>
+    
+    
+    
+    
+    
+  </div>
+
+</div>
+
+        </div>
+      
+      
+      
+    </div>
+
+    
+  </div>
+  
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+    
+
+
+
+
+
+
+
+
+  
+
+
+<div id="abstract">
+  <div class="col-12">
+    <div class="mt-4 mb-4">
+      <ul class="nav nav-tabs article-tab">
+        
+          <li class="nav-item">
+            <a class="nav-link active"
+               lang="en"
+               data-bs-toggle="tab"
+               data-bs-target="#abstract-en"
+               href="#abstract-en">
+              <span title="Anglais
+">
+                
+                  Résumé
+                
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+      <div class="tab-content mt-2">
+        
+          <div lang="en"
+               id="abstract-en"
+               class="tab-pane fade show active">
+            
+                      <p>In this work we present a deduction of the Saint-Venant–Exner model through an asymptotic analysis of the Navier–Stokes equations. A multi-scale analysis is performed in order to take into account that the velocity of the sediment layer is smaller than the one of the fluid layer. This leads us to consider a shallow water type system for the fluid layer and a lubrication Reynolds equation for the sediment one. This deduction provides some improvements with respect to the classic Saint-Venant–Exner model: (i) the deduced model has an associated energy. Moreover, it allows us to explain why classic models do not have an associated energy and how they can be modified in order to recover a model with this property. (ii) The model incorporates naturally a necessary modification that must be taken into account in order to be applied to arbitrarily sloping beds. Furthermore, we show that in general this modification is different from the ones considered classically. Nevertheless, it coincides with a classic one in the case of constant free surface. (iii) The deduced solid transport discharge naturally depends on the thickness of the moving sediment layer, which allows to ensure sediment mass conservation. Moreover, we include a simplified version of the model for the case of quasi-stationary regimes. Some of these simplified models correspond to a generalization of classic ones such as Meyer-Peter and Müller and Ashida–Michiue models. Three numerical tests are presented to study the evolution of a dune for several definition of the repose angle, to see the influence of the proposed definition of the effective shear stress in comparison with the classic one, and by comparing with experimental data. </p>      
+            
+            
+
+
+
+
+            
+
+
+
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+        <div>
+          <div class="col-12">
+          
+          
+            
+              <div class="mt-4 mb-4">
+                <ul class="nav nav-tabs article-tab">
+                  
+                    <li class="nav-item">
+                      <a class="nav-link active"
+                         data-bs-toggle="tab"
+                         data-bs-target="#info-tab"
+                         href="#info-tab">Détail</a>
+                    </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle="tab"
+                       data-bs-target="#citation-tab"
+                       href="#citation-tab">Export</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link "
+                       data-bs-toggle="tab"
+                       data-toggle="tab"
+                       data-bs-target="#how-to-cite-tab"
+                       href="#how-to-cite-tab">Comment citer</a>
+                  </li>
+                  
+                  
+                  
+                </ul>
+                <div class="tab-content" style="margin-top:10px">
+                  <div id="info-tab"
+                       class="tab-pane fade show active">
+                    
+                      
+                      
+                        
+                        
+                      
+                      
+                      
+                    
+                    <!--Mis en ligne le : <time datetime="2025-07-21">2025-07-21</time><br>-->
+                    <div style="margin-top:5px">
+                      
+                        
+                          
+                        
+                        
+                          
+
+  
+    
+      
+      
+      <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3601003" class="badge bg-secondary rounded-pill ref-badge extid-badge">
+        
+        
+        
+        
+        
+        
+        
+        MR
+        
+        
+        
+        
+        
+      </a>
+      &nbsp; 
+
+      
+
+    
+  
+
+
+                        
+                          
+
+  
+    
+      
+      
+      <a href="https://zbmath.org/?q=an:1360.35176" class="badge bg-secondary rounded-pill ref-badge extid-badge">
+        
+        
+        
+        
+        
+        
+        
+        
+        Zbl
+        
+        
+        
+        
+      </a>
+      
+
+      
+
+    
+  
+
+
+                        
+                        
+                        
+                          
+                            
+                          
+                        
+                      
+                    </div>
+                    
+                      
+  
+    
+      DOI : 
+        
+          <a href="https://doi.org/10.1051/m2an/2016018">10.1051/m2an/2016018</a>
+        
+        <br>
+    
+  
+
+                    
+                    
+                    
+                      <div style="margin-top:5px">
+                        
+                          <!-- kwd_tuple.0: msc  |  kwd_tuple.1: kwds  |  kwd_tuple.2: trans_kwds (dict) -->
+                          
+                            
+
+
+   Classification : 
+
+<span class="mathjax-formula">
+35Q30, 35Q35, 35Q70, 35Q86, 65Z02, 76D05, 76D09, 86A05, 93A30
+</span>
+
+                            <br />
+                          
+                          
+                            
+
+Keywords: 
+<span class="mathjax-formula">
+Saint-Venant–Exner, bedload, Reynolds equation
+</span>
+
+                            <br />
+                          
+                          
+                          
+                        
+                      </div>
+                    
+                    <div style="margin-top:5px">
+                      
+                        
+                      
+                    </div>
+                    
+                    
+                      
+                    
+                    
+                      
+                        
+                          <div style="margin-top:5px">
+                            
+                              
+                                <span id="affiliation-toggle"
+                                      data-bs-toggle="collapse"
+                                      href="#affiliation_details"
+                                      role="button"
+                                      aria-expanded="false"
+                                      aria-controls="affiliation_details">
+                                  Affiliations des auteurs :
+                                  <span id="details-caret"
+                                        class="caret-icon fa fa-caret-down"
+                                        style="margin-left:3px"></span>
+                                </span>
+                                <div class="collapse"
+                                     id="affiliation_details"
+                                     style="margin-top:10px;
+                                            margin-left:10px">
+                                  <div class="card card-body">
+                                    <p>
+                                      
+                                        Fernández-Nieto, Enrique D.&hairsp;
+                                        <sup class="d-inline-block">
+                                          
+                                            1
+                                            
+                                          
+                                        </sup>
+                                        
+                                          &nbsp;
+                                          ;
+                                        
+                                      
+                                        Luna, Tomás Morales de&hairsp;
+                                        <sup class="d-inline-block">
+                                          
+                                            2
+                                            
+                                          
+                                        </sup>
+                                        
+                                          &nbsp;
+                                          ;
+                                        
+                                      
+                                        Narbona-Reina, Gladys&hairsp;
+                                        <sup class="d-inline-block">
+                                          
+                                            1
+                                            
+                                          
+                                        </sup>
+                                        
+                                          &nbsp;
+                                          ;
+                                        
+                                      
+                                        Zabsonré, Jean de Dieu&hairsp;
+                                        <sup class="d-inline-block">
+                                          
+                                            3
+                                            
+                                          
+                                        </sup>
+                                        
+                                      
+                                    </p>
+                                    
+
+
+  <div class="affiliation-authors">
+    
+      
+        <span id="aff_1">
+          <sup>1</sup>
+          
+                                                Dpto. Matemática Aplicada I, ETS Arquitectura, Universidad de          Sevilla, Avda. Reina Mercedes N. 2, 41012 Sevilla, Spain.
+                                            
+        </span>
+        
+        <br>
+      
+        <span id="aff_2">
+          <sup>2</sup>
+          
+                                                Dpto. de Matemáticas, Universidad de Córdoba, Campus de          Rabanales, 14071 Córdoba, Spain.
+                                            
+        </span>
+        
+        <br>
+      
+        <span id="aff_3">
+          <sup>3</sup>
+          
+                                                Institut Universitaire de Technologie, Université          Polytechnique de Bobo-Dioulasso, 01, BP 1091 Bobo-Dioulasso 01, Burkina Faso. 
+                                            
+        </span>
+        
+        <br>
+      
+    
+  </div>
+
+
+                                  </div>
+                                </div>
+                              
+                            
+                          </div>
+                        
+                      
+                    
+                    
+                    
+                    
+                  </div>
+                  <div id="citation-tab" class="tab-pane fade">
+                    <div class="upper">
+                      <ul class="nav nav-pills">
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link active"
+                             data-bs-toggle="tab"
+                             data-bs-target="#bibtex"
+                             href="#bibtex">BibTeX</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link"
+                             data-bs-toggle="tab"
+                             data-bs-target="#ris"
+                             href="#ris">RIS</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                          <a class="nav-link"
+                             data-bs-toggle="tab"
+                             data-bs-target="#enw"
+                             href="#enw">EndNote</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                        <div id="bibtex" class="tab-pane fade show active">
+                          <pre class="upper-right-content" id="bibtex-div">@article{M2AN_2017__51_1_115_0,
+     author = {Fern\&#x27;andez-Nieto, Enrique D. and Luna, Tom\&#x27;as Morales de and Narbona-Reina, Gladys and Zabsonr\&#x27;e, Jean de Dieu},
+     title = {Formal deduction of the {Saint-Venant{\textendash}Exner} model including arbitrarily sloping sediment beds and associated energy},
+     journal = {ESAIM: Mathematical Modelling and Numerical Analysis },
+     pages = {115--145},
+     year = {2017},
+     publisher = {EDP-Sciences},
+     volume = {51},
+     number = {1},
+     doi = {10.1051/m2an/2016018},
+     mrnumber = {3601003},
+     zbl = {1360.35176},
+     language = {en},
+     url = {https://www.numdam.org/articles/10.1051/m2an/2016018/}
+}</pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#bibtex-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/M2AN_2017__51_1_115_0/bib/"></a>
+                          
+                        </div>
+                        <div id="ris" class="tab-pane fade">
+                          <pre class="upper-right-content" id="ris-div">TY  - JOUR
+AU  - Fernández-Nieto, Enrique D.
+AU  - Luna, Tomás Morales de
+AU  - Narbona-Reina, Gladys
+AU  - Zabsonré, Jean de Dieu
+TI  - Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy
+JO  - ESAIM: Mathematical Modelling and Numerical Analysis 
+PY  - 2017
+SP  - 115
+EP  - 145
+VL  - 51
+IS  - 1
+PB  - EDP-Sciences
+UR  - https://www.numdam.org/articles/10.1051/m2an/2016018/
+DO  - 10.1051/m2an/2016018
+LA  - en
+ID  - M2AN_2017__51_1_115_0
+ER  - </pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#ris-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/M2AN_2017__51_1_115_0/ris/"></a>
+                          
+                        </div>
+                        <div id="enw" class="tab-pane fade">
+                          <pre class="upper-right-content" id="enw-div">%0 Journal Article
+%A Fernández-Nieto, Enrique D.
+%A Luna, Tomás Morales de
+%A Narbona-Reina, Gladys
+%A Zabsonré, Jean de Dieu
+%T Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy
+%J ESAIM: Mathematical Modelling and Numerical Analysis 
+%D 2017
+%P 115-145
+%V 51
+%N 1
+%I EDP-Sciences
+%U https://www.numdam.org/articles/10.1051/m2an/2016018/
+%R 10.1051/m2an/2016018
+%G en
+%F M2AN_2017__51_1_115_0</pre>
+                          <button class="fa fa-clipboard copy-button btn btn-primary"
+                                  data-clipboard-action="copy"
+                                  data-clipboard-target="#enw-div"
+                                  aria-hidden="true"
+                                  title="Copier dans le presse-papier"></button>
+                          
+                            <a class="fa fa-download export-button btn btn-primary"
+                               title="Télécharger"
+                               href="/export_citation/M2AN_2017__51_1_115_0/enw/"></a>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="how-to-cite-tab"
+                       class="tab-pane fade ">
+                    <div class="upper-right">
+                      <pre class="upper-right-content" id="how-to-cite-div">Fernández-Nieto, Enrique D.; Luna, Tomás Morales de; Narbona-Reina, Gladys; Zabsonré, Jean de Dieu. Formal deduction of the Saint-Venant–Exner model including arbitrarily sloping sediment beds and associated energy. ESAIM: Mathematical Modelling and Numerical Analysis , Tome 51 (2017) no. 1, pp. 115-145. doi: 10.1051/m2an/2016018</pre>
+                      <button class="fa fa-clipboard copy-button btn btn-primary"
+                              data-clipboard-action="copy"
+                              data-clipboard-target="#how-to-cite-div"
+                              aria-hidden="true"
+                              title="Copier dans le presse-papier"></button>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  
+                </div>
+              </div>
+            
+          
+          
+    </div>
+  </div>
+
+
+
+  
+
+  
+
+
+
+
+  <div>
+    <div class="col-12">
+      <div style="margin-top:30px;margin-bottom:10px">
+
+        <ul class="nav nav-tabs article-tab"
+            >
+          <li class="nav-item"
+              id="main-citations-li"
+              >
+            <a class="nav-link active"
+               data-bs-toggle="tab"
+               data-bs-target="#references-tab"
+               href="#references-tab">Bibliographie</a>
+          </li>
+          <li class="nav-item" id="citations-html" style="display:none">
+            <a class="nav-link"
+               data-bs-toggle="tab"
+               data-bs-target="#citations-tab"
+               href="#citations-tab">Cité par</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" style="margin-top:10px">
+          
+            <div id="references-tab" class="tab-pane fade show active">
+              <div style="margin-top:11px;margin-bottom: 0px">
+
+
+
+
+  
+    <p class="bibitemcls" id="R1"> <span class="citation-author">K. Ashida</span> and <span class="citation-author">M. Michiue</span>, <span class="citation-document-title">Study on hydraulic resistance and bedload transport rate in alluvial streams</span>. <span class="citation-publication-title">JSCE Tokyo</span> <span class="citation-volume">206</span> (1972) 59–69. </p><p class="bibitemcls" id="R2"> <span class="citation-author">P. Aussillous</span>, <span class="citation-author">J. Chauchat</span>, <span class="citation-author">M. Pailha</span>, <span class="citation-author">M. Médale</span> and <span class="citation-author">E. Guazzelli</span>, <span class="citation-document-title">Investigation of the mobile granular layer in bed-load transport</span>. <span class="citation-publication-title">J. Fluid Mech.</span> <span class="citation-volume">736</span> (2013) 594–615.  | <a href="https://zbmath.org/?q=an:1294.76263" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/jfm.2013.546" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R3"> <span class="citation-author">R.A. Bagnold</span>, <span class="citation-document-title">The Flow of Cohesionless Grains in Fluids</span>. <span class="citation-publication-title">Roy. Soc. London Philos. Trans. Ser. A: Math. Phys. Sci.</span> <span class="citation-volume">249</span> (1956) 235–297.  | <a href="https://zbmath.org/?q=an:0072.20201" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=83299" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://doi.org/10.1098/rsta.1956.0020" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R4"> R.A. Bagnold, An approach to the sediment transport problem from general physics. In: Physical of Sediments and Transport by Wind and Water. Amer. Society of Civil Engineers (1988). </p><p class="bibitemcls" id="R5"> <span class="citation-author">C. Cassar</span>, <span class="citation-author">M. Nicolas</span> and <span class="citation-author">O. Pouliquen</span>, <span class="citation-document-title">Submarine granular flows down inclined planes</span>. <span class="citation-publication-title">Phys. Fluids</span> <span class="citation-volume">17</span> (2005) 103301.  | <a href="https://zbmath.org/?q=an:1188.76024" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1063/1.2069864" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R6"> <span class="citation-author">M.J. Castro Díaz</span>, <span class="citation-author">E.D. Fernández-Nieto</span> and <span class="citation-author">A.M. Ferreiro</span>, <span class="citation-document-title">Sediment transport models in Shallow Water equations and numerical approach by high order finite volume methods</span>. <span class="citation-publication-title">Comput. Fluids</span> <span class="citation-volume">37</span> (2008) 299–316.  | <a href="https://zbmath.org/?q=an:1237.76082" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2645529" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://doi.org/10.1016/j.compfluid.2007.07.017" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R7"> <span class="citation-author">J. Chauchat</span> and <span class="citation-author">M. Médale</span>, <span class="citation-document-title">A 3D numerical model for incompress-ible two-phase flow of a granular bed submitted to a laminar shearing flow</span>. <span class="citation-publication-title">Comput. Meth. Appl. Mech. Eng.</span> <span class="citation-volume">199</span> (2010) 439–449.  | <a href="https://zbmath.org/?q=an:1227.76028" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2581319" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://doi.org/10.1016/j.cma.2009.07.007" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R8"> <span class="citation-author">F. Charru</span>, <span class="citation-document-title">Interface boundary value problem for the Navier–Stokes equations in thin domains</span>. <span class="citation-publication-title">J. Differ. Eq.</span> <span class="citation-volume">208</span> (2005) 449–493.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2109563" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1078.35084" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R9"> <span class="citation-author">F. Charru</span>, <span class="citation-document-title">Selection of the ripple length on a granular bed sheared by a liquid flow</span>. <span class="citation-publication-title">Phys. Fluids</span> <span class="citation-volume">18</span> (2006) 121508.  | <a href="https://zbmath.org/?q=an:1146.76347" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1063/1.2397005" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R10"> <span class="citation-author">I.D. Chueskov</span>, <span class="citation-author">G. Raugel</span> and <span class="citation-author">A.M. Rekalo</span>, <span class="citation-document-title">Selection of ripple length on a granular bed sheared by a liquid flow</span>. <span class="citation-publication-title">Phys. Fluids</span> <span class="citation-volume">18</span> (2006) 121508.  | <a href="https://zbmath.org/?q=an:1146.76347" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R11"> M. Church, P. Biron and A. Roy, Gravel Bed Rivers: Processes, Tools, Environments. John Wiley &amp; Sons (2012). </p><p class="bibitemcls" id="R12"> <span class="citation-author">G. Cimatti</span>, <span class="citation-document-title">A Rigorous Justification of the Reynolds Equation</span>. <span class="citation-publication-title">Quart. Appl. Math. XLV</span> <span class="citation-volume">4</span> (1987) 627–644.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=917014" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:0661.76028" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1090/qam/917014" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R13"> <span class="citation-author">M. Colombini</span>, <span class="citation-document-title">Revisiting the linear theory of sand dune formation</span>. <span class="citation-publication-title">J. Fluid Mech.</span> <span class="citation-volume">502</span> 1–6 (2004).  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2256960" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1057.76021" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/S0022112003007201" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R14"> <span class="citation-author">W.F. Cope</span>, <span class="citation-document-title">The hydrodynamic theory of film lubrication</span>. <span class="citation-publication-title">Proc. R. Soc. London, Ser. A</span> <span class="citation-volume">197</span> (1949) 201–217.  | <a href="https://zbmath.org/?q=an:0033.08603" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1098/rspa.1949.0059" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R15"> <span class="citation-author">S. Cordier</span>, <span class="citation-author">C. Lucas</span> and <span class="citation-author">J.D.D. Zabsonré</span>, <span class="citation-document-title">A two time-scale model for tidal bed-load transport</span>. <span class="citation-publication-title">Commun. Math. Sci.</span> <span class="citation-volume">10</span> (2012) 875–888.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2911201" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1254.76050" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.4310/CMS.2012.v10.n3.a8" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R16"> <span class="citation-author">H.A. Einstein</span>, <span class="citation-document-title">Formulas for the transportation of bedload</span>. <span class="citation-publication-title">ASCE</span> <span class="citation-volume">107</span> (1942) 561–575. </p><p class="bibitemcls" id="R17"> <span class="citation-author">F. Exner</span>, <span class="citation-document-title">Uber die wechselwirkung zwischen wasser und geschiebe in flussen, Sitzungsber</span>. <span class="citation-publication-title">Akad. Wissenschaften pt. IIa. Bd.</span> <span class="citation-volume">134</span> (1925).  | <a href="https://zbmath.org/?q=an:52.1000.19" class="badge bg-secondary rounded-pill ref-badge">JFM</a></p><p class="bibitemcls" id="R18"> <span class="citation-author">F. Engelund</span> and <span class="citation-author">J. Dresoe</span>. <span class="citation-document-title">A sediment transport model for straight alluvial channels</span>. <span class="citation-publication-title">Nordic Hydrol.</span> <span class="citation-volume">7</span> (1976) 293–306.  | <a href="https://doi.org/10.2166/nh.1976.0019" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R19"> F. Engelund and E. Hansen, A monograph on sediment transport in alluvial streams. Danish Technical Press, Copenhagen (1967). </p><p class="bibitemcls" id="R20"> <span class="citation-author">F. Luque</span> and <span class="citation-author">V. Beek</span>, <span class="citation-document-title">Erosion and transport of bedload sediment</span>. <span class="citation-publication-title">J. Hydraulaul. Res.</span> <span class="citation-volume">14</span> (1976) 127–144.  | <a href="https://doi.org/10.1080/00221687609499677" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R21"> <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-document-title">Modelling and numerical simulation of submarine sediment shallow flows: transport and avalanches</span>. <span class="citation-publication-title">SeMA J.</span> <span class="citation-volume">49</span> (2009) 83–103.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2584079" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1242.86008" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R22"> <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-author">F. Bouchut</span>, <span class="citation-author">D. Bresch</span>, <span class="citation-author">J.M. Castro</span> and <span class="citation-author">A. Mangeney</span>, <span class="citation-document-title">A new-Savage-Hutter type model for submarine avalanches and genrated tsunami</span>. <span class="citation-publication-title">J. Comput. Phys.</span> <span class="citation-volume">227</span> (2008) 7720–7754.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2437587" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1156.76015" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1016/j.jcp.2008.04.039" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R23"> <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-author">G. Narbona-Reina</span> and <span class="citation-author">J.D.D. Zabsonré</span>, <span class="citation-document-title">Formal derivation of a bilayer model coupling Shallow Water and Reynolds equations: evolution of a thin pollutant layer over the water</span>. <span class="citation-publication-title">Eur. J. Appl. Math.</span> <span class="citation-volume">24</span> (2013) 803–833.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3181483" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1291.74133" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/S095679251300020X" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R24"> <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-author">C. Lucas</span>, <span class="citation-author">T. Morales De Luna</span> and <span class="citation-author">S. Cordier</span>, <span class="citation-document-title">On the influence of the thickness of the sediment moving layer in the definition of the bedload trasport formula in Exner systems</span>. <span class="citation-publication-title">Comp. Fluids</span> <span class="citation-volume">91</span> (2014) 87–106.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=3151293" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1391.76403" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1016/j.compfluid.2013.11.031" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R25"> <span class="citation-author">Y. Forterre</span> and <span class="citation-author">O. Pouliquen</span>, <span class="citation-document-title">Flows of dense granular media</span>. <span class="citation-publication-title">Ann. Rev. Fluid Mech.</span> <span class="citation-volume">40</span> (2008) 1–24.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2402384" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1136.76051" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1146/annurev.fluid.40.111406.102142" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R26"> <span class="citation-author">A.C. Fowler</span>, <span class="citation-author">N. Kopteva</span> and <span class="citation-author">C. Oakley</span>, <span class="citation-document-title">The formation of river channel</span>. <span class="citation-publication-title">SIAM J. Appl. Math.</span> <span class="citation-volume">67</span> (2007) 1016–1040.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2314195" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1117.86002" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1137/050629264" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R27"> <span class="citation-author">J. Fredsøe</span>, <span class="citation-document-title">On the development of dunes in erodible channel</span>. <span class="citation-publication-title">J. Fluid Mech.</span> <span class="citation-volume">64</span> (1974) 1–16.  | <a href="https://zbmath.org/?q=an:0357.76037" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/S0022112074001960" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R28"> <span class="citation-author">G. Garegnani</span>, <span class="citation-author">G. Rosatti</span> and <span class="citation-author">L. Bonaventura</span>, <span class="citation-document-title">Free surface flows over mobile bed: mathematical analysis and numerical modeling of coupled and decoupled approaches</span>. <span class="citation-publication-title">Commun. Appl. Ind. Math.</span> <span class="citation-volume">2</span> (2011).  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2876426" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1329.76360" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R29"> A.J. Grass, Sediments transport by waves and currents. SERC London Cent. Mar. Technol., Report No. FL29 (1981). </p><p class="bibitemcls" id="R30"> <span class="citation-author">F. Gerbeau</span> and <span class="citation-author">B. Perthame</span>, <span class="citation-document-title">Derivation of viscous Saint-Venant system for laminar Shallow-Water; Numerical validation</span>. <span class="citation-publication-title">Disc. Cont. Dynam. Syst. Series B</span> <span class="citation-volume">1</span> (2001) 89–102.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=1821555" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:0997.76023" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R31"> R. Jackson, The Dynamics of Fluidized Particles. Cambridge University Press, Cambridge, (2000).  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=1780833" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:0956.76004" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R32"> <span class="citation-author">A.A. Kalinske</span>, <span class="citation-document-title">Criteria for determining sand transport by surface creep and saltation</span>. <span class="citation-publication-title">Trans. AGU.</span> <span class="citation-volume">23</span> (1942) 639–643.  | <a href="https://doi.org/10.1029/TR023i002p00639" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R33"> <span class="citation-author">A. Kovacs</span> and <span class="citation-author">G. Parker</span>. <span class="citation-document-title">A new vectorial bedload formulation and its application to the time evolution of straight river channels</span>. <span class="citation-publication-title">J. Fluid Mech.</span> <span class="citation-volume">267</span> (1994) 153–183.  | <a href="https://zbmath.org/?q=an:0800.76485" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/S002211209400114X" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R34"> <span class="citation-author">K.K.J. Kouakou</span> and <span class="citation-author">P.Y. Lagrée</span>, <span class="citation-document-title">Evolution of a model dune in a shear flow</span>. <span class="citation-publication-title">Eur. J. Mech. B/Fluids</span> <span class="citation-volume">25</span> (2006) 348–359.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2217652" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1130.76337" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1016/j.euromechflu.2005.09.002" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R35"> <span class="citation-author">P.Y. Lagrée</span>, <span class="citation-author">L. Staron</span> and <span class="citation-author">S. Popinet</span> <span class="citation-document-title">The granular column collapse as a continuum: validity of a two-dimensional Navier–Stokes model with a <span class="mathjax-formula" data-tex="$\mu{}(I)$"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>μ</mi><mrow/><mo>(</mo><mi>I</mi><mo>)</mo></mrow></math></span>-rheology</span>. <span class="citation-publication-title">J. Fluid. Mech.</span> <span class="citation-volume">686</span> (2011) 378–408.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2850981" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1241.76413" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/jfm.2011.335" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R36"> <span class="citation-author">D.K. Lysne</span>, <span class="citation-document-title">Movement of sand in tunnels</span>. <span class="citation-publication-title">Proc. A.S.C.E.</span> <span class="citation-volume">95</span> (1969) 1835–1846. </p><p class="bibitemcls" id="R37"> F. Marche, Theoretical and numerical study of Shallow Water models. Applications to Nearshore hydrodynamics. Ph.D. thesis, University of Bordeaux (2005). </p><p class="bibitemcls" id="R38"> <span class="citation-author">Meyer-Peter</span> and <span class="citation-author">R. Müller</span>, <span class="citation-document-title">Formulas for bed-load transport. Rep. 2nd Meet. Int. Assoc. Hydraul. Struct. Res., Stockolm 1948</span>. <span class="citation-publication-title">ASCE.</span> <span class="citation-volume">107</span> (1942) 561–575. </p><p class="bibitemcls" id="R39"> <span class="citation-author">T. Morales De Luna</span>, <span class="citation-author">J.M. Castro-Díaz</span> and <span class="citation-author">C. Parés-Madroñal</span>, <span class="citation-document-title">A Duality Method for Sediment Transport Based on a Modified Meyer-Peter and Müller Model</span>. <span class="citation-publication-title">J. Sci. Comput.</span> <span class="citation-volume">48</span> (2009) 258–273.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2811702" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:05936147" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1007/s10915-010-9447-1" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R40"> <span class="citation-author">T. Morales De Luna</span>, <span class="citation-author">J.M. Castro-Díaz</span>, <span class="citation-author">C. Parés-Madroñal</span> and <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-document-title">On a Shallow Water Model for the Simulation of Turbidity Currents</span>. <span class="citation-publication-title">Commun. Comput. Phys.</span> <span class="citation-volume">6</span> (2011) 848–882.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2672326" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1364.76037" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.4208/cicp.2009.v6.p848" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R41"> <span class="citation-author">G. Narbona-Reina</span>, <span class="citation-author">J.D. Zabsonré</span>, <span class="citation-author">E.D. Fernández-Nieto</span> and <span class="citation-author">D. Bresch</span>, <span class="citation-document-title">Derivation of a bi-layer Shallow–Water model with viscosity. Numerical validation</span>. <span class="citation-publication-title">CMES</span> <span class="citation-volume">43</span> (2009) 27–71.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2536223" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1232.76008" class="badge bg-secondary rounded-pill ref-badge">Zbl</a></p><p class="bibitemcls" id="R42"> <span class="citation-author">P. Nielsen</span>, <span class="citation-document-title">Coastal Bottom Boundary Layers and Sediment Transport. World Scientific Publishing, Singapore</span>. <span class="citation-publication-title">Adv. Ser. Ocean Eng.</span> <span class="citation-volume">4</span> (1992).  | <a href="https://doi.org/10.1142/1269" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R43"> <span class="citation-author">A. Oron</span>, <span class="citation-author">S.H. Davis</span> and <span class="citation-author">S.G. Bankoff</span>, <span class="citation-document-title">Long scale evolution of thin films</span>. <span class="citation-publication-title">Rev. Mod. Phys.</span> <span class="citation-volume">69</span> (1997).  | <a href="https://doi.org/10.1103/RevModPhys.69.931" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R44"> <span class="citation-author">M. Ouriemi</span>, <span class="citation-author">P. Aussillous</span> and <span class="citation-author">E. Guazzelli</span>, <span class="citation-document-title">Sediment dynamics. Part I: Bed-load transport by shearing flows</span>. <span class="citation-publication-title">J. Fluid Mech.</span> <span class="citation-volume">636</span> (2009) 295–319.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2545278" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1183.76908" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1017/S0022112009007915" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R45"> M. Pailha, J. Chauchat, P. Aussillous, M. Médale and E. Guazzelli. Bed-load Transport. Part 2: The Mobile Granular Layer. Ph.D. thesis (2011). </p><p class="bibitemcls" id="R46"> <span class="citation-author">G. Parker</span>, <span class="citation-author">G. Seminara</span> and <span class="citation-author">L. Solari</span>, <span class="citation-document-title">Bedload at low Shields stress on arbitrarily sloping beds: Alternative entrainment formulation</span>. <span class="citation-publication-title">Water Resources Res.</span> <span class="citation-volume">29</span> (2003) 7. </p><p class="bibitemcls" id="R47"> <span class="citation-author">C. Parés</span> and <span class="citation-author">M.J. Castro</span>, <span class="citation-document-title">On the well-balance property of Roe’s method for nonconservative hyperbolic systems. Applications to shallow-water systems</span>. <span class="citation-publication-title">ESAIM: M2AN</span> <span class="citation-volume">38</span> (2004) 821–852.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2104431" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1130.76325" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://www.numdam.org/item/M2AN_2004__38_5_821_0" class="badge bg-secondary rounded-pill ref-badge">Numdam</a> | <a href="https://doi.org/10.1051/m2an:2004041" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R48"> E. Peña González, Estudio numérico y experimental del transporte de sedimentos en cauces aluviales. Ph.D. thesis, Universidade da Coruña, Grupo de Ingeniería del agua y del medio ambiente (2002). </p><p class="bibitemcls" id="R49"> <span class="citation-author">T. Revil-Baudard</span> and <span class="citation-author">J. Chauchat</span>, <span class="citation-document-title">A two-phase model for sheet flow regime based on dense granular flow rheology</span>. <span class="citation-publication-title">J. Geophys. Res. Oceans</span> <span class="citation-volume">118</span> (2013) 619–634.  | <a href="https://doi.org/10.1029/2012JC008306" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R50"> M. Peybernes, Analyse de problème mathématiques de la mécanique des fluides de type bi-couche et à frontière libre. Ph.D. thesis, University of Pascal Paoli (2006). </p><p class="bibitemcls" id="R51"> O. Reynolds, On the theory of lubrication and its application to Mr. Beauchamp Tower’s experiment. Phil. Trans. R. Soc. London Part I (1886) 228–310. </p><p class="bibitemcls" id="R52"> <span class="citation-author">L.C. Van Rijn</span>, <span class="citation-document-title">Sediment transport (I): bedload transport</span>. <span class="citation-publication-title">J. Hydraul. Div. Proc. ASCE</span> <span class="citation-volume">110</span> (1984) 1431–56.  | <a href="https://doi.org/10.1061/(ASCE)0733-9429(1984)110:10(1431)" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R53"> P.C. Roos, Seabed Pattern Dynamics and Offshore Sand Extraction. Ph.D. thesis, University of Twente (2004). </p><p class="bibitemcls" id="R54"> H. Schuttelaars, Evolution and Stability Analysis of Bottom Patterns in Tidal Embayements. Ph.D. thesis, Utrecht University (1997). </p><p class="bibitemcls" id="R55"> <span class="citation-author">G. Seminara</span>, <span class="citation-author">L. Solari</span> and <span class="citation-author">G. Parker</span>, <span class="citation-document-title">Bedload at low Shields stress on arbitrarily sloping beds: Failure of the Bagnold hypothesis</span>. <span class="citation-publication-title">Water Resources Res.</span> <span class="citation-volume">38</span> (2002) 11.  | <a href="https://doi.org/10.1029/2001WR000681" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R56"> <span class="citation-author">N. Struiksma</span>. <span class="citation-author">K.W. Olesen</span>. <span class="citation-author">C. Flokstra</span> and <span class="citation-author">H.J. De Vriend</span>, <span class="citation-document-title">Bed deformation in curved alluvial channels</span>. <span class="citation-publication-title">J. Hudraulic Res.</span> <span class="citation-volume">23</span> (1985) 57–79.  | <a href="https://doi.org/10.1080/00221688509499377" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R57"> <span class="citation-author">P. Tassi</span>, <span class="citation-author">S. Rhebergen</span>, <span class="citation-author">C. Vionnet</span> and <span class="citation-author">O. Bokhove</span>, <span class="citation-document-title">A discontinuous Galerkin finite element model for morphodynamical evolution in shallow flows</span>. <span class="citation-publication-title">Comp. Meth. App. Mech. Eng.</span> <span class="citation-volume">197</span> (2008) 2930–2947.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2427094" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1194.76143" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1016/j.cma.2008.01.023" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R58"> <span class="citation-author">H.J. De Vriend</span>, <span class="citation-author">J. Zyserman</span>, <span class="citation-author">J. Nicholson</span>, <span class="citation-author">J.A. Roelvink</span>, <span class="citation-author">P. Péchon</span> and <span class="citation-author">H.N. Southgate</span>, <span class="citation-document-title">Medium-term 2DH coastal area modelling</span>. <span class="citation-publication-title">Coastal Engineering</span> <span class="citation-volume">21</span> (1993) 193–224.  | <a href="https://doi.org/10.1016/0378-3839(93)90050-I" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p><p class="bibitemcls" id="R59"> J.D. Zabsonré, Modèles visqueux en sédimentation et stratification: obtention formelle, stabilité théorique et schémas volumes finis bien équilibrés. Ph.D. thesis, Université de Savoie (2008). </p><p class="bibitemcls" id="R60"> <span class="citation-author">J.D.D. Zabsonré</span>, <span class="citation-author">C. Lucas</span> and <span class="citation-author">E.D. Fernández-Nieto</span>, <span class="citation-document-title">An energetically consistent viscous sedimentation model</span>. <span class="citation-publication-title">Math. Models Methods Appl. Sci.</span> <span class="citation-volume">19</span> (2009) 477–499.  | <a href="https://mathscinet.ams.org/mathscinet-getitem?mr=2502471" class="badge bg-secondary rounded-pill ref-badge">MR</a> | <a href="https://zbmath.org/?q=an:1178.35308" class="badge bg-secondary rounded-pill ref-badge">Zbl</a> | <a href="https://doi.org/10.1142/S0218202509003504" class="badge bg-secondary rounded-pill ref-badge">DOI</a></p>
+  
+
+</div>
+            </div>
+          
+
+          
+            <div id="citations-tab" class="tab-pane fade show">
+              <div id="citations-div"
+                   data-url="/citedby/10.1051/m2an/2016018"
+                   style="margin-top:11px;
+                          margin-bottom: 11px"></div>
+              <p>
+                <em>Cité par <span id="citations-number"></span> Sources : <span id="citations-sources"></span></em>
+              </p>
+            </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+  
+
+
+</div>
+
+
+                <!-- center_footer -->
+             
+            </div>
+
+            
+              <div>
+                
+                
+              </div>
+            
+
+          
+        </div>
+      
+    </div>
+    
+  </main>
+
+  
+    
+<div id="footer">
+  <div class="horizontal-menu menu-footer">
+    <ul>
+      <li><a href="/accessibility/">Accessibilité - non conforme</a></li>
+      <li><a href="/about/">À propos</a></li>
+      <li><a href="/help/">Aide</a></li>
+      <li><a href="/legal/">Mentions légales</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      
+    </ul>
+  </div>
+  <div class="logo-footer">
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Développé par</p>
+      </div>
+      <div>
+        <a href="http://www.mathdoc.fr"><img class="logo-auto" src="/static/numdam/img/logo-mathdoc.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Soutenu par</p>
+      </div>
+      <div>
+        <a href="http://www.cnrs.fr/insmi"><img class="logo-auto" src="/static/ptf/img/logo-cnrs.png"/></a>&nbsp;
+        <a href="http://www.univ-grenoble-alpes.fr/"><img class="logo-auto" src="/static/numdam/img/logo-uga.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="lg-desktop">
+        <p>Partenaire de</p>
+      </div>
+      <div>
+        <a href="https://geodesic.mathdoc.fr"><img class="logo-auto" src="/static/numdam/img/geodesic.png"/></a>&nbsp;
+        <a href="http://portail.math.cnrs.fr"><img class="logo-auto" src="/static/numdam/img/logo-portail.png"/></a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div id="logo-collex">
+        <a href="https://www.collexpersee.eu/"><img class="logo-auto" src="/static/numdam/img/logo-collex.png"/></a>&nbsp;
+      </div>
+      <div id="logo-collex-lg">
+        <a href="https://www.collexpersee.eu/"><img class="logo-auto" src="/static/numdam/img/logo-collex.png"/></a>&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+  <script type="text/javascript" src="/static/ptf/vendors/jquery/js/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="/static/ptf/vendors/bootstrap5/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/static/ptf/vendors/clipboard/js/clipboard.min.js "></script>
+  
+    <script type="text/javascript" src="/static/ptf/js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  
+
+  
+
+<script src="/static/numdam/js/scripts.js "></script>
+<script src="/static/numdam/vendors/owl-carousel/js/owl.carousel.min.js "></script>
+
+
+
+
+  <script type="text/javascript" src="/static/ptf/js/bs5/ptf.js"></script>
+  <script type="text/javascript" src="/static/ptf/js/bs5/search-bar.js"></script>
+  <script type="text/javascript" src="/static/ptf/js/bs5/facets.js"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ This report distinguishes paper statements, exact checks, corrected results, and
 
 ### started utc
 
-2026-10-13T05:15:23.694644+00:00
+2026-10-15T02:41:55.533033+00:00
 
 ### stage
 
@@ -38,7 +38,7 @@ constructed dimensionless local IVPs
 
 ### elapsed seconds
 
-19.57746099997894
+20.239437700001872
 
 ### execution status
 
@@ -92,7 +92,7 @@ local_primary_pdf_checked
 
 #### accessed
 
-2026-10-13
+2026-10-15
 
 #### id
 
@@ -120,7 +120,7 @@ local_primary_pdf_checked
 
 #### accessed
 
-2026-10-13
+2026-10-15
 
 ### source verification complete
 
@@ -28596,13 +28596,125 @@ True
 
 ### elapsed seconds
 
-5.8916127999837045
+5.7520756000012625
 
 ### scope
 
 local analytic germs on regular positive chart; no radius or global PDE claim
 
 ## Detailed derivations and discrepancy explanations
+
+### BOUSSINESQ_REFERENCE.md
+
+# Boussinesq chapter: bounded Section 8 reference note
+
+## Verified citation
+
+M. S. Bruzón and M. L. Gandarias, "Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations," in *Symmetries and Applications of Differential Equations*, A. C. J. Luo and R. K. Gazizov (eds.), Nonlinear Physical Science, Springer Singapore, 2021, pp. 153-171. DOI: `10.1007/978-981-16-4683-6_5`. This is a **book chapter, not a journal article**. The title page of the local PDF (PDF p. 166, printed p. 153) gives the title, authors, editors, year and DOI. Crossref's DOI record independently gives type `book-chapter`, publisher `Springer Singapore`, and pages `153-171`. The chapter occupies PDF pp. 166-184; the next chapter starts at PDF p. 185 (printed p. 173).
+
+Suggested embedded-bibliography key and entry (adapt to local natbib style):
+
+```latex
+\bibitem[Bruz\'{o}n and Gandarias(2021)]{bruzon-gandarias-2021}
+M. S. Bruz\'{o}n and M. L. Gandarias,
+\emph{Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations},
+in A. C. J. Luo and R. K. Gazizov (eds.),
+\emph{Symmetries and Applications of Differential Equations},
+Nonlinear Physical Science, Springer Singapore (2021), pp. 153--171.
+\newblock \doi{10.1007/978-981-16-4683-6_5}.
+\newblock URL \url{https://doi.org/10.1007/978-981-16-4683-6_5}.
+```
+
+This follows the existing bibliography's `\doi`/`\url` convention. The proposed entry is metadata, not a claim that this exact LaTeX fragment has compiled.
+
+## Source anchors and what they establish
+
+| Source location (printed pages) | What is actually done | Legitimate scalar-SVE analogy |
+|---|---|---|
+| p. 153, Eq. (1) | Defines a nonlinear **sixth-order Boussinesq** PDE in time `t` and one spatial variable `x`, with a function `f(u)` and coefficients `b_1,b_2,c_0,d`. | State the SVE **printed scalar** current equation in `t,s`; do not import the Boussinesq PDE, its coefficients, physical conclusions or symmetries. |
+| p. 157, Eqs. (8)-(10) | Starts with unrestricted point coefficients `xi(x,t,u), tau(x,t,u), eta(x,t,u)`; applies the **sixth** prolongation criterion on the equation manifold; describes solving an overdetermined linear determining system. | Start Section 8 with unrestricted `tau(t,s,phi), xi(t,s,phi), eta(t,s,phi)` and a **third** prolongation of the SVE master residual; explicitly eliminate the regular leading jet and split remaining free jets. |
+| pp. 158-159, Tables 1-3 and Eq. (11) | Tabulates its own nonlinearity-dependent point algebras, uses `eta-tau u_t-xi u_x=0` for invariant graphs, lists similarity forms and reduced ODEs. | Give SVE parameter-stratum generators, bracket/adjoint qualification, invariant graph guards, then direct pullbacks for the nine audited cases. Cite Table 2 only as a model for presentation, not as proof of SVE optimality. |
+| pp. 158-160, Eqs. (12)-(17) | Integrates a traveling-wave equation, chooses zero integration constants for a subclass, then tries a Jacobi-elliptic profile ansatz. | SVE ODE integrals and Taylor/IVP work must be independently derived. Do not transfer Jacobi ansatz, zero constants or Boussinesq exact solutions. |
+| pp. 166-169, Sec. 4, Eqs. (58)-(71) | Separately constructs low-order multipliers and currents, then uses translation-invariant currents to obtain first integrals of its traveling-wave ODE. It explicitly distinguishes PDE-to-ODE symmetry reduction from further ODE-order reduction. | Mention as a *methodological* example of a second gate: only a verified SVE multiplier/current or directly checked profile first integral justifies lower ODE order. Do not say the chapter's multipliers, currents, first integrals or fourth-order ODE hold for SVE. |
+
+Two precise places to cite: after introducing the Lie-point derivation workflow, `\cite[Sec.~2, pp.~157--159]{bruzon-gandarias-2021}`; after explaining that an inherited or directly verified integral is a separate order-reduction result, `\cite[Sec.~4, pp.~166--169]{bruzon-gandarias-2021}`. One citation to the first span may suffice if Sec. 4 is not substantively discussed.
+
+## Boundaries and source cautions
+
+- Both the cited Boussinesq example and the scalar SVE example have **two independent variables total**, time plus one space/material coordinate. Here `s` is a one-dimensional material (Lagrangian-coordinate) label and `phi(t,s)` is particle position. It is not a second spatial dimension; this is not a `2+1` SVE system.
+- A **Lagrangian coordinate** is a label following material/particles. A **variational Lagrangian** is an action density whose Euler-Lagrange equation yields a PDE. The first does not imply the second, or authorize Noether's theorem. Multiplier conservation laws do not require a variational Lagrangian.
+- The chapter's classification is for its Boussinesq family. It cannot certify SVE's `m=1`, generic and `m=3` point algebras, connected-inner-adjoint optimal systems, the nine source reductions, or their regularity. Cite the chapter for exposition/method only and cite the SVE source or independent certificates for SVE-specific facts.
+- Source formulas themselves must not be imported unchecked: visually, Eq. (1) has `-(...-b_2 u_{xx}+...)_{xx}`, whose expansion contributes **positive** `b_2 u_{xxxx}`, whereas displayed Eq. (10) has a negative `b_2 u_{xxxx}`. Table 3's generic traveling ODE has a sixth derivative with coefficient `-d lambda^2`, but the twice-integrated Eq. (12) prints `b_1 mu^2 h''''` as its leading fourth-derivative term. These apparent internal discrepancies reinforce independent pullback checking; they are not SVE discrepancy claims.
+- The SVE printed scalar equation and advectively corrected scalar model remain separate. The chapter supplies neither a full-bed SVE equivalence nor a variational action, numerical error theorem, global well-posedness result or learned reduction.
+
+## Recommended Section 8 narrative and pseudocode
+
+Pedagogical ordering: model/positive chart -> expanded master equation/normal jet -> point field and graph characteristic -> recursive prolongation -> coefficient splitting with `m` strata -> direct off-shell generator check -> brackets and qualified adjoint orbits -> invariant graph/coordinate and all nine direct original-PDE pullbacks -> separate first-integral identities -> Taylor/Fehlberg initial-value examples and independent numerical checks. Keep each step's status (exact, constructed numerical example, nonregular, unresolved) next to the claim. For a beginner, explain that the Lie algebra compresses families of coordinate changes, whereas an invariant graph is a particular solution compatible with one change.
+
+Suggested prose near the start (edit notation/labels to match surrounding text):
+
+> Bruzón and Gandarias illustrate the classical order of work for a different, sixth-order Boussinesq equation: write a general point field, prolong it to the PDE's order, solve the resulting determining equations, and only then pass from the graph-invariance condition to similarity variables and reduced ODEs [Sec. 2 citation]. We follow that *method*, not their equation or classification. Our scalar Saint--Venant--Exner benchmark has independent variables time `t` and one material coordinate `s`; its printed current equation is third order and is analyzed locally where `phi_t>0` and `phi_s>0`.
+
+Suggested prose before integrals:
+
+> Obtaining an ODE by quotienting the two-variable PDE and lowering that ODE's order are different operations. The Boussinesq chapter makes this separation visible by deriving conservation laws before using their traveling-wave first integrals [Sec. 4 citation]. Here we claim an SVE first integral only where differentiating our stated candidate reproduces the corresponding corrected reduced residual under its declared chart guards. This is not a transfer of the chapter's currents or a Noether assertion.
+
+Suggested *mathematical* pseudocode, not program paths/commands:
+
+```text
+Input: printed scalar currents, g>0, kappa>0, m>=1, regular chart p=phi_t>0, q=phi_s>0
+E := D_t(A) - D_s(J); expand E and solve for its regular leading jet r=phi_ttt
+X := tau(t,s,phi) d_t + xi(t,s,phi) d_s + eta(t,s,phi) d_phi
+Q := eta - tau*p - xi*q
+Construct pr^(3)X recursively; Omega := pr^(3)X(E) after r=R
+Split Omega in all remaining free jets; integrate the full determining system
+Branch on m=1, m=3, and m outside {1,3}; verify each basis field off-shell
+Compute brackets and connected-inner adjoint actions; state orbit equivalence used
+For each audited case: solve Q=0, record graph and chart guards, substitute into original E
+For each candidate profile first integral I: verify D_z(I)=multiplier*reduced_E exactly
+For constructed IVPs: derive RHS, integrate, cross-check original-PDE residual and series
+Output: equations, generators, regularity/status, discrepancies and independent checks
+```
+
+This describes the existing `main.py` stages as mathematics. It should not imply automatic discovery of hand-derived optimal-system representatives or supplied first integrals: the current computation map says the split/integration, optimal-system chart arguments and candidate integrals include authored mathematical inputs, while prolongation, pullbacks, brackets, identities and numerical cross-checks are computed.
+
+## Verification record
+
+- Opened local PDF with PyMuPDF/Poppler; inspected title and pp. 157-159 as rendered images, and extracted full relevant text of Sec. 4, pp. 166-169. PDF page index is printed page +13 for this chapter.
+- Queried Crossref DOI `10.1007/978-981-16-4683-6_5` on 2026-10-13; returned book-chapter, exact title/authors and pages 153-171.
+- Read current README, project map, experiment index, and Section 8; checked the current reproduction computation map. No SVE calculation or classifier run was performed for this note.
+
+### BOUSSINESQ_STYLE_MAP.md
+
+# Source-style research note: SVE replication
+
+Scope: exposition only. Primary source checked against `chapter.txt` and rendered PDF pages 170--172 (printed pp. 157--159), plus the chapter's conservation-law passage on PDF pp. 179--182 (printed pp. 166--169). Target inspected: `draft/main.tex`, SVE block lines 1519--2800. No Boussinesq formula is proposed as an SVE formula.
+
+## Page-specific arrangement and what the tables mean
+
+1. **Printed p. 157, Section 2 (PDF p. 170).** The chapter writes its one-parameter near-identity transformations (8), names the generator (9), imposes the prolonged equation criterion (10), and states that solving the resulting overdetermined determining system yields the classification. The assumptions `d != 0` and nonzero derivatives of `f` precede Table 1. It does not begin with guessed similarity solutions. The small `epsilon` is only the flow/group parameter.
+2. **Printed pp. 157--158, Table 1 (PDF pp. 170--171).** Four rows classify the *Boussinesq equation's nonlinearity and coefficient conditions*, with columns `Case`, `F(u)=f'(u)`, `Conditions`, `Symmetry generators`. The prose directly after the classification explains the generic translation generators `X1,X2` versus extra scaling/shift generators in conditional rows. It says `p,k != 0` and `a,b` arbitrary constants; these `a,b` belong to the displayed Boussinesq constitutive functions, not to the one-parameter group and not to SVE derivatives or coefficients. The finite transformation groups are then written beneath Table 1; their `epsilon` still parameterizes each flow.
+3. **Printed p. 158, transition to Tables 2--3 (PDF p. 171).** The chapter explains the *logic* between the tables: each admitted point symmetry can select invariant solutions; solving `eta - tau u_t - xi u_x = 0` (11) gives the similarity variables and graph form. Table 2 is explicitly for an optimal set of generators **within each classified case**, not for arbitrary generators. Table 3 then records the reduced equation. Thus Table 1 answers *when and which generator*; Table 2 answers *what graph it fixes*; Table 3 answers *what equation that graph must satisfy*. A reader can follow one numbered case horizontally through the three stages.
+4. **Printed p. 159, Tables 2--3 and Section 3 (PDF p. 172).** Table 2 has columns case, optimal generator, similarity coordinate `z`, and `u(t,x)` form. Table 3 lists the associated (possibly long) profile equations. Section 3 picks the traveling-wave row from Table 3, integrates it twice with explicit constants `A,B`, then narrows to `A=B=0` for its direct solution construction. The constants and restriction are visible; the table is an index to subsequent calculation, not a substitute for it.
+5. **Printed pp. 166--169, Section 4 (PDF pp. 179--182).** Only after symmetry reductions and particular traveling-wave solutions does the chapter introduce currents/multipliers, select translation-invariant laws, and show the inherited first integrals and further ODE reduction. The prose distinguishes reduction of PDE to ODE from reduction of that ODE's order. Its particular multiplier lists and numerical/order claims are Boussinesq-specific, not SVE evidence.
+
+## Concrete SVE rewrite guidance
+
+- Preserve the detailed SVE differentiation, prolongation, free-jet split, stratum integration, bracket/adjoint reasoning, pullbacks, and source counterexamples. The source chapter supplies a **reader path**, not authority to shorten these independently checked arguments or borrow its point generators.
+- At the start of the SVE block, give a brief table roadmap: (i) SVE parameter strata and admitted generators, (ii) selected generator/invariant graph including chart failures, (iii) original-master pullback/reduced profile equation and its status. Explicitly say that the nine `3.x` rows audit the source paper's selected cases, not a complete optimal-system table for all SVE strata. Do not imply a finite list of nine proves the local point classification; the unrestricted determining calculation, with its `p,q>0` scope, is the separate basis for the classification proposition.
+- Make the existing generator table (`tab:sve-generators`, around line 1807) function like Table 1: organize or explain its generic, `m=3`, and `m=1` rows and their conditions, then interpret which are translations, common scaling, cubic-only scaling, and linear-flux boost. Its present flow column is useful, but distinguish flow parameter `epsilon` from PDE exponent `m`, model constants `g,kappa`, and any profile parameters. The current narrative already derives the strata; use the table as a readable summary after that derivation.
+- Keep the adjoint and optimal-system work around lines 1865--1994, since it explains which representatives are genuinely inequivalent. Its generic optimal-system table is **not** the same thing as the nine source-selected reductions. A short bridge before the invariants table should say why those selected cases are examined despite a larger optimal-system classification.
+- Use the existing invariants table (`tab:sve-repro-invariants`, around line 2025) as the analogue of Table 2. Preface it with the `Q=0` graph condition and one worked common-scaling or traveling calculation. Explain its outcome column explicitly: case 3.1 is stationary outside the positive-velocity chart; 3.2 makes `q=0` and the printed PDE undefined; 3.3 has `Q=1` and no invariant graph; 3.7 is an identity family; 3.8 yields a quadratic; the other regular rows require additional denominator/velocity checks. These are results, not missing table cells.
+- Add a compact, cross-referenced **SVE reduction table** immediately after the graph table or at the start of the reduction subsection, analogous to Table 3. Suggested columns: source case, pullback of *printed scalar* `E_m` (or exact equation reference), ODE order/outcome, required chart and further first-integral reference. Group 3.6 and 3.9 as the same traveling template with/without drift, and keep 3.1--3.3 and 3.7 as explicit identity/undefined/no-graph outcomes. For lengthy formulas use exact equation numbers such as `eq:sve-repro-scale-residual`, `eq:sve-repro-first-integral`, `eq:sve-cubic-expanded`, `eq:sve-repro-travel`, and `eq:sve-quadratic-reduction`; do not squeeze full derivations into a table. Table 3 should point forward to the preserved step-by-step calculations.
+- For each worked family, follow the chapter's table-to-calculation move: name the table row, show the invariant substitution into the original master equation, state the undivided residual, record every necessary nonzero factor, and only then integrate or divide to lower order. The existing common-scaling and traveling current calculations already do much of this. State that `D I_4=0` or `D(B(P)C)=0` is an **additional ODE-order reduction** after the PDE-to-profile reduction; it is not a second independent-variable reduction or an arbitrary-data theorem.
+- Put the exact singular power profile and selected local IVPs after the reduction table, analogous to the source's worked solution section, but label constructed dimensionless IVPs versus source-derived exact identities. The RKF45 tableau and finite diagnostics support the new numerical study; they should not be presented as chapter-style exact solutions or as evidence that the source Boussinesq `a,b` were imported.
+- Treat the manuscript's direct scalar-current identities and profile first integrals as the local conservation-law analogue, while explicitly withholding a borrowed multiplier/Noether classification or a full-bed-system conservation claim. The SVE printed and advectively corrected scalar equations must remain separate.
+
+## Notation and limits to enforce in prose
+
+In the Boussinesq chapter, `epsilon` is the infinitesimal flow parameter (p. 157, eq. (8)); `a,b` are arbitrary constants inside its `F(u)=f'(u)` cases (p. 157 explanation and p. 158 Table 1). Neither supplies the SVE model parameters. In the current SVE derivation `a=phi_tt`, `b=phi_ts` are temporary jet coordinates (main.tex around line 1571), `g,kappa,m` are model parameters, `A,B` denote scaling exponents in one subsection, and `a_*` is a separate exact-profile amplitude. Spell out these roles near first use, or rename the temporary jets if ambiguity persists. Do not replace the SVE transformations with the chapter's `(x,t,u)` transformations.
+
+Uncertainty: rendered pp. 157--159 establish the three-table exposition pattern, but do **not** validate the mathematical correctness of the chapter's lengthy Table 3 entries or imply their forms are reusable. The current SVE source audit reports discrepancies in its own source paper; retain the explicit counterexamples and qualified scope rather than smoothing them into the table chain. No independent fresh symbolic or numerical SVE check was performed for this style-only note.
 
 ### COMPUTATION.md
 
@@ -29157,6 +29269,41 @@ The API also exposes `build_reduction_report()`, which serializes all nine
 rows, the Table 3 mixed row, certified integrals, and source witnesses.
 The main runner defaults to this package's `results/`; `--out` selects a
 separate output directory. The frozen historical package is not rewritten.
+
+### REPLICATION_MERIT.md
+
+# SVE replication: independent merit and provenance assessment
+
+## Ruling
+
+**Retain, but compress and reframe.** This is not merely a routine replay of source symmetry formulas: the positive-chart audit finds an omitted `m=1` point generator, a defect in the printed Eulerian-to-material bed pullback, and exact positive-chart counterexamples to several published reduced equations. The corrected first integrals then give usable lower-order local profile equations. These are substantive *paper-specific corrections*, not evidence of literature-wide novelty, a theorem for the physical full SVE system, or new ML order reduction. The 21 constructed IVPs, Taylor series, RKF45 tables and plots are checks/illustrations, not independent research discoveries. Retaining all ~1,280 lines of current section 1:1 is difficult to justify on merit alone.
+
+## Evidence and falsifiable scope
+
+- Primary SVE source: `ref/main/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf`, SHA-256 `2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5` (hash rechecked). Its PDF p. 6 gives Table 3 SVE invariants and the original `X4 + alpha X5` family. `research_artifacts/SVE-reproduced-20261012/results/source_manifest.json` maps source pp. 2-9 and claims; `main.py` contains the live symbolic witness implementation; `docs/REVIEW_SYMBOLIC.md` records independent PDF-image and direct-substitution review.
+- **Model boundary:** `draft/main.tex:1547-1610`, `main.py:130-187`, and `docs/REVIEW_SYMBOLIC.md:27` show that printed scalar (7) follows the *printed* material bed pair. If `b(t,s)=B(t,phi(t,s))` is a pullback of Eulerian bed elevation, the chain rule has `B_T=b_t-(phi_t/phi_s)b_s`; source (6) omits that advection. Therefore results below address the printed scalar, not the corrected scalar or coupled physical SVE. This correction is conditional on that stated bed interpretation; it does not rule out an undefined alternative bed variable.
+- **Parameter-stratum correction:** `draft/main.tex:1726-1864` derives unrestricted local point determining equations on `g,kappa,p=phi_t,q=phi_s>0`, `m>=1`: dimensions 4 for `m!=1,3`, 5 for `m=3`, and 5 for `m=1`. `X6=t partial_phi` is omitted by the source at `m=1`. Simple independent check: the expanded `E_1` in `draft/main.tex:1594-1602` contains no `p` because `(m-1)=0` and `p^(m-1)=1`; the boost changes only `p`, so its third prolongation annihilates `E_1`. At `m=2`, that argument fails. The source's printed determining relation evaluates to `6`, rather than zero, on its own `X4` (`main.py:290-316`). Claim only a local smooth *point* classification for the printed scalar on the declared chart, never a maximal classification across other symmetry categories, chart boundaries or the bed system.
+- **Published reduction discrepancies:** `draft/main.tex:2386-2435`, `main.py:816-940`, and `results/source_manifest.json` tie literal source (24)-(34) to exact witnesses. I independently recomputed one from the original expanded scalar expression, without calling `main.py`: at `m=3,g=1,kappa=1/30,z=t=s=1,F=2,P=1/2,C=1/10`, source (24) gives `H=23/250`, while the direct `phi=t F(s/t)` jet has `p=3/2,q=1/2` and original `E_m=2367/5000 != 0`. This refutes equality of those universal equations, not all special solutions. Source (32)'s quadratic is sufficient but not necessary for its printed graph. Keep source equation/page, exact witness, chart and corrected equation in any condensed audit table; avoid saying every result in the paper fails.
+- **Corrected solvable structure:** `draft/main.tex:2119-2189` gives common-scaling `R_4=D I_4` and `I_4=K_4 F''`; `draft/main.tex:2279-2385` gives traveling `E=-alpha D[B(F')F'']`. On nonzero leading-coefficient charts these integrate once, and the traveling derivative equation becomes `Y''=0` for `Y'(P)=B(P)`. This is a genuine order reduction distinct from the 2-to-1 independent-variable similarity reduction. It is a classical consequence of the corrected current form, not a new general integration method or learned integral. Keep `alpha=0`, `B=0`, `P>0`, velocity positivity and zero-integral constant branches explicit.
+- **Singular profile:** `draft/main.tex:2386-2396`, `main.py:749-770`: the source cubic power profile can solve both scaling pullbacks but lies exactly on a zero leading coefficient for the common-scaling normal form. It must not be passed through the divided IVP equation. This is a useful counterexample to a blanket regular-solution narrative, not proof of a shock.
+- **Supporting rather than headline:** `draft/main.tex:2437-2715`, `docs/SERIES.md`, `results/REPORT.md` document 21 newly specified dimensionless regular IVPs, degree-six exact residual-coefficient tests, numerical comparisons and qualified convergence. Analytic local ODE existence is standard once the corrected leading coefficient is nonzero; the Taylor recurrence is standard; RKF45 is established. No original paper data, new physical experiment, global solution, continuous numerical error bound, or ML acceleration follows. Keep one representative table/plot and move full tableau, exhaustive IVP matrix and long diagnostics to the reproducible package if manuscript space matters.
+
+Focused current check: `python -B -m pytest -q research_artifacts/SVE-reproduced-20261012/tests/test_symmetries.py research_artifacts/SVE-reproduced-20261012/tests/test_reductions.py` returned **15 passed**. These tests largely share the package's SymPy implementation, hence the separate direct rational PDE substitution above. I did not run the full audit/workflow/43-test package or rebuild the manuscript; those belong to release validation after an edit.
+
+## The `a,b` and `A,B` provenance issue
+
+The Boussinesq primary chapter `ref/small-pdfs/symmetries-and-applications-of-differential-equations-2021.pdf` (SHA-256 `7ad2a827b4b2a994b12df0a1ea0c9a435ddcbab715fa8639595688c46b1cdba6`, rechecked) says on printed p. 157/PDF p. 170 that **`a` and `b` are arbitrary constants** in its nonlinear function `F(u)` classification; Table 1 on printed p. 158 displays `k(a+u)^p-b-c0^2 u`. They are not SVE transformation rules. That chapter then gives its own finite transformation groups, Table 2 similarity variables/graphs and Table 3 reduced equations. `build/boussinesq-style-20261014/chapter.txt:208-355` is navigation evidence, with the PDF hash identifying the primary source.
+
+The SVE draft uses lower-case `a=phi_tt,b=phi_ts` as jet names (`draft/main.tex:1563-1574`), `a,b` again as free coefficients in an optimal-system representative (`draft/main.tex:1935`), `a_star` for a source power-profile amplitude (`draft/main.tex:2386`), and upper-case `A,B` as exponents in `phi=t^A F(st^B)` (`draft/main.tex:2119-2167`). These are four different roles. The upper-case exponent pair is mathematically SVE-derived: `X4` gives `(A,B)=(1,-1)`, `X5` at `m=3` gives `(0,2)`, and source SVE Table 3 already prints the mixed `X4+alpha X5` invariants. The current text derives `3A+B=2` and `(m-3)(A-1)=0`; it does **not** transplant Boussinesq's constitutive `a,b` or its transformation groups. Nonetheless the generic exponent template appears before a reader-facing comparison of the SVE source tables, and repeated letter reuse makes the mistaken-import impression plausible. Retitle it a *derived SVE scaling family*, introduce its members from the SVE generator/invariant table first, and consider distinct symbols (e.g. `lambda_t,lambda_s`) or an explicit one-line notation legend. Do not claim Boussinesq supplies the SVE exponent equations.
+
+## Concrete manuscript edit guidance
+
+1. Lead with the printed-scalar/physical-model boundary and a compact claim table: source claim, exact audit outcome, correction, chart. Explain source agreements as well as failures. Make the paper-specific correction, not an RKF45 demo, the point of keeping the section.
+2. Mirror the *expository sequence*, not equations, of the Boussinesq chapter: near-identity transformation and determining criterion; a parameter-stratum generator table with plain-language explanation; a similarity-variable/graph table explained by `Q=0`; a reduced-equation/status table explaining identity/undefined/regular/singular cases; then selected first-integral and source-counterexample derivations. The present `draft/main.tex:1825`, `:2046`, and `:2421` tables lack a compact counterpart to its reduced-equation Table 3. Keep the fuller adjoint/orbit derivation only if it serves a stated result.
+3. Use one worked line for each nontrivial route: `X4` common scaling and its first integral; a traveling family and its integral; `m=1` boost. Put the nine-case formula inventory, exact source transcription/witnesses and optional numerical details in the existing package, with manuscript pointers.
+4. Retain the source cubic profile as a separate singular branch; distinguish analytic local germs from finite numerical checks. No Boussinesq-specific symmetries, conservation currents, constitutive parameters or transformations should appear as SVE facts.
+
+**Decision threshold:** discard a replication-only section if its exact audit cannot survive direct original-equation substitution and source-page checking. Here that threshold is met for at least the concrete source (24) witness and the `m=1` boost, so a concise correction-focused section is warranted. This assessment makes no claim that the corrections are unpublished elsewhere; a separate literature check would be needed for priority/novelty language.
 
 ### SERIES.md
 

@@ -1,0 +1,2270 @@
+                                                      Formal deduction of the Saint-Venant-Exner model
+                                                        including arbitrarily sloping sediment beds and
+arXiv:1506.05642v1 [physics.flu-dyn] 18 Jun 2015
+
+
+
+
+                                                                       associated energy
+                                                                       E.D. Fernández-Nieto ∗, T. Morales de Luna †,
+                                                                           G. Narbona-Reina∗ , J. D. Zabsonré ‡
+                                                                                            June 18, 2015
+
+
+                                                                                                Abstract
+                                                             In this work we present a deduction of the Saint-Venant-Exner model through
+                                                         an asymptotic analysis of the Navier-Stokes equations. A multi-scale analysis is
+                                                         performed in order to take into account that the velocity of the sediment layer is
+                                                         smaller than the one of the fluid layer. This leads us to consider a shallow water
+                                                         type system for the fluid layer and a lubrication Reynolds equation for the sediment
+                                                         one. This deduction provides some improvements with respect to the classical Saint-
+                                                         Venant-Exner model: (i) the deduced model has an associated energy. Moreover,
+                                                         it allows us to explain why classical models do not have an associated energy and
+                                                         how to modify them in order to recover a model with this property. (ii) The model
+                                                         incorporates naturally a necessary modification that must be taken into account in
+                                                         order to be applied to arbitrarily sloping beds. Furthermore, we show that this
+                                                         modification is different of the ones considered classically, and that it coincides with
+                                                         a classical one only if the solution has a constant free surface. (iii) The deduced
+                                                         solid transport discharge naturally depends on the thickness of the moving sediment
+                                                         layer, what allows to ensure sediment mass conservation. Moreover, we include a
+                                                         simplified version of the model for the case of quasi-stationary regimes. Some of these
+                                                         simplified models correspond to the generalization of classical ones such as Meyer-
+                                                         Peter&Müller and Ashida-Michiue models. Three numerical tests are presented to
+                                                         study the evolution of a dune for several definition of the repose angle, to see the
+                                                         influence of the proposed definition of the effective shear stress in comparison with
+                                                         the classical one, and by comparing with experimental data.
+                                                      ∗
+                                                        Dpto. Matemática Aplicada I. ETS Arquitectura - Universidad de Sevilla. Avda. Reina Mercedes N.
+                                                   2. 41012-Sevilla, Spain. (edofer@us.es), (gnarbona@us.es)
+                                                      †
+                                                        Dpto. de Matemáticas. Universidad de Córdoba. Campus de Rabanales. 14071 Córdoba, Spain
+                                                   (tomas.morales@uco.es)
+                                                      ‡
+                                                        Unité de Formation et de Recherche en Sciences et Techniques, Département de Mathématiques,
+                                                   Université Polytechnique de Bobo-Dioulasso, Bobo-Dioulasso, Burkina Faso. (jzabsonre@gmail.com)
+
+
+                                                                                                    1
+Contents
+1 Introduction                                                                             2
+
+2 The asymptotic Saint-Venant-Exner models                                                  7
+  2.1 The 3D initial system . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     7
+      2.1.1 Physical domain and governing equations . . . . . . . . . . . . . . .           8
+      2.1.2 Closures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      9
+  2.2 Proposed models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      12
+      2.2.1 Model deduced with the linear friction law (13)-(14) . . . . . . . . .         13
+      2.2.2 Model deduced with the quadratic friction law (15)-(16) . . . . . .            15
+      2.2.3 Sediment mass transference and simplified models . . . . . . . . . .           17
+  2.3 Energy balance of the models . . . . . . . . . . . . . . . . . . . . . . . . .       18
+  2.4 Energy balance of the classical Saint-Venant-Exner model . . . . . . . . . .         19
+
+3 Numerical tests                                                                          20
+  3.1 Test 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   21
+  3.2 Test 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   21
+  3.3 Test 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   24
+
+4 Conclusions                                                                              27
+
+Appendix                                                                                   28
+
+A Derivation of the sediment transport models                                              28
+  A.1 Dimensionless equations . . . . . . . . . . . . . . . . . . . . . . . . . . . .      28
+  A.2 Layer Ω1 : shallow water. . . . . . . . . . . . . . . . . . . . . . . . . . . . .    31
+  A.3 Layer Ω2 : Reynolds. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     32
+
+B Energy balance                                                                           36
+  B.1 Proof of Theorem 2.1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     36
+  B.2 Proof of Theorem 2.2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     38
+
+
+1    Introduction
+The Saint-Venant-Exner system (see [17]) is generally used to model the bedload transport
+in rivers, lakes and coastal areas. Sediment transport is usually divided into three types:
+surface creep, saltation and suspension. Surface creep is defined as the type of transport
+where sediment grains roll or slide along the bed. Saltation transport is defined as the
+type of transport where single grains jump over the bed a length proportional to their
+diameter, losing for instants the contact with the soil. Sediment is suspended when the
+flux is intense enough so that the sediment grains reach height over the bed. There is not
+a clear distinction between surface creep and saltation, so that these types of transport are
+
+
+                                              2
+usually called bedload transport. At low Froude numbers, the bedload is the dominating
+transport mechanism which is the regime under study in this paper.
+   The Saint-Venant-Exner system (SVE in what follows) is defined in terms of a hy-
+drodynamical component coupled with a morphodynamical one. The hydrodynamical
+component in most cases is modeled by Saint-Venant system. The equation that describe
+the morphodynamical component is the well known Exner equation, that is a continuity
+equation. Such system can be written under the following form:
+          
+          
+            ∂t h1 + divx q1 = 0,
+          
+          
+          
+                                              
+                           q 1 ⊗ q1          1 2
+             ∂t q1 + divx              + ∇x    gh + gh1 ∇x (h2 + b) + τ /ρ1 = 0,   (1)
+          
+                               h1            2 1
+          
+          
+          
+          
+          
+             ∂t h2 + divx qb = 0,
+
+where x = (x1 , x2 ) is the horizontal spacial coordinates, t represents the time variable,
+q1 = h1 (x, t)u1 (x, t) represents the water discharge, h1 (x, t) the height of the fluid and
+u1 = (u1 [1] , u1 [2] ) its horizontal velocity. τ is the shear stress at the bottom and ρ1 the
+density of the fluid. The unknown function h2 = h2 (x, t) is the thickness of the sediment
+layer (see Figure 1) and qb denotes the solid transport discharge. g is the gravity constant
+and b is the fixed bottom, usually called the bedrock layer. In what follows we shall denote
+η = b + h2 , being z = η(x, t) the sediment bed surface.
+    To close the system, it is necessary to define the solid transport discharge qb . Several
+formulae for qb can be found in the literature. For example the classical formula proposed
+by Grass [29] assumes that the movement of the sediment begins at the same time as for
+the fluid and both move in the same direction. It is defined by qb = Ag |u1 |mg −1 u1 where Ag
+is a constant which takes into account the grain size and the kinematic viscosity and mg is a
+positive real number, such that 1 ≤ mg ≤ 4. Nevertheless, for practical applications, some
+other type of formulae has been proposed in the literature, for instance, by Meyer-Peter
+& Müller [39], Van Rijn’s [53], Einstein [16], Nielsen [43], Fernández-Luque & Van Beek
+[6, 20], Ashida & Michiue [1], Engelund & Fredsoe [18], Kalinske [32] or Charru [10]. Such
+formulae are usually presented in nondimensional form and can be written as follows,
+                    qb              k1                        √        p m 3
+                       = sgn(τ )         θ m1 (θ − k2 θc )m
+                                                          +
+                                                            2
+                                                                 θ − k3  θc    ,          (2)
+                    Q            (1 − ϕ)                                    +
+
+                                                                 p
+where Q represents the characteristic discharge, Q = ds g(1/r − 1)ds , r is the density
+ratio, r = ρ1 /ρ2 , being ρ2 the density of the sediment particles and ds the mean diameter
+of the sediment particles. ϕ is the averaged porosity.
+    In classical SVE models the sign of qb coincides with the sign of τ , the shear stress at
+the bottom. It is usually defined as τ = ρ1 gh1 Sf , being Sf the friction term. Sf can be
+set by different empirical laws such as the Darcy-Weisbach (Sf = f u1 |u1 |/8gh1 , where f is
+                                                                              4/3
+the Darcy-Weisbach coefficient) or Manning formulae (Sf = n2 u1 |u1 |/h1 , where n is the
+
+
+                                              3
+Manning coefficient). In general we can write τ = ρ1 gζ(h1 )u1 |u1 |, being ζ(h1 ) a function
+depending on the considered friction law.
+    The Shields stress, θ, represents the ratio between the agitating and the stabilizing
+forces on a sediment grain in the bed,
+                                              |τ |d2s
+                                     θ=                  ,                               (3)
+                                          g(ρ2 − ρ1 )d3s
+and θc is the critical Shields stress for incipient motion.
+   The constants kl , ml , l = 1, 2, 3 are positive real numbers depending on the model.
+Being usually at least one of the parameters m1 , m2 or m3 equals to zero. For example,
+Meyer-Peter & Müller’s model is defined by
+                              qb              8             3/2
+                                 = sgn(τ )         (θ − θc )+ ,                          (4)
+                              Q            (1 − ϕ)
+and Ashida & Michiue’s model is defined by
+                         qb              17               √   p
+                            = sgn(τ )         (θ − θc )+ ( θ − θc ).                     (5)
+                         Q            (1 − ϕ)
+
+   Finally, by ( · )+ we denote the positive part. In equation (2) the positive part implies
+that the sediment moves when the modulus of the shear stress is bigger than a given critical
+value.
+Although the classical SVE model is largely used, it presents several disadvantages:
+  (i) The SVE model has not a dissipative energy equation associated to the system.
+
+ (ii) Solid transport discharge formulae are derived by using the hypothesis of nearly
+      horizontal sediment beds, that is, ∇x η ≈ 0.
+
+(iii) Solid transport flux is independent of the thickness of the sediment layer. Thus, the
+      mass conservation property for the sediment given by third equation in (1) may fail
+      (see [40]).
+    Concerning the first item, we should remark that there exist in the literature some
+simpler solid transport formulae for which the corresponding SVE model has an associated
+dissipative energy equation (see for example [36]). Nevertheless, up to our knowledge, no
+general result exists in the bibliography in this sense.
+    The second item implies that classical formulae cannot be used in several problems of
+interest (see [33]) because they are derived by using the hypothesis of nearly horizontal
+sediment beds.
+    As mentioned before, the Shields parameter is the coefficient between agitating forces
+and the stabilizing forces. Classical formulae consider that the only agitating force is the
+bottom shear stress, concretely |τ |d2s . Nevertheless, in the experiments presented by Lysne
+in [37] it can be seen that gravity is another contributing factor as an agitating force (see
+
+                                              4
+also [27]) for sloped sediment beds. Then, it is necessary to take into account gravitational
+forces in order to obtain a solid transport discharge that can be applied in arbitrarily
+sloping beds.
+    This has been done in the literature in several ways. For instance, the simplest way to
+take into account the sediment bed slope in the definition of the solid transport discharge
+is to include a diffusion term. Engelund and Hansen proposed in [19] a formula that can
+be written under the following form,
+                                                            
+                                           m    u1
+                                qb = k|u1 |          − c ∇x η ,                           (6)
+                                               |u1 |
+k, m, and c being constant parameters of the model (see also [58] and [59]). Equation (6)
+can be seen as a modification of the Grass model. An adaptation of this formula for curved
+channels was proposed by Struiksma et al. in [57]:
+                                                                     
+                              m                               1
+                   qb = k|u1 | (1 − c ∂s (b + h2 )) sgn u1 −      ∇x η ,
+                                                             fs θ
+s being the streamwise coordinate and fs the shape factor of the grains (see [57] for more
+details). Note that this definition implies that the direction of the sediment transport does
+not coincides with the direction of the velocity of the fluid. The direction is determinated
+by the sign of the vector (u1 − fs1 θ ∇x η). Note that
+                                                               
+                             1          u1 − fs1 θ ∇x η     cos α
+                   sgn u1 −      ∇x η =                 =           ,
+                            fs θ        u1 − fs1 θ ∇x η     sin α
+
+α being the angle of the transport direction, where
+                                            u1 [2] − fs1 θ ∂x2 η
+                                  tan α =                          .                     (7)
+                                            u1 [1] − fs1 θ ∂x1 η
+Let us remark that in [57] the direction of the sediment transport is defined in terms of
+its angle, given by (7), rather than defining it in terms of the sign vector. Authors also
+include a correction of the angle due to the transversal velocity in curves. For the sake of
+brevity we do not include a discussion on the modification of the transport angle in curved
+channels, since it is not the aim of this paper.
+    A more used extension of classical formulae to arbitrarily sloping sediment beds is to
+consider a modification of the critical Shields parameter, replacing θc by θbc (see [27] and
+[20]). For the scalar case, 1D flows, this modification can be written as follows:
+                                     
+             b            sgn(τ )                                           θc
+            θc = θc 1 +           ∂x η = θc + ϑ sgn(τ ) ∂x η, where ϑ =          .        (8)
+                           tan δ                                           tan δ
+In the works of Kovacs and Parker [33], Seminara et al. [56] and Parker et al. [47] several
+extensions for the vectorial case are presented, where the computation of θbc takes into
+account lateral slopes.
+
+                                               5
+     Note that usually in the definition of the modified critical Shields parameter we do not
+find the sign of τ . This is due to the fact that formulae are usually presented for the case
+of positive velocities only.
+     In previous definition tan δ is the friction coefficient corresponding to the internal fric-
+tion angle of the material. Typical values of ϑ and θc are, ϑ = 0.1 and θc = 0.047, what
+implies that θc /ϑ = tan δ, with δ ≈ 25o , as proposed by Fredsœ in [27]. The angle δ = 25o
+is lower than the repose angle close to 32o , although lower values have also been suggested
+(see [10] and references therein).
+     Let us remark that the definition of θbc in (8) is based in two arguments: first, grav-
+itational forces due to the sediment bed slope are incorporated as agitating forces in the
+definition of the effective Shields parameter,
+
+                           |τeff |d2s
+               θeff =                    with τeff = τ − ϑ(ρ2 − ρ1 )gds ∂x (b + h2 ),          (9)
+                        g(ρ2 − ρ1 )d3s
+
+where τeff is the effective shear stress. Second, rather than replacing θ by θeff , it is usually
+assumed that this is equivalent to replacing θc by θbc , defined by (8) (see [27]). More
+explicitly, it is usually assumed that (θeff − θc ) = (θ − θbc ).
+   Nevertheless, this second assumption is not true in general,
+
+                             |τ |d2s − ϑ sgn(τ )g(ρ2 − ρ1 )d3s ∂x (b + h2 )
+              θeff − θc 6=                                                  − θc = θ − θbc .
+                                            g(ρ2 − ρ1 )d3s
+
+The problem arises from the fact that the absolute value (or the norm in the vectorial case)
+is neglected in the definition of θeff (see for example [10] and [27]), which should be taken
+into account, depending on the sign of τ and τeff .
+    In fact, Fowler et al. proposed in [26] a modification of the Meyer-Peter & Müller
+formula that consist in replacing θ by θeff , instead of replacing θc by θbc . The model proposed
+by Fowler et al. can be written as follows:
+                                                                   3/2
+                                   qb                h2
+                                      = 8 sgn(τeff )      θeff − θc      ,
+                                   Q                 h2              +
+
+
+where h2 is an averaged value of the thickness of the sediment layer. The fact of introducing
+an explicit dependence on h2 in the formula is also interesting. Indeed, this allows to ensure
+the mass conservation property for the sediment layer (see also [40]), which was the second
+issue noted previously as a disadvantage for classical SVE models.
+    Related to this problem, in [23], Fernández-Nieto et al. introduce a modified general
+definition of the solid transport discharge for SVE models that takes into account the
+thickness of the sediment layer. Then mass conservation is ensured. Moreover, the proposed
+formula has the advantage that it reduces to a classical solid transport discharge formula
+in the case of quasi-uniform regimes. This is in fact the regime where usually classical
+formulae are derived.
+
+
+                                                     6
+    The main objective of this paper is to show that the SVE model can be deduced through
+an asymptotic analysis of the Navier-Stokes equations. Moreover, we obtain that following
+this process some improvements on the classical SVE model are reached: (i) We obtain
+that the deduced model verifies exactly a dissipative energy equation. This deduction
+and the proof of energy allows us to understand why classical models do not have an
+associated energy. Moreover, it allows to prove that the classical SVE model can have an
+associated energy by introducing a simple modification. (ii) In the deduction process of
+the model the pressure terms introduce a modification that must be taken into account
+if we consider applications where the sediment bed is not nearly horizontal. We also see
+that this modification coincides with some of the alternatives proposed in the literature for
+some special cases. (iii) The solid transport flux depends on the thickness of the moving
+sediment layer, then mass conservation is ensured.
+    The paper is organized as follows: In Section 2 we present the 3D system of equations
+considered as starting point from which the models are deduced, the proposed models and
+the results on the associated energy. The formal deduction of the models by an asymptotic
+analysis from the Navier-Stokes equations is detailed in Appendix A. This is done by
+developing a multi-scale analysis in space and time. Section 3 is devoted to numerical
+tests. In the first test we study the evolution of a dune for different values of the the
+repose angle. The purpose of the second test is to compare the influence of the deduced
+modification in the definition of the effective shear stress respect to classical ones. A
+comparison with experimental data is presented in the third test. Finally, the conclusions
+are presented in Section 4.
+
+
+2     The asymptotic Saint-Venant-Exner models
+Following an asymptotic analysis, we derive two main models which are presented here (see
+Appendix A for details). The difference between these models is the friction law used at
+the fluid and sediment interaction level. In Subsection 2.1 we summarize the starting 3D
+system of equations and the hypothesis considered for the derivation of the models. The
+models deduced in this work are shown in Subsection 2.2. First, they are presented with
+the same notation as they are deduced (see Appendix A). Secondly, they are rewritten in
+terms of the Shields parameter or the effective Shields parameter. The associated energy
+for these models is presented in Subsection 2.3. Moreover, we include in Subsection 2.4
+a result that justifies that classical SVE model may have an associated dissipative energy
+provided a second order correction is made in the friction term appearing in the momentum
+equation.
+
+2.1    The 3D initial system
+We consider two immiscible layers of different materials with different physical properties:
+velocity, pressure, density and viscosity. The two layers are related through the interaction
+terms at the internal interface levels. In the following subsections the starting systems
+
+                                             7
+of equations, the definition of the physical domain and the considered hypothesis for the
+deduction of the models proposed in this paper are specified.
+
+2.1.1   Physical domain and governing equations
+We consider a cartesian coordinate system where x represents the horizontal 2D direction
+and z the vertical one. Let us define the physical domain for the fluid and sediment layers
+by Ω1 (t) and Ω2 (t) respectively; t being the time variable. Usually in the context of bedload
+transport it is assumed that the sediment domain can be decomposed into two layers: one
+that moves due to the action of the convection of the upper fluid, the mobile sediment
+layer with thickness hm , and a second one composed of sediment that is not moving but is
+susceptible to come into motion, with thickness hf . This leads us to define four boundaries
+in the domain (see Figure 1):
+
+                            Γs = {(x, z) ∈ R3 /x ∈ ω, z = ηs (x, t)};
+                            Γ1,2 = {(x, z) ∈ R3 /x ∈ ω, z = η(x, t)};
+                            Γf = {(x, z) ∈ R3 /x ∈ ω, z = ηf (x, t)};
+                            Γb = {(x, z) ∈ R3 /x ∈ ω, z = b(x)}.
+where ω is a domain in R2 . The water free surface is defined by z = ηs (x, t), where
+ηs (x, t) = h1 (x, t) + h2 (x, t) + b(x) and the fluid/sediment interface by z = η(x, t), where
+η(x, t) = b(x)+h2 (x, t). h1 (x, t) denotes the height of the water column. The sediment layer
+is decomposed as h2 (x, t) = hm (x, t) + hf (x, t), and then the internal sediment interface is
+z = ηf (x, t), where ηf (x, t) = b(x) + hf (x, t) (see Figure 1).
+    Thus, we consider a time-dependant domain Ω(t) = Ω1 (t) ∪ Ω2 (t) ∪ Γb ∪ Γ1,2 (t) ∪ Γs (t),
+being:
+                  Ω1 (t) = {(x, z) ∈ R3 /x ∈ ω, η(x, t) < z < ηs (x, t)};
+                  Ω2 (t) = Ω2,f (t) ∪ Ω2,m (t);
+                  where
+                         Ω2,f (t) = {(x, z) ∈ R3 /x ∈ ω, b(x) < z < ηf (x, t)};
+                         Ω2,m (t) = {(x, z) ∈ R3 /x ∈ ω, ηf (x, t) < z < η(x, t)};
+Moreover, let us denote by Tm the mass transference between the static and the mobile
+sediment domains, Ω2,f and Ω2,m . Tm is defined as the difference between the erosion rate
+(że ) and the deposition rate (żd ), Tm = że − żd (see [23] and Section 2.2.3).
+      As a general rule in notation, we will use the subscript 1 to denote the upper layer
+(fluid) and the subscript 2 for the lower layer (sediment). We denote by
+
+                                           vi = (ui , wi )
+
+the velocity field for each layer with ui = (ui [1] , ui [2] ) the 2D horizontal velocity. We denote
+by ρi the density and pi the pressure. Moreover, µi and νi = µi /ρi , denote the dynamic
+and kinematic viscosity coefficients respectively, for i = 1, 2.
+
+
+
+
+                                                 8
+              Figure 1: Sketch of the domain for the fluid-sediment problem
+
+For each layer (i = 1, 2), we start from the 3D Navier-Stokes equations for incompressible
+fluid and sediment components:
+                           
+                             ρi ∂t vi + (ρi vi ∇)vi − div(σi ) = −ρi~g
+                                                                                     (10)
+                             div(vi ) = 0
+
+In this system ~g represents the gravitational vector and σi the stress tensor associated to
+each layer.
+    To complete this system, we must give the stress tensor expressions, the interactions at
+the internal interface levels (Γ1,2 and Γf ), as soon as boundary and kinematic conditions.
+They are specified in the following subsection.
+
+2.1.2   Closures
+Stress tensors
+We shall define the stress tensors as follows:
+
+                                σi = σi0 − pi Id,    for i = 1, 2;
+
+where σi0 is the deviatoric part of the stress tensor.
+
+We assume that the stress tensor for the fluid layer follows a Newtonian form with constant
+dynamic viscosity µ1 and then σ10 is given by:
+
+                                       σ10 = 2µ1 D(v1 ),
+
+D(v) being the rate of deformation tensor, D(v) = 12 (∇v + ∇t v).
+   For the sediment layer we consider a non-Newtonian rheology. Recent works have been
+devoted to demonstrate through experimental results the resemblance between the bed
+
+                                                 9
+load transport phenomena and the granular flows behavior [45, 46, 2, 52]. Ouriemi et
+al. proposed in [45] a two-phase model for bed load transport in laminar flows. Where
+a Newtonian law for the fluid phase and a frictional rheology for the particulate phase,
+namely a Coulomb type friction is considered. Chauchat et al. (see [7], [8]) study a three-
+dimensional two-phase model where a Drucker-Prager rheology describe the stress tensor
+associated to the particulate phase. This definition is consistent with the Coulomb friction
+model proposed in [45]. A comparison with experimental data for bed load transport can
+be seen in [2].
+    Following these references we define
+
+                                      σ20 = 2µ2 D(v2 ),
+
+with a non-constant viscosity µ2 , given by a Drucker-Prager model. By using a regular-
+ization of the Drucker-Prager model (see [35]), we can assume that µ2 is expressed as a
+function of D(v2 ) and p2 .
+    Nevertheless, let us remark that in order to deduce a first order Reynolds-type model
+for the sediment layer, we do not need further specifications about this rheology. In fact,
+the depth-averaged model will be written in terms of the boundary conditions, that is, the
+Coulomb friction law, which is compatible with the Drucker-Prager rheology.
+
+Friction laws
+We must define the friction laws at the mobile-static sediment interface and at the fluid-
+sediment interface.
+
+◦ Friction law at the mobile-static sediment interface
+   As explained before, a Coulomb friction condition at the interface between the static
+and the moving sediment particles, z = ηf (x, t), is considered. Denoting by Nf the unitary
+normal vector to the interface Γf and by δ the repose angle, we write the Coulomb friction
+law as                                                           
+                   (σ2 Nf )T = − sgn(u2 ) tan δ (σ1 − σ2 )Nf · Nf       ,              (11)
+                                                                   |z=ηf
+                         p
+                         t
+where Nf = (−∇x ηf , 1) / 1 + |∇x ηf |2 and the subscript ( · )T denotes the tangent com-
+ponent of a vector.
+
+   Let us remark that the use of a Coulomb friction can also be interpreted as a mechanism
+to approximate the collision effects of saltating grains in the computation of the bedload
+transport formula (see [33]).
+◦ Friction law at the fluid-sediment interface
+   At the fluid-sediment interface the interaction between fluid and sediment is defined
+through a friction force:
+                               (σ1 Nη )T = (σ2 Nη )T = (fric, 0)t ,                 (12)
+
+
+                                             10
+                          p
+where Nη = (−∇x η, 1)t / 1 + |∇x η|2 is the normal vector at the interface pointing from
+layer 2 to layer 1.
+    In particular, we consider two classical friction laws for which we obtain two different
+models that can be written under the same structure.
+   • Linear friction law:
+                                        fric = C (u1 − u2 )|z=η ,                                (13)
+     where the coefficient C has velocity dimension. Moreover, taking into account the
+     results presented in [42] (see also Remark A.2), C can be assumed proportional to
+     hm . Following the analysis of Seminara et al. [56], the drag coefficient is proportional
+     to tan(δ)/θc . That is, inversely proportional to ϑ, defined in (8). Taking into account
+     these remarks we may define
+                                          (1/r − 1)ghm
+                                       C= p             .                                        (14)
+                                         ϑ (1/r − 1)gds
+
+   • Quadratic friction law:
+
+                               fric = C1 |(u1 − u2 )|z=η |(u1 − u2 )|z=η .                       (15)
+
+     In this case C1 must be adimensional, so taking into account previous arguments on
+     the definition of the drag coefficient, we can define
+                                                     hm
+                                              C1 =        .                                      (16)
+                                                     ϑ ds
+
+Boundary and kinematic conditions
+The following boundary and kinematic conditions are imposed at each interface to complete
+the system:
+
+   • At the free surface, z = ηs (t, x) = b(x) + h2 (x, t) + h1 (x, t):
+                                                                                1
+        – The surface tension condition: (σ1 ·Ns )n = 0 where Ns = √                     (−∇x ηs , 1)t
+                                                                             1+|∇x ηs |2
+           is the unitary outward normal vector to the free surface and the subscript n
+           denotes the normal component.
+        – The kinematic condition: ∂t ηs = v1 · Ns .
+
+   • At the fluid/sediment interface, z = η(t, x) = b(x) + h2 (x, t):
+
+        – The kinematic conditions corresponding to both velocities:
+
+                                          ∂t η = v1 · Nη = v2 · Nη .
+
+        – The continuity of the normal component of the tensors: (σ1 · Nη )n = (σ2 · Nη )n .
+
+                                               11
+        – The friction law defined by (12)-(16).
+
+   • At the internal sediment interface, z = ηf (t, x) = b(x) + hf (x, t):
+
+        – The conservation of the sediment mass,
+
+                                          ∂t ηf = v2 · Nf − Tm ;
+
+           Tm being the mass transference term (see Section 2.2.3).
+        – The Coulomb friction law defined by (11).
+
+   • At the bottom, z = b(x):
+
+        – The no penetration condition: vp2 · Nb = 0, where the unitary normal vector to
+          the bottom is Nb = (−∇x b, 1)t / 1 + |∇x b|2 .
+
+2.2    Proposed models
+In this section we present the final models obtained through an asymptotic analysis of
+the 3D system (10). Following the work performed in [24], we derive a mathematical two
+dimensional SVE type model for bed load transport. Thus, the models are composed by
+three equations: the first two equations represent the Saint-Venant system used for mod-
+eling the upper fluid layer and the third one describes the evolution of the moving bed
+through a lubrication Reynolds equation.
+As it is classically considered in such kind of models, we take into account two different
+time scales for the hydrodynamics and the sediment evolution. Therefore, the ratio be-
+tween the hydrodynamic and morphodynamic time scales, defined by ε2 , being small. We
+obtain first order models, so we neglect the terms of order ε2 as commonly done to obtain
+SVE type models, (see [28] and references therein).
+The two models obtained depends on the considered friction law at the fluid-sediment in-
+terface, given by (13) and (15) respectively. The complete derivation of these models is
+detailed in Appendix A.
+
+First, we present the models deduced under a unified formulation. Then, we analyze
+each of them in order to relate the sediment velocity with the classical motion threshold in
+terms of the Shields parameter and the effective Shields parameter. Finally, the closure of
+the systems is discussed and simplified models corresponding to a quasi stationary regime
+will be presented. From now on, we use the superscript (LF ) to denote the properties of
+the model deduced with a linear friction law, and (QF ) for the model using a quadratic
+friction law.
+
+   The model deduced in this paper can be written under the form of a SVE system form
+
+
+
+
+                                             12
+as follows:
+          
+           ∂t h1 + divx q1 = 0,
+          
+          
+          
+          
+          
+          
+          
+                                          1      2                     ghm
+          
+           ∂t q1 + divx (h1 (u1 ⊗ u1 )) + 2 g∇x h1 + gh1 ∇x (b + h2 ) + r P = 0,
+                                                                                            (17)
+          
+                               p                
+          
+           ∂t h2 + divx hm vb (1/r − 1)gds = 0,
+          
+          
+          
+          
+          
+          
+          
+            ∂t hf = −Tm .
+
+with
+                           P = ∇x (rh1 + h2 + b) + (1 − r)sgn(u2 ) tan δ.                   (18)
+and the velocity vb defined for each friction law as
+
+                                (LF )          1               ϑ
+                               vb        =p             u1 −       P,                       (19)
+                                           (1/r − 1)gds      1 − r
+
+                                  1              ϑ 1/2
+                    (QF )
+                   vb       =p             u1 −          |P|1/2 sgn(P).                     (20)
+                              (1/r − 1)gds       1 − r
+
+
+We can write these velocities in terms of the Shields parameter. For this aim, we use now
+the expression of the shear stress and the definitions of the friction coefficients C and C1
+given by (14) and (16). We obtain,
+                                     (LF )           (LF )      (LF )
+                                    vb       = sgn(τeff      )(θeff     − θc )+ ,
+        (LF )      (LF )
+where τeff and θeff are defined by (24) and (25), respectively, for the case of a linear
+                                                        (QF )
+friction law. For the case of a quadratic friction law vb     is defined by (35). If we consider
+a linearization of the quadratic friction law (see Subsection 2.2.2), we obtain
+                            (QF )        (QF )    (QF )           
+                           vb     = sgn(τeff )((θeff )1/2 − θc1/2 + ,
+        (QF )      (QF )
+where τeff and θeff are defined by (32)-(33).
+   In the following subsections we describe the deduction of previous definitions of vb for
+each friction law.
+
+2.2.1   Model deduced with the linear friction law (13)-(14)
+From the asymptotic approximation at first order, we introduce the shear stress and the
+Shields parameter as
+
+                 τ (LF )                                   |τ (LF ) |/ρ1      C|u1 |
+                         = Cu1       and θ(LF ) =                        =              .
+                   ρ1                                     (1/r − 1)gds     (1/r − 1)gds
+
+                                                      13
+Using the definition of the friction coefficient C in equation (14), we have
+
+                                        u1                    ds (LF )
+                                   p             = ϑ sgn(u1 )    θ     .
+                                    (1/r − 1)gds              hm
+
+
+Thus, taking into account (18) and the definition of ϑ in (8), the velocity of the sediment
+layer reads in this case
+
+                 (LF )                    ds (LF )    ϑ
+                vb       = ϑ sgn(u1 )        θ     −     ∇x (rh1 + η) − sgn(u2 )θc .        (21)
+                                          hm         1−r
+
+
+◦ Influence of the Coulomb friction law.
+Note that the sign of the velocity of the sediment layer, sgn(u2 ), has still to be defined.
+Observe that this coefficient comes from the contribution of the Coulomb friction law at
+the interface between moving and static sediment particles (see (18)). In order to specify
+the sign of u2 , we remark that Coulomb friction force has the same sign of the net force
+acting on the sediment. That is,
+                                                                                   
+          ϑ hm                                  hm u1         ϑ hm
+    sgn         (1 − r)sgn(u2 ) tan δ = sgn p              −        ∇x (rh1 + h2 + b) .
+          1−r                                 (1/r − 1)gds 1 − r
+                      θc
+Then, using that ϑ = tan δ
+                           ,
+                                                                              !
+                                              u1         ϑ
+                sgn(u2 ) = sgn           p            −      ∇x (rh1 + h2 + b) .            (22)
+                                          (1/r − 1)gds 1 − r
+
+Furthermore, Coulomb friction force implies also a threshold in order to stop the motion
+of the sediment layer when the net forces acting on the sediment is not large enough to
+compensate the friction force. In this case, we obtain that the velocity of the sediment
+layer vb must be zero under the following condition:
+
+                hm u1               ϑ hm                     ϑ hm
+          p                     −        ∇x (rh1 + h2 + b) ≤      (1 − r) tan δ = hm θc .   (23)
+              (1/r − 1)gds          1−r                      1−r
+
+
+◦ Link with the effective and the critical Shields parameter.
+The stop criteria (23) gives us the way to find the relationship with the classical motion
+threshold. Thus, we introduce the modified shear stress including the gravitational forces,
+called the “effective shear stress”, defined in our case as:
+                           (LF )
+                         τeff             κ ds τ (LF ) ϑ gds
+                                     =                −      ∇x (rh1 + h2 + b).             (24)
+                           ρ1             hm ρ1          r
+
+                                                     14
+The corresponding definition of the effective Shields parameter is
+               (LF )                  (LF )                                               
+   (LF )    |τeff |/ρ1          sgn(τeff )               ds (LF )      ϑ
+  θeff =                  =                   ϑ sgn(u1 )    θ     −       ∇x (rh1 + h2 + b) .
+           (1/r − 1)gds        (1/r − 1)gds              hm           1−r
+                                                                                            (25)
+                                                                (LF )
+In particular, with these definitions we obtain that sgn(τeff ) = sgn(u2 ) thanks to (22)
+and the definition of τ (LF ) . As a consequence, from (21), the velocity of the sediment layer
+can be written as
+                                  (LF )        (LF )  (LF )
+                                 vb     = sgn(τeff )(θeff − θc )+ .                         (26)
+Observe that condition (23) coming from the Coulomb friction law is equivalent to the
+                (LF )
+classical one, θeff > θc .
+Remark 2.1 (Comparison with the classical effective shear stress) The definition
+of the effective shear stress (24) can be seen as a generalization of the classical one, given
+in equation (9) that can be written in vectorial form as follows (see [26]),
+                             τeff   τ
+                                  =    − ϑ(1/r − 1)gds ∇x (h2 + b).                       (27)
+                             ρ1     ρ1
+There are two main differences: the first one is the factor (κds /hm ) multiplying the shear
+stress, which comes from the fact that the model is expressed in terms of the thickness of
+the moving sediment layer. The second main difference appears in the second term, that is,
+we consider (gds ϑ∇x (rh1 + h2 + b)/r) instead of (gds ϑ(1/r − 1)∇x (h2 + b)). Nevertheless,
+both terms are related:
+                                                                                
+                                   g ds ϑ
+      gds ϑ(1/r − 1)∇x (h2 + b) =          ∇x (rh1 + h2 + b) − r∇x (h1 + h2 + b)
+                                     r                                                  (28)
+                                   g ds ϑ
+                                 =        ∇(rh1 + h2 + b) − g ds κ∇x (h1 + h2 + b).
+                                     r
+Then, both definitions coincide in the case of constant free surface, ∇x (h1 + h2 + b) = 0,
+but could be relevant otherwise.
+
+2.2.2   Model deduced with the quadratic friction law (15)-(16)
+For the quadratic friction law we have the following definition of the fluid shear stress for
+the first order approximation
+                   τ (QF )                                         C1 |u1 |2
+                           = C1 |u1 |u1 ,   and then θ(QF ) =                ,             (29)
+                     ρ1                                         (1/r − 1)gds
+Then, using the definition of C1 in (16) and again (18) and (8), the velocity of the sediment
+is written as
+                                 1/2
+   (QF )
+  vb     = sgn(u1 ) ϑ hdms θ(QF )
+                                             1/2                                        
+          ϑ                                             ϑ
+     −        ∇x (rh1 + h2 + b) + sgn(u2 )θc     sgn       ∇x (rh1 + h2 + b) + sgn(u2 )θc .
+         1−r                                           1−r
+                                                                                          (30)
+
+                                                15
+Following analogous arguments as in the case of linear friction law, we can define
+
+                                         sgn(u2 ) = sgn(Φ)                                       (31)
+
+where
+              d          1/2                            1/2                           
+                  s (QF )           ϑ                                ϑ
+ Φ = sgn(u1 ) ϑ     θ          −        ∇x (rh1 + h2 + b)     sgn       ∇x (rh1 + h2 + b) ,
+                hm               1−r                                1−r
+                                                                                        (32)
+and similarly to (23), the stop criteria is
+
+                                           |hm Φ| ≤ hm θc .
+
+For this model we introduce the effective shear stress as
+                         (QF )                                    (QF )
+                       τeff      = g(1/r − 1)ds |Φ|Φ and θeff             = |Φ|2 ,               (33)
+
+where Φ is defined by (32). The former stop criteria, derived directly from the model with
+the Coulomb friction law, becomes
+                                        (QF )
+                                       θeff > θc .                                    (34)
+Observe that in this case we are not able to obtain an explicit expression of the velocity
+ (QF )               (QF )
+vb     in terms of θeff , due to the presence of the modulus and the sign vectors. Never-
+                             (QF )
+theless, the definition of vb      must take into account previous criteria. Thus, thanks to
+(30) and (34), we give
+                                (QF )                       (QF )
+                       (QF )       vb   defined by (30), if θeff > θc ,
+                      vb     =                                                          (35)
+                                   0,                    otherwise.
+    We may also consider the following approximation, which can be seen as a linearization,
+of the quadratic friction law (15):
+
+          fric = C1 |(u1 − u∗2 )|z=η |(u1 − u∗2 )|z=η + C1 |(u∗2 − u2 )|z=η |(u∗2 − u2 )|z=η ,
+
+being u∗2 the velocity of the system without considering the Coulomb friction law at the
+internal interface of the sediment layer. In this case, we obtain the following bedload
+velocity:                                                        
+                            (QF )        (QF )   (QF )
+                           vb     = sgn(τeff )((θeff )1/2 − θc1/2 + .               (36)
+This corresponds to defining a solid transport discharge with a structure similar to that of
+classical formulae (see for example the Ashida & Michiue’s model (5)).
+
+Remark 2.2 Definition (33) of the effective shear stress is different of the classical ones.
+Nevertheless, as in previous case (see equation (24)), the main difference is to consider the
+term ∇x (rh1 + h2 + b)/(1 − r) instead of ∇x (h2 + b). Note also that a linearization of (33)
+leads to previous definition of the effective shear stress (24).
+
+                                                  16
+2.2.3   Sediment mass transference and simplified models
+To close the models, it is necessary to define Tm , the mass transference between the moving
+and the static sediment layers. It is defined in terms of the difference between the erosion
+rate, że , and the deposition rate żd ,
+
+                                           Tm = że − żd .
+
+Following the definitions used in [23],
+                                        Q                                  hm
+                        że = Ke              (θ − θc )+ ,    żd = Kd Q       ,          (37)
+                                   ds (1 − ϕ)                              d2s
+Ke and Kd being the erosion and deposition constants respectively.
+   Nevertheless, it is necessary to remark that in such definition, the erosion rate does
+not take into account gravitational effects appearing in arbitrarily sloping beds. Thus, for
+the case of sediment beds which are not nearly horizontal, we propose to replace θ by θeff .
+Thus, we set
+                                             Q
+                               że = Ke            (θeff − θc )+
+                                        ds (1 − ϕ)
+with θeff defined by (25) or (33).
+
+    A simplification of the proposed model is to consider a quasi-uniform regime, where
+the deposition rate equals the erosion rate, that is Tm = że − żd = 0. In this case, from the
+definition of żd and że , we have
+                                            Ke ds
+                                   hm =              (θeff − θc )+ .                      (38)
+                                          Kd (1 − ϕ)
+
+If we introduce this definition of hm in (17), we obtain the following system
+          
+          
+            ∂t h1 + divx q1 = 0,
+          
+          
+          
+          
+          
+                                            1                           ghm
+             ∂t q1 + divx (h1 (u1 ⊗ u1 )) + g∇x h21 + gh1 ∇x (b + h2 ) +     P = 0,
+                                             2                            r               (39)
+          
+          
+          
+                                                                     
+          
+                               K e ds                   p
+          
+           ∂t h2 + divx                 (θeff − θc )+ vb (1/r − 1)gds = 0,
+                             Kd (1 − ϕ)
+with vb and θeff defined by (24)-(26) for (LF ) and by (30)-(33) for (QF ).
+    Let us focus on the case of a linearization of the quadratic friction law, for which vb is
+defined by (36). Then, we obtain a SVE model with the following definition of the solid
+transport discharge,
+                     qb                  Ke                    p      p 
+                        = sgn(τeff )            (θeff − θc )+ ( θeff − θc .               (40)
+                     Q               Kd (1 − ϕ)
+
+                                                  17
+This definition can be seen as a generalization of the Ashida-Michiue model for arbitrarily
+sediment sloping beds, see equation (5).
+   Other possibilities for the definition of hm can be found in the bibliography. For in-
+stance, it is possible to define (see [56])
+                                                           3/2
+                                          k1 ds (θeff − θc )+
+                                 hm =           √           √ ,                              (41)
+                                        (1 − ϕ) θeff − k2 θc
+
+k1 and k2 being two parameters of the model. Note that (41) is an approximation of (38),
+which is valid except near the threshold of motion.
+    Let us also remark that for the case k2 = 1 and vb defined by (36) we obtain a SVE
+model with the following definition of the solid transport discharge,
+                             qb        (QF )    k1               3/2
+                                = sgn(τeff )         (θeff − θc )+ .                         (42)
+                             Q               (1 − ϕ)
+
+This definition can be seen as a generalization of the Meyer-Peter&Müller model for arbi-
+trarily sediment sloping beds, see equation (4).
+
+Remark 2.3 The simplified model defined by (42) coincides with the classical Meyer-
+Peter&Müller model for k1 = 8 and by neglecting all gravitational terms in the definition
+                                                                           1/2
+of τeff . That is, for τeff defined by (33) with Φ = sgn(u1 ) ϑ hdms θ(QF )      , where θ(QF ) is
+defined by (29).
+    We obtain also that with this definition of τeff the simplified model (40) coincides with
+the classical Ashida-Michiue model when Ke /Kd = 17.
+
+    By analogous arguments we can deduce a large range of classical models. What allows
+us to see these classical models as simplified models which can been deduced from an
+asymptotic expansion of the Navier-Stokes equations, by considering the coupling between
+a shallow water layer and a Reynolds one. Then, for example – see previous remark–,
+we can deduce that Meyer-Peter&Müller model corresponds to define hm by (41) with
+k1 = 8 and k2 = 1. By while the Ashida-Michiue model corresponds to define hm by (38)
+with Ke /Kd = 17. In Figure 2 we can see the comparison of both definitions of hm for
+θc = 0.047. Where we can observe that both definitions of hm are close.
+
+2.3    Energy balance of the models
+In this subsection we present the main result regarding the energy balance associated to
+the models (LF ) and (QF ) presented before. In particular we prove that they admit an
+exactly dissipation energy. The detailed proof of the theorem is given in the Appendix B.1.
+
+Theorem 2.1 The model (17) has a dissipative energy balance. More explicitly:
+
+
+
+                                               18
+                        3
+
+
+
+
+                       2.5
+
+
+
+
+                                    MeyerïPeter&Müller
+                        2
+                                    AshidaïMichiue
+
+
+
+               hm/ds   1.5
+
+
+
+
+                        1
+
+
+
+
+                       0.5
+
+
+
+
+                        0
+                        0.04        0.06       0.08      0.1    0.12   0.14   0.16   0.18   0.2
+                               ec                               e
+
+
+
+Figure 2: Definitions of hm corresponding to the Meyer-Peter&Müller and the Ashida-
+Michiue models.
+
+   • for the (LF ) model:
+                                                                           
+                    1                2   1       2
+                ∂t rg(h1 + h2 + b) + rh1 |u1 | + gh2 x(1 − r)sgn(u2 ) tan δ
+                    2                   2
+                              |u |2                  
+                                 1
+                +divx rh1 u1         + g(h1 + h2 + b)
+                                 2                                                                (43)
+                                      ϑ      p            
+                +divx hm u1 P̃ − hm       P̃P (1/r − 1)gds
+                                     1−r
+                          ϑ p
+                ≤ −ghm           (1/r − 1)gds |P|2 ,
+                         1−r
+
+   • for the (QF ) model:
+                                                                             
+                    1                    1
+                ∂t rg(h1 + h2 + b)2 + rh1 |u1 |2 + gh2 x(1 − r)sgn(u2 ) tan δ
+                    2                   2
+                              |u |2                  
+                                 1
+                +divx rh1 u1         + g(h1 + h2 + b)
+                                 2 r
+                                                        p                                       (44)
+                                         ϑ       1/2
+                +divx hm u1 P̃ − hm         P̃|P| sgn(P) (1/r − 1)gds
+                        r              1−r
+                             ϑ p
+                ≤ −ghm             (1/r − 1)gds |P|3/2 ,
+                          1−r
+                                                     
+where P̃ = g (rh1 + h2 + b) + x (1 − r)sgn(u2 ) tan δ and P is defined in (18).
+
+2.4    Energy balance of the classical Saint-Venant-Exner model
+As mentioned in the introduction there exist in the literature some simple solid transport
+formulae for which the corresponding SVE model has an associated dissipative energy
+
+                                                               19
+equation. Nevertheless, up to our knowledge, no general result exists in the bibliography
+in this sense.
+    In this subsection we present a result that shows that by including a second order
+correction in the definition of the friction law in the momentum equation of the Saint-
+Venant system, we obtain a dissipative energy balance for any classical SVE model whose
+solid transport discharge can be written under the general form (2).
+Theorem 2.2 Let us consider the general SVE system (1)-(3) and the following definition
+of the friction term in the momentum conservation equation of the Saint-Venant model,
+                                                    1 p
+                           τ /ρ1 = gζ(h1 )u1 |u1 | + ξm gζ(h1 )R.
+                                                    r
+We have that if          √     p
+                           θ − θc + sgn(τ )g∇x (rh1 + h2 + b) > 0,
+then the SVE model satisfies the dissipative energy balance:
+                                                            p 
+                      1                  2   1       2
+                 ∂t rg(h1 + h2 + b) + rh1 |u1 | − h2 sgn(τ ) θc
+                      2                     2
+                                  |u |2                  
+                                     1
+                 +divx rh1 u1            + g(h1 + h2 + b)                                 (45)
+                                    2                        
+                               p                     p
+                 +divx ξm u1 gζ(h1 )R̃ − ξm RR̃ (1/r − 1)gds
+                                         p
+                 ≤ −gζ(h1 )|u1 |3 − ξm (1/r − 1)gds |R|2
+where
+       1                           √      p                        1
+ ξm =      k1 θ m1 (θ − k2 θc )m
+                               + ( θ − k3
+                                 2
+                                           θc )m
+                                               + √
+                                                3
+                                                       √                                ,
+      1−ϕ                                         ( θ − θc + sgn(τ )g∇x (rh1 + h2 + b))
+               p                                             p
+    R = sgn(τ ) θc − g∇x (rh1 + h2 + b) and R̃ = sgn(τ )x θc − g(rh1 + h2 + b).
+The proof of this theorem is similar to the one of Theorem 2.1 and can be found in the
+Appendix B.2.
+Remark 2.4 Note that the considered modification of the classical SVE model introduces
+a second order term in the system. That implies that the classical SVE model verifies a
+dissipative energy equation up to second order terms.
+
+
+3       Numerical tests
+In this section we present three numerical tests, for the simplified model obtained from
+(17) with (41), that is, the solid transport equation reduces to (42). This coincides with a
+classical Meyer-Peter&Müller model with a modified shear stress given by τeff The purpose
+of these tests is to study the influence of the effective shear stress. The purpose is to study
+what are the effects of the different terms that appear in this modified shear stress.
+    The numerical results follow from a combination of the scheme described in [6] with a
+discrete approximation of bottom and surface derivatives. The numerical simulations are
+done with a CFL number equal to 0.5.
+
+                                              20
+3.1    Test 1
+In this first test we propose to study the influence of tan δ = θc /ϑ in (24). To do so, let us
+consider the following initial condition
+
+                    
+                        0.2,   if x ∈ [4, 6],
+      h2 (0, x) =                               h1 (0, x) + h2 (0, x) = 1,   q1 (0, x) = 1.5.   (46)
+                        0.1,   otherwise.
+
+The initial condition is shown in Figure 3(a). We set the boundary condition q(t, 0) = 1.5.
+  The parameters for the model has been set as follows
+
+                                         r = 0.34,    ds = 10−3 ,
+
+                               ϕ = 0,   Ke = 10,     Kd = 1,    θc = 0.047
+with the Manning friction law and as Manning coefficient n = 0.01. The computational
+domain used is [0, 10] with 800 points.
+    Remark that this is a rather severe test: the bottom is discontinuous and thus we have
+∂x (h2 + b) = ±∞ initially. We run the test for different values of δ ranging from 25◦ to 89◦ .
+In Figure 3(b) we show the surface and bottom at time t = 2000 for δ = 89◦ , 60◦ , 45◦ and
+25◦ . The results are also compared with a classical Meyer-Peter&Müller model. A more
+detailed comparison of the final bottom can be seen in Figure 4(a)
+    Remark that for δ → 90◦ we have κ → 0. Thus, the model reduces to a classical Meyer-
+Peter&Müller model for values of δ near 90◦ as it can be observed in Figure 3(c). For
+smaller values of δ, the effects of the gradient ∂x (rh1 + η) play a relevent role in the stress
+tensor. This is shown, for instance, in Figures 4(b) and 4(c), where the value τ − τef f
+displayed. The steep profile of ∂x (rh1 + η) makes that this term plays an esentiall role in
+the evolution of the test. The smaller the value δ, the bigger the influence of the gradient
+on this test. This is specially true for small values of t. This results in a smoothing of the
+dune profile, and in particular in the advancing front of the dune.
+
+3.2    Test 2
+The purpose of this test is to study the influence on the definition of the effective shear
+stress in terms of ∇x η instead of ∇x (rh1 + η)/(1 − r). Following Remark 2.1, both terms
+can be related by
+                                   1                  r
+                        ∇x η =        ∇x (rh1 + η) −     ∇x (b + h1 + h2 ).                     (47)
+                                  1−r                1−r
+    This means that both definitions coincide only for constant free surface. We recall that
+the model proposed in [26] defines the effective shear in terms of ∇x η. This model was
+also studied in [40].
+    We set as initial condition
+
+
+                                                     21
+                                       t = 0.000
+   1.0
+
+   0.8
+
+   0.6                                                           Free Surface
+                                                                 Bottom
+   0.4
+
+   0.2
+
+     0            2              4                 6         8                  10
+
+                          (a) Test 1: Initial condition
+
+  1.05                                t=2000.000
+  1.00
+  0.95
+  0.90                                                              Classical
+  0.85                                                              δ =89°
+                                                                    δ =60°
+  0.80                                                              δ =45°
+                                                                    δ =25°
+  0.75
+      0           2              4                 6         8                  10
+
+                      (b) Test 1: Surface at time t = 2000
+
+  0.35                                t=2000.000
+                                                                    Classical
+  0.30                                                              δ =89°
+                                                                    δ =60°
+  0.25                                                              δ =45°
+  0.20                                                              δ =25°
+
+  0.15
+  0.10
+  0.05
+      0           2              4                 6         8                  10
+
+                      (c) Test 1: Bottom at time t = 2000
+
+Figure 3: Test 1: Initial condition and evolution for different values of δ
+
+
+
+
+                                      22
+                                      t=2000.000
+0.20                                                                       Classical
+                                                                           δ =89°
+0.18                                                                       δ =60°
+0.16                                                                       δ =45°
+                                                                           δ =25°
+0.14
+0.12
+0.10
+         4                  5               6              7                 8
+
+                     (a) Test 1: Bottom comparison (Zoom)
+                                       t = 5.000
+0.20
+                                                                           Classical
+0.15                                                                       δ =89°
+                                                                           δ =60°
+0.10                                                                       δ =45°
+                                                                           δ =25°
+0.05
+0.00
+0.05
+0.10
+0.15
+   3.0       3.5      4.0       4.5         5.0     5.5        6.0   6.5               7.0
+
+                    (b) Test 1: τ − τef f at time t = 5 (Zoom)
+
+                                      t = 100.000
+0.04                                                                       Classical
+                                                                           δ =89°
+                                                                           δ =60°
+0.02                                                                       δ =45°
+                                                                           δ =25°
+0.00
+
+0.02
+
+0.04
+   3.0       3.5      4.0       4.5         5.0     5.5        6.0   6.5               7.0
+
+                   (c) Test 1: τ − τef f at time t = 100 (Zoom)
+
+                      Figure 4: Test 1: Influence of δ
+
+
+
+
+                                       23
+                                                        
+                                                  x − 0.4
+                               0.1 + 0.1 1 + cos              ,             if x ∈ [0.2, 0.6],
+                 h2 (0, x) =                        0.2π                                                   (48)
+                             
+                               0.1,                                         otherwise.
+                                 h1 (0, x) + h2 (0, x) = 1,       q1 (0, x) = 1.4,                         (49)
+The initial condition is shown in Figure 5.
+   We set the boundary condition q(t, 0) = 1.4 and we have used the same parameters
+and computational domain described int Test 1. δ is fixed to 45◦ .
+
+           1.2
+                                                      t = 0.000
+
+           1.0
+
+           0.8
+
+           0.6
+                                                                                           Surface
+                                                                                           Bottom
+           0.4
+
+           0.2
+
+           0.0
+             0.0               0.2              0.4               0.6            0.8                 1.0
+
+
+                                     Figure 5: Test 2: Initial condition
+
+    Figures 6(a) and 6(b) show the difference observed on the surface and bottom when
+the different terms ∂x (rh1 + η) and ∂x η are used in the definition of τef f . Due to the shape
+                                                    1                            1
+of the surface and bottom, we get that ∂x η ≥ 1−r      (rh1 + η) and ∂x η ≤ 1−r    (rh1 + η) on
+the upstream and downstream part of the dune respectively which is shown in 6(c). This
+makes that the influence of the gravitational effects in τef f are stronger when ∂x η is used
+and results as a more difussed shape observed in Figure 6(b).
+
+3.3    Test 3
+In this section we present a comparison with experimental data obtained by the Hydraulic
+Laboratory of Escuela Superior de Ingenieros de Caminos, Canales y Puertos (A Coruña
+University) over a channel of 15 m long and 0.5 m width (for more details see [49] and
+[6]). We compare the experimental data with the numerical simulation corresponding to
+the modified Meyer-Peter&Müler’s model, defined by (42).
+    The experimental test was developed by introducing a sand layer in the central part
+of laboratory channel, and inducing hydrodynamical conditions to erode the sand layer.
+The channel has slope of 0.052 %. Sand layer was situated in interval [4.5 m, 9 m], with
+a thickness of 4.5 cm; being media diameter of the grain equals to 1 mm. As boundary
+conditions, an incoming discharge equal to 0.0285 m2 /s upstream is imposed. The water
+thickness is 0.129 m downstream.
+    We have the experimental measurements of the sediment profile at several points for
+t = 10, t = 40 and t = 120 minutes. Then, for the numerical simulation we have considered
+
+                                                      24
+                                   t = 200.000
+1.14                                                     Using x (rh1 + η)/(1−r) model
+                                                         Using x η model
+1.12
+
+1.10
+
+1.08
+
+1.06
+
+1.04
+   0.0       0.2             0.4                 0.6            0.8                        1.0
+
+                   (a) Test 2: Surface at time t = 200
+                                   t = 200.000
+0.24                                                     Using x (rh1 + η)/(1−r) model
+0.22                                                     Using x η model
+0.20
+0.18
+0.16
+0.14
+0.12
+0.10
+0.08
+   0.0       0.2             0.4                 0.6            0.8                        1.0
+
+                   (b) Test 2: Bottom at time t = 200
+
+ 0.8                               t = 200.000
+ 0.6                                                                   x (rh1 + η)/(1−r)
+                                                                       xη
+ 0.4
+ 0.2
+ 0.0
+ 0.2
+ 0.4
+ 0.6
+ 0.8
+   0.0       0.2             0.4                 0.6            0.8                        1.0
+
+            (c) Test 2: ∂x (rh1 + η) and ∂x η at time t = 200
+
+         Figure 6: Test 2: Comparisons at time t = 200
+
+
+
+
+                                   25
+as initial condition for the sediment surface a profile produced by an interpolation of the
+data at t = 10 minutes (see Figure 7). The initial condition for the free surface and the
+discharge can be precomputed by considering this profile of the sediment layer and previous
+boundary conditions.
+                                                                               t= 10 m.
+                                           0.05
+                                                                                                       Experimental
+                                          0.045                                                        Initial condition
+                                                                                                       bedrock
+                                           0.04
+
+                                          0.035
+
+                                           0.03
+
+                                          0.025
+
+                                           0.02
+
+                                          0.015
+
+                                           0.01
+
+                                          0.005
+
+                                             0
+                                                  0              5                                10                       15
+
+
+
+
+                            Figure 7: Test 3: Sediment surface. Initial condition
+
+   For numerical simulation we have meshed the domain with 250 nodes. The CFL is set
+to 0.9. Sediment porosity is set to 0.4. Friction between fluid and bed is modeled using
+a Manning’s law with coefficient equal to 0.0125 over the fixed bed and 0.0196 over the
+sediment layer.
+                               t= 40 m.                                                                                         t= 120 m.
+   0.05                                                                              0.05
+                                                           Experimental                                                                          Experimental
+  0.045                                                    b=22o                    0.045                                                        b=22o
+   0.04                                                    b=10o                     0.04                                                        b=10o
+                                                           bedrock                                                                               bedrock
+  0.035                                                                             0.035
+
+   0.03                                                                              0.03
+
+  0.025                                                                             0.025
+
+   0.02                                                                              0.02
+
+  0.015                                                                             0.015
+
+   0.01                                                                              0.01
+
+  0.005                                                                             0.005
+
+     0                                                                                    0
+          0             5                             10                  15                  0                   5                         10                  15
+
+
+
+
+              Figure 8: Test 3: Sediment surface evolution at t = 40 min. and t = 120 min.
+
+    Comparisons with the experimental data for t = 40 and t = 120 minutes are presented
+in Figure 8. Two numerical simulations has been done, corresponding to the Coulomb
+friction angle δ = 10o and δ = 22o . We can observe that in both cases the averaged
+position of the sediment surface is well reproduced by the numerical simulations. We can
+remark that at t = 120 minutes the numerical simulation reproduces correctly the position
+of the discontinuity in the profile of the sediment bed, located at x ≈ 10.7. Nevertheless,
+the model does not produce the small sediment bed at the right of the shock. Although, we
+have tested a large range of models to define the solid transport discharge and any of them
+reproduce this advance of the sediment bed at the right of the shock. Which is probably
+a purely tridimensional effect.
+
+
+
+
+                                                                               26
+4    Conclusions
+The SVE model has been deduced in this work by an asymptotic analysis of the Navier-
+Stokes equations. We show that depending on the considered friction law at the interface
+between the fluid and the sediment we can obtain different definitions of solid transport
+discharge. Results have been presented for the case of linear and quadratic friction laws.
+The stop criteria, which is usually represented as a positive part in terms of a critical
+Shields stress, is deduced by including a Coulomb friction law in the internal interface of
+the sediment layer.
+    The proposed models present also some advantages with respect to classical ones: they
+have an associated dissipative energy, they are deduced for arbitrarily sediment sloping
+beds and they depend on the thickness of the moving sediment layer, what implies sediment
+mass conservation in general situations.
+    Moreover, from the deduction of the model we obtain a modification on the definition
+of the effective shear stress. We obtain that it must be defined in terms of the gradient
+of total pressure, ∇x (rh1 + b + h2 ). By while, classical models consider the gradient of
+sediment bed, ∇x (b + h2 ). Nevertheless, by considering this classical definition we cannot
+obtain a model with a dissipative energy.
+    Finally, the deduction of the model and the proof of the existing energy dissipation
+equation provides important information on classical models. It allows us to understand
+why classical SVE models do not have an associated energy. Moreover, in order to have an
+associated dissipative energy we may we add an extra term – a term that is deduced in the
+modelling process – in the definition of the shear stress which appears in the momentum
+equation of the Saint-Venant model. This allows also us to deduce that any classical SVE
+exner model, defined by a solid transport discharge which can be written under the general
+form (2), verifies a dissipative energy equation up to second order.
+    In the numerical test we presented the evolution of a dune for several repose angle.
+We can see as the morphodynamical form of the dune is well reproduced. The influence
+of the definition of the effective shear stress as we propose in this paper in comparison
+with the classical one is compared in the second test. We can observe that a difference
+appears between both definitions just in the area over the dune, where the free surface is
+not constant. In the last numerical test we have compared with experimental data for the
+generalization of the Meyer-Peter&-Müller model. We obtain that the averaged position
+of the dune is well captured in comparison with experimental data. And the position of
+the shock is well approximated.
+
+
+Acknowledgments
+This research has been partially supported by the Spanish Government and FEDER
+through the Research project MTM2012-38383-C02-02, and by the Andalusian Govern-
+ment through the projects P11- RNM7069 and P11-FQM8179.
+   Authors would like to thank to Pierre-Yves Lagrée for his comments and the interesting
+
+
+                                            27
+discussions that followed during his visit to the University of Seville in November 2014.
+
+
+Appendix
+A     Derivation of the sediment transport models
+In this section we develop the derivation of the sediment transport models from an asymp-
+totic analysis of the Navier-Stokes equations. These processes are different for each layer.
+In [24] a similar development is performed coupling also shallow water and Reynolds equa-
+tions in a multiscale framework but for a transport of pollutant problem. Thus, we consider
+this work as a reference in the development, which in turn is based on the original works
+[30] and [44].
+The derivation is divided in several steps: first, we write the initial system in non-
+dimensional form; next we make an hydrostatic approximation, we assume a suitable
+asymptotic regime and we average the equations out.
+
+A.1     Dimensionless equations
+To begin with, we write the equations and boundary conditions under dimensionless form.
+We set the dimensionless variables, where we must take into account the different nature
+of the fluids in two layers, so we make it separately. Indeed the main property that we
+want to point out is the different order of the velocities, as we have discussed in Section
+2.1. Since we study a coupled system we relate the two characteristic velocities by the
+aspect ratio to indicate that the sediment layer is slower than the fluid layer.
+We denote by H and L the characteristic height and length respectively. To impose the
+shallow flow condition, we assume that the aspect ratio between the characteristic height
+and length is small, as usual we denote it by ε = H  L
+                                                       . The characteristic velocities are U
+for the layer 1 and U2 for the sediment layer, consequently, the characteristic times are
+respectively T = UL and T2 = UL2 for each layer. This hypothesis also affects the definitions
+of the Froude and Reynolds numbers. For the sake of clarity we indicate separately these
+variables.
+We consider the “star” notation for the dimensionless variables.
+
+General dimensionless variables:
+               x = Lx∗                  z = Hz ∗               hi = Hh∗i b = Hb∗
+
+                 fricf = ρ2 U 2 fricf ∗ fric = ρ1 U 2 fric∗H
+Nondimensionalization for layer 1:
+                                                            L ∗
+                    u1 = U u∗1 w1 = εU w1∗             t=     t     p1 = ρ1 U 2 p∗1
+                                                            U 1
+                           UL          U
+                    Re1 =      F r1 = √                µ 1 = ρ 1 ν1
+                           ν1           gH
+
+                                                  28
+Nondimensionalization for layer 2:
+                                                        L ∗                  ρ2 ν2 U2 ∗
+                  u2 = U2 u∗2    w2 = εU2 w2∗    t=       t           p2 =           p
+                                                        U2 2                   εH 2
+                          U2 L         U2
+                  Re2 =        F r2 = √          µ2 = ρ2 ν2 µ∗2 Tm = εU2 Tm∗
+                           ν2           gH
+Since we study the coupled system we must take into account that layer 2 is slower than
+layer 1. This related aspect lead us to search for a relationship between the characteristic
+velocities of the two layers holding this property. Thus, we assume that
+                                            U2 = ε2 U,
+so consequently, T2 = ε2LU = ε12 T and we can write the dimensionless variables for the
+sediment layer in terms of ε as:
+                                                           L ∗             ερ2 ν2 U ∗
+                u2 = ε2 U u∗2 w2 = ε3 U w2∗          t=      t         p2 =          p2
+                                                          εU 2
+                                                           2                  H
+                          UL              U
+                Re2 = ε2      F r2 = ε 2 √           µ2 = ρ2 ν2 µ∗2    Tm = ε3 U Tm∗
+                          ν2               gH
+We also define the ratio of densities,
+                                                ρ1
+                                           r=      < 1.
+                                                ρ2
+Thus, the equations and the boundary conditions written in dimensionless form read as
+follows (we omit the “star” to simplify the notation):
+                                                           2
+             
+               ∂t1 u1 + divx (u1 ⊗ u1 ) + ∂z (u1 w1 ) −        divx (Dx u1 )
+             
+                                                          Re
+             
+                                                             1
+             
+                      1 1 2           1
+             
+                   − 2      ∂z u1 −       ∇x (∂z w1 ) + ∇x p1 = 0;
+             
+                     ε Re1           Re1
+             
+             
+             
+                                                   1                                 (50)
+               ∂t1 w1 + u1 ∇x w1 + w1 ∂z w1 −          divx (∇x w1 )
+             
+                                                 Re  1
+             
+                      1 1                     1 1 2             1            1 1
+             
+                   − 2      ∂z (divx u1 ) − 2 2      ∂z w1 + 2 ∂z p1 = − 2 2 ;
+             
+             
+             
+                     ε Re1                   ε Re1             ε             ε F r1
+             
+             
+             
+             
+                divx u1 + ∂z w1 = 0.
+    
+    
+     ε2 Re2 (∂t2 u2 + divx (u2 ⊗ u2 ) + ∂z (u2 w2 ))
+    
+    
+    
+        = −∇x p2 + ∂z (µ2 ∂z u2 ) + 2ε2 divx (µ2 Dx u2 ) + ε2 ∇x (µ2 ∂z w2 );
+    
+    
+    
+    
+     4
+      ε Re2 (∂t2 w2 + u2 ∇x w2 + w2 ∂z w2 )
+                                                                                      Re2    (51)
+    
+    
+    
+        = −∂z p2 + ε2 (2∂z (µ2 ∂z w2 ) + ∂z (µ2 divx u2 ) + ε2 divx (µ2 ∇x w2 )) − ε2 2 ;
+    
+                                                                                     F r2
+    
+    
+    
+    
+    
+      divx u2 + ∂z w2 = 0.
+
+                                                29
+• Conditions at the free surface:
+
+                                      ∂t1 ηs + u1 · ∇x ηs = w1 ;                          (52)
+                                      
+                          2                         1            1 1
+                       −     Dx u1 + p1 ∂x ηs +        ∇ x w1 + 2      ∂z u1 = 0;         (53)
+                         Re1                       Re1           ε Re1
+                           1                               2
+                        −      ε2 ∇x w1 + ∂z u1 ∇x ηs +        ∂z w1 − p1 = 0.            (54)
+                          Re1                              Re1
+• Conditions at the interface:
+
+                                       ∂t1 η + u1 · ∇x η = w1 ;                           (55)
+
+
+                                       ∂t2 η + u2 · ∇x η = w2 ;                           (56)
+
+          1                   1                                    
+rε2 |∇η|2 2     Dx u1 − p1 + r     −2(ε2 ∇x w1 + ∂z u1 )∇x η + 2∂z w1 − rp1
+            Re1                Re1
+
+         1  6                                                                                 
+   =−       ε |∇x η|2 (2µ2 Dx u2 − p2 ) − 2ε4 µ2 (ε2 ∇x w2 + ∂z u2 )∇x η + 2ε4 µ2 ∂z w2 − ε2 p2 ;
+        Re2
+                                                                                           (57)
+                                                                           
+              1                                    1              2      2
+                 −2∇x η(Dx u1 − ∂z w1 ) + (∇x w1 + 2 ∂z u1 )(1 − ε |∇x η| )
+             Re1                                   ε                                      (58)
+                1 p         2     2
+             = fric 1 + ε |∇x η| ;
+                ε
+                                                                           
+       4    1                                        1             2      2
+      ε µ2        −2∇x η(Dx u2 − ∂z w2 ) + (∇x w2 + 2 ∂z u2 )(1 − ε |∇x η| )
+           Re2                                      ε                                     (59)
+          1 p          2      2
+      = r fric 1 + ε |∇x η| ;
+          ε
+• Conditions at the internal sediment interface:
+                                   ∂t2 hf + u2 ∇x ηf − w2 = −Tm ;                         (60)
+
+                                                                            
+         4    1                                      1              2      2
+        ε µ2       −2∇x η(Dx u2 − ∂z w2 ) + (∇x w2 + 2 ∂z u2 )(1 − ε |∇x η| )
+             Re2                                    ε                                     (61)
+          1      p
+        = fricf 1 + ε2 |∇x η|2 ;
+           ε
+• Condition at the bottom:
+
+                                         −u2 ∇x b + w2 = 0.                               (62)
+
+                                              30
+A.2      Layer Ω1 : shallow water.
+In this section we obtain the mass and momentum approximated equations for the fluid
+layer.
+
+Hydrostatic approximation
+We assume ε to be small and keep the terms in the system of order zero and one. Then we
+integrate this system in [η, ηs ]. First, we integrate the equation of the horizontal velocity
+and use conditions (52), (53), (54), (55) and (58) to obtain:
+      Z ηs                Z ηs                             Z ηs                  Z ηs        
+                                                      2
+  ∂t1       u1 dz + divx           (u1 ⊗ u1 )dz −         divx        Dx u1 dz + ∇x           p1 dz
+        η                       η                   Re1           η                         η
+      2                                  1
+  −     ∂z w1|z=η ∇x η + p1 |z=η ∇x η + fric = O(ε2 ).
+    Re1                                  ε
+                                                                                                  (63)
+Now, to get p1 we integrate the vertical velocity equation from z to ηs and use the divergence
+free condition:
+                                   1                                1
+             p1 (z) = p1 |z=ηs −      (divx u1 − divx u1|z=ηs ) −       (z − ηs ) + O(ε2 ).       (64)
+                                  Re1                             F r12
+
+Asymptotic analysis
+To develop the asymptotic analysis, we assume the following hypotheses on the data:
+                                      1
+                                         = εν01 ,     fric = ε fric0 ,
+                                     Re1
+and we consider the development of the unknowns in terms of ε:
+         h1 = h01 + εh11 + O(ε2 ),     u1 = u01 + εu11 + O(ε2 ),         p1 = p01 + εp11 + O(ε2 ).
+We also introduce for simplicity the notation η 0 and ηs0 to write the main order components
+of the interface and the free surface respectively.
+If we just consider the terms of the principal order (ε0 ), we obtain from first equation in
+(50), (58) and (53) that:
+                                      ∂z2 u1 = O(ε);
+                                      ∂z u1|z=η = O(ε);
+                                      ∂z u1|z=ηs = O(ε),
+from where we deduce that u1 does not depend on z at first order, so:
+                                        u01 (t, x, z) = u01 (t, x).
+This is the usual “motion by slices” property of the shallow flows. Under this hypothesis,
+we shall rewrite the expressions above to obtain the final equation for layer 1 at first order.
+First, we write the mass conservation equation from (50) as:
+                                       ∂t h01 + divx (h01 u01 ) = 0.                                 (65)
+
+                                                    31
+From (64) and taking into account the free surface condition (54), the pressure reads,
+                                           1
+                            p1 (z) = −       2
+                                               (z − ηs0 ) − 2εν01 divx u01 + O(ε2 ).                 (66)
+                                          F r1
+Using these values in equation (63), we obtain:
+                                                   1 1                1 0
+      ∂t1 (h01 u01 ) + divx (h01 (u01 ⊗ u01 )) +          ∇ (h0 )2 +
+                                                        2 x 1
+                                                                          h ∇x η 0 + fric0 = O(ε),   (67)
+                                                   2 F r1            F r12 1
+where the friction term fric0 will be specified later.
+
+A.3      Layer Ω2 : Reynolds.
+We derive in this section the first order approximation of the evolution equation for the
+layer 2. Due to the more complex dimensionless considered for this layer, it is necessary to
+keep in the derivation process the terms of order zero and one (the unknowns are denoted
+with tilde). Later we will only consider the terms of principal order.
+
+We write the momentum equations in (51) up to second order :
+                                       −∂z (µ2 ∂z u2 ) + ∇x p2 = O(ε2 );                             (68)
+                                            Re2
+                                                  = O(ε2 ).
+                                            ∂ z p 2 + ε2                               (69)
+                                            F r22
+The mass equation for the sediment layer comes from the integration of the incompre-
+ssibility equation. Since we decomposed this layer into the static and the moving sediment
+layers, we make this integration in each of them. Thus, for the static layer we have that
+u2 (z) = 0 for b ≤ z < ηf , and we use conditions (60) and (62) to get
+                                                    ∂t2 hf = −Tm                                     (70)
+Using conditions (56) and (60) we write the mass conservation for the moving layer:
+                                           Z η      !
+                            ∂t2 hm + divx      u2 dz = Tm .                         (71)
+                                                            ηf
+
+The expression for the velocity u2 will be obtained from the equation (68), but first we
+need to know the value of the pressure p2 that will be given by equation (69).
+
+
+Remark A.1 Due to the incompressibility equation, we only need to find an equation for
+u2 . In fact from the mass conservation equation, we have
+                                                Z η
+                              w2 (z) = w2|z=η −     divx u2 dz,
+                                                                 z
+
+where w2|z=η is given by the kinematic condition at the interface (56).                                
+
+                                                           32
+Asymptotic analysis
+We consider the following asymptotic regime in order to keep the gravitational and inter-
+granular friction effects:
+                             ν2 = ε−1 ν̄2 ; fricf = ε fricf 0 ;
+                                                                                           2
+Thanks to the definition of the dimensionless variables for the layer 2, we have Re2 = ε νU2 L ,
+so for simplicity we will use the notation
+
+                                   ε3                        ν̄2
+                           Re2 =       ,     where ν02 =         = O(1).
+                                   ν02                       UL
+
+Notice that from the definitions of Re2 and F r2 we have ε2 FRer22 = gLH
+                                                                     ν2 U
+                                                                          , so for simplicity we
+                                                                2
+introduce
+                                         Re2        1
+                                  β0 = ε 2 = ε             .                                (72)
+                                         F r2    ν02 F r12
+   As we did for the layer 1, we develop each unknown in terms of ε and introduce the
+notation:
+                   h̃m = h0m + εh1m , ũ2 = u02 + εu12 , p˜2 = p02 + εp12 .
+Note that the integration at this level involves only the moving layer hm , because the
+velocity is assumed to be zero for b ≤ z < ηf .
+So to obtain the pressure we integrate the equation (69) for z ∈ [ηf , η]:
+
+                                p˜2 (z) = p˜2 |z=η − εβ0 (z − η 0 ).                       (73)
+
+We use the interface condition (57) to get the value of the pressure at the interface up to
+second order
+                                   r
+                       p2 |z=η = ε (p1 |z=η + 2εν01 divx u01 ) + O(ε2 ).               (74)
+                                  ν02
+Thanks to (66) we get:
+                                            r 1 0
+                             p˜2 (z) = ε            h − εβ0 (z − η 0 ).                    (75)
+                                           ν02 F r12 1
+Thus
+                                            r 1
+                             ∇x p˜2 = ε              ∇x h01 + εβ0 ∇x η 0 ,                 (76)
+                                           ν02 F r12
+that does not depend on z. Taking into account the definition of β0 , we can write this
+equation as follows:
+                                      1 1
+                          ∇x p˜2 = ε           (r∇x h01 + ∇x η 0 ).                (77)
+                                     ν02 F r12
+Next in order to get an expression for the velocity ũ2 , we integrate (68) from ηf to z to
+find
+                        µ2 ∂z ũ2 = (µ2 ∂z u˜2 )|z=ηf + (z − ηf ) ∇x p˜2 .
+
+
+
+                                                   33
+We get the value at the internal sediment interface from the friction condition (61) at
+second order:
+                          ν02 (µ2 ∂z u2 )|z=ηf = εfricf 0 + O(ε2 ).                (78)
+Then we obtain
+                                        1 ε                     z − ηf
+                             ∂z ũ2 =          fricf 0 + ∇x p˜2        .                   (79)
+                                        µ2 ν02                    µ2
+We integrate again but now from z to η to get ũ2 . We must take into account that µ2 is
+not constant, so
+                                                 Z z               Z z
+                                      ε              1                 z − ηf
+                 ũ2 (z) = u˜2|z=η +     fricf 0       dz + ∇x p˜2            dz.  (80)
+                                     ν02          η µ2              η    µ2
+
+Since we are interested in the principal order approximation, we neglect the two last terms
+−remember that ∇x p˜2 ∼ O(ε) from equation (77)−. So we approximate
+
+                                    ũ2 (z) = u˜2|z=η + O(ε).
+
+If we use the boundary condition at the interface (59),
+                                                      r
+                              (µ2 ∂z u˜2 )|z=η = ε       fric0 + O(ε2 )                    (81)
+                                                     ν02
+and the previous expression for µ2 ∂z u˜2 evaluated in z = η we get a relation between the
+friction forces:
+                                              hm
+                          r fric0 = fricf 0 +       (r∇x h01 + ∇x η 0 )               (82)
+                                              F r12
+where we have used (77).
+At this moment, in order to find an expression for u˜2|z=η , and then for u˜2 , we must explicit
+the friction terms.
+For the friction at the level z = ηf , we consider a Coulomb friction law,
+                                                                
+                      fricf = − sgn(u2 ) tan δ (σ1 − σ2 )Nf · Nf                           (83)
+                                                                           |z=ηf
+
+with Nf the unitary normal vector to the interface z = ηf and δ the intergranular Coulomb
+friction angle. To be consistent with the development done before, the asymptotic assump-
+tion must be
+                                       tan δ = ε tan δ0 .
+Developing this expression and using (66) we have:
+                                            r−1
+                              fricf 0 = −         sgn(u2 ) tan δ0 h̃m .                    (84)
+                                            F r12
+
+We consider two possible friction laws for the level z = η and we derive the corresponding
+models.
+
+                                                  34
+• Linear friction law at z = η
+We use a generalized law based in the work [42] (see Remark A.2), that reads
+
+                                          fric = C(u1 − u2 )|z=η                                     (85)
+
+Remark A.2 The friction law introduced in (85) is based on the work performed in [42].
+If we take into account the asymptotic regime considered for the viscosities, the coefficient
+C can be written (up to second order) as:
+
+                                                 C = khm .
+
+We must also take care of the adimensionalization for this friction term. Thus we assume
+the following dimension and asymptotic to the coefficient C:
+
+                                        C = U C ∗;         C ∗ = εC 0 .
+
+Then we have
+                                       fric0 = C 0 (u01 − ε2 u˜2|z=η )                               (86)
+From the friction at z = η (86) and using (82) we get the value of u˜2|z=η
+
+                              1 0       1
+                  u2|z=η =      2
+                                  u1 − 2 0 fric0
+                              ε       εC
+                              1 0        1        hm          0         0
+                                                                             
+                            = 2 u1 − 2 0 fricf 0 +       (r∇  h
+                                                             x 1 + ∇ x η   )
+                              ε       rε C         F r12
+
+Finally, an expression for ũ2 is deduced:
+                   1          1     1                                                  
+         ũ2 (z) = 2 u01 − 2 0        h̃m   (1 − r)sgn(u 2 ) tan δ0 + (r∇ h0
+                                                                         x 1 + ∇ x η 0
+                                                                                       )             (87)
+                  ε       r ε C F r12
+
+Now we use the relation (71) to write an equation for hm up to first order:
+                                                                                  
+      0          1 0 0        1 (h0m )2                                 0       0
+ ∂t2 hm + divx     h u −                  (1 − r)sgn(u2 ) tan δ0 + (r∇x h1 + ∇x η )   = Tm .
+                 ε2 m 1 r ε2 C 0 F r12
+                                                                                        (88)
+     Finally we use (82) to complete the equation for the momentum of the layer 1, (67)
+that reads:
+                                                                                1 0
+              ∂t1 (h01 u01 ) + divx (h01 (u01 ⊗ u01 )) + 21 F1r2 ∇x (h01 )2 +        h ∇ η0
+                                                                                   2 1 x
+                                 
+                                                               1               F r 1                (89)
+                    1 1                                                    0         0
+                 +           h̃m   (1 −   r)sgn(u  2 ) tan δ 0 +  (r∇ x  h 1 + ∇ x η   )   = O(ε).
+                    r F r12
+
+The final model is given by equations (65), (70), (88) and (89). The dimension form of the
+system is given by (17)-(19).
+
+                                                      35
+• Quadratic friction law at z = η
+We consider now a quadratic law as follows
+                            fric = C1 |(u1 − u2 )|z=η |(u1 − u2 )|z=η                    (90)
+with C1 an adimensional constant that we suppose of order ε, that is, C1 = εC10 . Then,
+                         fric0 = C10 |u01 − ε2 u˜2|z=η | (u01 − ε2 u˜2|z=η ).
+We can find a solution for this equation, given by:
+                                              1
+                          u01 − ε2 u˜2|z=η = p 0 |fric0 |1/2 sgn(fric0 )
+                                              C1
+So we write the value of the velocity u2 at the interface as follows:
+                                    1 0        1
+                         u2|z=η =     2
+                                        u1 − p 0 |fric0 |1/2 sgn(fric0 )
+                                    ε        2
+                                            ε C1
+Thus, (87) turns into
+                                                      1/2
+                                    1 0   1   h̃m
+                        ũ2 (z) =     u −   p         |P|1/2 sgn(P)                      (91)
+                                    ε2 1 ε2 rC10 F r1
+with                                                              
+                      P = ∇x (rh1 + h2 + b) + (1 − r)sgn(u2 ) tan δ .
+Since the relation (82) is valid for any friction laws, the completion of the equation for the
+layer 1 does not change and is given by (89). The dimension form for the complete system
+is given by (17)-(20).
+
+
+B      Energy balance
+B.1     Proof of Theorem 2.1
+In this appendix we prove the result of the energy balance associated to the proposed
+system that is held in Theorem 2.1. Concretely, we prove that the deduced model verifies
+an exact entropy dissipation energy.
+For convenience, we remind here the proposed model given by equation (17)
+          
+            ∂t h1 + divx q1 = 0,
+          
+          
+          
+          
+          
+          
+          
+                                          1      2                     ghm
+          
+           ∂t q1 + divx (h1 (u1 ⊗ u1 )) + 2 g∇x h1 + gh1 ∇x (b + h2 ) + r P = 0,
+          
+                                p               
+          
+            ∂  h  + div     h v    (1/r  − 1)gd
+             t 2        x    m b               s = 0,
+          
+          
+          
+          
+          
+          
+             ∂t hf = −Tm .
+
+                                                 36
+with                                                               
+                      P = ∇x (rh1 + h2 + b) + (1 − r)sgn(u2 ) tan δ
+and
+   • for the model (LF ),
+
+                                  (LF )         1              ϑ
+                            vb = vb       =p             u1 −     P.
+                                            (1/r − 1)gds      1−r
+
+   • for the model (QF ),
+                                                             r
+                          (QF )             1                     ϑ
+                    vb = vb     =p                    u1 −           |P|1/2 sgn(P).
+                                      (1/r − 1)gds               1−r
+
+In the following lines, we give the proof of the Theorem 2.1.
+
+First we multiply the momentum equation for the layer 1 by ru1 and we use the mass
+equation to obtain:
+                                                 
+  r      2           2
+                                     |u1 |2
+    ∂t gh1 + h1 |u1 | + rdivx h1 u1          + gh1    + rgh1 u1 ∇x (b + h2 ) + ghm u1 P = 0
+  2                                     2               |       {z        } | {z }
+                                                                       (a)                (b)
+
+                                                                                         
+Now we multiply the equation for the layer 2 by P̃ = g (rh1 +h2 +b)+x (1−r)sgn(u2 ) tan δ .
+Note that ∇x P̃ = gP.
+   • For the linear friction law case,
+                                                                       
+                                                       ϑ     p
+                P̃∂t h2 + P̃divx (hm u1 ) − P̃divx hm     P (1/r − 1)gds = 0;
+                | {z } |       {z      }              1−r
+                  (c)          (d)          |             {z            }
+                                                             (eL )
+
+
+   • for the quadratic friction law case
+                                                 r                                 !
+                                                      ϑ               p
+         P̃∂t h2 + P̃divx (hm u1 ) − P̃divx hm           |P|1/2 sgn(P) (1/r − 1)gds = 0.
+         | {z } |       {z      }                    1−r
+           (c)          (d)          |                       {z                    }
+                                                             (eQ )
+
+
+We use the definition of P̃ to decompose the term (c) in two parts, (c) = (c)1 + (c)2 :
+
+                                 (c)1 = g(rh1 + h2 + b)∂t h2
+                                                                                      
+            (c)2 = gx (1 − r)sgn(u2 ) tan δ ∂t h2 = ∂t gh2 x (1 − r)sgn(u2 ) tan δ
+
+                                                37
+Now, after some simple calculations, the terms (a) and (c)1 gives:
+                       1                                                            
+           (a) + (c)1 = g∂t (b + h2 )2 + divx (rgh1 (b + h2 )u1 ) + rg∂t h1 (b + h2 )
+                       2
+Finally
+                                   (b) + (d) = divx (hm u1 P̃)
+and the last terms read
+                                           
+                         ϑ     p                    ϑ p
+      (eL ) = −divx hm      P̃P (1/r − 1)gds + ghm     (1/r − 1)gds |P|2
+                        1−r                        1−r
+or
+                    r                                !     r
+                         ϑ              p                     ϑ p
+(eQ ) = −divx hm                 1/2
+                            P̃|P| sgn(P) (1/r − 1)gds +ghm       (1/r − 1)gds |P|3/2
+                        1−r                                  1−r
+
+So, finally we obtain (43) and (44), where the right hand side in both cases are non-positive.
+
+B.2       Proof of Theorem 2.2
+In this section we analyze the energy associated to a general Saint-Venant-Exner model
+for a modified friction in the momentum equation of the Saint-Venant system:
+                                                    1 p
+                           τ /ρ1 = gϕ(h1 )u1 |u1 | + ξm gϕ(h1 )R.
+                                                    r
+This model is given in equations (1)-(3) that we remind next:
+              
+              
+                ∂t h1 + divx q1 = 0,
+              
+              
+              
+                              2          
+                               |q1 |  1 2
+                 ∂t q1 + divx         + gh1 + gh1 divx (h2 + b) + τ /ρ1 = 0,
+              
+                                h1    2
+              
+              
+              
+              
+              
+                 ∂t h2 + divx qb = 0,
+
+where                                                             p
+                 qb     1                                 √
+                    =      sgn(τ ) k1 θ m1 (θ − k2 θc )m
+                                                       + ( θ − k3
+                                                        2
+                                                                   θc )m
+                                                                       + ,
+                                                                         3
+
+                 Q    1−ϕ
+                 p                          |τ |d2s
+           Q = ds g(1/r − 1)ds , θ =                     and τ = ρ1 gϕ(h1 )u1 |u1 |.
+                                       g(ρ2 − ρ1 )d3s
+To prove Theorem 2.2 we follow the same development above. First, we write the discharge
+qb in the following way:
+                  qb             √   p                             
+                     = ξm sgn(τ ) θ − θc + sgn(τ )g∇x (rh1 + h2 + b) ,
+                   Q
+
+                                               38
+where
+         1                          √      p                         1
+ ξm =       k1 θ m1 (θ − k2 θc )m
+                                + ( θ − k3
+                                  2
+                                            θ c )m
+                                                 + √
+                                                  3
+                                                         √                                .
+        1−ϕ                                         ( θ − θc + sgn(τ )g∇x (rh1 + h2 + b))
+Now, from the definition of θ and τ we write:
+                                                                p
+                          ρ1 ϕ(h1 )|u1 |2               √       ϕ(h1 )|u1 |
+                       θ=                 ,    so           θ=p
+                          (ρ2 − ρ1 )ds                         (1/r − 1)ds
+
+with                                  p
+                           R = sgn(τ ) θc − g∇x (rh1 + h2 + b).
+So, finally
+                                                                     p
+                         p                                  gϕ(h1 )
+               qb = ξm vb g(1/r − 1)ds        with vb = p             u1 − R.
+                                                         g(1/r − 1)ds
+
+And we can write the equation for h2 as follows:
+                             p                  p           
+                ∂t h2 + divx ξm gϕ(h1 )u1 − ξm R g(1/r − 1)ds = 0.
+
+Note that we have rewritten the evolution equation for the sediment in a different manner
+but no modification has been introduced in it. As we mentioned above, the only modifi-
+cation needed to obtain the dissipative energy balance is taken into account in the friction
+term in the momentum conservation equation of the Saint-Venant system.
+First, we multiply the momentum equation of the first layer by ru1 and we use the mass
+equation to obtain:
+                                                          
+        r      2           2
+                                              |u1 |2
+          ∂t gh1 + h1 |u1 |    + rdivx h1 u1          + gh1    + rgh1 u1 ∇x (b + h2 )
+        2                                        2               |       {z        }
+                                                                               (a)
+                                               3
+                                                 p
+                              + gϕ(h1 )|u1 | + ξm gϕ(h1 )Ru1 = 0
+                                               |    {z     }
+                                                               (b)
+
+                                                                            √ 
+Now we multiply the equation for layer 2 by R̃ = sgn(τ ) g(rh1 + h2 + b) + x θc , where
+∇x R̃ = R. Then,
+                           p                          p             
+          R̃∂t h2 + R̃divx ξm gϕ(h1 )u1 − R̃divx ξm R (1/r − 1)gds = 0.
+          | {z }
+            (c)
+                    |        {z         } |              {z            }
+                               (d)                                       (e)
+
+In the same manner than before, we obtain that
+           1                                                                            p
+(a) + (c) = g∂t (b + h2 )2 + divx (rgh1 (b + h2 )u1 ) + rg∂t h1 (b + h2 ) − ∂t (h2 sgn(τ ) θc )
+           2
+                                                   39
+Finally                                               p
+                            (b) + (d) = divx (ξm u1    gϕ(h1 )R̃)
+and the last term reads
+                               p                p
+              (e) = −divx ξm R̃R (1/r − 1)gds + ξm (1/r − 1)gds |R|2
+
+Then, (45) is satisfied.
+
+
+References
+ [1] K. Ashida, M. Michiue. Study on hydraulic resistance and bedload transport rate in
+     alluvial streams. JSCE Tokyo (206): 59–69, (1972).
+ [2] P. Aussillous, J. Chauchat, M. Pailha, M. Médale, and E. Guazzelli. Investigation of
+     the mobile granular layer in bed-load transport, J. Fluid Mech., 736, 594-615, (2013)
+ [3] R.A. Bagnold. The Flow of Cohesionless Grains in Fluids, Royal Society of London
+     Philosophical transactions. Series A. Mathematical and physical sciences, no. 964,
+     Royal Society of London, (1956).
+ [4] R. A. Bagnold. An approach to the sediment transport problem from general physics.
+     in: Physical of Sediments and Transport by Wind and Water, Amer. Society of Civil
+     Engineers, (1988).
+ [5] C. Cassar, M. Nicolas, and O. Pouliquen. Submarine granular flows down inclined
+     planes, Phys. Fluids, 17(10), 103301, (2005).
+ [6] M. J. Castro Dı́az, E. D. Fernández-Nieto, A. M. Ferreiro. Sediment transport mod-
+     els in Shallow Water equations and numerical approach by high order finite volume
+     methods. Computers & Fluids (37): 299–316, (2008) .
+ [7] J. Chauchat, M. Médale. A 3D numerical model for incompress- ible two-phase flow
+     of a granular bed submitted to a laminar shearing flow, Comput. Meth. Appl. Mech.
+     Eng., 199, 439-449, (2010).
+ [8] T. Revil-Baudard, J. Chauchat. A two-phase model for sheet flow regime based on
+     dense granular flow rheology, J. Geophys. Res. Oceans, 118, 619-634, (2013).
+ [9] F. Charru. Interface boundary value problem for the Navier-Stokes equations in thin
+     domains. J. Differential Equations (208): 449-493, (2005).
+[10] F. Charru. Selection of the ripple length on a granular bed sheared by a liquid flow.
+     Physics of Fluids (18): 121508, (2006).
+[11] I.D. Chueskov, G. Raugel and A.M. Rekalo. Selection of ripple length on a granular
+     bed sheared by a liquid flow. Physics of Fluids (18):121508, (2006).
+
+                                            40
+[12] G. Cimatti. A Rigorous Justification of the Reynolds Equation. Quart. Appl. Math.
+     XLV (4): 627–644, (1987).
+[13] M. Colombini. Revisiting the linear theory of sand dune formation. J. Fluid Mech.,
+     (502):1–6, (2004).
+[14] W. F. Cope. The hydrodynamic theory of film lubrication. Proc. R. Soc. London, Ser.
+     A 197, 201–217, (1949).
+[15] S. Cordier, C. Lucas, J. D. D. Zabsonré. A two time-scale model for tidal bed-load
+     transport. Communications in Mathematical Sciences (10): 875–888, (2012).
+[16] H. A. Einstein. Formulas for the transportation of bed load. ASCE. (107): 561–575,
+     (1942).
+[17] F. Exner, Uber die wechselwirkung zwischen wasser und geschiebe in flussen, Sitzungs-
+     ber., Akad. Wissenschaften pt. IIa. Bd. 134, (1925).
+[18] F. Engelund, J. Dresoe. A sediment transport model for straight alluvial channels.
+     Nordic Hydrol. (7): 293–306, (1976).
+[19] F. Engelund and E. Hansen. A monograph on sediment transport in alluvial streams.
+     Copenhagen, Danish Technical Press. (1967).
+[20] Fernández Luque & Van Beek. Erosion and transport of bedload sediment. J. Hy-
+     draulaul. Res. (14): 127–144, (1976).
+[21] E. D. Fernández-Nieto, F. Bouchut, D. Bresch, J. M. Castro, A. Mangeney. A new-
+     Savage-Hutter type model for submarine avalanches and genrated tsunami. J. Comput.
+     Phys., 227(16): 7720–7754, (2008).
+[22] E. D. Fernández-Nieto. Modelling and numerical simulation of submarine sediment
+     shallow flows: transport and avalanches. SeMA Journal (49):83–103, (2009).
+[23] E. D. Fernández-Nieto, C. Lucas, T. Morales de Luna, S. Cordier. On the influence
+     of the thickness of the sediment moving layer in the definition of the bedload trasport
+     formula in Exner systems. Comp.& Fluids, 91: 87–106, (2014).
+[24] E. D. Fernández-Nieto, G. Narbona-Reina, J. D. D. Zabsonré. Formal derivation of
+     a bilayer model coupling Shallow Water and Reynolds equations: evolution of a thin
+     pollutant layer over the water. European Journal of Applied Mathematics, 24 (6):
+     803–833, (2013).
+[25] Y. Forterre, O. Pouliquen. Flows of dense granular media, Annu. Rev. Fluid Mech.,
+     40, 1-24, (2008).
+[26] A. C. Fowler, N. Kopteva, and C. Oakley. The formation of river channel. SIAM J.
+     Appl. Math.(67):1016–1040, (2007).
+
+                                            41
+[27] J. Fredsøe. On the development of dunes in erodible channel. J. Fluid Mech. (64):1–16,
+     (1974).
+
+[28] G. Garegnani, G. Rosatti, L. Bonaventura. Free surface flows over mobile bed: math-
+     ematical analysis and numerical modeling of coupled and decoupled approaches. Com-
+     munications In Applied And Industrial Mathematics, 2(1), (2011).
+
+[29] A. J. Grass. Sediments transport by waves and currents. SERC London Cent. Mar.
+     Technol., Report No. FL29, (1981).
+
+[30] F. Gerbeau, B. Perthame. Derivation of viscous Saint-Venant system for laminar
+     Shallow-Water; Numerical validation. Disc. Cont. Dynam. Syst. Series B 1(1): 89–
+     102, (2001).
+
+[31] R. Jackson, The Dynamics of Fluidized Particles, Cambridge University Press, Cam-
+     bridge, (2000).
+
+[32] A. A. Kalinske. Criteria for determining sand transport by surface creep and saltation.
+     Trans. AGU. 23(2): 639–643, (1942).
+
+[33] A. Kovacs, G. Parker. A new vectorial bedload formulation and its application to the
+     time evolution of straight river channels. J. Fluid Mech., (267):153–183, (1994).
+
+[34] K. K. J. Kouakou, P. Y. Lagrée. Evolution of a model dune in a shear flow. Eur. J.
+     Mech. B/Fluids, (25): 348–359, (2006).
+
+[35] P.Y. Lagrée, L. Staron, S. Popinet. The granular column collapse as a continuum: va-
+     lidity of a two-dimensional Navier-Stokes model with a µ(I)-rheology. J. Fluid. Mech.,
+     686, 378–408, (2011).
+
+[36] J. Zabsonré, C. Lucas, E.D. Fernández-Nieto. An Energertically Consistent Viscous
+     Sedimentation Model. Math. Models and Methods in Applied Sciences, 477–499,
+     (2009).
+
+[37] D.K. Lysne. Movement of sand in tunnels. Proc. A.S.C.E.(95): 1835–1846, (1969).
+
+[38] F. Marche. Theoretical and numerical study of Shallow Water models. Applications to
+     Nearshore hydrodynamics. Ph.D. thesis, University of Bordeaux, (2005).
+
+[39] Meyer-Peter, R. Müller. Formulas for bed-load transport. Rep. 2nd Meet. Int. Assoc.
+     Hydraul. Struct. Res., Stockolm: 39–64, (1948). ASCE. (107): 561–575, (1942)
+
+[40] T. Morales De Luna, J. M. Castro-Dı́az, C. Parés-Madroñal. A Duality Method for
+     Sediment Transport Based on a Modified Meyer-Peter & Müller Model. J. Sci. Comput.
+     (48): 258–273, (2009).
+
+
+
+                                            42
+[41] T. Morales De Luna, J. M. Castro-Dı́az, C. Parés-Madroñal, E. D. Fernández-Nieto.
+     On a Shallow Water Model for the Simulation of Turbidity Currents. Commun. Com-
+     put. Phys., (6): 4848–882, (2011).
+
+[42] G. Narbona-Reina, J.D. Zabsonré, E.D. Fernández-Nieto, D. Bresch. Derivation of
+     a bi-layer Shallow-Water model with viscosity. Numerical validation. CMES, 43(1):
+     27–71 (2009).
+
+[43] P. Nielsen. Coastal Bottom Boundary Layers and Sediment Transport. World Scientific
+     Publishing, Singapore. Advanced Series on Ocean Engineering, 4, (1992).
+
+[44] A. Oron, S. H. Davis, S. G. Bankoff. Long scale evolution of thin films. Rev. Mod.
+     Phys., (69), (1997).
+
+[45] M. Ouriemi, P. Aussillous, E. Guazzelli. Sediment dynamics. Part I: Bed-load transport
+     by shearing flows. J. Fluid Mech., 636, 295-319, (2009).
+
+[46] M. Pailha, J. Chauchat, P. Aussillous, M. Médale, E. Guazzelli. Bed-load Transport.
+     Part 2: The Mobile Granular Layer. THESIS, (2011).
+
+[47] G. Parker, G. Seminara, L. Solari. Bed load at low Shields stress on arbitrarily
+     sloping beds: Alternative entrainment formulation. Water Resources Res. (29):7,
+     doi:10.1029/2001WR001253, (2003).
+
+[48] C. Parés and M.J. Castro. On the well-balance property of Roe’s method for noncon-
+     servative hyperbolic systems. Applications to shallow-water systems. ESAIM-Math.
+     Model. Num. 38 (5): 821–852, (2004).
+
+[49] E. Peña González. Estudio numérico y experimental del transporte de sedimentos en
+     cauces aluviales. Tesis Doctoral. Universidade da Coruña. Grupo de Ingenierı́a del
+     agua y del medio ambiente. (2002).
+
+[50] M. Peybernes. Analyse de problème mathématiques de la mécanique des fluides de type
+     bi-couche et à frontière libre. Ph.D. thesis, University of Pascal Paoli, (2006).
+
+[51] O. Reynolds. On the theory of lubrication and its application to Mr. Beauchamp
+     Tower’s experiment. Phil. Trans. R. Soc. London Part I, 228–310, (1886).
+
+[52] M. Church, P. Biron, A. Roy. Gravel Bed Rivers: Processes, Tools, Environments.
+     John Wiley & Sons, (2012).
+
+[53] L. C. Van Rijn. Sediment transport (I): bed load transport. J. Hydraul. Div. Proc.
+     ASCE, (110): 1431–56, (1984).
+
+[54] P. C. Roos. Seabed Pattern Dynamics and Offshore Sand Extraction, Ph.D. thesis,
+     University of Twente, (2004).
+
+
+                                            43
+[55] H. Schuttelaars. Evolution and Stability Analysis of Bottom Patterns in Tidal Em-
+     bayements, Ph.D. thesis, Utrecht University, (1997).
+
+[56] G. Seminara, L. Solari, G. Parker. Bed load at low Shields stress on arbitrarily slop-
+     ing beds: Failure of the Bagnold hypothesis. Water Resources Res. Vol. 38: 11, doi:
+     10.1029/2001WR000681, (2002).
+
+[57] N. Struiksma. K.W. Olesen. C. Flokstra. H.J. De Vriend. Bed deformation in curved
+     alluvial channels. J. Hudraulic Research, (23): 57–79, (1985).
+
+[58] P. Tassi, S. Rhebergen, C. Vionnet, O. Bokhove. A discontinuous Galerkin finite
+     element model for morphodynamical evolution in shallow flows. Comp. Meth. App.
+     Mech. Eng. (197) 2930–2947, (2008).
+
+[59] H. J. de Vriend, J. Zyserman, J. Nicholson, J.A. Roelvink, P. Péchon, H. N. Southgate.
+     Medium-term 2DH coastal area modelling. Coastal Engineering, (21): 193–224, (1993).
+
+[60] J.D. Zabsonré. Modèles visqueux en sédimentation et stratification: obtention formelle,
+     stabilité théorique et schémas volumes finis bien équilibrés. Phd thesis, Université de
+     Savoie, (2008).
+
+[61] J. D. D. Zabsonré, C. Lucas, E. D. Fernández-Nieto. An energetically consistent viscous
+     sedimentation model. Math. Models Methods Appl. Sci. (19): 477–499 (2009).
+
+
+
+
+                                               44
+

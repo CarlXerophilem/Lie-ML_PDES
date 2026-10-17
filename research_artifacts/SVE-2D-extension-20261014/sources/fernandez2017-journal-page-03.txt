@@ -1,0 +1,56 @@
+                   SAINT-VENANT–EXNER MODELS WITH GRAVITATIONAL EFFECTS AND ENERGY                                  117
+
+   The Shields stress, θ, represents the ratio between the agitating and the stabilizing forces on a sediment grain
+in the bed,
+                                                         |τ |d2s
+                                                 θ=                 ,                                         (1.4)
+                                                     g(ρ2 − ρ1 )d3s
+and θc is the critical Shields stress for incipient motion.
+  The constants kl , ml , l = 1, 2, 3 are positive real numbers. Depending on the values of theses constants,
+we obtain diﬀerent models. Usually at least one of the parameters m1 , m2 or m3 is set to zero. For example,
+Meyer-Peter and Müller’s model is deﬁned by
+                                          qb              8             3/2
+                                             = sgn(τ )         (θ − θc )+ ,                                       (1.5)
+                                          Q            (1 − ϕ)
+
+and Ashida and Michiue’s model is deﬁned by:
+                                     qb              17               √
+                                        = sgn(τ )         (θ − θc )+ ( θ −     θc ).                              (1.6)
+                                     Q            (1 − ϕ)
+
+  Finally, by ( · )+ we denote the positive part. In equation (1.2) the positive part implies that the sediment
+moves when the modulus of the shear stress is bigger than a given critical value.
+  Although the classic SVE model is largely used, it presents several disadvantages:
+  (i) The SVE model has not a dissipative energy equation associated to the system.
+ (ii) Solid transport discharge formulae are derived by using the hypothesis of nearly horizontal sediment beds,
+      that is, ∇x η ≈ 0.
+(iii) Solid transport ﬂux is independent of the thickness of the sediment layer. Thus, the mass conservation
+      property for the sediment given by third equation in (1.1) may fail (see [39]).
+   Concerning the ﬁrst item, we should remark that there exist in the literature some simpler solid trans-
+port formulae for which the corresponding SVE model has an associated dissipative energy equation (see for
+example [60]). Nevertheless, up to our knowledge, no general result exists in the bibliography in this sense.
+   The second item implies that classic formulae cannot be used in several problems of interest (see [33]) because
+they are derived by using the hypothesis of nearly horizontal sediment beds.
+   As mentioned before, the Shields parameter is the ratio between agitating forces and the stabilizing forces.
+Classical formulae consider that the only agitating force is the bottom shear stress, concretely |τ |d2s . Nevertheless,
+in the experiments presented by Lysne in [36] it can be seen that gravity is another contributing factor as an
+agitating force (see also [27]) for sloped sediment beds. Thus, it is necessary to take into account gravitational
+forces in order to obtain a solid transport discharge that can be applied for arbitrarily sloping beds.
+   This has been achieved in the literature in several ways. For instance, the simplest way to take into account
+the sediment bed slope in the deﬁnition of the solid transport discharge is to include a diﬀusion term. Engelund
+and Hansen proposed in [19] a formula that can be written under the following form,
+                                                                        
+                                                            u1
+                                            qb = k|u1 |m
+                                                                 − c ∇x η ,                                       (1.7)
+                                                           |u1 |
+
+k, m, and c being constant parameters of the model (see also [57,58]). Equation (1.7) can be seen as a modiﬁcation
+of the Grass model. An adaptation of this formula for curved channels was proposed by Struiksma et al. in [56]:
+                                                                                 
+                                                                          1
+                              qb = k|u1 |m (1 − c ∂s (b + h2 )) sgn u1 −      ∇x η ,
+                                                                         fs θ
+
+s being the streamwise coordinate and fs the shape factor of the grains (see [56] for more details). Note that this
+deﬁnition implies that the direction of the sediment transport does not coincide with the direction of the velocity

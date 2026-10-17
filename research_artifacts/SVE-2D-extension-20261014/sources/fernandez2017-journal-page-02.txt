@@ -1,0 +1,64 @@
+116                                         E.D. FERNÁNDEZ-NIETO ET AL.
+
+
+Surface creep is deﬁned as the type of transport where sediment grains roll or slide along the bed. Saltation
+transport is deﬁned as the type of transport where single grains jump over the bed a length proportional to their
+diameter, losing for instants the contact with the soil. Sediment is suspended when the ﬂux is intense enough
+so that the sediment grains reach height over the bed. There is not a clear distinction between surface creep
+and saltation, so that these types of transport are usually called bedload transport. At low Froude numbers,
+the bedload is the dominating transport mechanism which is the regime under study in this paper.
+   The Saint-Venant–Exner system (SVE in what follows) is deﬁned in terms of a hydrodynamical component
+coupled with a morphodynamical one. The hydrodynamical component in most cases is modeled by the Saint-
+Venant system. Although it is not necessarily a good model for the hydrodynamic component, it is widely
+used for its simplicity and because it is valid in a wide range of applications. The equation that describe
+the morphodynamical component is the well known Exner equation, that is a continuity equation. Then, the
+Saint-Venant–Exner model can be written under the following form:
+                     ⎧
+                     ⎪  ∂t h1 + divx q1 = 0,
+                     ⎪
+                     ⎪
+                     ⎪
+                     ⎪                                    
+                     ⎨                 q1 ⊗ q1          1 2
+                        ∂t q1 + divx             + ∇x     gh1 + gh1 ∇x (h2 + b) + τ /ρ1 = 0,                (1.1)
+                     ⎪
+                     ⎪                    h1            2
+                     ⎪
+                     ⎪
+                     ⎪
+                     ⎩
+                        ∂t h2 + divx qb = 0,
+where x = (x1 , x2 ) is the horizontal spacial coordinates, t represents the time variable, q1 = h1 (x, t)u1 (x, t)
+represents the water discharge, h1 (x, t) the thickness of the ﬂuid and u1 = (u1 [1] , u1 [2] ) its horizontal velocity.
+τ is the shear stress at the bottom and ρ1 the density of the ﬂuid. The unknown function h2 = h2 (x, t) is the
+thickness of the sediment layer (see Fig. 1) and qb denotes the solid transport discharge. g is the gravity constant
+and b is the ﬁxed bottom, usually called the bedrock layer. In what follows we shall denote η = b + h2 , being
+z = η(x, t) the sediment bed surface.
+   To close the system, it is necessary to deﬁne the solid transport discharge qb as well as the friction term τ .
+Several formulae for qb can be found in the literature. For example the classic formula proposed by Grass [29]
+assumes that the movement of the sediment begins at the same time as for the ﬂuid and both move in the same
+direction. It is deﬁned by qb = Ag |u1 |mg −1 u1 where Ag is a constant which takes into account the grain size
+and the kinematic viscosity and mg is a positive real number, such that 1 ≤ mg ≤ 4. Nevertheless, for practical
+applications, some other types of formulae have been proposed in the literature, for instance, by Meyer-Peter
+and Müller [38], Van Rijn’s [52], Einstein [16], Nielsen [42], Fernández-Luque and Van Beek [6, 20], Ashida and
+Michiue [1], Engelund and Fredsoe [18], Kalinske [32] or Charru [9]. Such formulae are usually presented in
+nondimensional form and can be written as follows,
+                            qb              k1                         √           m3
+                               = sgn(τ )          θ m1 (θ − k2 θc )m
+                                                                   +
+                                                                     2
+                                                                          θ − k3 θc     ,                          (1.2)
+                            Q            (1 − ϕ)                                    +
+
+where Q represents the characteristic discharge, Q = ds g(1/r − 1)ds , r is the density ratio, r = ρ1 /ρ2 , being
+ρ2 the density of the sediment particles and ds the mean diameter of the sediment particles. ϕ is the averaged
+porosity.
+   In classic SVE models the sign of qb coincides with the sign of τ , the shear stress at the bottom. In general
+we can write
+                                              τ = ρ1 gζ(h1 )u1 |u1 |,                                        (1.3)
+being ζ(h1 ) a function depending on the considered friction law. The shear stress is usually deﬁned as
+                                                     τ = ρ1 gh1 Sf ,
+being Sf the friction term. Sf can be described by diﬀerent empirical laws, such as the Darcy–Weisbach (Sf =
+                                                                                                 4/3
+f u1 |u1 |/8gh1, where f is the Darcy–Weisbach coeﬃcient) or Manning formulae (Sf = n2 u1 |u1 |/h1 , where n
+is the Manning coeﬃcient).

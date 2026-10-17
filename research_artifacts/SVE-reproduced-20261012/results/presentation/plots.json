@@ -632,9 +632,9 @@
   "source_sha256": "71224cf2e4a3ed456dc0cf9b5bb467fdf484b3ce7b4a7b7d713f649aa9747aa9",
   "status": "passed",
   "figure_sha256": {
-    "series-numerical.pdf": "da272b9b1c9bb4496e57e79a846497a2caf9f4572e95d941329edb392e041624",
+    "series-numerical.pdf": "1bb9abeea209d0f84d58d454e221ab44e51c8f4c2c2322f75018819fee725764",
     "series-numerical.png": "30239297b1dbe9453b490954fb174cc5227f2d7179338d63b3f4c6e20f3acc3d",
-    "first-integral-checks.pdf": "87dbe70ba3a4e11fb12e629ce885424e157121975bb2682608d5e6d4c8512641",
+    "first-integral-checks.pdf": "71f663bc0476658569e2732ecabd26fdae22cc3a1c32a0503a2bd255d0f23b4d",
     "first-integral-checks.png": "63ff2c8aafeca6827fc0cea16552bb439c49587d5a0b6372f295091783f0d071"
   }
 }
