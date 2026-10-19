@@ -6,6 +6,23 @@ fundamentals, boundary/data restrictions, derivations, implementation and result
 The project separates exact symmetry/reduction certificates, constructed
 data compatibility, numerical diagnostics, and bounded approximation results.
 
+## Dated research extension: 19 October 2026
+
+The [run report](build/sve-autonomous-20261019/REPORT.md) records 29 symbolic
+configurations, an independently evolved original-system affine benchmark,
+and 17 planned plus six exploratory neural runs. None of the neural runs
+passed every accuracy/residual gate; both single-profile Chebyshev reuse
+controls passed. The supported results are integrated into `draft/main.tex`.
+The [Lie reduction account](docs/Lie_reduction.md) connects definitions,
+geometry, model contracts and the remaining approximation problem.
+
+The reproduction package's current `main.py` is a different Eulerian analysis
+from its manifest-matching scalar release. Its scalar tests have six collection
+errors. Use the explicit [recovery adapter and instructions](build/sve-autonomous-20261019/recovery/README.md)
+for the historical scalar source: all 80 original tests passed in that
+separate replay. The frozen package and current entrypoint are preserved.
+This is not a fresh full historical numerical campaign.
+
 The [2026-10-12 SVE reproduction](research_artifacts/SVE-reproduced-20261012/README.md)
 audits all nine source reductions, records verified corrections, and runs
 classic Fehlberg 4(5) numerical examples, exact local series, convergence
@@ -62,8 +79,8 @@ two fixed PINNs passed both accuracy gates; no conditioned candidate passed.
 The extended perturbed interval uses sampled guards, without a continuous
 error certificate. The dissertation build reads its measured table and figure
 from that directory; run it from the repository root. Its bibliography includes
-selected manuscript entries and distinguishes the consulted 1986 Olver edition
-from the manuscript's 1993 entry. A smaller independent campaign uses
+selected manuscript entries; both manuscripts now identify the consulted
+1986 Olver edition. A smaller independent campaign uses
 `python3 run_pipeline.py --quick --seeds 17 --out build/week-4-quick`.
 
 Build the manuscript with a TeX distribution containing latexmk,
@@ -76,10 +93,10 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex draft/m
 The embedded bibliography needs no external `.bib` database. Read the final
 LaTeX log for unresolved citations/references and inspect the resulting PDF.
 The two ODE comparison figures are included under the reproduction package's
-`results/presentation/`; regenerate them with its `main.py --stage plots`
-after generating the matching numerical data, or run its default full demo.
-On this machine, the local TeX tools are in
-`$HOME/.local/share/.TinyTeX/bin/x86_64-linux`; add that directory to `PATH`.
+`results/presentation/`. Historical scalar execution requires the dated
+recovery adapter above and a separate output directory. The 19 October
+Windows build uses native MiKTeX `latexmk`/pdfLaTeX available on `PATH`;
+the older Linux checkout used TinyTeX.
 Git LFS must be installed before checking out the canonical PDF corpus.
 
 ## Research priorities
@@ -95,7 +112,9 @@ Git LFS must be installed before checking out the canonical PDF corpus.
 
 The three research interests are the Lagrange coordinate option, parameter
 and distribution of symmetry-breaking, and trivial-symmetry filtration.
-Hybrid structure design and conservation analogies are deferred. The dated
+Equation-derived Taylor and derivative-compatible profile architectures were
+tested in the dated extension above, with no demonstrated neural benefit.
+Learned order-reducing objects and conservation analogies remain prospective. The dated
 [revision plan](research_artifacts/SVE-reproduced-20261012/SERIES_PLAN.md)
 records this instructor-directed scope.
 

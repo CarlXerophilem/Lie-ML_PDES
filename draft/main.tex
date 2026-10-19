@@ -53,8 +53,10 @@ validity of a generator from its usefulness for particular data or a solver.
 The proposed, not yet demonstrated, machine-learning stage is to propose a
 nonconstant first integral or a symmetry of a verified reduced ODE and then
 prove its determining identity and independence on a guarded chart. Only that
-certificate can lower ODE order. Historical neural profile fits are retained
-as bounded comparisons; fitting a profile is not order reduction. Three
+certificate can lower ODE order. A new bounded profile study completes 17 planned neural runs and six
+exploratory derivative-compatible runs, with no full accuracy/residual-gate
+passes; classical single-profile reuse passes. Historical profile fits are
+retained separately. Fitting a profile is not order reduction. Three
 research directions are the Lagrange-coordinate option, parameter strata and
 orbit-rank distributions of symmetry breaking, and task-dependent filtration
 of trivial or unhelpful symmetries. No learned first integral, neural speedup,
@@ -144,7 +146,8 @@ factors before division, and directly substitute every proposed generator
 back into the original residual. This is the classical infinitesimal
 criterion, not a new theorem \cite{olver,oliveri2026}. A finite ansatz or a
 verified candidate proves no maximality outside its search space.
-The active SVE package implements the unrestricted determining calculation
+The preserved historical scalar source, accessed through the explicit
+recovery adapter described below, implements the unrestricted calculation
 for its \emph{printed scalar} target in \texttt{build\_symmetry\_report}.
 Its \texttt{derive\_reduction} path then audits selected generators and
 pulls back equations; comparing the source's displayed formulas is another
@@ -800,8 +803,9 @@ For an ordinary point of a reduced scalar ODE, the implicit function theorem
 can put $\mathcal R=0$ in normal form if
 $\partial\mathcal R/\partial F^{(\bar n)}\ne0$. Local Lipschitz dependence
 of the normal-form right-hand side gives local IVP existence and uniqueness
-by Picard--Lindelof. Analytic dependence gives the analytic ODE existence
-theorem and a local Taylor recurrence \cite{teschl2012}. Singular points and global continuation
+by Picard--Lindelof. Analytic dependence gives a local analytic solution
+and Taylor recurrence, as the ODE specialization of
+\cite[Theorem~2.73, p.~166]{olver}. Singular points and global continuation
 need separate analysis. A formal series is not a convergence certificate.
 
 For $K$ justified coefficients, let $P_K$ be the analytical approximation and
@@ -1423,6 +1427,89 @@ compatibility equation
 $\E_m^{\rm phys}=\E_m-D_s(\phi_tA/\phi_s)=0$
 on the smooth $\phi_s>0$ branch. Its local bed reconstruction uses the
 advectively corrected time derivative; it is not the printed benchmark.
+
+\paragraph{Separate dimensionless model contracts and local equivalence.}
+Choose positive reference length $L_*$, velocity $U_*$ and depth $H_*$,
+and set $x=L_*X$, $t=(L_*/U_*)T$, $h=H_*\bar h$,
+$B=H_*\bar B$, $s=H_*L_*S$, $\phi=L_*\bar\phi$.
+The transformed coefficients are $\bar g=gH_*/U_*^2$ and
+$\bar\kappa=\kappa U_*^{m-1}/H_*$, with $\bar\beta=m\bar\kappa$.
+Holding $\bar\kappa$ fixed as $m$ varies differs from holding
+$\bar\beta$ fixed. Logarithms arising from parameter derivatives refer
+to the dimensionless positive velocity; changing $m$ does not preserve
+the physical units of an unscaled transport coefficient.
+
+After dropping bars, let $v=\phi_t$, $q=\phi_s>0$,
+$A=q\phi_{tt}-g\phi_{ss}/q^2$ and
+$J=\beta v^{m-1}\phi_{ts}/q$. The original smooth Eulerian system,
+the printed scalar residual $D_tA-gD_sJ$, and the corrected residual
+$D_tA-D_s(vA/q)-gD_sJ$ are separate model contracts. For the corrected
+model, the one-form
+\begin{equation}\label{eq:autonomous-bed-form}
+ \omega_{\rm phys}=\left(-\frac{vA}{gq}-J\right)dt
+                         -\frac{A}{g}\,ds
+\end{equation}
+is closed exactly when its scalar residual vanishes. On a simply connected
+regular neighborhood it defines $b$ up to an additive constant. The
+identities $b_s=-A/g$ and $b_t=-vA/(gq)-J$, together with the inverse map
+$x=\phi(t,s)$, recover mass, momentum and Exner exactly. Conversely, a
+smooth Eulerian solution supplies the closed mass form
+$ds=h\,dx-hu\,dt$ and these identities. Bed data must match the same
+primitive; nontrivial periods require additional conditions. This
+solution-dependent material transformation is not an invertible point
+transformation on the original point space, so it does not identify the
+two point-symmetry algebras automatically.
+
+\paragraph{An exact original-system control and its restricted class.}
+An independently checked finite-dimensional substitution is
+\begin{equation}\label{eq:autonomous-affine-ode}
+ h=H(T),\qquad u=a(T)z,\qquad B=B_0+c(T)z^2,
+ \quad
+ H'=-aH,\quad a'=-a^2-2gc,\quad c'=-\beta a^3,
+\end{equation}
+where $T=t-t_0>0$, $z=x-x_0>0$ and $m=3$.
+Its exact member is
+\begin{equation}\label{eq:autonomous-affine}
+ H=H_*\left(T/T_*\right)^{-\alpha},\qquad
+ a=\frac{\alpha}{T},\qquad c=\frac{\beta\alpha^3}{2T^2},
+ \qquad \alpha=\frac{2}{1+\sqrt{1+4g\beta}}.
+\end{equation}
+Indeed, $g\beta\alpha^2+\alpha-1=0$ makes all three original
+conservative residuals vanish. Its material map is
+$\phi=x_0+s/H(T)$ after a choice of label origin, with
+$\phi_s=1/H>0$. These identities establish an ansatz-restricted family,
+without a novelty claim or an assertion that the ansatz has been obtained
+by a complete Lie reduction. Nearby three-state IVPs retain this
+finite-dimensional class; they do not represent arbitrary initial data.
+
+\paragraph{An instantiated conditional error estimate.}
+For $g=1$, $\beta=3/10$, $H_*=T_*=1$ and $1\le T\le7/5$, the positive root satisfies
+$4/5<\alpha<81/100$. The exact reference lies in the convex box
+\[
+ 7/10\le H\le11/10,\qquad 1/2\le a\le9/10,
+ \qquad 3/100\le c\le9/100.
+\]
+For the vector field in~\eqref{eq:autonomous-affine-ode}, the absolute
+Jacobian row sums are $a+H$, $2a+2$, and $(9/10)a^2$, so $L=19/5$
+is an infinity-norm Lipschitz bound on that box. Proposition~\ref{prop:ode-error-core}
+therefore gives, \emph{if the approximate trajectory also stays in the box}
+and its continuous maximum state defect is at most $\epsilon$,
+\begin{equation}\label{eq:autonomous-stability}
+ \|\widehat Y-Y\|_\infty
+ \le e^{38/25}e_0+
+       \frac{e^{38/25}-1}{19/5}\epsilon
+ =e^{38/25}e_0+0.940059\ldots\epsilon.
+\end{equation}
+For matched physical points $1\le z\le2$ and an identical bed gauge,
+the reconstruction factor for $(h,u,B)$ is at most $4$.
+If $r=(r_H,r_a,r_c)$ is the state defect, the original conservative
+PDE residuals are exactly $r_H$, $z(a r_H+H r_a)$, and $z^2r_c$.
+Thus numerical state compatibility and physical residuals are separately
+testable. Sampled containment and sampled residual maxima do not establish
+the continuous hypotheses in~\eqref{eq:autonomous-stability}; the learning
+experiments below retain that limitation. For an arbitrary material
+reconstruction, inversion and spatial field-derivative bounds are additional
+requirements, beyond the factor $4$ specific to this affine family.
 
 \subsection{An exceptional exponent and a surviving common scaling}
 For the printed scalar equation, weighted prolongation gives the off-shell
@@ -2578,6 +2665,18 @@ order-reduced solve. Figure~\ref{fig:sve-series-numerical} links the series to
 the saved numerical nodes; Figure~\ref{fig:sve-integral-checks} displays the
 integral and order-reduction diagnostics.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{research_artifacts/SVE-reproduced-20261012/results/presentation/series-numerical.pdf}
+\caption{Retained scalar-reproduction data: degree-six Taylor profiles,
+RKF45 trajectories and DOP853 nodes for cases 3.4 and 3.6 at $m=3$.
+Lower panels compare the Taylor jet with the numerical reference;
+hollow markers identify differences below the stated numerical screen.
+These are constructed local IVPs, separate from the dated physical and
+learning experiments in Section~\ref{sec:autonomous-campaign}.}
+\label{fig:sve-series-numerical}
+\end{figure}
+
 We computed \emph{new dimensionless local IVPs}, not source-paper flow data
 or shooting solutions. Set $g=1$, $\kappa=1/30$ and test
 $m\in\{1,3/2,2,3,4\}$. The regular matrix contains 3.4, 3.6, 3.8,
@@ -2601,9 +2700,9 @@ conditions and $L_0\ne0$, the right-hand side of
  (F,P,C)'=(P,C,R(z,F,P,C))
 \]
 is real analytic in a neighborhood. This remains true for fixed noninteger
-$m$ on a strictly positive velocity branch. The analytic local ODE theorem
-\cite[Section~4.1]{teschl2012}
-therefore gives a unique analytic profile germ for the specified three
+$m$ on a strictly positive velocity branch. The ODE specialization of
+\cite[Theorem~2.73, p.~166]{olver} gives a local analytic germ, and local
+Lipschitz uniqueness makes it the unique profile germ for the specified three
 initial values. The verified similarity pullback then gives a local invariant
 solution of the printed scalar master equation. Continuity preserves the
 strict chart inequalities on a sufficiently small neighborhood. This
@@ -2763,6 +2862,16 @@ numerical-method comparison are both visible. These checks do not require
 a variational Lagrangian. They are classical verified integrals, not learned
 order-reducing discoveries, and no analogous certified integral is asserted
 here for case 3.5.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{research_artifacts/SVE-reproduced-20261012/results/presentation/first-integral-checks.pdf}
+\caption{Retained scalar-reproduction diagnostics for cases 3.4, 3.6 and
+3.9: independent first-integral evaluation (left), and matched-data
+second-order versus third-order evolution (right). Values near floating-point
+precision are numerical consistency checks, not continuous error bounds.}
+\label{fig:sve-integral-checks}
+\end{figure}
 
 
 
@@ -3009,6 +3118,8 @@ implementation listing are retained verbatim in the research archive.
 Their historical status is explicit: they do not supply evidence for the
 current theorem or for the proposed learned order reduction.
 
+\input{draft/sections/autonomous_campaign.tex}
+
 \section{Conclusions and next gates}
 The corrected scalar SVE reductions and their local solutions are the
 completed starting point. The reusable reducer begins with arbitrary point
@@ -3023,8 +3134,11 @@ order-lowering chart and compatible data. Compare its total search and
 verification cost with direct symbolic algebra and one classical ODE solve
 before claiming utility. The Lagrange-coordinate option, parameter and
 orbit-rank strata, and task-dependent symmetry filtration are the current
-three research interests. Hybrid structure design and conservation analogies
-are deferred; a variational action would need its own Euler--Lagrange and
+three research interests. The bounded semi-analytic profile assessment in
+Section~\ref{sec:autonomous-campaign} now tests equation-derived Taylor
+structure and derivative-compatible networks; it finds no neural benefit
+under the declared budgets. Conservation analogies remain prospective;
+a variational action would need its own Euler--Lagrange and
 Noether checks \cite{noether}.
 
 \section{Source provenance and reproducibility status}
@@ -3056,6 +3170,26 @@ these checks do not certify a maximal algebra for the advectively corrected
 scalar or coupled bed-field system, a general conservation-law theorem,
 arbitrary boundary data/flux, or a uniform learned solution error.
 
+A dated executable-provenance audit found that the current reproduction
+package entry point contains a different 2022 Eulerian analysis. Its scalar
+test suite therefore has six collection errors. The manifest-matching
+historical scalar source was preserved and loaded through an explicitly
+hash-checked recovery adapter outside the frozen package; all 80 original
+tests pass in that recovered-source replay. This does not make the current
+entry point reproducible without the adapter, nor is it a fresh full
+historical numerical campaign. The independently checked classification
+proof and new campaign certificates are distinguished from that executable
+provenance. The source and recovery hashes, commands and failure receipts
+are retained in the dated evidence package.
+
+The source audit checked twelve primary identities and the actual local
+editions/versions. The Teschl metadata is verified, but its full PDF was
+unavailable during this run; no page-specific analytic-ODE theorem is
+claimed newly checked. The local existence and defect estimates used here
+have explicit proofs. The unavailable version-specific SciPy web pages
+were replaced by preserved installed 1.17.1 docstrings, not silently by
+documentation for a different version.
+
 The bibliography below supports only cited theory, model provenance,
 numerical-method context and the bounded ML comparison. The larger supplied
 PDF/reference corpus remains untouched; dropping a citation from this focused
@@ -3073,171 +3207,189 @@ paper does not delete that source or negate its potential relevance later.
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Olver(1993)]{olver}
-Peter~J. Olver.
-\newblock \emph{{Applications of Lie Groups to Differential Equations}}.
-\newblock Springer, 2 edition, 1993.
-\newblock \doi{10.1007/978-1-4612-4350-2}.
-\newblock URL \url{https://doi.org/10.1007/978-1-4612-4350-2}.
-\newblock Archived Olver PDF in repository is identified separately; do not
-  infer that an excerpt is the full book.
+\bibitem[Olver(1986)]{olver}
+OLVER P J. Applications of Lie groups to differential equations[M].
+New York: Springer-Verlag, 1986.
+DOI: \url{https://doi.org/10.1007/978-1-4684-0274-2}.
 
 \bibitem[Oliveri(2026)]{oliveri2026}
-Francesco Oliveri.
-\newblock \emph{{Lie Symmetries of Differential Equations: Theory,
-  Applications, and Symbolic Computation}}.
-\newblock Birkh{\"a}user, 2026.
-\newblock \doi{10.1007/978-3-032-12791-4}.
-\newblock URL \url{https://doi.org/10.1007/978-3-032-12791-4}.
+OLIVERI F. Lie symmetries of differential equations: theory, applications,
+and symbolic computation[M]. Cham: Birkh\"auser, 2026.
+DOI: \url{https://doi.org/10.1007/978-3-032-12791-4}.
 
 \bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
-Ian~M. Anderson, Mark~E. Fels, and Charles~G. Torre.
-\newblock {Group Invariant Solutions without Transversality}.
-\newblock \emph{Communications in Mathematical Physics}, 212\penalty0
-  (3):\penalty0 653--686, 2000.
-\newblock \doi{10.1007/s002200000215}.
-\newblock URL \url{https://arxiv.org/abs/math-ph/9910015}.
+ANDERSON I M, FELS M E, TORRE C G. Group invariant solutions without
+transversality[J]. Communications in Mathematical Physics, 2000,
+212(3): 653--686.
+\doi{10.1007/s002200000215}.
+\url{https://arxiv.org/abs/math-ph/9910015}.
 
-\bibitem[Paliathanasis et~al.(2026)Paliathanasis, Leon, and Leach]{ap}
-Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach.
-\newblock {Lie Symmetries and Similarity Solutions for a Shallow-Water Model
-  with Bed Elevation in Lagrange Variables}.
-\newblock \emph{Mathematics}, 14:\penalty0 433, 2026.
-\newblock \doi{10.3390/math14030433}.
-\newblock URL \url{https://doi.org/10.3390/math14030433}.
+\bibitem[Paliathanasis et~al.(2026)]{ap}
+PALIATHANASIS A, LEON G, LEACH P G L. Lie symmetries and similarity
+solutions for a shallow-water model with bed elevation in Lagrange variables[J].
+Mathematics, 2026, 14(3): 433.
+DOI: \url{https://doi.org/10.3390/math14030433}.
 
 \bibitem[Bruz\'{o}n and Gandarias(2021)]{bruzon-gandarias-2021}
-M.~S. Bruz\'{o}n and M.~L. Gandarias.
-\newblock {Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations}.
-\newblock In A.~C.~J. Luo and R.~K. Gazizov, editors,
-\emph{Symmetries and Applications of Differential Equations},
-Nonlinear Physical Science, pages 153--171. Springer Singapore, 2021.
-\newblock \doi{10.1007/978-981-16-4683-6_5}.
-\newblock URL \url{https://doi.org/10.1007/978-981-16-4683-6_5}.
+BRUZ\'{O}N M S, GANDARIAS M L. Symmetry analysis and conservation laws
+of a family of Boussinesq equations[M]//LUO A C J, GAZIZOV R K, eds.
+Symmetries and applications of differential equations. Nonlinear Physical
+Science. Springer Singapore, 2021: 153--171.
+\doi{10.1007/978-981-16-4683-6_5}.
+\url{https://doi.org/10.1007/978-981-16-4683-6_5}.
 
 \bibitem[Otto et~al.(2025)Otto, Zolman, Kutz, and Brunton]{otto}
-S.~E. Otto, N.~Zolman, J.~N. Kutz, and S.~L. Brunton.
-\newblock {A Unified Framework to Enforce, Discover, and Promote Symmetry in
-  Machine Learning}.
-\newblock \emph{Journal of Machine Learning Research}, 26:\penalty0 1--83,
-  2025.
-\newblock URL \url{https://jmlr.org/papers/v26/24-1315.html}.
+OTTO S E, ZOLMAN N, KUTZ J N, et al. A unified framework to enforce,
+discover, and promote symmetry in machine learning[J]. Journal of Machine
+Learning Research, 2025, 26: 1--83.
+\url{https://jmlr.org/papers/v26/24-1315.html}.
+% Remaining recorded author: S. L. Brunton.
 
 \bibitem[Kovalev(2021)]{kovalev}
-V.~F. Kovalev.
-\newblock {Approximate Symmetry in Nonlinear Physics Problems}.
-\newblock In A.~C.~J. Luo and R.~K. Gazizov, editors, \emph{Symmetries and
-  Applications of Differential Equations}. Springer, 2021.
-\newblock \doi{10.1007/978-981-16-4683-6_1}.
-\newblock URL \url{https://doi.org/10.1007/978-981-16-4683-6_1}.
+KOVALEV V F. Approximate symmetry in nonlinear physics problems[M]//
+LUO A C J, GAZIZOV R K, eds. Symmetries and applications of differential
+equations. Springer, 2021.
+\doi{10.1007/978-981-16-4683-6_1}.
+\url{https://doi.org/10.1007/978-981-16-4683-6_1}.
 
 \bibitem[Deng and Reid(2024)]{approxalg}
-Siyuan Deng and Gregory Reid.
-\newblock {Contributions to the Algorithmic Foundations of Approximate Lie
-  Symmetry Algebras of Differential Equations}.
-\newblock arXiv:2410.20608v1 [math-ph], 2024.
-\newblock URL \url{https://arxiv.org/abs/2410.20608v1}.
+DENG S, REID G. Contributions to the algorithmic foundations of
+approximate Lie symmetry algebras of differential equations[EB/OL].
+arXiv:2410.20608v1 [math-ph], 2024.
+\url{https://arxiv.org/abs/2410.20608v1}.
 
-\bibitem[Tarayrah et~al.(2023)Tarayrah, Pitzel, and
-  Cheviakov]{tarayrah2023}
-Mahmood~R. Tarayrah, Brian Pitzel, and Alexei Cheviakov.
-\newblock {Two Approximate Symmetry Frameworks for Nonlinear Partial
-  Differential Equations with a Small Parameter: Comparisons, Relations,
-  Approximate Solutions}.
-\newblock \emph{European Journal of Applied Mathematics}, 34:\penalty0
-  1017--1045, 2023.
-\newblock \doi{10.1017/S0956792522000407}.
-\newblock URL \url{https://doi.org/10.1017/S0956792522000407}.
+\bibitem[Tarayrah et~al.(2023)Tarayrah, Pitzel, and Cheviakov]{tarayrah2023}
+TARAYRAH M R, PITZEL B, CHEVIAKOV A. Two approximate symmetry frameworks
+for nonlinear partial differential equations with a small parameter:
+comparisons, relations, approximate solutions[J]. European Journal of
+Applied Mathematics, 2023, 34: 1017--1045.
+\doi{10.1017/S0956792522000407}.
+\url{https://doi.org/10.1017/S0956792522000407}.
 
 \bibitem[Teschl(2012)]{teschl2012}
-Gerald Teschl.
-\newblock \emph{Ordinary Differential Equations and Dynamical Systems}, volume
-  140 of \emph{Graduate Studies in Mathematics}.
-\newblock American Mathematical Society, Providence, 2012.
-\newblock ISBN 978-0-8218-8328-0.
-\newblock URL \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/}.
+TESCHL G. Ordinary differential equations and dynamical systems[M].
+Providence: American Mathematical Society, 2012.
+Graduate Studies in Mathematics, 140. ISBN 978-0-8218-8328-0.
+% Metadata verified at https://www.mat.univie.ac.at/~gerald/ftp/book-ode/
+% Full-text pages not checked in this run; PDF requests timed out.
 
 \bibitem[Lagaris et~al.(1998)Lagaris, Likas, and Fotiadis]{lagaris}
-I.~E. Lagaris, A.~Likas, and D.~I. Fotiadis.
-\newblock {Artificial Neural Networks for Solving Ordinary and Partial
-  Differential Equations}.
-\newblock \emph{IEEE Transactions on Neural Networks}, 9:\penalty0 987--1000,
-  1998.
-\newblock URL \url{https://arxiv.org/abs/physics/9705023}.
+LAGARIS I E, LIKAS A, FOTIADIS D I. Artificial neural networks for
+solving ordinary and partial differential equations[J]. IEEE Transactions
+on Neural Networks, 1998, 9: 987--1000.
+\url{https://arxiv.org/abs/physics/9705023}.
 
 \bibitem[Cohen and DeVore(2015)]{cohen2015}
-Albert Cohen and Ronald DeVore.
-\newblock {Approximation of high-dimensional parametric PDEs}, 2015.
-\newblock URL \url{https://arxiv.org/abs/1502.06797}.
+COHEN A, DEVORE R. Approximation of high-dimensional parametric PDEs[EB/OL].
+2015. \url{https://arxiv.org/abs/1502.06797}.
 
 \bibitem[Mishra and Molinaro(2023)]{mishra2023}
-Siddhartha Mishra and Roberto Molinaro.
-\newblock Estimates on the generalization error of physics-informed neural
-  networks for approximating pdes.
-\newblock \emph{IMA Journal of Numerical Analysis}, 43\penalty0 (1):\penalty0
-  1--43, 2023.
-\newblock \doi{10.1093/imanum/drab093}.
-\newblock URL \url{https://arxiv.org/abs/2006.16144}.
+MISHRA S, MOLINARO R. Estimates on the generalization error of
+physics-informed neural networks for approximating PDEs[J].
+IMA Journal of Numerical Analysis, 2023, 43(1): 1--43.
+\doi{10.1093/imanum/drab093}.
+\url{https://arxiv.org/abs/2006.16144}.
 
 \bibitem[Koval and Popovych(2023)]{koval2023}
-Serhii~D. Koval and Roman~O. Popovych.
-\newblock {Point and generalized symmetries of the heat equation revisited}.
-\newblock \emph{Journal of Mathematical Analysis and Applications},
-  527:\penalty0 127430, 2023.
-\newblock \doi{10.1016/j.jmaa.2023.127430}.
-\newblock URL \url{https://arxiv.org/abs/2208.11073}.
-\newblock Extended arXiv version 4, revised 17 September 2024.
+KOVAL S D, POPOVYCH R O. Point and generalized symmetries of the heat
+equation revisited[J]. Journal of Mathematical Analysis and Applications,
+2023, 527: 127430.
+\doi{10.1016/j.jmaa.2023.127430}.
+\url{https://arxiv.org/abs/2208.11073}.
+Extended arXiv version 4, revised 17 September 2024.
 
 \bibitem[Levi et~al.(2015)Levi, Martina, and Winternitz]{levi2015}
-Decio Levi, Luigi Martina, and Pavel Winternitz.
-\newblock {Lie-point symmetries of the discrete Liouville equation}.
-\newblock \emph{Journal of Physics A: Mathematical and Theoretical},
-  48\penalty0 (2):\penalty0 025204, 2015.
-\newblock \doi{10.1088/1751-8113/48/2/025204}.
-\newblock URL \url{https://arxiv.org/abs/1407.4043}.
+LEVI D, MARTINA L, WINTERNITZ P. Lie-point symmetries of the discrete
+Liouville equation[J]. Journal of Physics A: Mathematical and Theoretical,
+2015, 48(2): 025204.
+\doi{10.1088/1751-8113/48/2/025204}.
+\url{https://arxiv.org/abs/1407.4043}.
 
 \bibitem[Akhound-Sadegh et~al.(2023)Akhound-Sadegh, Perreault-Levasseur,
   Brandstetter, Welling, and Ravanbakhsh]{sympinn}
-Tara Akhound-Sadegh, Laurence Perreault-Levasseur, Johannes Brandstetter, Max
-  Welling, and Siamak Ravanbakhsh.
-\newblock {Lie Point Symmetry and Physics Informed Networks}.
-\newblock In \emph{Advances in Neural Information Processing Systems},
-  volume~36, 2023.
-\newblock URL \url{https://arxiv.org/abs/2311.04293}.
+AKHOUND-SADEGH T, PERREAULT-LEVASSEUR L, BRANDSTETTER J, et al.
+Lie point symmetry and physics informed networks[C]//Advances in Neural
+Information Processing Systems. 2023, 36.
+\url{https://arxiv.org/abs/2311.04293}.
+% Remaining recorded authors: Max Welling; Siamak Ravanbakhsh.
 
 \bibitem[Paliathanasis(2022)]{sveold}
-Andronikos Paliathanasis.
-\newblock {Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner
-  Model}.
-\newblock \emph{Symmetry}, 14\penalty0 (8):\penalty0 1679, 2022.
-\newblock \doi{10.3390/sym14081679}.
-\newblock URL \url{https://doi.org/10.3390/sym14081679}.
+PALIATHANASIS A. Lie symmetry analysis of the one-dimensional
+Saint-Venant-Exner model[J]. Symmetry, 2022, 14(8): 1679.
+\doi{10.3390/sym14081679}.
+\url{https://doi.org/10.3390/sym14081679}.
 
 \bibitem[Noether(1918)]{noether}
-Emmy Noether.
-\newblock {Invariant Variation Problems}, 1918.
-\newblock URL \url{https://arxiv.org/abs/physics/0503066}.
-\newblock English translation deposited in 2005.
+NOETHER E. Invariant variation problems[EB/OL]. 1918.
+\url{https://arxiv.org/abs/physics/0503066}.
+English translation deposited in 2005.
 
-\bibitem[Fern{\'a}ndez-Nieto et~al.(2017)Fern{\'a}ndez-Nieto, Morales~de Luna,
-  Narbona-Reina, and Zabsonr{\'e}]{fernandez2017}
-E.~D. Fern{\'a}ndez-Nieto, T.~Morales~de Luna, G.~Narbona-Reina, and J.~D.
-  Zabsonr{\'e}.
-\newblock {Formal deduction of the Saint-Venant--Exner model including
-  arbitrarily sloping sediment beds and associated energy}.
-\newblock \emph{ESAIM: Mathematical Modelling and Numerical Analysis},
-  51:\penalty0 115--145, 2017.
-\newblock Reference retained from recovered benchmark source bibliography.
+\bibitem[Fern{\'a}ndez-Nieto et~al.(2017)Fern{\'a}ndez-Nieto,
+  Morales~de Luna, Narbona-Reina, and Zabsonr{\'e}]{fernandez2017}
+FERN{\'A}NDEZ-NIETO E D, MORALES DE LUNA T, NARBONA-REINA G, et al.
+Formal deduction of the Saint-Venant--Exner model including arbitrarily
+sloping sediment beds and associated energy[J]. ESAIM: Mathematical
+Modelling and Numerical Analysis, 2017, 51: 115--145.
+Reference retained from recovered benchmark source bibliography.
+% Remaining recorded author: J. D. Zabsonr{\'e}.
 
-\bibitem[Uddin et~al.(2016)Uddin, Rashidi, Alsulami, Abbasbandy, and Freidoonimeh]{uddin2016rkf}
-M.~J. Uddin, M.~M. Rashidi, Hamed~H. Alsulami, S.~Abbasbandy, and
-N.~Freidoonimeh.
-\newblock {Two parameters Lie group analysis and numerical solution of
-unsteady free convective flow of non-Newtonian fluid}.
-\newblock \emph{Alexandria Engineering Journal}, 2016.
-\newblock Article-in-press version consulted.
-\newblock \doi{10.1016/j.aej.2016.05.009}.
-\newblock URL \url{https://doi.org/10.1016/j.aej.2016.05.009}.
+\bibitem[Uddin et~al.(2016)Uddin, Rashidi, Alsulami, Abbasbandy,
+  and Freidoonimeh]{uddin2016rkf}
+UDDIN M J, RASHIDI M M, ALSULAMI H H, et al. Two parameters Lie group
+analysis and numerical solution of unsteady free convective flow of
+non-Newtonian fluid[J]. Alexandria Engineering Journal, 2016.
+Article-in-press version consulted.
+\doi{10.1016/j.aej.2016.05.009}.
+\url{https://doi.org/10.1016/j.aej.2016.05.009}.
+% Remaining recorded authors: S. Abbasbandy; N. Freidoonimeh.
+
+\bibitem[Gubbiotti et~al.(2015)]{gubbiotti2015}
+GUBBIOTTI G, LEVI D, SCIMITERNA C. On partial differential and difference
+equations with symmetries depending on arbitrary functions[EB/OL].
+arXiv:1512.01967v1 (2015-12-07)[2026-10-19].
+\url{https://arxiv.org/abs/1512.01967v1}.
+
+\bibitem[Bluman and de~la~Rosa(2024)]{bluman2024}
+BLUMAN G W, DE LA ROSA R. The natural extension to PDEs of Lie's reduction
+of order algorithm for ODEs[EB/OL].
+arXiv:2407.09063v1 (2024-07-12)[2026-10-19].
+\url{https://arxiv.org/abs/2407.09063v1}.
+
+\bibitem[SciPy Developers(2026a)]{scipy1171ivp}
+SCIPY DEVELOPERS. scipy.integrate.solve\_ivp: installed documentation,
+SciPy 1.17.1[CP]. 2026.
+% Exact docstring snapshot: sources/solve_ivp-installed-doc.txt. The
+% version-specific online docs URL returned404 on2026-10-19.
+
+\bibitem[SciPy Developers(2026b)]{scipy1171bvp}
+SCIPY DEVELOPERS. scipy.integrate.solve\_bvp: installed documentation,
+SciPy 1.17.1[CP]. 2026.
+% Exact docstring snapshot: sources/solve_bvp-installed-doc.txt.
+
+\bibitem[Hao et~al.(2023)]{pinnacle2023v2}
+HAO Z, YAO J, SU C, et al. PINNacle: a comprehensive benchmark of
+physics-informed neural networks for solving PDEs[EB/OL].
+arXiv:2306.08827v2 (2023-10-05)[2026-10-19].
+\url{https://arxiv.org/abs/2306.08827v2}.
+
+\bibitem[Krishnapriyan et~al.(2021)]{krishnapriyan2021}
+KRISHNAPRIYAN A, GHOLAMI A, ZHE S, et al. Characterizing possible failure
+modes in physics-informed neural networks[C/OL]//Advances in Neural
+Information Processing Systems 34. 2021[2026-10-19].
+\url{https://proceedings.neurips.cc/paper_files/paper/2021/hash/df438e5206f31600e6ae4af72f2725f1-Abstract.html}.
+% Full-text read version: arXiv:2109.01050v2; HTML section anchors in ledger.
+
+\bibitem[Rackauckas et~al.(2021)]{rackauckas2021}
+RACKAUCKAS C, MA Y, MARTENSEN J, et al. Universal differential equations
+for scientific machine learning[EB/OL].
+arXiv:2001.04385v4 (2021-11-02)[2026-10-19].
+\url{https://arxiv.org/abs/2001.04385v4}.
+
+\bibitem[De~Ryck et~al.(2021)]{deryck2021tanh}
+DE RYCK T, LANTHALER S, MISHRA S. On the approximation of functions by
+tanh neural networks[EB/OL].
+arXiv:2104.08938v2 (2021-08-23)[2026-10-19].
+\url{https://arxiv.org/abs/2104.08938v2}.
 
 \end{thebibliography}
 \endgroup

@@ -1,5 +1,13 @@
 # Project map: certificate-gated Lie reduction and machine learning
 
+The 19 October 2026 [autonomous run](../build/sve-autonomous-20261019/REPORT.md)
+adds reviewed source/model checks, 29 symbolic configurations, original-system
+numerics, and a completed negative 23-run neural assessment. See the canonical
+[Lie reduction account](Lie_reduction.md) and the integrated manuscript.
+Historical scalar execution uses the [hash-checked recovery adapter](../build/sve-autonomous-20261019/recovery/README.md);
+the current reproduction entrypoint does not match its scalar release manifest.
+This dated update supersedes the older deferral of profile-hybrid experiments.
+
 **Writing order updated 2026-10-13.** Lead with the
 [SVE replication](../research_artifacts/SVE-reproduced-20261012/README.md),
 corrected ODE solutions and discoveries. Derive the infinitesimal point
