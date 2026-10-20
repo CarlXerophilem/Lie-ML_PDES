@@ -75,6 +75,28 @@ def test_math_and_examples_do_not_become_files():
     assert list(markdown_targets(text)) == ["papers/name (version).pdf", "paper(v2).pdf"]
 
 
+def test_dollar_math_is_not_a_link_but_real_links_and_currency_remain():
+    text = r"$[X,Y](f)$ $$\Delta[T F](y,z)$$ [actual](missing.md)"
+    text += r" \$20 [budget](budget.md) and $[A,B](I)$"
+    assert list(markdown_targets(text)) == ["missing.md", "budget.md"]
+
+
+def test_relocated_canonical_pdf_is_still_hash_checked(small_project, tmp_path):
+    root, _, _ = small_project
+    path = root / 'ref/main/paper.pdf'
+    path.parent.mkdir()
+    raw = b'%PDF-1.7\nsource bytes\n'
+    path.write_bytes(raw)
+    (root / 'ref/inventory.json').write_text(json.dumps({'records': [{
+        'citation_key': 'paper', 'availability': 'canonical',
+        'path': 'ref/main/paper.pdf', 'sha256': _hash(raw)}]}))
+    report = audit(root, tmp_path / 'relocated')
+    assert report['status'] == 'passed'
+    assert next(c for c in report['checks'] if c['name'] == 'unique_canonical_pdfs')['pdf_count'] == 1
+    path.write_bytes(b'%PDF-1.7\nchanged\n')
+    assert 'canonical_reference_integrity: paper' in audit(root, tmp_path / 'corrupt')['issues']
+
+
 @pytest.mark.parametrize("path", ["draft", "ref/pdfs", ".git", "../Lie-ML_PDES-archive/2026-10-11"])
 def test_cli_rejects_overwriting_preserved_sources(path):
     result = subprocess.run([sys.executable, str(ROOT / "scripts/project.py"),

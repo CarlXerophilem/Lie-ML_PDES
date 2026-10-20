@@ -205,7 +205,7 @@ CDN is required. This is a session-launched service, not a boot-persistent daemo
 
 ## Research status
 
-Read [the focused novelty audit](fluid_baseline_novelty.md) for named sources,
+Read [the focused novelty audit](../../../docs/fluid_baseline_novelty.md) for named sources,
 exact anchors and access limits. The established reductions and integrators are
 baseline prior art. Our accomplishment is a transparent, replayable implementation
 with explicit negative outcomes and an end-to-end symbolic/numerical evidence

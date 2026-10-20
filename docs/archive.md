@@ -1,6 +1,8 @@
 # Preserved history and evidence integrity
 
-The cleanup starts from Git commit `3bc20b0`. A SHA-256-verified snapshot of all
+Current-host notice (21 October): the external 11 October archive described below is absent; the audit reports this as a failure. Git retains its source commit. The new [build cleanup](build-archive-20261021.md) is a different archive.
+
+The historical cleanup starts from Git commit `3bc20b0`. A SHA-256-verified snapshot of all
 1,502 then-tracked entries is stored outside this repository at
 `../Lie-ML_PDES-archive/2026-10-11`. Its `ARCHIVE_MANIFEST.json` records hydrated
 file bytes and symlink targets. The backup branch

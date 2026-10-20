@@ -1,0 +1,1739 @@
+{
+  "schema": 1,
+  "source_gate": "build/sve-general-symm-20261020/STAGE_1_GATE.json",
+  "source_gate_sha256": "6cb76ba6a129aaae9508e97a6fcaea73569cc00067d12686c1784d276f696c7f",
+  "coverage": {
+    "model_branches": 8,
+    "registered_E_reductions": 17,
+    "all_possible_reductions_claim": false,
+    "general_profile_solves_from_registry": 0
+  },
+  "branches": [
+    "grass_generic",
+    "grass_cubic",
+    "slope_attachment_generic",
+    "slope_attachment_cubic",
+    "slope_source_generic",
+    "slope_source_cubic",
+    "slope_only",
+    "zero_transport"
+  ],
+  "reductions": [
+    {
+      "id": "grass_generic/traveling",
+      "model": "E",
+      "branch": "grass_generic",
+      "model_conditions": {
+        "model_id": "grass_generic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "1<=m<=4",
+          "m!=3"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/grass_generic/derivation.json",
+      "source_sha256": "b0e499f4ac45f6b2b01b9a090e79a767bd0720a39755b23f82d5d2bfb2341822",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-(-K*m*U(z)**m*Derivative(U(z), z) + c*U(z)*Derivative(Z(z), z))/U(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "K*m*U(z)**m/U(z)",
+            "-c"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-(-K*c*g*m*U(z)**m + K*g*m*U(z)*U(z)**m + c**3*U(z) - 2*c**2*U(z)**2 - c*g*H(z)*U(z) + c*U(z)**3)/U(z)",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "grass_generic/scaling-1",
+      "model": "E",
+      "branch": "grass_generic",
+      "model_conditions": {
+        "model_id": "grass_generic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "1<=m<=4",
+          "m!=3"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/grass_generic/derivation.json",
+      "source_sha256": "b0e499f4ac45f6b2b01b9a090e79a767bd0720a39755b23f82d5d2bfb2341822",
+      "generator": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x/t",
+      "reconstruction": [
+        "H(x/t)",
+        "U(x/t)",
+        "Z(x/t)"
+      ],
+      "reduced_equations": [
+        "-z*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) - z*Derivative(U(z), z) + U(z)*Derivative(U(z), z)",
+        "-(-K*m*U(z)**m*Derivative(U(z), z) + z*U(z)*Derivative(Z(z), z))/U(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-z + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-z + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "K*m*U(z)**m/U(z)",
+            "-z"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-(-K*g*m*z*U(z)**m + K*g*m*U(z)*U(z)**m - g*z*H(z)*U(z) + z**3*U(z) - 2*z**2*U(z)**2 + z*U(z)**3)/U(z)",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "grass_cubic/traveling",
+      "model": "E",
+      "branch": "grass_cubic",
+      "model_conditions": {
+        "model_id": "grass_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/grass_cubic/derivation.json",
+      "source_sha256": "e22764728c0e52c17c8544dd5d1661dd03e1e8d57f4663e1e7486c0d5781372c",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "3*K*U(z)**2*Derivative(U(z), z) - c*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "3*K*U(z)**2",
+            "-c"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "3*K*c*g*U(z)**2 - 3*K*g*U(z)**3 - c**3 + 2*c**2*U(z) + c*g*H(z) - c*U(z)**2",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "grass_cubic/scaling-1",
+      "model": "E",
+      "branch": "grass_cubic",
+      "model_conditions": {
+        "model_id": "grass_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/grass_cubic/derivation.json",
+      "source_sha256": "e22764728c0e52c17c8544dd5d1661dd03e1e8d57f4663e1e7486c0d5781372c",
+      "generator": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x/t",
+      "reconstruction": [
+        "H(x/t)",
+        "U(x/t)",
+        "Z(x/t)"
+      ],
+      "reduced_equations": [
+        "-z*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) - z*Derivative(U(z), z) + U(z)*Derivative(U(z), z)",
+        "3*K*U(z)**2*Derivative(U(z), z) - z*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-z + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-z + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "3*K*U(z)**2",
+            "-z"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "3*K*g*z*U(z)**2 - 3*K*g*U(z)**3 + g*z*H(z) - z**3 + 2*z**2*U(z) - z*U(z)**2",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "grass_cubic/scaling-2",
+      "model": "E",
+      "branch": "grass_cubic",
+      "model_conditions": {
+        "model_id": "grass_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/grass_cubic/derivation.json",
+      "source_sha256": "e22764728c0e52c17c8544dd5d1661dd03e1e8d57f4663e1e7486c0d5781372c",
+      "generator": [
+        "t",
+        "0",
+        "-2*h",
+        "-u",
+        "-2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x",
+      "reconstruction": [
+        "H(x)/t**2",
+        "U(x)/t",
+        "Z(x)/t**2"
+      ],
+      "reduced_equations": [
+        "H(z)*Derivative(U(z), z) - 2*H(z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z) - U(z)",
+        "3*K*U(z)**2*Derivative(U(z), z) - 2*Z(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "3*K*U(z)**2",
+            "0"
+          ]
+        ],
+        "remainder": [
+          [
+            "-2*H(z)"
+          ],
+          [
+            "-U(z)"
+          ],
+          [
+            "-2*Z(z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-3*K*g*U(z)**3",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_attachment_generic/traveling",
+      "model": "E",
+      "branch": "slope_attachment_generic",
+      "model_conditions": {
+        "model_id": "slope_attachment_generic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0",
+          "1<=m<=4",
+          "m!=3"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_attachment_generic/derivation.json",
+      "source_sha256": "14cb51316f9199b68be799e4462eb417bf3e4f7b0311e61812ca4b0a66f5aee2",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-(G*m*U(z)**m*Derivative(U(z), z)*Derivative(Z(z), z) + G*U(z)*U(z)**m*Derivative(Z(z), (z, 2)) - G*U(z)**m*Derivative(U(z), z)*Derivative(Z(z), z) - K*m*U(z)*U(z)**m*Derivative(U(z), z) + c*U(z)**2*Derivative(Z(z), z))/U(z)**2"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-(G*m*U(z)**m*Derivative(Z(z), z) - G*U(z)**m*Derivative(Z(z), z) - K*m*U(z)*U(z)**m)/U(z)**2",
+            "-G*U(z)**m/U(z)"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "g*Derivative(Z(z), z)"
+          ],
+          [
+            "-c*Derivative(Z(z), z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**(m - 1)",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_attachment_cubic/traveling",
+      "model": "E",
+      "branch": "slope_attachment_cubic",
+      "model_conditions": {
+        "model_id": "slope_attachment_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_attachment_cubic/derivation.json",
+      "source_sha256": "41d144f5a30c4830ed6e695383d44c603220044d831bf55aaf98bc180f3138bb",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-G*U(z)**2*Derivative(Z(z), (z, 2)) - 2*G*U(z)*Derivative(U(z), z)*Derivative(Z(z), z) + 3*K*U(z)**2*Derivative(U(z), z) - c*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-2*G*U(z)*Derivative(Z(z), z) + 3*K*U(z)**2",
+            "-G*U(z)**2"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "g*Derivative(Z(z), z)"
+          ],
+          [
+            "-c*Derivative(Z(z), z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**2",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_attachment_cubic/scaling-1",
+      "model": "E",
+      "branch": "slope_attachment_cubic",
+      "model_conditions": {
+        "model_id": "slope_attachment_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_attachment_cubic/derivation.json",
+      "source_sha256": "41d144f5a30c4830ed6e695383d44c603220044d831bf55aaf98bc180f3138bb",
+      "generator": [
+        "0",
+        "x",
+        "2*h",
+        "u",
+        "2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "t",
+      "reconstruction": [
+        "x**2*H(t)",
+        "x*U(t)",
+        "x**2*Z(t)"
+      ],
+      "reduced_equations": [
+        "3*H(z)*U(z) + Derivative(H(z), z)",
+        "2*g*H(z) + 2*g*Z(z) + U(z)**2 + Derivative(U(z), z)",
+        "-6*G*U(z)**2*Z(z) + 3*K*U(z)**3 + Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ]
+        ],
+        "remainder": [
+          [
+            "3*H(z)*U(z)"
+          ],
+          [
+            "2*g*H(z) + 2*g*Z(z) + U(z)**2"
+          ],
+          [
+            "3*(-2*G*Z(z) + K*U(z))*U(z)**2"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "1",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "x > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_source_generic/traveling",
+      "model": "E",
+      "branch": "slope_source_generic",
+      "model_conditions": {
+        "model_id": "slope_source_generic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0",
+          "1<=m<=4",
+          "m!=3"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_source_generic/derivation.json",
+      "source_sha256": "47267a9a95e3402954df9bfb0f750b7e913454cd11f2ac35a69472d47954c760",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-(G*m*U(z)**m*Derivative(U(z), z)*Derivative(Z(z), z) + G*U(z)*U(z)**m*Derivative(Z(z), (z, 2)) - K*m*U(z)**m*Derivative(U(z), z) + c*U(z)*Derivative(Z(z), z))/U(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-(G*m*U(z)**m*Derivative(Z(z), z) - K*m*U(z)**m)/U(z)",
+            "-G*U(z)**m"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "g*Derivative(Z(z), z)"
+          ],
+          [
+            "-c*Derivative(Z(z), z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**m",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_source_cubic/traveling",
+      "model": "E",
+      "branch": "slope_source_cubic",
+      "model_conditions": {
+        "model_id": "slope_source_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_source_cubic/derivation.json",
+      "source_sha256": "bca9b7d1721a14926be9a93534374d9db0eabb777b895a511bfd820bbbe9a97f",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-G*U(z)**3*Derivative(Z(z), (z, 2)) - 3*G*U(z)**2*Derivative(U(z), z)*Derivative(Z(z), z) + 3*K*U(z)**2*Derivative(U(z), z) - c*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-3*G*U(z)**2*Derivative(Z(z), z) + 3*K*U(z)**2",
+            "-G*U(z)**3"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "g*Derivative(Z(z), z)"
+          ],
+          [
+            "-c*Derivative(Z(z), z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**3",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_source_cubic/scaling-1",
+      "model": "E",
+      "branch": "slope_source_cubic",
+      "model_conditions": {
+        "model_id": "slope_source_cubic",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "K>0",
+          "G>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_source_cubic/derivation.json",
+      "source_sha256": "bca9b7d1721a14926be9a93534374d9db0eabb777b895a511bfd820bbbe9a97f",
+      "generator": [
+        "t",
+        "2*x",
+        "2*h",
+        "u",
+        "2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x/t**2",
+      "reconstruction": [
+        "t**2*H(x/t**2)",
+        "t*U(x/t**2)",
+        "t**2*Z(x/t**2)"
+      ],
+      "reduced_equations": [
+        "-2*z*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + 2*H(z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) - 2*z*Derivative(U(z), z) + U(z)*Derivative(U(z), z) + U(z)",
+        "-G*U(z)**3*Derivative(Z(z), (z, 2)) - 3*G*U(z)**2*Derivative(U(z), z)*Derivative(Z(z), z) + 3*K*U(z)**2*Derivative(U(z), z) - 2*z*Derivative(Z(z), z) + 2*Z(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-2*z + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-2*z + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-3*G*U(z)**2*Derivative(Z(z), z) + 3*K*U(z)**2",
+            "-G*U(z)**3"
+          ]
+        ],
+        "remainder": [
+          [
+            "2*H(z)"
+          ],
+          [
+            "g*Derivative(Z(z), z) + U(z)"
+          ],
+          [
+            "-2*z*Derivative(Z(z), z) + 2*Z(z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(-g*H(z) + 4*z**2 - 4*z*U(z) + U(z)**2)*U(z)**3",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_only/traveling",
+      "model": "E",
+      "branch": "slope_only",
+      "model_conditions": {
+        "model_id": "slope_only",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "G>0",
+          "0<=n<=4"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_only/derivation.json",
+      "source_sha256": "15d336e05487b4d16ab430f48013cca537afaa3e865dfa1760c0b98847fa504b",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-(G*n*U(z)**n*Derivative(U(z), z)*Derivative(Z(z), z) + G*U(z)*U(z)**n*Derivative(Z(z), (z, 2)) + c*U(z)*Derivative(Z(z), z))/U(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "0"
+          ],
+          [
+            "0",
+            "-G*n*U(z)**n*Derivative(Z(z), z)/U(z)",
+            "-G*U(z)**n"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "g*Derivative(Z(z), z)"
+          ],
+          [
+            "-c*Derivative(Z(z), z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**n",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_only/scaling-1",
+      "model": "E",
+      "branch": "slope_only",
+      "model_conditions": {
+        "model_id": "slope_only",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "G>0",
+          "0<=n<=4"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_only/derivation.json",
+      "source_sha256": "15d336e05487b4d16ab430f48013cca537afaa3e865dfa1760c0b98847fa504b",
+      "generator": [
+        "t*(n - 2)",
+        "x*(n - 1)",
+        "2*h",
+        "u",
+        "2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "t**((1 - n)/(n - 2))*x",
+      "reconstruction": [
+        "t**(2/(n - 2))*H(t**((1 - n)/(n - 2))*x)",
+        "t**(1/(n - 2))*U(t**((1 - n)/(n - 2))*x)",
+        "t**(2/(n - 2))*Z(t**((1 - n)/(n - 2))*x)"
+      ],
+      "reduced_equations": [
+        "-(n*z*Derivative(H(z), z) - n*H(z)*Derivative(U(z), z) - n*U(z)*Derivative(H(z), z) - z*Derivative(H(z), z) + 2*H(z)*Derivative(U(z), z) - 2*H(z) + 2*U(z)*Derivative(H(z), z))/(n - 2)",
+        "-(-g*n*Derivative(H(z), z) - g*n*Derivative(Z(z), z) + 2*g*Derivative(H(z), z) + 2*g*Derivative(Z(z), z) + n*z*Derivative(U(z), z) - n*U(z)*Derivative(U(z), z) - z*Derivative(U(z), z) + 2*U(z)*Derivative(U(z), z) - U(z))/(n - 2)",
+        "-(G*n**2*U(z)**n*Derivative(U(z), z)*Derivative(Z(z), z) + G*n*U(z)*U(z)**n*Derivative(Z(z), (z, 2)) - 2*G*n*U(z)**n*Derivative(U(z), z)*Derivative(Z(z), z) - 2*G*U(z)*U(z)**n*Derivative(Z(z), (z, 2)) + n*z*U(z)*Derivative(Z(z), z) - z*U(z)*Derivative(Z(z), z) - 2*U(z)*Z(z))/((n - 2)*U(z))"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          2
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), (z, 2))"
+        ],
+        "matrix": [
+          [
+            "-(n*z - n*U(z) - z + 2*U(z))/(n - 2)",
+            "-(-n*H(z) + 2*H(z))/(n - 2)",
+            "0"
+          ],
+          [
+            "-(-g*n + 2*g)/(n - 2)",
+            "-(n*z - n*U(z) - z + 2*U(z))/(n - 2)",
+            "0"
+          ],
+          [
+            "0",
+            "-(G*n**2*U(z)**n*Derivative(Z(z), z) - 2*G*n*U(z)**n*Derivative(Z(z), z))/((n - 2)*U(z))",
+            "-(G*n*U(z)*U(z)**n - 2*G*U(z)*U(z)**n)/((n - 2)*U(z))"
+          ]
+        ],
+        "remainder": [
+          [
+            "2*H(z)/(n - 2)"
+          ],
+          [
+            "(g*n*Derivative(Z(z), z) - 2*g*Derivative(Z(z), z) + U(z))/(n - 2)"
+          ],
+          [
+            "(-n*z*Derivative(Z(z), z) + z*Derivative(Z(z), z) + 2*Z(z))/(n - 2)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-G*(-g*n**2*H(z) + 4*g*n*H(z) - 4*g*H(z) + n**2*z**2 - 2*n**2*z*U(z) + n**2*U(z)**2 - 2*n*z**2 + 6*n*z*U(z) - 4*n*U(z)**2 + z**2 - 4*z*U(z) + 4*U(z)**2)*U(z)**n/(n - 2)**2",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(n - 2, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "slope_only/scaling-2",
+      "model": "E",
+      "branch": "slope_only",
+      "model_conditions": {
+        "model_id": "slope_only",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0",
+          "G>0",
+          "0<=n<=4"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/slope_only/derivation.json",
+      "source_sha256": "15d336e05487b4d16ab430f48013cca537afaa3e865dfa1760c0b98847fa504b",
+      "generator": [
+        "0",
+        "x",
+        "2*h",
+        "u",
+        "2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "t",
+      "reconstruction": [
+        "x**2*H(t)",
+        "x*U(t)",
+        "x**2*Z(t)"
+      ],
+      "reduced_equations": [
+        "3*H(z)*U(z) + Derivative(H(z), z)",
+        "2*g*H(z) + 2*g*Z(z) + U(z)**2 + Derivative(U(z), z)",
+        "-6*G*U(z)**2*Z(z) + Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ]
+        ],
+        "remainder": [
+          [
+            "3*H(z)*U(z)"
+          ],
+          [
+            "2*g*H(z) + 2*g*Z(z) + U(z)**2"
+          ],
+          [
+            "-6*G*U(z)**2*Z(z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "1",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "x > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "zero_transport/traveling",
+      "model": "E",
+      "branch": "zero_transport",
+      "model_conditions": {
+        "model_id": "zero_transport",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/zero_transport/derivation.json",
+      "source_sha256": "c2d0b5ddeb5d4fa815f11792240b1583910e47b6c33f601dcc55fabd6aa020cd",
+      "generator": [
+        "1",
+        "c",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "traveling",
+      "coordinate": "-c*t + x",
+      "reconstruction": [
+        "H(-c*t + x)",
+        "U(-c*t + x)",
+        "Z(-c*t + x)"
+      ],
+      "reduced_equations": [
+        "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+        "-c*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-c + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-c + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "0",
+            "-c"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-c*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "extract first integrals and undivided singular branches",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "zero_transport/scaling-1",
+      "model": "E",
+      "branch": "zero_transport",
+      "model_conditions": {
+        "model_id": "zero_transport",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/zero_transport/derivation.json",
+      "source_sha256": "c2d0b5ddeb5d4fa815f11792240b1583910e47b6c33f601dcc55fabd6aa020cd",
+      "generator": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x/t",
+      "reconstruction": [
+        "H(x/t)",
+        "U(x/t)",
+        "Z(x/t)"
+      ],
+      "reduced_equations": [
+        "-z*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) - z*Derivative(U(z), z) + U(z)*Derivative(U(z), z)",
+        "-z*Derivative(Z(z), z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "-z + U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "-z + U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "0",
+            "-z"
+          ]
+        ],
+        "remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "-z*(-g*H(z) + z**2 - 2*z*U(z) + U(z)**2)",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    },
+    {
+      "id": "zero_transport/scaling-2",
+      "model": "E",
+      "branch": "zero_transport",
+      "model_conditions": {
+        "model_id": "zero_transport",
+        "guards": [
+          "h>0",
+          "u>0",
+          "g>0"
+        ],
+        "substitutions": {},
+        "registry_status": "awaiting_necessity_review"
+      },
+      "source": "build/sve-general-symm-20261020/runs/stage1-branches-seed0/zero_transport/derivation.json",
+      "source_sha256": "c2d0b5ddeb5d4fa815f11792240b1583910e47b6c33f601dcc55fabd6aa020cd",
+      "generator": [
+        "t",
+        "0",
+        "-2*h",
+        "-u",
+        "-2*B"
+      ],
+      "kind": "diagonal_scaling",
+      "coordinate": "x",
+      "reconstruction": [
+        "H(x)/t**2",
+        "U(x)/t",
+        "Z(x)/t**2"
+      ],
+      "reduced_equations": [
+        "H(z)*Derivative(U(z), z) - 2*H(z) + U(z)*Derivative(H(z), z)",
+        "g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z) - U(z)",
+        "-2*Z(z)"
+      ],
+      "leading_system": {
+        "orders": [
+          1,
+          1,
+          1
+        ],
+        "leaders": [
+          "Derivative(H(z), z)",
+          "Derivative(U(z), z)",
+          "Derivative(Z(z), z)"
+        ],
+        "matrix": [
+          [
+            "U(z)",
+            "H(z)",
+            "0"
+          ],
+          [
+            "g",
+            "U(z)",
+            "g"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "remainder": [
+          [
+            "-2*H(z)"
+          ],
+          [
+            "-U(z)"
+          ],
+          [
+            "-2*Z(z)"
+          ]
+        ],
+        "affine_in_leaders": true,
+        "determinant": "0",
+        "status": "implicit_ode_or_dae",
+        "leading_matrix_inverted": false,
+        "singular_locus_discarded": false
+      },
+      "chart_guards": [
+        "t > 0",
+        "Ne(1, 0)"
+      ],
+      "chart_conditions": [
+        "H(z)>0",
+        "U(z)>0"
+      ],
+      "data_status": "Constructed uniform/constant-slope and fixed-slice stabilizers exist in source; arbitrary initial data not certified.",
+      "reduction_status": "verified_reduction",
+      "solver_status": "registered_implicit_ode_or_dae; general profile solving pending",
+      "partial_solution_control": "uniform_flow and constant_slope_flow in source data_experiments; not a general profile solution",
+      "next_action": "classify undivided ODE/DAE and first-integral candidates",
+      "model_conditions_origin": "verbatim source construction record; its registry_status is historical, not the current review verdict",
+      "current_gate_status": "accepted_exact_version_by_STAGE_1_GATE",
+      "acceptance_authority": "build/sve-general-symm-20261020/STAGE_1_GATE.json"
+    }
+  ],
+  "other_models": [
+    {
+      "model": "P",
+      "entry": "research_artifacts/SVE-reproduced-20261012/docs/COMPUTATION.md",
+      "status": "nine source reductions audited historically; current main.py is different Eulerian code; use19Oct recovery adapter before detailed profile import",
+      "record_kind": "discovery_pointer_not_executable_solver_certificate",
+      "source_sha256": "a3ca8e68352476b1c21d03ff93cf748e517147637235c72a425716fdd6ecebe3",
+      "next": "Import a complete model-specific reduction certificate before calling solve_reduction; pointer alone cannot authorize solving"
+    },
+    {
+      "model": "P",
+      "entry": "research_artifacts/sve-progress-20261010/docs/THEORY.md",
+      "reduction": "common_scaling",
+      "status": "exact first integral; existing local series/numerical controls",
+      "record_kind": "discovery_pointer_not_executable_solver_certificate",
+      "source_sha256": "faa88cd646f4739809e4566b5caf7ba9baa8c56445b9693e67e3012dd78bee1d",
+      "next": "Import a complete model-specific reduction certificate before calling solve_reduction; pointer alone cannot authorize solving"
+    },
+    {
+      "model": "M",
+      "entry": "research_artifacts/sve-progress-20261010/docs/THEORY.md",
+      "reduction": "common_scaling",
+      "status": "exact first integral; existing material reconstruction and numerical controls",
+      "record_kind": "discovery_pointer_not_executable_solver_certificate",
+      "source_sha256": "faa88cd646f4739809e4566b5caf7ba9baa8c56445b9693e67e3012dd78bee1d",
+      "next": "Import a complete model-specific reduction certificate before calling solve_reduction; pointer alone cannot authorize solving"
+    }
+  ],
+  "coverage_warning": "E inventory is exhaustive for the explicit traveling/scaling certificates emitted in the accepted stage1 receipts; it is not all optimal-system combinations, all literature reductions, or all solutions. P nine historical rows require dedicated faithful import in the next solver cycle.",
+  "nonauthoritative_exploration": {
+    "path": "build/sve-general-symm-20261020/runs/stage1-branches-final/receipts.json",
+    "sha256": "05b3e734fd694cf5c8bc05afffe2f332faff6081e70dc813dfb22991d1e7f767",
+    "execution_passed": false,
+    "interpretation": "execution_timeout_not_obstruction; use only STAGE_1_GATE-bound seed0 evidence",
+    "failed_rows": [
+      {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "D:\\MATHs\\math 4890 LieML\\build\\sve-general-symm-20261020\\cases\\slope_source_generic.py",
+          "--out",
+          "D:\\MATHs\\math 4890 LieML\\build\\sve-general-symm-20261020\\runs\\stage1-branches-final\\slope_source_generic",
+          "--trace",
+          "full"
+        ],
+        "cwd": "D:\\MATHs\\math 4890 LieML\\build\\sve-general-symm-20261020",
+        "started_utc": "2026-10-20T08:41:02.891508+00:00",
+        "elapsed_seconds": 180.0392713000183,
+        "timeout_seconds": 180,
+        "exit_code": null,
+        "process_status": "timeout",
+        "log": "D:\\MATHs\\math 4890 LieML\\build\\sve-general-symm-20261020\\runs\\stage1-branches-final\\slope_source_generic.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cpu_lease": "cpu-symbolic",
+        "heavy_concurrency": 1,
+        "branch": "slope_source_generic",
+        "child_sha256": "e38d0abc85b60ae3113413a454eafab4c40aa1c7cf7f6ebd5c59fb3eff977730"
+      }
+    ]
+  }
+}

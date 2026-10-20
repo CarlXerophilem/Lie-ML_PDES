@@ -48,8 +48,8 @@ The modified MLP has aggregate median error 0.1327 versus 0.1528 for the plain M
 
 The MLP conservation variant has aggregate median error 0.2040. Final training-batch PDE/extra-gradient cosines over all conservation runs range from 0.043 to 0.865. All are positive at this sampled final checkpoint, so these diagnostics do not support gradient conflict as the explanation. Weight, quadrature, capacity, and sampling ablations are required before judging conservation penalties generally.
 
-![Learning curves](results/family_pilot/figures/learning_process.png)
-![Optimization snapshots](results/family_pilot/figures/training.gif)
+![Learning curves](../../code/sve_liepinn_benchmark/results/family_pilot/figures/learning_process.png)
+![Optimization snapshots](../../code/sve_liepinn_benchmark/results/family_pilot/figures/training.gif)
 
 The family pilot’s first panel logs last-update PDE losses from cycling training cases; it is not a fixed-case loss trajectory. Held-out evolution errors use the same diagnostic case throughout. Future runs additionally log PDE residuals at fixed independent points. GIF frames show training progress at fixed final physical time.
 

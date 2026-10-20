@@ -1,0 +1,405 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-20T16:57:50.124392+00:00",
+  "original_root": "D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\portable-root",
+  "directories": [
+    "sve-general-symm-20261020",
+    "sve-systematic-20261020",
+    "sve-autonomous-20261019",
+    "week-4"
+  ],
+  "file_count": 10849,
+  "uncompressed_bytes": 107622521,
+  "archive": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\sve-current-20261021\\current-build.zip",
+  "archive_sha256": "270dc54d2a33589500251e8a6031db65eda40b099aefe900591578e2d32a031e",
+  "archive_bytes": 52892588,
+  "verified": true,
+  "omitted_cache_aliases": [
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-active/test_machine_certificate_exporcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/data-fluxcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/data-gatecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_archive_corruption_is_repcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_archive_imports_do_not_recurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_barren_is_latent_onlycurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_burgers_certifiedcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_current_constructed_data_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_failed_or_stale_data_repocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_frozen_zip_corruption_is_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_missing_expanded_evidencecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_nonzero_exact_identity_blcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/test_resume_is_identicalcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-engine/workflowcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_a_bare_success_flag_is_nocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_bare_passed_flag_does_notcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_evidence_outside_cycle_iscurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_gate_invalidates_on_sourccurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_incomplete_or_changed_execurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_ml_export_cannot_launder_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_post_release_source_changcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_review_cannot_accept_a_bacurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_review_gate_rejects_a_barcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_review_must_bind_every_mlcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_review_must_bind_proof_ancurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_synthetic_complete_evidencurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-validation/tmp-new/test_validation_must_cover_evecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_a_bare_success_flag_is_nocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_evidence_outside_cycle_iscurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_incomplete_or_changed_execurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_ml_export_cannot_launder_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_post_release_source_changcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_review_must_bind_every_mlcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_review_must_bind_proof_ancurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_synthetic_complete_evidencurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage3-review-preflight/pytest-temp/test_validation_must_cover_evecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-active/test_machine_certificate_exporcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/data-fluxcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/data-gatecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_archive_corruption_is_repcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_archive_imports_do_not_recurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_barren_is_latent_onlycurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_burgers_certifiedcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_current_constructed_data_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_failed_or_stale_data_repocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_frozen_zip_corruption_is_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_missing_expanded_evidencecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_nonzero_exact_identity_blcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/test_resume_is_identicalcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-engine/workflowcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-new/test_bare_passed_flag_does_notcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-new/test_gate_invalidates_on_sourccurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-new/test_review_cannot_accept_a_bacurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage2-validation/tmp-new/test_review_gate_rejects_a_barcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-active/test_machine_certificate_exporcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/data-fluxcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/data-gatecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_archive_corruption_is_repcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_archive_imports_do_not_recurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_barren_is_latent_onlycurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_burgers_certifiedcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_current_constructed_data_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_failed_or_stale_data_repocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_frozen_zip_corruption_is_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_missing_expanded_evidencecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_nonzero_exact_identity_blcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/test_resume_is_identicalcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-engine/workflowcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-new/test_bare_passed_flag_does_notcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-new/test_gate_invalidates_on_sourccurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-general-symm-20261020/runs/stage1-validation/tmp-new/test_review_gate_rejects_a_barcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-systematic-20261020/validation/active-tmp/test_machine_certificate_exporcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/generic-pytest/test_run_pilot_writes_reproduccurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/data-fluxcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/data-gatecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_archive_corruption_is_repcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_archive_imports_do_not_recurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_barren_is_latent_onlycurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_burgers_certifiedcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_current_constructed_data_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_failed_or_stale_data_repocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_frozen_zip_corruption_is_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_machine_certificate_exporcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_missing_expanded_evidencecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_nonzero_exact_identity_blcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/test_resume_is_identicalcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/validation/pytest/workflowcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_campaign_writes_nine_statcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_incompatible_case_is_recocurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_linear_case_all_exponentscurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_nonregular_cases_are_typecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_one_case_campaign_writes_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_plot_campaign_checks_intecurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_removed_viewer_cli_and_stcurrent",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_series_reference_rejects_current",
+      "reason": "cache alias; target contents retained"
+    },
+    {
+      "path": "build/sve-autonomous-20261019/recovery/runs/suite-001/recovered_tests/pytest-tmp/test_series_reference_requirescurrent",
+      "reason": "cache alias; target contents retained"
+    }
+  ],
+  "frozen_release_files_checked": 4924,
+  "snapshot_source_root": "D:\\MATHs\\math 4890 LieML"
+}

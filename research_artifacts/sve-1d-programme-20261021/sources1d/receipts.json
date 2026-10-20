@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-10-21T01:46:23.7230370+09:00",
+  "timezone": "Asia/Tokyo",
+  "network_policy": "open primary or institutional sources only; no paid API and no access-control bypass",
+  "records": [
+    {
+      "id": "S01",
+      "doi": "10.3390/sym14081679",
+      "identity": "confirmed by Crossref exact DOI and local journal PDF",
+      "metadata_url": "https://api.crossref.org/works/10.3390/sym14081679",
+      "read_path": "D:/MATHs/math 4890 LieML/ref/large-pdfs/Lie Symmetry Analysis of the One-Dimensional SVE.pdf",
+      "extract": "S01-paliathanasis2022-extract.txt",
+      "pages": 12,
+      "sha256": "54fa53cf28ff2f3cb224e45eece88e7f5d2184303a81ddd47ff8058304b16d86",
+      "access_status": "confirmed_local_full_text",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "S02",
+      "doi": "10.3390/math14030433",
+      "identity": "confirmed by Crossref exact DOI and local journal PDF",
+      "metadata_url": "https://api.crossref.org/works/10.3390/math14030433",
+      "read_path": "D:/MATHs/math 4890 LieML/ref/large-pdfs/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf",
+      "extract": "S02-paliathanasis-leon-leach2026-extract.txt",
+      "pages": 11,
+      "sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5",
+      "access_status": "confirmed_local_full_text",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "S03",
+      "doi": "10.1016/j.crma.2012.01.007",
+      "identity": "confirmed by Crossref exact DOI and publisher PDF",
+      "metadata_url": "https://api.crossref.org/works/10.1016/j.crma.2012.01.007",
+      "download_url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2012.01.007.pdf",
+      "read_path": "S03-berthon2012.pdf",
+      "extract": "S03-berthon2012-extract.txt",
+      "pages": 4,
+      "bytes": 156409,
+      "sha256": "65e6e41f78b5557dbe6c17263cce417bd6bdb8bafcc21a8f0856893a0c1979cc",
+      "access_status": "confirmed_open_publisher_full_text",
+      "license": "unknown; publisher PDF states all rights reserved"
+    },
+    {
+      "id": "S04",
+      "doi": "10.1016/j.compfluid.2013.11.031",
+      "identity": "confirmed by Crossref, HAL metadata, and University of Seville repository",
+      "metadata_url": "https://api.archives-ouvertes.fr/search/?q=halId_s:hal-00821659&fl=title_s,authFullName_s,doiId_s,fileMain_s,uri_s,producedDateY_i&wt=json",
+      "repository_landing": "https://idus.us.es/items/a03e80e0-0bf2-46ac-809f-ce6231367712",
+      "download_url": "https://idus.us.es/bitstreams/a4cd869a-d6b7-4db2-a21c-f74a28b88101/download",
+      "read_path": "S04-fernandez-nieto2014.pdf",
+      "extract": "S04-fernandez-nieto2014-extract.txt",
+      "pages": 40,
+      "bytes": 1247858,
+      "sha256": "66b9ddef5ef6ed76efb808b92a37ad62d5397f8793167de6861b7469eff8649f",
+      "access_status": "confirmed_institutional_repository_full_text",
+      "license": "CC BY-NC-ND 4.0 per repository Link header",
+      "failed_route": "HAL file route returned an Anubis challenge; preserved as S04-hal-access-blocked.html, then used the repository's advertised public PDF link"
+    },
+    {
+      "id": "S05",
+      "doi": "10.1016/j.cnsns.2020.105343",
+      "arxiv": "1912.13314",
+      "identity": "confirmed by Crossref and arXiv-linked OpenAlex record",
+      "metadata_url": "https://api.crossref.org/works/10.1016/j.cnsns.2020.105343",
+      "download_url": "https://arxiv.org/pdf/1912.13314",
+      "read_path": "S05-dorodnitsyn-kaptsov2020.pdf",
+      "extract": "S05-dorodnitsyn-kaptsov2020-extract.txt",
+      "pages": 28,
+      "bytes": 1007498,
+      "sha256": "94bac85d29b31512803b3f517b2b468e56ffd39caf40162c2f7a1b90bbfbafca",
+      "access_status": "confirmed_arxiv_full_text",
+      "license": "unknown"
+    },
+    {
+      "id": "S06",
+      "doi": "10.1016/j.amc.2006.06.059",
+      "identity": "confirmed by Crossref exact DOI and supplied local PDF",
+      "metadata_url": "https://api.crossref.org/works/10.1016/j.amc.2006.06.059",
+      "read_path": "D:/MATHs/math 4890 LieML/ref/small-pdfs/10.1016@j.amc.2006.06.059.pdf",
+      "extract": "S06-sjoberg2007-extract.txt",
+      "pages": 9,
+      "sha256": "1458434c99edbef2b868d64e2f3a3a6b5d0ca024c198671d60ca790ddc989bb4",
+      "access_status": "confirmed_local_full_text",
+      "license": "unknown"
+    }
+  ],
+  "tool_notes": [
+    "The guarded Python downloader failed with SSL UNEXPECTED_EOF for S03-S05; curl downloads were subsequently signature-checked with inspect_pdf.py.",
+    "All retained PDFs passed pdfinfo and pdftotext extraction; extracted text is navigation evidence and formulas were checked against surrounding source text.",
+    "Crossref and OpenAlex are identity/location indexes, not mathematical evidence."
+  ]
+}

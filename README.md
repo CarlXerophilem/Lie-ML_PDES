@@ -6,6 +6,25 @@ fundamentals, boundary/data restrictions, derivations, implementation and result
 The project separates exact symmetry/reduction certificates, constructed
 data compatibility, numerical diagnostics, and bounded approximation results.
 
+## Current cycle: 21 October 2026
+
+The [project map](docs/project-map.md) now leads with the completed 20 October
+classification and the [one-dimensional exact-first programme](research_artifacts/sve-1d-programme-20261021/README.md).
+Eight declared 1D branches currently supply **17 registered traveling/scaling
+reductions**. Their equations, domains and pending solve status are explicit;
+classification coverage is not a claim to have solved all SVE solutions.
+
+Read the [solver plan](research_artifacts/sve-1d-programme-20261021/PLAN.md),
+[bounded literature review](research_artifacts/sve-1d-programme-20261021/LITERATURE_1D.md)
+and [ML decision](research_artifacts/sve-1d-programme-20261021/ML_DECISION.md).
+Pure PINN training is stopped for this workload. Exact structure and classical
+solvers remain primary; conditional hybrid ideas require measured added value.
+
+Generated evidence is shipped as a [verified portable snapshot](research_artifacts/sve-current-20261021/README.md).
+Restore it on a fresh checkout before opening build-linked reports. The
+[cleanup/restore guide](docs/build-archive-20261021.md) records older local archives,
+retained dissertation inputs, and the unresolved 11 October external-archive gap.
+
 ## Dated research extension: 19 October 2026
 
 The [run report](build/sve-autonomous-20261019/REPORT.md) records 29 symbolic
@@ -122,6 +141,5 @@ records this instructor-directed scope.
 
 [Archive and evidence integrity](docs/archive.md) explains the external snapshot,
 recovery gaps, and frozen-versus-expanded results. Historical experiments and
-drafts are available there and in the preceding Git commit. Only the current
-SVE evidence package remains in `research_artifacts/`. Existing `symm` package
+drafts are available there and in the preceding Git commit. Dated evidence packages remain in `research_artifacts/`; the documentation index distinguishes them. Existing `symm` package
 paths stay stable for regression checks; older demos are secondary entrypoints.

@@ -82,7 +82,7 @@ Pure P2 requires no learning and has worst active-field error 4.66% for flat SWE
 
 The per-equation KAN gate rejects several proposed stages; seed 1 retains pure P2. None of its three seeds passes the sediment target. The optional sensitivity term penalizes a central difference of the full residual at m+epsilon and m-epsilon (epsilon=.01, weight 1); it changes coefficients and predictions together. It uses no numerical sensitivity labels. Extra residual/derivative evaluations increase cost, and this untuned weight worsens field accuracy under 600 steps. These follow-up trials were triggered by observed failures; they are diagnostic extensions rather than a prespecified superiority test. Within-stage plots show proposals, whereas accepted-stage records and final errors describe retained models.
 
-![Learning and retained-field accuracy](halfway_comparison.png)
+![Learning and retained-field accuracy](../../code/lie_kan_workflow/halfway_comparison.png)
 
 The unexpected result is reproducible: a single series-KAN flat run has 60.3% worst-field error, while damped chaining passes all three flat seeds. In SVE, total-loss chaining lowers sampled validation losses yet every seed misses the bed target. The matched MLP series and MLP-chain controls pass both families at this budget. The evidence supports testing a series/remainder decomposition; it does not support asserting a general KAN advantage.
 

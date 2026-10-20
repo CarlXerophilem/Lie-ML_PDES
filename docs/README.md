@@ -1,0 +1,20 @@
+# Documentation index
+
+Start with [project-map.md](project-map.md), the current map of models, evidence and work.
+
+| Purpose | Entry |
+|---|---|
+| Current 1D research and solver plan | [programme](../research_artifacts/sve-1d-programme-20261021/README.md) |
+| Cleanup, archives and restoration | [21 October archive guide](build-archive-20261021.md) |
+| Current verification and integration | [refresh report](../research_artifacts/project-refresh-20261021/REPORT.md) |
+| Lie reduction concepts | [Lie_reduction.md](Lie_reduction.md), [implementation interface](pde_formalization_and_reduction.md) |
+| Detailed older methodology | [map through 19 October](methodology-map-through-20261019.md) |
+| Reference reading | [source guide](../ref/README.md), [basic reading notes](basic-reference-reading-notes-20261010.md) |
+| Test commands | [validation](validation.md) |
+| Older cleanup provenance | [archive.md](archive.md) |
+| Equation 27 teaching material | [dated presentation note](2026-10-17-sve-equation27-manim.md) |
+
+Dated proposals, manuscript variants and experiment reports are historical records,
+not automatically the current result. The distinct handwritten-manuscript variants
+are retained; similarly named files were not deleted as duplicates without byte identity.
+The user-edited Lie reduction notes and draft documents remain outside this refresh commit.

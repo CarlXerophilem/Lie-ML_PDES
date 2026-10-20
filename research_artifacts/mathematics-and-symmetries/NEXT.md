@@ -1,6 +1,6 @@
 # Next work and project architecture
 
-Updated 2026-10-06. Canonical paper: [main(1).tex](main(1).tex).
+Updated 2026-10-06. Historical paper: [main(1).tex](manuscript_history/main(1).tex).
 The next mathematical question is whether the exceptional cubic generator
 has a first-order continuation or obstruction at `m = 3 + delta`.
 Recover missing source/evidence before treating the entire current paper as

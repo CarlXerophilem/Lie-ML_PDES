@@ -1,5 +1,17 @@
 # Cleanup and workflow validation
 
+## Current host, 21 October 2026
+
+The [refresh report](../research_artifacts/project-refresh-20261021/REPORT.md)
+contains current commands and raw receipts. data-flux/workflow pass; 62 engine,
+chart and audit tests, 43 active-package tests and 410 general-symm tests pass.
+After the final archive-guard repair, all 13 focused archive controls pass.
+The project audit has **one failure**: the absent 11 October external archive.
+Thirty canonical PDF hashes, active links and frozen evidence pass.
+The older records below describe their dated hosts and are not this host's status.
+No TeX source or bibliography was changed in this cleanup, so no new manuscript
+build or visual PDF acceptance is claimed.
+
 Validated on 2026-10-11, Python 3.12, SymPy 1.14.0, NumPy 2.5.3,
 SciPy 1.18.1 and Matplotlib 3.11.2. Optional retained demo checks used
 PyTorch and pykan 0.2.8 with their supporting dependencies.

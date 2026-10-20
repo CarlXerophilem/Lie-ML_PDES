@@ -1,3 +1,5 @@
+> 21 October archive notice: the build-linked evidence below is preserved in the verified local archive. Follow the [restore guide](build-archive-20261021.md) to recover the video package.
+
 # From an epsilon-flow to five generators, then Equation (27)
 
 **Revision 2: unrestricted determining equations with geometry continuously visible.**
@@ -6,7 +8,7 @@ Source: [the handwritten manuscript](sve_equation27_handwritten_manuscript.md),
 Sections 2–5, 7, 10–14 and Appendices C–D. Workflow: `paper2manim`.
 Duration: **480 seconds**. Revision 2 was explicitly approved; the nine scenes
 have been authored and rendered. Final review results and the playable film are
-in the [production package](../build/sve-equation27-manim-20261017/README.md).
+in the [production package](build-archive-20261021.md).
 The rejected first proposal is preserved under
 `../build/sve-equation27-manim-20261017/revision-01/`.
 
@@ -49,7 +51,7 @@ quotients remove an irrelevant profile offset and scaling freedom, lowering
 ODE order while retaining constants needed for reconstruction. The reciprocal
 shift finally exposes an Abel cubic; recognizing its form does not solve it
 in general. These motivations appear in the film's amber captions and in the
-[presenter notes](../build/sve-equation27-manim-20261017/PRESENTER_NOTES.md).
+[presenter notes](build-archive-20261021.md).
 
 ## Geometry remains on board
 
@@ -379,7 +381,7 @@ Reveal successive rows; the full collection is companion material. The manuscrip
 identifies these with printed Equation (27). The supplied local paper PDF,
 page 7, and its exact publisher record were checked during production: the
 three coefficients agree after distinguishing the printed variable from the
-reciprocal coordinate (N). See the [source check](../build/sve-equation27-manim-20261017/production/ONLINE_CHECK.md).
+reciprocal coordinate (N). See the [source check](build-archive-20261021.md).
 
 **35–55 s:** reverse the arrows:
 \[

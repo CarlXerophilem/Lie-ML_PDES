@@ -1,5 +1,6 @@
 ref/applications-of-lie-groups-to-differential-equations-graduate-texts-in-mathematics-9781468402766-9781468402742-1468402765_compress.pdf filter=lfs diff=lfs merge=lfs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 ref/*.pdf filter=lfs diff=lfs merge=lfs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+ref/large-pdfs/applications-of-lie-groups-to-differential-equations.pdf filter=lfs diff=lfs merge=lfs -text
 
 # Preserve release hashes across Windows and Linux checkouts.
 .gitattributes -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
@@ -18,3 +19,16 @@ research_artifacts/SVE-2D-extension-20261014/** -text whitespace=blank-at-eol,bl
 research_artifacts/free-boundary-scope-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 research_artifacts/dissertation-title-inspection-20261014/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 research_artifacts/publication-20261016/** -text
+
+# Portable October research packages and raw source receipts.
+research_artifacts/sve-current-20261021/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/sve-1d-programme-20261021/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/project-refresh-20261021/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+ref/recovered/*.pdf binary
+draft/proposal_support/README.md -text
+ref/README.md -text
+
+# Raw retrieved text and diagnostics are immutable evidence, not edited prose.
+research_artifacts/sve-1d-programme-20261021/sources1d/* -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+research_artifacts/project-refresh-20261021/*.log -text -diff
+research_artifacts/project-refresh-20261021/validation/**/*.svg binary

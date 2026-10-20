@@ -1,6 +1,6 @@
 # Proposal Support: Current Lagrangian Basis
 
-The active [proposal](../proposal.pdf) is now based on Paliathanasis,
+The September proposal (its former `draft/proposal.pdf` is absent from this checkout) was based on Paliathanasis,
 Leon and Leach (2026), DOI `10.3390/math14030433`, as requested.
 It studies the paper's **printed master Eq. (7)**, with a separately
 documented failed equivalence check against Eulerian sediment transport.

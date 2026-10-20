@@ -212,7 +212,7 @@ that delta0*E_H<=H_min/2 and delta0*E_v<=v_min/2. If one E is zero,
 the corresponding restriction is unnecessary. The reconstructed scaled
 depth and velocity stay uniformly positive, and 3+delta>0.
 
-Define R(delta,t,x)=F_delta[W_delta](t,x). On the resulting compact set,
+Define `R(delta,t,x)=F_delta[W_delta](t,x)`. On the resulting compact set,
 R has a continuous bounded second derivative in delta: all real powers and
 logarithms have uniformly positive arguments, and the needed time/space
 derivatives of (5) are continuous. Direct coefficient identities (3),(6)

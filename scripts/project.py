@@ -33,6 +33,10 @@ def markdown_targets(text: str):
     text = re.sub(r"(?ms)^\s*(`{3,}|~{3,}).*?^\s*\1\s*$", "", text)
     text = re.sub(r"`[^`]*`", "", text)
     text = re.sub(r"(?s)\\\[.*?\\\]|\\\(.*?\\\)", "", text)
+    # Mathematical bracket evaluation, e.g. $[X,Y](f)$, is not a file link.
+    # Handle display dollars first, and leave escaped currency dollars alone.
+    text = re.sub(r"(?s)(?<!\\)\$\$.*?(?<!\\)\$\$", "", text)
+    text = re.sub(r"(?s)(?<!\\)\$(?!\$)(?:\\.|[^$])*?(?<!\\)\$", "", text)
     for match in re.finditer(r"\]\(", text):
         start = match.end()
         if text[start:start + 1] == "<":
@@ -54,8 +58,8 @@ def markdown_targets(text: str):
 
 
 def audit(root: Path, out: Path) -> dict:
-    cleanup = json.loads((root / "docs/cleanup.json").read_text())
-    inventory = json.loads((root / "ref/inventory.json").read_text())
+    cleanup = json.loads((root / "docs/cleanup.json").read_text(encoding="utf-8"))
+    inventory = json.loads((root / "ref/inventory.json").read_text(encoding="utf-8"))
     checks, issues = [], []
 
     def check(name, failures, **details):
@@ -65,7 +69,7 @@ def audit(root: Path, out: Path) -> dict:
     archive = (root / cleanup["archive_relative"]).resolve()
     manifest_path = archive / "ARCHIVE_MANIFEST.json"
     if manifest_path.exists():
-        manifest = json.loads(manifest_path.read_text())
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         failures = []
         for rel, item in manifest["files"].items():
             path = archive / rel
@@ -85,13 +89,19 @@ def audit(root: Path, out: Path) -> dict:
         if not path.exists() or digest(path) != record["sha256"]:
             failures.append(record["citation_key"])
     check("canonical_reference_integrity", failures, citation_records=len(canonical))
-    pdfs = sorted((root / "ref/pdfs").glob("*.pdf"))
+    # The corpus was reorganized into main/, large-pdfs/ and small-pdfs/.
+    # Canonical identity comes from the registered path and hash, not a folder.
+    registered = {r["path"] for r in canonical}
+    pdfs = sorted(root / name for name in registered if (root / name).is_file())
     hashes = [digest(path) for path in pdfs]
     check("unique_canonical_pdfs", ["duplicate SHA-256"] if len(hashes) != len(set(hashes)) else [],
           pdf_count=len(pdfs))
-    registered = {r["path"] for r in canonical}
-    check("canonical_reference_inventory", [str(p.relative_to(root)) for p in pdfs
-          if str(p.relative_to(root)) not in registered])
+    canonical_folder_pdfs = sorted((root / "ref/pdfs").glob("*.pdf"))
+    failures = [p.relative_to(root).as_posix() for p in canonical_folder_pdfs
+                if p.relative_to(root).as_posix() not in registered]
+    failures += [name for name in registered
+                 if not (root / name).resolve().is_relative_to((root / "ref").resolve())]
+    check("canonical_reference_inventory", failures)
 
     files = active_files(root)
     failures = []
@@ -99,7 +109,7 @@ def audit(root: Path, out: Path) -> dict:
         if not rel.endswith(".md"):
             continue
         path = root / rel
-        for target in markdown_targets(path.read_text()):
+        for target in markdown_targets(path.read_text(encoding="utf-8")):
             parsed = urlsplit(target)
             if parsed.scheme or target.startswith("#") or not parsed.path:
                 continue
@@ -110,7 +120,7 @@ def audit(root: Path, out: Path) -> dict:
     check("temporary_outputs_untracked", [rel for rel in files if rel.startswith(("tmp/", "build/"))])
 
     package = root / "research_artifacts/sve-progress-20261010"
-    frozen = json.loads((package / "MANIFEST.json").read_text())
+    frozen = json.loads((package / "MANIFEST.json").read_text(encoding="utf-8"))
     missing, changed, frozen_failures = [], [], []
     with zipfile.ZipFile(package / "lie-ml-sve-progress-20261010.zip") as carrier:
         for rel, item in frozen.items():
@@ -137,7 +147,7 @@ def audit(root: Path, out: Path) -> dict:
               "local_only_references": [r["citation_key"] for r in inventory["records"] if r["availability"] == "local-only"],
               "citation_validation": "Inventory is a navigation aid. Native LaTeX build/logs validate citations and cross-references."}
     out.mkdir(parents=True, exist_ok=True)
-    (out / "audit.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    (out / "audit.json").write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     lines = ["# Active project audit", "", f"Status: **{result['status']}**.", "",
              f"Active files: {len(files)}; baseline: {cleanup['original_tracked_count']} ({result['reduction_percent']}% fewer).", "",
              f"Canonical PDFs: {len(pdfs)}. Frozen entries checked: {len(frozen)}.", "",
@@ -146,7 +156,7 @@ def audit(root: Path, out: Path) -> dict:
     lines += [f"| {c['name']} | {'PASS' if c['passed'] else 'FAIL'} |" for c in checks]
     if issues:
         lines += ["", "Issues:", ""] + [f"- {issue}" for issue in issues]
-    (out / "audit.md").write_text("\n".join(lines) + "\n")
+    (out / "audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return result
 
 

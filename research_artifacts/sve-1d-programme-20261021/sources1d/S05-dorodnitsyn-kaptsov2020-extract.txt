@@ -1,0 +1,1646 @@
+                                           Shallow water equations in Lagrangian coordinates: symmetries, conservation
+                                                          laws and its preservation in difference models
+
+                                                                                  V. A. Dorodnitsyna,∗, E. I. Kaptsova,b
+                                                                                    a Keldysh Institute of Applied Mathematics,
+
+                                                                      Russian Academy of Science, Miusskaya Pl. 4, Moscow, 125047, Russia
+                                                                                   b School of Mathematics, Institute of Science,
+
+                                                                               Suranaree University of Technology, 30000, Thailand
+arXiv:1912.13314v1 [math-ph] 31 Dec 2019
+
+
+
+
+                                           Abstract
+                                               The one-dimensional shallow water equations in Eulerian and Lagrangian coordinates are considered. It is
+                                           shown the relationship between symmetries and conservation laws in Lagrangian (potential) coordinates and
+                                           symmetries and conservation laws in mass Lagrangian variables. For equations in Lagrangian coordinates
+                                           with a flat bottom an invariant difference scheme is constructed which possesses all the difference analogues
+                                           of the conservation laws: mass, momentum, energy, the law of center of mass motion. Some exact invariant
+                                           solutions are constructed for the invariant scheme, while the scheme admits reduction on subgroups as well
+                                           as the original system of equations. For an arbitrary shape of bottom it is possible to construct an invariant
+                                           scheme with conservation of mass and momentum or energy. Invariant conservative difference scheme for
+                                           the case of a flat bottom tested numerically in comparison with other known schemes.
+                                           Keywords: shallow water, Lagrangian coordinates, Lie point symmetries, conservation law, Noether’s
+                                           theorem, numerical scheme
+
+
+
+
+                                           1. Introduction
+
+                                               The shallow water equations describe the motion of incompressible fluid in the gravitational field if
+                                           the depth of the liquid layer is small enough. They are widely used in the description of processes in the
+                                           atmosphere, water basins, modeling of tidal oscillations, tsunami waves and gravitational waves (see the
+                                           classical papers such as [1, 2] and detailed description in, for example, [3, 4]). Even in case of the one-
+                                           dimensional shallow water equations with the flat bottom one meets certain difficulties to obtain nontrivial
+                                           exact solutions. Some exact solutions can be found in [3, 5, 6].
+                                               Therefore, numerical calculations and finite-difference modeling are an effective mathematical apparatus
+                                           in that area. Some monographs [7, 8, 9, 10] and numerous articles, e. g., [11, 12, 13, 14, 15, 16, 17, 18], are
+                                           devoted to the numerical modeling of processes described by shallow water equations.
+                                               The present paper is devoted to the construction of invariant conservative difference schemes for the
+                                           shallow water equations in potential and mass Lagrangian coordinates.
+                                               Lie groups have provided efficient tools for studying ODEs and PDEs since the fundamental works of
+                                           Sophus Lie [19, 20, 21]. The symmetry group of a differential equation transforms solutions into solutions
+                                           while leaving the set of all solutions invariant. The symmetry group can be used to obtain new solutions
+                                           from known ones and to classify equations into equivalence classes according to their symmetry groups. It
+                                           can also be used to obtain exact analytic solutions that are invariant under some subgroup of the symmetry
+
+                                             ∗ Corresponding author
+
+                                              Email addresses: Dorodnitsyn@keldysh.ru,dorod2007@gmail.com (V. A. Dorodnitsyn), evgkaptsov@gmail.com (E. I.
+                                           Kaptsov)
+
+                                           Preprint submitted to Elsevier                                                                     January 1, 2020
+group, so called “group invariant solutions”. Most solutions of the nonlinear differential equations occurring
+in physics, mechanics and in other applications were obtained in this manner. Applications of Lie group
+theory to differential equations, known as group analysis, is the subject of many books and review articles [22,
+23, 24, 25, 26, 27].
+    The group properties of the shallow water equations were studied in numerous papers (see [28, 29, 30]).
+Group classification and first integrals of these equations can be found in [31, 32]. It was shown (see,
+e. g., [32]) that the shallow water equations in Lagrangian coordinates can be obtained as Euler–Lagrange
+equations of Lagrangian functions of a special kind. Extended nonlinear models, such as the Green–Naghdi
+equations and modified shallow water equations from a group point of view were considered in [33, 34].
+    More recently applications of Lie groups have been extended to difference equations [35, 36, 37, 38, 39,
+40, 41, 42, 43, 44, 45, 46, 47, 48]. The applications are quite the same as in the case of differential equations,
+but have certain peculiarities connected with nonlocal character of difference operators and geometrical
+structure of difference mesh [45].
+    The invariant finite-difference schemes that preserve symmetries and since the geometric properties of
+the original equations are of particular interest. For the shallow water equations such schemes on moving
+meshes were proposed in [12] (for the methods of introducing moving meshes, see [49, 50]). The difficulties
+of constructing energy-saving difference schemes for the shallow water equations was emphasized in [12],
+and there the references were made to non-invariant schemes possessing the conservation law of energy (see,
+for example, [51]).
+    The Lagrange mass coordinates1 [52, 53] are widely used in numerical modeling of the equations of
+continuous medium. Notice that Lagrangian mass coordinates are related with standard Lagrangian coor-
+dinates by tangent transformations and since may not preserve the whole set of admitted Lie group of point
+transformations. In the papers [54, 52] completely conservative schemes for the gas dynamics equations in
+Lagrangian mass coordinates were constructed. One can find examples of such schemes in gas dynamics and
+magnetohydrodynamics in [54, 55, 56, 57, 58, 59, 60].
+    The paper is organized as follows. In the second section basic equations in Eulerian and Lagrangian mass
+coordinates and some introductory remarks are given. The third section discusses in detail the shallow water
+equations in Lagrangian (potential) coordinates and their connection to the Lagrangian mass coordinates.
+In the third section, invariant difference schemes possessing local conservation laws of energy, mass, center of
+mass and momentum for the shallow water equations with the flat bottom are constructed. For the case of an
+arbitrary bottom, difference schemes possessing local conservation laws of mass and energy (or momentum)
+are presented. For the flat bottom equations some invariant difference solutions and corresponding reductions
+of the scheme are given. In the fifth section, one of the constructed invariant schemes is numerically
+performed on several test problems. The same tests are performed on some know schemes, and the obtained
+results are compared. In Conclusion the obtained schemes and numerical results are discussed.
+
+2. Shallow water equation for Eulerian and Lagrangian mass coordinates
+   System of the one-dimensional shallow water equations with an arbitrary bottom in Eulerian coordinates
+has the following form
+                                          ηt + ((η + h)u)x = 0,                                       (1)
+                                                    ut + uux + ηx = 0.                                                    (2)
+where u(t, x) is the velocity of the continuous medium particles, η(t, x) is the height of a liquid column
+above the bottom at point x, and the bottom profile is described by the function h(x). One can reduce the
+linear bottom case (h(x) = kx, where k is constant) to the flat bottom (h = 0) by the following change of
+variables [61]
+                                         kt2                                         τ2
+                                            
+                   τ = kt, ξ = k x −           , u = ν(τ, ξ) + τ, η = w(τ, ξ) − ξ −
+                                          2                                           2
+
+   1 To avoid terminological confusion, further we also refer standard Lagrangian coordinates as potential coordinates to dis-
+
+tinguish from the mass Lagrangian coordinates.
+
+                                                              2
+In case of the flat bottom, it turns out that system (1),(2) possesses especially simple form with the help of
+hodograph transformation
+
+                                x = x(ρ, u),            xρ = − u∆t ,         xu = ρ∆t ,
+                                  t = t(ρ, u),          tρ = u∆x ,         tu = − ρ∆x ,                   (3)
+                                              ∆ = ρt ux − ρx ut 6= 0
+
+that allows one to linearize [53, 2] the system into the following equations
+
+                                                 xu − utu + ρtρ = 0,
+
+                                                 xρ + tu − utρ = 0.
+
+
+   Now we involve the Lagrangian operator of total differentiation with respect to t
+                                                  d
+                                                     = Dt + uDx ,                                         (4)
+                                                  dt
+which does not commute with Dx :                             
+                                                       d
+                                                          , Dx =6 0.
+                                                       dt
+           d
+Along with dt we introduce two variables: a “density” ρ
+
+                                                       ρ = h + η,                                         (5)
+
+and a new independent (mass) coordinate s by means of contact transformation
+
+                                                  ds = ρdx − ρudt,                                        (6)
+
+where ds is a total differential form, i.e.
+                                                   ∂ρ    ∂(ρu)
+                                                      =−       ,                                          (7)
+                                                   ∂t     ∂x
+that equivalent to the equation
+                                                   ρt + (ρu)x = 0.                                        (8)
+Collecting all relations we get the following transform:
+                                        dx             ∂x  1           ∂s
+                                           = u,           = ,             = −ρu.
+                                        dt             ∂s  ρ           ∂t
+   We introduce the following operator of total differentiation with respect to s:
+                                                              1
+                                                       Ds =     Dx .                                      (9)
+                                                              ρ
+              d
+The operators dt , Ds commute on the system (1),(2):
+                                                  
+                             d                     1     1
+                                , Ds = Dt + uDx , Dx = − 2 (ρt + (ρu)x ) ,                               (10)
+                             dt                    ρ    ρ
+
+where the last equation is zero on equation (1).
+
+
+                                                            3
+   So far we can change variables as following:
+
+                                 u(t, x) = u(t, s),      ρ(t, s) = h(x) + η(t, x),
+                                   du                     dρ                                           (11)
+                                   dt = ut + uux ,        dt = ηt + u(h + η)x ,
+
+                             ux = ρus ,    ρx = ρρs ,      ds = ρdx − ρudt,       t = t.
+
+Now we can rewrite the original system in the Lagrangian coordinates (t, s, u, ρ):
+                                               
+                                            d 1
+                                                   − us = 0,                                           (12)
+                                            dt ρ
+
+                                             du
+                                                + ρ(ρ − h)s = 0.                                       (13)
+                                             dt
+
+3. Shallow water equation for (potential) Lagrangian coordinates
+
+    By means of a contact transformation one can relate Lagrangian mass coordinates to potential Lagrangian
+coordinates which are of our main interest. Potential coordinates allow one to derive the shallow water
+equations as Euler-Lagrange equations of a specific Lagrangian function. What is more important, they
+preserve orthogonality of a difference mesh for all the symmetries of the shallow water equations that
+significantly simplifies the subsequent discretization procedure.
+
+3.1. Shallow water equation with an arbitrary bottom profile
+   We consider a potential x, defined by
+                                              dx              ∂x  1
+                                                 = u;            = .                                   (14)
+                                              dt              ∂s  ρ
+
+Then continuity equation (12) reads
+                                                      xts = xst ,                                      (15)
+while equation (13) will be the following (everywhere below the derivative with respect to t is a Lagrangian
+one):
+                                                  xss
+                                             xtt − 3 − hx = 0.                                          (16)
+                                                  xs
+
+Remark 1. Notice that equation (16) corresponds to one-dimensional gas dynamics of polytrophic gas with
+γ = 2. Gas dynamics equations in this case are augmented with a state equation of the form
+
+                                                      p = Aργ ,
+
+where p is the pressure and A is constant. For the hyperbolic shallow water equations one can put following
+“state equation”: [62]
+                                                      1
+                                                 p = ρ2 ,                                              (17)
+                                                      2
+which allows one to rewrite system (12), (13) in an alternative form:
+                                       
+                                    d 1                   du
+                                            − us = 0,         + ps = hx .
+                                   dt ρ                   dt
+
+
+
+
+                                                          4
+     The equation (16) admits two symmetries
+
+                                                 ∂                 ∂
+                                          X1 =        and X2 =        .                                  (18)
+                                                 ∂t                ∂s
+Equation (16) can be considered as Euler-Lagrange equation for the Lagrangian
+
+                                                 x2t    1
+                                            L=       −     + h(x).                                       (19)
+                                                 2     2xs
+   Now the Noether theorem can be applied. First, we consider the case where h = h(x) is an arbitrary
+function. In this case one obtains the following conservation laws:
+             ∂
+     1. X1 = ∂t :
+                                    x2t
+                                                        
+                           d   1                       xt               xss
+                                  +     − h(x) + Ds      2
+                                                             = xt {xtt − 3 − hx } = 0;                   (20)
+                           dt 2xs   2                 2xs               xs
+             ∂
+     2. X2 = ∂s :
+                                                   x2
+                                                           
+                            d                  1                        xss
+                               [xt xs ] + Ds      − t − h(x) = xs {xtt − 3 − hx } = 0.                   (21)
+                            dt                 xs   2                   xs
+
+     Now we recalculate the above conservation laws of the system (12), (13) in Lagrangian mass coordinates.
+             ∂
+     1. X1 = ∂t :
+                                        d u2 + ρ
+                                                            2 
+                                                              ρ u
+                                                 − h(x) + Ds       = 0.                                  (22)
+                                        dt   2                 2
+             ∂
+     2. X2 = ∂s :
+                                                        u2
+                                                              
+                                         d u
+                                               + Ds ρ −    − h(x) = 0.                                   (23)
+                                         dt ρ           2
+
+Remark 2. In verification of above conservation laws one should keep in mind:
+                                                               
+                                                             ds
+                                    dh = h0 (x)dx = h0 udt +      ,                                      (24)
+                                                              ρ
+
+     Let us recalculate the conservation laws for the Euler coordinate system. For the first one we have:
+                            2                      2         2            
+                               u +ρ                    ρ u         u +ρ
+                       Dte ρ          − h(x) + Dx           + ρu          − h(x)    = 0.                  (25)
+                                 2                      2            2
+or
+                                                                       u2
+                                                                            
+                          ρu(ut + uux + (ρ − h)x ) + (ρt + (ρu)x ) ρ +    − h = 0,                       (26)
+                                                                       2
+where Dte is the Euler total derivative with respect to t.
+     The second conservation law in the Euler coordinate system equals just the following
+
+                                                            u2
+                                                              
+                                        e
+                                      Dt (u) + Dx ρ − h +        = 0,                                    (27)
+                                                             2
+or
+                                              ut + uux + ηx = 0.
+
+
+                                                       5
+3.2. The case of a linear bottom
+   Let us consider the linear bottom, i.e.,
+
+                                                h(x) = C1 x + C2 ,
+
+where C1 and C2 are constant. Equation (13) becomes
+
+                                              du
+                                                 + ρ(ρ − C1 x)s = 0,
+                                              dt
+or, in potential coordinates,
+                                                       xss
+                                               xtt −       − C1 = 0.
+                                                       x3s
+One can cancel the constant C1 by means of transformation
+
+                                                               t2
+                                                 x = x̃ +         C1 ,                                (28)
+                                                               2
+and arrive to the case of the flat bottom h(x) = 0
+                                                          xss
+                                                 xtt −        = 0.                                    (29)
+                                                          x3s
+
+For the sake of brevity, here and further on symbol “~” is omitted.
+   Equation (29) admits the following symmetries
+
+                                     ∂             ∂                ∂             ∂
+                                X1 = ∂t ,     X2 = ∂s ,        X3 = ∂x ,   X4 = t ∂x ,
+                                                                                                      (30)
+                                           ∂       ∂                    ∂      ∂
+                                   X5 = 3t ∂t + 2x ∂x ,         X6 = 3s ∂s + x ∂x ,
+
+and can be considered as Euler-Lagrange equation for the Lagrangian
+
+                                                         x2t    1
+                                                 L=          −     ,                                  (31)
+                                                         2     2xs
+which is invariant to the group actions of the symmetries X1 –X4 . Notice, that (31) is divergent–invariant
+to the action of the symmetry X4 , i.e.,
+
+                                    X4 L + L Dt ξ4t + Ds ξ4s = Dt (−x).
+                                                            
+
+
+    Along with the Noether theorem there exists so called direct method [63, 64] which operates with the
+following relation:
+                                       Dt (F t ) + Ds (F s ) = ΛF,
+where F is the original equation and Λ is called an integrating multiplier. As far an action of variational
+operator cancels any divergent expression, then we get the determining equation for the multiplier Λ:
+
+                                                      E(ΛF ) ≡ 0,
+
+where the variational operator E has the form
+                                                ∞
+                                        ∂    X                        ∂
+                                   E=      +   (−1)k Di1 · · · Dik            .
+                                        ∂x                         ∂xi1 ···ik
+                                                k=1
+
+   Using Noether’s theorem as well as the direct method one can obtain the following conservation laws.
+
+                                                           6
+                           ∂
+  1. For the symmetry X1 = ∂t on gets the conservation law of energy (20), where h(x) = 0.
+      The corresponding integrating factor is Λ1 = ut .
+               ∂
+  2. For X2 = ∂s  one obtains the conservation of mass (21), where again h(x) = 0, and Λ2 = ux (it was
+     shown in Section 3.1 that the conservation law (21) in Euler coordinates can be directly derived from
+     the commutation relation xts = xst ).
+          ∂
+  3. X3 = ∂x :                                                    
+                                       d                    1 −2             xss
+                                          (xt ) + Ds         x           =       − xtt = 0,              (32)
+                                       dt                   2 s              x3s
+      with Λ3 = 1, which is conservation of momentum.
+            ∂
+  4. X4 = t ∂x :                                                                           
+                                  d                         1 −2                  xss
+                                     (txt − x) + Ds          tx          =t           − xtt       = 0,   (33)
+                                  dt                        2 s                   x3s
+      with Λ4 = t, which means law of the center of mass motion.
+   In Lagrangian mass coordinates the conservation laws (32) and (33) have the following forms
+                                                     2
+                                         d            ρ
+                                           (u) + Ds       = 0,
+                                        dt            2
+
+and                                                                         
+                                           d                         1 2
+                                              (tu − x) + Ds            tρ        = 0.
+                                           dt                        2
+Finally, in Euler’s coordinates the conservation laws (32) and (33) become
+                                                     2         
+                                         e             ρ      2
+                                       Dt (ρu) + Dx       + ρu = 0,
+                                                       2
+
+and                                                                          
+                                                             1 2
+                                Dte (ρ(tu − x)) + Dx           tρ + ρu(tu − x) = 0.
+                                                             2
+
+Remark 3. Generators (30) in Lagrangian mass coordinates read
+
+                                    ∂            ∂               ∂                   ∂     ∂
+                               Y1 = ∂t ,    Y2 = ∂s ,       Y3 = ∂x ,         Y4 = t ∂x + ∂u ,
+                           ∂       ∂       ∂      ∂                      ∂      ∂       ∂      ∂
+                   Y5 = 3t ∂t + 2x ∂x − u ∂u − 2ρ ∂ρ ,           Y6 = 3s ∂s + x ∂x + u ∂u + 2ρ ∂ρ .
+
+    Now we will consider an invariant difference schemes for shallow water equations in Lagrangian coordinate
+system. Here we change equation (17) with constant equals 1/2 into the same equation with constant equals 1
+as it was used in group classification [32] (the same result can be obtained by means of stretching x = αx̃,
+where 2α3 = 1):
+                                                    p = ρ2 ,                                             (34)
+and then equation (29) reads
+                                                             xss
+                                                 xtt − 2         = 0.                                    (35)
+                                                             x3s
+
+
+
+
+                                                             7
+4. Invariant conservative difference schemes for the shallow water equations in Lagrangian
+   coordinates
+
+     Let us consider invariant difference schemes on the following 9-point stencil
+
+                              (t, s, x) = (t, ť, t̂; s, s− , s+ ; x, x+ , x− , x̂, x̂+ , x̂− , x̌, x̌+ , x̌− )              (36)
+
+or, alternatively,
+                                                                                   n+1    n+1         n−1    n−1
+       (t, s, x) = (tn , tn−1 , tn+1 ; sm , sm−1 , sm+1 ; xnm , xnm+1 , xn+1  n+1                n−1
+                                                                         m , xm , xm+1 , xm−1 , xm , xm+1 , xm−1 ),
+
+which is depicted in Fig. 1.
+
+                                                  m-1                  m              m+1
+                                                                                        n+1
+
+                                                                       m, n
+                                                                                        n
+
+
+                                                                                        n-1
+
+                                                       Figure 1: 9-point stencil
+
+     Here and further we will consider the simplest orthogonal regular mesh
+
+                                  hs− = hs+ = hs = const,                        τ− = τ+ = τ = const,                        (37)
+
+which is invariant under the whole set of the generators (30) (see criterion in [45]).
+
+4.1. The construction of invariant difference scheme
+     Now we construct an invariant difference scheme for the flat bottom case (35).
+     One can easily state that the following difference expression admits the whole set of the generators (30):
+                                                                 4/3
+                                                              τ−
+                                                                      D (xt ).
+                                                            (hs− )1/3 −τ
+
+Hence, we are looking for an invariant scheme having the following divergent form
+                                                    4/3                                
+                                                  τ−
+                                                                D (xt ) + D (Φ)             = 0,                             (38)
+                                                (hs− )1/3     −τ                 −s
+
+
+where D and D are the difference operators
+        ±τ      ±s
+
+                            1− S                       S −1                            1− S                       S −1
+                                +τ                    −τ                                    +s                    −s
+                     D =               ,   D =                     ,       D=                      ,   D=                ,
+                  +τ       tn+1 − tn       −τ      tn − tn−1               +s      sm+1 − sm           −s   sm − sm−1
+
+S and S are the difference shift operators that defined as follows
+±τ       ±s
+
+                        S (f (tn , sm )) = f (tn ± τ, sm ),                     S (f (tn , sm )) = f (tn , sm ± hs ),
+                       ±τ                                                   ±s
+
+
+                                                                       8
+xt = D (x) and xs = D (x) are right difference derivatives with respect to t and s, Φ is a function, which
+     +τ                  +s
+approximates Ds (1/x2s ) to the first order by h and τ .
+   It is reasonable to consider Φ as a rational function
+
+                                                      Φ(x) = 1/P2 (x),                                                    (39)
+
+where P2 6= 0 — is a second-order polynomial in points x = {x, x+ , x̂, x̂+ , x̌, x̌+ }.
+   Notice that being invariant to the actions of the generators X1 –X3 the function Φ(x) should depend on
+the differences:
+                             tn+p+1 − tn+p = τn+p , sm+q+1 − sm+q = hsm+q ,
+                                    xn+p+1
+                                     m+q   − xn+p
+                                              m+q ,
+                                                            n+p
+                                                           xm+q+1    n+p
+                                                                  − xm+q ,              p, q ∈ Z.
+Therefore, we consider the following form of the polynomial P2 :
+
+     P2 (x) = a11 x2s + a22 x̂2s + a33 x̌2s + 2a12 xs x̂s + 2a13 xs x̌s + 2a23 x̂s x̌s + b1 xs + b2 x̂s + b3 x̌s + c1 ,   (40)
+
+where aij , bk and c1 are some real constants, x̂s = S (xs ), and x̌s = S (xs ).
+                                                                +τ                      −τ
+   Invariant scheme (38) must satisfy the infinitesimal criterions for the invariance, namely
+                               4/3                   !
+                             τ−
+                      Xk              D (xt ) + D (Φ)           = 0,     k = 1, . . . , 6.
+                           (hs− )1/3 −τ         −s
+                                                                        (37)
+
+After some standard algebraic simplifications one states that b1 = b2 = b3 = c1 = 0 and the constants aij
+are arbitrary. Actually, in order to approximate the original equation the following relation must hold
+                                                X
+                                                    aij = 1.                                            (41)
+                                                          i,j
+
+   Expression D (Φ) is divergent one, and it obviously possesses the integrating factors 1, t and any function
+                −s
+f (t). As an approximation for the integration factor xt of the conservation law of energy (20), one can choose
+the following difference expression
+                                                      xt + x̌t
+                                                 Λ=            .                                           (42)
+                                                         2
+Following the difference analog of the direct method we demand
+                                                                
+                                            E Λ( D (xt ) + D (Φ))                     = 0,                                (43)
+                                                   −τ            −s
+                                                                               (37)
+
+where
+                                                    +∞      +∞
+                                                    X       X
+                                                               k  l  ∂
+                                             E=              S S         ,
+                                                             +τ +s ∂xn−k
+                                                   k=−∞ l=−∞         m−l
+
+is the variational Euler operator (see [45]).
+    Substituting (40) and (42) into (43) and carrying out the summation of the resulting rational expressions,
+one gets the fraction
+                                                        
+                                                                  P54
+                                   E Λ( D (xt ) + D (Φ))        =      = 0,
+                                         −τ       −s              P···
+                                                                        (37)
+
+where P54 is a polynomial of degree 54 in terms of 20 points
+
+                                        xn+i
+                                         m+j ,     i = −2, . . . , 2,    j = −1, . . . , 2,
+                                                                 9
+and by P··· we denote some nonzero polynomial defined on the same set of points. Then, considering the
+leading terms of the polynomial P54 , one sees that the following equation must be satisfied by the coefficients
+
+                                                 a11 a22 a33 (a33 − a22 ) = 0.                             (44)
+
+Let us choose the simplest solution a11 = a22 = a33 = 0. Substituting the solution into the polynomial P54
+and considering the leading terms again, one gets
+
+                                                   a13 a23 (a13 − a23 ) = 0.                               (45)
+
+Putting a13 = a23 = 0, one derives the following form of the function sought
+                                                         1                  −1
+                                                  Φ=        = (a23 x̂s x̌s ) ,
+                                                         P2
+which satisfies (43) for any value of the coefficient a23 . Taking (41) into account, one puts a23 = 1 and
+finally arrives at the following finite-difference scheme on regular orthogonal mesh:
+
+
+                                  F = xtť + h1s ((x̂s x̌s )−1 − (x̂s̄ x̌s̄ )−1 ) = 0,
+                                                     −
+                                                                                                           (46)
+                                                τ+ = τ− ,            hs+ = hs− ,
+
+where xs̄ = D (x) and xtť = D (xt ). The scheme (46) approximates equation (35) up to O((hs )2 + τ 2 ).
+            −h                  −τ
+
+Remark 4. One can check that choosing another solutions of equation (44) (or equation (45)) finally leads
+to either the solution (46), or the trivial solution P2 = 0 (which is prohibited by (39)).
+
+Remark 5. One can rewrite (46) in the following “viscosity” form:
+
+                                          1                                    x̂ss̄ + x̌ss̄
+                                             (x̂s x̌s )−1 − (x̂s̄ x̌s̄ )−1 + µ
+                                                                          
+                                xtť +                                                       = 0,          (47)
+                                         hs−                                         2
+
+where |µ|  (hs )2 is the viscosity factor.
+
+Remark 6. Apparently, (46) is not the only scheme that could be obtained by the procedure similar to
+performed above. For example, one may generalize the scheme (47), assuming
+
+                                             xt = D (w(x)),         xs = D (w(x)),
+                                                   +τ                    +s
+
+where w is a function. Substituting into (47) and performing series expansion, one gets
+
+                                 w0 (xtt − 2x−3         00 2     2        2   2
+                                             s xss ) + w (xt − 2xs ) + O(τ + h ).
+
+Then, the scheme can be represented in the following generalized form
+
+                              1                                               w(x̂)ss̄ + w(x̌)ss̄
+                                (w(x̂)s w(x̌)s )−1 − (w(x̂)s̄ w(x̌)s̄ )−1 + µ
+                                                                         
+                 w(x)tť +    s                                                                   = 0,
+                             h−                                                        2
+
+where
+                                                   w(z) = νϕ(z) + z + c,
+and c is constant, ϕ is an arbitrary function, and ν is a coefficient of order O((hs )2 + τ 2 ).
+
+
+                                                               10
+4.2. Invariant representation of the scheme (46)
+   Consider invariants of the symmetries (30) in the space (36). There are 15 − 6 = 9 difference invariants:
+
+                                                         hs
+                                                  I1 = hs+ ,           I2 = ττ−
+                                                                              +
+                                                                                ,
+                                                            −
+
+
+                               I3 = x−x −
+                                      ω ,      I4 = x+ω−x ,           I5 = x̌+ω−x̌ ,      I6 = x̌−x̌−
+                                                                                                  ω ,
+                                                                                                               (48)
+                                I7 = τ+ (x−x̌)+τ
+                                            ωτ−
+                                                 − (x−x̂)
+                                                          ,           I8 = τ+ (x−x̌)+τ
+                                                                                   ωτ−
+                                                                                       − (x−x̂+ )
+                                                                                                  ,
+
+                                                  I9 = τ+ (x−x̌)+τ
+                                                               ωτ−
+                                                                   − (x−x̂− )
+                                                                              ,
+
+where
+                                         2 s
+                                  ω 3 = τ− h− ,        hs+ = s+ − s,              hs− = s − s− .
+   The scheme (46) is invariant to the actions of the whole 6-parametric group (30):
+
+                                             Xk F |(46) = 0,             k = 1, ..., 6.
+
+Thus, the scheme (46) can be represented in terms of the invariants (48), namely,
+                                                      
+                   (τ− )4/3                                                        (I1 )2
+                   (hs− )1/3
+                                xtť + D ((x̂s x̌s ) ) = I2I−I
+                                                    −1         6 I7 (I7 −I9 )
+                                                            2 I6 (I7 −I9 )
+                                                                              + I5 (I 7 −I8 )
+                                                                                              = 0,
+                                        −s
+
+                                                   I1 = 1,              I2 = 1.
+
+Remark 7. Invariant form of the “viscosity” scheme (47) is the following
+                                                                                                   
+                       I2 −I6 I7 (I7 −I9 )    (I1 )2     µα2           I5 +I7 −I9
+                         I2 I6 (I7 −I9 ) + I5 (I7 −I9 ) + 2                I1     + I7 − I9 − I6        = 0,
+
+                                                    I1 = 1,            I2 = 1,
+
+where α = τ− /hs− (on regular mesh, one can consider α as constant).
+
+4.3. Conservation laws of the scheme (46)
+   It was stated in Section 4.1 that the scheme (46) has the following set of integration multipliers:
+                                                                                xt + x̌t
+                                          Λ1 = 1,       Λ2 = t,         Λ3 =             ,                     (49)
+                                                                                   2
+where the last multiplier was given by the formula (42). The multipliers (49) allow one to writhe the
+following conservation laws of the scheme (46) in Lagrangian coordinates.
+  1. The continuity equation
+                                                                            +
+                                                       D (x̂s ) − D (xt ) = 0,                                 (50)
+                                                       −τ             −s
+
+     which is just the difference analogue of the condition (15).
+  2. Conservation of momentum:
+                                                                                   −1
+                                                                                      
+                                         Λ1 = 1,            D (xt ) + D (x̂s x̌s )      = 0,                   (51)
+                                                            −τ             −s
+
+     which corresponds to (32).
+
+
+                                                                 11
+  3. Center of mass conservation:
+                                                                                  −1
+                                                                                     
+                                       Λ2 = t,         D (txt − x) + D t(x̂s x̌s )     = 0,                  (52)
+                                                     −τ                        −s
+
+     which corresponds to (33).
+  4. Conservation of energy:
+                          xt + x̌t            1     2   −1    −1   1    +     +             −1
+                                                                                               
+                   Λ3 =            ,            D (x + xs + x̂s ) + D (xt + x̌t )(x̂s x̌s )      = 0,        (53)
+                             2                2 −τ t               2 −s
+
+     which corresponds to (20).
+
+Remark 8. Conservation laws for the scheme (47) can be written as follows.
+  1. Conservation of momentum:
+                                                                                           
+                                                                        −1      x̂s + x̌s
+                                         D (xt ) + D         (x̂s x̌s )      +µ                 = 0.         (54)
+                                         −τ         −s                              2
+
+  2. Center of mass conservation:
+                                                                                                 
+                                                                                      x̂s + x̌s
+                                   D (txt − x) + D               t(x̂s x̌s )−1 + tµ                   = 0.   (55)
+                                  −τ                   −s                                 2
+
+  3. Conservation of energy:
+
+                               1
+                                 D (x2t + x−1    −1
+                                                                                        
+                               2 −τ        s + x̂s + µτ      xx+ + x̂x̂+ − 2(x2 + x̂2 ) )
+
+                                + 21 D (x+     +            −1
+                                                                                     
+                                         t + x̌t )(x̂s x̌s )   + µhs (x̂x̌+ − x̌x̂+ ) = 0.
+                                       −s
+
+
+4.4. Schemes and their conservation laws in Lagrangian mass coordinates
+    In the present section, through difference transformations of type (14), we construct two invariant con-
+servative difference schemes in Lagrangian mass coordinates, which correspond to the scheme (46). Using
+naive difference transformations of type (14), one can derive a scheme on three time layers, which is the
+first scheme presented here. The second scheme is defined on two time layers, and some more sophisticated
+transformations are required in that case.
+
+4.4.1. Three-level scheme
+    Here we use the following difference analog of the transformation (14)
+
+                                                  xt = u,              xs = ρ−1 .                            (56)
+
+The scheme (46) becomes
+                                                           
+                                                             1
+                                                             ρ        = us ,
+                                                                  t
+
+                                                   D (u) + D (ρ̂ρ̌) = 0,                                     (57)
+                                                  −τ             −s
+
+                                                  hs+ = hs− ,          τ+ = τ− .
+
+The corresponding difference template is shown in the Figure 2
+    We remind that in the case of the shallow water equations the physical meaning of variable ρ is thickness
+of a water column above the bottom.
+                                                                  12
+                                   Figure 2: Three-level scheme difference template
+
+
+   Using the following approximation of “state” equation (34)
+
+                                                    p = ργ = ρ2 ,                                            (58)
+
+one can represent the scheme (57) in the form
+                                                      
+                                                       1
+                                                       ρ  = us ,
+                                                            t
+                                                          √ 
+                                                D (u) + D   p̂p̌ = 0,
+                                               −τ          −s
+
+                                                hs+ = hs− ,      τ+ = τ− .
+
+The conservation laws of the latter scheme are the following.
+  1. Conservation of mass:                               
+                                                         1
+                                                             = us ,
+                                                         ρ t
+
+  2. The conservation law of momentum:
+                                                                                  p       
+                               Λ = 1,          D (u) + D (ρ̂ρ̌) = D (u) + D            p̂p̌ = 0.
+                                               −τ      −s            −τ      −s
+
+
+  3. Center of mass conservation:
+                                                                                p 
+                         Λ = t,          D (tu − x) + D (tρ̂ρ̌) = D (tu − x) + D t p̂p̌ = 0.
+                                         −τ           −s             −τ            −s
+
+
+  4. The conservation law of energy:
+                                                           
+                              u + ǔ          1      2 p p̂    1            p 
+                         Λ=          ,          D u + +       + D (u+ + ǔ+ ) p̂p̌ = 0.
+                                2             2 −τ     ρ ρ̂    2 −s
+
+4.4.2. Two-level scheme
+    It is of our interest to construct two-level difference schemes, as far one can perform numerical calculations
+much easier with the help of such a scheme. In the space of finite–differences one has a freedom to choose
+approximations of the relations (14) and of the “state equation” (34).
+                                                            13
+   Here, instead of (56), we use the following transformation
+                                                                2
+                                                x̌s + xs =         ,        xt = u,                          (59)
+                                                                ρ̌
+and the following implicit approximation of “state” equation (34)
+                                             1   1  2                              1
+                                            √ +√ =                     ⇔     xs = √ .                        (60)
+                                              p̌  p ρ̌                              p
+
+Then, the scheme (57) becomes
+                                                                 +           
+                                                      1                u +ǔ+
+                                               D      ρ   −D             2          = 0,
+                                               −τ           −s
+
+                                                     D (u) + D (Q) = 0,                                      (61)
+                                                    −τ          −s
+
+                                                    hs+ = hs− ,        τ+ = τ− ,
+where                                                                          
+                                             1    4    2                1 1           1
+                                               =     −√                  +           + .                     (62)
+                                             Q   ρρ̌    p               ρ ρ̌          p
+Here the scheme and the “state” equation are written in the points of two difference time layers. The
+corresponding difference template is shown on the Figure 3. The scheme (61) approximates equation (35)
+up to O(h + τ ).
+
+
+
+
+                                       Figure 3: Two-level scheme difference template
+
+   The conservation laws of the scheme (61) are the following.
+  1. Conservation of mass2 :                                +
+                                                            u + ǔ+
+                                                                  
+                                                    1
+                                                D      −D             = 0.
+                                                −τ  ρ   −s     2
+  2. The conservation law of momentum:
+
+                                                Λ = 1,           D (u) + D (Q) = 0.
+                                                                −τ              −s
+
+
+  3. Center of mass conservation:
+
+                                             Λ = t,        D (tu − x) + D (tQ) = 0.
+                                                           −τ                       −s
+
+  2 To get this conservation law one should instead of (50) get the sum of (50) and the shifted one, i.e.,
+
+                                                                        +       +
+                                               D (x̂s + xs ) − D (xt + x̌t ) = 0.
+                                              −τ                −s
+
+
+
+                                                                 14
+  4. The conservation law of energy:
+                                                2               +
+                                                                 u + ǔ+
+                                                                         
+                             u + ǔ             u      p
+                          Λ=        ,       D      + √      +D           Q = 0.
+                               2            −τ   2  2 p−ρ    −s     2
+
+Remark 9. Here “viscosity” term of the scheme (47) becomes:
+                                                                                              !
+                            x̂ss̄ + x̌ss̄   µ       1 1  1   1  1 1
+                          µ               = s        + −√ − −− −+p                                .
+                                  2        h        ρ ρ̌  p ρ  ρ̌  p−
+
+Apparently, the physical meaning of this term is lost in Lagrangian mass coordinates.
+
+4.5. Some invariant solutions of the scheme
+   In the present section we consider some invariant solutions of the scheme (46). It seems that in Lagrangian
+coordinates the scheme has a wider class of invariant solutions than in Eulerian representation (in particular
+there is no travelling wave solutions in Eulerian coordinates).
+
+4.5.1. Example 1. Travelling wave solution
+    Consider travelling wave solutions
+
+                                          x = ψ(λ),                λ = s − αt,
+
+which correspond to the subalgebra X1,5 = X1 + αX5 = ∂t + α∂s . Then, equation (29) becomes
+
+                                                ψ 00 (α2 (ψ 0 )3 − 2) = 0.
+
+Further we consider the simplest form of travelling wave solution that is
+
+                                                    x = λ = s − αt.                                      (63)
+
+   Constructing the scheme on the subgroup corresponding to the generator X1,5 , one should mention that
+the difference mesh spacing ∆λ along the λ-axis should be matched with the original mesh spacings h
+and τ [45]. This is achieved under conditions
+
+                                                      h
+                                                α=      ,          ∆λ = h.
+                                                      τ
+Then, scheme (46) reduces to the following
+                                                                             
+                                  2                        1                 1
+                                α ψλλ̄ + S                ψλ       S        ψλ         = 0,
+                                                 +λ                −λ             λ̄
+
+                                        λ+ − λ = λ − λ− = ∆λ,
+
+where ψ = ψ(λ). The latter scheme possesses invariant solution (63),
+
+                                                    x = ψ(λ) = λ,
+
+which becomes trivial in Eulerian coordinates:
+
+                                                u = −α,             ρ = 1.
+
+
+
+                                                            15
+4.5.2. Example 2. Nonuniform dilation in the (x, s)-space
+    Consider subalgebra X6 = 3s∂s + x∂x and the corresponding invariant solution of equation (29):
+
+                                x = s1/3 ψ,        u = s1/2 ψ 0 ,    ρ = 3s2/3 /ψ,                        (64)
+
+where ψ = ψ(t).
+   Equation (29) reduces to the form
+                                                ψ 2 ψ 00 + 12 = 0.                                        (65)
+One can find the following particular exact solution of the latter equation:
+
+                                          x = s1/3 ψ(t) = (54st2 )1/3 .                                   (66)
+
+   The generator X6 holds orthogonality of the mesh. Therefore, further we consider the scheme on an
+orthogonal mesh without requiring it to be a uniform one.
+   Then, the first equation of the scheme (29) possesses the form
+                                                               2                     2 !
+                                    1                s+ −s                     s− −s
+                  ψ̂ ψ̌ψtt̂ + s1/3 (s−s−)
+                                                    1/3              −        1/3              = 0,       (67)
+                                                   s+ −s1/3                  s− −s1/3
+
+
+and we do not set the mesh equations for now.
+   According to (64), one can split scheme (67) into two separate equations:
+
+                                              ψ̂ ψ̌ψtt̂ = K = const,                                      (68)
+
+and                                           !2                            !2 
+                           1           s+ − s                   s− − s
+                                                 −                             = −K = const.            (69)
+                    s1/3 (s − s− )    1/3
+                                     s+ − s1/3
+                                                               1/3
+                                                              s− − s1/3
+
+By virtue of (65), one can set K = δ − 12, where 0 < |δ|  1 is a constant related to the mesh density.
+   First, consider equation (68) on a uniform lattice. One can obtain its first integral
+                                                     
+                                               1    1
+                                     ψt2 + K     +      = C1 = const,                                     (70)
+                                               ψ̂ ψ
+
+which corresponds to the integrating factor (ψ̂ − ψ̌)/(ψ̂ ψ̌). Then, one can writh the following implicit
+solution of the Cauchy problem
+                                                               
+                                           2   2       1      1
+                             (ψ(tn ) − ψ0 ) + tn K         +      − t2n C1 = 0,                     (71)
+                                                     ψ(tn ) ψ0
+
+                                              tn = nτ,         n ∈ Z,
+where ψ0 = ψ(0) is the value of the function at the initial time.
+
+Remark 10. Notice that in some specific cases equations of type (68) can be linearized [65].
+
+    Next, consider equation (69). One can find a particular (invariant) solution of (69). Consider an invariant
+grid
+                                                  s+     s
+                                                      =     ,                                              (72)
+                                                   s    s−
+which possesses the first integral
+                                            s+ = κ3 s,        κ = const,                                  (73)
+                                                         16
+One can integrate the latter equation and get
+
+                                           sm = κ3m s0 ,           m ∈ Z,                                (74)
+
+where s0 is an initial constant value.
+   It is easy to verify that equation (74) becomes a particular solution of (69) under the following condition
+
+                                  (κ2 + κ + 1)(κ2 + 1)(κ + 1) = (12 − δ)κ4 .                             (75)
+
+The latter equation has (assuming δ is small enough) three real positive roots. Evidently, for δ → 0 one or
+more of the solutions κ have values close to 1.
+   In Lagrangian mass coordinates, functions ρ and u are added to the solution. In the simplest case (u = xt ,
+ρ = 1/xs ) they are
+                                                                   s+ − s 1
+                           x = s1/3 ψ,     u = s1/3 ψt ,    ρ = 1/3           .                          (76)
+                                                                s+ − s1/3 ψ
+On lattice equation (73) the latter solution becomes
+
+                                                                                     s2/3
+                           x = s1/3 ψ,       u = s1/3 ψt ,        ρ = (κ2 + κ + 1)        .              (77)
+                                                                                      ψ
+It corresponds to the solution of the original differential equation for κ → 1.
+
+Particular exact solution
+   Now, consider the scheme on a nonuniform mesh and rewrite equation (68) in the following expanded
+form:                                                          
+                           ψ(t̂)ψ(ť) ψ(t̂) − ψ(t) ψ(t) − ψ(ť)
+                                                  −               = δ − 12.                      (68)
+                             t − ť       t̂ − t      t − ť
+Substituting invariant solution
+                                                     t̂ = µ3 t.                                          (78)
+into (68), one gets
+
+                       µ3 ψ(µ3 t)ψ(t/µ3 ) 
+                                           ψ(µ3 t) − (1 + µ3 )ψ(t) + ψ(t/µ3 ) = δ − 12.
+                                                                             
+                                                                                                         (79)
+                          (µ3 − 1)2 t2
+Let us seek for an invariant solution of the form
+
+                                         ψ(z) = Bz q ,        B, q = const.
+
+Analyzing the left side of equation (79), one concludes that q = 2/3, i. e.,
+
+                                         ψ(z) = Bz 2/3 ,          B = const,                             (80)
+
+which corresponds to the solution (66). Therefore, in order to obtain an exact solution, one set
+
+                                                    B = 541/3 .
+
+Substituting into (79), one gets the following mesh constraint
+
+                                    54µ3 (µ + 1) = (12 − δ)(µ2 + µ + 1)2 .
+
+Comparing with (75), one obtains a relation connecting the parameters that specify the grid densities with
+respect to t and s:
+                             (κ2 + κ + 1)(κ2 + 1)(κ + 1)     54µ3 (µ + 1)
+                                            4
+                                                          = 2             .                           (81)
+                                           κ                (µ + µ + 1)2
+                                                         17
+Hence, one gets the following particular exact solution:
+
+                                       xnm = (54sm t2n )1/3 ,
+
+                                       tn = µ3n t0 ,          sm = κ3m s0 ,         m, n ∈ Z,                    (82)
+                                       (κ2 +κ+1)(κ2 +1)(κ+1)   54µ3 (µ+1)
+                                                κ4           = (µ2 +µ+1)2 ,
+
+
+
+where t0 and s0 are the initial data of the Cauchy problem.
+   Solution (77) for the functions ρ and u is
+                                                          1/3                                        2/3
+                                  1 − µ2                                        κ2 + κ + 1
+                                                                                            
+                                                 54 sm                                           sm
+                            unm =      3
+                                                                 ,        ρnm =      1/3
+                                                                                                             .   (83)
+                                      1−µ         tn                              54             tn
+
+4.6. Schemes for an arbitrary bottom case
+   In this case equation (35) has the form
+                                                               xss
+                                                   xtt − 2         − H 0 (x) = 0,                                (84)
+                                                               x3s
+
+where H(x) is a bottom profile function.
+
+4.6.1. Case H 0 (x) 6= 0.
+    In this general case, equation (84) is not a divergent one and its invariance strongly depends on the
+specific type of the function H(x). In case H(x) is arbitrary, equation (84) only admits two generators,
+
+                                                            ∂                    ∂
+                                                  X1 =               and X2 =       .
+                                                            ∂t                   ∂s
+In finite-difference case there is no obvious way to approximate the derivative H 0 (x). One can consider
+separately two different representations of this derivative, namely
+                                                          1                  1
+                                          H 0 (x) =          (H 0 (x) xt ) =    Dt (H(x))                        (85)
+                                                          xt                 xt
+and
+                                                       1                  1
+                                         H 0 (x) =        (H 0 (x) xs ) =    Ds (H(x)).                          (86)
+                                                       xs                 xs
+   According to the representation (85), scheme (46) can be generalized as follows
+                                                                                         
+                                                 −1            1
+                                                      
+                      xtť + D (x̂s x̌s )                 − xt +x̌ t
+                                                                           D H(x) + D H(x) = 0,
+                               −s                                         −τ            +τ                       (87)
+                                                 τ+ = τ− ,                hs+ = hs− ,
+
+where                                                                   
+                 D H(x) + D H(x)                 2       D H(x) + D H(x)
+                 −τ             +τ
+                                            =           −τ       +τ
+                                                                          ∼ 1 [Hx0 x0t ] ∼ H 0 (x).
+                           xt + x̌t           xt + x̌t          2            x0t
+
+   Scheme (87) only has the conservation law of mass (50) and the conservation law of energy:
+                       2    −1     −1                         +     +         −1
+                                                                                 
+                   D (xt + xs + x̂s − H(x) − H(x̂)) + D (xt + x̌t )(x̂s x̌s )      = 0.
+                      −τ                                                    −s
+
+
+                                                                     18
+  Using (59), (60), one obtains the following representation of the latter conservation law in Lagrangian
+mass coordinates
+                      2                                            +
+                                                                     u + ǔ+
+                                                                               
+                       u        p        H(x) + H(x + τ u)
+                   D      + √         −                      +D               Q = 0,
+                  −τ    2    2 p−ρ               2              −s       2
+
+where Q is given by the formula (62).
+
+   Using scheme (46), one can construct new invariant schemes corresponding to the representation (86)
+of H 0 (x). As an example we consider the following one
+                                                                                                  
+                                 − 12                  − 12
+                1
+                2
+                        (x̂s x̌s )      + (x̂s̄ x̌s̄ )             xs +xs̄
+                                                                      2
+                                                                           xtť − D H(x)                 + D ((x̂s x̌s )−1 ) = 0,
+                                                                                  −s                       −s                       (88)
+                                                         τ+ = τ− ,                 hs+ = hs− .
+
+Scheme (88) possesses the conservation law of mass (50) and the conservation law of momentum (which
+corresponds to the generator X2 )
+
+                                                                 xt x+
+                                                                          
+                                x̂s + x̂s̄                  − 21     t
+                         D xt                + D 2(x̂s x̌s ) −         − H(x) = 0
+                         −τ         2          −s                  2
+
+with integrating factor
+                                                                                        1
+                                                                   2(x̂s x̌s x̂s̄ x̌s̄ ) 2
+                                                                          1                  1   .
+                                                               (x̂s x̌s ) 2 + (x̂s̄ x̌s̄ ) 2
+  Using (59), (60), one obtains the following representation of the latter conservation law in Lagrangian
+mass coordinates
+                                                 !!
+                                                                     uu+
+                                                                                 
+                         1    1      1        1              p
+                 D u       +     − √ − p              + D 2 Q−            − H(x) = 0,
+                 −τ      ρ ρ−      2 p 2 p−             −s             2
+
+where Q is given by the formula (62).
+
+4.6.2. Case H 0 (x) = const (linear bottom).
+    Here the function H is H(x) = C1 x + C2 , and the scheme (87) becomes
+
+
+                                        xtť + h1s ((x̂s x̌s )−1 − (x̂s̄ x̌s̄ )−1 ) − C1 = 0,
+                                                   −
+
+                                                         τ+ = τ− ,                 hs+ = hs− .
+
+    In case C1 = 0 (a flat bottom), all the results for the latter scheme coincide with the results of Section 4.2.
+    In case C1 6= 0, the scheme admits the whole 6-parametric group of transformations (30). Using the
+difference analogue
+                                                             C1
+                                                  x = x̃ +      tt̂
+                                                              2
+of transformation (28), one arrives at the flat bottom case, which was described above.
+
+
+
+
+                                                                              19
+5. Numerical results
+
+   For comparison, we consider several schemes in Lagrangian mass coordinates.
+
+ (a) Invariant scheme (61),(60), which was constructed in the previous sections.
+ (b) An explicit difference scheme, which is a simple difference approximation of the shallow water equations
+     system.
+
+ (c) Samarskiy and Popov’s completely conservative scheme for the gas dynamics equations [52], adapted
+     for the shallow water equations.
+ (d) The completely conservative Yelenin–Krylov scheme for the two-layer shallow water equations [11],
+     adapted for the single-layer case.
+
+ (e) A completely conservative scheme proposed in the paper [60] by V. A. Korobitsyn.
+
+   All the schemes are considered on uniform orthogonal meshes in case of the flat bottom (h(x) = 0) only.
+Also, unless specifically indicated, it is assumed that xt = u. Consider schemes (b)—(e) in detail.
+
+(b) An explicit scheme. Consider the following explicit scheme, which approximates the equations (12), (13)
+and can be written in the divergent form as follows.
+                                                       
+                                             1 1      1    u+ −u
+                                             τ   ρ̂ − ρ =    h ,                                       (89)
+                                         û−u     1       − −
+                                           τ + h (ρρ̂ − ρ ρ̂ ) = 0.
+
+These equations are the conservation laws of mass and momentum:
+                                              
+                                           D ρ1 − D (u) = 0,
+                                                +τ        +s
+                                             D (u) + D (ρ− ρ̂− ) = 0.
+                                             +τ      +s
+
+The center of mass conservation law is
+
+                                           D (ťu − x) + D (tρρ̂) = 0.
+                                           +τ             +s
+
+The energy conservation law for the scheme (89) does not hold:
+                                               
+                                              2
+                                         D  + ρ + D (uρ− ρ̂− ) =
+                                                u
+                                                2
+                                   +τ           +s
+                                                              
+                                        − −             1
+                        = u D (u) + D (ρ ρ̂ ) − ρρ̂ D ρ − D (u) + 12 u2t τ.
+                              +τ      +s                       +τ         +s
+
+
+(c) The Samarskiy-Popov scheme. An implicit completely conservative schemes by Samarskiy–Popov [52]
+for the one-dimensional gas dynamics equations can be modified for the case of the shallow water as follows.
+
+                                                                    1
+                                      ut + p̂s̄ = 0,                ρ = xs ,
+                                                                                                        (90)
+                                         xt = û+u
+                                                2 ,            p = Aρ .  2
+
+
+Scheme (90) is invariant.
+
+
+
+                                                       20
+   The original Samarskiy–Popov scheme for the one-dimensional gas dynamics equations also includes a
+conservation law of energy:
+                                        u2+
+                                                              
+                                                    (u+û)(p+p̂)
+                                  D ε +  2    + D        4         = 0,                                   (91)
+                                  +τ                       +s
+
+where the internal energy of the medium ε is determined by the equation
+                                                       
+                                                       1
+                                             εt = −p̂      ,                                              (92)
+                                                       ρ t
+relating the change in internal energy with the work of pressure forces.
+    In the case of shallow water, in contrast to the original scheme for the gas dynamics equations, the energy
+equation (91) is no longer a part of the scheme and it does not directly follow from (90). One can rewrite
+equation (91), taking into account (92), as follows:
+                                                                
+                      û+ + u+ +                  1      1              1
+                              (ut + p̂s ) − p̂        − (û + u)s − ((u + û)pt )s τ = 0.                  (93)
+                          2                       ρ t 2                 4
+
+Then, one sees that equation (91) does not hold on the solutions of system (90), and, strictly speaking, it
+is not a conservation law of the system. Nevertheless, we are going to use equations (91) and (92) of the
+original Samarskiy–Popov scheme in numerical computations in order to control the conservation law of
+energy on the solutions of the system.
+
+(d) The Yelenin–Krylov scheme. This is a completely conservative scheme for a system of equations of the
+two-layer shallow water obtained in [11]. It can be reduced to the system of equations of single-layer shallow
+water by assuming all the parameters of the both layers to be equal. Then, after some simplifications, one
+arrives at the following scheme:
+                                                      
+                                           1
+                                           ρ − +s
+                                                D D (u(0.5) ) = 0,
+                                       +τ                                                               (94)
+                                                      −1 (0.5)    0 (0.5)
+                                            (0.5)
+                                                                          
+                             D (u) + D S P        + (ρ )       (P )           = 0,
+                             +τ            +s   −s
+
+where
+                                                 fˆ + f                   P̂ − P
+                                   f (0.5) =               and P 0 =               ,
+                                                    2                   ρ̂−1 − ρ−1
+the function P is given by a state equation and in the case of the single-layer shallow water it should be
+equal to ρ2 in the continuous limit.
+   The scheme possesses the conservation law of energy
+                                                                     (0.5) !
+                                                              F + F−
+                             2
+                             u + (u+ )2
+                                                           
+                                           P          (0.5)
+                         D              +      +D u                           = 0,
+                         +τ        4       ρ     +s              2
+
+where
+                                       F (0.5) = P (0.5) − (ρ−1 )(0.5) (P 0 )(0.5) .
+    In the given form, scheme (94) is a three-level one. In order to write it on two time levels, one sets the
+state equation that defines the function P as follows:
+
+                                                P̂ − P = 2(ρ̂−1 − ρ−1 )ρ3 .                               (95)
+
+The latter expression corresponds to the differential
+                                                     dG   d 2
+                                                        =    (ρ ) = 2ρ.
+                                                     dρ   dρ
+                                                           21
+Taking into account equation (95), one can write a modified Yelenin–Krylov scheme as follows
+                                                        
+                                                        1
+                                                   D    ρ       − D (u(0.5) ) = 0,
+                                                  +τ              +s
+
+                                 D (u) + D P (0.5) + (ρ−1 )(0.5) (2ρ3 )(0.5) = 0,
+                                                                            
+                                +τ            −s
+
+                                                P̂ − P = 2(ρ̂−1 − ρ−1 )ρ3 ,                                 (96)
+                                                                        
+                                               D 14 (u2 + (u+ )2 ) + ρ1 P +
+                                             +τ                                                 
+                              + 12 D                   D P (0.5) + (ρ−1 )(0.5) (2ρ3 )(0.5)
+                                             s (0.5)
+                                                                                             
+                                            h u                                                      = 0.
+                                   +s                  −s
+
+(e) The Korobitsyn scheme. This scheme was proposed in the paper [60], and it is a modification of the
+completely conservative Samarskiy-Popov scheme [52]. For the shallow water equations, according to (34),
+one can rewrite the scheme in the following form
+
+                                                            ut + ps̄ = 0,
+
+                                                    xt = 0.5(u + û),
+                                                                                                          (97)
+                                                    1
+                                                    ρ   = 0.5(u + û)s̄ ,
+                                                            t
+                                                                              
+                               p̂ = (0.5q(ρ− + ρ) + (1 − q)ρ) ρ + 0.25qτ 2 u2t ,
+
+where 0 ⩽ q ⩽ 1 is a parameter. Setting q = 0, one gets one of the Samarskiy–Popov schemes [66]. If q = 1,
+scheme (97) becomes “thermodynamically consistent” (see. [60]), i. e., it possesses additional conservation
+laws if the one-dimensional flow of polytropic gas with an adiabatic exponent γ = 3 is considered. In the
+shallow water case, the condition of thermodynamic consistency does not have of clear physical meaning,
+but further we put q = 1, as it was done in [60]. In this case, the scheme can be represented in an explicit
+form. Using the relations given in [60], one can also derive the following expression for the conservation law
+of energy
+                                 2 2              h
+                                  u +u+         û+u
+                                     2      +     8   (ρ + ρ− )(ρ + 0.25qτ 2 u2t )
+                                          t
+                                                                           i
+                                       +(ρ− + ρ−− )(ρ− + 0.25qτ 2 (u−    2
+                                                                      t ) )       = 0.
+                                                                                       s
+
+
+   In order to reduce the schemes’ dispersion, we use an artificial linear-quadratic viscosity [52] of the form
+                                                                              κhs 2
+                                            ω = −νρus + 0.5(1 + γ)ρ              u ,
+                                                                               π s
+where ν is a linear viscosity coefficient, κ is a quadratic viscosity coefficient, and γ — adiabatic exponent,
+which equals 2 in the case of shallow water. The use of artificial viscosity means that in all the calculations
+the value of pressure p near strong discontinuities of solutions is replaced by
+
+                                                            q = p + ω.
+
+    Further, four test problems are considered (detailed description of three of them one can find in [52]).
+In all the tasks the mesh space steps are given as hs = 0.02 and τ = 0.025hs . Viscosity coefficients ν and κ
+were chosen empirically so that solutions of the schemes to be close to the known exact solutions. For the
+modified Yelenin-Krylov scheme (96) artificial viscosity is not used, as it turned out, in this case it markedly
+worsens the results. For the explicit scheme we put ν = 0.005, and, for scheme (97) and for the modified
+Samarskiy–Popov scheme (90), we put ν = 0.001. In all cases, except for the scheme (96), the coefficient
+                                                                   22
+of quadratic viscosity is κ = 4.5. The total substance mass S for the first three tests is taken S = 3, and
+for the fourth test S = 4. The initial height of the fluid column ρ0 in all cases is 1, and the pressure p0 is
+calculated by the equations of state. Calculations for all the implicit schemes were carried out by iterative
+methods with the accuracy requirement ε = 0.001.
+
+
+
+
+                                            Figure 4: Legend for Fig. 5–8
+
+   Descriptions of the test problems and the numerical results are presented below.
+   Notice that in Figures 5–8 the legend which is depicted in Figure 4 is used.
+
+   • Test 1. Rarefaction wave. This is the problem of a withdrawing piston, which, under the action of
+     external forces, moves outside of the medium producing a rarefaction wave. The numerical results, as
+     well as the values of the conservation laws on solutions, for all the schemes at the moment t = 0.55 are
+     shown in the Figure 5. The height ρ of the fluid column above the flat bottom at the chosen moment
+     of time is shown in Figure 5 a). The values of the conservation laws of energy, mass and momentum
+     on the solution Figure 5 a) are depicted in Figures 5 b)— 5 d) appropriately.
+   • Test 2. Compression wave. Here the piston moves into the medium at a constant speed U0 = 0.5,
+     producing a shock wave. The numerical results at the moment t = 0.6 are given in Figure 6 by analogy
+     with Figure 5.
+
+   • Test 3. Unidirectional compression waves. At the initial moment of time under the action of a piston
+     moving at a constant speed U0 = 0.8 to the right, there is a compression wave. At time t1 = 0.25, the
+     piston begins to accelerate until the moment t2 = 0.5, when its speed reaches the value U1 = 2U0 = 1.6.
+     After that the piston moves at a constant speed U1 . The piston moves according to the following law
+                                    
+                                    U0 ,     t ⩽ t1 ,
+                                    
+                                                                
+                             U (t) =    U0 + (U1 − U0 ) sin2    π t−t1
+                                                                2 t2 −t1    ,   t 1 ⩽ t ⩽ t2 ,
+                                       
+                                       
+                                       U ,    t ⩾ t2 .
+                                         1
+
+
+     The numerical results at t = 0.74 are given in Figure 7.
+   • Test 4. Collision of two opposing compression waves. In this test, two compression waves move towards
+     each other at speeds U1 = 0.5 and U2 = −0.5. The numerical results at t = 1.0 are given in Figure 8.
+
+Remark 11. One can find some exact smooth solutions and generalizations of the scheme and the corre-
+sponding numerical computations in the paper [67].
+
+   Comparing the results of calculations according to five schemes, we arrive at the following conclusions.
+  1. All the considered schemes, with proper selection of artificial viscosity, show numerical results close to
+     the known exact solutions.
+
+  2. The solutions of the modified Yelenin–Krylov scheme (96) change with dispersal peaks near disconti-
+     nuities, while the artificial viscosity value does not significantly affect that peaks.
+
+
+                                                         23
+     a) test   b) energy                               c) mass   d) momentum
+                      Figure 5: Test 1 numerical results
+24
+
+
+
+
+     a) test   b) energy                               c) mass   d) momentum
+                      Figure 6: Test 2 numerical results
+     a) test   b) energy                               c) mass   d) momentum
+                      Figure 7: Test 3 numerical results
+25
+
+
+
+
+     a) test   b) energy                               c) mass   d) momentum
+                      Figure 8: Test 4 numerical results
+   3. The modified Korobitsyn’s scheme (97) turns out to be extremely sensitive to the artificial viscos-
+      ity parameters, which makes big difference from scheme (96). In contrast to the implicit modified
+      Samarskiy–Popov’s scheme (90) the explicit scheme (97) shows worse results according to the conser-
+      vation of energy and momentum, but it better conserves mass.
+   4. In all the cases, the invariant scheme (61), (60) results appear among the best results on the conser-
+      vation laws on solutions.
+
+
+6. Conclusion
+
+    The one-dimensional shallow water equations in Eulerian and Lagrangian coordinates were considered
+in the present work.
+    It was shown the relationship between symmetries and conservation laws in Lagrangian (potential)
+coordinates and symmetries and conservation laws in physical variables.
+    For equations in Lagrangian coordinates with a flat bottom an invariant difference scheme is constructed
+which possesses all the difference analogues of the differential conservation laws: mass, momentum, energy,
+the law of center of mass motion.
+    The resulting conservative scheme is three-layers scheme in time. By non-point transformations of
+variables such a scheme can be reduced to an invariant scheme in mass Lagrangian variables possessing the
+same set of conservation laws. By choosing a special form of “equation of state” (the relationship of pressure
+and height of a liquid column) it is possible to obtain a two-level scheme of shallow water equations in physical
+variables. Generalization of the scheme to the case of an arbitrary bottom faces certain difficulties, leading
+to that it is possible to construct either an invariant scheme with conservation of mass and momentum, or
+an invariant scheme with conservation of mass and energy.
+    For a conservative difference scheme for a flat bottom some invariant solutions are constructed. It is
+shown that the invariant scheme admits reduction on subgroups as well as the original system of differential
+equations.
+    Invariant conservative difference scheme for the case of a flat bottom tested numerically in comparison
+with other known schemes adapted for the case of shallow water in one-dimensional approximation. The
+numerical tests indicated a good accuracy of calculations and the validation of conservation laws on solutions
+with big gradients.
+
+Acknowledgements
+
+   The research was supported by Russian Science Foundation Grant No 18-11-00238 ‘Hydrodynamics-type
+equations: symmetries, conservation laws, invariant difference schemes’. E.I.K. also acknowledges Suranaree
+University of Technology for Full-time Master Researcher Fellowship (15/2561).
+
+
+References
+ [1] G. B. Whitham, Linear and Nonlinear Waves, Wiley, New York, 1974.
+ [2] L. V. Ovsiannikov, Lectures on the gas dynamics equations, Institute of Computer Studies, Moscow–Izhevsk, 2003. In
+     Russian.
+ [3] A. S. Petrosyan, Additional chapters of heavy fluid hydrodynamics with a free boundary, Space Research Institute of the
+     Russian Academy of Sciences, Moscow, 2014. In Russian.
+ [4] G. K. Vallis, Atmospheric and Oceanic Fluid Dynamics: Fundamentals and Large-scale Circulation, Cambridge University
+     Press, Cambridge, 2006.
+ [5] R. Bernetti, V. A. Titarev, E. F. Toro, Exact solution of the riemann problem for the shallow water equations with
+     discontinuous bottom geometry, Journal of Computational Physics 227 (2008) 3212 – 3243. doi:https://doi.org/10.
+     1016/j.jcp.2007.11.033.
+ [6] E. E. Han, M. Hantke, G. Warnecke, Exact riemann solutions to compressible Euler equations in ducts with discontinuous
+     cross-section, Journal of Hyperbolic Differential Equations 09 (2012) 403–449. doi:10.1142/S0219891612500130.
+ [7] A. G. Kulikovskii, N. V. Pogorelov, A. Y. Semenov, Mathematical aspects of numerical solution of hyperbolic systems,
+     Chapman & Hall/CRC Monographs and Surveys in Pure and Applied Mathematics, Boca Raton, 2001.
+
+                                                            26
+ [8] C. B. Vreugdenhil, Numerical Methods for Shallow-Water Flow, Springer Science+Business Media, Dordrecht, 1994.
+ [9] W. Y. Tan, Shallow Water Hydrodynamics: Mathematical Theory and Numerical Solution for a Two-dimensional System
+     of Shallow Water Equations, Water & Power Press, Beijing, 2012.
+[10] I. B. Abbasov, 3D Modeling of Nonlinear Wave Phenomena on Shallow Water Surfaces, Wiley, Hoboken, 2018.
+[11] G. G. Yelenin, V. V. Krylov, A completely conservative difference scheme for equations of two-layered “shallow water” in
+     Lagrange coordinates, Differ. Uravn. 18 (1982) 1190—-1196.
+[12] A. Bihlo, R. Popovych, Invariant discretization schemes for the shallow-water equations, SIAM Journal on Scientific
+     Computing 34 (2012). doi:10.1137/120861187.
+[13] A. Bihlo, S. MacLachlan, Well-balanced mesh-based and meshless schemes for the shallow-water equations, BIT Numerical
+     Mathematics (2017).
+[14] R. Brecht, W. Bauer, A. Bihlo, F. Gay-Balmaz, S. MacLachlan, Variational integrator for the rotating shallow-water
+     equations on the sphere, Quarterly Journal of the Royal Meteorological Society 145 (2019). doi:10.1002/qj.3477.
+[15] M. Masum Murshed, K. Futai, M. Kimura, H. Notsu, Theoretical and numerical studies for energy estimates of the shallow
+     water equations with a transmission boundary condition, arXiv e-prints (2019) arXiv:1901.05725. arXiv:1901.05725.
+[16] G. Khakimzyanov, D. Dutykh, O. Gusev, Dispersive shallow water wave modelling. Part IV: Numerical simulation on a
+     globally spherical geometry, arXiv e-prints (2017) arXiv:1707.02552. arXiv:1707.02552.
+[17] T. Dyakonova, A. Khoperskov, S. Khrapov, Numerical model of shallow water: The use of nvidia cuda graphics processors,
+     in: V. Voevodin, S. Sobolev (Eds.), Supercomputing, Springer International Publishing, Cham, 2016, pp. 132–145.
+[18] T. M. Luna, M. J. Castro Dı́az, C. Parés, Reliability of first order numerical schemes for solving shallow water system
+     over abrupt topography, Applied Mathematics and Computation 219 (2013) 9012 – 9032. doi:https://doi.org/10.1016/
+     j.amc.2013.03.033.
+[19] S. Lie, Theorie der transformationsgruppen i, Mathematische Annalen 16 (1880) 441–528. doi:10.1007/BF01446218.
+[20] S. Lie, von Dr. G. Scheffers, Vorlesungen uber differentialgleichungen mit bekannten infinitesimalen transformationen,
+     bearbeitet und herausgegehen, Mathematische Annalen (1891).
+[21] S. Lie, Geometrie der Berührungstransformationen, B.G. Teubner, Leipzig, 1896. Dargestellt von Sophus Lie und Georg
+     Scheffers.
+[22] L. V. Ovsiannikov, Group Analysis of Differential Equations, Academic, New York, 1982.
+[23] P. J. Olver, Applications of Lie Groups to Differential Equations, Springer, New York, 1986.
+[24] N. H. Ibragimov, Transformation Groups Applied to Mathematical Physics, Reidel, Boston, 1985.
+[25] G. Bluman, S. Kumei, Symmetries and Differential Equations, Applied Mathematical Sciences, Springer New York, 2013.
+[26] N. H. Ibragimov (Ed.), CRC Handbook of Lie Group Analysis of Differential Equations, volume 1, CRC Press, Boca
+     Raton, 1994.
+[27] G. Gaeta, Nonlinear Symmetries and Nonlinear Equations, Kluwer, Dordrecht, 1994.
+[28] N. H. Ibragimov (Ed.), CRC Handbook of Lie Group Analysis of Differential Equations, volume 2, CRC Press, Boca
+     Raton, 1995.
+[29] D. Levi, M. Nicci, C. Rogers, P. Winternitz, Group theoretical analysis of a rotating shallow liquid in a rigid container,
+     Journal of Physics A: Mathematical and General 22 (1989) 4743–4767. doi:10.1088/0305-4470/22/22/007.
+[30] N. Bila, E. Mansfield, P. Clarkson, Symmetry group analysis of the shallow water and semi-geostrophic equations, The
+     Quarterly Journal of Mechanics and Applied Mathematics 59 (2006). doi:10.1093/qjmam/hbi033.
+[31] A. V. Aksenov, K. P. Druzhkov, Conservation laws of the equation of one-dimensional shallow water over uneven bottom
+     in Lagrange’s variables, International Journal of Non-Linear Mechanics 119 (2020) 103348. doi:https://doi.org/10.1016/
+     j.ijnonlinmec.2019.103348.
+[32] E. Kaptsov, S. Meleshko, Analysis of the one-dimensional Euler–Lagrange equation of continuum mechanics with a
+     Lagrangian of a special form, Applied Mathematical Modelling 77 (2020) 1497 – 1511. doi:https://doi.org/10.1016/j.
+     apm.2019.09.014.
+[33] P. Siriwat, C. Kaewmanee, S. V. Meleshko, Symmetries of the hyperbolic shallow water equations and the Green-Naghdi
+     model in Lagrangian coordinates, International Journal of Non-Linear Mechanics 86 (2016) 185–195.
+[34] S. Szatmari, A. Bihlo, Symmetry analysis of a system of modified shallow-water equations, Communications in Nonlinear
+     Science and Numerical Simulation 19 (2014) 530–537.
+[35] S. Maeda, Extension of discrete Noether theorem, Math. Japonica 26 (1985) 85–90.
+[36] S. Maeda, The similarity method for difference equations, J. Inst. Math. Appl. 38 (1987) 129–134.
+[37] V. A. Dorodnitsyn, Transformation groups in net spaces, Journal of Soviet Mathematics 55 (1991) 1490–1517. doi:10.
+     1007/BF01097535.
+[38] V. A. Dorodnitsyn, Finite difference models entirely inheriting symmetry of original differential equations, International
+     Journal of Modern Physics C 5 (1994). doi:10.1142/S0129183194000830.
+[39] V. A. Dorodnitsyn, The finite-difference analogy of Noether’s theorem, Phys. Dokl. 38 (1993) 66–68. doi:10.1142/
+     S0129183194000830.
+[40] V. A. Dorodnitsyn, R. V. Kozlov, P. Winternitz, Continuous symmetries of Lagrangians and exact solutions of discrete
+     equations, Journal of Mathematical Physics 45 (2004) 336–359. doi:10.1063/1.1625418.
+[41] D. Levi, P. Winternitz, Continuous symmetries of difference equations, Journal of Physics A: Mathematical and General
+     39 (2005) R1–R63. doi:10.1088/0305-4470/39/2/r01.
+[42] V. A. Dorodnitsyn, R. V. Kozlov, P. Winternitz, Lie group classification of second-order ordinary difference equations,
+     Journal of Mathematical Physics 41 (2000) 480–504. doi:10.1063/1.533142.
+[43] G. Quispel, R. Sahadevan, Lie symmetries and the integration of difference equations, Physics Letters A 184 (1993) 64 –
+     70. doi:https://doi.org/10.1016/0375-9601(93)90347-3.
+
+                                                              27
+[44] P. Winternitz, Symmetry preserving discretization of differential equations and Lie point symmetries of differential-
+     difference equations (2011).
+[45] V. A. Dorodnitsyn, Applications of Lie Groups to Difference Equations, CRC Press, Boca Raton, 2011.
+[46] R. Floreanini, L. Vinet, Lie symmetries of finite-difference equations, Journal of Mathematical Physics 36 (1995) 7024–
+     7042. doi:10.1063/1.531205.
+[47] P. E. Hydon, Difference Equations by Differential Equation Methods, Cambridge Monographs on Applied and Computa-
+     tional Mathematics, Cambridge University Press, 2014. doi:10.1017/CBO9781139016988.
+[48] V. A. Dorodnitsyn, E. I. Kaptsov, R. V. Kozlov, P. Winternitz, The adjoint equation method for constructing first integrals
+     of difference equations, Journal of Physics A: Mathematical and Theoretical 48 (2015) 055202. doi:10.1088/1751-8113/
+     48/5/055202.
+[49] C. J. Budd, H. Weizhang, R. D. Russell, Moving mesh methods for problems with blow-up, SIAM Journal on Scientific
+     Computing 17 (1996) 305–327. doi:10.1137/S1064827594272025.
+[50] W. Huang, R. D. Russel, Adaptive Moving Mesh Methods, Springer, New York, 2010.
+[51] A. Arakawa, V. R. Lamb, A potential enstrophy and energy conserving scheme for the shallow water equations, Monthly
+     Weather Review 109 (1981) 18–36.
+[52] A. Samarskii, Y. P. Popov, Difference methods for solving problems of gas dynamics, Nauka, Moscow, 1980. In Russian.
+[53] B. L. Rojdestvenskiy, N. N. Yanenko, Systems of quasilinear equations and their applications to gas dynamics, Nauka,
+     Moscow, 1968. In Russian.
+[54] Y. P. Popov, A. A. Samarskiy, Completely conservative difference schemes, Zh. Vychisl. Mat. Mat. Fiz. 9 (1969) 953–958.
+[55] A. V. Koldoba, Y. A. Poveschenko, Y. P. Popov, Two-layer completely conservative difference schemes for the equations
+     of gas dynamics in Euler variables, U.S.S.R. Comput. Math. Math. Phys. 27 (1987) 91–95.
+[56] Y. A. Poveshchenko, M. E. Ladokina, V. O. Podryga, O. R. Rahimly, Y. S. Sharova, On a two-layer completely conservative
+     difference scheme of gas dynamics in Eulerian variables with adaptive regularization of solution, Keldysh Institute preprints
+     (2019).
+[57] I. Popov, Y. Poveschenko, S. Polyakov, P. Rahimli, One approach to constructing a conservative difference scheme for the
+     two-phase filtration problem, Keldysh Institute preprints (2017).
+[58] V. A. Dorodnitsyn, R. V. Kozlov, S. V. Meleshko, One-dimensional gas dynamics equations of a polytropic gas in
+     Lagrangian coordinates: Symmetry classification, conservation laws, difference schemes, Communications in Nonlinear
+     Science and Numerical Simulation 74 (2019) 201 – 218. doi:https://doi.org/10.1016/j.cnsns.2019.03.009.
+[59] R. Kozlov, Conservative difference schemes for one-dimensional flows of polytropic gas, Communications in Nonlinear
+     Science and Numerical Simulations 78 (2019) 104864. doi:10.1016/j.cnsns.2019.104864.
+[60] V. A. Korobitsyn, Thermodynamically matched difference schemes, U.S.S.R. Comput. Math. Math. Phys 29 (1989) 71–79.
+[61] Y. Chirkunov, E. O. Pikmullina, Symmetry properties and solutions of shallow water equations, Universal Journal of
+     Applied Mathematics 2 (2014) 10–23.
+[62] L. V. Ovsiannikov, Lectures on the gas dynamics equations, Institute of computer studies, Moscow, Izhevsk, 2003. Second
+     edition.
+[63] G. W. Bluman, S. C. Anco, Symmetry and Integration Methods for Differential Equations, Springer, New York, 2002.
+[64] G. W. Bluman, A. F. Cheviakov, S. C. Anco, Applications of Symmetry Methods to Partial Differential Equations,
+     Springer, New York, 2010. Applied Mathematical Sciences, Vol.168.
+[65] V. A. Dorodnitsyn, On the linearization of second-order differential and difference equations, Symmetry, Integrability and
+     Geometry: Methods and Applications 2 (2006). doi:10.3842/SIGMA.2006.065.
+[66] A. A. Samarskiy, Y. P. Popov, Completely conservative difference schemes for the equations of magneto-hydrodynamics,
+     U.S.S.R. Comput. Math. Math. Phys. 10 (1970) 233–243.
+[67] E. I. Kaptsov, Numerical implementation of an invariant scheme for one-dimensional shallow water equations in Lagrangian
+     coordinates, Keldysh Institute preprints (2019). In Russian.
+
+
+
+
+                                                               28
+

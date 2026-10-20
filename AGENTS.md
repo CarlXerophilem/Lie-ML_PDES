@@ -1,8 +1,10 @@
 # Active project instructions
 
 Read README.md, draft/main.tex, docs/project-map.md and the current experiment
-index before making research claims. The active evidence package is
-research_artifacts/sve-progress-20261010. Historical instructions in the
+index before making research claims. The current evidence entries are indexed in docs/project-map.md. The retained
+scalar benchmark is research_artifacts/sve-progress-20261010; the portable
+19/20 October classification snapshot is research_artifacts/sve-current-20261021;
+the current 1D research programme is research_artifacts/sve-1d-programme-20261021. Historical instructions in the
 external archive apply to their snapshot, not this working tree.
 
 ## Mathematical and evidence boundaries
