@@ -1,6 +1,30 @@
 # Cleanup and workflow validation
 
-## Current host, 21 October 2026
+## Current Cleanup And Precision Validation, 21 October 2026
+
+The [cleanup delivery](../research_artifacts/archives-20261021/CLEANUP.md)
+records 72 library/scalar, 168 scripts/engine/chart/active-package and 410
+historical general-symm tests passed on Windows (650 disjoint tests, including
+43 active-package and 58 new archive controls). Integrity, data-flux and workflow
+pass. The audit retains only the missing external 11 October history archive;
+archived historical issues are not relabelled as repaired.
+
+The [precision follow-up](residual-resolution-20261021.md) supersedes the
+earlier extended-IVP outcome below: all 11 independent high-precision-reference
+checks pass the unchanged 1e-6 gate. The frozen raw float64 campaign still
+records 10/11 and its time-resonant 1.177074994e-6 failure. This is not a
+continuous residual/error certificate for either float64 interpolant.
+
+Native Windows builds after compaction produced 47-page dissertation and
+51-page manuscript PDFs; final logs contain no undefined or multiply defined
+citations/references. Existing underfull-box warnings remain. Dissertation
+page 26 and manuscript page 40 were rendered and inspected. Sources and
+bibliography were not rewritten. Logs, PDFs, render checks, negative receipts
+and the independent review are retained in cleanup-evidence.zip in the linked
+delivery. Linux synchronization/checks are recorded separately in the
+[handoff](priestess-handoff.md), not inferred from these Windows checks.
+
+## Earlier Deliveries On This Host, 21 October 2026
 
 The latest [printed-P solution delivery](../build/sve-P-solutions-20261021/DELIVERY.md)
 supersedes the library-only counts below: 66 library/scalar tests, 410 historical

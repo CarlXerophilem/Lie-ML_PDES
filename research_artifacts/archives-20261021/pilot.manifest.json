@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "files": {
+    "research_artifacts/pilot/REPORT.md": {
+      "bytes": 229,
+      "sha256": "0a5bbd79bc5e8b260d5edf616dcedace88f2946d8d5a7d48a921d30e25cb1e68"
+    },
+    "research_artifacts/pilot/corpus_manifest.jsonl": {
+      "bytes": 9588,
+      "sha256": "58870573bdc5f7bc4c8c95799c9680b058959b0ad76f801a55e4d9f708d235e2"
+    },
+    "research_artifacts/pilot/evaluation.json": {
+      "bytes": 803,
+      "sha256": "5e44f71274087dc68af42d4df83a5c62e6afc6fcf2c7af614c71b4dd00d24339"
+    },
+    "research_artifacts/pilot/model.json": {
+      "bytes": 1014,
+      "sha256": "6d166a69bce021fd665c4a9d3158b7c2954ca84261a8cf14a30d9b4a6dd7d026"
+    },
+    "research_artifacts/pilot/oracle_records.jsonl": {
+      "bytes": 26164,
+      "sha256": "0b059fa6636d83c827986f5d935e7098bd1cb33f4a6f473f497c2443d674d2c1"
+    },
+    "research_artifacts/pilot/run_metadata.json": {
+      "bytes": 2012,
+      "sha256": "5070fe637db2a5a7d221cbf80f1b45a432abe119c0b5ca877e06e0e361c31bfe"
+    }
+  },
+  "file_count": 6,
+  "uncompressed_bytes": 39810,
+  "archive": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\archives-20261021\\pilot.zip",
+  "archive_sha256": "0a6cbb42d0a9350135cf15d1ef25a28693b94937c801b1154b8e6397e5e8dc22",
+  "archive_bytes": 7116,
+  "verified": true
+}

@@ -1,16 +1,19 @@
 # Three-layer research demos
 
 These command-line programs deliberately keep the three claims separate.
+They are optional historical demos, not a restart of the stopped pure-PINN
+programme. The original results and certificates have [restore instructions](../../research_artifacts/three-layer-baselines-20260927/ARCHIVED.md).
+New runs must use a fresh build directory rather than mutate historical evidence.
 
 ```powershell
-python -B -m symm.research_demos.ml_only --output-dir research_artifacts/three-layer-baselines-20260927/ml-only
-python -B -m symm.research_demos.lie_only --output-dir research_artifacts/three-layer-baselines-20260927/lie-only
+python -B -m symm.research_demos.ml_only --output-dir build/three-layer-NEW/ml-only
+python -B -m symm.research_demos.lie_only --output-dir build/three-layer-NEW/lie-only
 python -B -m symm.research_demos.fusion `
-  --certificate research_artifacts/three-layer-baselines-20260927/lie-only/lie_only_report.json `
-  --output-dir research_artifacts/three-layer-baselines-20260927/fusion --steps 1000
+  --certificate build/three-layer-NEW/lie-only/lie_only_report.json `
+  --output-dir build/three-layer-NEW/fusion --steps 1000
 python -B -m symm.research_demos.sve_family `
-  --certificate research_artifacts/three-layer-baselines-20260927/lie-only/sve_certificate_v02.json `
-  --output-dir research_artifacts/three-layer-baselines-20260927/sve-family-v02 --steps 1000
+  --certificate build/three-layer-NEW/lie-only/sve_certificate_v02.json `
+  --output-dir build/three-layer-NEW/sve-family-v02 --steps 1000
 ```
 
 Use `--quick` on the ML-only, fusion or SVE-family command for a wiring smoke

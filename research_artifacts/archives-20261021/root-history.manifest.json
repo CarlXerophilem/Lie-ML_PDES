@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "files": {
+    "AGENTS.txt": {
+      "bytes": 2462,
+      "sha256": "bb763a57ccc5d3fc2cfad1920c4efca6f803aa3117deaaa51d284d35a6b354bd"
+    },
+    "flow.jpg": {
+      "bytes": 130223,
+      "sha256": "20cb7f49387cda00d6096a15acfab7052532160dde28840016b532fc5dde6c07"
+    },
+    "main-annotated.pdf": {
+      "bytes": 775237,
+      "sha256": "260343eb43e872aff43c6f2e985ba640345f05b9afdd64fafc2c97f346dd39b1"
+    },
+    "midterm_dissertation.pptx": {
+      "bytes": 198088,
+      "sha256": "08106091203dabe3e63fb806e9d0fb104b17278db54d63a808c50a11752b4f1f"
+    }
+  },
+  "file_count": 4,
+  "uncompressed_bytes": 1106010,
+  "archive": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\archives-20261021\\root-history.zip",
+  "archive_sha256": "53d1c6b7ccf49c60684601e9d8633d26001da74920a03f8a8216cc0a2351c456",
+  "archive_bytes": 915184,
+  "verified": true
+}

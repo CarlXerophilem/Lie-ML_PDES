@@ -1,0 +1,6 @@
+# Search defaults only: explicit reads and rg --no-ignore remain available.
+/ref/
+/research_artifacts/
+/symm/LieSymm/_snapshot/runs/
+/symm/LieSymm/_snapshot/**/*.json
+/draft/tmp/

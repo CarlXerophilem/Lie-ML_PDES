@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "files": {
+    "research_artifacts/dissertation-title-inspection-20261014/INSPECTION.md": {
+      "bytes": 5085,
+      "sha256": "3eb181992d5733cb6272f32485ce7efd82fda67adf8ab020ef267b9ab94ac9b8"
+    }
+  },
+  "file_count": 1,
+  "uncompressed_bytes": 5085,
+  "archive": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\archives-20261021\\dissertation-title-inspection-20261014.zip",
+  "archive_sha256": "50ccd3c4e617e9d28416e05fbc2217cf23749a804f19eb1aa928e2f8c431f094",
+  "archive_bytes": 2817,
+  "verified": true
+}

@@ -10,7 +10,10 @@ __pycache__/
 *.log
 *.out
 *.toc
+*.lof
+*.lot
 *.synctex.gz
+*.synctex(busy)
 
 # Local Claude/Codex runtime state; project skills and workflows remain tracked
 .claude/session-log.md
@@ -31,3 +34,25 @@ build/
 
 # archives
 docs/.old
+
+# Historical expansions are restored explicitly; their small stubs stay tracked.
+/research_artifacts/mathematics-and-symmetries/**
+!/research_artifacts/mathematics-and-symmetries/ARCHIVED.md
+/research_artifacts/fluid-baseline-20260925/**
+!/research_artifacts/fluid-baseline-20260925/ARCHIVED.md
+/research_artifacts/free-boundary-scope-inspection-20261014/**
+!/research_artifacts/free-boundary-scope-inspection-20261014/ARCHIVED.md
+/research_artifacts/live-simulation-20260925/**
+!/research_artifacts/live-simulation-20260925/ARCHIVED.md
+/research_artifacts/three-layer-baselines-20260927/**
+!/research_artifacts/three-layer-baselines-20260927/ARCHIVED.md
+/research_artifacts/pilot/**
+!/research_artifacts/pilot/ARCHIVED.md
+/research_artifacts/dissertation-title-inspection-20261014/**
+!/research_artifacts/dissertation-title-inspection-20261014/ARCHIVED.md
+/research_artifacts/p0-near-cubic-20261007/**
+!/research_artifacts/p0-near-cubic-20261007/ARCHIVED.md
+/AGENTS.txt
+/flow.jpg
+/main-annotated.pdf
+/midterm_dissertation.pptx

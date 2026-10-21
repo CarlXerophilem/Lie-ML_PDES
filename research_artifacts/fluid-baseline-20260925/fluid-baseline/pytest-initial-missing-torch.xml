@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.383" timestamp="2026-09-25T16:48:50.684976+08:00" hostname="priestess-X99"><testcase classname="" name="draft.proposal_support.test_pinn_feasibility" time="0.000"><error message="collection failure">ImportError while importing test module '/home/carl/lieml/releases/20260925-fluid-baseline-v1/draft/proposal_support/test_pinn_feasibility.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-../../../miniforge3/envs/pinn/lib/python3.12/importlib/__init__.py:90: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-draft/proposal_support/test_pinn_feasibility.py:4: in &lt;module&gt;
-    import torch
-E   ModuleNotFoundError: No module named 'torch'</error></testcase></testsuite></testsuites>

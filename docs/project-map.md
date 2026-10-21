@@ -1,80 +1,90 @@
-# Project map — 21 October 2026
+# Project Map: 21 October 2026
 
-The immediate work is **verified reproduction and extension of the original
-SVE paper**. The [printed-P precision repair](residual-resolution-20261021.md)
-now passes the independent reference check while preserving the raw failure.
-The [research roadmap](research-roadmap-20261021.md) then proceeds to controlled
-changes of the full SV+bed model, a frozen LieML baseline, and source-verified
-open 2D problems. These later stages are planned, not completed research claims.
-The [solution API](../symm/LieSymm/scalar2026/SOLUTIONS.md) reuses the existing
-classification and retains exact, series, numerical and unresolved results.
-The [accepted plan](superpowers/plans/2026-10-21-sve-printed-solutions.md) governs
-the printed-P solution cycle; the E programme below remains a distinct model
-and supplies a later experimental starting point, not a replacement for P.
-The [new local delivery](../build/sve-P-residual-20261021/DELIVERY.md) and
-[fresh demo](../build/sve-P-residual-20261021/campaign-reviewed/index.html) give
-12/12 exact, 21/21 seed and 11/11 reference-checked extended IVPs. The
-[frozen published delivery](../build/sve-P-solutions-20261021/DELIVERY.md)
-keeps the earlier 10/11 result. These demonstrations separate
-exact surfaces, truncated series and numerical trajectories.
-The [local LieSymm library](../symm/LieSymm/README.md) now preserves and exposes
-the general-symm kernel without depending on the original build directory.
-The [2026 scalar demo](../symm/LieSymm/scalar2026/README.md) processes all nine
-source subsections and their eleven numbered formulas, with 21 verified local
-IVPs and `(s,t,phi)` surface exports. Its corrected reductions solve printed
-model P; they do not establish equivalence to E or M.
+The current research route is source-faithful reproduction and extension of
+the 2026 printed scalar SVE paper, then controlled full SV+bed changes and a
+frozen baseline, then source-verified open 2D questions. The latter two stages
+are planned, not completed results. The immediate next writing task is
+[title, outline and source-question-evidence mapping](superpowers/plans/2026-10-21-dissertation-writing.md)
+for the existing [dissertation](../draft/dissertation.tex), not manuscript prose.
 
-Start with the [1D programme](../research_artifacts/sve-1d-programme-20261021/README.md),
-[registered reductions](../research_artifacts/sve-1d-programme-20261021/REDUCTION_INVENTORY.md),
-and [implementation plan](../research_artifacts/sve-1d-programme-20261021/PLAN.md).
+## Models And Accepted Scope
 
-| Object | Current evidence | Next operation |
+| Object | Current evidence | Limits / next operation |
 |---|---|---|
-| Full Eulerian E | 8 declared 1D / 17 declared 2D maximal local point-algebra cells | After the source-paper demo, pose controlled SV+bed modifications and test/freeze the baseline, retaining singular strata |
-| Printed scalar P | 18 registered families, exact/series/numerical examples; time-resonant reference residual 2.212490569e-8 at unchanged 1e-6 gate | Finish source-faithful demo and address recorded regular scaling/mixed closed forms and singular continuations |
-| Corrected scalar M | Common-scaling first integral and local material reconstruction | Check currents, exceptional branches and additional reductions independently |
+| Printed scalar P | 18 registered families; 12/12 exact, 21/21 seed and 11/11 high-precision-reference extended IVPs | Frozen float64 campaign stays 10/11; regular scaling/mixed closed forms and singular continuation remain recorded open branches |
+| Full Eulerian SV+bed E | 8 declared 1D and 17 declared 2D local point-algebra cells; 17 registered traveling/scaling reductions in the separate 1D programme | Read the certificate's model/chart/ansatz scope; not every reduction or nonlinear solution; optimal-subalgebra completeness and full equivalence groupoid remain open |
+| Advectively corrected scalar M | Common-scaling first integral and local material reconstruction | Check currents, exceptional branches and further reductions independently |
 
-The completed [20 October delivery](../build/sve-general-symm-20261020/DELIVERY.md)
-contains 64 nonclassical candidate certificates: 11 full-chart passes, 2 requiring
-u!=0, and 51 failures. It found no new classically inequivalent solution family.
-2D optimal-subalgebra completeness and a full equivalence groupoid remain open.
-The eight 1D branch records currently emit 17 traveling/scaling certificates;
-this is not every possible invariant reduction or every solution.
+No P/E/M equivalence is assumed. State positive-branch/chart assumptions,
+nonzero denominators, parameter strata and compatible data. Independent-variable
+reduction is not ODE-order reduction. A verified generator, finite search or
+registered catalogue does not prove a maximal/global PDE classification.
 
-Pure PINN training has been abandoned for the current workload, following the
-user's decision and existing negative evidence. See the [ML decision](../research_artifacts/sve-1d-programme-20261021/ML_DECISION.md).
-Hybrid ML is considered only after a specific unmet task and a matched-accuracy
-cost advantage can be tested. No new training campaign is part of this repair.
-The user-selected local annotated PINN/KAN benchmark is a prospective protocol
-reference in the roadmap; it is not a completed LieML comparison or permission
-to restart pure PINN. Future 2D targets must be checked against the selected
-papers before calling them unknown or novel.
+The 20 October nonclassical campaign has 64 candidate certificates: 11 full-chart
+passes, 2 requiring u!=0 and 51 failures, with no new classically inequivalent
+solution family. See its [delivery](../build/sve-general-symm-20261020/DELIVERY.md).
+Pure PINN is stopped; [conditional hybrid ideas](../research_artifacts/sve-1d-programme-20261021/ML_DECISION.md)
+need an unmet task and measured added value. The PINN/KAN benchmark
+arXiv:2602.15068v1 is a prospective protocol reference, not an SVE result.
 
-## Current acceptance boundary
+## Current Evidence Index
 
-The missing 11 October external archive is a **nonblocking legacy-provenance
-note**, not a current research gate. Preserve its old audit receipt without
-spending the present research cycle on archive recovery. Current acceptance
-depends on source fidelity, explicit model/chart/data assumptions, independent
-original-equation reconstruction and appropriately scoped numerical checks.
-General closed forms, untreated singular continuations and raw float64 stencil
-failures remain explicitly recorded. The independent reference check does not
-prove a continuous error bound for double-precision interpolants.
+| Entry | What it establishes |
+|---|---|
+| [Precision follow-up](residual-resolution-20261021.md), [delivery](../build/sve-P-residual-20261021/DELIVERY.md), [demo](../build/sve-P-residual-20261021/campaign-reviewed/index.html) | Independent 40-digit reference resolves the third-derivative noise floor at unchanged 1e-6 gate; raw float64 failure is preserved |
+| [New precision carrier](../research_artifacts/sve-P-residual-20261021/README.md) | 401-file portable follow-up; source baseline 11fe2a8 |
+| [Frozen P delivery](../build/sve-P-solutions-20261021/DELIVERY.md), [three delivery carriers](../research_artifacts/sve-delivery-20261021/README.md) | Earlier 10/11 campaign, library receipts, exact/series/numerical/unresolved records |
+| [Portable current snapshot](../research_artifacts/sve-current-20261021/README.md) | 19/20 October evidence and retained dissertation build/week-4 inputs |
+| [Solution API](../symm/LieSymm/scalar2026/SOLUTIONS.md), [library](../symm/LieSymm/README.md), [source audit/demo](../symm/LieSymm/scalar2026/README.md) | All nine source subsections processed; printed failures and corrected P pullbacks kept distinct |
+| [E-focused 1D programme](../research_artifacts/sve-1d-programme-20261021/README.md), [reduction inventory](../research_artifacts/sve-1d-programme-20261021/REDUCTION_INVENTORY.md), [plan](../research_artifacts/sve-1d-programme-20261021/PLAN.md) | Separate declared E branches, domains and pending solve status |
+| [Retained scalar experiment index](../research_artifacts/sve-progress-20261010/docs/EXPERIMENT_INDEX.md) | 43-test benchmark, classical/approximation outcomes and negative results |
+| [12 October source reproduction](../research_artifacts/SVE-reproduced-20261012/README.md) | Printed-versus-verified audit; original scalar replay uses the dated recovery adapter |
 
-## Evidence and reproduction
+The precision reference residual is 2.212490569e-8 at h=.003 and
+2.976602120e-11 at h=.001. Agreement at output nodes and sampled residuals do
+not prove a continuous error bound for float64 interpolants. Bare pytest has
+separate legacy collection defects; selected passing suites are not a global pass.
 
-- [Published library and P-solution carriers](../research_artifacts/sve-delivery-20261021/README.md); Ubuntu synchronization and restoration commands are in the root README.
-- [Portable build snapshot and restore](../research_artifacts/sve-current-20261021/README.md).
-- [10 October scalar experiment index](../research_artifacts/sve-progress-20261010/docs/EXPERIMENT_INDEX.md): 43-test retained benchmark.
-- [Source-faithful 12 October reproduction](../research_artifacts/SVE-reproduced-20261012/README.md): use the 19 October scalar recovery adapter for its original scalar code.
-- [Archive policy and current cleanup](build-archive-20261021.md).
-- [Project checks](validation.md); exact current commands and results are in the refresh report linked from the documentation index.
+## Workflow, Writing And Remote Use
 
-The [manuscript](../draft/main.tex) and [dissertation](../draft/dissertation.tex)
-retain their existing research scope. This cleanup does not rewrite their claims.
-The dissertation still reads `build/week-4`, so that directory is retained and
-included in the portable snapshot.
+- [Root commands](../README.md): integrity, focused tests, audit, data-flux, workflow and native Windows latexmk.
+- [Three-stage research roadmap](research-roadmap-20261021.md): future acceptance conditions.
+- [Approved P-solution plan](superpowers/plans/2026-10-21-sve-printed-solutions.md): completed cycle's declared scope.
+- [Writing plan](superpowers/plans/2026-10-21-dissertation-writing.md): provisional title, outline and source-question-evidence map; completed results separated from future work.
+- [Priestess handoff](priestess-handoff.md): clean astra sync, hash-checked restoration, Python environment and Windows-only compilation boundary.
+- [Validation](validation.md), [documentation index](README.md), [reference guide](../ref/README.md).
 
-For the detailed theory, notation and older workflow diagrams, read the
-[preserved methodology map through 19 October](methodology-map-through-20261019.md).
-For other documents, use the [documentation index](README.md).
+The [manuscript](../draft/main.tex) and dissertation keep their existing scope;
+cleanup does not synchronize or rewrite their claims. The dissertation directly
+reads build/week-4, which stays retained and portable.
+
+## Historical Packages And Search Scope
+
+The absent 11 October external archive is a nonblocking legacy-provenance note,
+not a current acceptance gate. Its failed historical receipt is unchanged.
+See the [build archive guide](build-archive-20261021.md) and [archive policy](archive.md).
+
+Eight older packages are represented by restore stubs, not live deep links:
+[mathematics and symmetries](../research_artifacts/mathematics-and-symmetries/ARCHIVED.md),
+[fluid baseline](../research_artifacts/fluid-baseline-20260925/ARCHIVED.md),
+[free-boundary inspection](../research_artifacts/free-boundary-scope-inspection-20261014/ARCHIVED.md),
+[live simulation](../research_artifacts/live-simulation-20260925/ARCHIVED.md),
+[three-layer baselines](../research_artifacts/three-layer-baselines-20260927/ARCHIVED.md),
+[pilot](../research_artifacts/pilot/ARCHIVED.md),
+[title inspection](../research_artifacts/dissertation-title-inspection-20261014/ARCHIVED.md),
+[near-cubic P0](../research_artifacts/p0-near-cubic-20261007/ARCHIVED.md).
+Their ZIPs and root-history.zip are in research_artifacts/archives-20261021.
+Current reproduction, 2D extension, scalar benchmark, 1D programme and delivery
+packages stay expanded; frozen carriers remain immutable.
+
+`.ignore` narrows default ripgrep discovery only. To navigate intentionally:
+
+```bash
+rg --no-ignore --files ref
+rg --no-ignore -n --glob '*.md' 'failed|unresolved' research_artifacts/sve-1d-programme-20261021
+rg --no-ignore --files research_artifacts/archives-20261021
+rg --no-ignore -n 'source_sha256' symm/LieSymm/_snapshot/cases
+```
+
+For detailed historical theory and workflow diagrams, use the
+[methodology map through 19 October](methodology-map-through-20261019.md).

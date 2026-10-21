@@ -1,8 +1,0 @@
-# Exact versions used in the included CPU pilot (Python 3.12).
-# Install torch from its CPU index to resolve the +cpu build.
-numpy==2.3.5
-scipy==1.17.0
-sympy==1.14.0
-torch==2.14.1+cpu
-matplotlib==3.10.8
-pillow==12.3.0

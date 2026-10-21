@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "files": {
+    "research_artifacts/three-layer-baselines-20260927/fusion-smoke/fusion_report.json": {
+      "bytes": 4090,
+      "sha256": "44ef5eaa96f4ee5471f6a6f91fd8367d8eaf6980e77d961cb0a0d1b5a1d518e0"
+    },
+    "research_artifacts/three-layer-baselines-20260927/fusion/fusion_comparison.png": {
+      "bytes": 53850,
+      "sha256": "08a26b6aa218dccfb233f6c231117e5c85de423c882a8d4a87eb3d8dae08634c"
+    },
+    "research_artifacts/three-layer-baselines-20260927/fusion/fusion_report.json": {
+      "bytes": 12215,
+      "sha256": "2323c855ff660908e4ebb355ebbcd037cb80bcc7d3e99bae685ee324cb884460"
+    },
+    "research_artifacts/three-layer-baselines-20260927/fusion/fusion_runs.csv": {
+      "bytes": 2595,
+      "sha256": "557b23b22b7761227f5723205e48ac27c3976e3563b3039504d740a89b5021fb"
+    },
+    "research_artifacts/three-layer-baselines-20260927/lie-only/lie_only_control.png": {
+      "bytes": 81539,
+      "sha256": "c27717909c208a50360aff4cc2a1b78d9fb71a8885bbb63b78f9aa8936a83ec4"
+    },
+    "research_artifacts/three-layer-baselines-20260927/lie-only/lie_only_report.json": {
+      "bytes": 4386,
+      "sha256": "7488cab866cbdd8c5659e8f1780453c75d4bc1f2549b61db6b023f98e714b7d7"
+    },
+    "research_artifacts/three-layer-baselines-20260927/lie-only/run-v02.log.txt": {
+      "bytes": 4388,
+      "sha256": "40055aa7bc33a46fd31780de6c87f80584c26fb92cda9035a5b7b5624dcbec21"
+    },
+    "research_artifacts/three-layer-baselines-20260927/lie-only/sve_certificate_v02.json": {
+      "bytes": 4421,
+      "sha256": "27376f0e6abcff6053922b668c65474cdcecf336131e53f67fad7d0c3c407b9f"
+    },
+    "research_artifacts/three-layer-baselines-20260927/ml-only-smoke/ml_only_report.json": {
+      "bytes": 4798,
+      "sha256": "e66dc1d9e6568f94603286bbaf154a6346d7ff9cd2c14416cb0996256c31cc4a"
+    },
+    "research_artifacts/three-layer-baselines-20260927/ml-only/ml_only_comparison.png": {
+      "bytes": 67903,
+      "sha256": "a643bfe1d723389f904649c5108510b0834b17aa66dec8fb30066620cb3ef3bc"
+    },
+    "research_artifacts/three-layer-baselines-20260927/ml-only/ml_only_report.json": {
+      "bytes": 19996,
+      "sha256": "fbc8f05dfb5027e81985d86ff262bbe9a433bd4d0cde43bc6b729bd17aee16d5"
+    },
+    "research_artifacts/three-layer-baselines-20260927/ml-only/ml_only_runs.csv": {
+      "bytes": 4851,
+      "sha256": "1e5e4ad76b9918a7a3d74a3cff03eea2110190a5caae673fea14461d1195308d"
+    },
+    "research_artifacts/three-layer-baselines-20260927/sve-family-v02-run.log.txt": {
+      "bytes": 24900,
+      "sha256": "c58b48c86383d7f432f4ed27460f3e8625615f67d760c52fdabda1004f5f1fbc"
+    },
+    "research_artifacts/three-layer-baselines-20260927/sve-family-v02/sve_family_comparison.png": {
+      "bytes": 94860,
+      "sha256": "d7bee508a3abfbe278daf231275f32ae5ff962ddc33a7267ce51e3fd3475a445"
+    },
+    "research_artifacts/three-layer-baselines-20260927/sve-family-v02/sve_family_report.json": {
+      "bytes": 24904,
+      "sha256": "ce1d998aef4808645720e68b7f13537efcf103e689a54d22febbfd6a70743e9f"
+    },
+    "research_artifacts/three-layer-baselines-20260927/sve-family-v02/sve_family_runs.csv": {
+      "bytes": 3920,
+      "sha256": "880f11cc01cd06ca43532b4e25c1a374f444f9c772060d3719013a504367fb5b"
+    },
+    "research_artifacts/three-layer-baselines-20260927/verification.txt": {
+      "bytes": 3430,
+      "sha256": "196b94873f5932be1680d4065915795cc0ecc7e952e85dff16108f3d4a081a18"
+    }
+  },
+  "file_count": 17,
+  "uncompressed_bytes": 417046,
+  "archive": "D:\\MATHs\\math 4890 LieML\\research_artifacts\\archives-20261021\\three-layer-baselines-20260927.zip",
+  "archive_sha256": "282660bc3b909bcfe80e764ef3e6e42d1255994a4e68aac7ba1108e772e9d254",
+  "archive_bytes": 307346,
+  "verified": true
+}
