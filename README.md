@@ -8,6 +8,47 @@ data compatibility, numerical diagnostics, and bounded approximation results.
 
 ## Current cycle: 21 October 2026
 
+The publication branch is **`astra`** on
+[GitHub](https://github.com/CarlXerophilem/Lie-ML_PDES/tree/astra).
+The delivered printed-P programme contains **18 registered reduction families**:
+13 ODE records, one arbitrary-profile identity, two cases without an invariant
+graph, one undefined PDE and one case outside the positive-velocity chart.
+Fourteen symbolic pullbacks pass, including the identity case.
+
+| Evidence | Current result |
+|---|---|
+| Exact solution demonstrations | 12/12 verified in original P and Q=0, on their stated domains |
+| Constructed seed IVPs | 21/21 passed |
+| Extended IVPs | 10/11 passed; the remaining original-P sampled residual is 1.177074994e-6 against a 1e-6 threshold |
+| Regression suites | 66 library/scalar, 410 historical general-symm, 110 retained active/engine/chart/script tests passed; the 43 active tests are included in 110 |
+| Integrity, data-flux and workflow | Passed |
+| Project audit | One existing failure: missing 11 October external historical archive |
+
+The overall campaign is **not all-green**. Agreement of two ODE integrators
+does not replace the independent PDE residual check. Every registered family
+has a processing status; general closed forms and singular continuation remain
+open where explicitly recorded.
+
+The current implementation is the [printed-P direct solution programme](symm/LieSymm/scalar2026/SOLUTIONS.md).
+It reuses the established classification, adds exact accelerating and singular
+solution families, and treats regular series, numerical continuation and
+unresolved singular strata separately. E and M remain comparison models.
+The [execution plan](docs/superpowers/plans/2026-10-21-sve-printed-solutions.md)
+fixes the scope; current run evidence is under `build/sve-P-solutions-20261021`.
+Open the [solution delivery](build/sve-P-solutions-20261021/DELIVERY.md) for
+coverage, validation and unresolved branches, and the
+[surface demonstration](build/sve-P-solutions-20261021/campaign-reviewed/index.html)
+for the constructed `(s,t,phi)` examples.
+
+The verified general-symm implementation is now available as the local
+[LieSymm library](symm/LieSymm/README.md), preserving the existing `symm` APIs.
+Its [2026 printed-scalar demo](symm/LieSymm/scalar2026/README.md) audits all nine
+paper subsections, separates invalid printed formulas from corrected PDE
+pullbacks, and reconstructs exact/series/numerical examples in `(s,t,phi)`.
+Run `python -m symm.LieSymm.scalar2026.demo --out build/sve-demo-NEW` for a fresh
+21-IVP demonstration. General closed forms for the two scaling families and
+singular continuation remain open.
+
 The [project map](docs/project-map.md) now leads with the completed 20 October
 classification and the [one-dimensional exact-first programme](research_artifacts/sve-1d-programme-20261021/README.md).
 Eight declared 1D branches currently supply **17 registered traveling/scaling
@@ -21,9 +62,117 @@ Pure PINN training is stopped for this workload. Exact structure and classical
 solvers remain primary; conditional hybrid ideas require measured added value.
 
 Generated evidence is shipped as a [verified portable snapshot](research_artifacts/sve-current-20261021/README.md).
+The [21 October delivery carriers](research_artifacts/sve-delivery-20261021/README.md)
+add the library audit and complete current P-solving results, including earlier
+failed campaigns, logs, raw trajectories, series, certificates and PNG/PDF/HTML.
 Restore it on a fresh checkout before opening build-linked reports. The
 [cleanup/restore guide](docs/build-archive-20261021.md) records older local archives,
 retained dissertation inputs, and the unresolved 11 October external-archive gap.
+
+## Project goal and next target
+
+The research goal is a reproducible route from a parameter-dependent PDE to
+its symmetry generators, invariant reductions and solutions that reconstruct
+the original equation. Keep three objects separate: the fully coupled Eulerian
+SVE system E, the 2026 printed scalar P, and the advectively corrected scalar M.
+The current target is **one-dimensional printed P**, with g,kappa>0, m>=1 and
+phi_s,phi_t>0; numeric demonstrations mainly use 1<=m<=4.
+
+The next bounded cycle should first diagnose the time-resonant numerical PDE
+check, then seek additional exact integrals or validated local continuations
+for the unresolved 3.4/3.5 and mixed/resonant equations. Every accepted result
+must identify its parameter stratum, nonzero denominators, data constraints,
+solution type and independent original-P certificate. A processed catalog is
+not a proof that all possible reductions or all nonlinear solutions are solved.
+
+The broader E classification and M control experiments remain independent
+evidence. No new 2D/nonclassical campaign or pure PINN is part of this target.
+ML is considered only for a concrete unmet task with an exactly checked output
+or a measured accuracy/cost benefit over classical methods.
+
+## Ubuntu: clone, sync astra and restore computational results
+
+Use Ubuntu 24.04+ (Python 3.12+) for the archive utility. The core library also
+supports older Python, but the guarded restore script requires Python 3.12.
+Private-repository access requires your GitHub account to have repository access;
+use your normal Git credential manager or an authorized SSH remote.
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git git-lfs python3 python3-venv python3-pip
+git lfs install
+git clone --branch astra --single-branch https://github.com/CarlXerophilem/Lie-ML_PDES.git
+cd Lie-ML_PDES
+git lfs pull origin astra
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+export PYTHONUTF8=1 PYTHONHASHSEED=0
+```
+
+For an existing clone, run the following from the repository root. The clean
+working-tree check prevents the update from absorbing unrelated local edits.
+Commit or deliberately stash your work before rerunning it if the check fails.
+
+```bash
+test -z "$(git status --porcelain)" || { echo 'Save local edits before syncing'; exit 1; }
+git fetch origin astra
+git switch astra
+git pull --ff-only origin astra
+git lfs pull origin astra
+git rev-parse HEAD
+git ls-remote origin refs/heads/astra
+# The two commit hashes above must match.
+```
+
+After cloning or syncing, restore all current computational evidence. The old
+carrier is immutable; the three new carriers supplement it without replacing
+its files. Restoration verifies hashes and refuses to overwrite different bytes.
+
+```bash
+for archive in \
+  research_artifacts/sve-current-20261021/current-build.zip \
+  research_artifacts/sve-delivery-20261021/library-evidence.zip \
+  research_artifacts/sve-delivery-20261021/printed-P-evidence.zip \
+  research_artifacts/sve-delivery-20261021/other-current-evidence.zip
+do
+  python -X utf8 scripts/build_archive.py verify --archive "$archive" || exit 1
+  python -X utf8 scripts/build_archive.py restore --archive "$archive" || exit 1
+done
+python -B -X utf8 -m symm.LieSymm --check-integrity
+python -B -X utf8 -m pytest -q -p no:cacheprovider symm/LieSymm/tests symm/LieSymm/scalar2026/tests
+python -B -X utf8 -m pytest -q -p no:cacheprovider scripts/tests symm/tests/test_engine.py symm/tests/test_chart_reduction.py research_artifacts/sve-progress-20261010/tests
+```
+
+Open `build/sve-P-solutions-20261021/campaign-reviewed/index.html` in a browser.
+To generate a separate run, use a new output directory:
+
+```bash
+python -B -X utf8 -m symm.LieSymm.scalar2026.solve_demo --out "build/sve-P-local-$(date +%Y%m%d-%H%M%S)"
+```
+
+The delivered demo returns exit code 1 for the retained 10/11 numerical result;
+this is a recorded scientific failure, not a missing output package. Archived
+Windows paths are provenance; restore preserves their bytes. This release is
+validated on Windows, and Ubuntu commands are provided without claiming a full
+Linux campaign. The older pre19 video/intermediate archive and missing 11 October
+archive remain machine-local/unavailable as documented in the archive guide.
+
+To publish your later Ubuntu changes, inspect and stage explicit paths, then
+push without force. Add any new computational evidence carrier alongside its
+hash manifest before committing.
+
+```bash
+git status --short
+git add -- README.md  # Add the other intended source/evidence paths explicitly.
+git diff --cached --stat
+git commit -m "Describe the verified research update"
+git fetch origin astra
+git merge --ff-only origin/astra  # Stops on divergence; inspect before resolving.
+git push origin HEAD:refs/heads/astra
+git rev-parse HEAD
+git ls-remote origin refs/heads/astra
+```
 
 ## Dated research extension: 19 October 2026
 

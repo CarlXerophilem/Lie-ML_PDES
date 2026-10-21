@@ -1,0 +1,38 @@
+{
+  "platform": "win32",
+  "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "staged_library_files": 445,
+  "changed_on_checkout": [],
+  "archives": [
+    {
+      "archive": "research_artifacts/sve-current-20261021/current-build.zip",
+      "sha256": "270dc54d2a33589500251e8a6031db65eda40b099aefe900591578e2d32a031e",
+      "restored_files": 10849,
+      "directory": null,
+      "verified_restored_hashes": true
+    },
+    {
+      "archive": "research_artifacts/sve-delivery-20261021/library-evidence.zip",
+      "sha256": "9a138519e9362ba84da42e45a3ef509aa889dfa4b85d25b9e518dbbd175c8481",
+      "restored_files": 6445,
+      "directory": null,
+      "verified_restored_hashes": true
+    },
+    {
+      "archive": "research_artifacts/sve-delivery-20261021/printed-P-evidence.zip",
+      "sha256": "01f2581e45fcc1e38220bbc4b6da80de1342d597e74882041d690bd7214a94a9",
+      "restored_files": 6531,
+      "directory": null,
+      "verified_restored_hashes": true
+    },
+    {
+      "archive": "research_artifacts/sve-delivery-20261021/other-current-evidence.zip",
+      "sha256": "4b1f21d8f829a0e6ea36c1c65f1e5632d8b2bb692ac97a73a88d63e3e4c7a22d",
+      "restored_files": 4650,
+      "directory": null,
+      "verified_restored_hashes": true
+    }
+  ],
+  "total_restored": 28475,
+  "full_ubuntu_campaign_run": false
+}

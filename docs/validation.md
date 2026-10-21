@@ -2,6 +2,26 @@
 
 ## Current host, 21 October 2026
 
+The latest [printed-P solution delivery](../build/sve-P-solutions-20261021/DELIVERY.md)
+supersedes the library-only counts below: 66 library/scalar tests, 410 historical
+general-symm tests and 110 retained active/engine/chart/script tests passed
+(including the 43 active tests). Exact examples are 12/12, seed IVPs 21/21 and
+extended IVPs 10/11. The time-resonant original-P sampled residual is
+1.177074994e-6 against 1e-6 and remains failed. Integrity, data-flux and workflow
+pass; project audit retains the missing 11 October archive. The independent
+review found three Important data/chart issues, fixed with recorded regressions.
+All runs and failed attempts are included in the
+[publication carriers](../research_artifacts/sve-delivery-20261021/README.md).
+
+The subsequent [LieSymm delivery](../symm/LieSymm/docs/DELIVERY.md) records
+410 historical general-symm regressions, 32 new library/scalar tests, 43 active
+scalar tests, and 66 existing engine/chart/script tests passed under UTF-8.
+The new native Windows absolute-link regression also passes (11 focused audit
+tests). All 21 constructed scalar IVPs and exact series checks passed;
+data-flux and workflow passed. The first GBK-default workflow test failure is
+retained in the run log. Project audit still reports the absent 11 October
+external archive. Raw receipts: `build/lie-symm-library-20261021/`.
+
 The [refresh report](../research_artifacts/project-refresh-20261021/REPORT.md)
 contains current commands and raw receipts. data-flux/workflow pass; 62 engine,
 chart and audit tests, 43 active-package tests and 410 general-symm tests pass.

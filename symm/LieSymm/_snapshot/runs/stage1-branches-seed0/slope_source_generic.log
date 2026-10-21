@@ -1,0 +1,2305 @@
+
+1. Specialized PDE and branch
+  h*u__0_1 + h__0_1*u + h__1_0
+  B__0_1*g + g*h__0_1 + u*u__0_1 + u__1_0
+  -B__0_1*G*m*u**m*u__0_1/u - B__0_2*G*u**m + B__1_0 + K*m*u**m*u__0_1/u
+
+2. Jet coordinates and total derivatives
+  Independent variables: (t, x); fields: (h, u, B)
+  PDE order: 2; field__j0_j1_... denotes the indicated partial derivative
+  D_i = partial_i + sum_(a,J) u^a_(J+e_i) partial_(u^a_J)
+  Time-leading divisors: [1]
+
+3. Arbitrary point generator and characteristic Q
+  {'xi': (xi_t(t, x, h, u, B), xi_x(t, x, h, u, B)), 'eta': (eta_h(t, x, h, u, B), eta_u(t, x, h, u, B), eta_B(t, x, h, u, B))}
+  (-h__0_1*xi_x(t, x, h, u, B) - h__1_0*xi_t(t, x, h, u, B) + eta_h(t, x, h, u, B), -u__0_1*xi_x(t, x, h, u, B) - u__1_0*xi_t(t, x, h, u, B) + eta_u(t, x, h, u, B), -B__0_1*xi_x(t, x, h, u, B) - B__1_0*xi_t(t, x, h, u, B) + eta_B(t, x, h, u, B))
+
+4a. Prolonged equations before using the PDE
+  -B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*h*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*h*Derivative(eta_u(t, x, h, u, B), B) - B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*h__1_0*u*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_h(t, x, h, u, B), B) - B__1_0*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__1_0*h__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__1_0*Derivative(eta_h(t, x, h, u, B), B) - h*h__0_1*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h*h__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h*h__0_1*Derivative(eta_u(t, x, h, u, B), h) - h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - h*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + h*u__0_1*Derivative(eta_u(t, x, h, u, B), u) - h*u__0_1*Derivative(xi_x(t, x, h, u, B), x) - h*u__1_0*Derivative(xi_t(t, x, h, u, B), x) + h*Derivative(eta_u(t, x, h, u, B), x) - h__0_1**2*u*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*h__1_0*u*Derivative(xi_t(t, x, h, u, B), h) - h__0_1*h__1_0*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + h__0_1*u*Derivative(eta_h(t, x, h, u, B), h) - h__0_1*u*Derivative(xi_x(t, x, h, u, B), x) - h__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) + h__0_1*eta_u(t, x, h, u, B) - h__0_1*Derivative(xi_x(t, x, h, u, B), t) - h__1_0**2*Derivative(xi_t(t, x, h, u, B), h) - h__1_0*u*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - h__1_0*u*Derivative(xi_t(t, x, h, u, B), x) - h__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + h__1_0*Derivative(eta_h(t, x, h, u, B), h) - h__1_0*Derivative(xi_t(t, x, h, u, B), t) + u*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + u*Derivative(eta_h(t, x, h, u, B), x) + u__0_1*eta_h(t, x, h, u, B) + u__1_0*Derivative(eta_h(t, x, h, u, B), u) + Derivative(eta_h(t, x, h, u, B), t)
+  -B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*B__1_0*g*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*g*h__1_0*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + B__0_1*g*Derivative(eta_B(t, x, h, u, B), B) + B__0_1*g*Derivative(eta_h(t, x, h, u, B), B) - B__0_1*g*Derivative(xi_x(t, x, h, u, B), x) - B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*u*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_u(t, x, h, u, B), B) - B__1_0*g*h__0_1*Derivative(xi_t(t, x, h, u, B), h) - B__1_0*g*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - B__1_0*g*Derivative(xi_t(t, x, h, u, B), x) - B__1_0*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__1_0*Derivative(eta_u(t, x, h, u, B), B) - g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), h) - g*h__0_1*h__1_0*Derivative(xi_t(t, x, h, u, B), h) - g*h__0_1*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + g*h__0_1*Derivative(eta_B(t, x, h, u, B), h) + g*h__0_1*Derivative(eta_h(t, x, h, u, B), h) - g*h__0_1*Derivative(xi_x(t, x, h, u, B), x) - g*h__1_0*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - g*h__1_0*Derivative(xi_t(t, x, h, u, B), x) + g*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + g*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) - h__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*u*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h__0_1*u*Derivative(eta_u(t, x, h, u, B), h) - h__1_0*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h__1_0*Derivative(eta_u(t, x, h, u, B), h) - u*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - u*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + u*u__0_1*Derivative(eta_u(t, x, h, u, B), u) - u*u__0_1*Derivative(xi_x(t, x, h, u, B), x) - u*u__1_0*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) - u__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) + u__0_1*eta_u(t, x, h, u, B) - u__0_1*Derivative(xi_x(t, x, h, u, B), t) - u__1_0**2*Derivative(xi_t(t, x, h, u, B), u) + u__1_0*Derivative(eta_u(t, x, h, u, B), u) - u__1_0*Derivative(xi_t(t, x, h, u, B), t) + Derivative(eta_u(t, x, h, u, B), t)
+  B__0_1**3*G*u**m*Derivative(xi_x(t, x, h, u, B), (B, 2)) + B__0_1**2*B__1_0*G*u**m*Derivative(xi_t(t, x, h, u, B), (B, 2)) + 2*B__0_1**2*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), B, h) + 2*B__0_1**2*G*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u + B__0_1**2*G*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), B)/u - B__0_1**2*G*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + 2*B__0_1**2*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B, u) - B__0_1**2*G*u**m*Derivative(eta_B(t, x, h, u, B), (B, 2)) + 2*B__0_1**2*G*u**m*Derivative(xi_x(t, x, h, u, B), B, x) + 3*B__0_1*B__0_2*G*u**m*Derivative(xi_x(t, x, h, u, B), B) + 2*B__0_1*B__1_0*G*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), B, h) + B__0_1*B__1_0*G*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u + 2*B__0_1*B__1_0*G*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B, u) + 2*B__0_1*B__1_0*G*u**m*Derivative(xi_t(t, x, h, u, B), B, x) - B__0_1*B__1_0*Derivative(xi_x(t, x, h, u, B), B) + 2*B__0_1*B__1_1*G*u**m*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*G*h__0_1**2*u**m*Derivative(xi_x(t, x, h, u, B), (h, 2)) + 2*B__0_1*G*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u + B__0_1*G*h__0_1*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), h)/u - B__0_1*G*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + 2*B__0_1*G*h__0_1*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h, u) - 2*B__0_1*G*h__0_1*u**m*Derivative(eta_B(t, x, h, u, B), B, h) + 2*B__0_1*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), h, x) + B__0_1*G*h__0_2*u**m*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*G*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + 2*B__0_1*G*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u + B__0_1*G*m*u**m*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u)/u - B__0_1*G*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), B)/u - B__0_1*G*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u + 2*B__0_1*G*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u + B__0_1*G*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), x)/u - B__0_1*G*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u + B__0_1*G*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + B__0_1*G*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), (u, 2)) - 2*B__0_1*G*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), B, u) + 2*B__0_1*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), u, x) + B__0_1*G*u**m*u__0_2*Derivative(xi_x(t, x, h, u, B), u) + B__0_1*G*u**m*Derivative(xi_x(t, x, h, u, B), (x, 2)) - 2*B__0_1*G*u**m*Derivative(eta_B(t, x, h, u, B), B, x) - B__0_1*K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u - B__0_1*K*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1*K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u - B__0_1*h__1_0*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*Derivative(xi_x(t, x, h, u, B), t) + B__0_2*B__1_0*G*u**m*Derivative(xi_t(t, x, h, u, B), B) + 2*B__0_2*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), h) - B__0_2*G*m*u**m*eta_u(t, x, h, u, B)/u + 2*B__0_2*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_2*G*u**m*Derivative(eta_B(t, x, h, u, B), B) + 2*B__0_2*G*u**m*Derivative(xi_x(t, x, h, u, B), x) - B__1_0**2*Derivative(xi_t(t, x, h, u, B), B) + B__1_0*G*h__0_1**2*u**m*Derivative(xi_t(t, x, h, u, B), (h, 2)) + B__1_0*G*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u + 2*B__1_0*G*h__0_1*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h, u) + 2*B__1_0*G*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), h, x) + B__1_0*G*h__0_2*u**m*Derivative(xi_t(t, x, h, u, B), h) + B__1_0*G*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u)/u + B__1_0*G*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x)/u + B__1_0*G*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), (u, 2)) + 2*B__1_0*G*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), u, x) + B__1_0*G*u**m*u__0_2*Derivative(xi_t(t, x, h, u, B), u) + B__1_0*G*u**m*Derivative(xi_t(t, x, h, u, B), (x, 2)) - B__1_0*h__1_0*Derivative(xi_t(t, x, h, u, B), h) - B__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + B__1_0*Derivative(eta_B(t, x, h, u, B), B) - B__1_0*Derivative(xi_t(t, x, h, u, B), t) + 2*B__1_1*G*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), h) + 2*B__1_1*G*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), u) + 2*B__1_1*G*u**m*Derivative(xi_t(t, x, h, u, B), x) - G*h__0_1**2*u**m*Derivative(eta_B(t, x, h, u, B), (h, 2)) - G*h__0_1*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), h)/u - 2*G*h__0_1*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), h, u) - 2*G*h__0_1*u**m*Derivative(eta_B(t, x, h, u, B), h, x) - G*h__0_2*u**m*Derivative(eta_B(t, x, h, u, B), h) - G*m*u**m*u__0_1**2*Derivative(eta_B(t, x, h, u, B), u)/u - G*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), x)/u - G*u**m*u__0_1**2*Derivative(eta_B(t, x, h, u, B), (u, 2)) - 2*G*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), u, x) - G*u**m*u__0_2*Derivative(eta_B(t, x, h, u, B), u) - G*u**m*Derivative(eta_B(t, x, h, u, B), (x, 2)) - K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u - K*h__0_1*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), h)/u + K*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + K*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 - K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u)/u + K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u - K*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u - K*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + h__1_0*Derivative(eta_B(t, x, h, u, B), h) + u__1_0*Derivative(eta_B(t, x, h, u, B), u) + Derivative(eta_B(t, x, h, u, B), t)
+
+4b. Differential consequences used
+  {'h__1_0': -h*u__0_1 - h__0_1*u, 'u__1_0': -B__0_1*g - g*h__0_1 - u*u__0_1, 'B__1_0': B__0_1*G*m*u**m*u__0_1/u + B__0_2*G*u**m - K*m*u**m*u__0_1/u, 'B__1_1': B__0_1*G*m**2*u**m*u__0_1**2/u**2 + B__0_1*G*m*u**m*u__0_2/u - B__0_1*G*m*u**m*u__0_1**2/u**2 + 2*B__0_2*G*m*u**m*u__0_1/u + B__0_3*G*u**m - K*m**2*u**m*u__0_1**2/u**2 - K*m*u**m*u__0_2/u + K*m*u**m*u__0_1**2/u**2}
+
+4c. Equation-manifold restriction
+  B__0_1**2*g*h*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*G*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1*G*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*G*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u + B__0_1*G*m*u**m*u__0_1*Derivative(eta_h(t, x, h, u, B), B)/u + B__0_1*g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), h) + B__0_1*g*h*Derivative(xi_t(t, x, h, u, B), x) - B__0_1*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*g*Derivative(eta_h(t, x, h, u, B), u) + 2*B__0_1*h*u*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*h*Derivative(eta_u(t, x, h, u, B), B) + B__0_1*h__0_1*u**2*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_h(t, x, h, u, B), B) + B__0_2*G*h*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_2*G*h__0_1*u*u**m*Derivative(xi_t(t, x, h, u, B), B) - B__0_2*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), B) + B__0_2*G*u**m*Derivative(eta_h(t, x, h, u, B), B) - K*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u - K*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u - K*m*u**m*u__0_1*Derivative(eta_h(t, x, h, u, B), B)/u + g*h*h__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), x) - g*h__0_1**2*u*Derivative(xi_t(t, x, h, u, B), u) + g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - g*h__0_1*Derivative(eta_h(t, x, h, u, B), u) - h**2*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + h*h__0_1*Derivative(eta_u(t, x, h, u, B), h) + h*u*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + 2*h*u*u__0_1*Derivative(xi_t(t, x, h, u, B), x) - h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - h*u__0_1*Derivative(eta_h(t, x, h, u, B), h) + h*u__0_1*Derivative(eta_u(t, x, h, u, B), u) + h*u__0_1*Derivative(xi_t(t, x, h, u, B), t) - h*u__0_1*Derivative(xi_x(t, x, h, u, B), x) + h*Derivative(eta_u(t, x, h, u, B), x) + h__0_1*u**2*Derivative(xi_t(t, x, h, u, B), x) + h__0_1*u*Derivative(xi_t(t, x, h, u, B), t) - h__0_1*u*Derivative(xi_x(t, x, h, u, B), x) + h__0_1*eta_u(t, x, h, u, B) - h__0_1*Derivative(xi_x(t, x, h, u, B), t) + u*Derivative(eta_h(t, x, h, u, B), x) + u__0_1*eta_h(t, x, h, u, B) + Derivative(eta_h(t, x, h, u, B), t)
+  -B__0_1**2*g**2*Derivative(xi_t(t, x, h, u, B), u) + B__0_1**2*g*u*Derivative(xi_t(t, x, h, u, B), B) - B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*G*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u - B__0_1*G*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u - B__0_1*G*g*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u)/u - B__0_1*G*g*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x)/u + B__0_1*G*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*G*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), B)/u + B__0_1*G*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), B)/u - 2*B__0_1*g**2*h__0_1*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), h) + 2*B__0_1*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*g*u*u__0_1*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*u*Derivative(xi_t(t, x, h, u, B), x) + B__0_1*g*Derivative(eta_B(t, x, h, u, B), B) + B__0_1*g*Derivative(eta_h(t, x, h, u, B), B) - B__0_1*g*Derivative(eta_u(t, x, h, u, B), u) + B__0_1*g*Derivative(xi_t(t, x, h, u, B), t) - B__0_1*g*Derivative(xi_x(t, x, h, u, B), x) + B__0_1*u**2*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_u(t, x, h, u, B), B) + B__0_2*G*g*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), B) - B__0_2*G*g*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), h) - B__0_2*G*g*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - B__0_2*G*g*u**m*Derivative(xi_t(t, x, h, u, B), x) + B__0_2*G*u*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_2*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B) + B__0_2*G*u**m*Derivative(eta_u(t, x, h, u, B), B) - K*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u + K*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u + K*g*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u)/u + K*g*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x)/u - K*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), B)/u - K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), B)/u - g**2*h__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + g*h*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), x) + g*h__0_1**2*u*Derivative(xi_t(t, x, h, u, B), h) - g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), h) + 2*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), x) + g*h__0_1*Derivative(eta_B(t, x, h, u, B), h) + g*h__0_1*Derivative(eta_h(t, x, h, u, B), h) - g*h__0_1*Derivative(eta_u(t, x, h, u, B), u) + g*h__0_1*Derivative(xi_t(t, x, h, u, B), t) - g*h__0_1*Derivative(xi_x(t, x, h, u, B), x) + g*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + g*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) - h*u*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), h) - h*u__0_1*Derivative(eta_u(t, x, h, u, B), h) + u**2*u__0_1*Derivative(xi_t(t, x, h, u, B), x) + u*u__0_1*Derivative(xi_t(t, x, h, u, B), t) - u*u__0_1*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + u__0_1*eta_u(t, x, h, u, B) - u__0_1*Derivative(xi_x(t, x, h, u, B), t) + Derivative(eta_u(t, x, h, u, B), t)
+  B__0_1**3*G**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (B, 2))/u - B__0_1**3*G*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1**3*G*u**m*Derivative(xi_x(t, x, h, u, B), (B, 2)) + B__0_1**2*B__0_2*G**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), (B, 2)) + 2*B__0_1**2*G**2*h__0_1*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B, h)/u + 2*B__0_1**2*G**2*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 + 2*B__0_1**2*G**2*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B, u)/u + 2*B__0_1**2*G**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B, x)/u + 2*B__0_1**2*G**2*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), B)/u - 2*B__0_1**2*G**2*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 - B__0_1**2*G*K*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (B, 2))/u - B__0_1**2*G*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u - B__0_1**2*G*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u - B__0_1**2*G*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + 2*B__0_1**2*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), B, h) - B__0_1**2*G*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_1**2*G*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u - B__0_1**2*G*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + 2*B__0_1**2*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B, u) - B__0_1**2*G*u**m*Derivative(eta_B(t, x, h, u, B), (B, 2)) + 2*B__0_1**2*G*u**m*Derivative(xi_x(t, x, h, u, B), B, x) + B__0_1**2*K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), u) + 2*B__0_1*B__0_2*G**2*h__0_1*u**(2*m)*Derivative(xi_t(t, x, h, u, B), B, h) + 4*B__0_1*B__0_2*G**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u + 2*B__0_1*B__0_2*G**2*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B, u) + 2*B__0_1*B__0_2*G**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), B, x) + B__0_1*B__0_2*G*g*u**m*Derivative(xi_t(t, x, h, u, B), u) + 2*B__0_1*B__0_2*G*u**m*Derivative(xi_x(t, x, h, u, B), B) + 2*B__0_1*B__0_3*G**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*G**2*h__0_1**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (h, 2))/u + 3*B__0_1*G**2*h__0_1*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u**2 + 2*B__0_1*G**2*h__0_1*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h, u)/u + 2*B__0_1*G**2*h__0_1*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h, x)/u + 2*B__0_1*G**2*h__0_1*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), h)/u - 2*B__0_1*G**2*h__0_1*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u**2 + B__0_1*G**2*h__0_2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u + 3*B__0_1*G**2*m**2*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), u)/u**2 + 3*B__0_1*G**2*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), x)/u**2 + B__0_1*G**2*m*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), (u, 2))/u + 2*B__0_1*G**2*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u, x)/u + 3*B__0_1*G**2*m*u**(2*m)*u__0_1*u__0_2*Derivative(xi_t(t, x, h, u, B), u)/u + B__0_1*G**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (x, 2))/u + 2*B__0_1*G**2*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), x)/u - 2*B__0_1*G**2*m*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), u)/u**2 - 2*B__0_1*G**2*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), x)/u**2 - 2*B__0_1*G*K*h__0_1*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B, h)/u - B__0_1*G*K*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 - 2*B__0_1*G*K*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B, u)/u - 2*B__0_1*G*K*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B, x)/u - 2*B__0_1*G*K*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), B)/u + 2*B__0_1*G*K*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 - B__0_1*G*g*h__0_1**2*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u - B__0_1*G*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + B__0_1*G*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u + B__0_1*G*h__0_1**2*u**m*Derivative(xi_x(t, x, h, u, B), (h, 2)) + 2*B__0_1*G*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u - B__0_1*G*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + 2*B__0_1*G*h__0_1*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h, u) - 2*B__0_1*G*h__0_1*u**m*Derivative(eta_B(t, x, h, u, B), B, h) + 2*B__0_1*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), h, x) + B__0_1*G*h__0_2*u**m*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*G*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 - B__0_1*G*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x) + 2*B__0_1*G*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u - B__0_1*G*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u - B__0_1*G*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), t)/u + 2*B__0_1*G*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u - B__0_1*G*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u + B__0_1*G*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + B__0_1*G*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), (u, 2)) - 2*B__0_1*G*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), B, u) + 2*B__0_1*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), u, x) + B__0_1*G*u**m*u__0_2*Derivative(xi_x(t, x, h, u, B), u) + B__0_1*G*u**m*Derivative(xi_x(t, x, h, u, B), (x, 2)) - 2*B__0_1*G*u**m*Derivative(eta_B(t, x, h, u, B), B, x) + B__0_1*K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1*K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + B__0_1*K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + B__0_1*K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*g*Derivative(eta_B(t, x, h, u, B), u) + B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), h) + B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), h) + B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*Derivative(xi_x(t, x, h, u, B), t) + B__0_2*G**2*h__0_1**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), (h, 2)) + 5*B__0_2*G**2*h__0_1*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u + 2*B__0_2*G**2*h__0_1*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h, u) + 2*B__0_2*G**2*h__0_1*u**(2*m)*Derivative(xi_t(t, x, h, u, B), h, x) + B__0_2*G**2*h__0_2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), h) + 5*B__0_2*G**2*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u)/u + 5*B__0_2*G**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), x)/u + B__0_2*G**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), (u, 2)) + 2*B__0_2*G**2*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), u, x) + B__0_2*G**2*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), u) + B__0_2*G**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), (x, 2)) + B__0_2*G*K*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_2*G*g*h__0_1*u**m*Derivative(xi_t(t, x, h, u, B), u) + B__0_2*G*h*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h) + B__0_2*G*h__0_1*u*u**m*Derivative(xi_t(t, x, h, u, B), h) + 2*B__0_2*G*h__0_1*u**m*Derivative(xi_x(t, x, h, u, B), h) - B__0_2*G*m*u**m*eta_u(t, x, h, u, B)/u + B__0_2*G*u*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), u) + 2*B__0_2*G*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_2*G*u**m*Derivative(xi_t(t, x, h, u, B), t) + 2*B__0_2*G*u**m*Derivative(xi_x(t, x, h, u, B), x) + 2*B__0_3*G**2*h__0_1*u**(2*m)*Derivative(xi_t(t, x, h, u, B), h) + 2*B__0_3*G**2*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), u) + 2*B__0_3*G**2*u**(2*m)*Derivative(xi_t(t, x, h, u, B), x) - G*K*h__0_1**2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (h, 2))/u - 3*G*K*h__0_1*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u**2 - 2*G*K*h__0_1*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h, u)/u - 2*G*K*h__0_1*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h, x)/u - 2*G*K*h__0_1*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), h)/u + 2*G*K*h__0_1*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u**2 - G*K*h__0_2*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u - 3*G*K*m**2*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), u)/u**2 - 3*G*K*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), x)/u**2 - G*K*m*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), (u, 2))/u - 2*G*K*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u, x)/u - 3*G*K*m*u**(2*m)*u__0_1*u__0_2*Derivative(xi_t(t, x, h, u, B), u)/u - G*K*m*u**(2*m)*u__0_1*Derivative(xi_t(t, x, h, u, B), (x, 2))/u - 2*G*K*m*u**(2*m)*u__0_2*Derivative(xi_t(t, x, h, u, B), x)/u + 2*G*K*m*u**(2*m)*u__0_1**3*Derivative(xi_t(t, x, h, u, B), u)/u**2 + 2*G*K*m*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), x)/u**2 - G*h__0_1**2*u**m*Derivative(eta_B(t, x, h, u, B), (h, 2)) - G*h__0_1*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), h)/u - 2*G*h__0_1*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), h, u) - 2*G*h__0_1*u**m*Derivative(eta_B(t, x, h, u, B), h, x) - G*h__0_2*u**m*Derivative(eta_B(t, x, h, u, B), h) - G*m*u**m*u__0_1**2*Derivative(eta_B(t, x, h, u, B), u)/u - G*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), x)/u - G*u**m*u__0_1**2*Derivative(eta_B(t, x, h, u, B), (u, 2)) - 2*G*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), u, x) - G*u**m*u__0_2*Derivative(eta_B(t, x, h, u, B), u) - G*u**m*Derivative(eta_B(t, x, h, u, B), (x, 2)) - K**2*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 + K*g*h__0_1**2*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u - K*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u - K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u + K*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + K*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), B)/u + K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u + K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), t)/u - K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u - K*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 - g*h__0_1*Derivative(eta_B(t, x, h, u, B), u) - h*u__0_1*Derivative(eta_B(t, x, h, u, B), h) - h__0_1*u*Derivative(eta_B(t, x, h, u, B), h) - u*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + Derivative(eta_B(t, x, h, u, B), t)
+
+5. Necessary determining equations
+  g*h*u*Derivative(xi_t(t, x, h, u, B), B)
+  G*m*u**m*(u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  u*(g*h*Derivative(xi_t(t, x, h, u, B), B) + g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + g*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B))
+  G*h*m*u**m*Derivative(xi_t(t, x, h, u, B), B)
+  G*m*u**m*Derivative(eta_h(t, x, h, u, B), B) + 2*h*u**2*Derivative(xi_t(t, x, h, u, B), B) - h*u*Derivative(xi_x(t, x, h, u, B), B)
+  u*(g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), B) + u*Derivative(eta_h(t, x, h, u, B), B))
+  G*u**(m + 1)*(u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  G*h*u**(m + 1)*Derivative(xi_t(t, x, h, u, B), B)
+  G*u**(m + 1)*Derivative(eta_h(t, x, h, u, B), B)
+  -g*u*(-h*Derivative(xi_t(t, x, h, u, B), h) + u*Derivative(xi_t(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), u))
+  -K*m*u**m*(u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  u*(g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t))
+  h*(-K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) - h*u*Derivative(xi_t(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), u) - u*Derivative(xi_x(t, x, h, u, B), u))
+  -K*m*u**m*Derivative(eta_h(t, x, h, u, B), B) + 2*h*u**2*Derivative(xi_t(t, x, h, u, B), x) - h*u*Derivative(eta_h(t, x, h, u, B), h) + h*u*Derivative(eta_u(t, x, h, u, B), u) + h*u*Derivative(xi_t(t, x, h, u, B), t) - h*u*Derivative(xi_x(t, x, h, u, B), x) + u*eta_h(t, x, h, u, B)
+  u*(h*Derivative(eta_u(t, x, h, u, B), x) + u*Derivative(eta_h(t, x, h, u, B), x) + Derivative(eta_h(t, x, h, u, B), t))
+  g*u*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  G*g*m*u**m*(Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_t(t, x, h, u, B), h))
+  g*u*(-2*g*Derivative(xi_t(t, x, h, u, B), u) + 2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), h))
+  G*m*u**m*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  -G*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) + G*m*u**m*Derivative(eta_u(t, x, h, u, B), B) + g*h*u*Derivative(xi_t(t, x, h, u, B), B) - g*h*u*Derivative(xi_t(t, x, h, u, B), h) - g*u**2*Derivative(xi_t(t, x, h, u, B), u) + u**3*Derivative(xi_t(t, x, h, u, B), B) - u**2*Derivative(xi_x(t, x, h, u, B), B)
+  u*(g*u*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), B) + g*Derivative(eta_h(t, x, h, u, B), B) - g*Derivative(eta_u(t, x, h, u, B), u) + g*Derivative(xi_t(t, x, h, u, B), t) - g*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), B))
+  G*g*u**(m + 1)*(Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_t(t, x, h, u, B), h))
+  G*u**(m + 1)*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))
+  -G*u**(m + 1)*(g*Derivative(xi_t(t, x, h, u, B), x) - Derivative(eta_u(t, x, h, u, B), B))
+  g*u*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), h) - Derivative(xi_x(t, x, h, u, B), h))
+  -K*g*m*u**m*(Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_t(t, x, h, u, B), h))
+  g*u*(2*u*Derivative(xi_t(t, x, h, u, B), x) + Derivative(eta_B(t, x, h, u, B), h) + Derivative(eta_h(t, x, h, u, B), h) - Derivative(eta_u(t, x, h, u, B), u) + Derivative(xi_t(t, x, h, u, B), t) - Derivative(xi_x(t, x, h, u, B), x))
+  K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), u) - K*m*u*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*Derivative(xi_x(t, x, h, u, B), B) + g*h*u*Derivative(xi_t(t, x, h, u, B), u) - h*u**2*Derivative(xi_t(t, x, h, u, B), h) + h*u*Derivative(xi_x(t, x, h, u, B), h)
+  K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_u(t, x, h, u, B), B) + g*h*u*Derivative(xi_t(t, x, h, u, B), x) + g*u*Derivative(eta_B(t, x, h, u, B), u) + g*u*Derivative(eta_h(t, x, h, u, B), u) - h*u*Derivative(eta_u(t, x, h, u, B), h) + u**3*Derivative(xi_t(t, x, h, u, B), x) + u**2*Derivative(xi_t(t, x, h, u, B), t) - u**2*Derivative(xi_x(t, x, h, u, B), x) + u*eta_u(t, x, h, u, B) - u*Derivative(xi_x(t, x, h, u, B), t)
+  u*(g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + Derivative(eta_u(t, x, h, u, B), t))
+  G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), (B, 2))
+  G*u**(m + 1)*(-g*m*Derivative(xi_t(t, x, h, u, B), B) + u*Derivative(xi_x(t, x, h, u, B), (B, 2)))
+  G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), (B, 2))
+  2*G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), B, h)
+  G*u**(m + 1)*(-g*m*Derivative(xi_t(t, x, h, u, B), B) - g*m*Derivative(xi_t(t, x, h, u, B), h) + 2*u*Derivative(xi_x(t, x, h, u, B), B, h))
+  2*G**2*m*u**(2*m)*(m*Derivative(xi_t(t, x, h, u, B), B) + u*Derivative(xi_t(t, x, h, u, B), B, u) - Derivative(xi_t(t, x, h, u, B), B))
+  -G*u**(m + 1)*(-2*G*m*u**m*Derivative(xi_t(t, x, h, u, B), B, x) + K*m*u**m*Derivative(xi_t(t, x, h, u, B), (B, 2)) + m*u*Derivative(xi_t(t, x, h, u, B), B) - m*Derivative(xi_x(t, x, h, u, B), B) - 2*u*Derivative(xi_x(t, x, h, u, B), B, u))
+  2*G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), B)
+  u*(-G*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - G*m*u**m*Derivative(eta_u(t, x, h, u, B), B) - G*u*u**m*Derivative(eta_B(t, x, h, u, B), (B, 2)) + 2*G*u*u**m*Derivative(xi_x(t, x, h, u, B), B, x) + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + g*u*Derivative(xi_x(t, x, h, u, B), u))
+  2*G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), B, h)
+  2*G**2*u**(2*m + 1)*(2*m*Derivative(xi_t(t, x, h, u, B), B) + u*Derivative(xi_t(t, x, h, u, B), B, u))
+  G*u**(m + 2)*(2*G*u**m*Derivative(xi_t(t, x, h, u, B), B, x) + g*Derivative(xi_t(t, x, h, u, B), u) + 2*Derivative(xi_x(t, x, h, u, B), B))
+  2*G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), B)
+  G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), (h, 2))
+  G*u**(m + 1)*(-g*m*Derivative(xi_t(t, x, h, u, B), h) + u*Derivative(xi_x(t, x, h, u, B), (h, 2)))
+  G**2*m*u**(2*m)*(3*m*Derivative(xi_t(t, x, h, u, B), h) + 2*u*Derivative(xi_t(t, x, h, u, B), h, u) - 2*Derivative(xi_t(t, x, h, u, B), h))
+  2*G*u**(m + 1)*(G*m*u**m*Derivative(xi_t(t, x, h, u, B), h, x) - K*m*u**m*Derivative(xi_t(t, x, h, u, B), B, h) + m*Derivative(xi_x(t, x, h, u, B), h) + u*Derivative(xi_x(t, x, h, u, B), h, u))
+  2*G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), h)
+  u*(-G*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - G*m*u**m*Derivative(eta_u(t, x, h, u, B), h) - 2*G*u*u**m*Derivative(eta_B(t, x, h, u, B), B, h) + 2*G*u*u**m*Derivative(xi_x(t, x, h, u, B), h, x) + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h) + g*u*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_x(t, x, h, u, B), h))
+  G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), h)
+  G*u**(m + 2)*Derivative(xi_x(t, x, h, u, B), h)
+  G**2*m*u**(2*m)*(3*m*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), (u, 2)) - 2*Derivative(xi_t(t, x, h, u, B), u))
+  G*u**m*(3*G*m**2*u**m*Derivative(xi_t(t, x, h, u, B), x) + 2*G*m*u*u**m*Derivative(xi_t(t, x, h, u, B), u, x) - 2*G*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m**2*u**m*Derivative(xi_t(t, x, h, u, B), B) - 2*K*m*u*u**m*Derivative(xi_t(t, x, h, u, B), B, u) + 2*K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*m*u*Derivative(xi_t(t, x, h, u, B), h) + 2*m*u*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_x(t, x, h, u, B), (u, 2)))
+  3*G**2*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), u)
+  G**2*m*u*u**(2*m)*Derivative(xi_t(t, x, h, u, B), (x, 2)) - 2*G*K*m*u*u**(2*m)*Derivative(xi_t(t, x, h, u, B), B, x) - G*m**2*u**m*eta_u(t, x, h, u, B) - G*m*u**2*u**m*Derivative(xi_t(t, x, h, u, B), x) - G*m*u*u**m*Derivative(eta_u(t, x, h, u, B), u) - G*m*u*u**m*Derivative(xi_t(t, x, h, u, B), t) + 2*G*m*u*u**m*Derivative(xi_x(t, x, h, u, B), x) + G*m*u**m*eta_u(t, x, h, u, B) - 2*G*u**2*u**m*Derivative(eta_B(t, x, h, u, B), B, u) + 2*G*u**2*u**m*Derivative(xi_x(t, x, h, u, B), u, x) + K*m*u**2*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*u**2*Derivative(xi_x(t, x, h, u, B), h) + u**3*Derivative(xi_x(t, x, h, u, B), u)
+  G*u**(m + 1)*(2*G*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - 2*K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + u*Derivative(xi_x(t, x, h, u, B), u))
+  -u*(G*m*u**m*Derivative(eta_u(t, x, h, u, B), x) - G*u*u**m*Derivative(xi_x(t, x, h, u, B), (x, 2)) + 2*G*u*u**m*Derivative(eta_B(t, x, h, u, B), B, x) - K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_u(t, x, h, u, B), B) + g*u*Derivative(eta_B(t, x, h, u, B), u) + u*Derivative(xi_x(t, x, h, u, B), t))
+  G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), (h, 2))
+  G**2*u**(2*m + 1)*(5*m*Derivative(xi_t(t, x, h, u, B), h) + 2*u*Derivative(xi_t(t, x, h, u, B), h, u))
+  G*u**(m + 2)*(2*G*u**m*Derivative(xi_t(t, x, h, u, B), h, x) + g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), h) + 2*Derivative(xi_x(t, x, h, u, B), h))
+  G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), h)
+  G**2*u**(2*m + 1)*(5*m*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), (u, 2)))
+  G*u**(m + 1)*(5*G*m*u**m*Derivative(xi_t(t, x, h, u, B), x) + 2*G*u*u**m*Derivative(xi_t(t, x, h, u, B), u, x) + K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*u*Derivative(xi_t(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), u) + 2*u*Derivative(xi_x(t, x, h, u, B), u))
+  G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), u)
+  G*u**(m + 1)*(G*u*u**m*Derivative(xi_t(t, x, h, u, B), (x, 2)) - m*eta_u(t, x, h, u, B) - u*Derivative(xi_t(t, x, h, u, B), t) + 2*u*Derivative(xi_x(t, x, h, u, B), x))
+  2*G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), h)
+  2*G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), u)
+  2*G**2*u**(2*m + 2)*Derivative(xi_t(t, x, h, u, B), x)
+  -G*K*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), (h, 2))
+  -u**(m + 1)*(G*u*Derivative(eta_B(t, x, h, u, B), (h, 2)) - K*g*m*Derivative(xi_t(t, x, h, u, B), h))
+  -G*K*m*u**(2*m)*(3*m*Derivative(xi_t(t, x, h, u, B), h) + 2*u*Derivative(xi_t(t, x, h, u, B), h, u) - 2*Derivative(xi_t(t, x, h, u, B), h))
+  -u**(m + 1)*(2*G*K*m*u**m*Derivative(xi_t(t, x, h, u, B), h, x) + G*m*Derivative(eta_B(t, x, h, u, B), h) + 2*G*u*Derivative(eta_B(t, x, h, u, B), h, u) + K*m*Derivative(xi_x(t, x, h, u, B), h))
+  -2*G*K*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), h)
+  -u*(2*G*u*u**m*Derivative(eta_B(t, x, h, u, B), h, x) - K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_u(t, x, h, u, B), h) + g*u*Derivative(eta_B(t, x, h, u, B), u) + u**2*Derivative(eta_B(t, x, h, u, B), h))
+  -G*K*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), h)
+  -G*u**(m + 2)*Derivative(eta_B(t, x, h, u, B), h)
+  -G*K*m*u**(2*m)*(3*m*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), (u, 2)) - 2*Derivative(xi_t(t, x, h, u, B), u))
+  -u**m*(3*G*K*m**2*u**m*Derivative(xi_t(t, x, h, u, B), x) + 2*G*K*m*u*u**m*Derivative(xi_t(t, x, h, u, B), u, x) - 2*G*K*m*u**m*Derivative(xi_t(t, x, h, u, B), x) + G*m*u*Derivative(eta_B(t, x, h, u, B), u) + G*u**2*Derivative(eta_B(t, x, h, u, B), (u, 2)) + K**2*m**2*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*h*m*u*Derivative(xi_t(t, x, h, u, B), h) + K*m*u*Derivative(xi_x(t, x, h, u, B), u))
+  -3*G*K*m*u**(2*m + 1)*Derivative(xi_t(t, x, h, u, B), u)
+  -G*K*m*u*u**(2*m)*Derivative(xi_t(t, x, h, u, B), (x, 2)) - G*m*u*u**m*Derivative(eta_B(t, x, h, u, B), x) - 2*G*u**2*u**m*Derivative(eta_B(t, x, h, u, B), u, x) + K*m**2*u**m*eta_u(t, x, h, u, B) + K*m*u**2*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u*u**m*Derivative(eta_B(t, x, h, u, B), B) + K*m*u*u**m*Derivative(eta_u(t, x, h, u, B), u) + K*m*u*u**m*Derivative(xi_t(t, x, h, u, B), t) - K*m*u*u**m*Derivative(xi_x(t, x, h, u, B), x) - K*m*u**m*eta_u(t, x, h, u, B) - h*u**2*Derivative(eta_B(t, x, h, u, B), h) - u**3*Derivative(eta_B(t, x, h, u, B), u)
+  -G*u**(m + 1)*(2*K*m*u**m*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(eta_B(t, x, h, u, B), u))
+  -u*(G*u*u**m*Derivative(eta_B(t, x, h, u, B), (x, 2)) - K*m*u**m*Derivative(eta_u(t, x, h, u, B), x) - u*Derivative(eta_B(t, x, h, u, B), t))
+
+6. General-solution status: proved_for_declared_regular_chart
+ Branch: {'model_id': 'slope_source_generic', 'guards': ['h>0', 'u>0', 'g>0', 'K>0', 'G>0', '1<=m<=4', 'm!=3'], 'substitutions': {}, 'registry_status': 'awaiting_necessity_review'}
+ General solution: (t0, x0, 0, 0, b0)
+ Free constants: (t0, x0, b0)
+
+7. Basis obtained by differentiating the general solution
+  (1, 0, 0, 0, 0)
+  (0, 1, 0, 0, 0)
+  (0, 0, 0, 0, 1)
+
+8. Algebra: {'status': 'verified_bracket_closure', 'structure_constants': {'0,1': [0, 0, 0], '0,2': [0, 0, 0], '1,2': [0, 0, 0]}, 'adjoint_matrices': [Matrix([
+[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]]), Matrix([
+[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]]), Matrix([
+[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])], 'adjoint_flows': [Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]]), Matrix([
+[1, 0, 0],
+[0, 1, 0],
+[0, 0, 1]])], 'adjoint_convention': 'ad_X(Y)=[X,Y]; Ad(exp(epsilon X))=exp(epsilon ad_X)', 'one_dimensional_subalgebra_candidates': [(1, 0, 0, 0, 0), (0, 1, 0, 0, 0), (0, 0, 0, 0, 1)], 'optimal_system_status': 'not_proved'}
+
+8b. Subalgebra representative families from the actual adjoint action
+{
+  "status": "certified_line_orbit_classification",
+  "structure": {
+    "status": "verified_diagonal_semidirect",
+    "coordinates": [
+      "t",
+      "x",
+      "h",
+      "u",
+      "B"
+    ],
+    "basis": [
+      [
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ]
+      ]
+    ],
+    "adjoint_matrices": [
+      [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ]
+    ],
+    "translation_indices": [
+      0,
+      1,
+      2
+    ],
+    "scaling_indices": [],
+    "weights": [
+      [],
+      [],
+      []
+    ],
+    "bracket_reconstruction_residuals": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "structure_residuals": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "convention": "ad_X(Y)=[X,Y]; Ad(exp(eps X))=exp(eps ad_X)"
+  },
+  "strata": [
+    {
+      "label": "fixed algebra",
+      "substitutions": {},
+      "guards": [],
+      "weights": [
+        [],
+        [],
+        []
+      ],
+      "families": [
+        {
+          "kind": "translation_line",
+          "support": [
+            0
+          ],
+          "signs": [
+            1
+          ],
+          "parameters": [],
+          "parameter_guards": [],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0"
+              ]
+            ],
+            "remaining_rows": [],
+            "continuous_moduli": 0,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            1
+          ],
+          "signs": [
+            1
+          ],
+          "parameters": [],
+          "parameter_guards": [],
+          "coefficients": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "generator": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0"
+              ]
+            ],
+            "remaining_rows": [],
+            "continuous_moduli": 0,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            2
+          ],
+          "signs": [
+            1
+          ],
+          "parameters": [],
+          "parameter_guards": [],
+          "coefficients": [
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "1"
+            ]
+          ],
+          "generator": [
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "1"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0"
+              ]
+            ],
+            "remaining_rows": [],
+            "continuous_moduli": 0,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1
+          ],
+          "signs": [
+            1,
+            -1
+          ],
+          "parameters": [
+            "rho_0_1_1"
+          ],
+          "parameter_guards": [
+            "rho_0_1_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_1"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1
+          ],
+          "signs": [
+            1,
+            1
+          ],
+          "parameters": [
+            "rho_0_1_1"
+          ],
+          "parameter_guards": [
+            "rho_0_1_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_1"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            2
+          ],
+          "signs": [
+            1,
+            -1
+          ],
+          "parameters": [
+            "rho_0_2_1"
+          ],
+          "parameter_guards": [
+            "rho_0_2_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "-rho_0_2_1"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "-rho_0_2_1"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            2
+          ],
+          "signs": [
+            1,
+            1
+          ],
+          "parameters": [
+            "rho_0_2_1"
+          ],
+          "parameter_guards": [
+            "rho_0_2_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "rho_0_2_1"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "rho_0_2_1"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            -1
+          ],
+          "parameters": [
+            "rho_1_2_1"
+          ],
+          "parameter_guards": [
+            "rho_1_2_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "-rho_1_2_1"
+            ]
+          ],
+          "generator": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "-rho_1_2_1"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            1
+          ],
+          "parameters": [
+            "rho_1_2_1"
+          ],
+          "parameter_guards": [
+            "rho_1_2_1 > 0"
+          ],
+          "coefficients": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "rho_1_2_1"
+            ]
+          ],
+          "generator": [
+            [
+              "0"
+            ],
+            [
+              "1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "rho_1_2_1"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1
+            ],
+            "continuous_moduli": 1,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            -1,
+            -1
+          ],
+          "parameters": [
+            "rho_0_1_2_1",
+            "rho_0_1_2_2"
+          ],
+          "parameter_guards": [
+            "rho_0_1_2_1 > 0",
+            "rho_0_1_2_2 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_2_1"
+            ],
+            [
+              "-rho_0_1_2_2"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_2_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "-rho_0_1_2_2"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1",
+                "0"
+              ],
+              [
+                "-1",
+                "0",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1,
+              2
+            ],
+            "continuous_moduli": 2,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            -1,
+            1
+          ],
+          "parameters": [
+            "rho_0_1_2_1",
+            "rho_0_1_2_2"
+          ],
+          "parameter_guards": [
+            "rho_0_1_2_1 > 0",
+            "rho_0_1_2_2 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_2_1"
+            ],
+            [
+              "rho_0_1_2_2"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "-rho_0_1_2_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "rho_0_1_2_2"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1",
+                "0"
+              ],
+              [
+                "-1",
+                "0",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1,
+              2
+            ],
+            "continuous_moduli": 2,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            1,
+            -1
+          ],
+          "parameters": [
+            "rho_0_1_2_1",
+            "rho_0_1_2_2"
+          ],
+          "parameter_guards": [
+            "rho_0_1_2_1 > 0",
+            "rho_0_1_2_2 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_2_1"
+            ],
+            [
+              "-rho_0_1_2_2"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_2_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "-rho_0_1_2_2"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1",
+                "0"
+              ],
+              [
+                "-1",
+                "0",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1,
+              2
+            ],
+            "continuous_moduli": 2,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        },
+        {
+          "kind": "translation_line",
+          "support": [
+            0,
+            1,
+            2
+          ],
+          "signs": [
+            1,
+            1,
+            1
+          ],
+          "parameters": [
+            "rho_0_1_2_1",
+            "rho_0_1_2_2"
+          ],
+          "parameter_guards": [
+            "rho_0_1_2_1 > 0",
+            "rho_0_1_2_2 > 0"
+          ],
+          "coefficients": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_2_1"
+            ],
+            [
+              "rho_0_1_2_2"
+            ]
+          ],
+          "generator": [
+            [
+              "1"
+            ],
+            [
+              "rho_0_1_2_1"
+            ],
+            [
+              "0"
+            ],
+            [
+              "0"
+            ],
+            [
+              "rho_0_1_2_2"
+            ]
+          ],
+          "normalizer": {
+            "matrix": [
+              [
+                "1"
+              ],
+              [
+                "1"
+              ],
+              [
+                "1"
+              ]
+            ],
+            "rank": 1,
+            "pivot_rows": [
+              0
+            ],
+            "pivot_columns": [
+              0
+            ],
+            "independent_minor": "1",
+            "nonzero_guards": [],
+            "theta_map": [
+              [
+                "-1",
+                "0",
+                "0"
+              ]
+            ],
+            "invariant_projection": [
+              [
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "1",
+                "0"
+              ],
+              [
+                "-1",
+                "0",
+                "1"
+              ]
+            ],
+            "remaining_rows": [
+              1,
+              2
+            ],
+            "continuous_moduli": 2,
+            "verification_residuals": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "higher_minors": []
+          }
+        }
+      ],
+      "coverage_status": "proved_exhaustive_for_connected_inner_line_orbits",
+      "uniqueness_status": "one representative per orbit within the stated parameter domains"
+    }
+  ],
+  "equivalence": "connected inner adjoint action and arbitrary nonzero rescaling of a generator",
+  "maximal_point_algebra_claim": false,
+  "subalgebra_dimension": 1,
+  "optimality_status": "complete and nonredundant for the stated inner equivalence, subject to fresh review",
+  "review_status": "pending_fresh_review",
+  "outer_automorphism_classification": "not_claimed",
+  "higher_dimensional_subalgebras": "not_claimed",
+  "reduction_usefulness": "not_inferred"
+}
+
+9. Characteristic integration and original-equation pullback
+{
+  "status": "verified_reduction",
+  "kind": "traveling",
+  "generator": [
+    "1",
+    "c",
+    "0",
+    "0",
+    "0"
+  ],
+  "basis_membership": {
+    "status": "verified",
+    "weights": [
+      "1",
+      "c",
+      "0"
+    ],
+    "residual": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "generator_verification": {
+    "verified": true,
+    "residuals": [
+      "0",
+      "0",
+      "0"
+    ],
+    "divisors": [
+      "1"
+    ],
+    "method": "recursive_point_prolongation"
+  },
+  "profile_coordinate": "z",
+  "profiles": [
+    "H(z)",
+    "U(z)",
+    "Z(z)"
+  ],
+  "base_invariant": "-c*t + x",
+  "field_invariants": [
+    "h",
+    "u",
+    "B"
+  ],
+  "orbit_coordinate": "t",
+  "chart_jacobian": "1",
+  "chart_guards": [],
+  "chart_conditions": [
+    "H(z)>0",
+    "U(z)>0"
+  ],
+  "graph": [
+    "H(-c*t + x)",
+    "U(-c*t + x)",
+    "Z(-c*t + x)"
+  ],
+  "jet_substitution": {
+    "B": "Z(z)",
+    "B__0_1": "Derivative(Z(z), z)",
+    "B__0_2": "Derivative(Z(z), (z, 2))",
+    "B__1_0": "-c*Derivative(Z(z), z)",
+    "h": "H(z)",
+    "h__0_1": "Derivative(H(z), z)",
+    "h__1_0": "-c*Derivative(H(z), z)",
+    "u": "U(z)",
+    "u__0_1": "Derivative(U(z), z)",
+    "u__1_0": "-c*Derivative(U(z), z)"
+  },
+  "chain_residuals": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "reduced_equations": [
+    "-c*Derivative(H(z), z) + H(z)*Derivative(U(z), z) + U(z)*Derivative(H(z), z)",
+    "-c*Derivative(U(z), z) + g*Derivative(H(z), z) + g*Derivative(Z(z), z) + U(z)*Derivative(U(z), z)",
+    "-(G*m*U(z)**m*Derivative(U(z), z)*Derivative(Z(z), z) + G*U(z)*U(z)**m*Derivative(Z(z), (z, 2)) - K*m*U(z)**m*Derivative(U(z), z) + c*U(z)*Derivative(Z(z), z))/U(z)"
+  ],
+  "row_factors": [
+    1,
+    1,
+    1
+  ],
+  "reconstruction_residuals": [
+    "0",
+    "0",
+    "0"
+  ],
+  "characteristic_residuals": [
+    "0",
+    "0",
+    "0"
+  ],
+  "invariant_residuals": [
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "orbit_residual": "0",
+  "leading_system": {
+    "orders": [
+      1,
+      1,
+      2
+    ],
+    "leaders": [
+      "Derivative(H(z), z)",
+      "Derivative(U(z), z)",
+      "Derivative(Z(z), (z, 2))"
+    ],
+    "matrix": [
+      [
+        "-c + U(z)",
+        "H(z)",
+        "0"
+      ],
+      [
+        "g",
+        "-c + U(z)",
+        "0"
+      ],
+      [
+        "0",
+        "-(G*m*U(z)**m*Derivative(Z(z), z) - K*m*U(z)**m)/U(z)",
+        "-G*U(z)**m"
+      ]
+    ],
+    "remainder": [
+      [
+        "0"
+      ],
+      [
+        "g*Derivative(Z(z), z)"
+      ],
+      [
+        "-c*Derivative(Z(z), z)"
+      ]
+    ],
+    "affine_in_leaders": true,
+    "determinant": "-G*(c**2 - 2*c*U(z) - g*H(z) + U(z)**2)*U(z)**m",
+    "status": "implicit_ode_or_dae",
+    "leading_matrix_inverted": false,
+    "singular_locus_discarded": false
+  },
+  "graph_solution_claim": "original PDE iff these implicit reduced equations vanish on the guarded chart",
+  "ode_order_reduction_claim": false,
+  "optimal_subalgebra_claim": false
+}
+
+10. Diagonal scaling charts and exact reconstruction
+[]
+
+11. Initial graph, domain and flux experiments
+{
+  "uniform_flow": {
+    "branch": "slope_source_generic",
+    "graph": [
+      "2",
+      "3",
+      "1"
+    ],
+    "check": {
+      "equation_residuals": [
+        "0",
+        "0",
+        "0"
+      ],
+      "characteristic_residuals": [],
+      "is_solution": true,
+      "is_invariant": null
+    },
+    "status": "verified_exact_solution",
+    "chart_guards": [
+      "2 > 0",
+      "3 > 0"
+    ],
+    "parameter_guards": [
+      "h>0",
+      "u>0",
+      "g > 0",
+      "K > 0",
+      "m >= 1",
+      "m <= 4",
+      "Ne(m, 3)",
+      "G > 0"
+    ],
+    "parameter_substitutions": {},
+    "scope": "constructed smooth solution on recorded chart",
+    "arbitrary_data_claim": false
+  },
+  "constant_slope_flow": {
+    "branch": "slope_source_generic",
+    "graph": [
+      "2",
+      "-g*t/5 + 3",
+      "x/5 + 1"
+    ],
+    "check": {
+      "equation_residuals": [
+        "0",
+        "0",
+        "0"
+      ],
+      "characteristic_residuals": [],
+      "is_solution": true,
+      "is_invariant": null
+    },
+    "status": "verified_exact_solution",
+    "chart_guards": [
+      "2 > 0",
+      "-g*t/5 + 3 > 0"
+    ],
+    "parameter_guards": [
+      "h>0",
+      "u>0",
+      "g > 0",
+      "K > 0",
+      "m >= 1",
+      "m <= 4",
+      "Ne(m, 3)",
+      "G > 0"
+    ],
+    "parameter_substitutions": {},
+    "scope": "constructed smooth solution on recorded chart",
+    "arbitrary_data_claim": false
+  },
+  "initial_profiles": {
+    "flat": {
+      "branch": "slope_source_generic",
+      "profiles": [
+        "2",
+        "3",
+        "1"
+      ],
+      "fixed_time": "0",
+      "general_coefficients": [
+        "_c_t0",
+        "_c_x0",
+        "0",
+        "0",
+        "_c_b0"
+      ],
+      "constants": [
+        "_c_t0",
+        "_c_x0",
+        "_c_b0"
+      ],
+      "source_constant_names": [
+        "t0",
+        "x0",
+        "b0"
+      ],
+      "tangency_identities": [
+        "_c_t0",
+        "0",
+        "0",
+        "_c_b0"
+      ],
+      "flux_data": {
+        "compatibility_residuals": [],
+        "variation_identities": [],
+        "compatible": true,
+        "scope": "no sediment flux specified"
+      },
+      "fixed_endpoints": [],
+      "boundary_scope": "fixed endpoint tangency; flux values only on the initial slice",
+      "chart_guards": [
+        "2 > 0",
+        "3 > 0"
+      ],
+      "parameter_guards": [
+        "h>0",
+        "u>0",
+        "g > 0",
+        "K > 0",
+        "m >= 1",
+        "m <= 4",
+        "Ne(m, 3)",
+        "G > 0"
+      ],
+      "parameter_substitutions": {},
+      "frozen_profile_diagnostic": {
+        "equation_residuals": [
+          "0",
+          "0",
+          "0"
+        ],
+        "characteristic_residuals": [],
+        "is_solution": true,
+        "is_invariant": null
+      },
+      "pde_solution_claim": false,
+      "scope": "stabilizer of specified initial graph; no existence or later boundary-data theorem",
+      "status": "verified_initial_data_stabilizer",
+      "constant_constraints": [
+        "_c_t0",
+        "_c_b0"
+      ],
+      "coefficient_solution": [
+        "0",
+        "_c_x0",
+        "0"
+      ],
+      "free_constants": [
+        "_c_x0"
+      ],
+      "dimension": 1,
+      "stabilized_coefficients": [
+        "0",
+        "_c_x0",
+        "0",
+        "0",
+        "0"
+      ],
+      "verification_residuals": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "rank_guards": [],
+      "unresolved_zero_pivot_branches": [],
+      "denominator_guards": []
+    },
+    "linear": {
+      "branch": "slope_source_generic",
+      "profiles": [
+        "2",
+        "3",
+        "x + 1"
+      ],
+      "fixed_time": "0",
+      "general_coefficients": [
+        "_c_t0",
+        "_c_x0",
+        "0",
+        "0",
+        "_c_b0"
+      ],
+      "constants": [
+        "_c_t0",
+        "_c_x0",
+        "_c_b0"
+      ],
+      "source_constant_names": [
+        "t0",
+        "x0",
+        "b0"
+      ],
+      "tangency_identities": [
+        "_c_t0",
+        "0",
+        "0",
+        "_c_b0 - _c_x0"
+      ],
+      "flux_data": {
+        "compatibility_residuals": [],
+        "variation_identities": [],
+        "compatible": true,
+        "scope": "no sediment flux specified"
+      },
+      "fixed_endpoints": [],
+      "boundary_scope": "fixed endpoint tangency; flux values only on the initial slice",
+      "chart_guards": [
+        "2 > 0",
+        "3 > 0"
+      ],
+      "parameter_guards": [
+        "h>0",
+        "u>0",
+        "g > 0",
+        "K > 0",
+        "m >= 1",
+        "m <= 4",
+        "Ne(m, 3)",
+        "G > 0"
+      ],
+      "parameter_substitutions": {},
+      "frozen_profile_diagnostic": {
+        "equation_residuals": [
+          "0",
+          "g",
+          "0"
+        ],
+        "characteristic_residuals": [],
+        "is_solution": false,
+        "is_invariant": null
+      },
+      "pde_solution_claim": false,
+      "scope": "stabilizer of specified initial graph; no existence or later boundary-data theorem",
+      "status": "verified_initial_data_stabilizer",
+      "constant_constraints": [
+        "_c_t0",
+        "_c_b0 - _c_x0"
+      ],
+      "coefficient_solution": [
+        "0",
+        "_c_b0",
+        "_c_b0"
+      ],
+      "free_constants": [
+        "_c_b0"
+      ],
+      "dimension": 1,
+      "stabilized_coefficients": [
+        "0",
+        "_c_b0",
+        "0",
+        "0",
+        "_c_b0"
+      ],
+      "verification_residuals": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "rank_guards": [],
+      "unresolved_zero_pivot_branches": [],
+      "denominator_guards": []
+    },
+    "quadratic": {
+      "branch": "slope_source_generic",
+      "profiles": [
+        "2",
+        "3",
+        "x**2 + 1"
+      ],
+      "fixed_time": "0",
+      "general_coefficients": [
+        "_c_t0",
+        "_c_x0",
+        "0",
+        "0",
+        "_c_b0"
+      ],
+      "constants": [
+        "_c_t0",
+        "_c_x0",
+        "_c_b0"
+      ],
+      "source_constant_names": [
+        "t0",
+        "x0",
+        "b0"
+      ],
+      "tangency_identities": [
+        "_c_t0",
+        "0",
+        "0",
+        "_c_b0 - 2*_c_x0*x"
+      ],
+      "flux_data": {
+        "compatibility_residuals": [],
+        "variation_identities": [],
+        "compatible": true,
+        "scope": "no sediment flux specified"
+      },
+      "fixed_endpoints": [],
+      "boundary_scope": "fixed endpoint tangency; flux values only on the initial slice",
+      "chart_guards": [
+        "2 > 0",
+        "3 > 0"
+      ],
+      "parameter_guards": [
+        "h>0",
+        "u>0",
+        "g > 0",
+        "K > 0",
+        "m >= 1",
+        "m <= 4",
+        "Ne(m, 3)",
+        "G > 0"
+      ],
+      "parameter_substitutions": {},
+      "frozen_profile_diagnostic": {
+        "equation_residuals": [
+          "0",
+          "2*g*x",
+          "-2*3**m*G"
+        ],
+        "characteristic_residuals": [],
+        "is_solution": false,
+        "is_invariant": null
+      },
+      "pde_solution_claim": false,
+      "scope": "stabilizer of specified initial graph; no existence or later boundary-data theorem",
+      "status": "verified_initial_data_stabilizer",
+      "constant_constraints": [
+        "_c_t0",
+        "-2*_c_x0",
+        "_c_b0"
+      ],
+      "coefficient_solution": [
+        "0",
+        "0",
+        "0"
+      ],
+      "free_constants": [],
+      "dimension": 0,
+      "stabilized_coefficients": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "verification_residuals": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "rank_guards": [],
+      "unresolved_zero_pivot_branches": [],
+      "denominator_guards": []
+    }
+  },
+  "fixed_endpoints": {
+    "branch": "slope_source_generic",
+    "profiles": [
+      "2",
+      "3",
+      "1"
+    ],
+    "fixed_time": "0",
+    "general_coefficients": [
+      "_c_t0",
+      "_c_x0",
+      "0",
+      "0",
+      "_c_b0"
+    ],
+    "constants": [
+      "_c_t0",
+      "_c_x0",
+      "_c_b0"
+    ],
+    "source_constant_names": [
+      "t0",
+      "x0",
+      "b0"
+    ],
+    "tangency_identities": [
+      "_c_t0",
+      "0",
+      "0",
+      "_c_b0",
+      "_c_x0",
+      "_c_x0"
+    ],
+    "flux_data": {
+      "compatibility_residuals": [],
+      "variation_identities": [],
+      "compatible": true,
+      "scope": "no sediment flux specified"
+    },
+    "fixed_endpoints": [
+      "0",
+      "1"
+    ],
+    "boundary_scope": "fixed endpoint tangency; flux values only on the initial slice",
+    "chart_guards": [
+      "2 > 0",
+      "3 > 0"
+    ],
+    "parameter_guards": [
+      "h>0",
+      "u>0",
+      "g > 0",
+      "K > 0",
+      "m >= 1",
+      "m <= 4",
+      "Ne(m, 3)",
+      "G > 0"
+    ],
+    "parameter_substitutions": {},
+    "frozen_profile_diagnostic": {
+      "equation_residuals": [
+        "0",
+        "0",
+        "0"
+      ],
+      "characteristic_residuals": [],
+      "is_solution": true,
+      "is_invariant": null
+    },
+    "pde_solution_claim": false,
+    "scope": "stabilizer of specified initial graph; no existence or later boundary-data theorem",
+    "status": "verified_initial_data_stabilizer",
+    "constant_constraints": [
+      "_c_t0",
+      "_c_b0",
+      "_c_x0"
+    ],
+    "coefficient_solution": [
+      "0",
+      "0",
+      "0"
+    ],
+    "free_constants": [],
+    "dimension": 0,
+    "stabilized_coefficients": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "verification_residuals": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "rank_guards": [],
+    "unresolved_zero_pivot_branches": [],
+    "denominator_guards": []
+  },
+  "zero_speed_control": {
+    "branch": "slope_source_generic",
+    "graph": [
+      "3 - x**2",
+      "0",
+      "x**2"
+    ],
+    "effective_exponents": [
+      "m",
+      "m"
+    ],
+    "parameter_guards": [
+      "h>0",
+      "u>0",
+      "g > 0",
+      "K > 0",
+      "m >= 1",
+      "m <= 4",
+      "Ne(m, 3)",
+      "G > 0"
+    ],
+    "parameter_substitutions": {},
+    "inside_classified_positive_speed_chart": false,
+    "scope": "explicit polynomial-closure extension; no zero-speed maximal-algebra claim",
+    "chart_guards": [
+      "3 - x**2 > 0"
+    ],
+    "status": "outside_declared_chart",
+    "check": null,
+    "reason": "u=0 requires the separately declared signed polynomial closure"
+  }
+}
+slope_source_generic proved_for_declared_regular_chart 82 determining equations; dimension 3

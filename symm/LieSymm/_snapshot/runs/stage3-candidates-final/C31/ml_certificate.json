@@ -1,0 +1,200 @@
+{
+  "schema": "sve-ml-input-v1",
+  "candidate_id": "C31",
+  "model": "2D full SVE: G=f=0,m=3,g>0,K>0",
+  "field_order": [
+    "h",
+    "u",
+    "v",
+    "B"
+  ],
+  "affine_coefficients": {
+    "a": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "b": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "c": 0
+  },
+  "conditional_status": "verified_conditional_on_declared_chart",
+  "conditional_admitted": true,
+  "global_chart_admitted": true,
+  "use": "certified_conditional_solution_class",
+  "classical_equivalence_status": "no_classical_representative_on_open_ambient_chart",
+  "invariant_coordinates": {
+    "z": "x-(0)*t",
+    "field_invariants": [
+      "h-(1)*t",
+      "u-(0)*t",
+      "v-(0)*t",
+      "B-(0)*t"
+    ]
+  },
+  "reduced_unknowns": [
+    "H(z)",
+    "U(z)",
+    "V(z)",
+    "Zb(z)"
+  ],
+  "profile_derivative_symbols": [
+    "H_z",
+    "U_z",
+    "V_z",
+    "Zb_z"
+  ],
+  "reconstruction": {
+    "time_symbol": "T=t",
+    "rho": "exp(t)>0",
+    "fields": [
+      "H + T",
+      "U",
+      "V",
+      "Zb"
+    ]
+  },
+  "pullback_PDE": [
+    "H*U_z + H_z*U + T*U_z + 1",
+    "H_z*g + U*U_z + Zb_z*g",
+    "U*V_z",
+    "3*K*U**2*U_z + 2*K*U*V*V_z + K*U_z*V**2"
+  ],
+  "profile_equations": [
+    [
+      {
+        "exp_rate": 0,
+        "time_power": 0,
+        "coefficient_must_vanish": "H*U_z + H_z*U + 1"
+      },
+      {
+        "exp_rate": 0,
+        "time_power": 1,
+        "coefficient_must_vanish": "U_z"
+      }
+    ],
+    [
+      {
+        "exp_rate": 0,
+        "time_power": 0,
+        "coefficient_must_vanish": "H_z*g + U*U_z + Zb_z*g"
+      }
+    ],
+    [
+      {
+        "exp_rate": 0,
+        "time_power": 0,
+        "coefficient_must_vanish": "U*V_z"
+      }
+    ],
+    [
+      {
+        "exp_rate": 0,
+        "time_power": 0,
+        "coefficient_must_vanish": "K*(3*U**2*U_z + 2*U*V*V_z + U_z*V**2)"
+      }
+    ]
+  ],
+  "time_split_proof": "Finite distinct t^k exp(j*t) are independent on an open real interval; rho powers are multiplied before grouping.",
+  "valid_domain_mask": [
+    "g>0",
+    "K>0",
+    "all values finite",
+    "h(t,z)>0",
+    "u(t,z)^2+v(t,z)^2>0"
+  ],
+  "chart": {
+    "base_determinant": "1",
+    "field_determinant": "1",
+    "guards": [
+      "rho=exp(t)>0",
+      "finite real t"
+    ],
+    "divisions": [
+      "nonzero constant a_i only in the a_i!=0 flow formula",
+      "rho**a_i>0"
+    ],
+    "no_profile_or_characteristic_division": true
+  },
+  "data_conditions": {
+    "initial_time": "t=0",
+    "initial_fields": [
+      "H(x)",
+      "U(x)",
+      "V(x)",
+      "Zb(x)"
+    ],
+    "y_independence_required": true,
+    "initial_time_derivative": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "compatibility": "All exported profile coefficient equations and any additional conditional-system guards must hold; arbitrary profiles are not solutions.",
+    "boundary": "Boundary values and fluxes must be restrictions of this reconstructed family; no arbitrary IBVP guarantee.",
+    "mass_flux": [
+      "h*u",
+      "h*v"
+    ],
+    "sediment_flux": [
+      "K*(u*u+v*v)*u",
+      "K*(u*u+v*v)*v"
+    ]
+  },
+  "applicable_solution_class": "y-independent local smooth graphs obeying Q and all profile equations on the wet, nonzero-speed domain",
+  "singular_compatibility": "Implicit profile equations retain singular characteristic loci; no leading-matrix division is used by this adapter.",
+  "certificate": {
+    "input_inverse_verified": true,
+    "Q_verified": true,
+    "PDE_pullback_verified": true,
+    "time_coefficients_reconstruct_PDE": true,
+    "identity_remainders": {
+      "Q_remainders": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "inverse_remainders": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "initial_remainders": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "reconstruction_remainders": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "direct_PDE_remainders": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "conditional_evidence": {
+      "candidate_result": "candidate.json",
+      "registry_sha256": "2409ee048ab8ed66bdf4d0840a34a95b6ea380fdb72c2aedc29ce84382b3b764",
+      "regular_chart_status": "verified",
+      "singular_status": "no_compatible_jets",
+      "candidate_sha256": "3a10a262dcd6d215dd9632a8a8f66570a18514bdb425363242e6e1ec377e32ee"
+    }
+  },
+  "independent_review": "required_before_release",
+  "training_performed": false,
+  "learned_error_bound": false
+}

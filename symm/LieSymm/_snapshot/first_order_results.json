@@ -1,0 +1,381 @@
+{
+  "model": "h_t+u*h_x+h*u_x=0; u_t+u*u_x+g*(h_x+B_x)=0; B_t+m*K*u^(m-1)*u_x=0",
+  "assumptions": [
+    "local smooth point symmetries",
+    "open connected coordinate domain",
+    "h>0",
+    "u>0",
+    "g>0",
+    "K>=0",
+    "1<=m<=4"
+  ],
+  "claim_status": "complete_unrestricted_point_algebra_derived; independent_review_required",
+  "proof": "FIRST_ORDER_DERIVATION.md",
+  "dimensions": {
+    "K>0,m!=3": 4,
+    "K>0,m=3": 5,
+    "K=0,m_removed": 5
+  },
+  "checks": {
+    "unrestricted_split_equals_direct_prolongation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_0_1": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_0_2": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_1_0": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_1_2": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_2_0": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "quadratic_eigenbasis_2_1": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "determinant_identity_without_invertibility": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "trace_identity": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "K_positive_symmetrizer": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "K_zero_characteristic": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "K_zero_discriminant": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "determinant_after_trace": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "determinant_h_coefficient": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "m_one_remaining_equation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "generic_exceptional_factor": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "trace_A_M_solves_H": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "K_zero_matrix_11_removes_tau_x": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "remaining_zero_jet_equations": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_generic_general_solution": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_generic_time_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_generic_space_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_generic_bed_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_generic_common_base_scaling": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_general_solution": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_time_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_space_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_bed_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_common_base_scaling": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "positive_cubic_relative_scaling": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_general_solution": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_time_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_space_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_bed_translation": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_common_base_scaling": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "zero_transport_relative_scaling": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "extra_scaling_exact_defect": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "galilean_defect": {
+      "passed": true,
+      "nonzero_residuals": []
+    },
+    "nonlinear_bed_relabeling_defect": {
+      "passed": true,
+      "nonzero_residuals": []
+    }
+  },
+  "check_count": 39,
+  "all_checks_passed": true,
+  "generators": {
+    "positive_generic": {
+      "time_translation": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "space_translation": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "bed_translation": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "common_base_scaling": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "positive_cubic": {
+      "time_translation": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "space_translation": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "bed_translation": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "common_base_scaling": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      "relative_scaling": [
+        "t",
+        "0",
+        "-2*h",
+        "-u",
+        "-2*B"
+      ]
+    },
+    "zero_transport": {
+      "time_translation": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "space_translation": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "bed_translation": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "common_base_scaling": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      "relative_scaling": [
+        "t",
+        "0",
+        "-2*h",
+        "-u",
+        "-2*B"
+      ]
+    }
+  },
+  "general_solutions": {
+    "positive_generic": {
+      "coefficients": [
+        "beta*t + t0",
+        "beta*x + x0",
+        "0",
+        "0",
+        "d0"
+      ],
+      "free_constants": [
+        "t0",
+        "x0",
+        "d0",
+        "beta"
+      ]
+    },
+    "positive_cubic": {
+      "coefficients": [
+        "t*(a0 + beta) + t0",
+        "beta*x + x0",
+        "-2*a0*h",
+        "-a0*u",
+        "-2*B*a0 + d0"
+      ],
+      "free_constants": [
+        "t0",
+        "x0",
+        "d0",
+        "beta",
+        "a0"
+      ]
+    },
+    "zero_transport": {
+      "coefficients": [
+        "t*(a0 + beta) + t0",
+        "beta*x + x0",
+        "-2*a0*h",
+        "-a0*u",
+        "-2*B*a0 + d0"
+      ],
+      "free_constants": [
+        "t0",
+        "x0",
+        "d0",
+        "beta",
+        "a0"
+      ]
+    }
+  },
+  "integration_certificate": {
+    "projectability_quadratic_factor": "(lambda_i-lambda_j)*(lambda_i*tau_wj-xi_wj)",
+    "linear_matrix": "Matrix([[-H_u*g + U + U_h*h + a*u + b*g*h + b*u**2 - c, H - H_B*q - H_h*h + U_u*h + a*h + 2*b*h*u, H_B*u - H_u*g + U_B*h + b*g*h], [H_h*g - U_u*g + Z_h*g + a*g + 2*b*g*u, H_u*g + U - U_B*q - U_h*h + Z_u*g + a*u + b*g*h + b*g*q + b*u**2 - c, H_B*g + U_B*u - U_u*g + Z_B*g + a*g + b*g*u], [U_h*q - Z_h*u - Z_u*g + b*g*q, U*q*(m - 1)/u + U_u*q - Z_B*q - Z_h*h - Z_u*u + a*q + b*q*u, U_B*q - Z_u*g + b*g*q - c]])",
+    "trace_equations": "[2*U + 2*a*u + 2*b*g*h + 2*b*g*q + 2*b*u**2 - 3*c, g*(H - H_B*q - H_h*h + U_u*h + a*h + 2*b*h*u) + g*(U*q*(m - 1)/u + U_u*q - Z_B*q - Z_h*h - Z_u*u + a*q + b*q*u) + h*(H_h*g - U_u*g + Z_h*g + a*g + 2*b*g*u) + q*(H_B*g + U_B*u - U_u*g + Z_B*g + a*g + b*g*u) + u*(-H_u*g + U + U_h*h + a*u + b*g*h + b*u**2 - c) + u*(H_u*g + U - U_B*q - U_h*h + Z_u*g + a*u + b*g*h + b*g*q + b*u**2 - c)]",
+    "solved_H_U": "{H: (-4*a*g*h*u + 2*a*g*m*q*u - 6*a*g*q*u + 2*b*g**2*h*m*q - 2*b*g**2*h*q + 2*b*g**2*m*q**2 - 2*b*g**2*q**2 - 8*b*g*h*u**2 + 2*b*g*m*q*u**2 - 4*b*g*q*u**2 - 3*c*g*m*q + 3*c*g*q - 2*c*u**2)/(2*g*u), U: -a*u - b*g*h - b*g*q - b*u**2 + 3*c/2}",
+    "determinant_equation": "-U*g*m*q - 3*a*g*q*u - 2*b*g*q*u**2 + c*g*h + c*g*q - c*u**2",
+    "determinant_after_trace": "a*g*m*q*u - 3*a*g*q*u + b*g**2*h*m*q + b*g**2*m*q**2 + b*g*m*q*u**2 - 2*b*g*q*u**2 + c*g*h - 3*c*g*m*q/2 + c*g*q - c*u**2",
+    "h_coefficient": "g*(b*g*m*q + c)",
+    "m_one_after_h_split": "g*q*(-4*a*u + 3*b*g*q)/2",
+    "positive_after_b_c_zero": "a*g*q*u*(m - 3)",
+    "zero_transport_determinant": "-c*(-g*h + u**2)",
+    "remaining_field_equations": "['Z_h=0', 'Z_u=0', 'Z_B=-2a']",
+    "remaining_base_equations": "['tau_x=0', 'xi_t=0', 'a_t=0', 'a_x=0', 'd_t=0', 'd_x=0']",
+    "branch_divisors": "['g>0', 'h>0', 'u>0', 'q>0 only on K>0', 'm-1 only on m>1']",
+    "exceptional_factors": "['K', 'm-1 handled separately', 'm-3', 'u^2-gh handled by dense smooth extension']"
+  },
+  "negative_controls": {
+    "extra_scaling_generic_defect": [
+      "0",
+      "0",
+      "K*m*u**(m - 1)*u_x*(3 - m)"
+    ],
+    "galilean_defect": [
+      "0",
+      "0",
+      "(-B_x*u + K*m*u**(m - 1)*u_x*(m - 1))/u"
+    ],
+    "nonlinear_bed_relabeling_defect_K_zero": [
+      "0",
+      "2*B*B_x*g",
+      "0"
+    ],
+    "nonprojectable_trial_defect_K_zero": [
+      "h*(B_x*g*h_x + g*h_x**2 - h*u_x**2)",
+      "-B_x*g*h*u_x + g*h_x**2*u - h*u*u_x**2",
+      "0"
+    ]
+  },
+  "elapsed_seconds": 2.083065799990436,
+  "not_claimed": [
+    "equivalence-group maximality",
+    "optimal-system completeness",
+    "generalized/contact/nonlocal symmetry classification",
+    "arbitrary data compatibility",
+    "well-posedness",
+    "2D classification"
+  ]
+}

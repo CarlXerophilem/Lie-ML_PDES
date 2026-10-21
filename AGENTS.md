@@ -4,7 +4,10 @@ Read README.md, draft/main.tex, docs/project-map.md and the current experiment
 index before making research claims. The current evidence entries are indexed in docs/project-map.md. The retained
 scalar benchmark is research_artifacts/sve-progress-20261010; the portable
 19/20 October classification snapshot is research_artifacts/sve-current-20261021;
-the current 1D research programme is research_artifacts/sve-1d-programme-20261021. Historical instructions in the
+the current printed-P solution delivery is build/sve-P-solutions-20261021,
+published in research_artifacts/sve-delivery-20261021. The E-focused 1D programme
+is research_artifacts/sve-1d-programme-20261021 and remains a separate model.
+Historical instructions in the
 external archive apply to their snapshot, not this working tree.
 
 ## Mathematical and evidence boundaries

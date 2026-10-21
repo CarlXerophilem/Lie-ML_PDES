@@ -32,3 +32,7 @@ ref/README.md -text
 research_artifacts/sve-1d-programme-20261021/sources1d/* -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 research_artifacts/project-refresh-20261021/*.log -text -diff
 research_artifacts/project-refresh-20261021/validation/**/*.svg binary
+
+# LieSymm pins source and evidence hashes; checkout must preserve exact bytes.
+symm/LieSymm/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+research_artifacts/sve-delivery-20261021/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

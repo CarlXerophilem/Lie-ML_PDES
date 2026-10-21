@@ -4,6 +4,7 @@ Start with [project-map.md](project-map.md), the current map of models, evidence
 
 | Purpose | Entry |
 |---|---|
+| Current printed-P solutions and publication | [delivery](../build/sve-P-solutions-20261021/DELIVERY.md), [portable results](../research_artifacts/sve-delivery-20261021/README.md) |
 | Current 1D research and solver plan | [programme](../research_artifacts/sve-1d-programme-20261021/README.md) |
 | Cleanup, archives and restoration | [21 October archive guide](build-archive-20261021.md) |
 | Current verification and integration | [refresh report](../research_artifacts/project-refresh-20261021/REPORT.md) |

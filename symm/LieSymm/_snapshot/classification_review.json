@@ -1,0 +1,535 @@
+{
+  "reviewer_role": "fresh independent mathematical reviewer; not an author",
+  "verdicts": {
+    "first_order": "accepted on the declared positive open chart",
+    "slope": "accepted on the declared positive open chart",
+    "root_analyzer": "accepted for unrestricted DE construction in the eight declared cells; qualified as a classifier",
+    "reductions": "accepted for the declared translation and homogeneous diagonal charts",
+    "review_gate": "accepted for exact-version freshness without a receipt self-hash dependency",
+    "adjoints": "accepted as exp(epsilon ad_X), realized by flow pullback",
+    "negative_speed_reflection": "accepted for the signed absolute-value flux only"
+  },
+  "check_count": 147,
+  "checks": [
+    "trace solve U",
+    "trace solve H",
+    "h coefficient of determinant",
+    "m=1 endpoint remainder",
+    "positive transport exceptional factor",
+    "K=0 determinant",
+    "K=0 actual matrix removes tau_x",
+    "symmetrizer",
+    "K=0 discriminant",
+    "quadratic eigenbasis 0,1",
+    "quadratic eigenbasis 0,2",
+    "quadratic eigenbasis 1,0",
+    "quadratic eigenbasis 1,2",
+    "quadratic eigenbasis 2,0",
+    "quadratic eigenbasis 2,1",
+    "unrestricted first-order C plus M p plus Q identity",
+    "mixed J2 shell F1 derivative 0",
+    "mixed J2 shell F1 derivative 1",
+    "mixed J2 shell F2 derivative 0",
+    "mixed J2 shell F2 derivative 1",
+    "slope B_tx projectability",
+    "slope h_xx projectability",
+    "slope u_xx projectability",
+    "slope xi_B projectability",
+    "slope H_B",
+    "slope U_B",
+    "slope H_u",
+    "slope seven hydro DEs reconstruct both residuals",
+    "slope integrated hydro residuals",
+    "slope complete remaining bed identity",
+    "slope plain r removes frame function",
+    "grass_generic independent raw residual equality",
+    "grass_generic exact split reconstruction row 0",
+    "grass_generic exact split reconstruction row 1",
+    "grass_generic exact split reconstruction row 2",
+    "grass_generic integrated solution in every root DE",
+    "grass_generic root integrated solution equals independent branch result",
+    "grass_generic finite adjoint equals flow pullback for basis 0",
+    "grass_generic finite adjoint equals flow pullback for basis 1",
+    "grass_generic finite adjoint equals flow pullback for basis 2",
+    "grass_generic finite adjoint equals flow pullback for basis 3",
+    "grass_generic independent final sufficiency",
+    "grass_cubic independent raw residual equality",
+    "grass_cubic exact split reconstruction row 0",
+    "grass_cubic exact split reconstruction row 1",
+    "grass_cubic exact split reconstruction row 2",
+    "grass_cubic integrated solution in every root DE",
+    "grass_cubic root integrated solution equals independent branch result",
+    "grass_cubic finite adjoint equals flow pullback for basis 0",
+    "grass_cubic finite adjoint equals flow pullback for basis 1",
+    "grass_cubic finite adjoint equals flow pullback for basis 2",
+    "grass_cubic finite adjoint equals flow pullback for basis 3",
+    "grass_cubic finite adjoint equals flow pullback for basis 4",
+    "grass_cubic independent final sufficiency",
+    "slope_attachment_generic independent raw residual equality",
+    "slope_attachment_generic exact split reconstruction row 0",
+    "slope_attachment_generic exact split reconstruction row 1",
+    "slope_attachment_generic exact split reconstruction row 2",
+    "slope_attachment_generic J3 lift leading coefficient",
+    "slope_attachment_generic integrated solution in every root DE",
+    "slope_attachment_generic root integrated solution equals independent branch result",
+    "slope_attachment_generic finite adjoint equals flow pullback for basis 0",
+    "slope_attachment_generic finite adjoint equals flow pullback for basis 1",
+    "slope_attachment_generic finite adjoint equals flow pullback for basis 2",
+    "slope_attachment_generic independent final sufficiency",
+    "slope_attachment_cubic independent raw residual equality",
+    "slope_attachment_cubic exact split reconstruction row 0",
+    "slope_attachment_cubic exact split reconstruction row 1",
+    "slope_attachment_cubic exact split reconstruction row 2",
+    "slope_attachment_cubic J3 lift leading coefficient",
+    "slope_attachment_cubic integrated solution in every root DE",
+    "slope_attachment_cubic root integrated solution equals independent branch result",
+    "slope_attachment_cubic finite adjoint equals flow pullback for basis 0",
+    "slope_attachment_cubic finite adjoint equals flow pullback for basis 1",
+    "slope_attachment_cubic finite adjoint equals flow pullback for basis 2",
+    "slope_attachment_cubic finite adjoint equals flow pullback for basis 3",
+    "slope_attachment_cubic independent final sufficiency",
+    "slope_source_generic independent raw residual equality",
+    "slope_source_generic exact split reconstruction row 0",
+    "slope_source_generic exact split reconstruction row 1",
+    "slope_source_generic exact split reconstruction row 2",
+    "slope_source_generic J3 lift leading coefficient",
+    "slope_source_generic integrated solution in every root DE",
+    "slope_source_generic root integrated solution equals independent branch result",
+    "slope_source_generic finite adjoint equals flow pullback for basis 0",
+    "slope_source_generic finite adjoint equals flow pullback for basis 1",
+    "slope_source_generic finite adjoint equals flow pullback for basis 2",
+    "slope_source_generic independent final sufficiency",
+    "slope_source_cubic independent raw residual equality",
+    "slope_source_cubic exact split reconstruction row 0",
+    "slope_source_cubic exact split reconstruction row 1",
+    "slope_source_cubic exact split reconstruction row 2",
+    "slope_source_cubic J3 lift leading coefficient",
+    "slope_source_cubic integrated solution in every root DE",
+    "slope_source_cubic root integrated solution equals independent branch result",
+    "slope_source_cubic finite adjoint equals flow pullback for basis 0",
+    "slope_source_cubic finite adjoint equals flow pullback for basis 1",
+    "slope_source_cubic finite adjoint equals flow pullback for basis 2",
+    "slope_source_cubic finite adjoint equals flow pullback for basis 3",
+    "slope_source_cubic independent final sufficiency",
+    "slope_only independent raw residual equality",
+    "slope_only exact split reconstruction row 0",
+    "slope_only exact split reconstruction row 1",
+    "slope_only exact split reconstruction row 2",
+    "slope_only J3 lift leading coefficient",
+    "slope_only integrated solution in every root DE",
+    "slope_only root integrated solution equals independent branch result",
+    "slope_only finite adjoint equals flow pullback for basis 0",
+    "slope_only finite adjoint equals flow pullback for basis 1",
+    "slope_only finite adjoint equals flow pullback for basis 2",
+    "slope_only finite adjoint equals flow pullback for basis 3",
+    "slope_only independent final sufficiency",
+    "zero_transport independent raw residual equality",
+    "zero_transport exact split reconstruction row 0",
+    "zero_transport exact split reconstruction row 1",
+    "zero_transport exact split reconstruction row 2",
+    "zero_transport integrated solution in every root DE",
+    "zero_transport root integrated solution equals independent branch result",
+    "zero_transport finite adjoint equals flow pullback for basis 0",
+    "zero_transport finite adjoint equals flow pullback for basis 1",
+    "zero_transport finite adjoint equals flow pullback for basis 2",
+    "zero_transport finite adjoint equals flow pullback for basis 3",
+    "zero_transport finite adjoint equals flow pullback for basis 4",
+    "zero_transport independent final sufficiency",
+    "independent original-PDE pullback grass_generic/travel/n=None",
+    "independent original-PDE pullback grass_cubic/travel/n=None",
+    "independent original-PDE pullback slope_attachment_generic/travel/n=None",
+    "independent original-PDE pullback slope_attachment_cubic/travel/n=None",
+    "independent original-PDE pullback slope_source_generic/travel/n=None",
+    "independent original-PDE pullback slope_source_cubic/travel/n=None",
+    "independent original-PDE pullback slope_only/travel/n=None",
+    "independent original-PDE pullback zero_transport/travel/n=None",
+    "independent original-PDE pullback grass_generic/common/n=None",
+    "independent original-PDE pullback grass_cubic/common/n=None",
+    "independent original-PDE pullback grass_cubic/relative/n=None",
+    "independent original-PDE pullback grass_cubic/spatial/n=None",
+    "independent original-PDE pullback zero_transport/spatial/n=None",
+    "independent original-PDE pullback slope_attachment_cubic/last/n=None",
+    "independent original-PDE pullback slope_source_cubic/last/n=None",
+    "independent original-PDE pullback slope_only/last/n=0",
+    "independent original-PDE pullback slope_only/last/n=1",
+    "independent original-PDE pullback slope_only/last/n=2",
+    "independent original-PDE pullback slope_only/last/n=3",
+    "independent original-PDE pullback slope_only/last/n=4",
+    "signed reflection off-shell identities speed sign -1",
+    "signed reflection off-shell identities speed sign 1",
+    "reflection Jacobian and involution"
+  ],
+  "all_checks_passed": true,
+  "branches": {
+    "grass_generic": {
+      "raw_determining_equations": 30,
+      "integrated_solution": [
+        "beta*t + t0",
+        "beta*x + x0",
+        "0",
+        "0",
+        "d0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 1.184166599996388,
+      "passed": true
+    },
+    "grass_cubic": {
+      "raw_determining_equations": 30,
+      "integrated_solution": [
+        "t*(a0 + beta) + t0",
+        "beta*x + x0",
+        "-2*a0*h",
+        "-a0*u",
+        "-2*B*a0 + d0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 0.9629534000123385,
+      "passed": true
+    },
+    "slope_attachment_generic": {
+      "raw_determining_equations": 82,
+      "integrated_solution": [
+        "t0",
+        "x0",
+        "0",
+        "0",
+        "b0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 3.269931400020141,
+      "passed": true
+    },
+    "slope_attachment_cubic": {
+      "raw_determining_equations": 82,
+      "integrated_solution": [
+        "t0",
+        "d*x + x0",
+        "2*d*h",
+        "d*u",
+        "2*B*d + b0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 1.8917389000125695,
+      "passed": true
+    },
+    "slope_source_generic": {
+      "raw_determining_equations": 82,
+      "integrated_solution": [
+        "t0",
+        "x0",
+        "0",
+        "0",
+        "b0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 2.794688699999824,
+      "passed": true
+    },
+    "slope_source_cubic": {
+      "raw_determining_equations": 82,
+      "integrated_solution": [
+        "d*t + t0",
+        "2*d*x + x0",
+        "2*d*h",
+        "d*u",
+        "2*B*d + b0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 1.9388750000216532,
+      "passed": true
+    },
+    "slope_only": {
+      "raw_determining_equations": 74,
+      "integrated_solution": [
+        "d*t*(n - 2) + t0",
+        "x*(d*(n - 2) + d) + x0",
+        "2*d*h",
+        "d*u",
+        "2*B*d + b0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 2.053047699999297,
+      "passed": true
+    },
+    "zero_transport": {
+      "raw_determining_equations": 25,
+      "integrated_solution": [
+        "t*(a0 + beta) + t0",
+        "beta*x + x0",
+        "-2*a0*h",
+        "-a0*u",
+        "-2*B*a0 + d0"
+      ],
+      "root_report_classification_status": "necessity_integrated_pending_review",
+      "shell_divisors": [
+        "1"
+      ],
+      "elapsed_seconds": 0.712322800012771,
+      "passed": true
+    }
+  },
+  "reduction_cases": {
+    "grass_generic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "grass_cubic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "slope_attachment_generic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_attachment_cubic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_source_generic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_source_cubic/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_only/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "zero_transport/travel/n=None": {
+      "passed": true,
+      "chart": "translation",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "grass_generic/common/n=None": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "grass_cubic/common/n=None": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "grass_cubic/relative/n=None": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "grass_cubic/spatial/n=None": {
+      "passed": true,
+      "chart": "space",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "zero_transport/spatial/n=None": {
+      "passed": true,
+      "chart": "space",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "slope_attachment_cubic/last/n=None": {
+      "passed": true,
+      "chart": "space",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "slope_source_cubic/last/n=None": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_only/last/n=0": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_only/last/n=1": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_only/last/n=2": {
+      "passed": true,
+      "chart": "space",
+      "orders": [
+        1,
+        1,
+        1
+      ]
+    },
+    "slope_only/last/n=3": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    },
+    "slope_only/last/n=4": {
+      "passed": true,
+      "chart": "time",
+      "orders": [
+        1,
+        1,
+        2
+      ]
+    }
+  },
+  "review_gate_controls": {
+    "current_exact_snapshot_accepted": true,
+    "changed_source_rejected": true,
+    "missing_required_hash_rejected": true,
+    "missing_branch_rejected": true,
+    "failed_branch_rejected": true,
+    "rejected_verdict_rejected": true,
+    "receipt_not_its_own_hashed_input": true
+  },
+  "reflection_review": {
+    "independent_signed_reflection": true,
+    "author_map_checks_passed": 66,
+    "negative_chart_classification_transport": "accepted for signed absolute-value flux only",
+    "full_equivalence_groupoid": "not established"
+  },
+  "elapsed_seconds": 19.9653787999996,
+  "inputs_sha256": {
+    "CONTRACT.md": "3fcf0618dd6a950ca8ee72f4e716cd5725528e528c395011a4ba85ea8ced4594",
+    "FIRST_ORDER_DERIVATION.md": "092d176d901a1a8992951987f0f724ba859c0bc05674f18f321172cc50db39d4",
+    "SLOPE_DERIVATION.md": "286fb9aef106bd83476f3cfcdc881e31b0fb503ec665ea0826f6695c637b939a",
+    "research_first_order.py": "f2f5de7f849f0c8e64c5999745c0cbda241ff9a9d65f9e9d2fcb661536c2189b",
+    "research_slope.py": "0f0f5c379132a3e3bc7d882d6e2d6c2a8847d5f0151f84155d5b539957328b6a",
+    "models.py": "8ca80d0829ba4d87824e3660bec310f0caa560344a8f7c3b85876fc82fe85a1b",
+    "main.py": "44b894144cb9006569dfb85e3404c1e6e952274012b4f78f032f3ae28fd22b82",
+    "classification.py": "f7e0e1e88fe27363dd4a41e723f746e883c1c806eac8e0a3ce0b77285fe76c49",
+    "review_classification.py": "8a42056777a5ba65c31f888ab2cf9253749e9dec36ee95ae2e094660ae9b2cd0",
+    "CLASSIFICATION_REVIEW.md": "59c91f221b9448ef7135511c9a8b614404a29461c90b40306cd2ec8fba76d2e0",
+    "reductions.py": "e7f6836540d2f74b3ec429376d6a9129571f0cf926a041c87859d807da766635",
+    "tests/test_reductions.py": "c776d413a82cb24533ff7bb016b2917fda797ccbc2c5be92d033148caf35b29b",
+    "tests/test_engine.py": "694c172e94a4265eaa66042887ecb3197dea69f62502d039780a86054a50c601",
+    "equivalence.py": "a5f91d63c1fc78da7254cd3809b19de7a54dcc78ae9c58714447a4d68af25b4f",
+    "EQUIVALENCE.md": "5fe16718e75be5f0253d6dc0b4878baa147d5b8dfe1d891b981153044eefcb6a"
+  },
+  "input_snapshot_unchanged_through_execution": true,
+  "proof_review": "CLASSIFICATION_REVIEW.md contains the necessity and coverage adjudication",
+  "prior_attempts": [
+    {
+      "status": "failed",
+      "reason": "Root classification adapter passed n instead of m to positive-K solver; author repaired"
+    },
+    {
+      "status": "timed_out",
+      "timeout_seconds": 28,
+      "completed_branches": [
+        "grass_generic",
+        "grass_cubic",
+        "slope_attachment_generic",
+        "slope_attachment_cubic"
+      ],
+      "interpretation": "Resource limit only; not an obstruction or mathematical failure"
+    }
+  ],
+  "limitations": [
+    "Finite checks are not the necessity proof",
+    "Model-specific necessity certificates do not supply a universal PDE integration algorithm",
+    "No full point-equivalence groupoid adjudication",
+    "Negative-speed transfer applies only to the signed absolute-value flux",
+    "No 2D, zero-speed or zero-depth classification",
+    "No global PDE existence, shock, or arbitrary-data theorem"
+  ]
+}

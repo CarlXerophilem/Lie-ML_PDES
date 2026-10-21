@@ -1,0 +1,1369 @@
+{
+  "review_status": "accepted",
+  "all_checks_passed": true,
+  "check_count": 171,
+  "checks": [
+    {
+      "name": "grass_generic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "grass_generic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "grass_generic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 2,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_generic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_generic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_generic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_generic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_generic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_generic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "grass_cubic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "grass_cubic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 2,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_cubic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_cubic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_cubic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_cubic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "grass_cubic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "grass_cubic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_generic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_generic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_generic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_generic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_generic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_generic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_cubic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_cubic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_cubic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_cubic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_attachment_cubic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_attachment_cubic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_generic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_generic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_generic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_generic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_generic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_generic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_cubic_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_cubic_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_cubic_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_cubic_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_source_cubic_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_source_cubic_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "slope_only_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "slope_only_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_only_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_only_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_only_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_only_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "slope_only_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_only_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_uniform_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_uniform_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "7 > 0"
+      ]
+    },
+    {
+      "name": "zero_transport_slope_independent_PDE",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_slope_status_scope",
+      "passed": true,
+      "evidence": [
+        "5 > 0",
+        "2*g*(t - 4)/3 + 7 > 0"
+      ]
+    },
+    {
+      "name": "zero_transport_flat_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 2,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "zero_transport_flat_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_flat_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "zero_transport_linear_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "zero_transport_linear_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_linear_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "zero_transport_quadratic_independent_stabilizer_dimension",
+      "passed": true,
+      "evidence": {
+        "dimension": 0,
+        "status": "verified_initial_data_stabilizer"
+      }
+    },
+    {
+      "name": "zero_transport_quadratic_independent_tangency",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_quadratic_no_evolution_claim",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "zero_transport_two_endpoints_remove_initial_stabilizer",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "unknown_profile_slope_retains_rank_branch",
+      "passed": true,
+      "evidence": {
+        "dimension": 1,
+        "rank_guards": [
+          "Ne(-review_profile_slope, 0)",
+          "Ne(-review_profile_slope, 0)"
+        ],
+        "unresolved_zero_pivot_branches": [
+          "Eq(-review_profile_slope, 0)",
+          "Eq(-review_profile_slope, 0)"
+        ]
+      }
+    },
+    {
+      "name": "zero_profile_slope_rank_drop_is_real",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "slope_exponent_rank_guard_and_n_two_branch",
+      "passed": true,
+      "evidence": {
+        "generic_dimension": 0,
+        "guards": [
+          "Ne(2 - n, 0)"
+        ],
+        "n_two_dimension": 1
+      }
+    },
+    {
+      "name": "grass_generic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "grass_generic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "grass_cubic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_generic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_attachment_cubic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_generic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_source_cubic_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "slope_only_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_independent_flux_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "zero_transport_independent_slope_weight",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "flux_prolongation_retains_B_t_Dx_tau",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "incompatible_flux_rejected",
+      "passed": true,
+      "evidence": {
+        "flux": "K*u**3",
+        "variation": "-3*_c_a0*K*u**3",
+        "bed_slope_jet": "B__0_1",
+        "parameter_guards": [
+          "h>0",
+          "u>0",
+          "g > 0",
+          "K > 0",
+          "3 >= 1",
+          "3 <= 4"
+        ],
+        "parameter_substitutions": {},
+        "slope_variation": "B__0_1*(-2*_c_a0 - _c_beta)",
+        "formula": "eta_Bx = D_x eta_B - B_t D_x tau - B_x D_x xi",
+        "initial_flux": "27*K",
+        "compatibility_residuals": [
+          "27*K"
+        ],
+        "compatibility_conditions": [
+          "Eq(27*K, 0)"
+        ],
+        "variation_identities": [
+          "-81*_c_a0*K"
+        ],
+        "compatible": false,
+        "scope": "prescribed sediment flux on the initial slice only"
+      }
+    },
+    {
+      "name": "time_dependent_flux_only_initial_trace",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "reject_invalid_grass_generic_{m: 3}",
+      "passed": true,
+      "evidence": "Exponent specialization leaves the registered m stratum"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{m: 0}",
+      "passed": true,
+      "evidence": "Exponent specialization leaves the registered m stratum"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{m: 5}",
+      "passed": true,
+      "evidence": "Exponent specialization leaves the registered m stratum"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{g: 0}",
+      "passed": true,
+      "evidence": "g>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{g: -1}",
+      "passed": true,
+      "evidence": "g>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{K: 0}",
+      "passed": true,
+      "evidence": "K>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{K: -1}",
+      "passed": true,
+      "evidence": "K>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_grass_generic_{K: I}",
+      "passed": true,
+      "evidence": "Physical parameter substitutions must be finite real constants"
+    },
+    {
+      "name": "reject_invalid_slope_only_{G: 0}",
+      "passed": true,
+      "evidence": "G>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_slope_only_{G: -1}",
+      "passed": true,
+      "evidence": "G>0 is required; select the appropriate zero branch instead"
+    },
+    {
+      "name": "reject_invalid_slope_only_{G: I}",
+      "passed": true,
+      "evidence": "Physical parameter substitutions must be finite real constants"
+    },
+    {
+      "name": "reject_invalid_slope_only_{n: -1}",
+      "passed": true,
+      "evidence": "The slope-only branch requires 0<=n<=4"
+    },
+    {
+      "name": "reject_invalid_slope_only_{n: 5}",
+      "passed": true,
+      "evidence": "The slope-only branch requires 0<=n<=4"
+    },
+    {
+      "name": "nonreal_positive_parameter_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "zero_speed_report_carries_specialized_parameter_guards",
+      "passed": true,
+      "evidence": {
+        "parameter_guards": [
+          "h>0",
+          "u>0",
+          "g > 0",
+          "review_parameter > 0"
+        ],
+        "parameter_substitutions": {
+          "n": "0",
+          "G": "review_parameter"
+        }
+      }
+    },
+    {
+      "name": "static_zero_speed_diffusion_negative_control",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "moving_zero_speed_diffusion_solution",
+      "passed": true,
+      "evidence": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "name": "zero_speed_chart_disclaimer",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reject_unapproved_zero_extension_grass_generic_{}",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reject_unapproved_zero_extension_grass_generic_{m: 2}",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reject_unapproved_zero_extension_slope_only_{n: 1}",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reject_unapproved_zero_extension_slope_only_{n: 3}",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reject_unapproved_zero_extension_slope_source_cubic_{}",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "material_chain_continuity",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "material_chain_momentum_sign",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "material_chain_Exner_sign",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "relative_flux_from_original_exner",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "P_is_printed_closedness",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "M_is_material_closedness",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "printed_counterexample_P",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "printed_counterexample_M_defect",
+      "passed": true,
+      "evidence": [
+        "0"
+      ]
+    },
+    {
+      "name": "printed_counterexample_is_nonzero",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "parent_report_checks_pass",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "parent_does_not_claim_point_equivalence",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "primary_source_ID_coverage",
+      "passed": true,
+      "evidence": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R07",
+        "R08"
+      ]
+    },
+    {
+      "name": "primary_source_bytes_match",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "source_provenance_not_claimed_as_new_web_retrieval",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "qualifications": [],
+  "reviewed_sha256": {
+    "data_experiments.py": "8dbc763cc9780afa13d4c997e972b34f5f4a6e648fca11c1b2b7d269f4245989",
+    "parent_models.py": "cf4d4d59239b95d116c1cfb3c766aa40d2afbf052a337956abc36cf8c986f7c7",
+    "models.py": "8ca80d0829ba4d87824e3660bec310f0caa560344a8f7c3b85876fc82fe85a1b",
+    "main.py": "44b894144cb9006569dfb85e3404c1e6e952274012b4f78f032f3ae28fd22b82",
+    "research_first_order.py": "f2f5de7f849f0c8e64c5999745c0cbda241ff9a9d65f9e9d2fcb661536c2189b",
+    "research_slope.py": "0f0f5c379132a3e3bc7d882d6e2d6c2a8847d5f0151f84155d5b539957328b6a",
+    "tests/test_data_experiments.py": "6a1ce9a51e8b1777fcc7524276b8164deb113a9ebce12b7da8a9b95a953d36cb",
+    "tests/test_parent_models.py": "e7cf694e321e3249ce14ba3aaf64c9e762968097af8321e38cd1323a1338f089",
+    "review_data_parent.py": "013ff36427095873e6cb821e7be63792a8eb1fdf270af46f8260266399ce1257"
+  },
+  "source_ledger_sha256": "b95ec52815d182ff8c8e9fed7e48b7f6d084e6bdebd853aa4a47fdd72c49f27c",
+  "elapsed_seconds": 2.979753699997673,
+  "per_process_timeout_seconds": 60,
+  "scope": [
+    "constructed exact flows",
+    "specified initial-data stabilizers",
+    "parameter and profile pivot guards",
+    "first-prolonged sediment flux",
+    "signed polynomial zero-speed extensions",
+    "P/M separation",
+    "mass-coordinate signs and guards",
+    "live source byte hashes"
+  ],
+  "not_reviewed": [
+    "first-order maximality proof authored by this reviewer",
+    "slope maximality proof",
+    "2D classification",
+    "global well-posedness",
+    "future-time boundary invariance",
+    "new web citation retrieval"
+  ]
+}

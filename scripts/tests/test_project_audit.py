@@ -1,6 +1,7 @@
 """Preservation audit catches corrupted carriers and misleading Markdown."""
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -79,6 +80,20 @@ def test_dollar_math_is_not_a_link_but_real_links_and_currency_remain():
     text = r"$[X,Y](f)$ $$\Delta[T F](y,z)$$ [actual](missing.md)"
     text += r" \$20 [budget](budget.md) and $[A,B](I)$"
     assert list(markdown_targets(text)) == ["missing.md", "budget.md"]
+
+
+@pytest.mark.skipif(os.name != 'nt', reason='Native Windows drive-link normalization')
+def test_windows_app_absolute_link_is_checked_not_exempted(small_project, tmp_path, monkeypatch):
+    root, _, _ = small_project
+    target = root / 'docs/linked note.md'
+    target.write_text('preserved note', encoding='utf-8')
+    page = root / 'docs/links.md'
+    page.write_text(f'[note](</{target.as_posix()}>)', encoding='utf-8')
+    monkeypatch.setattr('scripts.project.active_files', lambda _: ['docs/links.md'])
+    assert audit(root, tmp_path/'present')['status'] == 'passed'
+    target.unlink()
+    result = audit(root, tmp_path/'absent')
+    assert any('active_markdown_links:' in issue for issue in result['issues'])
 
 
 def test_relocated_canonical_pdf_is_still_hash_checked(small_project, tmp_path):

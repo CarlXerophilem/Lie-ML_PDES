@@ -1,0 +1,21 @@
+{
+  "publication_branch": "astra",
+  "library_and_scalar_tests": 66,
+  "retained_active_engine_chart_script_tests": 110,
+  "active_43_included_in_110": true,
+  "historical_general_symm_previous_delivery_tests": 410,
+  "isolated_restored_file_count": 28475,
+  "staged_library_file_count": 445,
+  "staged_library_changed_bytes": 0,
+  "bash_syntax_check": "passed",
+  "full_ubuntu_runtime_check": false,
+  "source_code_modified_in_publication": "no mathematical changes; publish existing reviewed library and Windows link audit fix",
+  "interrupted_attempt": "combined test replay preserved; separate suites subsequently passed",
+  "project_audit_failures": [
+    "11 October external archive unavailable"
+  ],
+  "research_failures": [
+    "cubic-resonant-time-5 original-P sampled residual 1.177074994e-6 > 1e-6"
+  ],
+  "remote_receipt_policy": "verify final HEAD against GitHub refs/heads/astra after push; no self-referential commit identifier in this file"
+}

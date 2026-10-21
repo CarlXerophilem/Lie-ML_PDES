@@ -1,0 +1,6 @@
+{
+  "status": "interrupted",
+  "reason": "combined replay exceeded four minutes of symbolic CPU work without a completed test summary",
+  "completed_suite_claim": false,
+  "next_action": "separate existing suites with diagnostic stack timer; no mathematical source changes"
+}

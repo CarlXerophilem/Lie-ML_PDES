@@ -1,0 +1,1556 @@
+{
+  "candidate": {
+    "id": "C52",
+    "profile": "weighted_scaling_positive",
+    "c": 0,
+    "a": [
+      2,
+      1,
+      1,
+      2
+    ],
+    "b": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "analysis": {
+    "candidate_id": "C52",
+    "candidate": {
+      "id": "C52",
+      "profile": "weighted_scaling_positive",
+      "c": 0,
+      "a": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "b": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "model": "grass_cubic_f0",
+    "conditional_status": "failed_conditional_criterion",
+    "regular_chart_status": "failed",
+    "singular_status": "not_resolved_for_rejected_candidate",
+    "conditional_admitted": false,
+    "global_chart_admitted": false,
+    "independent_review_status": "pending_fresh_review",
+    "preceding_gate": {
+      "passed": true,
+      "reason": "reviewed_and_executed_exact_version",
+      "gate_sha256": "14abcee2695fadb5a5542be214fdb51828e48f234ac4f1313419a3a35b6d2e59",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline": "D:\\MATHs\\math 4890 LieML\\build\\sve-systematic-20261020\\validation\\audit\\audit.json",
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118"
+        }
+      ]
+    },
+    "distribution": {
+      "generators": [
+        [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "1"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        [
+          [
+            "1"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "2*h"
+          ],
+          [
+            "u"
+          ],
+          [
+            "v"
+          ],
+          [
+            "2*B"
+          ]
+        ]
+      ],
+      "projection_rank": 2,
+      "projection_minor_t_y": "-1",
+      "involutivity_residual": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ]
+    },
+    "joint_system": {
+      "model": "grass_cubic_f0",
+      "phi": [
+        [
+          "2*h"
+        ],
+        [
+          "u"
+        ],
+        [
+          "v"
+        ],
+        [
+          "2*B"
+        ]
+      ],
+      "diagonal_matrix": [
+        [
+          "2",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "2"
+        ]
+      ],
+      "generators": [
+        [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "1"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        [
+          [
+            "1"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "2*h"
+          ],
+          [
+            "u"
+          ],
+          [
+            "v"
+          ],
+          [
+            "2*B"
+          ]
+        ]
+      ],
+      "projection_matrix": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "projection_rank": 2,
+      "projection_minor_t_y": "-1",
+      "involutivity_residual": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      "original_PDE": [
+        [
+          "h*u_x + h*v_y + h_t + h_x*u + h_y*v"
+        ],
+        [
+          "B_x*g + g*h_x + u*u_x + u_t + u_y*v"
+        ],
+        [
+          "B_y*g + g*h_y + u*v_x + v*v_y + v_t"
+        ],
+        [
+          "B_t + 2*K*u*u_y*v + 2*K*u*v*v_x + K*u_x*(3*u**2 + v**2) + K*v_y*(u**2 + 3*v**2)"
+        ]
+      ],
+      "Q_y": [
+        [
+          "-h_y"
+        ],
+        [
+          "-u_y"
+        ],
+        [
+          "-v_y"
+        ],
+        [
+          "-B_y"
+        ]
+      ],
+      "Q_flow": [
+        [
+          "2*h - h_t"
+        ],
+        [
+          "u - u_t"
+        ],
+        [
+          "v - v_t"
+        ],
+        [
+          "2*B - B_t"
+        ]
+      ],
+      "joint_first_order_equations": [
+        [
+          "h*u_x + 2*h + h_x*u"
+        ],
+        [
+          "B_x*g + g*h_x + u*u_x + u"
+        ],
+        [
+          "u*v_x + v"
+        ],
+        [
+          "2*B + 2*K*u*v*v_x + K*u_x*(3*u**2 + v**2)"
+        ]
+      ],
+      "leading_matrix": [
+        [
+          "u",
+          "h",
+          "0",
+          "0"
+        ],
+        [
+          "g",
+          "u",
+          "0",
+          "g"
+        ],
+        [
+          "0",
+          "0",
+          "u",
+          "0"
+        ],
+        [
+          "0",
+          "K*(3*u**2 + v**2)",
+          "2*K*u*v",
+          "0"
+        ]
+      ],
+      "determinant": "-K*g*u**2*(3*u**2 + v**2)",
+      "characteristic_factors": [
+        "u",
+        "3*K*g*u**3 + K*g*u*v**2"
+      ],
+      "adjugate": [
+        [
+          "-3*K*g*u**3 - K*g*u*v**2",
+          "0",
+          "-2*K*g*h*u*v",
+          "g*h*u"
+        ],
+        [
+          "0",
+          "0",
+          "2*K*g*u**2*v",
+          "-g*u**2"
+        ],
+        [
+          "0",
+          "0",
+          "-3*K*g*u**3 - K*g*u*v**2",
+          "0"
+        ],
+        [
+          "3*K*g*u**3 + K*g*u*v**2",
+          "-3*K*u**4 - K*u**2*v**2",
+          "2*K*g*h*u*v - 2*K*u**3*v",
+          "-g*h*u + u**3"
+        ]
+      ],
+      "conditional_matrix": [
+        [
+          "u",
+          "h",
+          "0",
+          "0"
+        ],
+        [
+          "g",
+          "u",
+          "0",
+          "g"
+        ],
+        [
+          "0",
+          "0",
+          "u",
+          "0"
+        ],
+        [
+          "0",
+          "6*K*u**2 + 2*K*v**2 - K*(3*u**2 + v**2)",
+          "2*K*u*v",
+          "0"
+        ]
+      ],
+      "prolonged_PDE_before_Q": [
+        [
+          "3*h*u_x + 3*h*v_y + 2*h_t + 3*h_x*u + 3*h_y*v"
+        ],
+        [
+          "2*B_x*g + 2*g*h_x + 2*u*u_x + u_t + 2*u_y*v"
+        ],
+        [
+          "2*B_y*g + 2*g*h_y + 2*u*v_x + 2*v*v_y + v_t"
+        ],
+        [
+          "2*B_t + 6*K*u*u_y*v + 6*K*u*v*v_x + 2*K*u_x*(3*u**2 + v**2) + 2*K*v_y*(u**2 + 3*v**2) + u_x*(6*K*u**2 + 2*K*v**2 - K*(3*u**2 + v**2)) + v_y*(2*K*u**2 + 6*K*v**2 - K*(u**2 + 3*v**2))"
+        ]
+      ],
+      "prolonged_PDE_on_Q": [
+        [
+          "3*h*u_x + 4*h + 3*h_x*u"
+        ],
+        [
+          "2*B_x*g + 2*g*h_x + 2*u*u_x + u"
+        ],
+        [
+          "2*u*v_x + v"
+        ],
+        [
+          "4*B + 6*K*u*v*v_x + 2*K*u_x*(3*u**2 + v**2) + u_x*(6*K*u**2 + 2*K*v**2 - K*(3*u**2 + v**2))"
+        ]
+      ],
+      "conditional_residual_mod_joint": [
+        [
+          "h*u_x + h_x*u"
+        ],
+        [
+          "B_x*g + g*h_x + u*u_x"
+        ],
+        [
+          "u*v_x"
+        ],
+        [
+          "2*K*u*v*v_x + u_x*(6*K*u**2 + 2*K*v**2 - K*(3*u**2 + v**2))"
+        ]
+      ],
+      "differential_consequences": {
+        "U_t": [
+          [
+            "2*h"
+          ],
+          [
+            "u"
+          ],
+          [
+            "v"
+          ],
+          [
+            "2*B"
+          ]
+        ],
+        "U_y": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "U_tx": [
+          [
+            "2*h_x"
+          ],
+          [
+            "u_x"
+          ],
+          [
+            "v_x"
+          ],
+          [
+            "2*B_x"
+          ]
+        ],
+        "U_tt": [
+          [
+            "4*h"
+          ],
+          [
+            "u"
+          ],
+          [
+            "v"
+          ],
+          [
+            "4*B"
+          ]
+        ],
+        "U_xy": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "U_yy": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "U_ty": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "D_x_E_on_Q_and_DQ": [
+          [
+            "h*u_xx + 2*h_x*u_x + 2*h_x + h_xx*u"
+          ],
+          [
+            "B_xx*g + g*h_xx + u*u_xx + u_x**2 + u_x"
+          ],
+          [
+            "u*v_xx + u_x*v_x + v_x"
+          ],
+          [
+            "2*B_x + 2*K*u*v*v_xx + K*u_xx*(3*u**2 + v**2) + u_x*(6*K*u*u_x + 2*K*v*v_x) + v_x*(2*K*u*v_x + 2*K*u_x*v)"
+          ]
+        ],
+        "D_t_E_on_Q_and_DQ": [
+          [
+            "3*h*u_x + 4*h + 3*h_x*u"
+          ],
+          [
+            "2*B_x*g + 2*g*h_x + 2*u*u_x + u"
+          ],
+          [
+            "2*u*v_x + v"
+          ],
+          [
+            "4*B + 6*K*u*v*v_x + K*u_x*(3*u**2 + v**2) + u_x*(6*K*u**2 + 2*K*v**2)"
+          ]
+        ],
+        "D_y_E_on_Q_and_DQ": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "compatibility_identity_remainder": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "meaning": "(D_t+c D_x)E = D*(M*p+phi)+N*p after Q and DQ; adding this compatibility condition cannot prove conditional invariance on the original first-jet locus"
+      },
+      "guards": [
+        "g>0",
+        "K>0",
+        "h>0",
+        "u**2+v**2>0",
+        "all fields finite and real"
+      ]
+    },
+    "regular_chart": {
+      "guard": "Ne(-K*g*u**2*(3*u**2 + v**2), 0)",
+      "profile_vector_field": [
+        [
+          "(2*B*h - 6*K*h*u**2 - 4*K*h*v**2)/(3*K*u**3 + K*u*v**2)"
+        ],
+        [
+          "(-2*B + 2*K*v**2)/(3*K*u**2 + K*v**2)"
+        ],
+        [
+          "-v/u"
+        ],
+        [
+          "(-2*B*g*h + 2*B*u**2 + 6*K*g*h*u**2 + 4*K*g*h*v**2 - 3*K*u**4 - 3*K*u**2*v**2)/(3*K*g*u**3 + K*g*u*v**2)"
+        ]
+      ],
+      "conditional_numerators": [
+        [
+          "6*K*g*h*u**4 + 2*K*g*h*u**2*v**2"
+        ],
+        [
+          "3*K*g*u**5 + K*g*u**3*v**2"
+        ],
+        [
+          "3*K*g*u**4*v + K*g*u**2*v**3"
+        ],
+        [
+          "6*B*K*g*u**4 + 2*B*K*g*u**2*v**2"
+        ]
+      ],
+      "positive_parameter_obstruction": {
+        "row": 0,
+        "field_powers": [
+          1,
+          4,
+          0,
+          0
+        ],
+        "coefficient": "6*K*g",
+        "parameter_monomials": [
+          [
+            [
+              1,
+              1
+            ],
+            "6"
+          ]
+        ],
+        "proof": "Every monomial has the same nonzero sign and g,K are strictly positive; this field-polynomial coefficient is nonzero for every admitted parameter pair."
+      },
+      "Frobenius_commutator": null,
+      "Frobenius_identity": "M*[phi,F]=-N*F, with F=-M^{-1}phi; acceptance checks this is zero.",
+      "rejection_witness": {
+        "state": {
+          "h": "2",
+          "u": "2",
+          "v": "1",
+          "B": "1",
+          "g": "1",
+          "K": "1"
+        },
+        "U_x": [
+          [
+            "-2"
+          ],
+          [
+            "0"
+          ],
+          [
+            "-1/2"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "U_y": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "U_t": [
+          [
+            "4"
+          ],
+          [
+            "2"
+          ],
+          [
+            "1"
+          ],
+          [
+            "2"
+          ]
+        ],
+        "determinant": "-52",
+        "joint_residual": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "conditional_residual": [
+          [
+            "-4"
+          ],
+          [
+            "-2"
+          ],
+          [
+            "-1"
+          ],
+          [
+            "-2"
+          ]
+        ],
+        "kind": "compatible_first_jet_not_a_claimed_solution"
+      }
+    },
+    "singular_analysis": {
+      "status": "not_resolved_for_rejected_candidate",
+      "implicit_DAE": {
+        "equations": [
+          [
+            "h*u_x + 2*h + h_x*u"
+          ],
+          [
+            "B_x*g + g*h_x + u*u_x + u"
+          ],
+          [
+            "u*v_x + v"
+          ],
+          [
+            "2*B + 2*K*u*v*v_x + K*u_x*(3*u**2 + v**2)"
+          ]
+        ],
+        "characteristic_equation": "-K*g*u**2*(3*u**2 + v**2)",
+        "discarded": false,
+        "extra_compatibility_must_not_relabel_failed_candidate": true
+      },
+      "scope": "No claim excluding compatible solutions or singular conditional subbranches is inferred from the rejected ambient candidate."
+    },
+    "implicit_DAE": [
+      [
+        {
+          "exp_rate": "2",
+          "time_power": 0,
+          "equation": "2*H"
+        },
+        {
+          "exp_rate": "3",
+          "time_power": 0,
+          "equation": "H*U_z + H_z*U"
+        }
+      ],
+      [
+        {
+          "exp_rate": "1",
+          "time_power": 0,
+          "equation": "U"
+        },
+        {
+          "exp_rate": "2",
+          "time_power": 0,
+          "equation": "H_z*g + U*U_z + Z_z*g"
+        }
+      ],
+      [
+        {
+          "exp_rate": "1",
+          "time_power": 0,
+          "equation": "V"
+        },
+        {
+          "exp_rate": "2",
+          "time_power": 0,
+          "equation": "U*V_z"
+        }
+      ],
+      [
+        {
+          "exp_rate": "2",
+          "time_power": 0,
+          "equation": "2*Z"
+        },
+        {
+          "exp_rate": "3",
+          "time_power": 0,
+          "equation": "K*(3*U**2*U_z + 2*U*V*V_z + U_z*V**2)"
+        }
+      ]
+    ],
+    "invariant_graph": {
+      "status": "verified_graph_pullback",
+      "remaining_variable": "z",
+      "base_invariant": "x",
+      "field_invariants": [
+        [
+          "h*exp(-2*t)"
+        ],
+        [
+          "u*exp(-t)"
+        ],
+        [
+          "v*exp(-t)"
+        ],
+        [
+          "B*exp(-2*t)"
+        ]
+      ],
+      "profile_symbols": [
+        [
+          "H"
+        ],
+        [
+          "U"
+        ],
+        [
+          "V"
+        ],
+        [
+          "Z"
+        ]
+      ],
+      "profile_derivative_symbols": [
+        [
+          "H_z"
+        ],
+        [
+          "U_z"
+        ],
+        [
+          "V_z"
+        ],
+        [
+          "Z_z"
+        ]
+      ],
+      "graph": [
+        [
+          "H*exp(2*t)"
+        ],
+        [
+          "U*exp(t)"
+        ],
+        [
+          "V*exp(t)"
+        ],
+        [
+          "Z*exp(2*t)"
+        ]
+      ],
+      "base_coordinate_map": [
+        "t",
+        "x",
+        "y"
+      ],
+      "base_jacobian": "1",
+      "field_jacobian": "exp(6*t)",
+      "Q_residuals": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      "inverse_residuals": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      "original_PDE_pullback": [
+        [
+          "H*U_z*exp(3*t) + 2*H*exp(2*t) + H_z*U*exp(3*t)"
+        ],
+        [
+          "H_z*g*exp(2*t) + U*U_z*exp(2*t) + U*exp(t) + Z_z*g*exp(2*t)"
+        ],
+        [
+          "U*V_z*exp(2*t) + V*exp(t)"
+        ],
+        [
+          "3*K*U**2*U_z*exp(3*t) + 2*K*U*V*V_z*exp(3*t) + K*U_z*V**2*exp(3*t) + 2*Z*exp(2*t)"
+        ]
+      ],
+      "matrix_pullback": [
+        [
+          "H*U_z*exp(3*t) + 2*H*exp(2*t) + H_z*U*exp(3*t)"
+        ],
+        [
+          "H_z*g*exp(2*t) + U*U_z*exp(2*t) + U*exp(t) + Z_z*g*exp(2*t)"
+        ],
+        [
+          "U*V_z*exp(2*t) + V*exp(t)"
+        ],
+        [
+          "3*K*U**2*U_z*exp(3*t) + 2*K*U*V*V_z*exp(3*t) + K*U_z*V**2*exp(3*t) + 2*Z*exp(2*t)"
+        ]
+      ],
+      "original_PDE_reconstruction_residuals": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      "profile_DAE_time_coefficients": [
+        [
+          {
+            "exp_rate": "2",
+            "time_power": 0,
+            "equation": "2*H"
+          },
+          {
+            "exp_rate": "3",
+            "time_power": 0,
+            "equation": "H*U_z + H_z*U"
+          }
+        ],
+        [
+          {
+            "exp_rate": "1",
+            "time_power": 0,
+            "equation": "U"
+          },
+          {
+            "exp_rate": "2",
+            "time_power": 0,
+            "equation": "H_z*g + U*U_z + Z_z*g"
+          }
+        ],
+        [
+          {
+            "exp_rate": "1",
+            "time_power": 0,
+            "equation": "V"
+          },
+          {
+            "exp_rate": "2",
+            "time_power": 0,
+            "equation": "U*V_z"
+          }
+        ],
+        [
+          {
+            "exp_rate": "2",
+            "time_power": 0,
+            "equation": "2*Z"
+          },
+          {
+            "exp_rate": "3",
+            "time_power": 0,
+            "equation": "K*(3*U**2*U_z + 2*U*V*V_z + U_z*V**2)"
+          }
+        ]
+      ],
+      "time_reconstruction_residuals": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "time_split_basis": "Distinct finite t^k*exp(r*t), rational r and nonnegative integer k, are independent on every open time interval.",
+      "formal_DAE_status": "exact_implicit_profile_conditions; global formal integrability not inferred",
+      "profile_or_characteristic_divisions": [],
+      "guards": [
+        "finite real t",
+        "h(t,z)>0",
+        "u(t,z)**2+v(t,z)**2>0"
+      ],
+      "conditional_invariance_inferred_from_graph": false
+    },
+    "compatible_families": {
+      "explicit_families": [],
+      "implicit_regular_family": null,
+      "scope": "Specified local solution branches only; no general DAE or arbitrary data theorem."
+    },
+    "additional_conditional_guards": [],
+    "not_claimed": [
+      "unrestricted nonclassical classification",
+      "novelty",
+      "classical distribution inequivalence",
+      "complete singular-profile classification",
+      "arbitrary data compatibility",
+      "ML training"
+    ],
+    "elapsed_seconds": 0.1846312000125181
+  },
+  "classical_equivalence": {
+    "candidate_id": "C52",
+    "c": "0",
+    "a": [
+      "2",
+      "1",
+      "1",
+      "2"
+    ],
+    "b": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "canonical_distribution_frame": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "2*h"
+      ],
+      [
+        "0",
+        "u"
+      ],
+      [
+        "0",
+        "v"
+      ],
+      [
+        "0",
+        "2*B"
+      ]
+    ],
+    "distribution_frame": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "2*h"
+      ],
+      [
+        "0",
+        "u"
+      ],
+      [
+        "0",
+        "v"
+      ],
+      [
+        "0",
+        "2*B"
+      ]
+    ],
+    "frame_change": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "frame_change_inverse": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "frame_change_determinant": "1",
+    "frame_change_point_dependent": false,
+    "frame_chart_guards": [],
+    "distribution_rank": 2,
+    "distribution_rank_minor": "-1",
+    "source_review_gate": {
+      "passed": true,
+      "reason": "reviewed_exact_version",
+      "receipt_sha256": "589ae94d7a6986156d9d9e3176c4c21e55f5f1af6abf751e80fd2bedd2b67c79",
+      "scope": "all 17 declared 2D local smooth point algebras on h>0, u^2+v^2>0",
+      "stage_2_passed": true
+    },
+    "source_classical_algebra_dimension": 7,
+    "source_classical_basis": [
+      [
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "-y"
+        ],
+        [
+          "x"
+        ],
+        [
+          "0"
+        ],
+        [
+          "-v"
+        ],
+        [
+          "u"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "t"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "-2*h"
+        ],
+        [
+          "-u"
+        ],
+        [
+          "-v"
+        ],
+        [
+          "-2*B"
+        ]
+      ],
+      [
+        [
+          "0"
+        ],
+        [
+          "x"
+        ],
+        [
+          "y"
+        ],
+        [
+          "2*h"
+        ],
+        [
+          "u"
+        ],
+        [
+          "v"
+        ],
+        [
+          "2*B"
+        ]
+      ]
+    ],
+    "classical_condition": "False",
+    "ambient_chart": [
+      "h>0",
+      "u^2+v^2>0",
+      "open point-coordinate domain"
+    ],
+    "conditional_invariance_claim": false,
+    "point_equivalence_groupoid_claim": false,
+    "novel_solution_family_claim": false,
+    "equivalence_scope": "same distribution in the fixed PDE coordinates; arbitrary invertible point-dependent changes of its frame",
+    "unproved_equivalences": [
+      "all point equivalences of PDE systems",
+      "classification of arbitrary nonclassical distributions"
+    ],
+    "tangency_identities": [
+      "-omega*y + p0*x + x0",
+      "h*(-2*a0 + 2*p0) - 2*h*(a0*t + t0)",
+      "-omega*v + u*(-a0 + p0) - u*(a0*t + t0)",
+      "omega*u + v*(-a0 + p0) - v*(a0*t + t0)",
+      "B*(-2*a0 + 2*p0) - 2*B*(a0*t + t0) + b0"
+    ],
+    "tangency_matrix": [
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-2",
+        "0"
+      ],
+      [
+        "-2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-2",
+        "2"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      [
+        "-1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "-1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "source_classical_constants": [
+      "t0",
+      "x0",
+      "y0",
+      "b0",
+      "omega",
+      "a0",
+      "p0"
+    ],
+    "status": "no_classical_representative_on_open_ambient_chart",
+    "classical_equivalent": false,
+    "classical_tangent_space_dimension": 1,
+    "evaluated_classical_rank": 1,
+    "classical_coefficient_nullspace": [
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ]
+    ],
+    "raw_classical_tangent_basis": [
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ]
+    ],
+    "classical_tangent_basis": [
+      [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "1"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ]
+    ],
+    "tangency_kernel_residuals": [
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "fixed_subalgebra_basis": null,
+    "fixed_subalgebra_constant_coordinates": null,
+    "fixed_subalgebra_bracket": null,
+    "frame_to_fixed_classical_basis": null,
+    "classical_frame_reconstruction_residual": null,
+    "ambient_obstruction": "All fixed classical tangent fields are constant multiples of partial_y; their evaluated rank is only one.",
+    "solution_family_containment": {
+      "status": "not_analyzed_for_this_candidate",
+      "classical_solution_family_containment": null,
+      "conditional_invariance_claim": false,
+      "novel_solution_family_claim": false
+    }
+  },
+  "prior_gates": {
+    "1": {
+      "passed": true,
+      "reason": "reviewed_and_executed_exact_version",
+      "gate_sha256": "6cb76ba6a129aaae9508e97a6fcaea73569cc00067d12686c1784d276f696c7f",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline": "D:\\MATHs\\math 4890 LieML\\build\\sve-systematic-20261020\\validation\\audit\\audit.json",
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118",
+          "interpretation": "documentary/archive/link audit remains failed; mathematical classification and tests are separate"
+        }
+      ]
+    },
+    "2": {
+      "passed": true,
+      "reason": "reviewed_and_executed_exact_version",
+      "gate_sha256": "14abcee2695fadb5a5542be214fdb51828e48f234ac4f1313419a3a35b6d2e59",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline": "D:\\MATHs\\math 4890 LieML\\build\\sve-systematic-20261020\\validation\\audit\\audit.json",
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118"
+        }
+      ]
+    }
+  },
+  "registry_sha256": "2409ee048ab8ed66bdf4d0840a34a95b6ea380fdb72c2aedc29ce84382b3b764",
+  "mathematical_admission": false,
+  "release_status": "requires_independent_review_and_project_validation"
+}

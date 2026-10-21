@@ -1,0 +1,933 @@
+{
+  "archives": [
+    {
+      "schema": 1,
+      "created_utc": "2026-10-21T05:30:40.323361+00:00",
+      "original_root": "D:\\MATHs\\math 4890 LieML",
+      "directories": [
+        "lie-symm-library-20261021"
+      ],
+      "file_count": 6445,
+      "uncompressed_bytes": 110973076,
+      "source_policy": "all ordinary files including failed experiments; optional aliases and Python caches omitted",
+      "archive": "library-evidence.zip",
+      "archive_sha256": "9a138519e9362ba84da42e45a3ef509aa889dfa4b85d25b9e518dbbd175c8481",
+      "archive_bytes": 23681696,
+      "verified": true
+    },
+    {
+      "schema": 1,
+      "created_utc": "2026-10-21T05:30:48.838932+00:00",
+      "original_root": "D:\\MATHs\\math 4890 LieML",
+      "directories": [
+        "sve-P-solutions-20261021"
+      ],
+      "file_count": 6531,
+      "uncompressed_bytes": 134368325,
+      "source_policy": "all ordinary files including failed experiments; optional aliases and Python caches omitted",
+      "archive": "printed-P-evidence.zip",
+      "archive_sha256": "01f2581e45fcc1e38220bbc4b6da80de1342d597e74882041d690bd7214a94a9",
+      "archive_bytes": 41568904,
+      "verified": true
+    },
+    {
+      "schema": 1,
+      "created_utc": "2026-10-21T05:30:57.314662+00:00",
+      "original_root": "D:\\MATHs\\math 4890 LieML",
+      "directories": [
+        "audit",
+        "priestess-sync-20261019-local-audit",
+        "project-refresh-20261021",
+        "sve-1d-programme-20261021"
+      ],
+      "file_count": 4650,
+      "uncompressed_bytes": 10648308,
+      "source_policy": "all ordinary files including failed experiments; optional aliases and Python caches omitted",
+      "archive": "other-current-evidence.zip",
+      "archive_sha256": "4b1f21d8f829a0e6ea36c1c65f1e5632d8b2bb692ac97a73a88d63e3e4c7a22d",
+      "archive_bytes": 6495279,
+      "verified": true
+    }
+  ],
+  "optional_aliases": [
+    {
+      "path": "build/lie-symm-library-20261021/fresh-package-test-tmp/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\fresh-package-test-tmp\\liesymm-relocated0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/fresh-package-test-tmp/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\fresh-package-test-tmp\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/fresh-package-test-tmp/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\fresh-package-test-tmp\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/package-pytest-final/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\package-pytest-final\\liesymm-relocated0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/package-pytest-final/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\package-pytest-final\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/package-pytest-final/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\package-pytest-final\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-active/test_machine_certificate_exporcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-active\\test_machine_certificate_expor0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/data-fluxcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\data-flux0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/data-gatecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\data-gate0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_archive_imports_do_not_recurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_archive_imports_do_not_re0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_barren_is_latent_onlycurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_barren_is_latent_only0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_burgers_certifiedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_burgers_certified0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_current_constructed_data_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_current_constructed_data_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_duplicate_prune_selectioncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_duplicate_prune_selection2"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_failed_or_stale_data_repocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_failed_or_stale_data_repo4"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_nonzero_exact_identity_blcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_nonzero_exact_identity_bl0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_resume_is_identicalcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_resume_is_identical0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_top_level_alias_cannot_securrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_top_level_alias_cannot_se0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/workflowcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\workflow0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine/test_top_level_alias_cannot_se0/repo/build/old",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine\\test_top_level_alias_cannot_se0\\repo\\build\\keep"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/data-fluxcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\data-flux0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/data-gatecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\data-gate0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_archive_imports_do_not_recurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_archive_imports_do_not_re0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_barren_is_latent_onlycurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_barren_is_latent_only0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_burgers_certifiedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_burgers_certified0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_current_constructed_data_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_current_constructed_data_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_duplicate_prune_selectioncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_duplicate_prune_selection2"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_failed_or_stale_data_repocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_failed_or_stale_data_repo4"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_nonzero_exact_identity_blcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_nonzero_exact_identity_bl0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_resume_is_identicalcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_resume_is_identical0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_top_level_alias_cannot_securrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_top_level_alias_cannot_se0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/workflowcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\workflow0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-engine-utf8/test_top_level_alias_cannot_se0/repo/build/old",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-engine-utf8\\test_top_level_alias_cannot_se0\\repo\\build\\keep"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_a_bare_success_flag_is_nocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_a_bare_success_flag_is_no0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_bare_passed_flag_does_notcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_bare_passed_flag_does_not0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_evidence_outside_cycle_iscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_evidence_outside_cycle_is0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_gate_invalidates_on_sourccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_gate_invalidates_on_sourc0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_incomplete_or_changed_execurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_incomplete_or_changed_exe4"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_ml_export_cannot_launder_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_ml_export_cannot_launder_3"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_post_release_source_changcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_post_release_source_chang0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_review_cannot_accept_a_bacurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_review_cannot_accept_a_ba0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_review_gate_rejects_a_barcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_review_gate_rejects_a_bar0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_review_must_bind_every_mlcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_review_must_bind_every_ml0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_review_must_bind_proof_ancurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_review_must_bind_proof_an4"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_synthetic_complete_evidencurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_synthetic_complete_eviden0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-general/test_validation_must_cover_evecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-general\\test_validation_must_cover_eve0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-library/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-library\\liesymm-relocated0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-library/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-library\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-library/test_output_is_new_and_outsidecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-library\\test_output_is_new_and_outside0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-library/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-library\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-links/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-links\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-links/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-links\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-links/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-links\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-links/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-links\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-links/test_windows_app_absolute_linkcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-links\\test_windows_app_absolute_link0"
+    },
+    {
+      "path": "build/lie-symm-library-20261021/pytest-scalar/test_output_is_new_and_outsidecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\lie-symm-library-20261021\\pytest-scalar\\test_output_is_new_and_outside0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_a_bare_success_flag_is_nocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_a_bare_success_flag_is_no0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_bare_passed_flag_does_notcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_bare_passed_flag_does_not0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_evidence_outside_cycle_iscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_evidence_outside_cycle_is0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_gate_invalidates_on_sourccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_gate_invalidates_on_sourc0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_incomplete_or_changed_execurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_incomplete_or_changed_exe4"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_ml_export_cannot_launder_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_ml_export_cannot_launder_3"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_post_release_source_changcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_post_release_source_chang0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_review_cannot_accept_a_bacurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_review_cannot_accept_a_ba0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_review_gate_rejects_a_barcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_review_gate_rejects_a_bar0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_review_must_bind_every_mlcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_review_must_bind_every_ml0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_review_must_bind_proof_ancurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_review_must_bind_proof_an4"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_synthetic_complete_evidencurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_synthetic_complete_eviden0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/historical-test-tmp/test_validation_must_cover_evecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\historical-test-tmp\\test_validation_must_cover_eve0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/order-two-red-tmp/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\order-two-red-tmp\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\liesymm-relocated0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_output_is_new_and_outsidecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_output_is_new_and_outside0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-final-test-tmp/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-final-test-tmp\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\liesymm-relocated0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_output_is_new_and_outsidecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_output_is_new_and_outside0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_review_regular_solver_stocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_review_regular_solver_sto0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-reviewed-tmp/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-reviewed-tmp\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/liesymm-relocatedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\liesymm-relocated0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_existing_main_and_models_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_existing_main_and_models_0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_output_is_new_and_outsidecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_output_is_new_and_outside0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_separator_normalization_ncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_separator_normalization_n0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/package-test-tmp/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\package-test-tmp\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/data-fluxcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\data-flux0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/data-gatecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\data-gate0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_archive_imports_do_not_recurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_archive_imports_do_not_re0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_barren_is_latent_onlycurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_barren_is_latent_only0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_burgers_certifiedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_burgers_certified0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_current_constructed_data_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_current_constructed_data_0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_duplicate_prune_selectioncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_duplicate_prune_selection2"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_failed_or_stale_data_repocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_failed_or_stale_data_repo4"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_machine_certificate_exporcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_machine_certificate_expor0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_nonzero_exact_identity_blcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_nonzero_exact_identity_bl0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_resume_is_identicalcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_resume_is_identical0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_top_level_alias_cannot_securrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_top_level_alias_cannot_se0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_windows_app_absolute_linkcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_windows_app_absolute_link0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/workflowcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\workflow0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/retained-test-tmp/test_top_level_alias_cannot_se0/repo/build/old",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\retained-test-tmp\\test_top_level_alias_cannot_se0\\repo\\build\\keep"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/review-controls-tmp/test_review_regular_solver_stocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\review-controls-tmp\\test_review_regular_solver_sto0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/review-green-tmp/test_review_regular_solver_stocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\review-green-tmp\\test_review_regular_solver_sto0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/review-red-tmp/test_review_regular_solver_stocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\review-red-tmp\\test_review_regular_solver_sto0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/reviewer-tmp/pytest2/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\reviewer-tmp\\pytest2\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/reviewer-tmp/pytest2/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\reviewer-tmp\\pytest2\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/reviewer-tmp/pytest3/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\reviewer-tmp\\pytest3\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/reviewer-tmp/pytest3/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\reviewer-tmp\\pytest3\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/reviewer-tmp/pytest3/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\reviewer-tmp\\pytest3\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/test-tmp-1/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\test-tmp-1\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/test-tmp-1/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\test-tmp-1\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/test-tmp-2/test_series_and_numerical_croscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\test-tmp-2\\test_series_and_numerical_cros0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/test-tmp-2/test_singular_data_and_invalidcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\test-tmp-2\\test_singular_data_and_invalid0"
+    },
+    {
+      "path": "build/sve-P-solutions-20261021/test-tmp-2/test_spatial_resonance_has_seccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\sve-P-solutions-20261021\\test-tmp-2\\test_spatial_resonance_has_sec0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/project-refresh-20261021/test-preflight/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\test-preflight\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-active/test_machine_certificate_exporcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-active\\test_machine_certificate_expor0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_duplicate_prune_selectioncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_duplicate_prune_selection2"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_top_level_alias_cannot_securrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_top_level_alias_cannot_se0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-final/test_top_level_alias_cannot_se0/repo/build/old",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-final\\test_top_level_alias_cannot_se0\\repo\\build\\keep"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_duplicate_prune_selectioncurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_duplicate_prune_selection2"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_top_level_alias_cannot_securrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_top_level_alias_cannot_se0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-archive-log/test_top_level_alias_cannot_se0/repo/build/old",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-archive-log\\test_top_level_alias_cannot_se0\\repo\\build\\keep"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/data-fluxcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\data-flux0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/data-gatecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\data-gate0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_archive_corruption_is_repcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_archive_corruption_is_rep0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_archive_imports_do_not_recurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_archive_imports_do_not_re0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_barren_is_latent_onlycurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_barren_is_latent_only0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_burgers_certifiedcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_burgers_certified0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_current_constructed_data_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_current_constructed_data_0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_failed_or_stale_data_repocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_failed_or_stale_data_repo4"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_frozen_zip_corruption_is_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_frozen_zip_corruption_is_0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_member_path_boundary_builcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_member_path_boundary_buil1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_member_path_boundary_docscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_member_path_boundary_docs0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_member_path_boundary__buicurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_member_path_boundary__bui0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_member_path_boundary____dcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_member_path_boundary____d0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_missing_expanded_evidencecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_missing_expanded_evidence0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_nonzero_exact_identity_blcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_nonzero_exact_identity_bl0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_prune_refuses_any_post_arcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_prune_refuses_any_post_ar1"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_relocated_canonical_pdf_icurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_relocated_canonical_pdf_i0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_restore_refuses_overwritecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_restore_refuses_overwrite0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_resume_is_identicalcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_resume_is_identical0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/test_verified_roundtripcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\test_verified_roundtrip0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-engine/workflowcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-engine\\workflow0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_a_bare_success_flag_is_nocurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_a_bare_success_flag_is_no0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_bare_passed_flag_does_notcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_bare_passed_flag_does_not0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_evidence_outside_cycle_iscurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_evidence_outside_cycle_is0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_gate_invalidates_on_sourccurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_gate_invalidates_on_sourc0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_incomplete_or_changed_execurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_incomplete_or_changed_exe4"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_ml_export_cannot_launder_current",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_ml_export_cannot_launder_3"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_post_release_source_changcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_post_release_source_chang0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_review_cannot_accept_a_bacurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_review_cannot_accept_a_ba0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_review_gate_rejects_a_barcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_review_gate_rejects_a_bar0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_review_must_bind_every_mlcurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_review_must_bind_every_ml0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_review_must_bind_proof_ancurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_review_must_bind_proof_an4"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_synthetic_complete_evidencurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_synthetic_complete_eviden0"
+    },
+    {
+      "path": "build/project-refresh-20261021/validation/test-general/test_validation_must_cover_evecurrent",
+      "target": "\\\\?\\D:\\MATHs\\math 4890 LieML\\build\\project-refresh-20261021\\validation\\test-general\\test_validation_must_cover_eve0"
+    }
+  ],
+  "omitted_cache_directories": [
+    "build/lie-symm-library-20261021/sources/prior-art/lie_symmetry_toolkit/liesym/__pycache__"
+  ]
+}

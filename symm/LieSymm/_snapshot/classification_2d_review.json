@@ -1,0 +1,1950 @@
+{
+  "reviewer_role": "fresh independent reviewer, not a derivation author",
+  "inputs_sha256": {
+    "main.py": "44b894144cb9006569dfb85e3404c1e6e952274012b4f78f032f3ae28fd22b82",
+    "models.py": "8ca80d0829ba4d87824e3660bec310f0caa560344a8f7c3b85876fc82fe85a1b",
+    "models_2d.py": "5b632707612944c830642336a5627d447623578094ebc0790c840f9b55b8dd09",
+    "analyze_2d.py": "f146d8ebdbe01af8565d23f3c55df9c9133f1bae44d2c13f6b39e4b645dc2896",
+    "classification_2d.py": "5c74ba13377f02f796459e78e4d67bf04e84bf1c37663316156385d410d3a418",
+    "research_first_order_2d.py": "669d101fd6136263fc7fbef586ce05e13f74ab68456aa6d9194368a9185d1156",
+    "research_slope_2d.py": "70590cdaa5db25857f685b3422a8cb3f064d959b70f1bea4ea771a976066c495",
+    "FIRST_ORDER_2D_DERIVATION.md": "29d096f30c33139eb3c40070fa2535cf2906179c6ba467bbbf190fa3e195d327",
+    "SLOPE_2D_DERIVATION.md": "32fb9a74b5124d9c0fab142b05da2df9c97e6df725af5c830e94c8f6f9381820",
+    "reductions_2d.py": "5a2a4e1aa6072243c1a10a3966e16a882f9028f9939f84d1c2f80a61993792e3",
+    "tests/test_models_2d.py": "7d6809924bbbd23f84b9f5442ddf9afc614ea30387d9d0c3e6fb93ed51f4e15d",
+    "tests/test_reductions_2d.py": "4691cc1da6e22a0c12a62fc2652309bd27bf28d96396e730cf40400b3585c8e9",
+    "radial_normal_form.py": "824a4006b011bd52c4c58ec641ce27d9b54770adcda45d75875050feb048dbcf",
+    "general_sve.py": "eaef82756e7cc4d3571fc18b583ee60c37dc9fa802d0d6999563ba82b055f126",
+    "case_support_2d.py": "087bee4554625dd2706aa2f053fcd9e4da394ad574a858de4fb630c5041c0ede",
+    "stage2_gate.py": "c1d8fa975db5fbcb9beef2386dc49627c6be431755a124f1b6d7e1ff57c1ebde",
+    "stage2_runner.py": "55eb5ca602addad18868423d7bb2ce9dee45a9acbc2c6762148b5a52fe937c69",
+    "gatekeeper.py": "00833237984762e84840486716d3261e8d1457fc9470e3de73ecec5b457096e8",
+    "run_all.py": "36024ce44f12f3cc589c3e38ccb9eb75fc7d9d8da9d1f60ceb7873b5fbcb3dca",
+    "validate_project.py": "054aab7e78e023eea8edd856c8cf23c8855764235138c9fa42e7534849b747d9",
+    "review_classification_2d.py": "5597638133e98cbbb076632b9c5391415221f2777439275c85afc455ff00b0eb",
+    "CLASSIFICATION_2D_REVIEW.md": "dda4a2b5c8034d2688c4997ab76c1b7e6a3771192000f4bf0d0cf589e0ab353d",
+    "CONTRACT.md": "3fcf0618dd6a950ca8ee72f4e716cd5725528e528c395011a4ba85ea8ced4594"
+  },
+  "phases": {
+    "adapter": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "root radial normalizer exact same-base identity",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "root radial normalizer retains a nonzero remainder",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent rational-chart validation of root normalization",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend integrates grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend general-integral raw DE remainders grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend sufficient basis grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend shell count grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "model fingerprint refuses changed equation grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "model fingerprint refuses changed guards grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend integrates slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend general-integral raw DE remainders slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend sufficient basis slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual frontend shell count slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "model fingerprint refuses changed equation slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "model fingerprint refuses changed guards slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual exact review accepted",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects missing model dependency",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects missing branch",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects extra branch",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects failed branch",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects partial review",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects rejected necessity",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual gate rejects changed source",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 complete evidence accepted",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 binds all nested reviewed Markdown",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual completed stage2 passes actual checker",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "actual gate checker rejects changed nested Markdown",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects empty branch source set",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects empty validation source set",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects missing child",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects duplicate child",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects failed child exit",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects timed out child",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects changed derivation",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects missing derivation digest",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects timed out validation",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects wrong canonical validation log",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects failed non-audit validation",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects omitted additional reviews",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects rejected additional review",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "virtual stage2 rejects unbound additional review",
+          "passed": true,
+          "nonzero_residuals": []
+        }
+      ],
+      "elapsed_seconds": 12.144943299994338,
+      "adapter_cases": {
+        "grass_generic_f_nonzero": {
+          "determining_equations": 151,
+          "dimension": 5,
+          "elapsed_seconds": 3.8475565999979153,
+          "shell_constraints": 4
+        },
+        "slope_only_n2_f_nonzero": {
+          "determining_equations": 296,
+          "dimension": 6,
+          "elapsed_seconds": 8.078357299993513,
+          "shell_constraints": 13
+        },
+        "virtual_gate_controls": 8,
+        "live_gate_created_by_fixture": false,
+        "virtual_stage2_controls": 18,
+        "live_stage2_gate_written": false
+      }
+    },
+    "raw": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "independent flux/model grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent flux/model slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "unrestricted root raw determining identity grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction grass_generic_f_nonzero/0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction grass_generic_f_nonzero/1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction grass_generic_f_nonzero/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction grass_generic_f_nonzero/3",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent shell equals root shell grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "unrestricted root raw determining identity slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction slope_source_generic_f_nonzero/0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction slope_source_generic_f_nonzero/1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction slope_source_generic_f_nonzero/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "exact jet-polynomial reconstruction slope_source_generic_f_nonzero/3",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent shell equals root shell slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "thirteen mixed shell constraints",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "twenty-three free J2 jets",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "all three bed mixed/time jets remain free",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 0/0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 0/1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 0/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 1/0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 1/1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 1/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 2/0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 2/1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent hydro differential consequence 2/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "root splitter retains bed mixed jet 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "root splitter retains bed mixed jet 2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "author first-order unrestricted raw identity",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "author slope unrestricted raw identity for arbitrary diffusivity and flux",
+          "passed": true,
+          "nonzero_residuals": []
+        }
+      ],
+      "elapsed_seconds": 111.05052520000027,
+      "raw_cases": {
+        "grass_generic_f_nonzero": {
+          "raw_components_compared": 4,
+          "shell_constraints": 4
+        },
+        "slope_source_generic_f_nonzero": {
+          "raw_components_compared": 4,
+          "shell_constraints": 13
+        }
+      }
+    },
+    "necessity": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "unrestricted mixed-bed coefficient 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "unrestricted mixed-bed coefficient 2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "fluid Hessian coefficient 0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "fluid Hessian coefficient 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "fluid Hessian coefficient 2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "diagonal bed Hessian 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "diagonal bed Hessian 2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "off-diagonal bed Hessian factor two",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "arbitrary-time hydro family, all components",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "full bed divergence identity with arbitrary-time hydro coefficients",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "radial vector covariance",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "radial scalar covariance",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transport nonzero without dividing a velocity component",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "positive directional symmetrizer",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse eigenvalue separates from core",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "zero-transport directional spectrum",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "passive right eigenpair",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "passive left eigenpair",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "static full bed rejects boost with exact residual",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "nonlinear conformal field rejected in mass row",
+          "passed": true,
+          "nonzero_residuals": []
+        }
+      ],
+      "elapsed_seconds": 9.115475200000219,
+      "necessity_review": "All arbitrary-function integrations reviewed in CLASSIFICATION_2D_REVIEW.md; finite checks substantiate the coefficient identities."
+    },
+    "branches": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "independent original-PDE general integral grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction grass_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction grass_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction grass_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_attachment_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_attachment_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_attachment_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_source_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_source_cubic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_source_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction zero_transport_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_only_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent original-PDE general integral slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "basis function independence slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "dimension and parameter rank slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "one-dimensional longitudinal restriction slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "transverse Coriolis restriction slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 3",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 4",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "slope-only continuous-family specialization 3/2",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "first-order endpoint/noninteger specialization 1",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "first-order endpoint/noninteger specialization 4",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "first-order endpoint/noninteger specialization 3/2",
+          "passed": true,
+          "nonzero_residuals": []
+        }
+      ],
+      "elapsed_seconds": 3.413164700003108,
+      "branches": {
+        "grass_generic_f0": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "p0*t + t0",
+            "-omega*y + p0*x + x0",
+            "omega*x + p0*y + y0",
+            "0",
+            "-omega*v",
+            "omega*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "K*(-a0 + p0)*(m - 3)",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "grass_generic_f_nonzero": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega*y + x0",
+            "omega*x + y0",
+            "0",
+            "-omega*v",
+            "omega*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "K*(-a0 + p0)*(m - 3)",
+            "a0*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "grass_cubic_f0": {
+          "passed": true,
+          "dimension": 7,
+          "general_coefficients": [
+            "a0*t + t0",
+            "-omega*y + p0*x + x0",
+            "omega*x + p0*y + y0",
+            "h*(-2*a0 + 2*p0)",
+            "-omega*v + u*(-a0 + p0)",
+            "omega*u + v*(-a0 + p0)",
+            "B*(-2*a0 + 2*p0) + b0"
+          ],
+          "constant_equations": [
+            "0",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "grass_cubic_f_nonzero": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "t0",
+            "-omega*y + p0*x + x0",
+            "omega*x + p0*y + y0",
+            "2*h*p0",
+            "-omega*v + p0*u",
+            "omega*u + p0*v",
+            "2*B*p0 + b0"
+          ],
+          "constant_equations": [
+            "0",
+            "a0*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_attachment_generic_f0": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T + d*(3 - m)",
+            "K*d*m*(m - 3)",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "slope_attachment_generic_f_nonzero": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T + d*(3 - m)",
+            "K*d*m*(m - 3)",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_attachment_cubic_f0": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "t0",
+            "d*x - omega0*y + x0",
+            "d*y + omega0*x + y0",
+            "2*d*h",
+            "d*u - omega0*v",
+            "d*v + omega0*u",
+            "2*B*d + b0"
+          ],
+          "constant_equations": [
+            "T",
+            "0",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "slope_attachment_cubic_f_nonzero": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "t0",
+            "d*x - omega0*y + x0",
+            "d*y + omega0*x + y0",
+            "2*d*h",
+            "d*u - omega0*v",
+            "d*v + omega0*u",
+            "2*B*d + b0"
+          ],
+          "constant_equations": [
+            "T",
+            "0",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_source_generic_f0": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T + d*(2 - m)",
+            "K*d*m*(m - 3)",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "slope_source_generic_f_nonzero": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T + d*(2 - m)",
+            "K*d*m*(m - 3)",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_source_cubic_f0": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "d*t + t0",
+            "2*d*x - omega0*y + x0",
+            "2*d*y + omega0*x + y0",
+            "2*d*h",
+            "d*u - omega0*v",
+            "d*v + omega0*u",
+            "2*B*d + b0"
+          ],
+          "constant_equations": [
+            "T - d",
+            "0",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "slope_source_cubic_f_nonzero": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T - d",
+            "0",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_only_f0": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "d*t*(n - 2) + t0",
+            "-omega0*y + x*(d*(n - 2) + d) + x0",
+            "omega0*x + y*(d*(n - 2) + d) + y0",
+            "2*d*h",
+            "d*u - omega0*v",
+            "d*v + omega0*u",
+            "2*B*d + b0"
+          ],
+          "constant_equations": [
+            "T + d*(2 - n)",
+            "0",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "zero_transport_f0": {
+          "passed": true,
+          "dimension": 7,
+          "general_coefficients": [
+            "a0*t + t0",
+            "-omega*y + p0*x + x0",
+            "omega*x + p0*y + y0",
+            "h*(-2*a0 + 2*p0)",
+            "-omega*v + u*(-a0 + p0)",
+            "omega*u + v*(-a0 + p0)",
+            "B*(-2*a0 + 2*p0) + b0"
+          ],
+          "constant_equations": [
+            "0",
+            "0"
+          ],
+          "one_dimensional_restriction": true
+        },
+        "zero_transport_f_nonzero": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "t0",
+            "-omega*y + p0*x + x0",
+            "omega*x + p0*y + y0",
+            "2*h*p0",
+            "-omega*v + p0*u",
+            "omega*u + p0*v",
+            "2*B*p0 + b0"
+          ],
+          "constant_equations": [
+            "0",
+            "a0*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_only_generic_f_nonzero": {
+          "passed": true,
+          "dimension": 5,
+          "general_coefficients": [
+            "t0",
+            "-omega0*y + x0",
+            "omega0*x + y0",
+            "0",
+            "-omega0*v",
+            "omega0*u",
+            "b0"
+          ],
+          "constant_equations": [
+            "T + d*(2 - n)",
+            "0",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        },
+        "slope_only_n2_f_nonzero": {
+          "passed": true,
+          "dimension": 6,
+          "general_coefficients": [
+            "t0",
+            "d*x - omega0*y + x0",
+            "d*y + omega0*x + y0",
+            "2*d*h",
+            "d*u - omega0*v",
+            "d*v + omega0*u",
+            "2*B*d + b0"
+          ],
+          "constant_equations": [
+            "T",
+            "0",
+            "T*f"
+          ],
+          "one_dimensional_restriction": false
+        }
+      }
+    },
+    "reductions": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "plane wave API status grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian plane-wave pullback grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "plane-wave projection rank grass_generic_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "plane wave API status slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian plane-wave pullback slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "plane-wave projection rank slope_source_generic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "plane wave API status slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian plane-wave pullback slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "plane-wave projection rank slope_only_f0",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "time ODE API status zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian time-ODE pullback zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "rotation-scaling base minor zero_transport_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "time ODE API status slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian time-ODE pullback slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "rotation-scaling base minor slope_attachment_cubic_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "time ODE API status slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian time-ODE pullback slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "rotation-scaling base minor slope_only_n2_f_nonzero",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "nonrotating slope n=2 slice accessible",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "nonrotating n=2 time ODE explicit formula",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "independent Cartesian radial cross-section",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "radial base rank is one",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "radial reduction explicitly retains PDE",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "polar inverse chart determinant",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "non-real/non-finite wave speed rejected I",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "non-real/non-finite wave speed rejected oo",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "non-real/non-finite wave speed rejected nan",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "unsupported pure spatial scaling rejected",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "spatial-only rotation fails the original equations",
+          "passed": true,
+          "nonzero_residuals": []
+        },
+        {
+          "name": "naive transverse-zero wave retains f U",
+          "passed": true,
+          "nonzero_residuals": []
+        }
+      ],
+      "elapsed_seconds": 12.265680099983001,
+      "reduction_cases": {
+        "grass_generic_f0/plane_wave": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE/DAE"
+        },
+        "slope_source_generic_f_nonzero/plane_wave": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE/DAE"
+        },
+        "slope_only_f0/plane_wave": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE/DAE"
+        },
+        "zero_transport_f_nonzero/time_ode": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE",
+          "chart": "x^2+y^2>0"
+        },
+        "slope_attachment_cubic_f_nonzero/time_ode": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE",
+          "chart": "x^2+y^2>0"
+        },
+        "slope_only_n2_f_nonzero/time_ode": {
+          "passed": true,
+          "projection_rank": 2,
+          "type": "ODE",
+          "chart": "x^2+y^2>0"
+        },
+        "slope_attachment_cubic_f_nonzero/radial": {
+          "passed": true,
+          "projection_rank": 1,
+          "type": "PDE in t,r",
+          "chart": "r>0, local angle"
+        }
+      }
+    }
+  },
+  "branches": {
+    "grass_generic_f0": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "p0*t + t0",
+        "-omega*y + p0*x + x0",
+        "omega*x + p0*y + y0",
+        "0",
+        "-omega*v",
+        "omega*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "K*(-a0 + p0)*(m - 3)",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "grass_generic_f_nonzero": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega*y + x0",
+        "omega*x + y0",
+        "0",
+        "-omega*v",
+        "omega*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "K*(-a0 + p0)*(m - 3)",
+        "a0*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "grass_cubic_f0": {
+      "passed": true,
+      "dimension": 7,
+      "general_coefficients": [
+        "a0*t + t0",
+        "-omega*y + p0*x + x0",
+        "omega*x + p0*y + y0",
+        "h*(-2*a0 + 2*p0)",
+        "-omega*v + u*(-a0 + p0)",
+        "omega*u + v*(-a0 + p0)",
+        "B*(-2*a0 + 2*p0) + b0"
+      ],
+      "constant_equations": [
+        "0",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "grass_cubic_f_nonzero": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "t0",
+        "-omega*y + p0*x + x0",
+        "omega*x + p0*y + y0",
+        "2*h*p0",
+        "-omega*v + p0*u",
+        "omega*u + p0*v",
+        "2*B*p0 + b0"
+      ],
+      "constant_equations": [
+        "0",
+        "a0*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_attachment_generic_f0": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T + d*(3 - m)",
+        "K*d*m*(m - 3)",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "slope_attachment_generic_f_nonzero": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T + d*(3 - m)",
+        "K*d*m*(m - 3)",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_attachment_cubic_f0": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "t0",
+        "d*x - omega0*y + x0",
+        "d*y + omega0*x + y0",
+        "2*d*h",
+        "d*u - omega0*v",
+        "d*v + omega0*u",
+        "2*B*d + b0"
+      ],
+      "constant_equations": [
+        "T",
+        "0",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "slope_attachment_cubic_f_nonzero": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "t0",
+        "d*x - omega0*y + x0",
+        "d*y + omega0*x + y0",
+        "2*d*h",
+        "d*u - omega0*v",
+        "d*v + omega0*u",
+        "2*B*d + b0"
+      ],
+      "constant_equations": [
+        "T",
+        "0",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_source_generic_f0": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T + d*(2 - m)",
+        "K*d*m*(m - 3)",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "slope_source_generic_f_nonzero": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T + d*(2 - m)",
+        "K*d*m*(m - 3)",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_source_cubic_f0": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "d*t + t0",
+        "2*d*x - omega0*y + x0",
+        "2*d*y + omega0*x + y0",
+        "2*d*h",
+        "d*u - omega0*v",
+        "d*v + omega0*u",
+        "2*B*d + b0"
+      ],
+      "constant_equations": [
+        "T - d",
+        "0",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "slope_source_cubic_f_nonzero": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T - d",
+        "0",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_only_f0": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "d*t*(n - 2) + t0",
+        "-omega0*y + x*(d*(n - 2) + d) + x0",
+        "omega0*x + y*(d*(n - 2) + d) + y0",
+        "2*d*h",
+        "d*u - omega0*v",
+        "d*v + omega0*u",
+        "2*B*d + b0"
+      ],
+      "constant_equations": [
+        "T + d*(2 - n)",
+        "0",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "zero_transport_f0": {
+      "passed": true,
+      "dimension": 7,
+      "general_coefficients": [
+        "a0*t + t0",
+        "-omega*y + p0*x + x0",
+        "omega*x + p0*y + y0",
+        "h*(-2*a0 + 2*p0)",
+        "-omega*v + u*(-a0 + p0)",
+        "omega*u + v*(-a0 + p0)",
+        "B*(-2*a0 + 2*p0) + b0"
+      ],
+      "constant_equations": [
+        "0",
+        "0"
+      ],
+      "one_dimensional_restriction": true
+    },
+    "zero_transport_f_nonzero": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "t0",
+        "-omega*y + p0*x + x0",
+        "omega*x + p0*y + y0",
+        "2*h*p0",
+        "-omega*v + p0*u",
+        "omega*u + p0*v",
+        "2*B*p0 + b0"
+      ],
+      "constant_equations": [
+        "0",
+        "a0*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_only_generic_f_nonzero": {
+      "passed": true,
+      "dimension": 5,
+      "general_coefficients": [
+        "t0",
+        "-omega0*y + x0",
+        "omega0*x + y0",
+        "0",
+        "-omega0*v",
+        "omega0*u",
+        "b0"
+      ],
+      "constant_equations": [
+        "T + d*(2 - n)",
+        "0",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    },
+    "slope_only_n2_f_nonzero": {
+      "passed": true,
+      "dimension": 6,
+      "general_coefficients": [
+        "t0",
+        "d*x - omega0*y + x0",
+        "d*y + omega0*x + y0",
+        "2*d*h",
+        "d*u - omega0*v",
+        "d*v + omega0*u",
+        "2*B*d + b0"
+      ],
+      "constant_equations": [
+        "T",
+        "0",
+        "T*f"
+      ],
+      "one_dimensional_restriction": false
+    }
+  },
+  "verdicts": {
+    "first_order": "accepted: unrestricted necessity and sufficiency on the declared open chart",
+    "slope": "accepted: unrestricted mixed-order necessity and sufficiency on the declared open chart",
+    "root_analyzer": "accepted: independently checked raw DEs, mixed J2 shell and exact model fingerprints",
+    "reductions": "accepted: specified rank-one PDE and rank-two ODE/DAE charts, not an optimal system",
+    "review_gate": "accepted: exact-version hash and branch coverage controls; virtual fixtures only"
+  },
+  "all_checks_passed": true,
+  "prior_attempts": [
+    {
+      "status": "superseded_input_version",
+      "completed_phases": [
+        "raw",
+        "necessity",
+        "branches",
+        "reductions",
+        "adapter"
+      ],
+      "previous_all_checks_passed": true
+    }
+  ],
+  "input_snapshot_unchanged_through_execution": true,
+  "check_count": 230,
+  "proof_review": "CLASSIFICATION_2D_REVIEW.md",
+  "limitations": [
+    "No zero-speed/zero-depth classification",
+    "No full disconnected point-equivalence groupoid",
+    "No optimal-subalgebra completeness in 2D",
+    "No arbitrary-data or well-posedness theorem",
+    "No conditional/nonclassical or ML claim",
+    "Finite checks substantiate, not replace, the necessity proof"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "snapshot": {
+    "passed": true,
+    "changed": [],
+    "file_count": 398,
+    "total_bytes": 28933176,
+    "manifest_sha256": "f6615c8a4feef02f90425f43351f40063485e4cf3194977e2e0459645892d5c4",
+    "scope": "copied historical bytes; not a new mathematical review"
+  },
+  "adapter": {
+    "passed": true,
+    "changed": [],
+    "scope": "adapter release bytes; see fresh validation receipts for behavior"
+  },
+  "historical_gates": {
+    "1": {
+      "passed": true,
+      "reason": "reviewed_and_executed_exact_version",
+      "gate_sha256": "6cb76ba6a129aaae9508e97a6fcaea73569cc00067d12686c1784d276f696c7f",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline": "D:\\MATHs\\math 4890 LieML\\build\\sve-systematic-20261020\\validation\\audit\\audit.json",
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118",
+          "interpretation": "documentary/archive/link audit remains failed; mathematical classification and tests are separate"
+        }
+      ],
+      "stage": 1,
+      "evidence_kind": "frozen_historical_gate",
+      "runtime_adapter_review": "separate_from_historical_gate"
+    },
+    "2": {
+      "passed": true,
+      "reason": "reviewed_and_executed_exact_version",
+      "gate_sha256": "14abcee2695fadb5a5542be214fdb51828e48f234ac4f1313419a3a35b6d2e59",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline": "D:\\MATHs\\math 4890 LieML\\build\\sve-systematic-20261020\\validation\\audit\\audit.json",
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118"
+        }
+      ],
+      "stage": 2,
+      "evidence_kind": "frozen_historical_gate",
+      "runtime_adapter_review": "separate_from_historical_gate"
+    },
+    "3": {
+      "passed": true,
+      "reason": "reviewed_exact_version",
+      "changed": [],
+      "gate_sha256": "e9d32104a120d46337e8308aac32c54aff3d58be09f19dd05e80c1e6ea1dc7a0",
+      "qualifications": [
+        {
+          "project_audit": "failed_unchanged_preexisting_issue_set",
+          "issue_count": 234,
+          "baseline_sha256": "8378cab796f179cb38ca18f7b8a507e768170be4e319f31b9bd91dd952d0b118"
+        }
+      ],
+      "stage": 3,
+      "evidence_kind": "frozen_historical_gate",
+      "runtime_adapter_review": "separate_from_historical_gate"
+    }
+  }
+}

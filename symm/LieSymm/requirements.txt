@@ -1,0 +1,6 @@
+sympy>=1.14,<2
+# Optional scalar2026 demo and validation dependencies:
+numpy>=2,<3
+scipy>=1.15,<2
+matplotlib>=3.9,<4
+pytest>=8,<10

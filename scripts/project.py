@@ -113,7 +113,13 @@ def audit(root: Path, out: Path) -> dict:
             parsed = urlsplit(target)
             if parsed.scheme or target.startswith("#") or not parsed.path:
                 continue
-            destination = (path.parent / unquote(parsed.path)).resolve()
+            local_path = unquote(parsed.path)
+            # Codex-rendered Windows file links use /D:/... . Preserve frozen
+            # Markdown bytes while checking the actual native path, including
+            # missing targets; this is not an exemption for archived links.
+            if os.name == "nt" and re.match(r"^/[A-Za-z]:[/\\]", local_path):
+                local_path = local_path[1:]
+            destination = (path.parent / local_path).resolve()
             if not destination.exists():
                 failures.append(f"{rel} -> {target}")
     check("active_markdown_links", failures)
