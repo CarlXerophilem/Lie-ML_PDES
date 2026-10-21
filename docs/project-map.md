@@ -1,13 +1,21 @@
 # Project map — 21 October 2026
 
-The current work is **direct solution of the 2026 printed scalar P reductions**.
+The immediate work is **verified reproduction and extension of the original
+SVE paper**. The [printed-P precision repair](residual-resolution-20261021.md)
+now passes the independent reference check while preserving the raw failure.
+The [research roadmap](research-roadmap-20261021.md) then proceeds to controlled
+changes of the full SV+bed model, a frozen LieML baseline, and source-verified
+open 2D problems. These later stages are planned, not completed research claims.
 The [solution API](../symm/LieSymm/scalar2026/SOLUTIONS.md) reuses the existing
 classification and retains exact, series, numerical and unresolved results.
 The [accepted plan](superpowers/plans/2026-10-21-sve-printed-solutions.md) governs
-this cycle; the older E programme below is comparison material, not its priority.
-The [direct-solution delivery](../build/sve-P-solutions-20261021/DELIVERY.md)
-includes the independent review, repaired data checks and retained failures.
-Its [demo](../build/sve-P-solutions-20261021/campaign-reviewed/index.html) separates
+the printed-P solution cycle; the E programme below remains a distinct model
+and supplies a later experimental starting point, not a replacement for P.
+The [new local delivery](../build/sve-P-residual-20261021/DELIVERY.md) and
+[fresh demo](../build/sve-P-residual-20261021/campaign-reviewed/index.html) give
+12/12 exact, 21/21 seed and 11/11 reference-checked extended IVPs. The
+[frozen published delivery](../build/sve-P-solutions-20261021/DELIVERY.md)
+keeps the earlier 10/11 result. These demonstrations separate
 exact surfaces, truncated series and numerical trajectories.
 The [local LieSymm library](../symm/LieSymm/README.md) now preserves and exposes
 the general-symm kernel without depending on the original build directory.
@@ -22,8 +30,8 @@ and [implementation plan](../research_artifacts/sve-1d-programme-20261021/PLAN.m
 
 | Object | Current evidence | Next operation |
 |---|---|---|
-| Full Eulerian E | 8 declared 1D / 17 declared 2D maximal local point-algebra cells | Solve the registered 1D profiles, retaining singular strata |
-| Printed scalar P | 18 registered families, cubic singular parameter integral, m=1 exact families, series and numerical examples | Resolve the recorded regular scaling/mixed closed forms, singular continuations and numerical diagnostic failure |
+| Full Eulerian E | 8 declared 1D / 17 declared 2D maximal local point-algebra cells | After the source-paper demo, pose controlled SV+bed modifications and test/freeze the baseline, retaining singular strata |
+| Printed scalar P | 18 registered families, exact/series/numerical examples; time-resonant reference residual 2.212490569e-8 at unchanged 1e-6 gate | Finish source-faithful demo and address recorded regular scaling/mixed closed forms and singular continuations |
 | Corrected scalar M | Common-scaling first integral and local material reconstruction | Check currents, exceptional branches and additional reductions independently |
 
 The completed [20 October delivery](../build/sve-general-symm-20261020/DELIVERY.md)
@@ -36,7 +44,22 @@ this is not every possible invariant reduction or every solution.
 Pure PINN training has been abandoned for the current workload, following the
 user's decision and existing negative evidence. See the [ML decision](../research_artifacts/sve-1d-programme-20261021/ML_DECISION.md).
 Hybrid ML is considered only after a specific unmet task and a matched-accuracy
-cost advantage can be tested. No new training ran in this refresh.
+cost advantage can be tested. No new training campaign is part of this repair.
+The user-selected local annotated PINN/KAN benchmark is a prospective protocol
+reference in the roadmap; it is not a completed LieML comparison or permission
+to restart pure PINN. Future 2D targets must be checked against the selected
+papers before calling them unknown or novel.
+
+## Current acceptance boundary
+
+The missing 11 October external archive is a **nonblocking legacy-provenance
+note**, not a current research gate. Preserve its old audit receipt without
+spending the present research cycle on archive recovery. Current acceptance
+depends on source fidelity, explicit model/chart/data assumptions, independent
+original-equation reconstruction and appropriately scoped numerical checks.
+General closed forms, untreated singular continuations and raw float64 stencil
+failures remain explicitly recorded. The independent reference check does not
+prove a continuous error bound for double-precision interpolants.
 
 ## Evidence and reproduction
 

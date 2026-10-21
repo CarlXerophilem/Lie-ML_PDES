@@ -4,6 +4,7 @@ Start with [project-map.md](project-map.md), the current map of models, evidence
 
 | Purpose | Entry |
 |---|---|
+| Current route and precision repair | [three-stage roadmap](research-roadmap-20261021.md), [residual status](residual-resolution-20261021.md), [local demo](../build/sve-P-residual-20261021/campaign-reviewed/index.html) |
 | Current printed-P solutions and publication | [delivery](../build/sve-P-solutions-20261021/DELIVERY.md), [portable results](../research_artifacts/sve-delivery-20261021/README.md) |
 | Current 1D research and solver plan | [programme](../research_artifacts/sve-1d-programme-20261021/README.md) |
 | Cleanup, archives and restoration | [21 October archive guide](build-archive-20261021.md) |

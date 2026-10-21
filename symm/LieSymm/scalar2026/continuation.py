@@ -1,4 +1,4 @@
-"""Guarded regular-profile continuation and sampled ORIGINAL-P diagnostics."""
+"""Guarded continuation with separate float64 and high-precision P diagnostics."""
 from pathlib import Path
 import json
 import numpy as np
@@ -6,6 +6,7 @@ import sympy as sp
 from scipy.integrate import solve_ivp
 from .api import backend
 from .catalog import t,s,z,F,p,q,h
+from .precision import reference_pde_diagnostics
 
 
 def continue_profile(result,out,*,interval,rtol=1e-10,atol=1e-12):
@@ -58,7 +59,14 @@ def continue_profile(result,out,*,interval,rtol=1e-10,atol=1e-12):
         np.savetxt(out/'profile.csv',np.column_stack((grid,dop_jets.T,rkf_jets.T)),delimiter=',',
                    header='z,F_DOP,p_DOP,q_DOP,F_RKF,p_RKF,q_RKF',comments='')
         report['csv']=str((out/'profile.csv').resolve())
-        report['original_pde']=original_pde_diagnostics(result,dop.sol,backend()._rkf_interpolant(grid,rkf.y),(start,end))
+        report['original_pde_float64']=original_pde_diagnostics(result,dop.sol,backend()._rkf_interpolant(grid,rkf.y),(start,end))
+        reference,reference_states=reference_pde_diagnostics(result,grid,dop.y,rkf.y,(start,end))
+        report['original_pde']=reference
+        if reference_states.shape==dop.y.shape:
+            reference_path=out/'reference-profile.csv'
+            np.savetxt(reference_path,np.column_stack((grid,reference_states.T)),delimiter=',',
+                       header=','.join(('z','F','p','q')[:order+1]),comments='')
+            report['reference_csv']=str(reference_path.resolve())
         if 'first_integral' in result:
             integral=sp.lambdify(args,result['first_integral'],'numpy')
             values=np.array([integral(x,*y) for x,y in zip(grid,dop.y.T)])
@@ -75,7 +83,7 @@ def continue_profile(result,out,*,interval,rtol=1e-10,atol=1e-12):
 
 
 def original_pde_diagnostics(result,dop_dense,rkf_dense,interval):
-    """Differentiate interpolated position values; do not insert any ODE RHS."""
+    """Retain the raw float64 stencil, including its interpolation/noise floor."""
     b=backend();coord=sp.lambdify((t,s),result['coordinate'],'numpy')
     graph=sp.lambdify((t,s,F),result['graph'],'numpy')
     section={key:sp.lambdify(z,value,'numpy') for key,value in result['section'].items()}

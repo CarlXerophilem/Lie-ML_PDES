@@ -31,7 +31,7 @@
     "README.md": "b2e1fe3bc2cdae8ddeeeffb800daa20e65d06ff6235424e6af205a1b702f3360",
     "reductions.py": "06c23405d66976b8309187fb325f704837351c17983629dbb71c781503c957bc",
     "reductions_2d.py": "20667f31a2dbc3e549a6f325e5da4b52e42485bdcf7988d95eb99677ca287975",
-    "requirements.txt": "ca0d563bbb32d7b7a0a9636b20dbed54c38e18499bd99f0228d861a16a906525",
+    "requirements.txt": "719c2fd1a6187f7f1255daf9a8bc235e4651be345a1408a49b69aa06689f49fe",
     "scalar2026/__init__.py": "721b0b77f0202c69763842df5bed8f9b7af6deaa9e83c33df7982c45bb7f47d0",
     "scalar2026/_historical.py": "71224cf2e4a3ed456dc0cf9b5bb467fdf484b3ce7b4a7b7d713f649aa9747aa9",
     "scalar2026/api.py": "db9a0f93e8b36f7511d5919bb9704e59923ad695f89293a51745e7d5220c9934",
@@ -42,12 +42,14 @@
     "subalgebras.py": "5bf3fca42a16ec2d810827054866417c6ff81e4088f995e233be4af11713a46d",
     "tests/test_packaging.py": "ccb7fe6048dd7215b272193596cc75413d7b27c823a25ca4faf1ddd10d3b40d6",
     "scalar2026/catalog.py": "750560609d95be1f284bf74ad781bc5d02c63e9a91c93e08594436676cb95865",
-    "scalar2026/continuation.py": "1c8c99c747fb48b9109305abcf167a5495f852bec204fa05df43feb709179a90",
-    "scalar2026/SOLUTIONS.md": "115a99884a662d764511d77e4ccf0a3ab4b6c08c2bd10c429ac1fe1b537f26b1",
-    "scalar2026/solve_demo.py": "bc11a5b7f878306cf2ac9f2d57053e0b8ae5397c0e129a907e04d3c4bce9d3bd",
+    "scalar2026/continuation.py": "4a7f5f9525cc3af92e86b543c3aa7cba7385bcd73b650345a8be8918a523410c",
+    "scalar2026/precision.py": "2ab1f244d64ec57b24987088c27905a19727dcc16f8682940c3064d0c25363c2",
+    "scalar2026/SOLUTIONS.md": "e7cb03a56b1f275ab5b244b42f87957601c8ae849c725b8bded23f4422096059",
+    "scalar2026/solve_demo.py": "c3382fd78d24a3eee855c2333f5329b5fc7491f284b77ab5629a18eaab8512c1",
     "scalar2026/solving.py": "acf0c12119acd255ec011f5704ae17380597584551f3c4200ee6d653c2c4a1bc",
     "scalar2026/validation.py": "32e7b32527f92b2bd84187c689e7a834303c359151032657810fa18fae098525",
-    "scalar2026/tests/test_solutions.py": "530491e93e26e23308cd12931f206154602f90b006d0658f7c2ff976a3864d58"
+    "scalar2026/tests/test_solutions.py": "530491e93e26e23308cd12931f206154602f90b006d0658f7c2ff976a3864d58",
+    "scalar2026/tests/test_numerical_precision.py": "29ed0e5a1e6e702b3e6c9fedc9deec162eaf74d4916890042df6139df15d47af"
   },
-  "release_note": "2026-10-21 printed-P direct solution extension; historical SOURCE_MANIFEST and scalar source hash unchanged"
+  "release_note": "2026-10-21 precision-resolved P reference diagnostics; raw float64 failures preserved; historical SOURCE_MANIFEST and scalar source hash unchanged"
 }

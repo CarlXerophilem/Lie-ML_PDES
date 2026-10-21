@@ -22,6 +22,31 @@ exceptional branches, initial-data checks and exact local recurrences.
 `continuation` compares DOP853 and classic Fehlberg 4(5), then differentiates
 reconstructed position samples without inserting an ODE right-hand side.
 
+### Precision-resolved numerical checks
+
+The old time-resonant float64 check has a confirmed h^-3 amplified
+evaluation/interpolation noise floor. It is retained as `original_pde_float64`,
+including its original failures. It is not silently relabelled as passing.
+
+`precision` constructs an independent mpmath Taylor IVP reference at 40 decimal
+digits (`tol=1e-30`, degree 20), with the same model, parameters and initial
+jet. `original_pde` now differentiates that reference's original-coordinate
+position values using exact rational 9x9 stencil weights. All three fixed
+steps .003, .002, .001 must satisfy the unchanged 1e-6 residual threshold,
+positive-chart checks and the perturbed-surface negative control.
+
+Acceptance additionally requires every integrated state component of DOP853
+and RKF45 to agree with the reference on the output grid within
+1e-7*(1+max_abs_reference_state). `reference-profile.csv` stores reference
+states rounded to double for inspection, not for the high-precision stencil.
+Reference failure, timeout or disagreement cannot count as acceptance.
+
+This checks the reference reconstruction and sampled solver agreement. It
+does not certify the PDE residual of either float64 interpolant or prove a
+continuous error bound. The demo's interpolated numerical surfaces remain
+visualizations. The frozen seed-paper numerical engine remains byte-identical
+and retains its separately reported historical diagnostics.
+
 ## Inputs and statuses
 
 Use `parameters={'g': ..., 'kappa': ..., 'm': ...}` and the representative's

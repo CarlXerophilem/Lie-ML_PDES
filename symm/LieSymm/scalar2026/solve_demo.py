@@ -151,7 +151,7 @@ def run(out):
     seed=b.run_campaign(out/'seed-numerics',rtol=1e-10,atol=1e-12)
     series=[compute_ode_series(r['case'],exponent=sp.Rational(str(r['m'])),order=6,g_value=1,kappa_value=sp.Rational(1,30)) for r in seed['runs']]
     write_json(out/'seed-series.json',series);figures=_plots(out,seed,series)
-    print('4. Newly executable representative families: series and continuation',flush=True)
+    print('4. Representative families: continuation and independent 40-digit P reference',flush=True)
     experiments=[('m1-scale-boost',dict(m=1,alpha=1)),('m1-boost-travel',dict(m=1,a=-1)),
                  ('cubic-mixed',dict(a=1,b=sp.Rational(1,4))),('cubic-mixed',dict(a=1,b=-1)),
                  ('cubic-mixed',dict(a=1,b=sp.Rational(1,2)))]
@@ -225,6 +225,9 @@ def run(out):
                 limitations=['Constructed data, not source experimental IVPs.',
                              'Exact certificates are conditional on their stated local domains.',
                              'Numerical PDE checks are sampled diagnostics, not continuous error bounds.',
+                             'Extended PDE checks differentiate an independent 40-digit IVP reference; all DOP853/RKF45 state components are compared on the output grid.',
+                             'Raw float64 PDE diagnostics are retained separately; agreement does not certify either float64 interpolant between grid points.',
+                             'Displayed numerical surfaces interpolate double-precision trajectories and are visualizations, not continuously certified solutions.',
                              'Mixed/resonant families have symbolic reductions and local numerical examples, not general exact solutions.',
                              'No new point-algebra classification, E equivalence, novelty claim or ML benefit claimed.'])
     write_json(out/'report.json',report)
@@ -257,6 +260,11 @@ def _write_documents(out,report,catalog,exact,inventory):
             '- General exact solutions of mixed/resonant cubic and m=1 scale-boost equations remain open; regular series and numerical examples are supplied.',
             '- Original zero-leading-coefficient continuation is unresolved except the certified cubic L=0 family and explicitly checked constant branches.',
             '- Charts based on positive t or s do not prove continuation through t=0 or s=0.','',
+            '## Numerical validation','',
+            'Extended IVPs retain original_pde_float64 without reclassifying its failures. The original_pde field checks an independent mpmath Taylor IVP reconstruction at 40 decimal digits.',
+            'Exact rational nine-point weights differentiate original-coordinate position values, without replacing the highest derivative by the ODE RHS. All three fixed h=.003,.002,.001 stencils must satisfy the unchanged 1e-6 threshold and the perturbed-surface negative control.',
+            'Every integrated state component of both DOP853 and RKF45 must also agree with that reference on the output grid. These are finite diagnostics, not continuous error bounds or PDE certificates for the raw float64 interpolants.',
+            'Seed-paper numerics retain their historical method, separately from the precision-resolved extended check.','',
             '## Interpreting the demo','',
             's is a material label, t is time, phi is particle position. These are not water-depth surfaces.',
             'The logarithmic example includes a genuine invalid-domain mask. Parameter-integral pictures evaluate exact formulas numerically.','']
@@ -276,6 +284,7 @@ def _write_documents(out,report,catalog,exact,inventory):
        '<p>Original PDE → generator and invariant graph → undivided ODE → solution → original-P reconstruction.</p>'
        '<p>s labels particles; t is time; phi is position. All numerical initial data are constructed. E and M remain separate models.</p>'
        f'<p>{report["exact_passed"]} exact demonstrations; {report["seed_passed"]}/{report["seed_ivps"]} seed and {report["extended_passed"]}/{report["extended_ivps"]} extended numerical IVPs passed.</p>'
+       '<p>Extended checks differentiate an independent 40-digit IVP reference and compare all sampled DOP853/RKF45 states. Raw float64 stencil failures are retained. Plotted interpolants are visualizations, not continuously certified PDE solutions.</p>'
        '<p><a href="REPORT.md">Coverage and remaining problems</a> · <a href="DERIVATIONS.md">Stepwise derivations</a> · <a href="report.json">Receipts</a></p>'
        +images+'<h2>All registered families</h2><table><tr><th>Family</th><th>Processing status</th><th>ODE order</th><th>Reduced order</th></tr>'+table+'</table>'
        '<p>General closed forms and all singular continuations have not been obtained. Local series, exact solutions and sampled numerical checks are separate evidence types.</p></html>',encoding='utf-8')

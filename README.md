@@ -19,26 +19,34 @@ Fourteen symbolic pullbacks pass, including the identity case.
 |---|---|
 | Exact solution demonstrations | 12/12 verified in original P and Q=0, on their stated domains |
 | Constructed seed IVPs | 21/21 passed |
-| Extended IVPs | 10/11 passed; the remaining original-P sampled residual is 1.177074994e-6 against a 1e-6 threshold |
-| Regression suites | 66 library/scalar, 410 historical general-symm, 110 retained active/engine/chart/script tests passed; the 43 active tests are included in 110 |
+| Extended IVPs | Local precision-resolved check: 11/11 passed; frozen raw float64 campaign remains 10/11, with its original failure preserved |
+| Regression suites | 72 library/scalar, 410 historical tests in their original build location, and 110 retained active/engine/chart/script tests passed; the 43 active tests are included in 110 |
 | Integrity, data-flux and workflow | Passed |
-| Project audit | One existing failure: missing 11 October external historical archive |
+| Legacy provenance audit | Missing 11 October external historical archive; retained as a nonblocking historical note, not a current research acceptance gate |
 
-The overall campaign is **not all-green**. Agreement of two ODE integrators
-does not replace the independent PDE residual check. Every registered family
-has a processing status; general closed forms and singular continuation remain
-open where explicitly recorded.
+The [local precision repair](docs/residual-resolution-20261021.md) resolves the
+time-resonant finite-difference noise floor without changing the 1e-6 threshold.
+An independent 40-digit IVP reference has original-P residual 2.212490569e-8
+at h=.003, decreasing to 2.976602120e-11 at h=.001; every integrated DOP853/RKF45
+state component agrees with that reference on the output grid. Raw float64
+stencil failures remain in the receipts. This is not a continuous PDE
+certificate for either float interpolant. The whole repository is not labelled
+all-green: broad test collection has separately recorded legacy defects.
+Every registered family has a processing status; general closed forms and
+singular continuation remain open where recorded. The historical archive does not
+block the current research programme; the archived audit result is preserved,
+not retroactively rewritten as a pass.
 
 The current implementation is the [printed-P direct solution programme](symm/LieSymm/scalar2026/SOLUTIONS.md).
 It reuses the established classification, adds exact accelerating and singular
 solution families, and treats regular series, numerical continuation and
 unresolved singular strata separately. E and M remain comparison models.
 The [execution plan](docs/superpowers/plans/2026-10-21-sve-printed-solutions.md)
-fixes the scope; current run evidence is under `build/sve-P-solutions-20261021`.
-Open the [solution delivery](build/sve-P-solutions-20261021/DELIVERY.md) for
-coverage, validation and unresolved branches, and the
-[surface demonstration](build/sve-P-solutions-20261021/campaign-reviewed/index.html)
-for the constructed `(s,t,phi)` examples.
+fixes the original solution scope. The [new local delivery](build/sve-P-residual-20261021/DELIVERY.md)
+and [fresh demo](build/sve-P-residual-20261021/campaign-reviewed/index.html)
+record the precision repair. The [frozen published solution delivery](build/sve-P-solutions-20261021/DELIVERY.md)
+retains the earlier 10/11 result and its unresolved branches. The local follow-up
+has not been committed or pushed as a new release.
 
 The verified general-symm implementation is now available as the local
 [LieSymm library](symm/LieSymm/README.md), preserving the existing `symm` APIs.
@@ -69,26 +77,52 @@ Restore it on a fresh checkout before opening build-linked reports. The
 [cleanup/restore guide](docs/build-archive-20261021.md) records older local archives,
 retained dissertation inputs, and the unresolved 11 October external-archive gap.
 
-## Project goal and next target
+## Project goal and research route
 
 The research goal is a reproducible route from a parameter-dependent PDE to
 its symmetry generators, invariant reductions and solutions that reconstruct
-the original equation. Keep three objects separate: the fully coupled Eulerian
-SVE system E, the 2026 printed scalar P, and the advectively corrected scalar M.
-The current target is **one-dimensional printed P**, with g,kappa>0, m>=1 and
-phi_s,phi_t>0; numeric demonstrations mainly use 1<=m<=4.
+the original equation. The [research roadmap](docs/research-roadmap-20261021.md)
+fixes the following order; it is a research programme, not a claim that its
+later stages have already been completed.
 
-The next bounded cycle should first diagnose the time-resonant numerical PDE
-check, then seek additional exact integrals or validated local continuations
+1. **Reproduce the original SVE paper, then extend it.** Audit every declared
+   source formula and build a verified demonstration for the dissertation.
+   Label corrected formulas, constructed data and additional solutions as
+   extensions rather than reproduced source results. The immediate target is
+   one-dimensional printed P, with g,kappa>0, m>=1 and phi_s,phi_t>0; numeric
+   demonstrations mainly use 1<=m<=4.
+2. **Vary the original full SV+bed system and build a baseline.** Test the
+   existing LieML solver on explicitly posed changes of equation, parameters,
+   closure, data and geometry. Use benchmark protocols to separate mathematical,
+   implementation and approximation failures, improve the method's principles,
+   then freeze a reproducible baseline. The local annotated
+   [Unified Benchmark of PINNs and KANs](<ref/A Unified Benchmark of Physics-Informed Neural Networks and Kolmogorov-Arnold Networks for Ordinary and Partial Differential Equations-with-annotations.pdf>)
+   is a prospective protocol reference, not evidence of a completed comparison.
+3. **Test the improved method on source-verified open 2D SV+bed problems.**
+   Select explicit future-work problems from checked local/online papers,
+   establish what remains unsolved, and compare against the frozen baseline.
+   Retain errors, failures and useful structures to motivate concrete
+   geometric/algebraic refinements for the dissertation's future work and
+   conclusion. An untested equation is not automatically a novel or open problem.
+
+Throughout, keep three objects separate: the fully coupled Eulerian SVE system
+E, the 2026 printed scalar P, and the advectively corrected scalar M. Results
+do not transfer between them without a verified transformation certificate.
+
+The time-resonant numerical PDE diagnostic is now precision-resolved, with
+its raw failure retained. Next, seek exact integrals or validated continuations
 for the unresolved 3.4/3.5 and mixed/resonant equations. Every accepted result
 must identify its parameter stratum, nonzero denominators, data constraints,
 solution type and independent original-P certificate. A processed catalog is
 not a proof that all possible reductions or all nonlinear solutions are solved.
 
 The broader E classification and M control experiments remain independent
-evidence. No new 2D/nonclassical campaign or pure PINN is part of this target.
-ML is considered only for a concrete unmet task with an exactly checked output
-or a measured accuracy/cost benefit over classical methods.
+evidence. No new 2D/nonclassical campaign is part of the immediate residual
+repair; 2D is a later gated stage of the route above. Pure PINN remains stopped.
+Studying a PINN/KAN benchmark does not restart that route: ML is considered
+only for a concrete unmet task with an exactly checked output or a measured
+accuracy/cost benefit over classical methods. Historical archive recovery is
+outside the current research acceptance gates.
 
 ## Ubuntu: clone, sync astra and restore computational results
 
@@ -144,15 +178,18 @@ python -B -X utf8 -m pytest -q -p no:cacheprovider symm/LieSymm/tests symm/LieSy
 python -B -X utf8 -m pytest -q -p no:cacheprovider scripts/tests symm/tests/test_engine.py symm/tests/test_chart_reduction.py research_artifacts/sve-progress-20261010/tests
 ```
 
-Open `build/sve-P-solutions-20261021/campaign-reviewed/index.html` in a browser.
+Open `build/sve-P-residual-20261021/campaign-reviewed/index.html` for the local
+follow-up; the frozen published demo remains under `build/sve-P-solutions-20261021`.
 To generate a separate run, use a new output directory:
 
 ```bash
 python -B -X utf8 -m symm.LieSymm.scalar2026.solve_demo --out "build/sve-P-local-$(date +%Y%m%d-%H%M%S)"
 ```
 
-The delivered demo returns exit code 1 for the retained 10/11 numerical result;
-this is a recorded scientific failure, not a missing output package. Archived
+The frozen published demo retains exit code 1 for its 10/11 numerical result.
+The current local source returns 0 for the 12/12 exact, 21/21 seed and 11/11
+reference-checked extension run; it retains the raw float64 failure separately.
+The new local evidence is not added to the older immutable carriers. Archived
 Windows paths are provenance; restore preserves their bytes. This release is
 validated on Windows, and Ubuntu commands are provided without claiming a full
 Linux campaign. The older pre19 video/intermediate archive and missing 11 October
