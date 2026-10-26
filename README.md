@@ -1,9 +1,48 @@
 # Verified Lie symmetry reduction for SVE-type models
 
+The **27 October strict follow-up** is indexed in
+[the current delivery](research_artifacts/sve-final-20261027/README.md).
+Its latest dissertation is [the five-chapter source](<draft/dissertation_2026 (1).tex>)
+and [compiled PDF](<draft/dissertation_2026 (1).pdf>), with a total limit of 25 pages.
+Read [the failure and acceptance analysis](research_artifacts/sve-final-20261027/FAILURES.md)
+before interpreting a passing software test as a mathematical classification.
+Strict acceptance remains incomplete; the publication branch is `codex/final`.
+This task supersedes the earlier outline-only writing scope below.
+
 Start with the [project map](docs/project-map.md), [manuscript](draft/main.tex)
-and [existing dissertation](draft/dissertation.tex). The next writing task is
-**title, outline and source-question-evidence map only**, not manuscript prose;
-see the [writing plan](docs/superpowers/plans/2026-10-21-dissertation-writing.md).
+and [dissertation](draft/dissertation.tex). The 26 October writing cycle now
+completes the dissertation, superseding the earlier outline-only task.
+Its [run record](build/dissertation-completion-20261026/RUN.md) separates the
+scalar source audit, a fresh annular 2D full-E benchmark and prospective ML.
+
+## Dissertation And Fresh 2D Verification: 26 October 2026
+
+The subsequent [strict CAS run](build/sve-strict-lie-20261026/RUN.md) is
+**incomplete**. Its [equation-first entry](symm/LieSymm/strict.py) invokes the
+official REDUCE LIEPDE/CRACK packages and independently checks returned
+families, without registry basis or profile backfilling. Partial translation
+reductions are distinguished from exhaustive determining-system closure,
+source-subsection reproduction and data-compatible reconstruction. The
+[serial runner](scripts/run_strict_lie.py) preserves raw failures and guarded
+60/300/1800-second tiers. No universal-reduction claim follows from this run.
+
+The [annular module](symm/LieSymm/annular2d.py) produces six supplied symmetry
+profiles, prolonged tangency, an admitted algebra and rank-two reduction to
+ODEs for isotropic cubic transport with downslope diffusion and Coriolis
+forcing. Three independent integrals further reduce the regular five-state
+ODE. This is a constructed smooth full-E reference, not a maximal 2D
+classification, physical calibration or an executed 2D ML comparison.
+The [delivery and review](build/dissertation-completion-20261026/README.md) retain
+exact certificates, sampled reconstruction, source verification and negatives.
+
+```bash
+python -B -X utf8 scripts/verify_dissertation_interfaces.py --out build/interfaces-NEW.json
+python -B -X utf8 -m symm.LieSymm.annular2d --out build/annular-NEW
+python -B -X utf8 -m pytest -q -p no:cacheprovider scripts/tests/test_dissertation_interfaces.py symm/LieSymm/tests/test_annular2d.py
+```
+
+The scalar and 2D targets remain separate. No training, SSH work or remote
+publication is part of this writing cycle. The older writing plan is historical.
 
 ## Current Evidence: 21 October 2026
 
@@ -75,7 +114,9 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex draft/m
 latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/dissertation draft/dissertation.tex
 ```
 
-The dissertation reads retained `build/week-4` inputs. Compilation remains on
+The completed dissertation uses the retained scalar precision surface and the
+fresh annular profile in `build/dissertation-completion-20261026`. Older
+`build/week-4` inputs remain for historical dependants. Compilation remains on
 Windows for the current Priestess handoff, which has neither TeX nor sudo.
 
 ## Ubuntu Sync And Evidence Restore

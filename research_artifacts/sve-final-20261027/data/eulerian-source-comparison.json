@@ -1,0 +1,43 @@
+{
+  "scope": "Post-solve source comparison, not a determining-system solve",
+  "source_DOI": "10.3390/sym14081679",
+  "source_equation": 25,
+  "input_sha256": "f3d7d88d3e228b29d414215f5358ea1aac5dd23e12154556e121d2b98175da7e",
+  "cases": {
+    "printed_equation_25": {
+      "xi": [
+        "t",
+        0
+      ],
+      "eta": [
+        "-h",
+        "-2*u",
+        "-2*B"
+      ],
+      "original_PDE_tangency_residual": [
+        "-h*u__0_1 - h__0_1*u",
+        "B__0_1*g + 2*g*h__0_1 - u*u__0_1",
+        "-9*K*u**2*u__0_1"
+      ],
+      "admitted": false
+    },
+    "corrected_comparison": {
+      "xi": [
+        "t",
+        0
+      ],
+      "eta": [
+        "-2*h",
+        "-u",
+        "-2*B"
+      ],
+      "original_PDE_tangency_residual": [
+        "0",
+        "0",
+        "0"
+      ],
+      "admitted": true
+    }
+  },
+  "script_sha256": "db6fb52373e8c12065f31c1bbb918cc34d8bb2f9fb5a6f3023b5600f26107d78"
+}

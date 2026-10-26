@@ -1,0 +1,34 @@
+{
+  "active_tests": {
+    "passed": 346,
+    "failed": 0,
+    "receipt": "build/final-20261027/validation/active-regression-release.json"
+  },
+  "native_focused": {
+    "passed": 49,
+    "failed": 0,
+    "log": "build/final-20261027/remote/native-release-tests.log"
+  },
+  "frozen_historical": {
+    "passed": 409,
+    "failed": 1,
+    "reason": "inherited hardcoded relocated-root path",
+    "log": "build/final-20261027/validation/historical-regression.log"
+  },
+  "integrity": "passed: 398 frozen files",
+  "data_flux": "verified",
+  "workflow": "passed",
+  "audit": {
+    "status": "failed",
+    "issues": [
+      "available_history_preserved: local external archive unavailable"
+    ]
+  },
+  "dissertation": {
+    "pages": 20,
+    "main_chapters": 5,
+    "appendix": true,
+    "undefined_or_overfull_warnings": 0
+  },
+  "strict_mathematical_acceptance": "incomplete"
+}

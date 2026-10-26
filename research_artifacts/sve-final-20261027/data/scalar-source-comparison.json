@@ -1,0 +1,125 @@
+{
+  "eq24": {
+    "printed_H_zero": "23/250",
+    "original_residual_at_zero": "2367/5000",
+    "source": "p.7 eq(24)",
+    "printed": "Literal displayed expanded beta terms; positive jet F=2,P=1/2,C=1/10",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq25": {
+    "printed_H_zero": "-88/25",
+    "original_residual_at_zero": "437/25",
+    "source": "p.7 eq(25)",
+    "printed": "Displayed X5 third-order equation",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq26": {
+    "printed_mu_second_zero": "-88/25",
+    "correct_mu_equation_at_zero": "437/25",
+    "source": "p.7 eq(26)",
+    "printed": "Equation (25) with mu=phi_sigma, hence same failed zero",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq27": {
+    "printed_Mprime_at_sample": "89/117",
+    "correct_Mprime_at_sample": "-187/65",
+    "correct_rhs": "-(36*M**2*Sigma**3*g*kappa - 12*M**2*Sigma**3 - 6*M**2*g + 120*M*Sigma**4*g*kappa - 16*M*Sigma**4 - 5*M*Sigma*g + 72*Sigma**5*g*kappa - 6*Sigma**5)/(Sigma*(3*M + 2*Sigma)*(12*Sigma**3*g*kappa - 4*Sigma**3 + g))",
+    "source": "p.7 eq(27)",
+    "printed": "Displayed Abel-type polynomial RHS for M_Sigma",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "status": "refuted_as_printed"
+  },
+  "eq28": {
+    "printed_H_zero": "0",
+    "original_residual_at_zero": "169/1000",
+    "source": "p.7 eq(28)",
+    "printed": "Traveling expanded equation with alpha=-1,m=3",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq29": {
+    "printed_H_zero": "0",
+    "original_residual_at_zero": "169/1000",
+    "source": "p.8 eq(29)",
+    "printed": "Displayed mu second-order equation, alpha=-1,m=3",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq30": {
+    "printed_Mprime_over_M_at_sample": "172/35",
+    "correct_Mprime_over_M_at_sample": "338/71",
+    "source": "p.8 eq(30)",
+    "printed": "Displayed M_Xi/M logarithmic derivative",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "status": "refuted_as_printed"
+  },
+  "eq31": {
+    "printed_M": "3*P**2*g*kappa/(P**3*(3*g*kappa + 1) + g)",
+    "d_of_correct_integral_dP_at_sample": "960/8281",
+    "source": "p.8 eq(31)",
+    "printed": "Displayed complex-form M(Xi), real cubic slice M0=1",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "status": "refuted_as_printed"
+  },
+  "eq33": {
+    "printed_H_zero": "-5/119",
+    "original_residual_at_zero": "40337/119000",
+    "source": "p.8 eq(33)",
+    "printed": "Mixed traveling expanded equation alpha=-1,alpha3=1,m=3",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "printed_residual_at_witness": "0",
+    "status": "refuted_as_printed"
+  },
+  "eq32": {
+    "not_necessary_witness": "phi=t+s+s^3/6 has p=1, q=1+s^2/2>0, E=0, but F_sss=1",
+    "source": "p.8 eq(32)",
+    "printed": "Quadratic F(s) is sufficient but not necessary for printed wrong 3.8 graph",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "printed_quadratic_is_solution": true,
+    "quadratic_residual": "0",
+    "audit_verified": true,
+    "status": "qualified"
+  },
+  "eq34": {
+    "literal_implicit_first_derivative": "D(z,P)*C-(P-1)-1=0, D=g/P^2-z+beta*g*(1+P)^2/P",
+    "literal_implied_C": "10/69",
+    "literal_implied_H": "60200/328509",
+    "original_residual_at_implied_jet": "-118420/328509",
+    "correct_integrand": "g/tau^2-alpha^2*tau+beta*g*(alpha3-alpha*tau)^(m-1)/tau",
+    "note": "Even corrected integrand with coefficient 1 fixes first-integral constant I=-1; general I0 must be retained.",
+    "source": "p.9 eq(34)",
+    "printed": "Literal -alpha^2*kappa in integrand; lower limit P0=1",
+    "domain": "g=1,kappa_physical=1/30,m=3; positive P and velocity; see sample",
+    "audit_verified": true,
+    "status": "refuted_as_printed"
+  },
+  "sample": {
+    "m": 3,
+    "alpha": -1,
+    "alpha3": 1,
+    "g": 1,
+    "kappa": "1/30",
+    "z": 1,
+    "P": "1/2",
+    "C": "1/10",
+    "Sigma": 1,
+    "M": 1
+  }
+}

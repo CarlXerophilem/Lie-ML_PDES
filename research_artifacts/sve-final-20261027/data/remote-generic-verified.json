@@ -1,0 +1,692 @@
+{
+  "schema": "liesymm.strict/1",
+  "coordinates": [
+    "t",
+    "x"
+  ],
+  "fields": [
+    "h",
+    "u",
+    "B"
+  ],
+  "equations": [
+    "h*u__0_1 + h__0_1*u + h__1_0",
+    "B__0_1*g + g*h__0_1 + u*u__0_1 + u__1_0",
+    "B__1_0 + K*m*u**m*u__0_1/u"
+  ],
+  "parameters": [
+    "g",
+    "K",
+    "m"
+  ],
+  "branch_conditions": {
+    "model_id": "grass_generic",
+    "guards": [
+      "h>0",
+      "u>0",
+      "g>0",
+      "K>0",
+      "1<=m<=4",
+      "m!=3"
+    ],
+    "substitutions": {},
+    "registry_status": "awaiting_necessity_review",
+    "fixed_parameters": {
+      "m": "m"
+    }
+  },
+  "data_case": null,
+  "data_status": "not_checked",
+  "arbitrary_generator": {
+    "xi": [
+      "xi_t(t, x, h, u, B)",
+      "xi_x(t, x, h, u, B)"
+    ],
+    "eta": [
+      "eta_h(t, x, h, u, B)",
+      "eta_u(t, x, h, u, B)",
+      "eta_B(t, x, h, u, B)"
+    ]
+  },
+  "characteristic": [
+    "-h__0_1*xi_x(t, x, h, u, B) - h__1_0*xi_t(t, x, h, u, B) + eta_h(t, x, h, u, B)",
+    "-u__0_1*xi_x(t, x, h, u, B) - u__1_0*xi_t(t, x, h, u, B) + eta_u(t, x, h, u, B)",
+    "-B__0_1*xi_x(t, x, h, u, B) - B__1_0*xi_t(t, x, h, u, B) + eta_B(t, x, h, u, B)"
+  ],
+  "prolonged_equations": [
+    "-B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*h*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*h*Derivative(eta_u(t, x, h, u, B), B) - B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*h__1_0*u*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_h(t, x, h, u, B), B) - B__1_0*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__1_0*h__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__1_0*Derivative(eta_h(t, x, h, u, B), B) - h*h__0_1*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h*h__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h*h__0_1*Derivative(eta_u(t, x, h, u, B), h) - h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - h*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + h*u__0_1*Derivative(eta_u(t, x, h, u, B), u) - h*u__0_1*Derivative(xi_x(t, x, h, u, B), x) - h*u__1_0*Derivative(xi_t(t, x, h, u, B), x) + h*Derivative(eta_u(t, x, h, u, B), x) - h__0_1**2*u*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*h__1_0*u*Derivative(xi_t(t, x, h, u, B), h) - h__0_1*h__1_0*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + h__0_1*u*Derivative(eta_h(t, x, h, u, B), h) - h__0_1*u*Derivative(xi_x(t, x, h, u, B), x) - h__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) + h__0_1*eta_u(t, x, h, u, B) - h__0_1*Derivative(xi_x(t, x, h, u, B), t) - h__1_0**2*Derivative(xi_t(t, x, h, u, B), h) - h__1_0*u*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - h__1_0*u*Derivative(xi_t(t, x, h, u, B), x) - h__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + h__1_0*Derivative(eta_h(t, x, h, u, B), h) - h__1_0*Derivative(xi_t(t, x, h, u, B), t) + u*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + u*Derivative(eta_h(t, x, h, u, B), x) + u__0_1*eta_h(t, x, h, u, B) + u__1_0*Derivative(eta_h(t, x, h, u, B), u) + Derivative(eta_h(t, x, h, u, B), t)",
+    "-B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*B__1_0*g*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*g*h__1_0*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + B__0_1*g*Derivative(eta_B(t, x, h, u, B), B) + B__0_1*g*Derivative(eta_h(t, x, h, u, B), B) - B__0_1*g*Derivative(xi_x(t, x, h, u, B), x) - B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*u*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_u(t, x, h, u, B), B) - B__1_0*g*h__0_1*Derivative(xi_t(t, x, h, u, B), h) - B__1_0*g*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - B__1_0*g*Derivative(xi_t(t, x, h, u, B), x) - B__1_0*u__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), B) + B__1_0*Derivative(eta_u(t, x, h, u, B), B) - g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), h) - g*h__0_1*h__1_0*Derivative(xi_t(t, x, h, u, B), h) - g*h__0_1*u__0_1*Derivative(xi_x(t, x, h, u, B), u) + g*h__0_1*Derivative(eta_B(t, x, h, u, B), h) + g*h__0_1*Derivative(eta_h(t, x, h, u, B), h) - g*h__0_1*Derivative(xi_x(t, x, h, u, B), x) - g*h__1_0*u__0_1*Derivative(xi_t(t, x, h, u, B), u) - g*h__1_0*Derivative(xi_t(t, x, h, u, B), x) + g*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + g*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) - h__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h__0_1*u*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h__0_1*u*Derivative(eta_u(t, x, h, u, B), h) - h__1_0*u__0_1*Derivative(xi_x(t, x, h, u, B), h) - h__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), h) + h__1_0*Derivative(eta_u(t, x, h, u, B), h) - u*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - u*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + u*u__0_1*Derivative(eta_u(t, x, h, u, B), u) - u*u__0_1*Derivative(xi_x(t, x, h, u, B), x) - u*u__1_0*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) - u__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) + u__0_1*eta_u(t, x, h, u, B) - u__0_1*Derivative(xi_x(t, x, h, u, B), t) - u__1_0**2*Derivative(xi_t(t, x, h, u, B), u) + u__1_0*Derivative(eta_u(t, x, h, u, B), u) - u__1_0*Derivative(xi_t(t, x, h, u, B), t) + Derivative(eta_u(t, x, h, u, B), t)",
+    "-B__0_1*B__1_0*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u - B__0_1*K*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1*K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u - B__0_1*h__1_0*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*u__1_0*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*Derivative(xi_x(t, x, h, u, B), t) - B__1_0**2*Derivative(xi_t(t, x, h, u, B), B) - B__1_0*h__1_0*Derivative(xi_t(t, x, h, u, B), h) - B__1_0*u__1_0*Derivative(xi_t(t, x, h, u, B), u) + B__1_0*Derivative(eta_B(t, x, h, u, B), B) - B__1_0*Derivative(xi_t(t, x, h, u, B), t) - K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u - K*h__0_1*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), h)/u + K*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + K*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 - K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*u__1_0*Derivative(xi_t(t, x, h, u, B), u)/u + K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u - K*m*u**m*u__1_0*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u - K*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + h__1_0*Derivative(eta_B(t, x, h, u, B), h) + u__1_0*Derivative(eta_B(t, x, h, u, B), u) + Derivative(eta_B(t, x, h, u, B), t)"
+  ],
+  "on_shell_equations": [
+    "B__0_1**2*g*h*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), h) + B__0_1*g*h*Derivative(xi_t(t, x, h, u, B), x) - B__0_1*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*g*Derivative(eta_h(t, x, h, u, B), u) + 2*B__0_1*h*u*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*h*Derivative(eta_u(t, x, h, u, B), B) + B__0_1*h__0_1*u**2*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_h(t, x, h, u, B), B) - K*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u - K*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), B)/u - K*m*u**m*u__0_1*Derivative(eta_h(t, x, h, u, B), B)/u + g*h*h__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + g*h*h__0_1*Derivative(xi_t(t, x, h, u, B), x) - g*h__0_1**2*u*Derivative(xi_t(t, x, h, u, B), u) + g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - g*h__0_1*Derivative(eta_h(t, x, h, u, B), u) - h**2*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + h*h__0_1*Derivative(eta_u(t, x, h, u, B), h) + h*u*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + 2*h*u*u__0_1*Derivative(xi_t(t, x, h, u, B), x) - h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u) - h*u__0_1*Derivative(eta_h(t, x, h, u, B), h) + h*u__0_1*Derivative(eta_u(t, x, h, u, B), u) + h*u__0_1*Derivative(xi_t(t, x, h, u, B), t) - h*u__0_1*Derivative(xi_x(t, x, h, u, B), x) + h*Derivative(eta_u(t, x, h, u, B), x) + h__0_1*u**2*Derivative(xi_t(t, x, h, u, B), x) + h__0_1*u*Derivative(xi_t(t, x, h, u, B), t) - h__0_1*u*Derivative(xi_x(t, x, h, u, B), x) + h__0_1*eta_u(t, x, h, u, B) - h__0_1*Derivative(xi_x(t, x, h, u, B), t) + u*Derivative(eta_h(t, x, h, u, B), x) + u__0_1*eta_h(t, x, h, u, B) + Derivative(eta_h(t, x, h, u, B), t)",
+    "-B__0_1**2*g**2*Derivative(xi_t(t, x, h, u, B), u) + B__0_1**2*g*u*Derivative(xi_t(t, x, h, u, B), B) - B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), B) - 2*B__0_1*g**2*h__0_1*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), h) + 2*B__0_1*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), B) - B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), h) - B__0_1*g*u*u__0_1*Derivative(xi_t(t, x, h, u, B), u) + B__0_1*g*u*Derivative(xi_t(t, x, h, u, B), x) + B__0_1*g*Derivative(eta_B(t, x, h, u, B), B) + B__0_1*g*Derivative(eta_h(t, x, h, u, B), B) - B__0_1*g*Derivative(eta_u(t, x, h, u, B), u) + B__0_1*g*Derivative(xi_t(t, x, h, u, B), t) - B__0_1*g*Derivative(xi_x(t, x, h, u, B), x) + B__0_1*u**2*u__0_1*Derivative(xi_t(t, x, h, u, B), B) - B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), B) + B__0_1*u*Derivative(eta_u(t, x, h, u, B), B) - K*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B)/u + K*g*h__0_1*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), h)/u + K*g*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u)/u + K*g*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x)/u - K*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), B)/u - K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), B)/u - g**2*h__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + g*h*u__0_1**2*Derivative(xi_t(t, x, h, u, B), u) + g*h*u__0_1*Derivative(xi_t(t, x, h, u, B), x) + g*h__0_1**2*u*Derivative(xi_t(t, x, h, u, B), h) - g*h__0_1**2*Derivative(xi_x(t, x, h, u, B), h) + 2*g*h__0_1*u*Derivative(xi_t(t, x, h, u, B), x) + g*h__0_1*Derivative(eta_B(t, x, h, u, B), h) + g*h__0_1*Derivative(eta_h(t, x, h, u, B), h) - g*h__0_1*Derivative(eta_u(t, x, h, u, B), u) + g*h__0_1*Derivative(xi_t(t, x, h, u, B), t) - g*h__0_1*Derivative(xi_x(t, x, h, u, B), x) + g*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + g*u__0_1*Derivative(eta_h(t, x, h, u, B), u) + g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) - h*u*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h) + h*u__0_1**2*Derivative(xi_x(t, x, h, u, B), h) - h*u__0_1*Derivative(eta_u(t, x, h, u, B), h) + u**2*u__0_1*Derivative(xi_t(t, x, h, u, B), x) + u*u__0_1*Derivative(xi_t(t, x, h, u, B), t) - u*u__0_1*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + u__0_1*eta_u(t, x, h, u, B) - u__0_1*Derivative(xi_x(t, x, h, u, B), t) + Derivative(eta_u(t, x, h, u, B), t)",
+    "B__0_1**2*K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1**2*g*Derivative(xi_x(t, x, h, u, B), u) + B__0_1*K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + B__0_1*K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + B__0_1*K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + B__0_1*K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), B) + B__0_1*K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + B__0_1*g*h__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*g*Derivative(eta_B(t, x, h, u, B), u) + B__0_1*h*u__0_1*Derivative(xi_x(t, x, h, u, B), h) + B__0_1*h__0_1*u*Derivative(xi_x(t, x, h, u, B), h) + B__0_1*u*u__0_1*Derivative(xi_x(t, x, h, u, B), u) - B__0_1*Derivative(xi_x(t, x, h, u, B), t) - K**2*m**2*u**(2*m)*u__0_1**2*Derivative(xi_t(t, x, h, u, B), B)/u**2 + K*g*h__0_1**2*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + K*g*h__0_1*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u - K*h*m*u**m*u__0_1**2*Derivative(xi_t(t, x, h, u, B), h)/u - K*h__0_1*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), h)/u + K*h__0_1*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u + K*m**2*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 + K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*u__0_1**2*Derivative(xi_x(t, x, h, u, B), u)/u - K*m*u**m*u__0_1*Derivative(eta_B(t, x, h, u, B), B)/u + K*m*u**m*u__0_1*Derivative(eta_u(t, x, h, u, B), u)/u + K*m*u**m*u__0_1*Derivative(xi_t(t, x, h, u, B), t)/u - K*m*u**m*u__0_1*Derivative(xi_x(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u - K*m*u**m*u__0_1*eta_u(t, x, h, u, B)/u**2 - g*h__0_1*Derivative(eta_B(t, x, h, u, B), u) - h*u__0_1*Derivative(eta_B(t, x, h, u, B), h) - h__0_1*u*Derivative(eta_B(t, x, h, u, B), h) - u*u__0_1*Derivative(eta_B(t, x, h, u, B), u) + Derivative(eta_B(t, x, h, u, B), t)"
+  ],
+  "determining_splits": [
+    {
+      "status": "complete_jet_split",
+      "equations": [
+        "g*h*Derivative(xi_t(t, x, h, u, B), B)",
+        "g*h*Derivative(xi_t(t, x, h, u, B), B) + g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + g*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+        "h*(2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+        "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), B) + u*Derivative(eta_h(t, x, h, u, B), B)",
+        "g*(h*Derivative(xi_t(t, x, h, u, B), h) - u*Derivative(xi_t(t, x, h, u, B), u) + Derivative(xi_x(t, x, h, u, B), u))",
+        "K*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_x(t, x, h, u, B), B)/u)",
+        "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+        "h*(-K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u - h*Derivative(xi_t(t, x, h, u, B), h) + u*Derivative(xi_t(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), u))",
+        "-K*m*u**m*Derivative(eta_h(t, x, h, u, B), B)/u + 2*h*u*Derivative(xi_t(t, x, h, u, B), x) - h*Derivative(eta_h(t, x, h, u, B), h) + h*Derivative(eta_u(t, x, h, u, B), u) + h*Derivative(xi_t(t, x, h, u, B), t) - h*Derivative(xi_x(t, x, h, u, B), x) + eta_h(t, x, h, u, B)",
+        "h*Derivative(eta_u(t, x, h, u, B), x) + u*Derivative(eta_h(t, x, h, u, B), x) + Derivative(eta_h(t, x, h, u, B), t)"
+      ],
+      "jets": [
+        "B__0_1",
+        "h__0_1",
+        "u__0_1"
+      ],
+      "denominator": "u"
+    },
+    {
+      "status": "complete_jet_split",
+      "equations": [
+        "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+        "g*(-2*g*Derivative(xi_t(t, x, h, u, B), u) + 2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), h))",
+        "g*h*Derivative(xi_t(t, x, h, u, B), B) - g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+        "g*u*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), B) + g*Derivative(eta_h(t, x, h, u, B), B) - g*Derivative(eta_u(t, x, h, u, B), u) + g*Derivative(xi_t(t, x, h, u, B), t) - g*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), B)",
+        "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), h) - Derivative(xi_x(t, x, h, u, B), h))",
+        "K*g*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_t(t, x, h, u, B), h))/u",
+        "g*(2*u*Derivative(xi_t(t, x, h, u, B), x) + Derivative(eta_B(t, x, h, u, B), h) + Derivative(eta_h(t, x, h, u, B), h) - Derivative(eta_u(t, x, h, u, B), u) + Derivative(xi_t(t, x, h, u, B), t) - Derivative(xi_x(t, x, h, u, B), x))",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), u)/u - K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*Derivative(xi_x(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), u) - h*u*Derivative(xi_t(t, x, h, u, B), h) + h*Derivative(xi_x(t, x, h, u, B), h)",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u - K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), u) + g*Derivative(eta_h(t, x, h, u, B), u) - h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+        "g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + Derivative(eta_u(t, x, h, u, B), t)"
+      ],
+      "jets": [
+        "B__0_1",
+        "h__0_1",
+        "u__0_1"
+      ],
+      "denominator": "u"
+    },
+    {
+      "status": "complete_jet_split",
+      "equations": [
+        "g*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + Derivative(xi_x(t, x, h, u, B), u))",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + g*Derivative(xi_x(t, x, h, u, B), u) + u*Derivative(xi_x(t, x, h, u, B), h)",
+        "K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*Derivative(xi_x(t, x, h, u, B), h) + u*Derivative(xi_x(t, x, h, u, B), u)",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u - g*Derivative(eta_B(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), t)",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u",
+        "-K*m*u**m*Derivative(xi_x(t, x, h, u, B), h)/u",
+        "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u - g*Derivative(eta_B(t, x, h, u, B), u) - u*Derivative(eta_B(t, x, h, u, B), h)",
+        "-K*m*u**m*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + h*Derivative(xi_t(t, x, h, u, B), h) + Derivative(xi_x(t, x, h, u, B), u))/u",
+        "K*m**2*u**m*eta_u(t, x, h, u, B)/u**2 + K*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_B(t, x, h, u, B), B)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), u)/u + K*m*u**m*Derivative(xi_t(t, x, h, u, B), t)/u - K*m*u**m*Derivative(xi_x(t, x, h, u, B), x)/u - K*m*u**m*eta_u(t, x, h, u, B)/u**2 - h*Derivative(eta_B(t, x, h, u, B), h) - u*Derivative(eta_B(t, x, h, u, B), u)",
+        "K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u + Derivative(eta_B(t, x, h, u, B), t)"
+      ],
+      "jets": [
+        "B__0_1",
+        "h__0_1",
+        "u__0_1"
+      ],
+      "denominator": "u**2"
+    }
+  ],
+  "determining_equations": [
+    "g*h*Derivative(xi_t(t, x, h, u, B), B)",
+    "g*h*Derivative(xi_t(t, x, h, u, B), B) + g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + g*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+    "h*(2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+    "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), B) + u*Derivative(eta_h(t, x, h, u, B), B)",
+    "g*(h*Derivative(xi_t(t, x, h, u, B), h) - u*Derivative(xi_t(t, x, h, u, B), u) + Derivative(xi_x(t, x, h, u, B), u))",
+    "K*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_x(t, x, h, u, B), B)/u)",
+    "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+    "h*(-K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u - h*Derivative(xi_t(t, x, h, u, B), h) + u*Derivative(xi_t(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), u))",
+    "-K*m*u**m*Derivative(eta_h(t, x, h, u, B), B)/u + 2*h*u*Derivative(xi_t(t, x, h, u, B), x) - h*Derivative(eta_h(t, x, h, u, B), h) + h*Derivative(eta_u(t, x, h, u, B), u) + h*Derivative(xi_t(t, x, h, u, B), t) - h*Derivative(xi_x(t, x, h, u, B), x) + eta_h(t, x, h, u, B)",
+    "h*Derivative(eta_u(t, x, h, u, B), x) + u*Derivative(eta_h(t, x, h, u, B), x) + Derivative(eta_h(t, x, h, u, B), t)",
+    "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+    "g*(-2*g*Derivative(xi_t(t, x, h, u, B), u) + 2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), h))",
+    "g*h*Derivative(xi_t(t, x, h, u, B), B) - g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+    "g*u*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), B) + g*Derivative(eta_h(t, x, h, u, B), B) - g*Derivative(eta_u(t, x, h, u, B), u) + g*Derivative(xi_t(t, x, h, u, B), t) - g*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), B)",
+    "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), h) - Derivative(xi_x(t, x, h, u, B), h))",
+    "K*g*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_t(t, x, h, u, B), h))/u",
+    "g*(2*u*Derivative(xi_t(t, x, h, u, B), x) + Derivative(eta_B(t, x, h, u, B), h) + Derivative(eta_h(t, x, h, u, B), h) - Derivative(eta_u(t, x, h, u, B), u) + Derivative(xi_t(t, x, h, u, B), t) - Derivative(xi_x(t, x, h, u, B), x))",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), u)/u - K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*Derivative(xi_x(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), u) - h*u*Derivative(xi_t(t, x, h, u, B), h) + h*Derivative(xi_x(t, x, h, u, B), h)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u - K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), u) + g*Derivative(eta_h(t, x, h, u, B), u) - h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+    "g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + Derivative(eta_u(t, x, h, u, B), t)",
+    "g*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + Derivative(xi_x(t, x, h, u, B), u))",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + g*Derivative(xi_x(t, x, h, u, B), u) + u*Derivative(xi_x(t, x, h, u, B), h)",
+    "K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*Derivative(xi_x(t, x, h, u, B), h) + u*Derivative(xi_x(t, x, h, u, B), u)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u - g*Derivative(eta_B(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), t)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u",
+    "-K*m*u**m*Derivative(xi_x(t, x, h, u, B), h)/u",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u - g*Derivative(eta_B(t, x, h, u, B), u) - u*Derivative(eta_B(t, x, h, u, B), h)",
+    "-K*m*u**m*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + h*Derivative(xi_t(t, x, h, u, B), h) + Derivative(xi_x(t, x, h, u, B), u))/u",
+    "K*m**2*u**m*eta_u(t, x, h, u, B)/u**2 + K*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_B(t, x, h, u, B), B)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), u)/u + K*m*u**m*Derivative(xi_t(t, x, h, u, B), t)/u - K*m*u**m*Derivative(xi_x(t, x, h, u, B), x)/u - K*m*u**m*eta_u(t, x, h, u, B)/u**2 - h*Derivative(eta_B(t, x, h, u, B), h) - u*Derivative(eta_B(t, x, h, u, B), u)",
+    "K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u + Derivative(eta_B(t, x, h, u, B), t)"
+  ],
+  "remaining_equations": [
+    "g*h*Derivative(xi_t(t, x, h, u, B), B)",
+    "g*h*Derivative(xi_t(t, x, h, u, B), B) + g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + g*Derivative(xi_x(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+    "h*(2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+    "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), B) + u*Derivative(eta_h(t, x, h, u, B), B)",
+    "g*(h*Derivative(xi_t(t, x, h, u, B), h) - u*Derivative(xi_t(t, x, h, u, B), u) + Derivative(xi_x(t, x, h, u, B), u))",
+    "K*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_x(t, x, h, u, B), B)/u)",
+    "g*h*Derivative(xi_t(t, x, h, u, B), x) - g*Derivative(eta_h(t, x, h, u, B), u) + h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+    "h*(-K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u - h*Derivative(xi_t(t, x, h, u, B), h) + u*Derivative(xi_t(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), u))",
+    "-K*m*u**m*Derivative(eta_h(t, x, h, u, B), B)/u + 2*h*u*Derivative(xi_t(t, x, h, u, B), x) - h*Derivative(eta_h(t, x, h, u, B), h) + h*Derivative(eta_u(t, x, h, u, B), u) + h*Derivative(xi_t(t, x, h, u, B), t) - h*Derivative(xi_x(t, x, h, u, B), x) + eta_h(t, x, h, u, B)",
+    "h*Derivative(eta_u(t, x, h, u, B), x) + u*Derivative(eta_h(t, x, h, u, B), x) + Derivative(eta_h(t, x, h, u, B), t)",
+    "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B))",
+    "g*(-2*g*Derivative(xi_t(t, x, h, u, B), u) + 2*u*Derivative(xi_t(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), B) - Derivative(xi_x(t, x, h, u, B), h))",
+    "g*h*Derivative(xi_t(t, x, h, u, B), B) - g*h*Derivative(xi_t(t, x, h, u, B), h) - g*u*Derivative(xi_t(t, x, h, u, B), u) + u**2*Derivative(xi_t(t, x, h, u, B), B) - u*Derivative(xi_x(t, x, h, u, B), B)",
+    "g*u*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), B) + g*Derivative(eta_h(t, x, h, u, B), B) - g*Derivative(eta_u(t, x, h, u, B), u) + g*Derivative(xi_t(t, x, h, u, B), t) - g*Derivative(xi_x(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), B)",
+    "g*(-g*Derivative(xi_t(t, x, h, u, B), u) + u*Derivative(xi_t(t, x, h, u, B), h) - Derivative(xi_x(t, x, h, u, B), h))",
+    "K*g*m*u**m*(-Derivative(xi_t(t, x, h, u, B), B) + Derivative(xi_t(t, x, h, u, B), h))/u",
+    "g*(2*u*Derivative(xi_t(t, x, h, u, B), x) + Derivative(eta_B(t, x, h, u, B), h) + Derivative(eta_h(t, x, h, u, B), h) - Derivative(eta_u(t, x, h, u, B), u) + Derivative(xi_t(t, x, h, u, B), t) - Derivative(xi_x(t, x, h, u, B), x))",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), u)/u - K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + K*m*u**m*Derivative(xi_x(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), u) - h*u*Derivative(xi_t(t, x, h, u, B), h) + h*Derivative(xi_x(t, x, h, u, B), h)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u - K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u + g*h*Derivative(xi_t(t, x, h, u, B), x) + g*Derivative(eta_B(t, x, h, u, B), u) + g*Derivative(eta_h(t, x, h, u, B), u) - h*Derivative(eta_u(t, x, h, u, B), h) + u**2*Derivative(xi_t(t, x, h, u, B), x) + u*Derivative(xi_t(t, x, h, u, B), t) - u*Derivative(xi_x(t, x, h, u, B), x) + eta_u(t, x, h, u, B) - Derivative(xi_x(t, x, h, u, B), t)",
+    "g*Derivative(eta_B(t, x, h, u, B), x) + g*Derivative(eta_h(t, x, h, u, B), x) + u*Derivative(eta_u(t, x, h, u, B), x) + Derivative(eta_u(t, x, h, u, B), t)",
+    "g*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + Derivative(xi_x(t, x, h, u, B), u))",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u + g*Derivative(xi_x(t, x, h, u, B), u) + u*Derivative(xi_x(t, x, h, u, B), h)",
+    "K*m*u**m*Derivative(xi_t(t, x, h, u, B), B) + h*Derivative(xi_x(t, x, h, u, B), h) + u*Derivative(xi_x(t, x, h, u, B), u)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), B)/u - g*Derivative(eta_B(t, x, h, u, B), u) - Derivative(xi_x(t, x, h, u, B), t)",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), h)/u",
+    "-K*m*u**m*Derivative(xi_x(t, x, h, u, B), h)/u",
+    "K*g*m*u**m*Derivative(xi_t(t, x, h, u, B), x)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), h)/u - g*Derivative(eta_B(t, x, h, u, B), u) - u*Derivative(eta_B(t, x, h, u, B), h)",
+    "-K*m*u**m*(K*m*u**m*Derivative(xi_t(t, x, h, u, B), B)/u + h*Derivative(xi_t(t, x, h, u, B), h) + Derivative(xi_x(t, x, h, u, B), u))/u",
+    "K*m**2*u**m*eta_u(t, x, h, u, B)/u**2 + K*m*u**m*Derivative(xi_t(t, x, h, u, B), x) - K*m*u**m*Derivative(eta_B(t, x, h, u, B), B)/u + K*m*u**m*Derivative(eta_u(t, x, h, u, B), u)/u + K*m*u**m*Derivative(xi_t(t, x, h, u, B), t)/u - K*m*u**m*Derivative(xi_x(t, x, h, u, B), x)/u - K*m*u**m*eta_u(t, x, h, u, B)/u**2 - h*Derivative(eta_B(t, x, h, u, B), h) - u*Derivative(eta_B(t, x, h, u, B), u)",
+    "K*m*u**m*Derivative(eta_u(t, x, h, u, B), x)/u + Derivative(eta_B(t, x, h, u, B), t)"
+  ],
+  "normal_form_divisors": [
+    "1"
+  ],
+  "prolongation_agreement": true,
+  "cas": {
+    "command": [
+      "setsid",
+      "--wait",
+      "sh",
+      "-c",
+      "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+      "strict-cas",
+      "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.pid",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=5",
+      "1800",
+      "prlimit",
+      "--as=8000000000",
+      "--",
+      "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+      "-w",
+      "-k128M",
+      "--maxmem",
+      "4096M",
+      "--no-rcfile",
+      "--stop-on-error"
+    ],
+    "input_sha256": "de1bbfff3ab9bc4f292632cc1b369373a28f5680a2c78475ff020bcda6fb7fd5",
+    "status": "returned-solved",
+    "verified": false,
+    "returncode": 0,
+    "stdout": "Reduce (CSL, rev 7335),  7-Mar-2026 ...\n\n1: \n2: \n3: 3: 3: 3: 3: 3: 3: 3: 3: 3: \n4: \n5: 5: \n6: \n7: \n8: \n9: \n10: \n11: \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nThis is CRACK - a solver for overdetermined partial differential equations\n\nStep 1: \nnew function: c_1(t,x,u,b)\nIntegration of e_26\n\nStep 2: \ne_23 is a consequence of e_21.\nSubstitution of xi_x(t,x,h,u,b) by an expression in \nc_1(t,x,u,b) found in e_26 : \nxi_x= - c_1\n\n\nStep 3: \nStep 4: \nStep 5: \nStep 6: \nStep 7: \nnew function: c_2(t,x,u,b)\nIntegration of e_25\n\nStep 8: \ne_16 is a consequence of e_1.\ne_22 is a consequence of e_21.\ne_28 is a consequence of e_21.\nSubstitution of xi_t(t,x,h,u,b) by an expression in \nc_2(t,x,u,b) found in e_25 : \nxi_t= - c_2\n\n\nStep 9: \nSeparation of e_18 yields (e_31 e_32)\n\ne_31 is a consequence of e_15.\ne_32 is a consequence of e_11.\nStep 10: \nSeparation of e_13 yields (e_33 e_34)\n\ne_33 is a consequence of e_1.\ne_34 is a consequence of e_11.\nStep 11: \nSeparation of e_2 yields (e_35 e_36)\n\ne_35 is a consequence of e_1.\nStep 12: \nnew function: c_3(t,x,b)\nIntegration of e_15\n\nStep 13: \ne_8 is a consequence of e_21.\ne_11 is a consequence of e_6.\ne_12 is a consequence of e_3.\nSubstitution of c_2(t,x,u,b) by an expression in \nc_3(t,x,b) found in e_15 : \nc_2= - c_3\n\n\nStep 14: \nnew function: c_4(t,x,b)\nIntegration of e_5\n\nStep 15: \ne_21 is a consequence of e_1.\ne_36 is a consequence of e_6.\nSubstitution of c_1(t,x,u,b) by an expression in \nc_4(t,x,b) found in e_5 : \nc_1= - c_4\n\n\nStep 16: \nSeparation of e_6 yields (e_38 e_37)\n\ne_37 is a consequence of e_1.\nStep 17: \nSeparation of e_3 yields (e_40 e_39)\n\ne_40 is a consequence of e_38.\ne_39 is a consequence of e_1.\nStep 18: \nnew function: c_5(t,x)\nIntegration of e_38\n\nStep 19: \nSubstitution of c_4(t,x,b) by an expression in \nc_5(t,x) found in e_38 : \nc_4= - c_5\n\n\nStep 20: \nnew function: c_6(t,x)\nIntegration of e_1\n\nStep 21: \nSubstitution of c_3(t,x,b) by an expression in \nc_6(t,x) found in e_1 : \nc_3= - c_6\n\n\nStep 22: \nnew function: c_7(t,x,h,u,b)\nPotential integration of e_30 yields (e_30 e_41)\n\nStep 23: \nSubstitution of eta_u(t,x,h,u,b) by an expression in \nc_7(t,x,h,u,b) found in e_41 : 4 factors in 2 terms\n\nStep 24: \nnew function: c_8(t,x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_9(t,x)\nnew function: c_10(t,x)\nnew function: c_11(t,x,h,u,b)\nPartially potential integration of e_14 yields (e_14 e_43 e_42 e_44)\n\nStep 25: \nSubstitution of c_7(t,x,h,u,b) by an expression in \nc_11(t,x,h,u,b) found in e_44 : 3 factors in 2 terms\n\nStep 26: \nSubstitution of c_5(t,x) by an expression in \nc_9(t,x) found in e_42 : \nc_5=c_9\n       t\n\n\nStep 27: \nSubstitution of c_6(t,x) by an expression in \nc_10(t,x) found in e_43 : \nc_6=c_10\n        t\n\n\nStep 28: \nSubstitution of eta_h(t,x,h,u,b) by an expression in \neta_b(t,x,h,u,b), c_11(t,x,h,u,b), c_10(t,x), c_9(t,x) found in e_14 : 32\n factors in 7 terms\n\nStep 29: \nnew function: c_12(t,x)\nreplacing df(c_10,t) by c_12(t,x)\n\nnew function: c_13(t,x)\nreplacing df(c_9,t) by c_13(t,x)\n\nStep 30: \nnew function: c_14(t,x)\nnew function: c_15(t,x)\nnew function: c_16(x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_17(t,x)\nnew function: c_18(t,x)\nnew function: c_19(x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_20(t,x)\nnew function: c_21(t,x)\nnew function: c_22(t,x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_23(t,x)\nnew function: c_24(t,x)\nnew function: c_25(x,h,u,b)\nNot enough integrations to solve for a function.\nSubstitution of eta_b(t,x,h,u,b) by an expression in \nc_11(t,x,h,u,b) found in e_30 : 4 factors in 2 terms\n\nStep 31: \nnew function: c_26(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_27(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_28(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_29(t,x)\nnew function: c_30(t,x)\nnew function: c_31(x,h,u,b)\nPartially potential integration of e_20 yields (e_20 e_46 e_45)\n\nStep 32: \nSubstitution of c_12(t,x) by an expression in \nc_29(t,x) found in e_45 : \nc_12=c_29\n         t\n\n\nStep 33: \nSubstitution of c_13(t,x) by an expression in \nc_30(t,x) found in e_46 : \nc_13=c_30\n         t\n\n\nStep 34: \nnew function: c_32(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_33(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_34(x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_35(t,x,h,u)\nNot enough integrations to solve for a function.\nnew function: c_36(x,h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_37(t,x,h,u)\nIntegration of e_27\n\nStep 35: \nnew function: c_38(x,h,u,b)\nIntegration of e_17\n\nStep 36: \nnew function: c_39(t,x,h,u)\nIntegration of e_24\n\nStep 37: \nnew function: c_40(t,x,h,u)\nIntegration of e_29\n\nStep 38: \nnew function: c_41(x,h,u,b)\nIntegration of e_19\n\nStep 39: Eliminate \nc_11\n    b,h\n\nfrom e_17 and e_19. e_17: \n 7 terms, with derivatives of functions of all 5 variables: t,x,h,u,b\n\n (c_11   ,c_11   ,c_11   )\n      h,u     b,h     b,u\n\nis replaced by e_47: \n 16 terms, with derivatives of functions of all 5 variables: t,x,h,u,b\n\n (c_11   ,c_11  ,c_11   ,c_11  )\n      h,u     2u     b,u     2b\n\n\n  m\n{u }\n\n\nStep 40: Eliminate \nc_11\n    b,t\n\nfrom e_20 and e_24. e_24: \n 7 terms, with derivatives of functions of all 5 variables: t,x,h,u,b\n\n (c_11   ,c_11   ,c_11 )\n      b,t     u,x     x\n\n\n  m\n{u }\n\nis replaced by e_48: \n 8 terms, with derivatives of functions of all 5 variables: t,x,h,u,b\n\n (c_11 )\n      x\n\n\n  m\n{u }\n\n\nStep 41: \nnew function: c_42(t,x)\nnew function: c_43(x,h,u,b)\nnew function: c_44(t,x,h,u)\nnew function: c_45(t,h,u,b)\nPartially potential integration of e_48 yields (e_48 e_51 e_50 e_49)\n\nStep 42: \nSubstitution of c_30(t,x) by an expression in \nc_42(t,x) found in e_49 : \nc_30=c_42\n         x\n\n\nStep 43: \nSubstitution of c_31(x,h,u,b) by an expression in \nc_43(x,h,u,b) found in e_50 : \nc_31=c_43\n         x\n\n\nStep 44: \nStep 45: \nSubstitution of c_11(t,x,h,u,b) by an expression in \nc_45(t,h,u,b), c_44(t,x,h,u), c_43(x,h,u,b), c_29(t,x), c_42(t,x) found in e_48\n : 38 factors in 9 terms\n\nStep 46: \ngeneralized separation of e_27\nseparation w.r.t. b . \nseparation w.r.t. u . \nlinear independent expressions : \n 2\nu\n\n2 factors in 1 terms\n2 factors in 1 terms\n\nnew function: c_46(x,h,u)\nnew function: c_47(x)\nnew function: c_48(x)\nnew function: c_49(x)\nnew function: c_50(t,h,u)\nnew function: c_51(t)\nnew function: c_52(t)\nnew function: c_53(t)\nseparation yields 6 new equations : e_55,e_53,e_52,e_54,e_57,e_56\n\nStep 47: \ngeneralized separation of e_56\nnew function: c_54(h,u,b)\nseparation yields 2 new equations : e_58,e_59\n\nStep 48: \nnew function: c_55(t)\nnew function: c_56(t)\nnew function: c_57(x)\nnew function: c_58(x)\nnew function: c_59(x)\nnew function: c_60(t)\nPartially potential integration of e_55 yields (e_55 e_62 e_61 e_60)\n\nStep 49: \nSubstitution of c_53(t) by an expression in \nc_55(t) found in e_60 : \nc_53=c_55\n         t\n\n\nStep 50: \nSubstitution of c_55(t) by an expression in \nc_56(t) found in e_61 : \nc_55=c_56\n         t\n\n\nStep 51: \nSubstitution of c_49(x) by an expression in \nc_57(x) found in e_62 : \nc_49=c_57\n         x\n\n\nStep 52: \nSubstitution of c_42(t,x) by an expression in \nc_60(t), c_59(x), c_58(x), c_57(x), c_56(t) found in e_55 : 11 factors in 6\n terms\n\nStep 53: \nnew function: c_61(t)\nreplacing df(c_60,2,t) by c_61(t)\n\nnew function: c_62(x)\nreplacing df(c_59,x) by c_62(x)\n\nnew function: c_63(x)\nreplacing df(c_58,2,x) by c_63(x)\n\nnew function: c_64(t)\nreplacing df(c_56,t) by c_64(t)\n\nStep 54: \nnew function: c_65(x)\nnew function: c_66(x)\nnew function: c_67(t)\nnew function: c_68(t)\nPartially potential integration of e_53 yields (e_53 e_64 e_63)\n\nStep 55: \nSubstitution of c_47(x) by an expression in \nc_65(x) found in e_63 : \nc_47=c_65\n         x\n\n\nStep 56: \nSubstitution of c_65(x) by an expression in \nc_66(x) found in e_64 : \nc_65=c_66\n         x\n\n\nStep 57: \nSubstitution of c_29(t,x) by an expression in \nc_51(t), c_68(t), c_67(t), c_66(x) found in e_53 : 14 factors in 6 terms\n\nStep 58: \nnew function: c_69(t)\nreplacing df(c_67,t) by c_69(t)\n\nnew function: c_70(x)\nreplacing df(c_66,x) by c_70(x)\n\nStep 59: \nnew function: c_71(t,h,u)\nnew function: c_72(h,u,b)\nnew function: c_73(t)\nnew function: c_74(t)\nnew function: c_75(t,h,u)\nnew function: c_76(t,u,b)\nnew function: c_77(h,u,b)\nPartially potential integration of e_58 yields (e_58 e_28 e_22 e_16 e_26 e_23)\n\nStep 60: \nSubstitution of c_50(t,h,u) by an expression in \nc_71(t,h,u) found in e_23 : \nc_50=c_71\n         h\n\n\nStep 61: \nSubstitution of c_54(h,u,b) by an expression in \nc_72(h,u,b) found in e_26 : \nc_54=c_72\n         h\n\n\nStep 62: \nSubstitution of c_51(t) by an expression in \nc_73(t) found in e_16 : \nc_51=c_73\n         t\n\n\nStep 63: \nSubstitution of c_52(t) by an expression in \nc_74(t) found in e_22 : \nc_52=c_74\n         t\n\n\nStep 64: \nSubstitution of c_71(t,h,u) by an expression in \nc_75(t,h,u) found in e_28 : \nc_71=c_75\n         t\n\n\nStep 65: \nSubstitution of c_45(t,h,u,b) by an expression in \nc_77(h,u,b), c_76(t,u,b), c_75(t,h,u), c_72(h,u,b), c_64(t), c_74(t), \nc_73(t) found in e_58 : 20 factors in 8 terms\n\nStep 66: \nnew function: c_78(x)\nnew function: c_79(x,h,u)\nnew function: c_80(h,u,b)\nnew function: c_81(h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_82(x)\nnew function: c_83(x,h,u)\nnew function: c_84(h,u,b)\nNot enough integrations to solve for a function.\nStep 67: \ngeneralized separation of e_54\nseparation w.r.t. t . \nnew constant: c_85\nnew constant: c_86\nnew constant: c_87\nnew constant: c_88\nnew constant: c_89\nnew constant: c_90\nseparation yields 5 new equations : e_13,e_18,e_25,e_31,e_32\n\nStep 68: \nSeparation of e_32 yields (e_33 e_34)\n\ne_33 is a consequence of e_13.\nStep 69: \nnew constant: c_91\nnew constant: c_92\nIntegration of e_25\n\nStep 70: \nSubstitution of c_62(x) by an expression in \nc_88, c_85, c_92, c_91 found in e_25 : 14 factors in 5 terms\n\nStep 71: \nnew constant: c_93\nnew constant: c_94\nnew constant: c_95\nIntegration of e_18\n\nStep 72: \nSubstitution of c_57(x) by an expression in \nc_89, c_86, c_95, c_94, c_93 found in e_18 : 19 factors in 6 terms\n\nStep 73: \nnew constant: c_96\nnew constant: c_97\nIntegration of e_13\n\nStep 74: \nSubstitution of c_73(t) by an expression in \nc_87, c_86, c_85, c_97, c_96 found in e_13 : 15 factors in 6 terms\n\nStep 75: \nnew constant: c_98\nIntegration of e_34\n\nStep 76: \nSubstitution of c_68(t) by an expression in \nc_74(t), c_90, c_89, c_88, c_98 found in e_34 : 11 factors in 6 terms\n\nStep 77: \nnew function: c_99(x)\nnew function: c_100(x,h,u)\nnew function: c_101(h,u,b)\nnew function: c_102(h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_103(x)\nnew function: c_104(x,h,u)\nnew function: c_105(h,u,b)\nNot enough integrations to solve for a function.\nSubstitution of c_48(x) by an expression in \nc_63(x), c_90, c_87 found in e_31 : 8 factors in 4 terms\n\nStep 78: \nnew function: c_106(x,h,u)\nnew function: c_107(h,u,b)\nnew function: c_108(h,u,b)\nNot enough integrations to solve for a function.\nnew function: c_109(x,h,u)\nnew function: c_110(h,u,b)\nNot enough integrations to solve for a function.\ngeneralized separation of e_20\nnew function: c_111(t,x,u)\nnew function: c_112(x,h,u)\nseparation yields 3 new equations : e_2,e_8,e_35\n\nStep 79: \ngeneralized separation of e_35\nnew function: c_113(x,u,b)\nseparation yields 2 new equations : e_11,e_12\n\nStep 80: \ngeneralized separation of e_12\nnew function: c_114(u,b)\nnew function: c_115(t,u)\nseparation yields 3 new equations : e_15,e_36,e_21\n\nStep 81: \ngeneralized separation of e_21\nnew function: c_116(x,u)\nseparation yields 2 new equations : e_5,e_6\n\nStep 82: \ngeneralized separation of e_8\nnew function: c_117(t,u)\nseparation yields 2 new equations : e_37,e_3\n\nStep 83: \nThe integrated equation: 12 factors in 2 terms\n\nAn integrating factor has been found:\n 1\n----\n  2\n u\n\n\nnew function: c_118(h,u,b)\nnew function: c_119(x,h,u)\nnew function: c_120(x,u,b)\nnew function: c_121(x,h,u)\nnew function: c_122(x,u,b)\nnew function: c_123(x,h,b)\nnew function: c_124(h,u,b)\nnew function: c_125(h,u,b)\nPartially potential integration of e_11 yields (e_11 e_44 e_41 e_39 e_1 e_38\ne_40)\n\nStep 84: \nSubstitution of c_72(h,u,b) by an expression in \nc_125(h,u,b) found in e_40 : 3 factors in 1 terms\n\nStep 85: \nSubstitution of c_112(x,h,u) by an expression in \nc_119(x,h,u) found in e_38 : 3 factors in 1 terms\n\nStep 86: \nSubstitution of c_113(x,u,b) by an expression in \nc_120(x,u,b) found in e_1 : 3 factors in 1 terms\n\nStep 87: \nSubstitution of c_118(h,u,b) by an expression in \nc_125(h,u,b) found in e_39 : \nc_118= - c_125\n              b\n\n\nStep 88: \nSubstitution of c_119(x,h,u) by an expression in \nc_121(x,h,u) found in e_41 : \nc_119=c_121\n           x\n\n\nStep 89: \nSubstitution of c_120(x,u,b) by an expression in \nc_122(x,u,b) found in e_44 : \nc_120=c_122\n           x\n\n\nStep 90: \nSubstitution of c_43(x,h,u,b) by an expression in \nc_125(h,u,b), c_124(h,u,b), c_123(x,h,b), c_122(x,u,b), c_121(x,h,u), \nc_97 found in e_11 : 32 factors in 9 terms\n\nStep 91: \nnew function: c_126(t,u)\nnew function: c_127(t,u)\nnew function: c_128(t,u)\nnew function: c_129(u,b)\nnew function: c_130(u,b)\nPartially potential integration of e_37 yields (e_37 e_43 e_42)\n\nStep 92: \nSubstitution of c_126(t,u) by an expression in \nc_127(t,u) found in e_42 : \nc_126=c_127\n           t\n\n\nStep 93: \nSubstitution of c_117(t,u) by an expression in \nc_127(t,u) found in e_43 : \nc_117=c_127\n           2t\n\n\nStep 94: \nSubstitution of c_76(t,u,b) by an expression in \nc_130(u,b), c_129(u,b), c_128(t,u), c_127(t,u), c_64(t), c_74(t), \nc_87, c_86, c_85 found in e_37 : 100 factors in 17 terms\n\nStep 95: \nThe integrated equation: 11 factors in 2 terms\n\nAn integrating factor has been found:\n  1\n------\n  m\n u *u\n\n\nnew function: c_131(x,h,u)\nnew function: c_132(t,x,u)\nnew function: c_133(x,h,u)\nnew function: c_134(t,x,u)\nnew function: c_135(t,x,h)\nnew function: c_136(t,h,u)\nnew function: c_137(x,h,u)\nPartially potential integration of e_2 yields (e_2 e_17 e_46 e_30 e_14 e_45)\n\nStep 96: \nSubstitution of c_111(t,x,u) by an expression in \nc_132(t,x,u) found in e_45 : 3 factors in 1 terms\n\nStep 97: \nSubstitution of c_121(x,h,u) by an expression in \nc_137(x,h,u) found in e_14 : 2 factors in 1 terms\n\nStep 98: \nSubstitution of c_131(x,h,u) by an expression in \nc_137(x,h,u) found in e_30 : \nc_131= - c_137\n              x\n\n\nStep 99: \nStep 100: \nSubstitution of c_132(t,x,u) by an expression in \nc_134(t,x,u) found in e_17 : \nc_132=c_134\n           x\n\n\nStep 101: \nSubstitution of c_44(t,x,h,u) by an expression in \nc_137(x,h,u), c_136(t,h,u), c_135(t,x,h), c_134(t,x,u), c_133(x,h,u), \nc_64(t), c_74(t), c_87, c_86, c_85 found in e_2 : 147 factors in 28 terms\n\nStep 102: \nnew function: c_138(x,h,u)\nreplacing df(c_137,x) by c_138(x,h,u)\n\nStep 103: \nThe integrated equation: \nc_134\n     t\n\n\nAn integrating factor has been found:\n  -1\n------\n  m\n u *u\n\n\nnew function: c_139(t,u)\nnew function: c_140(t,u)\nnew function: c_141(t,u)\nnew function: c_142(t,x)\nnew function: c_143(x,u)\nnew function: c_144(t,u)\nPartially potential integration of e_3 yields (e_3 e_50 e_49 e_24)\n\nStep 104: \nSubstitution of c_127(t,u) by an expression in \nc_144(t,u) found in e_24 : 3 factors in 1 terms\n\nStep 105: \nSubstitution of c_139(t,u) by an expression in \nc_144(t,u) found in e_49 : \nc_139= - c_144\n              2t\n\n\nStep 106: \nStep 107: \nSubstitution of c_134(t,x,u) by an expression in \nc_143(x,u), c_142(t,x), c_141(t,u), c_140(t,u), c_61(t), c_64(t), \nc_69(t), c_74(t), c_89, c_88, c_86, c_85, c_94 found in e_3 : 222 factors in 37\n terms\n\nStep 108: \nnew function: c_145(u)\nIntegration of e_50\n\nStep 109: \nSubstitution of c_140(t,u) by an expression in \nc_144(t,u), c_145(u) found in e_50 : 2 factors in 2 terms\n\nStep 110: \nThe integrated equation: \nc_122\n     x\n\n\nAn integrating factor has been found:\n 1\n----\n  2\n u\n\n\nnew function: c_146(u,b)\nnew function: c_147(x,u)\nnew function: c_148(x,b)\nnew function: c_149(u,b)\nPartially potential integration of e_36 yields (e_36 e_51)\n\nStep 111: \nSubstitution of c_114(u,b) by an expression in \nc_146(u,b) found in e_51 : 3 factors in 1 terms\n\nStep 112: \nSubstitution of c_122(x,u,b) by an expression in \nc_149(u,b), c_148(x,b), c_147(x,u), c_146(u,b), c_63(x), c_70(x), \nc_90, c_89, c_87, c_86, c_95, c_94, c_97 found in e_36 : 109 factors in 25 terms\n\nStep 113: \nSeparation of e_7 yields (e_48 e_27 e_56 e_60)\n\nStep 114: \nSeparation of e_27 yields (e_55 e_61 e_62)\n\nStep 115: \nStep 116: \nSeparation of e_61 yields (e_53 e_64)\n\ne_64 is a consequence of e_48.\nStep 117: \nSeparation of e_56 yields (e_65 e_66 e_67)\n\nStep 118: \nSeparation of e_66 yields (e_69 e_68)\n\nStep 119: \nSeparation of e_68 yields (e_72 e_71 e_70)\n\ne_71 is a consequence of e_53.\ne_70 is a consequence of e_48.\nStep 120: \nSeparation of e_65 yields (e_26 e_23)\n\ne_26 is a consequence of e_69.\nStep 121: \nSeparation of e_23 yields (e_28 e_22 e_16)\n\ne_28 is a consequence of e_72.\ne_22 is a consequence of e_53.\ne_16 is a consequence of e_48.\nStep 122: \nSubstitution of c_86 found in e_48 : \nc_86=0\n\n\nStep 123: \nSubstitution of c_85 found in e_53 : \nc_85=0\n\n\nStep 124: \nSubstitution of c_87 found in e_72 : \nc_87=0\n\n\nStep 125: \nnew constant: c_150\nnew constant: c_151\nIntegration of e_69\n\nStep 126: \nSubstitution of c_64(t) by an expression in \nc_151, c_150 found in e_69 : 3 factors in 2 terms\n\nStep 127: \nnew constant: c_152\nnew constant: c_153\nnew constant: c_154\nIntegration of e_62\n\nStep 128: \nSubstitution of c_74(t) by an expression in \nc_89, c_154, c_153, c_152 found in e_62 : 20 factors in 7 terms\n\nStep 129: \nThe integrated equation: \nc_144\n     2t,u\n\n\nAn integrating factor has been found:\n 1\n----\n  m\n u\n\n\nnew function: c_155(t)\nnew function: c_156(t)\nnew function: c_157(u)\nnew function: c_158(u)\nIntegration of e_67\n\nStep 130: \nSubstitution of c_144(t,u) by an expression in \nc_61(t), c_69(t), c_158(u), c_157(u), c_156(t), c_155(t), c_89, \nc_88, c_94, c_153 found in e_67 : 154 factors in 28 terms\n\nStep 131: \nnew function: c_159(t)\nreplacing df(c_156,t) by c_159(t)\n\nnew function: c_160(u)\nreplacing df(c_157,2,u) by c_160(u)\n\nnew function: c_161(t)\nreplacing df(c_61,t) by c_161(t)\n\nStep 132: \nSubstitution of c_138(x,h,u) by an expression in \nc_133(x,h,u) found in e_46 : \nc_138= - c_133\n              x\n\n\nStep 133: \nSubstitution of c_116(x,u) by an expression in \nc_147(x,u), c_90, c_88, c_92 found in e_6 : 31 factors in 6 terms\n\nStep 134: \ngeneralized separation of e_57\nseparation w.r.t. b . \nseparation w.r.t. x . \nnew constant: c_162\nnew constant: c_163\nnew function: c_164(x,h)\nseparation yields 4 new equations : e_52,e_58,e_32,e_54\n\nStep 135: \nSeparation of e_32 yields (e_25 e_18 e_33)\n\nStep 136: \nStep 137: \nSeparation of e_58 yields (e_34 e_13)\n\nStep 138: \nSeparation of e_52 yields (e_20 e_31)\n\nStep 139: \nSeparation of e_33 yields (e_12 e_35)\n\ne_12 is a consequence of e_31.\ne_35 is a consequence of e_13.\nStep 140: \nSeparation of e_18 yields (e_8 e_21)\n\ne_8 is a consequence of e_20.\ne_21 is a consequence of e_34.\nStep 141: \nSubstitution of c_89 found in e_34 : \nc_89=0\n\n\nStep 142: \nStep 143: \nSubstitution of c_94 found in e_20 : \nc_94=0\n\n\nStep 144: \nStep 145: \nnew function: c_165(x,h)\nnew function: c_166(x,h)\nnew function: c_167(x,h)\nnew function: c_168(x,b)\nnew function: c_169(h,b)\nnew function: c_170(h,b)\nPartially potential integration of e_25 yields (e_25 e_1 e_38 e_40)\n\nStep 146: \nSubstitution of c_166(x,h) by an expression in \nc_167(x,h) found in e_40 : \nc_166=c_167\n           x\n\n\nStep 147: \nSubstitution of c_165(x,h) by an expression in \nc_167(x,h) found in e_38 : \nc_165=c_167\n           2x\n\n\nStep 148: \nSubstitution of c_164(x,h) by an expression in \nc_167(x,h) found in e_1 : \nc_164=c_167\n           h,2x\n\n\nStep 149: \nSubstitution of c_123(x,h,b) by an expression in \nc_170(h,b), c_169(h,b), c_168(x,b), c_167(x,h) found in e_25 : 5 factors in 4\n terms\n\nStep 150: \nnew function: c_171(h,u)\nIntegration of e_54\n\nStep 151: \nSubstitution of c_46(x,h,u) by an expression in \nc_133(x,h,u), c_147(x,u), c_167(x,h), c_171(h,u) found in e_54 : 32 factors in 8\n terms\n\nStep 152: \ngeneralized separation of e_15\nnew function: c_172(u)\nseparation yields 2 new equations : e_41,e_39\n\nStep 153: \nSubstitution of c_115(t,u) by an expression in \nc_69(t), c_159(t), c_161(t), c_172(u), c_88, c_153 found in e_39 : 50\n factors in 9 terms\n\nStep 154: \nnew function: c_173(u)\nNot enough integrations to solve for a function.\ngeneralized separation of e_10\nseparation w.r.t. x . \nseparation w.r.t. b . \nnew function: c_174(t)\nnew function: c_175(t)\nnew function: c_176(t,h)\nseparation yields 4 new equations : e_44,e_11,e_42,e_43\n\nStep 155: \nSeparation of e_43 yields (e_37 e_30 e_14)\n\nStep 156: \nSeparation of e_11 yields (e_24 e_17)\n\nStep 157: \nSeparation of e_44 yields (e_50 e_49)\n\nStep 158: \nSeparation of e_37 yields (e_36 e_51)\n\ne_36 is a consequence of e_49.\ne_51 is a consequence of e_17.\nStep 159: \nSeparation of e_30 yields (e_27 e_63)\n\ne_27 is a consequence of e_50.\ne_63 is a consequence of e_24.\nStep 160: \nStep 161: \nStep 162: \nnew constant: c_177\nnew constant: c_178\nIntegration of e_50\n\nStep 163: \nSubstitution of c_159(t) by an expression in \nc_178, c_177 found in e_50 : 3 factors in 2 terms\n\nStep 164: \nnew constant: c_179\nnew constant: c_180\nIntegration of e_24\n\nStep 165: \nSubstitution of c_69(t) by an expression in \nc_180, c_179 found in e_24 : 3 factors in 2 terms\n\nStep 166: \nThe integrated equation: 15 factors in 3 terms\n\nAn integrating factor has been found:\n   1\n-------\n  m  2\n u *u\n\n\nnew function: c_181(t,h)\nnew function: c_182(t,h)\nnew function: c_183(t,h)\nnew function: c_184(h,u)\nnew function: c_185(h,u)\nPartially potential integration of e_42 yields (e_42 e_56 e_64)\n\nStep 167: \nSubstitution of c_176(t,h) by an expression in \nc_181(t,h) found in e_64 : \nc_176=c_181\n           t\n\n\nStep 168: \nSubstitution of c_181(t,h) by an expression in \nc_182(t,h) found in e_56 : \nc_181=c_182\n           t\n\n\nStep 169: \nSubstitution of c_136(t,h,u) by an expression in \nc_75(t,h,u), c_128(t,u), c_141(t,u), c_185(h,u), c_184(h,u), c_183(t,h), \nc_182(t,h), c_88, c_153 found in e_42 : 125 factors in 25 terms\n\nStep 170: \nnew function: c_186(h,u)\nreplacing df(c_184,u) by c_186(h,u)\n\nStep 171: \nSubstitution of c_182(t,h) by an (separable) expression in \nc_41(x,h,u,b), c_77(h,u,b), c_125(h,u,b), c_124(h,u,b), c_133(x,h,u), \nc_130(u,b), c_129(u,b), c_143(x,u), c_149(u,b), c_148(x,b), c_147(x,u), \nc_146(u,b), c_170(h,b), c_169(h,b), c_168(x,b), c_167(x,h), c_185(h,u), \nc_186(h,u), c_63(x), c_70(x), c_145(u), c_158(u), c_160(u), c_90, \nc_88, c_92, c_91, c_95, c_93, c_97, c_96, c_98, c_151, \nc_150, c_154, c_153, c_152, c_180, c_179 found in e_19 : 2021 factors in 284\n terms\n\nStep 172: \nSeparation of e_47 yields (e_66 e_68 e_71)\n\nStep 173: \nSubstitution of c_153 by an expression in \nc_88 found in e_66 : 2 factors in 3 terms\n\nStep 174: \nStep 175: \ngeneralized separation of e_14\nnew function: c_187(x)\nseparation yields 2 new equations : e_65,e_70\n\nStep 176: \ngeneralized separation of e_65\nnew function: c_188(t)\nseparation yields 2 new equations : e_23,e_26\n\nStep 177: \ngeneralized separation of e_23\nnew constant: c_189\nseparation yields 2 new equations : e_28,e_22\n\nStep 178: \nStep 179: \nStep 180: \nSubstitution of c_187(x) by an expression in \nc_189 found in e_28 : \nc_187=c_189\n\n\nStep 181: \nSubstitution of c_188(t) by an expression in \nc_178, c_189 found in e_22 : 2 factors in 2 terms\n\nStep 182: \nStep 183: \nnew function: c_190(h)\nnew function: c_191(h)\nIntegration of e_26\n\nStep 184: \nSubstitution of c_182(t,h) by an expression in \nc_191(h), c_190(h), c_88, c_178, c_189 found in e_26 : 21 factors in 7 terms\n\nStep 185: \nSeparation of e_60 yields (e_16 e_48)\n\nStep 186: \nSeparation of e_16 yields (e_72 e_53)\n\nStep 187: \nSeparation of e_4 yields (e_55 e_69)\n\nStep 188: \ne_67 is a consequence of e_62.\ne_46 is a consequence of e_62.\nSeparation of e_55 yields (e_62 e_6)\n\ne_62 is a consequence of e_53.\nStep 189: \nSeparation of e_9 yields (e_57 e_32)\n\nStep 190: \ne_52 is a consequence of e_58.\ne_12 is a consequence of e_58.\ne_18 is a consequence of e_58.\nSeparation of e_57 yields (e_58 e_8)\n\ne_58 is a consequence of e_53.\ne_8 is a consequence of e_6.\nStep 191: \nSeparation of e_19 yields (e_34 e_13 e_20)\n\nStep 192: \ne_40 is a consequence of e_31.\nSeparation of e_34 yields (e_31 e_38)\n\ne_31 is a consequence of e_53.\nStep 193: \nSeparation of e_13 yields (e_25 e_54)\n\ne_25 is a consequence of e_53.\nStep 194: \ne_6 is a consequence of e_38.\nSubstitution of c_189 found in e_72 : \nc_189=0\n\n\nStep 195: \nSubstitution of c_88 found in e_53 : \nc_88=0\n\n\nStep 196: \nSubstitution of c_178 found in e_38 : \nc_178=0\n\n\nStep 197: \nnew function: c_192(x)\nnew function: c_193(b)\nnew function: c_194(b)\nIntegration of e_70\n\nStep 198: \nSubstitution of c_148(x,b) by an expression in \nc_168(x,b), c_194(b), c_193(b), c_192(x) found in e_70 : 5 factors in 4 terms\n\nStep 199: \nnew function: c_195(u)\nNot enough integrations to solve for a function.\nStep 200: \nnew function: c_196(b)\nreplacing df(c_194,b) by c_196(b)\n\nnew function: c_197(x,u)\nreplacing df(c_147,x,u) by c_197(x,u)\n\nnew function: c_198(x,u)\nreplacing df(c_143,x) by c_198(x,u)\n\nStep 201: \nSubstitution of c_197(x,u) by an expression in \nc_198(x,u), c_145(u), c_158(u), c_172(u), c_90, c_92 found in e_5 : 29\n factors in 8 terms\n\nStep 202: \ngeneralized separation of e_29\nnew function: c_199(t,h,u)\nseparation yields 2 new equations : e_15,e_39\n\nStep 203: \ngeneralized separation of e_39\nnew function: c_200(h,u)\nseparation yields 2 new equations : e_45,e_10\n\nStep 204: \nnew function: c_201(t)\nreplacing df(c_155,t) by c_201(t)\n\nStep 205: \nStep 206: \nStep 207: \nnew function: c_202(h,u)\nreplacing df(c_185,u) by c_202(h,u)\n\nnew function: c_203(u)\nreplacing df(c_158,u) by c_203(u)\n\nStep 208: \nnew function: c_204(u)\nnew function: c_205(u)\nnew function: c_206(u,b)\nPotential integration of e_41 yields (e_41 e_11 e_2 e_43)\n\nStep 209: \nSubstitution of c_203(u) by an expression in \nc_204(u) found in e_43 : 2 factors in 2 terms\n\nStep 210: \nSubstitution of c_172(u) by an expression in \nc_205(u) found in e_2 : \nc_172=c_205\n           u\n\n\nStep 211: \nSubstitution of c_146(u,b) by an expression in \nc_206(u,b) found in e_11 : \nc_146=c_206\n           b\n\n\nStep 212: \nnew function: c_207(u)\nreplacing df(c_204,2,u) by c_207(u)\n\nStep 213: \nSubstitution of c_130(u,b) by an expression in \nc_206(u,b), c_205(u), c_207(u) found in e_41 : 8 factors in 3 terms\n\nStep 214: \nnew function: c_208(u)\nreplacing df(c_205,u) by c_208(u)\n\nStep 215: Eliminate \nc_125\n     b,h\n\nfrom e_59 and e_10. e_59: \n 16 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125   ,c_125   ,c_125   )\n       h,u      b,h      b,u\n\n\n  m\n{u }\n\nis replaced by e_3: \n 77 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125   ,c_125  ,c_125   ,c_125  )\n       h,u      2u      b,u      2b\n\n\n  m\n{u }\n\n\nStep 216: Eliminate \nc_125\n     3u\n\nfrom e_48 and e_69. e_48: \n 75 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125     ,c_125  ,c_125    ,c_125    ,c_125  ,c_125   ,c_125 )\n       b,h,u      3u      b,2u      2b,u      2u      b,u      u\n\n\n  m\n{u }\n\nis replaced by e_44: \n 49 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125     ,c_125    ,c_125    ,c_125  ,c_125   )\n       b,h,u      b,2u      2b,u      3b      b,u\n\n\n  m\n{u }\n\n\nStep 217: \nnew function: c_209(h,u)\nNot enough integrations to solve for a function.\nnew function: c_210(h,u)\nIntegration of e_44\n\nStep 218: Eliminate \nc_125\n     h,u\n\nfrom e_44 and e_3. e_44: \n 50 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125   ,c_125  ,c_125   ,c_125  ,c_125 )\n       h,u      2u      b,u      2b      u\n\n\n  m\n{u }\n\nis replaced by e_7: \n 68 terms, with derivatives of functions of all 3 variables: h,u,b\n\n (c_125 )\n       u\n\n\n  m\n{u }\n\n\nStep 219: \nThe integrated equation: 15 factors in 3 terms\n\nAn integrating factor has been found:\n 1\n----\n  2\n u\n\n\nnew function: c_211(u)\nnew function: c_212(h,u)\nnew function: c_213(h,u)\nnew function: c_214(h,u)\nnew function: c_215(h,b)\nPartially potential integration of e_7 yields (e_7 e_61 e_51 e_36 e_37)\n\nStep 220: \nSubstitution of c_208(u) by an expression in \nc_211(u) found in e_37 : 3 factors in 1 terms\n\nStep 221: \nSubstitution of c_171(h,u) by an expression in \nc_212(h,u) found in e_36 : 3 factors in 1 terms\n\nStep 222: \nSubstitution of c_200(h,u) by an expression in \nc_213(h,u) found in e_51 : 3 factors in 1 terms\n\nStep 223: \nStep 224: \nSubstitution of c_125(h,u,b) by an expression in \nc_206(u,b), c_215(h,b), c_214(h,u), c_213(h,u), c_212(h,u), c_211(u), \nc_90, c_92, c_95, c_97, c_151, c_154, c_177, c_180 found in e_7 : 672\n factors in 133 terms\n\nStep 225: \nSeparation of e_68 yields (e_30 e_27)\n\nStep 226: \nSeparation of e_54 yields (e_63 e_17)\n\nStep 227: \ne_64 is a consequence of e_24.\nSeparation of e_63 yields (e_49 e_24)\n\ne_24 is a consequence of e_30.\nStep 228: \nSubstitution of c_95 by an expression in \nc_151 found in e_30 : 5 factors in 1 terms\n\nStep 229: \nSubstitution of c_154 by an expression in \nc_90 found in e_49 : 2 factors in 1 terms\n\nStep 230: \nnew function: c_216(u)\nreplacing df(c_211,u) by c_216(u)\n\nnew function: c_217(h,b)\nreplacing df(c_215,b) by c_217(h,b)\n\nnew function: c_218(h,u)\nreplacing df(c_212,u) by c_218(h,u)\n\nnew function: c_219(h,u)\nreplacing df(c_213,u) by c_219(h,u)\n\nnew function: c_220(h,u)\nreplacing df(c_214,u) by c_220(h,u)\n\nStep 231: \nThe integrated equation: 49 factors in 15 terms\n\nAn integrating factor has been found:\n  1\n------\n  m\n u *u\n\n\nnew function: c_221(h)\nIntegration of e_17\n\nStep 232: \nSubstitution of c_202(h,u) by an expression in \nc_218(h,u), c_219(h,u), c_220(h,u), c_191(h), c_221(h), c_92, c_97, \nc_180 found in e_17 : 92 factors in 28 terms\n\nStep 233: \nSeparation of e_32 yields (e_47 e_42 e_66)\n\nStep 234: \ne_42 is a consequence of e_69.\nSubstitution of c_180 by an expression in \nc_92 found in e_47 : 3 factors in 3 terms\n\nStep 235: \nnew constant: c_222\nIntegration of e_27\n\nStep 236: \nSubstitution of c_221(h) by an expression in \nc_97, c_222 found in e_27 : 16 factors in 4 terms\n\nStep 237: \nnew function: c_223(b)\nnew function: c_224(h)\nnew function: c_225(h)\nPartially potential integration of e_69 yields (e_69 e_14)\n\nStep 238: \nSubstitution of c_196(b) by an expression in \nc_223(b) found in e_14 : \nc_196=c_223\n           b\n\n\nStep 239: \nSubstitution of c_217(h,b) by an expression in \nc_170(h,b), c_225(h), c_224(h), c_223(b) found in e_69 : 13 factors in 6 terms\n\nStep 240: \nSeparation of e_10 yields (e_65 e_23)\n\nStep 241: \nnew constant: c_226\nIntegration of e_65\n\nStep 242: \nSubstitution of c_225(h) by an expression in \nc_226 found in e_65 : \nc_225= - c_226\n\n\nStep 243: \nSubstitution of c_222 by an expression in \nc_226 found in e_66 : 4 factors in 2 terms\n\nStep 244: \nnew function: c_227(u)Eliminate \nc_218\n     u\n\nfrom e_23 and e_3. e_3: \n 54 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_219 ,c_219,c_220 ,c_220 )\n       h      u            h      u            h      u\n\n\n  m\n{u }\n\nis replaced by e_28: \n 33 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_220 )\n       h            h      h\n\n\n  m\n{u }\n\n\nStep 245: \nnew function: c_228(h)\nreplacing df(c_224,h) by c_228(h)\n\nStep 246: Eliminate \nc_218\n     h,u\n\nfrom e_28 and e_23. e_22 is added: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\n\nStep 247: \nnew function: c_229(h)\nnew function: c_230(u)Eliminate \nc_218\n     u\n\nfrom e_23 and e_22. e_22: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\nis replaced by e_26: \n 62 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_219 ,c_219,c_220 ,c_220 )\n       h            h      u            h      u\n\n\n  m\n{u }\n\n\nStep 248: \nnew function: c_231(u)\nnew function: c_232(h)Eliminate \nc_218\n     h\n\nfrom e_28 and e_26. e_26: \n 62 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_219 ,c_219,c_220 ,c_220 )\n       h            h      u            h      u\n\n\n  m\n{u }\n\nis replaced by e_60: \n 44 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_219 ,c_219 ,c_219,c_220 )\n       h      u            u\n\n\n  m\n{u }\n\n\nStep 249: \nnew function: c_233(u)\nnew function: c_234(h)Eliminate \nc_219\n     h\n\nfrom e_60 and e_28. e_28: \n 33 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_220 )\n       h            h      h\n\n\n  m\n{u }\n\nis replaced by e_16: \n 53 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h            u            h      u\n\n\n  m\n{u }\n\n\nStep 250: \nnew function: c_235(u)\nnew function: c_236(h)Eliminate \nc_218\n     h,u\n\nfrom e_23 and e_16. e_4 is added: \n 75 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219   ,c_219  ,c_219 ,c_219 ,c_219,c_220  ,c_220 ,c_220\n       h      u            h,u      2u      h      u            2u      h      u\n\n)\n\n\n  m\n{u }\n\n\nStep 251: Eliminate \nc_219\n     h,u\n\nfrom e_60 and e_4. e_4: \n 75 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219   ,c_219  ,c_219 ,c_219 ,c_219,c_220  ,c_220 ,c_220\n       h      u            h,u      2u      h      u            2u      h      u\n\n)\n\n\n  m\n{u }\n\nis replaced by e_67: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\n\nStep 252: \nnew function: c_237(h)\nnew function: c_238(u)Eliminate \nc_219\n     h\n\nfrom e_60 and e_67. e_67: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\nis replaced by e_46: \n 67 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h      u            u            h      u\n\n\n  m\n{u }\n\n\nStep 253: \nnew function: c_239(u)\nnew function: c_240(h)Eliminate \nc_218\n     u\n\nfrom e_23 and e_46. e_46: \n 67 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h      u            u            h      u\n\n\n  m\n{u }\n\nis replaced by e_55: \n 53 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h            u            h      u\n\n\n  m\n{u }\n\n\ne_55 is a consequence of e_16.\nStep 254: \nFrom now on lexicographic ordering of derivatives.\nStep 255: Eliminate \nc_218\n     h,u\n\nfrom e_23 and e_16. e_62 is added: \n 75 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219   ,c_219 ,c_219  ,c_219 ,c_219,c_220 ,c_220  ,c_220\n       h      u            h,u      h      2u      u            h      2u      u\n\n)\n\n\n  m\n{u }\n\n\nStep 256: Eliminate \nc_219\n     h,u\n\nfrom e_60 and e_62. e_62: \n 75 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219   ,c_219 ,c_219  ,c_219 ,c_219,c_220 ,c_220  ,c_220\n       h      u            h,u      h      2u      u            h      2u      u\n\n)\n\n\n  m\n{u }\n\nis replaced by e_9: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\n\nStep 257: \nnew function: c_241(h)\nnew function: c_242(u)Eliminate \nc_219\n     h\n\nfrom e_60 and e_9. e_9: \n 40 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_220 )\n       h      u            h      h\n\n\n  m\n{u }\n\nis replaced by e_52: \n 67 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h      u            u            h      u\n\n\n  m\n{u }\n\n\nStep 258: \nnew function: c_243(u)\nnew function: c_244(h)Eliminate \nc_218\n     u\n\nfrom e_23 and e_52. e_52: \n 67 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h      u            u            h      u\n\n\n  m\n{u }\n\nis replaced by e_33: \n 53 terms, with derivatives of functions of all 2 variables: h,u\n\n (c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h            u            h      u\n\n\n  m\n{u }\n\n\ne_33 is a consequence of e_16.\nStep 259: \nThe current variable ordering is going to be reversed.\nStep 260: Eliminate \nc_219\n     u\n\nfrom e_60 and e_16. e_16: \n 53 terms, with derivatives of functions of all 2 variables: u,h\n\n (c_218 ,c_218,c_219 ,c_219,c_220 ,c_220 )\n       h            u            u      h\n\n\n  m\n{u }\n\nis replaced by e_12: \n 33 terms, with derivatives of functions of all 2 variables: u,h\n\n (c_218 ,c_218,c_219 ,c_220 )\n       h            h      h\n\n\n  m\n{u }\n\n\nStep 261: Eliminate \nc_219\n     u\n\nfrom e_60 and e_23. e_23: \n 34 terms, with derivatives of functions of all 2 variables: u,h\n\n (c_218 ,c_219 ,c_219,c_220 )\n       u      u            u\n\n\n  m\n{u }\n\nis replaced by e_35: \n 18 terms, with derivatives of functions of all 2 variables: u,h\n\n (c_218 ,c_219 )\n       u      h\n\n\n  m\n{u }\n\n\nStep 262: \nnew function: c_245(h)\nnew function: c_246(u,h)\nPartially potential integration of e_35 yields (e_35 e_18 e_21)\n\nStep 263: \nSubstitution of c_218(u,h) by an expression in \nc_246(u,h), c_228(h), c_245(h) found in e_21 : 9 factors in 5 terms\n\nStep 264: \nSubstitution of c_228(h) by an expression in \nc_245(h) found in e_18 : \nc_228=c_245\n           h\n\n\nStep 265: \nnew function: c_247(u)\nIntegration of e_12\n\nStep 266: \nSubstitution of c_219(u,h) by an expression in \nc_220(u,h), c_246(u,h), c_216(u), c_245(h), c_247(u), c_90, c_92, \nc_97, c_151, c_177 found in e_12 : 198 factors in 31 terms\n\nStep 267: \nThe integrated equation: 23 factors in 5 terms\n\nAn integrating factor has been found:\n  m\n h\n----\n h\n\n\nnew function: c_248(u)\nIntegration of e_60\n\nStep 268: \nSubstitution of c_220(u,h) by an expression in \nc_246(u,h), c_216(u), c_245(h), c_247(u), c_248(u), c_90, c_92, \nc_97, c_151, c_177, c_226 found in e_60 : 348 factors in 50 terms\n\nStep 269: \nSeparation of e_35 yields (e_58 e_57)\n\nStep 270: \nStep 271: \n\n>>>>>>>>> Solution : \nSTRICT_CRACK_BRANCH_BEGIN$\n\n{{},\n{xi_t=( - 2*c_179*m - c_92*m*t - c_92*t)/(2*g**3*k*m**3 + 2*g**3*k*m**2),\nxi_x=(2*c_150*g*k*m**2 - c_91 - c_92*x)/(2*g**3*k*m**2),\neta_h=0,\neta_u=0,\neta_b=( - c_226)/(24*g**5*k*m**6 - 48*g**5*k*m**5 - 24*g**5*k*m**4 + 48*g**5*k*m\n**3)},\n{c_92,\nc_91,\nc_150,\nc_179,\nc_226},\n{}}$\n\nSTRICT_CRACK_BRANCH_END$\n\nThis is the end of the CRACK run\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n12: \n13: \nLIESYMM_RESULT_BEGIN$\n\n14: \n{{{},\n{eta_b=( - c_226)/(24*g**5*k*m**6 - 48*g**5*k*m**5 - 24*g**5*k*m**4 + 48*g**5*k*\nm**3),\neta_u=0,\neta_h=0,\nxi_x=(2*c_150*g*k*m**2 - c_91 - c_92*x)/(2*g**3*k*m**2),\nxi_t=( - 2*c_179*m - c_92*m*t - c_92*t)/(2*g**3*k*m**3 + 2*g**3*k*m**2)},\n{c_92,\nc_91,\nc_150,\nc_179,\nc_226},\n{}}}$\n\n15: \nLIESYMM_END$\n\n16: ",
+    "stderr": "",
+    "timeout_seconds": 1800,
+    "memory_bytes": 8000000000,
+    "raw_files": [
+      "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.input.red",
+      "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.stdout.log",
+      "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.stderr.log"
+    ],
+    "peak_rss_bytes": 402120704,
+    "elapsed_seconds": 3.9032212258316576,
+    "name": "direct-generic",
+    "linux_cleanup": {
+      "status": "terminated",
+      "process_group": 1401394,
+      "kill_returncode": 1,
+      "check_returncode": 1
+    },
+    "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+    "parse_error": "Malformed LIEPDE branch",
+    "execution_kind": "historical_output_revalidation"
+  },
+  "cas_script": "off echo$\nload_package crack$\n\nalgebraic procedure crack_out(eqns,assigns,freef,ineq,solno);\nbegin\n  off nat;\n  write \"STRICT_CRACK_BRANCH_BEGIN\";\n  write {eqns,assigns,freef,ineq};\n  write \"STRICT_CRACK_BRANCH_END\";\n  on nat;\n  return {}\nend$\nlisp(call_crack_out:=t)$\n\nlisp(print_:=1)$\ndepend xi_t,t,x,h,u,b$\ndepend xi_x,t,x,h,u,b$\ndepend eta_h,t,x,h,u,b$\ndepend eta_u,t,x,h,u,b$\ndepend eta_B,t,x,h,u,b$\nstrictresult:=crack({(g*h*df(xi_t,b)),((g*df(xi_x,u))+((u**2)*df(xi_t,b))+(-1*u*df(xi_x,b))+(g*h*df(xi_t,b))+(g*h*df(xi_t,h))+(-1*g*u*df(xi_t,u))),(h*((-1*df(xi_x,b))+(2*u*df(xi_t,b)))),((h*df(eta_u,b))+(u*df(eta_h,b))+(-1*g*df(eta_h,u))+(g*h*df(xi_t,x))),(g*((h*df(xi_t,h))+(-1*u*df(xi_t,u))+df(xi_x,u))),(m*k*(u**m)*((-1*df(xi_t,b))+((u**-1)*df(xi_x,b)))),((-1*df(xi_x,t))+(h*df(eta_u,h))+(u*df(xi_t,t))+((u**2)*df(xi_t,x))+(-1*g*df(eta_h,u))+(-1*u*df(xi_x,x))+(g*h*df(xi_t,x))+eta_u),(h*((-1*df(xi_x,u))+(u*df(xi_t,u))+(-1*h*df(xi_t,h))+(-1*m*k*(u**-1)*(u**m)*df(xi_t,b)))),((h*df(eta_u,u))+(h*df(xi_t,t))+(-1*h*df(eta_h,h))+(-1*h*df(xi_x,x))+(2*h*u*df(xi_t,x))+(-1*m*k*(u**-1)*(u**m)*df(eta_h,b))+eta_h),((h*df(eta_u,x))+(u*df(eta_h,x))+df(eta_h,t)),(g*((-1*df(xi_x,b))+(u*df(xi_t,b))+(-1*g*df(xi_t,u)))),(g*((-1*df(xi_x,b))+(-1*df(xi_x,h))+(-2*g*df(xi_t,u))+(2*u*df(xi_t,b)))),(((u**2)*df(xi_t,b))+(-1*u*df(xi_x,b))+(g*h*df(xi_t,b))+(-1*g*h*df(xi_t,h))+(-1*g*u*df(xi_t,u))),((g*df(eta_B,b))+(g*df(eta_h,b))+(g*df(xi_t,t))+(u*df(eta_u,b))+(-1*g*df(eta_u,u))+(-1*g*df(xi_x,x))+(g*u*df(xi_t,x))),(g*((-1*df(xi_x,h))+(u*df(xi_t,h))+(-1*g*df(xi_t,u)))),(m*k*g*(u**-1)*(u**m)*((-1*df(xi_t,b))+df(xi_t,h))),(g*((-1*df(eta_u,u))+(-1*df(xi_x,x))+(2*u*df(xi_t,x))+df(eta_B,h)+df(eta_h,h)+df(xi_t,t))),((h*df(xi_x,h))+(g*h*df(xi_t,u))+(-1*h*u*df(xi_t,h))+(-1*m*k*(u**m)*df(xi_t,b))+(m*k*(u**-1)*(u**m)*df(xi_x,b))+(m*k*g*(u**-1)*(u**m)*df(xi_t,u))),((-1*df(xi_x,t))+(g*df(eta_B,u))+(g*df(eta_h,u))+(u*df(xi_t,t))+((u**2)*df(xi_t,x))+(-1*h*df(eta_u,h))+(-1*u*df(xi_x,x))+(g*h*df(xi_t,x))+(-1*m*k*(u**-1)*(u**m)*df(eta_u,b))+(m*k*g*(u**-1)*(u**m)*df(xi_t,x))+eta_u),((g*df(eta_B,x))+(g*df(eta_h,x))+(u*df(eta_u,x))+df(eta_u,t)),(g*((m*k*(u**-1)*(u**m)*df(xi_t,b))+df(xi_x,u))),((g*df(xi_x,u))+(u*df(xi_x,h))+(m*k*g*(u**-1)*(u**m)*df(xi_t,b))+(m*k*g*(u**-1)*(u**m)*df(xi_t,h))),((h*df(xi_x,h))+(u*df(xi_x,u))+(m*k*(u**m)*df(xi_t,b))),((-1*df(xi_x,t))+(-1*g*df(eta_B,u))+(m*k*(u**-1)*(u**m)*df(eta_u,b))+(m*k*g*(u**-1)*(u**m)*df(xi_t,x))),(m*k*g*(u**-1)*(u**m)*df(xi_t,h)),(-1*m*k*(u**-1)*(u**m)*df(xi_x,h)),((-1*g*df(eta_B,u))+(-1*u*df(eta_B,h))+(m*k*(u**-1)*(u**m)*df(eta_u,h))+(m*k*g*(u**-1)*(u**m)*df(xi_t,x))),(-1*m*k*(u**-1)*(u**m)*((h*df(xi_t,h))+(m*k*(u**-1)*(u**m)*df(xi_t,b))+df(xi_x,u))),((-1*h*df(eta_B,h))+(-1*u*df(eta_B,u))+(m*k*(u**m)*df(xi_t,x))+(m*k*(u**-1)*(u**m)*df(eta_u,u))+(m*k*(u**-1)*(u**m)*df(xi_t,t))+(k*(m**2)*(u**-2)*(u**m)*eta_u)+(-1*m*k*(u**-1)*(u**m)*df(eta_B,b))+(-1*m*k*(u**-1)*(u**m)*df(xi_x,x))+(-1*m*k*(u**-2)*(u**m)*eta_u)),((m*k*(u**-1)*(u**m)*df(eta_u,x))+df(eta_B,t))},{k,(-3+m),g},{xi_t,xi_x,eta_h,eta_u,eta_B},{t,x,h,u,b})$\noff nat$\nwrite \"LIESYMM_RESULT_BEGIN\"$\nwrite strictresult$\nwrite \"LIESYMM_END\"$\nquit$\n",
+  "classification_status": "incomplete",
+  "general_solution": null,
+  "reduction_status": "blocked",
+  "obligations": [
+    "CAS branch inequations and exhaustive parameter coverage",
+    "independent solution substitution",
+    "characteristic integration",
+    "data compatibility",
+    "Python derivation resource isolation"
+  ],
+  "input_sha256": "60d781bea70af00602d4778d47e1adcbd8c4026b8f6d500766d9177e43db08b8",
+  "cas_mode": "crack",
+  "cas_solution": {
+    "branches": [
+      {
+        "remaining": [],
+        "assignments": {
+          "eta_b": "-c_226/(24*K*g**5*m**6 - 48*K*g**5*m**5 - 24*K*g**5*m**4 + 48*K*g**5*m**3)",
+          "eta_u": "0",
+          "eta_h": "0",
+          "xi_x": "(2*K*c_150*g*m**2 - c_91 - c_92*x)/(2*K*g**3*m**2)",
+          "xi_t": "(-2*c_179*m - c_92*m*t - c_92*t)/(2*K*g**3*m**3 + 2*K*g**3*m**2)"
+        },
+        "free": [
+          "c_92",
+          "c_91",
+          "c_150",
+          "c_179",
+          "c_226"
+        ],
+        "nonzero_conditions": []
+      }
+    ],
+    "solved": true,
+    "parameter_coverage": "unverified",
+    "inequalities": "returned_by_crack"
+  },
+  "crack_solution": {
+    "branches": [
+      {
+        "remaining": [],
+        "assignments": {
+          "xi_t": "(-2*c_179*m - c_92*m*t - c_92*t)/(2*K*g**3*m**3 + 2*K*g**3*m**2)",
+          "xi_x": "(2*K*c_150*g*m**2 - c_91 - c_92*x)/(2*K*g**3*m**2)",
+          "eta_h": "0",
+          "eta_u": "0",
+          "eta_b": "-c_226/(24*K*g**5*m**6 - 48*K*g**5*m**5 - 24*K*g**5*m**4 + 48*K*g**5*m**3)"
+        },
+        "free": [
+          "c_92",
+          "c_91",
+          "c_150",
+          "c_179",
+          "c_226"
+        ],
+        "nonzero_conditions": []
+      }
+    ],
+    "parameter_coverage": "unverified",
+    "scope": "Raw CRACK terminal-branch conditions; correspondence to final LIEPDE families unverified"
+  },
+  "branch_correspondence": {
+    "matched": true,
+    "matches": [
+      {
+        "branch_index": 0,
+        "trace_index": 0,
+        "nonzero_conditions": [],
+        "matching_rank_guards": []
+      }
+    ],
+    "parameter_coverage": "unverified",
+    "scope": "Terminal-family correspondence; not a completeness proof"
+  },
+  "independent_checks": [
+    {
+      "status": "checked-returned-family",
+      "basis": [
+        [
+          "(-m*t - t)/(2*K*g**3*m**3 + 2*K*g**3*m**2)",
+          "-x/(2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1/(2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "g**(-2)",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "-2*m/(2*K*g**3*m**3 + 2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1/(24*K*g**5*m**6 - 48*K*g**5*m**5 - 24*K*g**5*m**4 + 48*K*g**5*m**3)"
+        ]
+      ],
+      "parameter_substitutions": {},
+      "guard_checks": [
+        {
+          "guard": "h>0",
+          "condition": "True",
+          "status": "true"
+        },
+        {
+          "guard": "u>0",
+          "condition": "True",
+          "status": "true"
+        },
+        {
+          "guard": "g>0",
+          "condition": "True",
+          "status": "true"
+        },
+        {
+          "guard": "K>0",
+          "condition": "K > 0",
+          "status": "conditional"
+        },
+        {
+          "guard": "1<=m<=4",
+          "condition": "(m >= 1) & (m <= 4)",
+          "status": "conditional"
+        },
+        {
+          "guard": "m!=3",
+          "condition": "Ne(m, 3)",
+          "status": "conditional"
+        },
+        {
+          "guard": "Ne(24*K*g**5*m**3*(m**3 - 2*m**2 - m + 2), 0)",
+          "condition": "Ne(24*K*g**5*m**3*(m**3 - 2*m**2 - m + 2), 0)",
+          "status": "conditional",
+          "origin": "CAS_assignment_denominator"
+        },
+        {
+          "guard": "Ne(2*K*g**3*m**2, 0)",
+          "condition": "Ne(2*K*g**3*m**2, 0)",
+          "status": "conditional",
+          "origin": "CAS_assignment_denominator"
+        },
+        {
+          "guard": "Ne(2*K*g**3*m**2*(m + 1), 0)",
+          "condition": "Ne(2*K*g**3*m**2*(m + 1), 0)",
+          "status": "conditional",
+          "origin": "CAS_assignment_denominator"
+        }
+      ],
+      "positive_power_bases": [
+        "K"
+      ],
+      "determining_residuals": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "residuals": [
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "verified": true
+    }
+  ],
+  "returned_family_verified": true,
+  "guard_status": "parsed_with_conditions",
+  "translation_reduction": {
+    "status": "partial",
+    "chains": [
+      {
+        "category": "implicit_ODE_DAE",
+        "subalgebra": [
+          [
+            "0",
+            "-1/(2*K*g**3*m**2)",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "brackets": "zero_constant_translations",
+        "projection_rank": 1,
+        "characteristic_equations": [
+          [
+            "0",
+            "-1/(2*K*g**3*m**2)"
+          ]
+        ],
+        "invariant": "t",
+        "coordinate_determinant": "-1/(2*K*g**3*m**2)",
+        "inverse_coordinates": {
+          "t": "strict_z",
+          "x": "-2*K*g**3*m**2*strict_orbit0"
+        },
+        "coordinate_guard": "True",
+        "profiles": [
+          "strict_U0(strict_z)",
+          "strict_U1(strict_z)",
+          "strict_U2(strict_z)"
+        ],
+        "reduced_equations": [
+          "Derivative(strict_U0(strict_z), strict_z)",
+          "Derivative(strict_U1(strict_z), strict_z)",
+          "Derivative(strict_U2(strict_z), strict_z)"
+        ],
+        "denominators": [
+          "1",
+          "1",
+          "strict_U1(strict_z)"
+        ],
+        "guard_checks": [
+          {
+            "guard": "h>0",
+            "condition": "strict_U0(strict_z) > 0",
+            "status": "conditional"
+          },
+          {
+            "guard": "u>0",
+            "condition": "strict_U1(strict_z) > 0",
+            "status": "conditional"
+          },
+          {
+            "guard": "g>0",
+            "condition": "True",
+            "status": "true"
+          },
+          {
+            "guard": "K>0",
+            "condition": "K > 0",
+            "status": "conditional"
+          },
+          {
+            "guard": "1<=m<=4",
+            "condition": "(m >= 1) & (m <= 4)",
+            "status": "conditional"
+          },
+          {
+            "guard": "m!=3",
+            "condition": "Ne(m, 3)",
+            "status": "conditional"
+          },
+          {
+            "guard": "Ne(24*K*g**5*m**3*(m**3 - 2*m**2 - m + 2), 0)",
+            "condition": "Ne(24*K*g**5*m**3*(m**3 - 2*m**2 - m + 2), 0)",
+            "status": "conditional",
+            "origin": "CAS_assignment_denominator"
+          },
+          {
+            "guard": "Ne(2*K*g**3*m**2, 0)",
+            "condition": "Ne(2*K*g**3*m**2, 0)",
+            "status": "conditional",
+            "origin": "CAS_assignment_denominator"
+          },
+          {
+            "guard": "Ne(2*K*g**3*m**2*(m + 1), 0)",
+            "condition": "Ne(2*K*g**3*m**2*(m + 1), 0)",
+            "status": "conditional",
+            "origin": "CAS_assignment_denominator"
+          }
+        ],
+        "Q_zero": true,
+        "Q_residuals": [
+          "0",
+          "0",
+          "0"
+        ],
+        "reconstruction_raw_residuals": [
+          "Derivative(strict_U0(t), t) - Subs(Derivative(strict_U0(strict_z), strict_z), strict_z, t)",
+          "Derivative(strict_U1(t), t) - Subs(Derivative(strict_U1(strict_z), strict_z), strict_z, t)",
+          "Derivative(strict_U2(t), t) - Subs(Derivative(strict_U2(strict_z), strict_z), strict_z, t)"
+        ],
+        "reconstruction_positive_bases": [
+          "strict_U0(t)",
+          "strict_U1(t)",
+          "K"
+        ],
+        "reconstruction_residuals": [
+          "0",
+          "0",
+          "0"
+        ],
+        "reconstruction_identity_verified": true,
+        "parameter_substitutions": {}
+      }
+    ],
+    "data_status": "no_data_supplied",
+    "reason": "Checked translation reductions only; complete classification and other actions remain unresolved"
+  },
+  "algebra": [
+    {
+      "status": "verified_finite_algebra_closure",
+      "dimension": 4,
+      "basis": [
+        [
+          "(-m*t - t)/(2*K*g**3*m**3 + 2*K*g**3*m**2)",
+          "-x/(2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1/(2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "-2*m/(2*K*g**3*m**3 + 2*K*g**3*m**2)",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1/(24*K*g**5*m**6 - 48*K*g**5*m**5 - 24*K*g**5*m**4 + 48*K*g**5*m**3)"
+        ]
+      ],
+      "brackets": {
+        "0,1": [
+          "0",
+          "1/(2*K*g**3*m**2)",
+          "0",
+          "0"
+        ],
+        "0,2": [
+          "0",
+          "0",
+          "1/(2*K*g**3*m**2)",
+          "0"
+        ],
+        "0,3": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "1,2": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "1,3": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "2,3": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "parameter_substitutions": {},
+      "basis_rank_guard": "True",
+      "basis_rank_minor": "1/(96*K**4*g**14*m**8*(m - 2)*(m - 1)*(m + 1)**2)",
+      "nonzero_denominators": [
+        "2*K*g**3*m**2",
+        "K*g**3*m*(m + 1)",
+        "24*K*g**5*m**3*(m - 2)*(m - 1)*(m + 1)"
+      ],
+      "scope": "Finite constant-coefficient specialization of returned CAS family; not maximality"
+    }
+  ],
+  "revalidation": {
+    "original_receipt_sha256": "213b0b0f98f6defbd7f034f33f6e6199650f027ad9ff4d70e67414977d9de8ce",
+    "strict_source_sha256": "c154e90e82760a445a56616d73f022abd9e96082745233d8ef9d233279e45787",
+    "execution_kind": "historical_output_revalidation"
+  }
+}

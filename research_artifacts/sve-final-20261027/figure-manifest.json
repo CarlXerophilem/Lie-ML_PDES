@@ -1,0 +1,22 @@
+{
+  "script_sha256": "b7008e61e63b0fc5b185217bafd9ac5857d57be3cb8be29e280510cc2186fc57",
+  "inputs": {
+    "data/scalar-source-comparison.json": "08be869197e583e2c84b6d41c7b68e0cbf2cf6fbde5f42a61839e789c54bf0ce",
+    "data/revalidation-summary.json": "f6c5ad39243b2e3b85301c47394f0c728661585396e340ecea48f7165ebe5738",
+    "data/annular-numerical.json": "cf6047ca7e5da19a1a7f8a2f4c49eabc09eb12a4ea14b8b082518c37c13b05c1",
+    "data/remote-summary.json": "5ae16c07eb05bfdd7fc11a92915b8f4d8ce6c312ab3cc6568ce92becd9d3ac48"
+  },
+  "outputs": {
+    "draft/figures/final-20261027/source-audit.pdf": "282553c5f4a7f11d18beb6a9abaa0d9e036f8d4ca1eb043ff5bbac69b089a7e9",
+    "draft/figures/final-20261027/source-audit.png": "25436abe530853067071c7d5ec50bdacfe1581cdfaaf230d0a9af130b11f4217",
+    "draft/figures/final-20261027/strict-coverage.pdf": "092979627458ca1c59dce647e4d95577f15ebfeb33de7b612f64ba71cb6a6adb",
+    "draft/figures/final-20261027/strict-coverage.png": "d2c7c5eec52751b87f0d13965a8a4996a96759a203afa95393e6186cc98e6f2d",
+    "draft/figures/final-20261027/annular-fields.pdf": "394aa0541cdc02f34e782c1a94c732a258367a2b4881ede50897cabe03a8d58e",
+    "draft/figures/final-20261027/annular-fields.png": "460c30f99a77c5c38b2970cc93d2693587c364875d08b9a7b3300f2661d1b7ae",
+    "draft/figures/final-20261027/annular-verification.pdf": "0cd67a305d0f4a2f3df6782be24bec908738afdc6a41a49c61b10868de550429",
+    "draft/figures/final-20261027/annular-verification.png": "5538053c4f8bd059dd8e7f4ceba136d589dc0d51da4aa5a3625d98fbeea0c323",
+    "draft/figures/final-20261027/remote-runtime.pdf": "13b700b3b602292a63bb71021c31583eac7df0c0689434998e525083c0f83fa6",
+    "draft/figures/final-20261027/remote-runtime.png": "ecf12392c86ed7eed0dc4bc72755c65f5a2b3b821187b279ed1d72c656533b6b"
+  },
+  "no_new_solves": true
+}

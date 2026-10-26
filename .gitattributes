@@ -42,3 +42,25 @@ research_artifacts/archives-20261021/** -text whitespace=-blank-at-eol,-blank-at
 research_artifacts/archives-20261021/*.zip filter=lfs diff=lfs merge=lfs -text
 research_artifacts/sve-P-residual-20261021/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 research_artifacts/sve-P-residual-20261021/*.zip filter=lfs diff=lfs merge=lfs -text
+
+# Strict follow-up: exact receipt and authoring bytes across Windows/Linux.
+research_artifacts/sve-final-20261027/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+research_artifacts/sve-final-20261027/*.zip binary
+"draft/dissertation_2026 (1).tex" -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+"draft/dissertation_2026 (1).pdf" binary
+draft/dissertation_2026.tex -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+draft/figures/final-20261027/*.pdf binary
+draft/figures/final-20261027/*.png binary
+scripts/*strict*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/tests/test_strict*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/plot_final_dissertation.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/verify_eulerian_source.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/verify_dissertation_interfaces.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+symm/LieSymm/strict.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+symm/LieSymm/annular2d.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+symm/LieSymm/tests/test_strict.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+symm/LieSymm/tests/test_annular2d.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/tests/test_dissertation_interfaces.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/project_workflow.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+requirements.txt -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_artifacts/sve-final-20261027/sources/cas/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

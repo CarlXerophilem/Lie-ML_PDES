@@ -1,0 +1,24 @@
+[
+  {
+    "name": "wolf",
+    "url": "https://arxiv.org/pdf/cs/0301029",
+    "retrieved_at": "2026-10-26T16:03:16.220229+00:00",
+    "sha256": "1d2fad143a06a117598c5f3eb4a39ecaa169652d8a7476c37c238d963b244e99",
+    "bytes": 187674,
+    "access": "confirmed PDF, text extracted",
+    "license": "not assessed; PDF not redistributed",
+    "claim_anchor": "Section 2, equation length reduction",
+    "executed_implementation": false
+  },
+  {
+    "name": "thomas",
+    "url": "https://arxiv.org/pdf/1008.3767",
+    "retrieved_at": "2026-10-26T16:03:16.342909+00:00",
+    "sha256": "9689ca9a50d93c77ee207a8d39b18d2e5dbee580454c266aef3f472e2c0d3b57",
+    "bytes": 394530,
+    "access": "confirmed PDF, text extracted",
+    "license": "not assessed; PDF not redistributed",
+    "claim_anchor": "Sections 3.3 and 3.4, differential simple systems and decomposition",
+    "executed_implementation": false
+  }
+]

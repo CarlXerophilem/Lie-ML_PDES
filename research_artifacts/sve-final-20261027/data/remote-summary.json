@@ -1,0 +1,303 @@
+{
+  "budget_seconds": 7200,
+  "charged_seconds": 4564.403586823717,
+  "jobs": [
+    {
+      "name": "baseline",
+      "status": "timeout",
+      "returncode": 124,
+      "elapsed_seconds": 1800.01,
+      "timeout_seconds": 1800,
+      "memory_bytes": 1800000000,
+      "input_sha256": "5b9de16f878caf4559e54777f7c75109986fddb2a627e16c0179edd8e924c8c3",
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "peak_rss_kib": 873684,
+      "original_status": "timeout"
+    },
+    {
+      "command": [
+        "setsid",
+        "--wait",
+        "sh",
+        "-c",
+        "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+        "strict-cas",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-liepde.pid",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=5",
+        "60",
+        "prlimit",
+        "--as=8000000000",
+        "--",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+        "-w",
+        "-k128M",
+        "--maxmem",
+        "4096M",
+        "--no-rcfile",
+        "--stop-on-error"
+      ],
+      "input_sha256": "228dbe3d097bec2b88102985f7a86048b8f81cead6ba206f2a12e60493fc9c99",
+      "status": "unparsed",
+      "verified": false,
+      "returncode": 0,
+      "timeout_seconds": 60,
+      "memory_bytes": 8000000000,
+      "raw_files": [
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-liepde.input.red",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-liepde.stdout.log",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-liepde.stderr.log"
+      ],
+      "peak_rss_bytes": 402350080,
+      "elapsed_seconds": 0.7965572052635252,
+      "name": "official-liepde",
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1380151,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "original_status": "unparsed",
+      "diagnosis": "Distribution sample completed; not a target determining-system certificate"
+    },
+    {
+      "command": [
+        "setsid",
+        "--wait",
+        "sh",
+        "-c",
+        "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+        "strict-cas",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-applysym.pid",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=5",
+        "60",
+        "prlimit",
+        "--as=8000000000",
+        "--",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+        "-w",
+        "-k128M",
+        "--maxmem",
+        "4096M",
+        "--no-rcfile",
+        "--stop-on-error"
+      ],
+      "input_sha256": "75a637dd42a8941625745a44d0c17da8a9e3695de95742eef8958d34a4b06755",
+      "status": "unparsed",
+      "verified": false,
+      "returncode": 0,
+      "timeout_seconds": 60,
+      "memory_bytes": 8000000000,
+      "raw_files": [
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-applysym.input.red",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-applysym.stdout.log",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/official-applysym.stderr.log"
+      ],
+      "peak_rss_bytes": 96636928,
+      "elapsed_seconds": 0.15905629890039563,
+      "name": "official-applysym",
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1380163,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "original_status": "unparsed",
+      "diagnosis": "Distribution sample completed; not a target determining-system certificate"
+    },
+    {
+      "command": [
+        "setsid",
+        "--wait",
+        "sh",
+        "-c",
+        "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+        "strict-cas",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-classify.pid",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=5",
+        "1800",
+        "prlimit",
+        "--as=8000000000",
+        "--",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+        "-w",
+        "-k128M",
+        "--maxmem",
+        "4096M",
+        "--no-rcfile",
+        "--stop-on-error"
+      ],
+      "input_sha256": "f8d1950f1dc90a9048a0147a835b62d3c2988b5edc5a9b4b52bbb4dfe5bb84f6",
+      "status": "timeout",
+      "verified": false,
+      "returncode": -9,
+      "timeout_seconds": 1800,
+      "memory_bytes": 8000000000,
+      "raw_files": [
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-classify.input.red",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-classify.stdout.log",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-classify.stderr.log"
+      ],
+      "peak_rss_bytes": 1819774976,
+      "elapsed_seconds": 1800.0199837703258,
+      "name": "direct-classify",
+      "linux_cleanup": {
+        "status": "cleanup-failed",
+        "process_group": 1380169,
+        "kill_returncode": 0,
+        "check_returncode": 0
+      },
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "original_status": "timeout"
+    },
+    {
+      "command": [
+        "setsid",
+        "--wait",
+        "sh",
+        "-c",
+        "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+        "strict-cas",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/fixed-positive.pid",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=5",
+        "1800",
+        "prlimit",
+        "--as=8000000000",
+        "--",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+        "-w",
+        "-k128M",
+        "--maxmem",
+        "4096M",
+        "--no-rcfile",
+        "--stop-on-error"
+      ],
+      "input_sha256": "a260440a025811708870b9384c759fbc2edd48598d09502b8f0c524fb9757f66",
+      "status": "unparsed",
+      "verified": false,
+      "returncode": 0,
+      "timeout_seconds": 1800,
+      "memory_bytes": 8000000000,
+      "raw_files": [
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/fixed-positive.input.red",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/fixed-positive.stdout.log",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/fixed-positive.stderr.log"
+      ],
+      "peak_rss_bytes": 855408640,
+      "elapsed_seconds": 957.141970353201,
+      "name": "fixed-positive",
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1390057,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "parse_error": "Missing or incomplete LIEPDE result frame",
+      "original_status": "unparsed",
+      "diagnosis": "Exit 0 without terminal frame; abrupt output end, underlying cause not established"
+    },
+    {
+      "command": [
+        "setsid",
+        "--wait",
+        "sh",
+        "-c",
+        "printf \"%s\" \"$$\" > \"$1\"; shift; exec \"$@\"",
+        "strict-cas",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.pid",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=5",
+        "1800",
+        "prlimit",
+        "--as=8000000000",
+        "--",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/cas/runtime/usr/lib/reduce/cslbuild/csl/reduce",
+        "-w",
+        "-k128M",
+        "--maxmem",
+        "4096M",
+        "--no-rcfile",
+        "--stop-on-error"
+      ],
+      "input_sha256": "de1bbfff3ab9bc4f292632cc1b369373a28f5680a2c78475ff020bcda6fb7fd5",
+      "status": "returned-solved",
+      "verified": false,
+      "returncode": 0,
+      "timeout_seconds": 1800,
+      "memory_bytes": 8000000000,
+      "raw_files": [
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.input.red",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.stdout.log",
+        "/home/carl/research/projects/Lie-ML_PDES/build/strict-final-20261027/campaign/direct-generic.stderr.log"
+      ],
+      "peak_rss_bytes": 402120704,
+      "elapsed_seconds": 3.9032212258316576,
+      "name": "direct-generic",
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1401394,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "timing_scope": "CAS command including timeout/prlimit; excludes transfer and derivation",
+      "parse_error": "Malformed LIEPDE branch",
+      "original_status": "unparsed",
+      "returned_family_verified": true,
+      "algebra_dimension": 4,
+      "domain_note": "Assignment denominators exclude m=1,2; no completeness proof"
+    },
+    {
+      "name": "direct-m1",
+      "status": "returned-partial",
+      "elapsed_seconds": 0.7360064820386469,
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1402822,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "returned_family_verified": false,
+      "input_sha256": "44026532403bbbd0c026b70a943a0eba189b8fdadc62bbdbe33313a319ed7ba0"
+    },
+    {
+      "name": "direct-m2",
+      "status": "unparsed",
+      "elapsed_seconds": 1.6367914881557226,
+      "linux_cleanup": {
+        "status": "terminated",
+        "process_group": 1402828,
+        "kill_returncode": 1,
+        "check_returncode": 1
+      },
+      "returned_family_verified": false,
+      "input_sha256": "9c2933b8fa169c1502688f81886981f9e8dc963b5798013ab1140c87592bb78f"
+    }
+  ],
+  "strict_pass": false,
+  "status": "finished",
+  "initial_charged_seconds": 4562.030788853523,
+  "remaining_seconds": 2635.596413176283,
+  "serial_gate_violation": {
+    "job": "direct-classify",
+    "original_status": "cleanup-failed",
+    "controller_continued": true,
+    "fixed_runner_stops": true,
+    "later_process_check_sha256": "92ba48685618a2d2cb2da76b77011d0328fc3096ca647eed76e117f96011c4a6",
+    "explanation": "Later absence of processes does not prove no overlap at the original transition"
+  },
+  "exceptional_diagnostics": {
+    "m1": "One residual differential equation remains; not a closed general solution",
+    "m2": "Returned expressions contain unevaluated int/noint and derivative dependencies; parser refuses unsupported expressions"
+  }
+}

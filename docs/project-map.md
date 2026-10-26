@@ -1,11 +1,34 @@
 # Project Map: 21 October 2026
 
+**27 October update:** the active strict CAS/Python follow-up, native Priestess
+retries, five-chapter dissertation and success/failure analysis are indexed in
+[the final follow-up carrier](../research_artifacts/sve-final-20261027/README.md).
+Its mathematical status is incomplete. The dated evidence below remains
+historical and unchanged; its outline-only writing scope is superseded.
+
 The current research route is source-faithful reproduction and extension of
 the 2026 printed scalar SVE paper, then controlled full SV+bed changes and a
-frozen baseline, then source-verified open 2D questions. The latter two stages
-are planned, not completed results. The immediate next writing task is
-[title, outline and source-question-evidence mapping](superpowers/plans/2026-10-21-dissertation-writing.md)
-for the existing [dissertation](../draft/dissertation.tex), not manuscript prose.
+frozen baseline, then source-verified open 2D questions. The broader baseline
+and learning programme remains incomplete. The current user request is the
+completed [dissertation](../draft/dissertation.tex), superseding the earlier
+[outline-only plan](superpowers/plans/2026-10-21-dissertation-writing.md).
+
+## Current Dissertation Cycle
+
+- [Run and scope](../build/dissertation-completion-20261026/RUN.md),
+  [physical sources](../build/dissertation-completion-20261026/PHYSICAL-SOURCES.md),
+  [historical benchmark audit](../build/dissertation-completion-20261026/BENCHMARK-AUDIT.md)
+  and [independent review](../build/dissertation-completion-20261026/REVIEW.md).
+- [New annular full-E target](../symm/LieSymm/annular2d.py): isotropic cubic
+  transport, positive downslope diffusion and constant Coriolis forcing;
+  six supplied verified generators, prolonged tangency, brackets, rank-two
+  invariant reduction, three first integrals and sampled reconstruction.
+  This is not a maximal symmetry classification or a physical validation.
+- [Exact-interface checks](../scripts/verify_dissertation_interfaces.py):
+  redundant invariant-graph penalties, first-integral identities, restricted
+  constitutive homogeneity, diffusion sign, characteristic determinant and
+  smooth non-shock control. Pure PINN remains stopped; 2D ML comparisons
+  are proposed, not executed.
 
 ## Models And Accepted Scope
 
@@ -54,9 +77,10 @@ separate legacy collection defects; selected passing suites are not a global pas
 - [Priestess handoff](priestess-handoff.md): clean astra sync, hash-checked restoration, Python environment and Windows-only compilation boundary.
 - [Validation](validation.md), [documentation index](README.md), [reference guide](../ref/README.md).
 
-The [manuscript](../draft/main.tex) and dissertation keep their existing scope;
-cleanup does not synchronize or rewrite their claims. The dissertation directly
-reads build/week-4, which stays retained and portable.
+The [manuscript](../draft/main.tex) remains unchanged by the current writing
+cycle. The completed dissertation instead uses the retained scalar precision
+surface and the fresh annular profile under build/dissertation-completion-20261026.
+Older build/week-4 inputs stay retained for their historical dependants.
 
 ## Historical Packages And Search Scope
 

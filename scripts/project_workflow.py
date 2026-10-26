@@ -340,7 +340,12 @@ def _stages(report: dict):
 def _evidence_href(path: str, root: Path, out: Path):
     name, separator, fragment = path.partition("#")
     destination = (out if name.startswith(("workflow.", "classical/")) else root) / name
-    return os.path.relpath(destination, out) + (separator + fragment if separator else "")
+    try:
+        href = os.path.relpath(destination, out)
+    except ValueError:
+        # Windows cannot express a relative path between different drives.
+        href = destination.resolve().as_uri()
+    return href + (separator + fragment if separator else "")
 
 
 def _evidence_label(path: str):
