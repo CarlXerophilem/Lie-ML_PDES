@@ -1,0 +1,15 @@
+........................................................................ [ 20%]
+........................................................................ [ 41%]
+........................................................................ [ 62%]
+........................................................................ [ 83%]
+..........................................................               [100%]
+346 passed in 99.84s (0:01:39)
+Exception ignored in atexit callback <function cleanup_numbered_dir at 0x0000018998BC00F0>:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Roaming\Python\Python314\site-packages\_pytest\pathlib.py", line 374, in cleanup_numbered_dir
+    cleanup_dead_symlinks(root)
+  File "C:\Users\Administrator\AppData\Roaming\Python\Python314\site-packages\_pytest\pathlib.py", line 360, in cleanup_dead_symlinks
+    left_dir.unlink()
+  File "C:\Python314\Lib\pathlib\__init__.py", line 1042, in unlink
+    os.unlink(self)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\Administrator\\AppData\\Local\\Temp\\pytest-of-Administrator\\pytest-current'

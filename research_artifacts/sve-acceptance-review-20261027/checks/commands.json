@@ -1,0 +1,158 @@
+[
+  {
+    "name": "active-regression",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "symm/LieSymm/tests",
+      "symm/LieSymm/scalar2026/tests",
+      "scripts/tests",
+      "symm/tests/test_engine.py",
+      "symm/tests/test_chart_reduction.py",
+      "research_artifacts/sve-progress-20261010/tests",
+      "symm/tests/test_generic_backend.py",
+      "symm/tests/test_generic_benchmarks.py",
+      "symm/tests/test_generic_core.py",
+      "symm/tests/test_generic_experiment.py",
+      "symm/tests/test_generic_jets.py",
+      "symm/tests/test_generic_reduction.py",
+      "symm/tests/test_generic_reductor.py"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:49:13.687100+00:00",
+    "elapsed_seconds": 102.17804180001258,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 0,
+    "log_sha256": "8a9748bb254f63d6f8ce8b1f893446ea396a05162a6188d7b9ce9d616b94b9b9"
+  },
+  {
+    "name": "historical-regression",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "symm/LieSymm/_snapshot/tests"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:50:55.873574+00:00",
+    "elapsed_seconds": 136.20055429999775,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 1,
+    "log_sha256": "fa74a449996a76c4e95a4d5d638f435f554405da127476770700fbb05ba4e27d"
+  },
+  {
+    "name": "integrity",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "symm.LieSymm",
+      "--check-integrity"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:53:12.082275+00:00",
+    "elapsed_seconds": 1.2541638999973657,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 0,
+    "log_sha256": "16c76fce7e3d3d86e4303bc1506215b2e0ac48378c08e5b8d6a9e40b3d216b58"
+  },
+  {
+    "name": "audit",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "audit",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\checks\\audit"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:53:13.338908+00:00",
+    "elapsed_seconds": 0.1308802999992622,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 2,
+    "log_sha256": "f2aefb7bf8e4f96faf4567f8f8fd8f4c350ddd1b4b774d2eec865984e0de5765"
+  },
+  {
+    "name": "data-flux",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "data-flux",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\checks\\data-flux"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:53:13.476117+00:00",
+    "elapsed_seconds": 0.12688529999286402,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 2,
+    "log_sha256": "f2aefb7bf8e4f96faf4567f8f8fd8f4c350ddd1b4b774d2eec865984e0de5765"
+  },
+  {
+    "name": "workflow",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "workflow",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\checks\\workflow",
+      "--data-report",
+      "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\checks\\data-flux\\data_flux.json"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:53:13.604526+00:00",
+    "elapsed_seconds": 0.12865890000830404,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 2,
+    "log_sha256": "f2aefb7bf8e4f96faf4567f8f8fd8f4c350ddd1b4b774d2eec865984e0de5765"
+  },
+  {
+    "name": "generic-revalidation",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/analyze_strict_remote.py",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\checks\\generic"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:53:13.734672+00:00",
+    "elapsed_seconds": 2.2128026999998838,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 0,
+    "log_sha256": "6d009059787cdc2266a1bc79148721a7f9dc68508ac60aec8e37afe49f659f92"
+  }
+]

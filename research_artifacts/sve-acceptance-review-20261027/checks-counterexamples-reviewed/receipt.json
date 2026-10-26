@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "D:\\MATHs\\LieML-codex-final-20261027\\build\\strict-acceptance-controls-reviewed-20261027",
+    "D:\\MATHs\\LieML-codex-final-20261027\\research_artifacts\\sve-acceptance-review-20261027\\test_acceptance_gates.py"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 1.6379969000117853,
+  "timeout_seconds": 60,
+  "test_sha256": "4da1953b35ea0b96ccd529b414eabf42fc4ff6752069e24c15312ea0bfdbcd31",
+  "log_sha256": "5b271723a4e727ddd3009f05c83968f86bddaab95bdcd75a6cc0f2944059035a"
+}

@@ -2,6 +2,11 @@
 
 **Mathematical acceptance: INCOMPLETE.** This package reports reproducible partial results and failures. It does not claim a universal PDE reducer, a complete parameter classification, experimental validation or neural superiority.
 
+The subsequent [strict acceptance review](../sve-acceptance-review-20261027/ACCEPTANCE.md)
+rejects full acceptance under the original contract and retains five new failing
+interface controls. The reviewed implementation remains unchanged; the matched
+archived families retain their stated conditional scope.
+
 - [Failure analysis and academic acceptance](FAILURES.md): every declared input is accounted for, with source-formula discrepancies and remaining gates separated from runtime issues.
 - [Shared repairs](FIXES.md): minimal counterexamples, active fixes and mathematical effects.
 - [Independent review](REVIEW.md): findings, dispositions and bounded acceptance.

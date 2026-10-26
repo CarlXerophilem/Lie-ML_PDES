@@ -1,0 +1,64 @@
+[
+  {
+    "name": "audit",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "audit",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\build\\strict-acceptance-20261026T175500131030\\audit"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:55:00.601230+00:00",
+    "elapsed_seconds": 0.7824177000002237,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 1,
+    "log_sha256": "d1544d8da27ca6061daefe7fe7fe2275cc203176cbf6778bd7befe7b2827fe17"
+  },
+  {
+    "name": "data-flux",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "data-flux",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\build\\strict-acceptance-20261026T175500131030\\data-flux"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:55:01.390436+00:00",
+    "elapsed_seconds": 6.629803200004972,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 0,
+    "log_sha256": "5ae79fcb76bdac980c91d8ba53ea47c42212bbddcdb06436f5312da2a6772d18"
+  },
+  {
+    "name": "workflow",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/project.py",
+      "workflow",
+      "--out",
+      "D:\\MATHs\\LieML-codex-final-20261027\\build\\strict-acceptance-20261026T175500131030\\workflow",
+      "--data-report",
+      "D:\\MATHs\\LieML-codex-final-20261027\\build\\strict-acceptance-20261026T175500131030\\data-flux\\data_flux.json"
+    ],
+    "cwd": "D:\\MATHs\\LieML-codex-final-20261027",
+    "started_utc": "2026-10-26T17:55:08.026506+00:00",
+    "elapsed_seconds": 4.051248100004159,
+    "timeout_seconds": 300,
+    "status": "finished",
+    "returncode": 0,
+    "log_sha256": "a9bc2bef96e6878fa08a10ce20035deb5ffb148a1aa96179b6b352b7a57bcae0"
+  }
+]
