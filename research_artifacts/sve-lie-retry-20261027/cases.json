@@ -1,0 +1,310 @@
+{
+  "scope": "serial fresh REDUCE retry; not mathematical acceptance",
+  "cases": [
+    {
+      "case": "E1:grass_cubic",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:grass_generic",
+      "cas_status": "timeout",
+      "classification": "incomplete",
+      "constant_subfamily_verified": false,
+      "returned_family_verified": false,
+      "branch_correspondence": null,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:slope_attachment_cubic",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:slope_attachment_generic",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:slope_only",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:slope_source_cubic",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:slope_source_generic",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E1:zero_transport",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:grass_cubic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:grass_cubic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:grass_generic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:grass_generic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_attachment_cubic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_attachment_cubic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_attachment_generic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_attachment_generic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_only_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_only_generic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_only_n2_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_source_cubic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_source_cubic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_source_generic_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:slope_source_generic_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:zero_transport_f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "E2:zero_transport_f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "P:1",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "P:3",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "P:general",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "custom:f0",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    },
+    {
+      "case": "custom:f_nonzero",
+      "cas_status": "returned-solved",
+      "classification": "incomplete",
+      "constant_subfamily_verified": true,
+      "returned_family_verified": false,
+      "branch_correspondence": true,
+      "source_changed_during_run": false,
+      "cleanup": "terminated"
+    }
+  ],
+  "count": 30,
+  "returned_solved": 29,
+  "timed_out": 1,
+  "classified_complete": 0,
+  "publication_note": "Per-case status only; original local build reports are not included in this publication."
+}
