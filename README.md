@@ -1,5 +1,7 @@
 # Lie–SVE: parameter-dependent symmetry and semi-analytical solution families
 
+**Review handoff:** [Gemini review brief](docs/gemini-review-handoff.md) · [agent instructions](AGENTS.md) · [current citation/source map](ref/README.md).
+
 **Current dissertation:** [LaTeX source](draft/dissertation_wku.tex) · [51-page PDF](draft/dissertation_wku.pdf) · [build notes](draft/README.md).
 
 This is the MATH 4890 dissertation by **Yihong Xiao**, supervised by **Dr. Puneet Rana**. The title is *Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs*, with Saint–Venant–Exner case studies. The supplied WKU template supplies the cover and front matter. The recorded submission date is 11 November 2026; the declaration remains unsigned.

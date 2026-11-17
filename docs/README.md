@@ -1,3 +1,5 @@
+> Current dissertation review: [Gemini handoff](gemini-review-handoff.md), [canonical manuscript](../draft/dissertation_wku.tex), [current references](../ref/README.md). The historical project map below is not the current manuscript inventory.
+
 # Documentation index
 
 Start with [project-map.md](project-map.md), the current map of models, evidence and work.

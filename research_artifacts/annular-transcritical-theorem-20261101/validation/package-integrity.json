@@ -1,0 +1,21 @@
+{
+  "checked_utc": "2026-11-01T08:48:48.097806+00:00",
+  "tracked_baseline_files_checked": 1375,
+  "tracked_baseline_changes": [],
+  "head_unchanged": true,
+  "reviewed_replay_source_and_result_bindings": true,
+  "dependency_hash_chain": true,
+  "three_source_artifact_bindings": true,
+  "latex_final_log_warnings": [],
+  "pdf_pages": 8,
+  "pdf_sha256": "40fb6adf55ff9f8cc923c16f7bf28f3bc911d52871062c037a6badefb636a523",
+  "latex_source_sha256": "550e1372fca3d99d6b6915c3f78b495cf5cf0a6bcd4d1c65dc153320c7326acc",
+  "render_review": "Root visually inspected all 8 rendered pages; equations, theorem, citations and TikZ tangent schematic readable without clipping.",
+  "json_structure_valid": true,
+  "failed_serialization_partial_preserved": true,
+  "limitations": [
+    "Hashes bind versions, not mathematical truth.",
+    "JSON syntax checks are not certificate validation.",
+    "Passing focused tests is not global repository acceptance."
+  ]
+}

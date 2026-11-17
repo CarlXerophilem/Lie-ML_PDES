@@ -1,66 +1,32 @@
-# Active project instructions
+# Dissertation review instructions
 
-Read README.md, draft/main.tex, docs/project-map.md and the current experiment
-index before making research claims. The current map distinguishes the new
-precision follow-up (build/sve-P-residual-20261021, source baseline 11fe2a8)
-from the frozen printed-P delivery (build/sve-P-solutions-20261021).
-The new precision carrier is research_artifacts/sve-P-residual-20261021;
-the four immutable earlier carriers remain in sve-current-20261021 and
-sve-delivery-20261021. The retained 43-test scalar benchmark is
-research_artifacts/sve-progress-20261010. The E-focused 1D programme is
-research_artifacts/sve-1d-programme-20261021 and remains a separate model.
-Historical archive instructions apply to their snapshot, not this working tree.
+This branch is prepared for **gemini-4-carbon** review. Review the existing dissertation; do not replace its frozen research questions or model definitions. No external reviewer has been invoked by this handoff.
 
-## Mathematical and evidence boundaries
+## Read first
 
-- Keep printed scalar P, full Eulerian SV+bed E and corrected scalar M separate.
-- Record positive-branch/chart assumptions, denominators, parameter strata,
-  and whether a result is exact, numerical, restricted, or unresolved.
-- A verified generator or finite search does not prove maximal classification.
-  An unavailable backend or exhausted budget is not an obstruction proof.
-- Reduction of independent-variable dimension and reduction of ODE order by
-  a first integral are separate results. Data and current compatibility are
-  additional checks. No arbitrary-IBVP, full-bed-system or learned-error theorem
-  follows from the constructed scalar example.
-- Preserve frozen ZIP/manifest files and negative experiment records. Write
-  new outputs to build/ or a separate user-selected directory.
-- Current checks are 12/12 exact, 21/21 seed and 11/11 high-precision-reference
-  extended IVPs; the frozen raw float64 campaign remains 10/11. Neither a finite
-  residual nor agreement at output nodes certifies a continuous PDE error bound.
-- Pure PINN is stopped. The missing 11 October external archive is nonblocking
-  historical provenance; do not rewrite its failed audit or make recovery a gate.
+1. `README.md`: research motivation, frozen questions, obstacles and scope.
+2. `docs/gemini-review-handoff.md`: review contract, resource gaps and validation limits.
+3. `draft/dissertation_wku.tex` and its PDF: canonical manuscript and supplied WKU/MATH 4890 cover. `draft/main.tex` and `draft/dissertation.tex` are wrappers, not independent drafts.
+4. `ref/README.md`, `ref/dissertation-sources.json`, and `evidence/CITATION_MAP.md`: current 23-entry bibliography and source locations.
+5. Relevant version-bound evidence packages, including `research_artifacts/sve-progress-20261010/docs/EXPERIMENT_INDEX.md` and `research_artifacts/annular-transcritical-theorem-20261101/`.
 
-## Navigation and next task
+## Frozen mathematical boundaries
 
-The next task is ONLY a title, outline and source-question-evidence map for
-the existing draft/dissertation.tex, following
-docs/superpowers/plans/2026-10-21-dissertation-writing.md. Do not write manuscript
-prose, start training, launch agents remotely or copy authentication/config.
+- Multi-parameter SVE is the setting. Do not silently replace it by a single-exponent model or a different closure.
+- Keep printed scalar P, corrected scalar M, and Eulerian systems E1/E2 separate. State the actual equation, parameter stratum, domain, branch and closure before using a result.
+- Distinguish invariant PDE reduction, ODE order reduction, conservation laws, and reconstruction. A Lie symmetry alone is not a Noether conservation law.
+- A finite ansatz or verified generator list is not maximal classification. Continuous parameter indexing is not proof of infinite-dimensional symmetry.
+- State transversality, graph conditions, regularity, nonvanishing denominators, critical compatibility, recursion solvability and convergence hypotheses explicitly.
+- Separate theorem/proof, symbolic identity, numerical evidence, conjecture and open problem. Sampled residuals and discrete corrector tolerances do not certify continuous PDE error.
+- Hopf interpretations, noninteger spatial dimension and function-space projections remain exploratory unless the manuscript supplies precise definitions and proofs. Do not promote them into frozen results.
+- Preserve negative results, ZIPs, manifests and existing experiment bytes. New outputs belong in `build/` or a new explicitly named artifact directory. No training, remote agents, or new experiments are needed for this review.
 
-`.ignore` reduces default ripgrep file discovery; it does not prevent direct
-reads or control every agent/tool. References, evidence and frozen JSON remain
-available through explicit scoped searches. Python implementation under
-symm/LieSymm/_snapshot stays visible; its run output and JSON do not. Examples:
+## Review output
 
-```bash
-rg --no-ignore --files ref
-rg --no-ignore -n --glob '*.md' 'current|failed|unresolved' research_artifacts/sve-progress-20261010
-rg --no-ignore -n 'source_sha256' symm/LieSymm/_snapshot/cases
-rg --no-ignore --files research_artifacts/archives-20261021
-```
+Provide file/line or theorem/equation locators, the exact mathematical issue, severity, assumptions needed, and the smallest proposed correction. Audit the analytical propositions and proofs before stylistic edits. Identify missing proof steps without inventing replacements. Keep the eight-minute defence constraint in view; propose a concise narrative without changing the dissertation's research questions.
 
-Eight historical packages retain ARCHIVED.md stubs pointing to verified ZIPs;
-restore only when needed. Do not automatically expand them or the machine-local
-external archive. Follow docs/priestess-handoff.md for portable remote work.
+## Validation and navigation
 
-## Validation
+Run `python tools/audit_dissertation_sources.py` for static reference/resource checks. This is not a proof check or a substitute for LaTeX compilation. If manuscript text changes, build from `draft/` using `latexmk -pdf dissertation_wku.tex`, inspect undefined-reference/citation warnings, and review affected PDF pages. Use relevant solver tests only when solver code changes; report commands and limitations accurately.
 
-Run the project audit, data-flux checker and workflow runner from README.md.
-Run relevant engine/chart regression tests and the current package's 43 tests.
-For manuscript or bibliography edits, build with native latexmk, inspect final
-citation/reference warnings and rendered pages. Regex inventories are navigation
-aids, not authoritative citation validation. Report commands and limitations.
-
-Before broad changes inspect Git status, preserve concurrent edits and inspect
-path dependencies. The external archive is machine-local; do not assume its
-presence in another checkout. Avoid automatically reading or expanding it.
+Use scoped `rg --no-ignore` searches when the repository ignore rules hide references/evidence. Historical instructions inside `.old/` apply to those snapshots only. `docs/project-map.md` and the legacy reference inventories describe earlier research states; the current handoff takes precedence for manuscript navigation. Preserve concurrent changes and use a guarded normal push.

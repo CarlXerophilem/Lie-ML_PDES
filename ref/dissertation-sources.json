@@ -1,0 +1,456 @@
+{
+  "canonical_source": "draft/dissertation_wku.tex",
+  "source_sha256": "83cc7cff5e6e666542d4d6366cec7b714b3f83c7a001718c04ec4288e427aafd",
+  "baseline_commit": "415f750a70f3375fb81916c91ff1f6a05bb4a121",
+  "scope": "Static source/resource inventory, not verification of cited mathematical claims.",
+  "entries": [
+    {
+      "key": "exner1925",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [],
+      "citation_occurrences": [
+        {
+          "line": 215,
+          "locator": "\\cite{exner1925,fernandez2017}"
+        }
+      ],
+      "bibliography_line": 2298,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "fernandez2017",
+      "status": "bundled-pdf",
+      "path": "ref/dissertation/fernandez-nieto-2017.pdf",
+      "source_urls": [
+        "https://doi.org/10.1051/m2an/2016018"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 215,
+          "locator": "\\cite{exner1925,fernandez2017}"
+        },
+        {
+          "line": 395,
+          "locator": "\\citet{fernandez2017}"
+        }
+      ],
+      "bibliography_line": 2301,
+      "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc"
+    },
+    {
+      "key": "olver",
+      "status": "git-lfs-pointer",
+      "path": "ref/large-pdfs/applications-of-lie-groups-to-differential-equations.pdf",
+      "source_urls": [
+        "https://doi.org/10.1007/978-1-4612-4350-2"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 359,
+          "locator": "\\cite[Ch.~3]{olver}"
+        },
+        {
+          "line": 587,
+          "locator": "\\cite{olver,anderson2000}"
+        },
+        {
+          "line": 746,
+          "locator": "\\cite[Ch.~3]{olver}"
+        },
+        {
+          "line": 906,
+          "locator": "\\cite[\\S2.4]{olver}"
+        },
+        {
+          "line": 1127,
+          "locator": "\\cite{olver}"
+        }
+      ],
+      "bibliography_line": 2304,
+      "git_blob_or_tree_sha": "10b6750f1a1752588c73fe5857e6e864813379ca",
+      "note": "Hydrate with Git LFS before reading; pointer existence does not imply PDF availability."
+    },
+    {
+      "key": "anderson2000",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://doi.org/10.1007/s002200000215"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 360,
+          "locator": "\\cite{anderson2000}"
+        },
+        {
+          "line": 587,
+          "locator": "\\cite{olver,anderson2000}"
+        },
+        {
+          "line": 738,
+          "locator": "\\cite{anderson2000}"
+        }
+      ],
+      "bibliography_line": 2307,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "sve2022",
+      "status": "bundled-pdf",
+      "path": "ref/main/Lie Symmetry Analysis of the One-Dimensional SVE.pdf",
+      "source_urls": [
+        "https://doi.org/10.3390/sym14081679"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 360,
+          "locator": "\\cite{sve2022}"
+        }
+      ],
+      "bibliography_line": 2310,
+      "git_blob_or_tree_sha": "f3291bf3fab693939d8cdcbe31ccfa2a5a3b6850"
+    },
+    {
+      "key": "ap",
+      "status": "bundled-pdf",
+      "path": "ref/main/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables-mathematics-14-00433-v3.pdf",
+      "source_urls": [
+        "https://doi.org/10.3390/math14030433"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 362,
+          "locator": "\\cite{ap}"
+        },
+        {
+          "line": 505,
+          "locator": "\\cite[Eq.~(7)]{ap}"
+        },
+        {
+          "line": 2079,
+          "locator": "\\cite[Proposition~1]{ap}"
+        },
+        {
+          "line": 2119,
+          "locator": "\\cite[Eq.~(24)]{ap}"
+        }
+      ],
+      "bibliography_line": 2313,
+      "git_blob_or_tree_sha": "b842a52e62e3557092d4506c4a9254c6fc1f97f9"
+    },
+    {
+      "key": "druzhkov2024",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://arxiv.org/abs/2412.02965v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 364,
+          "locator": "\\cite[\\S2.5, Theorem~1]{druzhkov2024}"
+        },
+        {
+          "line": 1166,
+          "locator": "\\cite{druzhkov2024}"
+        }
+      ],
+      "bibliography_line": 2316,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "chesnokov",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://arxiv.org/abs/0808.1490v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 367,
+          "locator": "\\cite{chesnokov}"
+        }
+      ],
+      "bibliography_line": 2319,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "berthon2012",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://doi.org/10.1016/j.crma.2012.01.007"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 372,
+          "locator": "\\cite{berthon2012}"
+        }
+      ],
+      "bibliography_line": 2323,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "teschl2012",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 376,
+          "locator": "\\cite{teschl2012}"
+        },
+        {
+          "line": 1687,
+          "locator": "\\cite[Theorems~9.4--9.5, p.~259]{teschl2012}"
+        },
+        {
+          "line": 1740,
+          "locator": "\\cite[Theorem~9.6, p.~260]{teschl2012}"
+        },
+        {
+          "line": 2106,
+          "locator": "\\cite[Theorem~4.1]{teschl2012}"
+        },
+        {
+          "line": 2259,
+          "locator": "\\cite[Lemma~2.7]{teschl2012}"
+        }
+      ],
+      "bibliography_line": 2326,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "lagaris",
+      "status": "bundled-pdf",
+      "path": "ref/large-pdfs/lagaris.pdf",
+      "source_urls": [
+        "https://arxiv.org/abs/physics/9705023v1",
+        "https://doi.org/10.1109/72.712178"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 378,
+          "locator": "\\cite{lagaris}"
+        },
+        {
+          "line": 2149,
+          "locator": "\\cite{lagaris}"
+        }
+      ],
+      "bibliography_line": 2329,
+      "git_blob_or_tree_sha": "2a2a6535fef46c4171040f5aa590ca44cd31d8c6"
+    },
+    {
+      "key": "sympinn",
+      "status": "bundled-pdf",
+      "path": "ref/large-pdfs/Lie Point Symmetry and Physics Informed Networks.pdf",
+      "source_urls": [
+        "https://arxiv.org/abs/2311.04293v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 379,
+          "locator": "\\cite{sympinn}"
+        }
+      ],
+      "bibliography_line": 2332,
+      "git_blob_or_tree_sha": "fa068be9385aad4718373061204a56054b06cba0"
+    },
+    {
+      "key": "otto",
+      "status": "bundled-pdf",
+      "path": "ref/large-pdfs/otto.pdf",
+      "source_urls": [
+        "https://jmlr.org/papers/v26/24-1315.html"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 379,
+          "locator": "\\cite{otto}"
+        }
+      ],
+      "bibliography_line": 2335,
+      "git_blob_or_tree_sha": "fcada4f50b61e057a4c05b557710ff1c979ed29b"
+    },
+    {
+      "key": "wang2020",
+      "status": "bundled-pdf",
+      "path": "ref/small-pdfs/wanggradient.pdf",
+      "source_urls": [
+        "https://arxiv.org/abs/2001.04536v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 219,
+          "locator": "\\cite{wang2020}"
+        }
+      ],
+      "bibliography_line": 2338,
+      "git_blob_or_tree_sha": "2bca50e2184166f55bb0dc98b570777576466e0c"
+    },
+    {
+      "key": "mishra2023",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://arxiv.org/abs/2006.16144v3",
+        "https://doi.org/10.1093/imanum/drab093"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 220,
+          "locator": "\\cite{mishra2023}"
+        },
+        {
+          "line": 382,
+          "locator": "\\cite{mishra2023}"
+        },
+        {
+          "line": 1330,
+          "locator": "\\cite{mishra2023}"
+        },
+        {
+          "line": 2270,
+          "locator": "\\cite{mishra2023}"
+        }
+      ],
+      "bibliography_line": 2343,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "trefethen",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://doi.org/10.1137/1.9780898719598"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 2158,
+          "locator": "\\cite[Ch.~6]{trefethen}"
+        }
+      ],
+      "bibliography_line": 2346,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "gungor2026",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://arxiv.org/abs/2610.34129v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 1985,
+          "locator": "\\cite[Eqs.~(3.16)--(3.17), (4.11)]{gungor2026}"
+        }
+      ],
+      "bibliography_line": 2349,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    },
+    {
+      "key": "scalarartifact",
+      "status": "repository-artifact",
+      "path": "research_artifacts/sve-progress-20261010",
+      "source_urls": [
+        "https://github.com/CarlXerophilem/Lie-ML_PDES/tree/28eaf15237d58654a841be84f3e066f340b5f17d/research_artifacts/sve-progress-20261010"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 2141,
+          "locator": "\\cite{scalarartifact}"
+        }
+      ],
+      "bibliography_line": 2352,
+      "git_blob_or_tree_sha": "108ca6dfd7cebd0f293b305a6af2a1453dfad651",
+      "cited_commit": "28eaf15237d58654a841be84f3e066f340b5f17d"
+    },
+    {
+      "key": "theoremartifact",
+      "status": "repository-artifact",
+      "path": "research_artifacts/annular-transcritical-theorem-20261101",
+      "source_urls": [
+        "https://github.com/CarlXerophilem/Lie-ML_PDES/tree/c48d9994e4bfaf69a91913c73a59e7ef8f1e1bf7/research_artifacts/annular-transcritical-theorem-20261101"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 1506,
+          "locator": "\\cite{theoremartifact}"
+        }
+      ],
+      "bibliography_line": 2358,
+      "source_commit": "c48d9994e4bfaf69a91913c73a59e7ef8f1e1bf7",
+      "git_blob_or_tree_sha": "ecf442830ec0d8e774603e2037dc0155ac8e6317",
+      "note": "Imported exact subtree. theorem-evidence.zip is an LFS pointer, not a hydrated archive."
+    },
+    {
+      "key": "dengreid2024",
+      "status": "bundled-pdf",
+      "path": "ref/large-pdfs/approxalg.pdf",
+      "source_urls": [
+        "https://arxiv.org/abs/2410.20608v1"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 869,
+          "locator": "\\cite{dengreid2024}"
+        }
+      ],
+      "bibliography_line": 2364,
+      "git_blob_or_tree_sha": "c312f8e42cf1772de891e1e158c197f01ccbbfad"
+    },
+    {
+      "key": "noether1918",
+      "status": "bundled-pdf",
+      "path": "ref/large-pdfs/noether.pdf",
+      "source_urls": [
+        "https://arxiv.org/abs/physics/0503066v3"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 1625,
+          "locator": "\\cite{noether1918}"
+        }
+      ],
+      "bibliography_line": 2370,
+      "git_blob_or_tree_sha": "2038047dfc7db9bf6f1a1f0b6bd10da9aef42291"
+    },
+    {
+      "key": "bluman2005",
+      "status": "bundled-pdf",
+      "path": "ref/dissertation/bluman-cheviakov-2005.pdf",
+      "source_urls": [
+        "https://doi.org/10.1063/1.2142834"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 1628,
+          "locator": "\\cite{bluman2005}"
+        }
+      ],
+      "bibliography_line": 2376,
+      "sha256": "ede131d39c009b54c52f2514b286bc3d32c9f59d1b54aa4e1d182419f576ad59"
+    },
+    {
+      "key": "westreich1982",
+      "status": "bibliography-only",
+      "path": null,
+      "source_urls": [
+        "https://doi.org/10.4153/CMB-1982-032-0"
+      ],
+      "citation_occurrences": [
+        {
+          "line": 1751,
+          "locator": "\\cite{westreich1982}"
+        }
+      ],
+      "bibliography_line": 2382,
+      "note": "No portable PDF identified in this branch; URLs are transcribed from the frozen bibliography and were not independently revalidated in this cleanup."
+    }
+  ]
+}

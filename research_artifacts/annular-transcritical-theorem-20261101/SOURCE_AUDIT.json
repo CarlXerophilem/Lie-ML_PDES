@@ -1,0 +1,72 @@
+{
+  "scope": "Only the three citations of the local continuation proof note",
+  "source_access": "Already obtained local originals, copied without modification",
+  "alphaxiv": "Prior raw responses reused and inspected; no fresh index query claimed",
+  "literature_priority": "UNRESOLVED",
+  "sources": [
+    {
+      "key": "teschl2012",
+      "title": "Ordinary Differential Equations and Dynamical Systems",
+      "version": "Author preliminary version distributed with AMS permission; printed work 2012",
+      "sha256": "362433156525216abf596c17ce843204510e96d57afa4284a37c7aa5a9ffc36e",
+      "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf",
+      "locators": [
+        "Theorems 9.4 and 9.5: printed 259, PDF 270",
+        "Theorem 9.6: printed 260, PDF 271"
+      ],
+      "alphaxiv_status": "No exact indexed title; original local source reviewed",
+      "pdf_source": "ref/main/teschl2012.pdf",
+      "pdf_local": "references/pdf/teschl2012.pdf",
+      "pdf_sha256": "362433156525216abf596c17ce843204510e96d57afa4284a37c7aa5a9ffc36e",
+      "text_source": "build/research-final-plan-20261101-r2/references/local-text/teschl2012.txt",
+      "text_local": "references/text/teschl2012.txt",
+      "text_sha256": "a4bcdc570637e51a80809006b5d082b48ff7a942a2e31e6deb1b5a41e2882ccc",
+      "alpha_source": "build/research-final-plan-20261101-r2/references/alphaxiv-raw/teschl2012.json",
+      "alpha_local": "references/alphaxiv/teschl2012.json",
+      "alpha_sha256": "5b17d4c72acaedf8dbc0de1ef5c764a54712b1f6c1e2d27f6a2af1b0e58cf6dc"
+    },
+    {
+      "key": "chesnokov2008v1",
+      "title": "Symmetries and exact solutions of the rotating shallow water equations",
+      "version": "arXiv:0808.1490v1, 11 August 2008",
+      "sha256": "d6968836297289978055d21e922fb27124ad52d93c7dd8930488b4f186dabaa2",
+      "url": "https://arxiv.org/pdf/0808.1490v1",
+      "locators": [
+        "PDF/printed 1 Eq. (1.1)",
+        "PDF/printed 13-14 Eqs. (5.1)-(5.2) and critical-boundary discussion",
+        "PDF/printed 16 Eqs. (5.6)-(5.7)"
+      ],
+      "alphaxiv_status": "Original pages returned as 0808.1490v1; checked against exact-v1 PDF",
+      "pdf_source": "build/research-final-plan-20261101-r2/novelty/pdf/chesnokov2008v1.pdf",
+      "pdf_local": "references/pdf/chesnokov2008v1.pdf",
+      "pdf_sha256": "d6968836297289978055d21e922fb27124ad52d93c7dd8930488b4f186dabaa2",
+      "text_source": "build/research-final-plan-20261101-r2/novelty/text/chesnokov2008v1.txt",
+      "text_local": "references/text/chesnokov2008v1.txt",
+      "text_sha256": "1e5d8c99a1d8c9e49112b06b8e79dc286053affb38703020ba392fb231d4905e",
+      "alpha_source": "build/research-final-plan-20261101-r2/novelty/raw/alpha-pdf-chesnokov2009.json",
+      "alpha_local": "references/alphaxiv/chesnokov2008v1.json",
+      "alpha_sha256": "526e372bee8ed51a31abf4246fe02ab23a7d5e084a2ae0fb541ccc10de1557d5"
+    },
+    {
+      "key": "berthon2012",
+      "title": "An analytical solution of the shallow water system coupled to the Exner equation",
+      "version": "C. R. Math. 350 (2012), 183-186; DOI 10.1016/j.crma.2012.01.007",
+      "sha256": "65e6e41f78b5557dbe6c17263cce417bd6bdb8bafcc21a8f0856893a0c1979cc",
+      "url": "https://www.numdam.org/articles/10.1016/j.crma.2012.01.007/",
+      "locators": [
+        "Printed 183, PDF 1, Eqs. (1)-(3)",
+        "Printed 184-185, PDF 2-3, Proposition 2.1 and Eqs. (7),(10)-(12)"
+      ],
+      "alphaxiv_status": "No exact indexed title; original local source reviewed",
+      "pdf_source": "ref/main/berthon-cordier-delestre-le-2012-analytical-sve.pdf",
+      "pdf_local": "references/pdf/berthon2012.pdf",
+      "pdf_sha256": "65e6e41f78b5557dbe6c17263cce417bd6bdb8bafcc21a8f0856893a0c1979cc",
+      "text_source": "build/research-final-plan-20261101-r2/references/local-text/berthon2012.txt",
+      "text_local": "references/text/berthon2012.txt",
+      "text_sha256": "1369b66d449a949f52769cf3966728f929dc88c4fe198705b815e83aa03df2b1",
+      "alpha_source": "build/research-final-plan-20261101-r2/references/alphaxiv-raw/berthon2012.json",
+      "alpha_local": "references/alphaxiv/berthon2012.json",
+      "alpha_sha256": "a8601e62bdf01a44ba04e7749dda19cdd96ef0d48bfe99d6c2e7044476053840"
+    }
+  ]
+}

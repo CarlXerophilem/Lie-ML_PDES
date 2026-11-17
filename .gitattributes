@@ -64,3 +64,11 @@ scripts/tests/test_dissertation_interfaces.py -text whitespace=blank-at-eol,blan
 scripts/project_workflow.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 requirements.txt -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 research_artifacts/sve-final-20261027/sources/cas/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Dissertation review resources and byte-preserved prototype import.
+ref/dissertation/*.pdf binary
+research_artifacts/annular-transcritical-theorem-20261101/** -text
+research_artifacts/annular-transcritical-theorem-20261101/*.zip filter=lfs diff=lfs merge=lfs -text
+research_artifacts/sve-regular-correction-20261117/** -text
+draft/dissertation_wku.tex -text
+draft/dissertation_wku.pdf binary

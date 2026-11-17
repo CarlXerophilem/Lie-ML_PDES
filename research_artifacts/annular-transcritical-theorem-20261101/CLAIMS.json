@@ -1,0 +1,65 @@
+{
+  "model": "Full two-dimensional rotating Saint-Venant-Exner with q = K |w|^2 w - G |w|^2 grad B",
+  "overall_full_classification": "INCOMPLETE_INDEPENDENT_CONTRACT",
+  "claims": [
+    {
+      "id": "determining_shared_affine",
+      "status": "EXACTLY_VERIFIED_IN_DECLARED_CLASS",
+      "statement": "56 parameter-independent affine point coefficients shared over the open positive parameter family give 84 distinct equations of rank 50 and a six-dimensional kernel.",
+      "evidence": "replay-reviewed/results/shared-affine-symmetries.json",
+      "limit": "Not maximal fixed-parameter or arbitrary-function classification."
+    },
+    {
+      "id": "derived_quotient_and_currents",
+      "status": "EXACTLY_VERIFIED",
+      "statement": "The selected returned generators yield the annular quotient; original mass/Exner currents and the angular balance yield the three constants on the declared chart.",
+      "evidence": ["replay-reviewed/results/derived-invariants.json", "replay-reviewed/results/derived-reduction.json"],
+      "limit": "Not an optimal-subalgebra classification; angular conservation requires vanishing bed torque in this invariant class."
+    },
+    {
+      "id": "local_smooth_transcritical_continuation",
+      "status": "PROVED_IN_REVIEW_NOTE",
+      "statement": "At a positive compatible nondegenerate saddle, exactly two C1 germs in the derived invariant class are smooth and cross the radial hydraulic critical locus.",
+      "evidence": "document/local-continuation.tex, Theorem 2 and proof",
+      "limit": "Classical proof using cited stable-manifold theory; not a formal proof-assistant certificate, arbitrary-IBVP theorem or global connection."
+    },
+    {
+      "id": "continuous_parameter_family",
+      "status": "PROVED_AND_ALGEBRA_VERIFIED",
+      "statement": "Dimensionless g=K=G=f=C1=C2=1, C3=c/2-15/16, c<-77/12 gives the saddle at (1,1); nearby parameter choices have a nearby saddle.",
+      "evidence": ["document/local-continuation.tex, Corollaries 4 and 5", "replay-reviewed/results/derived-reduction.json"],
+      "limit": "Exact continuous inequality and local parameter persistence; no empirical calibration."
+    },
+    {
+      "id": "full_cartesian_reconstruction",
+      "status": "PROVED_AND_INDEPENDENT_IDENTITIES_VERIFIED",
+      "statement": "Mass and Exner vanish and momentum is (D Hprime-N) er/H; the identity uses no division by D and includes critical points.",
+      "evidence": ["document/local-continuation.tex, Proposition 1", "replay-reviewed/results/cartesian.json"],
+      "limit": "For the specified reconstructed class; independent code uses the same SymPy library, not a second CAS."
+    },
+    {
+      "id": "source_boundary",
+      "status": "ORIGINAL_SOURCES_INSPECTED",
+      "statement": "All three sources cited in this proof note have version-bound local PDFs and checked original locators.",
+      "evidence": ["SOURCE_AUDIT.md", "SOURCE_AUDIT.json"],
+      "limit": "Teschl and Berthon exact-title alphaXiv lookups were unavailable. Their originals were reviewed directly. No new audit of all dissertation references is claimed."
+    },
+    {
+      "id": "literature_priority",
+      "status": "UNRESOLVED",
+      "statement": "The note differs from the inspected Chesnokov and Berthon model-specific results; global priority remains unestablished."
+    },
+    {
+      "id": "quantified_interval_and_numerical_error",
+      "status": "UNRESOLVED",
+      "statement": "The theorem supplies a qualitative local neighborhood. Validated numerical radii and continuous approximation-error bounds are future work."
+    },
+    {
+      "id": "ML_semi_analytic_solver",
+      "status": "REQUIRED_NEXT_MILESTONE_NOT_EXECUTED_HERE",
+      "statement": "ML may primarily approximate the derived ODE profile, with exact reconstruction and independent certification; no training or learned-benefit claim is part of this proof package.",
+      "evidence": "NEXT_STEPS.md"
+    }
+  ],
+  "script_scope_note": "The reducer's remaining_nonsymbolic_obligations field lists obligations external to that script. The proof and independent checker discharge the first two at package level, as recorded above."
+}

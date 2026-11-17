@@ -41,3 +41,7 @@ This is a formatting pass. The frozen research questions, model assumptions, mat
 The analytical supplements already present in the input remain: Propositions 3.A and 3.B on generator continuation, Theorem A.A on analytic SVE crossing branches, and Proposition A.B on critical recursion and tail bounds. This pass adds no new analytical claim and performs no new training or numerical experiment. The retained symbolic verification script may be run separately with SymPy installed.
 
 The attached `dissertation_wku.pdf` could not be opened, so this edition was built from the latest saved LaTeX source. Any edits existing only in that unavailable attachment are not incorporated.
+
+## Review navigation — 17 November 2026
+
+The canonical source and PDF are unchanged by the review cleanup. `main.tex` and `dissertation.tex` are compatibility wrappers; their PDF aliases contain the same PDF bytes. See [review brief](../docs/gemini-review-handoff.md) and [current references](../ref/README.md). Older reports, proposal support and figures are historical material, not additional current dissertation chapters. Obsolete QA screenshots were removed from `draft/tmp/`; the complete prior draft remains under `.old/2026-11-17-42f5654/draft/`.
