@@ -1,0 +1,74 @@
+{
+  "schema": "lieml.lagrange-proposal-pilot.v1",
+  "source_doi": "10.3390/math14030433",
+  "model": "Printed Eq. (7), not a certified Eulerian-equivalent SVE model",
+  "source_sha256": "89fb6371c5ec9334032e4e7cc0d2966a9a8cb94d14a9bb53520c9c86390f1213",
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.3.5",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0"
+  },
+  "symbolic": {
+    "checks": {
+      "cubic_reduction_pullback_zero": true,
+      "cubic_exact_profile_zero": true,
+      "traveling_wave_master_zero": true,
+      "traveling_wave_printed_momentum_zero": true,
+      "traveling_wave_printed_bed_zero": true,
+      "eulerian_mass_momentum_zero": true,
+      "eulerian_exner_counterexample_confirmed": true,
+      "arbitrary_static_profile_master_zero": true
+    },
+    "traveling_wave_physical_bed_defect": "-(s + t - 1)*(s**2 + 2*s*t - 5*s + t**2 - 5*t + 7)/(s + t - 2)**3",
+    "traveling_wave_eulerian_exner_defect": "exp(3*x) - 1",
+    "regular_leading_coefficient": "-2*g*z/Derivative(F(z), z)**2 + z**3*(-8*beta*g + 8)*Derivative(F(z), z)"
+  },
+  "numerical": {
+    "parameters": {
+      "g": 1,
+      "beta": 0.1,
+      "m": 3,
+      "sigma_interval": [
+        1,
+        1.5
+      ],
+      "grid_points": 501,
+      "perturbed_initial_curvature_factor": 1.01
+    },
+    "checks": {
+      "exact_control_state_error_below_1e-8": true,
+      "refinement_difference_below_1e-8": true,
+      "independent_solver_difference_below_1e-8": true,
+      "sampled_positive_profile_derivative": true,
+      "sampled_regular_leading_coefficient": true,
+      "finite_difference_state_defect_below_1e-6": true
+    },
+    "baseline_max_state_error": 1.7763568394002505e-15,
+    "perturbed_max_refinement_difference": 4.71778172084214e-12,
+    "perturbed_max_independent_solver_difference": 3.2784885917180873e-13,
+    "perturbed_sampled_min_r": 0.9017033472660814,
+    "perturbed_sampled_min_abs_a": 7.113786608980126,
+    "finite_difference_state_defects": {
+      "0.001": 1.08177911073426e-11,
+      "0.0005": 1.368238855548043e-12
+    },
+    "taylor_p2_max_profile_error": 0.020872663772250277,
+    "taylor_p4_max_profile_error": 0.002437817186647706,
+    "initial_state": [
+      3.556893304490063,
+      1.1856311014966876,
+      -0.7983249416744364
+    ],
+    "taylor_coefficients": [
+      3.556893304490063,
+      1.1856311014966876,
+      -0.3991624708372182,
+      0.2211281046364755,
+      -0.14729866390331323
+    ],
+    "interval_certified": false,
+    "pinn_trained": false
+  },
+  "all_checks_passed": true
+}

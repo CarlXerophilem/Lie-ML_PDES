@@ -1,0 +1,169 @@
+{
+  "schema": "lieml.2027-publication-check.v1",
+  "timestamp_utc": "2026-09-12T16:38:43.129911+00:00",
+  "scope": "Current proposal and pre-study manuscript; not peer review, novelty validation or a trained-network interval certificate",
+  "supersedes": [
+    "archive/before_sve2d_20260913/publication_check_2027.json (pre-Appendix-C manuscript)",
+    "lagrange_evidence/publication_check.json (retained for the archived preceding proposal)"
+  ],
+  "checks": {
+    "all_document_checks": true,
+    "all_evidence_checks": true,
+    "tests_passed": true
+  },
+  "all_checks_passed": true,
+  "documents": {
+    "proposal": {
+      "checks": {
+        "expected_page_count": true,
+        "fixed_title": true,
+        "planned_2027_scope_visible": true,
+        "shared_bibliography": true,
+        "all_citations_resolved": true,
+        "no_unresolved_markers": true,
+        "one_references_heading": true,
+        "times_new_roman_body_size": true,
+        "no_text_outside_tex_body_allowance": true,
+        "clean_latex_log": true,
+        "current_pilot_only": true,
+        "requested_heading_structure": true,
+        "double_spaced_body": true
+      },
+      "pages": 6,
+      "cited_keys": [
+        "baselines",
+        "lagrange",
+        "liepinn",
+        "olver",
+        "pinn",
+        "shah",
+        "taylor"
+      ],
+      "body_font_size_pdf_points": 11.9552001953125,
+      "median_body_baseline_pdf_points": 23.908000000000015,
+      "latex_warnings": [],
+      "out_of_bounds": []
+    },
+    "draft": {
+      "checks": {
+        "expected_page_count": true,
+        "fixed_title": true,
+        "planned_2027_scope_visible": true,
+        "shared_bibliography": true,
+        "all_citations_resolved": true,
+        "no_unresolved_markers": true,
+        "one_references_heading": true,
+        "times_new_roman_body_size": true,
+        "no_text_outside_tex_body_allowance": true,
+        "clean_latex_log": true,
+        "current_pilot_only": true
+      },
+      "pages": 14,
+      "cited_keys": [
+        "baselines",
+        "lagrange",
+        "liepinn",
+        "olver",
+        "pinn",
+        "shah",
+        "sve2d",
+        "taylor"
+      ],
+      "body_font_size_pdf_points": 10.909099578857422,
+      "median_body_baseline_pdf_points": 18.14699999999999,
+      "latex_warnings": [],
+      "out_of_bounds": []
+    }
+  },
+  "evidence": {
+    "checks": {
+      "reference_pdf_matches_verified_publisher_hash": true,
+      "classical_source_matches": true,
+      "neural_source_matches": true,
+      "exact_bound_reproduced": true,
+      "classical_checks_passed": true,
+      "neural_smoke_completed": true,
+      "neural_table_matches_report": true,
+      "certification_not_overstated": true,
+      "historical_qa_matches_archived_proposal": true
+    },
+    "exact_bounds": {
+      "schema": "lieml.exact-box-bound.v1",
+      "source_sha256": "16e0fdc6c11e65538d65c68eb81ea3acb8b7c4c57dc6ad45f18923c3b55dca8f",
+      "coefficient_source_sha256": "89fb6371c5ec9334032e4e7cc0d2966a9a8cb94d14a9bb53520c9c86390f1213",
+      "arithmetic": "fractions.Fraction; exact endpoint operations",
+      "box": {
+        "sigma": [
+          "1",
+          "3/2"
+        ],
+        "r": [
+          "17/20",
+          "5/4"
+        ],
+        "v": [
+          "-17/20",
+          "-7/20"
+        ]
+      },
+      "subdivisions_per_axis": 12,
+      "covered_subboxes": 1728,
+      "denominator_D_lower": "24217/4000",
+      "a_lower": "24217/7225",
+      "a_upper": "5691/200",
+      "a_sigma_lower": "112651/7225",
+      "joint_derivative_bound_exact": "7150105171934045737/506087956699582464",
+      "joint_derivative_bound_decimal": 14.128186765326252,
+      "lipschitz_constant": 15,
+      "checks": {
+        "derivatives_match_reduced_rhs": true,
+        "denominators_positive": true,
+        "a_bounds_positive_and_ordered": true,
+        "joint_bound_below_15": true
+      },
+      "neural_uniform_residual_validated": false,
+      "perturbed_trajectory_containment_certified": false
+    },
+    "neural_status": "feasibility-only",
+    "reference_pdf_sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5"
+  },
+  "tests": {
+    "returncode": 0,
+    "count": 37,
+    "output": "test_exact_partition_result (test_bounds.BoundsTests.test_exact_partition_result) ... ok\ntest_negative_quotient (test_bounds.BoundsTests.test_negative_quotient) ... ok\ntest_sign_crossing_even_power (test_bounds.BoundsTests.test_sign_crossing_even_power) ... ok\ntest_zero_division_rejected (test_bounds.BoundsTests.test_zero_division_rejected) ... ok\ntest_direct_neural_master_matches_lift (test_pinn_feasibility.FeasibilityTests.test_direct_neural_master_matches_lift) ... ok\ntest_gradients_are_finite (test_pinn_feasibility.FeasibilityTests.test_gradients_are_finite) ... ok\ntest_initial_jets_are_hard_constraints (test_pinn_feasibility.FeasibilityTests.test_initial_jets_are_hard_constraints) ... ok\ntest_zero_remainder_is_taylor (test_pinn_feasibility.FeasibilityTests.test_zero_remainder_is_taylor) ... ok\ntest_conservative_primitive_momentum_identity (test_sve2d.SVE2DChecks.test_conservative_primitive_momentum_identity) ... ok\ntest_cubic_one_dimensional_limit (test_sve2d.SVE2DChecks.test_cubic_one_dimensional_limit) ... ok\ntest_exact_sloping_bed_example_and_missing_transport (test_sve2d.SVE2DChecks.test_exact_sloping_bed_example_and_missing_transport) ... ok\ntest_gradient_and_fixed_point_time_chain_rules (test_sve2d.SVE2DChecks.test_gradient_and_fixed_point_time_chain_rules) ... ok\ntest_jacobian_and_water_mass_identity (test_sve2d.SVE2DChecks.test_jacobian_and_water_mass_identity) ... ok\ntest_piola_divergence_on_nonaffine_map (test_sve2d.SVE2DChecks.test_piola_divergence_on_nonaffine_map) ... ok\ntest_relative_bed_flux_identity (test_sve2d.SVE2DChecks.test_relative_bed_flux_identity) ... ok\ntest_bad_derivative_step_rejected (test_verify_corrections.CorrectionChecks.test_bad_derivative_step_rejected) ... ok\ntest_cubic_control_ode (test_verify_corrections.CorrectionChecks.test_cubic_control_ode) ... ok\ntest_derivative_stays_inside_interval (test_verify_corrections.CorrectionChecks.test_derivative_stays_inside_interval) ... ok\ntest_exponential_reference_satisfies_correction_ode (test_verify_corrections.CorrectionChecks.test_exponential_reference_satisfies_correction_ode) ... ok\ntest_independent_derivatives_include_endpoints (test_verify_corrections.CorrectionChecks.test_independent_derivatives_include_endpoints) ... ok\ntest_large_one_sided_stencil_rejected_before_evaluation (test_verify_corrections.CorrectionChecks.test_large_one_sided_stencil_rejected_before_evaluation) ... ok\ntest_log_domain_rejected (test_verify_corrections.CorrectionChecks.test_log_domain_rejected) ... ok\ntest_reconstruction_space_derivative (test_verify_corrections.CorrectionChecks.test_reconstruction_space_derivative) ... ok\ntest_reconstruction_time_derivative_detects_wrong_curve (test_verify_corrections.CorrectionChecks.test_reconstruction_time_derivative_detects_wrong_curve) ... ok\ntest_symbolic_balances_and_scaling (test_verify_corrections.CorrectionChecks.test_symbolic_balances_and_scaling) ... ok\ntest_two_sided_numeric_orders_and_negative_control (test_verify_corrections.CorrectionChecks.test_two_sided_numeric_orders_and_negative_control) ... ok\ntest_zero_correction_initial_forcing (test_verify_corrections.CorrectionChecks.test_zero_correction_initial_forcing) ... ok\ntest_analytic_initial_derivatives (test_verify_lagrange.LagrangeChecks.test_analytic_initial_derivatives) ... ok\ntest_arbitrary_profile_pullback (test_verify_lagrange.LagrangeChecks.test_arbitrary_profile_pullback) ... ok\ntest_evidence_boundaries (test_verify_lagrange.LagrangeChecks.test_evidence_boundaries) ... ok\ntest_exact_cubic_control (test_verify_lagrange.LagrangeChecks.test_exact_cubic_control) ... ok\ntest_leading_coefficient_rank_drop (test_verify_lagrange.LagrangeChecks.test_leading_coefficient_rank_drop) ... ok\ntest_numerical_gates (test_verify_lagrange.LagrangeChecks.test_numerical_gates) ... ok\ntest_physical_equivalence_counterexample (test_verify_lagrange.LagrangeChecks.test_physical_equivalence_counterexample) ... ok\ntest_printed_traveling_wave (test_verify_lagrange.LagrangeChecks.test_printed_traveling_wave) ... ok\ntest_regular_domain_rejects_nonpositive_r (test_verify_lagrange.LagrangeChecks.test_regular_domain_rejects_nonpositive_r) ... ok\ntest_static_profile_source_check (test_verify_lagrange.LagrangeChecks.test_static_profile_source_check) ... ok\n\n----------------------------------------------------------------------\nRan 37 tests in 2.728s\n\nOK\n"
+  },
+  "sha256": {
+    "draft/proposal_support/references_2027.tex": "96958649b524a23567e82ec9e51cfca7b95b2d6db3df8626d4ef8720f907b8f0",
+    "draft/research_record.md": "ab32e8469b0c4c73d9a7b7b8ffd0955aec31f377612451422c6bd8f7ae7d6354",
+    "draft/proposal_support/README.md": "623ee5f3a0620a58462dc35996ce125cc176c5a0f157f9219352d95cddba2a45",
+    "draft/proposal_support/submission_source_audit.md": "d4cc0b21c4a77d77707735b00f08c549e007b62460825b1e40be2caff18b4bfd",
+    "draft/proposal_support/sve2d_source_audit.md": "f2b06381649a52496dadede86b1152f3f090128e212d78f63a39d2df588a1b29",
+    "draft/proposal_support/check_publication.py": "cd637df5d872e01d66969efc714e7e79cf6412675dd28acc211caadf42a7715b",
+    "draft/proposal_support/test_bounds.py": "017581ff2aceba794c285c741a26b936068ce1652638d8907b07be26023f56cb",
+    "draft/proposal_support/test_pinn_feasibility.py": "974b38a1f39dfd18d47fd6b9605eeb4581b98889fcb9ed941c016295c2e07948",
+    "draft/proposal_support/test_sve2d.py": "58fc94c373362de468718cddba73f2dcf001a8ffe2352a25655fb55473ff6836",
+    "draft/proposal_support/test_verify_corrections.py": "7c92e30a306e2b4d103549a6b0741bad0af25c222e9e065cf1ae7c04a57e6bb8",
+    "draft/proposal_support/test_verify_lagrange.py": "4eef23685687998cb3f504787de658bdc0dbac52e6f7eb159f53300919837b63",
+    "draft/proposal_support/verify_lagrange.py": "89fb6371c5ec9334032e4e7cc0d2966a9a8cb94d14a9bb53520c9c86390f1213",
+    "draft/proposal_support/verify_bounds.py": "16e0fdc6c11e65538d65c68eb81ea3acb8b7c4c57dc6ad45f18923c3b55dca8f",
+    "draft/proposal_support/pinn_feasibility.py": "1396396463c4605909b798b61333006de07e250a3d477eee4053e2dc1ff9ffbf",
+    "draft/proposal_support/lagrange_evidence/report.json": "9e3b1cb4dc78b0044077346e45cd6e12e3a4ec9353d2aa94906d5fea2244726c",
+    "draft/proposal_support/lagrange_evidence/pilot_values.tex": "fdde192d8c37b0db8388ed1b750b7b2526905877097a23d595c86a1bd1acdc55",
+    "draft/proposal_support/feasibility_20260912/report.json": "a41a755afefc8512800fcb89023328342054d3569f7c2b5dcb81c05f75fafce4",
+    "draft/proposal_support/feasibility_20260912/table.tex": "7c2cf35a7bcc10c29e0c25ebb288c6efee3215c00216740b5471b880d99fa76c",
+    "draft/proposal_support/feasibility_20260912/bounds.json": "867b120fe318de552a6ac883f4daa1d43ef84d1295485d1c070729e7a08720ae",
+    "draft/proposal.tex": "e60e90c5157caf9f77406fde045ae1bb3e6b243946aaeb35e30880720628c9c9",
+    "draft/proposal.pdf": "88af4c8ea06a1515457ca5b08fffa8639bf9237886dd250f5e4be6e9d67e6867",
+    "draft/proposal.log": "d6b46fea28a329534a7079b10fa43017ee04efe2eb6a4a11e3bbf1034bd65b77",
+    "draft/proposal.aux": "1718ee5776f11b919afce21d03eda3f5074e879adf66a2a144b426bd8b55b2e6",
+    "draft/draft.tex": "abff6de8f0b14902b251c0608e439a6de799ea0fce57f4a5639bb31a17b8f25d",
+    "draft/draft.pdf": "d0925562aab2d39ac60f8994248528a98adc684e33e6487f76f46439d0649229",
+    "draft/draft.log": "5b2ac9e4d5ede8225561ce29ac712f134ad9397fd950e2081cd3f55b3a030d1b",
+    "draft/draft.aux": "aa819473a6a260918825dbc22323971f93f496072cd9e6742050529e8bc0b552"
+  },
+  "limits": [
+    "Web-source evidence is recorded in submission_source_audit.md; this check does not repeat network retrieval.",
+    "PDF checks use one-inch body margins with 1 pt coordinate tolerance and 3.5 pt bottom glyph descent; page-number footers are excluded. They do not replace visual or mathematical review.",
+    "The stored neural smoke is hash-checked, not rerun; timing is historical and machine-dependent."
+  ]
+}

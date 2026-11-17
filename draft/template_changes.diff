@@ -1,0 +1,404 @@
+--- before_template/dissertation_wku.tex
++++ dissertation_wku.tex
+@@ -1,17 +1,18 @@
++% Formatted using uploaded MATH_4890_dissertation_template.zip, 15 November 2026.
+ % Analytical supplement, 15 November 2026. Frozen scope and all inherited records retained.
+ % Dissertation source, 2 November 2026.
+ % Goal: reduce complex PDEs to simpler forms and obtain exact or approximate analytical solutions.
+ % Inherited numerical evidence and frozen research records stay unchanged. New proved supplements use independent counters.
+-% Compile: latexmk -pdf -interaction=nonstopmode -halt-on-error dissertation_f3ca94f_figures_review.tex
++% Compile: latexmk -pdf -interaction=nonstopmode -halt-on-error dissertation_wku.tex
+ % Revision: motivations aligned with parameters, symmetry structure and series geometry.
+ % Existing numbered equations, theorem environments and embedded plot data retained.
+ % Figure edits follow docs/dissertation-figure-workflow.md.
+-\documentclass[11pt,a4paper,oneside]{report}
++\documentclass[12pt,a4paper,oneside]{report}
+ \usepackage[T1]{fontenc}
+ \usepackage[utf8]{inputenc}
+ \usepackage{lmodern}
+ \usepackage[nopatch=footnote]{microtype}
+-\usepackage[margin=24mm,headheight=14pt]{geometry}
++\usepackage[top=1in,bottom=0.689in,hmargin=1.25in,nohead,includefoot,foot=0.311in,footskip=0.5827in]{geometry}
+ \usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+ \usepackage{booktabs,array,tabularx,longtable}
+ \renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+@@ -32,20 +33,24 @@
+  pdfauthor={Yihong Xiao},
+  pdftitle={Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs},
+  pdfsubject={Undergraduate dissertation, MATH 4890}}
+-\titleformat{\chapter}[hang]{\normalfont\Large\bfseries}{\thechapter}{.7em}{}
+-\titlespacing*{\chapter}{0pt}{-8pt}{12pt}
++\titleformat{\chapter}[hang]{\normalfont\Large\bfseries\raggedright}{\thechapter.}{.7em}{}
++\titlespacing*{\chapter}{0pt}{-20pt}{12pt}
+ \titleformat{\section}{\normalfont\large\bfseries}{\thesection}{.6em}{}
+-\titlespacing*{\section}{0pt}{10pt plus 2pt}{4pt}
++\titlespacing*{\section}{0pt}{8pt plus 2pt}{3pt}
+ \titlespacing*{\subsection}{0pt}{8pt plus 2pt}{3pt}
+ \captionsetup{font=small,labelfont=bf,skip=4pt}
+ \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+ \setlength{\intextsep}{9pt plus 2pt minus 2pt}
+ \renewcommand{\topfraction}{.9}
+ \renewcommand{\textfraction}{.08}
+-\setstretch{1.01}
++\setstretch{1.0}
+ \setlength{\emergencystretch}{2em}
+-\setlength{\parskip}{1.5pt}
+-\setcounter{tocdepth}{1}
++\setlength{\parskip}{0pt}
++\setcounter{tocdepth}{2}
++\makeatletter
++\renewcommand{\@pnumwidth}{2.8em}
++\renewcommand{\@tocrmarg}{3.8em}
++\makeatother
+ \raggedbottom
+ \numberwithin{equation}{chapter}
+ \newtheorem{theorem}{Theorem}[chapter]
+@@ -61,8 +66,12 @@
+ \DeclareRobustCommand{\code}[1]{\nolinkurl{#1}}
+ \newcommand{\doi}[1]{\href{https://doi.org/#1}{doi: #1}}
+ \pagestyle{fancy}\fancyhf{}
+-\fancyhead[L]{\footnotesize\nouppercase{\leftmark}}
+-\fancyfoot[C]{\footnotesize\thepage}
++\renewcommand{\headrulewidth}{0pt}
++\fancyfoot[R]{\thepage}
++\fancypagestyle{plain}{\fancyhf{}\fancyfoot[R]{\thepage}\renewcommand{\headrulewidth}{0pt}}
++\setlength{\tabcolsep}{1mm}
++\renewcommand{\arraystretch}{1.3}
++\renewcommand{\bibname}{References}
+ \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+ \tikzset{box/.style={draw=ink,fill=ink!4,rounded corners=2pt,
+  align=center,inner sep=5pt,font=\small},
+@@ -97,43 +106,57 @@
+ 
+ \begin{document}
+ \hypersetup{pageanchor=false}
++\pagenumbering{Roman}
+ \begin{titlepage}
+-\newgeometry{top=1in,bottom=0.689in,hmargin=1.25in,nohead}
+-\thispagestyle{empty}
+-\fontsize{12}{15}\selectfont
++\thispagestyle{plain}
+ \noindent\includegraphics[width=\textwidth]{wku_programme_header.pdf}
+-\vspace{12mm}
++\vspace{18mm}
+ \begin{center}
+ \textbf{College of Science, Mathematics and Technology}\par
+ \medskip
+ \textbf{Wenzhou-Kean University}\par
+-\vspace{7mm}
+-\includegraphics[width=2.2055in,keepaspectratio]{WKU.png}\par
+-\vspace{12mm}
+-{\fontsize{17}{21}\selectfont\bfseries Parameter-Dependent Lie Symmetries\par
++\vspace{8mm}
++\includegraphics[width=2.2055in,height=1.9055in]{WKU.png}\par
++\vspace{25mm}
++{\bfseries Parameter-Dependent Lie Symmetries\par
+ and Semi-Analytical Solutions\par
+ of Nonlinear PDEs\par}
+-\vspace{5mm}
++\vspace{4mm}
+ Saint--Venant--Exner Case Studies\par
+-\vspace{2mm}
+ {\small Lie-Invariant Reference Families and Targeted Corrections\par}
+-\vspace{4mm}
++\vspace{3mm}
+ Undergraduate Dissertation (MATH 4890)
+ \end{center}
++\vspace{10mm}
++\noindent\begin{tabularx}{\textwidth}{@{}lX@{}}
++\textbf{Student Name:} & \underline{Yihong Xiao}\\[4pt]
++\textbf{Student ID:} & \underline{1308225}\\[4pt]
++\textbf{Major:} & \underline{Mathematical Sciences}\\[-2pt]
++ & \underline{(Data Analytics Option)}\\[4pt]
++\textbf{Supervisor:} & \underline{Dr.\ Puneet Rana}\\[4pt]
++\textbf{Date of Submission:} & \underline{11 November 2026}
++\end{tabularx}
++\end{titlepage}
++\hypersetup{pageanchor=true}
++\setcounter{page}{2}
++\chapter*{Author's Declaration}
++\addcontentsline{toc}{chapter}{Author's Declaration}
++I, the undersigned, hereby declare that this submission is entirely my own work, in my own words, and that all sources used in researching it are fully acknowledged and all quotations properly identified. It has not been submitted, in whole or in part, by me or another person, for the purpose of obtaining any other credit/grade. I have a citation to AI system used to generate the text if I used AI-generated text. I understand the ethical implications of my research, and this work meets the requirements of College of Science, Mathematics and Technology.
++
++\vspace{25mm}
++\noindent\textbf{Date:} \rule[-8pt]{11.5cm}{0.1em}\par
++\bigskip\bigskip
++\noindent\textbf{Name (printed letters):} \rule[-8pt]{7.8cm}{0.1em}\par
++\bigskip\bigskip
++\noindent\textbf{Signature:} \rule[-8pt]{10.55cm}{0.1em}
+ \vfill
+-\noindent\begin{tabularx}{\textwidth}{@{}lX@{}}
+-\textbf{Student Name:} & Yihong Xiao\\[5pt]
+-\textbf{Student ID:} & 1308225\\[5pt]
+-\textbf{Major:} & Mathematical Sciences (Data Analytics Option)\\[5pt]
+-\textbf{Supervisor:} & Dr.\ Puneet Rana\\[5pt]
+-\textbf{Date of Submission:} & 11 November 2026
+-\end{tabularx}
+-\vspace{8mm}
+-\end{titlepage}
+-\restoregeometry
+-\hypersetup{pageanchor=true}
+-\pagenumbering{roman}
++{\small\noindent\textit{AI assistance disclosure.} OpenAI ChatGPT was used for drafting,
++mathematical exposition, verification-code preparation and typesetting assistance
++in this document (November 2026; \url{https://chatgpt.com/}). The declaration
++above remains unsigned for the author's review.}
++\clearpage
+ \chapter*{Abstract}
++\addcontentsline{toc}{chapter}{Abstract}
+ This dissertation develops a structure-aware approach to semi-analytical solution construction for nonlinear partial differential equations. The organizing question is whether verified Lie-invariant reference families can support controlled approximation and targeted corrections beyond a selected invariant class. The one-dimensional Grass-type Saint--Venant--Exner system is the main model. Conservation laws, constitutive assumptions and a locally invertible mass coordinate determine a compatible material scalar equation. A different printed scalar benchmark is retained only for source comparison and historical experiments.
+ 
+ The method first verifies a symmetry and the conditions for invariant-graph reduction, solves the resulting ordinary differential equation by integration or local series, and reconstructs the physical fields. A material travelling-wave family supplies an explicit regular example. The cubic scaling supplies a two-parameter convergent Laurent branch on a restricted parameter stratum; it does not exhaust the third-order reduced equation. Derivative bounds and coordinate inversion are required to translate profile accuracy into physical accuracy.
+@@ -144,8 +167,16 @@
+ 
+ \medskip\noindent\textbf{Keywords:} Lie symmetry; invariant reduction; Saint--Venant--Exner system; Laurent series; physical reconstruction; learning-assisted correction.
+ \clearpage
+-\chapter*{Notation and Scope}\label{sec:notation}
+-\addcontentsline{toc}{chapter}{Notation and Scope}
++\tableofcontents
++\clearpage
++\addcontentsline{toc}{chapter}{List of Figures}
++\listoffigures
++\clearpage
++\addcontentsline{toc}{chapter}{List of Tables}
++\listoftables
++\clearpage
++\chapter*{List of Symbols and Abbreviations}\label{sec:notation}
++\addcontentsline{toc}{chapter}{List of Symbols and Abbreviations}
+ \begin{table}[h!]\centering\small
+ \begin{tabularx}{\textwidth}{@{}p{.25\textwidth}X@{}}\toprule
+ Symbol & Meaning (the context specifies its domain)\\\midrule
+@@ -163,7 +194,7 @@
+ $D,N$ & $D=gH-V^2$ and right-hand side of the undivided radial equation $DH'=N$.\\
+ $\lambda$, $\theta$, $\widehat H_\theta$ & Physical/IVP parameter vector, fitted coefficients, and candidate reduced profile.\\\bottomrule
+ \end{tabularx}
+-\caption{Symbols used repeatedly; remaining local symbols are defined with their equations.}
++\caption[Symbols and notation]{Symbols used repeatedly; remaining local symbols are defined with their equations.}
+ \end{table}
+ \noindent\emph{Example:} $\Delta[U]=0$ asserts the original system,
+ $Q_X[U]=0$ selects one of its invariant solution classes, and
+@@ -171,10 +202,7 @@
+ 
+ 
+ \clearpage
+-\tableofcontents
+-\clearpage
+ \pagenumbering{arabic}
+-
+ % Begin sections/01-introduction.tex
+ \chapter{Introduction}\label{ch:introduction}
+ \section{Research setting and computational motivation}
+@@ -264,7 +292,7 @@
+        text width=10.0cm] at (0,-10.67)
+  {\textbf{Fail / exclusion:} $D=0$ leaves the regular solver chart; a non-transverse subgroup, incompatible boundary condition, or unverified interval forces revision. The critical saddle theorem is a separate local analytical result, not a neural crossing guarantee.};
+ \end{tikzpicture}
+-\caption{\textbf{Semi-analytical Lie reduction and verification workflow.}
++\caption[Semi-analytical reduction and verification workflow]{\textbf{Semi-analytical Lie reduction and verification workflow.}
+ The same verified reduced equation feeds analytical, optional learned and
+ classical-control branches. Every candidate returns through exact field
+ reconstruction and independent original-PDE checks. The learned annular
+@@ -439,7 +467,7 @@
+   \draw[-{Latex[length=2mm]}] (0,-0.28)--(8.7,-0.28)
+      node[right,font=\scriptsize] {$x$};
+ \end{tikzpicture}
+-\caption{One-dimensional Eulerian section of the depth-averaged
++\caption[One-dimensional Eulerian water--sediment section]{One-dimensional Eulerian section of the depth-averaged
+ water--sediment system. Here $h$ is the \emph{water depth} measured from the
+ mobile bed $B$ to the free surface $\eta=B+h$; $u$ transports water and the
+ constitutive flux $q$ transports sediment. The later two-dimensional model
+@@ -534,7 +562,7 @@
+   \draw[warr] (P.east)--(M.west)
+     node[midway,above,font=\scriptsize,warm] {$\neq$~\eqref{eq:counterexample}};
+ \end{tikzpicture}
+-\caption{Why one first rewrites the one-dimensional Eulerian system in
++\caption[Eulerian, material and printed scalar models]{Why one first rewrites the one-dimensional Eulerian system in
+ Lagrangian mass coordinates. The two-way arrows express a local, invertible
+ coordinate transformation and a closed-bed-form reconstruction on the
+ physical chart; neither arrow is an arbitrary global IBVP equivalence.
+@@ -690,7 +718,7 @@
+       {Tangency to the equation locus $\neq$ invariance of one graph};
+  \end{scope}
+ \end{tikzpicture}
+-\caption{Two geometrically different requirements. Left: the
++\caption[Orbit rank and invariant-graph transversality]{Two geometrically different requirements. Left: the
+ common-scaling flow foliates a regular base chart into rays of constant
+ $z=s/t$, and quotienting removes one independent variable. Right:
+ prolonged tangency of a generator to the jet equation locus detects an
+@@ -963,7 +991,7 @@
+  \draw[arr] (alg.east) to[out=15,in=180] (one.west);
+  \draw[arr] (alg.east) to[out=-15,in=180] (two.west);
+ \end{tikzpicture}
+-\caption{Optimal systems classify inequivalent \emph{subalgebras}; they do
++\caption[Optimal systems and inequivalent reductions]{Optimal systems classify inequivalent \emph{subalgebras}; they do
+ not enumerate individual numerical solutions. A complete symmetry search
+ and arbitrary-function check must precede an exhaustive classification.
+ The generic scalar example is complete only within its restricted affine
+@@ -985,9 +1013,11 @@
+ \end{equation}
+ Representative nonzero brackets are
+ \begin{equation}\label{eq:affine2d-brackets}
+- [R,P_x]=-P_y,\quad [R,P_y]=P_x,\quad
++ \begin{gathered}
++ [R,P_x]=-P_y,\quad [R,P_y]=P_x,\\
+  [S_0,P_x]=-\tfrac12P_x,\quad
+  [S_0,P_y]=-\tfrac12P_y,\quad [S_0,P_B]=-P_B.
++ \end{gathered}
+ \end{equation}
+ These brackets begin the \emph{adjoint classification} but do not by
+ themselves produce a complete one- or two-dimensional optimal system.
+@@ -1058,7 +1088,7 @@
+  \node[left,font=\scriptsize] at (0,.8) {$4$};
+  \node[left,font=\scriptsize] at (0,1.7) {$5$};
+ \end{tikzpicture}
+-\caption{A precise example of symmetry stratification: the dimension of the
++\caption[Restricted symmetry dimension across parameter strata]{A precise example of symmetry stratification: the dimension of the
+ \emph{declared affine class} for the printed scalar model $P$, not a
+ statement about all point symmetries of SVE.}
+ \label{fig:symmetry-strata}
+@@ -1250,7 +1280,7 @@
+ \node[box,text width=11cm,below=28mm of a] (d) {Derivative tails + overlap consistency + inversion bounds\\Accept a controlled patch, then continue or stop};
+ \draw[arr] (b)--(d);\draw[arr] (c)--(d);
+ \end{tikzpicture}
+-\caption{Representation and physical reconstruction are separate maps. A complex pole need not be a physical shock.}
++\caption[Representation and physical reconstruction]{Representation and physical reconstruction are separate maps. A complex pole need not be a physical shock.}
+ \end{figure}
+ \chapter{Targeted Transverse Correction}\label{ch:correction}
+ \section{Target specification and local function-space coordinates}
+@@ -1281,7 +1311,7 @@
+ \node[font=\small,anchor=west,warm] at (5.2,3.1) {Candidate $\iota(\alpha)+r$};
+ \node[font=\small,anchor=east,warm] at (4.3,2.5) {$r\in\mathcal X_\perp$};
+ \end{tikzpicture}
+-\caption{Local transverse coordinates. The complement is chosen explicitly; the drawing asserts neither a canonical metric nor that the complete PDE solution set is a manifold.}
++\caption[Local transverse coordinates]{Local transverse coordinates. The complement is chosen explicitly; the drawing asserts neither a canonical metric nor that the complete PDE solution set is a manifold.}
+ \end{figure}
+ 
+ \section{A conditional validation theorem}
+@@ -1320,7 +1350,7 @@
+ \code{sve_baseline.py} & Direct neural candidate; shared training, restart, inference and evaluation engine.\\
+ \code{sve_architecture.py} & Reference-plus-remainder candidate using the same engine.\\\bottomrule
+ \end{tabularx}
+-\caption{Implementation interfaces. CPU case parallelism and distributed training are distinct execution layers.}
++\caption[Implementation interfaces]{Implementation interfaces. CPU case parallelism and distributed training are distinct execution layers.}
+ \end{table}
+ The shared corrector iterates the full nonlinear discrete equations. It does not certify the continuous PDE. Whole cases are separated for training and evaluation; network size, data, accuracy goals and corrector are matched. Data generation, training, failed corrections and inference all contribute to cost. No library is asserted to be universally fastest without hardware-specific benchmarks.
+ 
+@@ -1335,7 +1365,7 @@
+ \node[warnbox,text width=5cm,right=6mm of f] (g) {Failure\\change chart, refine or stop};
+ \draw[arr] (a)--(b);\draw[warr] (a)--(c);\draw[arr] (b)--(d);\draw[warr] (c)--(d);\draw[arr] (d)--(e);\draw[arr] (e)--(f);\draw[warr] (e)--(g);
+ \end{tikzpicture}
+-\caption{Continuous method explanation: an analytical reference generates candidates; the original target problem determines acceptance. Learning changes the starting point, not the equations.}
++\caption[Continuous correction and validation workflow]{Continuous method explanation: an analytical reference generates candidates; the original target problem determines acceptance. Learning changes the starting point, not the equations.}
+ \end{figure}
+ \chapter{Evidence, Evaluation and Transfer Limits}\label{ch:computation}
+ \section{Separate analytical results from computational evidence}
+@@ -1394,7 +1424,7 @@
+       {$\mathrm{Fr}_{\rm rad}^2=V^2/(gH)$\\
+        critical radial locus $gH-V^2=0$};
+ \end{tikzpicture}
+-\caption{Two-dimensional Cartesian annulus and its symmetry-derived radial
++\caption[Cartesian annulus and radial quotient]{Two-dimensional Cartesian annulus and its symmetry-derived radial
+ fields. The velocity splits into radial and azimuthal components; the water
+ surface and sediment bed remain coupled through the momentum and Exner
+ balances. The diagram depicts an \emph{invariant solution class}, not the
+@@ -1424,7 +1454,7 @@
+ the lifted bed $B=Z(r)+ct$ is incompatible with a boundary condition fixing
+ its absolute elevation for all time unless that condition allows the drift.
+ Thus ``constrained two-dimensional'' means a class of \emph{invariant
+-annular flows}, not solutions for arbitrary topography, basin boundaries,
++annular flows},\linebreak not solutions for arbitrary topography, basin boundaries,
+ initial fields or shorelines. In the branch $C_1\ne0$, the mass integral
+ $rHV=C_1$ implies a water flux $2\pi C_1$ across every circle. Thus an
+ impermeable circular wall is incompatible with this branch. Likewise,
+@@ -1497,9 +1527,11 @@
+ unit pivot in $b_t$, so no division by $c$ loses the $c=0$ case.
+ The adapted map is
+ \[
+- (t,r,\theta,H,V,W,Z)\mapsto
+- (t,r\cos\theta,r\sin\theta,H,
++ \begin{aligned}
++ &(t,r,\theta,H,V,W,Z)\mapsto\\
++ &\quad(t,r\cos\theta,r\sin\theta,H,
+        V\cos\theta-W\sin\theta,V\sin\theta+W\cos\theta,Z+ct).
++ \end{aligned}
+ \]
+ Its Jacobian is $r$, and both orbit ranks are two. The invariant graph
+ condition therefore \emph{derives} four arbitrary functions of $r$:
+@@ -1511,12 +1543,14 @@
+ the axis is a separate orbit-rank stratum.
+ 
+ Direct substitution into the original Cartesian operators gives
+-\begin{align}
+- E_h&=(rHV)'/r,&
+- \mathbf E_w\cdot\mathbf e_r&=VV'-W^2/r-fW+g(H'+Z'),\label{eq:radial}\\
+- \mathbf E_w\cdot\mathbf e_\theta&=V(W'+W/r+f),&
+- E_B&=c+(rQ)'/r,\qquad Q=(V^2+W^2)(KV-GZ').\notag
+-\end{align}
++\begin{equation}\label{eq:radial}
++\begin{aligned}
++ E_h&=(rHV)'/r,\\
++ \mathbf E_w\cdot\mathbf e_r&=VV'-W^2/r-fW+g(H'+Z'),\\
++ \mathbf E_w\cdot\mathbf e_\theta&=V(W'+W/r+f),\\
++ E_B&=c+(rQ)'/r,\qquad Q=(V^2+W^2)(KV-GZ').
++\end{aligned}
++\end{equation}
+ The tangential sediment flux $K(V^2+W^2)W$ need not vanish; its angular
+ divergence vanishes in this invariant class. The radial measure $r\dd r$
+ is essential. For $V\ne0$, the tangential momentum equation has integrating
+@@ -1672,8 +1706,10 @@
+ \emph{Exhaustiveness among $C^1$ germs.} Let any $C^1$ solution through the
+ point have slope $s$ and write $\rho=r-r_*$. First-order expansions give
+ \[
+- D(r,H(r))=(D_r+D_Hs)\rho+o(\rho),\qquad
+- N(r,H(r))=(N_r+N_Hs)\rho+o(\rho),\qquad H'=s+o(1).
++ \begin{aligned}
++ D(r,H(r))&=(D_r+D_Hs)\rho+o(\rho),\\
++ N(r,H(r))&=(N_r+N_Hs)\rho+o(\rho),\qquad H'=s+o(1).
++ \end{aligned}
+ \]
+ Divide $DH'=N$ by $\rho$ and take the limit. Equation~\eqref{eq:slope-equation}
+ follows without assuming $H''$. Thus $\lambda=D_r+D_Hs$ is one of the
+@@ -1892,7 +1928,7 @@
+ \end{tikzpicture}
+ 
+ 
+-\caption{Exact algebraic information for~\eqref{eq:example-family}.
++\caption[Critical parameter family and tangent slopes]{Exact algebraic information for~\eqref{eq:example-family}.
+ Left: $\det A<0$ is the saddle interval. Right: tangent directions at $c=-7$;
+ the dashed line is tangent to $D=0$, $H_c(r)=r^{-2/3}$. These lines are
+ neither computed solution profiles nor a certified continuation radius.
+@@ -2172,7 +2208,7 @@
+ \end{tikzpicture}
+ 
+ 
+-\caption{Measured scalar results from all forty retained runs, re-plotted from
++\caption[Retained scalar approximation results]{Measured scalar results from all forty retained runs, re-plotted from
+ the frozen JSON without retraining. Markers are medians; bars show the full
+ observed minimum--maximum range, not confidence intervals. H: hard-data tanh;
+ T4: Taylor--tanh; C: Chebyshev; D: two-variable tanh in $(\log t,s/t)$.
+@@ -2186,7 +2222,7 @@
+ 
+ % Begin data/comparison-rows.tex
+ \begin{tabular}{@{}lrrrr@{}}\toprule
+-Method & Runs $P+M$ & Budget stops $P+M$ & Median error $P$ & Median error $M$\\\midrule
++Method & \shortstack{Runs\\$P+M$} & \shortstack{Budget stops\\$P+M$} & \shortstack{Median error\\$P$} & \shortstack{Median error\\$M$}\\\midrule
+ H: hard-data tanh & 6+6 & 2+2 & 1.16e-11 & 1.22e-10 \\
+ T4: Taylor--tanh & 6+6 & 6+6 & 1.83e-12 & 7.20e-11 \\
+ C: Chebyshev & 2+2 & 0+0 & 2.44e-15 & 1.61e-13 \\
+@@ -2194,7 +2230,7 @@
+ \bottomrule\end{tabular}
+ 
+ 
+-\caption{All runs, including the sixteen evaluation-budget stops, contribute
++\caption[Retained scalar runs and evaluation-budget stops]{All runs, including the sixteen evaluation-budget stops, contribute
+ to the medians in Figure~\ref{fig:experiments}. Errors have the scalar
+ profile-value definition above.}
+ \label{tab:experiment}
+@@ -2258,7 +2294,7 @@
+ \setstretch{0.97}
+ \setlength{\bibsep}{1pt plus .3pt minus .3pt}
+ \begin{thebibliography}{99}
+-\addcontentsline{toc}{chapter}{Bibliography}
++\addcontentsline{toc}{chapter}{References}
+ \bibitem[Exner(1925)]{exner1925}
+ Felix M. Exner. \"Uber die Wechselwirkung zwischen Wasser und Geschiebe in Fl\"ussen. \emph{Sitzungsberichte der Akademie der Wissenschaften in Wien, Mathematisch-Naturwissenschaftliche Klasse}, 134:165--203, 1925.
+ 

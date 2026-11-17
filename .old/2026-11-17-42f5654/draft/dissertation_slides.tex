@@ -1,0 +1,1085 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{booktabs,tabularx,array}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+\definecolor{SVEBlue}{HTML}{236BA6}
+\definecolor{SVEGreen}{HTML}{207C61}
+\definecolor{SVEOrange}{HTML}{CB7623}
+\definecolor{SVEInk}{HTML}{20252B}
+\definecolor{SVEMuted}{HTML}{5F6872}
+\definecolor{SVEWash}{HTML}{F5F7F8}
+\definecolor{SVERed}{HTML}{A33D3D}
+
+\setbeamercolor{normal text}{fg=SVEInk,bg=white}
+\setbeamercolor{structure}{fg=SVEBlue}
+\setbeamercolor{frametitle}{fg=SVEInk,bg=white}
+\setbeamercolor{title}{fg=SVEInk}
+\setbeamercolor{subtitle}{fg=SVEMuted}
+\setbeamercolor{block title}{fg=white,bg=SVEBlue}
+\setbeamercolor{block body}{fg=SVEInk,bg=SVEWash}
+\setbeamercolor{alerted text}{fg=SVERed}
+\setbeamercolor{footline}{fg=SVEMuted,bg=white}
+\setbeamerfont{title}{size=\fontsize{27}{31}\selectfont,series=\bfseries}
+\setbeamerfont{subtitle}{size=\fontsize{14}{17}\selectfont}
+\setbeamerfont{frametitle}{size=\fontsize{20}{23}\selectfont,series=\bfseries}
+\setbeamerfont{normal text}{size=\fontsize{11}{13.3}\selectfont}
+\setbeamerfont{footline}{size=\fontsize{7.5}{9}\selectfont}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\color{SVEBlue}$\blacktriangleright$}
+\setbeamertemplate{itemize subitem}{\color{SVEGreen}$\vcenter{\hbox{\scriptsize$\bullet$}}$}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{frametitle}{%
+  \vspace{0.25cm}\insertframetitle\par
+  \vspace{0.05cm}{\color{SVEBlue}\rule{\textwidth}{0.55pt}}}
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.6ex,dp=1.2ex,leftskip=.55cm]{footline}%
+      \insertshorttitle\hspace{0.8em}\textcolor{SVEBlue}{/}\hspace{0.8em}\insertsectionhead
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.6ex,dp=1.2ex,rightskip=.55cm plus1fil]{footline}%
+      \hfill\ifnum\value{framenumber}<18\insertframenumber\,/\,17\else Backup\,\number\numexpr\value{framenumber}-17\relax\fi
+    \end{beamercolorbox}%
+  }}
+
+\newcommand{\E}{\mathcal E}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\D}{\mathrm D}
+\newcommand{\Exact}{\textcolor{SVEGreen}{\bfseries Exact}}
+\newcommand{\Numerical}{\textcolor{SVEBlue}{\bfseries Numerical}}
+\newcommand{\Proposed}{\textcolor{SVEOrange}{\bfseries Proposed}}
+\newcommand{\Printed}{\textcolor{SVERed}{\bfseries Printed source}}
+\newcommand{\scope}[1]{\par\smallskip{\scriptsize\color{SVEMuted}\textbf{Scope.} #1}}
+\newcommand{\source}[1]{\par\smallskip{\tiny\color{SVEMuted}#1}}
+
+\title[Certified scalar SVE reductions]{Certified Lie-Point Reductions of a Scalar SVE Benchmark}
+\subtitle{Exact symmetry classification, corrected profile equations,\\ local verification, and an ML research gate}
+\author{Math 4890 dissertation demonstration}
+\date{October 2026}
+
+\begin{document}
+
+\section{Dissertation}
+\begin{frame}[plain]
+  \vspace{0.65cm}
+  {\color{SVEBlue}\rule{2.1cm}{1.2pt}}\par\vspace{0.72cm}
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+  \vspace{0.28cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vspace{0.8cm}
+  {\small\insertauthor\par}\vspace{0.14cm}
+  {\small\color{SVEMuted}\insertdate\par}
+  \vfill
+  {\small\color{SVEMuted}
+  Printed scalar model $\longrightarrow$ unrestricted point symmetries
+  $\longrightarrow$ invariant ODEs $\longrightarrow$ checked local solutions}
+  \vspace{0.22cm}
+\end{frame}
+\begin{frame}{Research question and proof chain}
+\small
+\textbf{Question.} Which mathematically certified reductions of the \emph{printed scalar} Saint--Venant--Exner (SVE) model yield useful lower-dimensional solution problems?
+\vspace{0.23cm}
+\begin{center}
+\setlength{\fboxsep}{8pt}
+\fcolorbox{SVEBlue}{SVEWash}{\parbox{.89\linewidth}{\centering
+$E_m=0\ \xrightarrow{\ \operatorname{pr}^{(3)}X\ }\ \mathfrak g_m$
+$\ \xrightarrow{\ Q=0\ }\ \phi=\mathcal T[F]$\\[4pt]
+$\xrightarrow{\ E_m[\mathcal TF]\ }\ \mathcal R[F]=0\ \xrightarrow{\ \text{verified integral}\ }\ I[F]=I_0$}}
+\end{center}
+\begin{columns}[T,onlytextwidth]
+\column{.49\textwidth}
+\begin{block}{Completed: exact mathematics}
+Unrestricted local point classification; nine source-case audits; corrected pullbacks; regular first integrals and special branches.
+\end{block}
+\column{.49\textwidth}
+\begin{block}{Separate: computational evidence}
+Constructed local IVPs, Taylor recurrences and finite solver diagnostics. \alert{No learned integral or ML speedup yet.}
+\end{block}
+\end{columns}
+\scope{A symmetry quotient removes independent variables ($2\to1$); a subsequent first integral lowers ODE order ($3\to2$).}
+\end{frame}
+\begin{frame}{Printed scalar model and regular chart}
+\small
+The independent variables are time $t$ and material label $s$; $\phi(t,s)$ is
+particle position.  Put $p=\phi_t$ and $q=\phi_s$.  The source's two currents are
+\begin{equation}
+ \mathcal A=q\phi_{tt}-g\frac{\phi_{ss}}{q^2},\qquad
+ \mathcal J=m\kappa\frac{p^{m-1}\phi_{ts}}{q},\qquad
+ \boxed{E_m:=D_t\mathcal A-gD_s\mathcal J=0}.
+ \tag{M}
+\end{equation}
+They follow by commuting the mixed derivatives of the source's printed bed
+relations $\mathfrak b_s=-\mathcal A/g$ and $\mathfrak b_t=-\mathcal J$.
+Throughout the regular calculation,
+\begin{equation*}
+g,\kappa>0,\qquad m\ge1,\qquad p>0,\qquad q>0.
+\end{equation*}
+The condition $q>0$ makes the material map locally invertible; $p>0$ fixes a
+real branch of $p^{m-1}$ for noninteger $m$.
+\scope{Equation (M) is the printed scalar target.  It is not the advectively corrected scalar equation or the full bed-field SVE system.}
+\end{frame}
+\begin{frame}[shrink=10]{One equation is not the complete physical SVE model}
+\footnotesize
+The manuscript audits a \textbf{printed scalar compatibility equation} in $(t,s)$, with $s$ a material label. It is \emph{not} a $(2+1)$-dimensional spatial shallow-water system.
+\begin{align*}
+E_m[\phi]&=D_t\mathcal A-gD_s\mathcal J,\\
+\mathcal A&=\phi_s\phi_{tt}-g\frac{\phi_{ss}}{\phi_s^2},\quad
+\mathcal J=m\kappa\frac{\phi_t^{m-1}\phi_{ts}}{\phi_s}.
+\end{align*}
+For an Eulerian bed $B(t,x)$ pulled back as $b(t,s)=B(t,\phi(t,s))$, the chain rule gives
+\[
+b_t= B_t+\phi_tB_x,\qquad b_s=\phi_sB_x.
+\]
+Thus the advective bed term cannot be discarded without an independent modelling justification. The manuscript's \emph{advectively corrected scalar compatibility} is
+\[
+\boxed{E_m^{\mathrm{phys}}=E_m-D_s\!\left(\frac{\phi_t\mathcal A}{\phi_s}\right)=0.}
+\]
+\scope{All source-case classification and ODE claims in this talk apply to the printed $E_m$, not automatically to $E_m^{\mathrm{phys}}$ or the full coupled bed-field system. [Manuscript \S7.3]}
+\end{frame}
+\begin{frame}[shrink=10]{First principles: the Lie group, its field, and its graphs}
+\footnotesize
+A \textbf{local one-parameter point group} $\{\Phi_\varepsilon\}$ satisfies $\Phi_0=\mathrm{id}$ and $\Phi_{\varepsilon+\delta}=\Phi_\varepsilon\circ\Phi_\delta$ wherever the compositions are defined. Its tangent at the identity is
+\[
+X=\left.\frac{d}{d\varepsilon}\right|_{0}\Phi_\varepsilon
+=\tau(t,s,\phi)\partial_t+\xi(t,s,\phi)\partial_s+\eta(t,s,\phi)\partial_\phi.
+\]
+For a graph $\phi=f(t,s)$, transformed graph values at fixed base coordinates satisfy
+\[
+\boxed{\delta f=\eta-\tau f_t-\xi f_s=:Q[f].}
+\]
+\begin{columns}[T,onlytextwidth]
+\column{.49\textwidth}
+\begin{block}{Equation symmetry}
+$\operatorname{pr}^{(3)}X(E_m)|_{E_m=0}=0$: the flow preserves the PDE's equation manifold and maps local solutions to solutions.
+\end{block}
+\column{.49\textwidth}
+\begin{block}{Invariant solution}
+$Q[f]=0$: this \emph{particular} graph is fixed. It selects a solution subclass; it is not the equation-symmetry test.
+\end{block}
+\end{columns}
+\scope{$\varepsilon$ is the group-flow displacement; $m,g,\kappa$ remain fixed. A Lie \emph{algebra} consists of infinitesimal generators closed under brackets.}
+\end{frame}
+\begin{frame}[shrink=10]{Prolongation and free-jet splitting are the proof gate}
+\footnotesize
+Because $E_m$ contains third derivatives, prolong the \emph{unrestricted} $X$ through order three:
+\[
+\eta^t=D_t\eta-pD_t\tau-qD_t\xi,\quad
+\eta^s=D_s\eta-pD_s\tau-qD_s\xi,\quad
+\eta^{Ii}=D_i\eta^I-\phi_{It}D_i\tau-\phi_{Is}D_i\xi.
+\]
+On $p=\phi_t>0$, $q=\phi_s>0$ the leading jet $r=\phi_{ttt}$ has coefficient $q$, so the exact on-shell identity is
+\[
+\Omega=\left.\operatorname{pr}^{(3)}X(E_m)\right|_{r=\mathcal N}=0
+\quad\text{for every remaining free jet}.
+\]
+\begin{center}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{@{}p{1.45cm}p{4.45cm}p{4.45cm}@{}}
+\toprule
+Split & Consequence & Logical reason\\\midrule
+$[y]\Omega=0$ & $\xi_t+p\xi_\phi=0\Rightarrow\xi=\xi(s)$ & Identity for all $p>0$\\
+$[w]\Omega=0$ & $\tau_s+q\tau_\phi=0\Rightarrow\tau=\tau(t)$ & Identity for all $q>0$\\
+$[ab],[a]$ & $\eta=A(t)\phi+B(t)$ & Affine form is \emph{derived}, not guessed\\
+$[x]$ & $(m-3)(A-\tau')=0$, $(m-1)B'=0$ & Split $m=1,3$ \emph{before} division\\\bottomrule
+\end{tabular}\end{center}
+\scope{The remaining determining equations and full sufficiency identities appear in the backup. Standard infinitesimal criterion: Olver.}
+\end{frame}
+\begin{frame}[shrink=28]{Parameter strata: two different exceptional exponents}
+\footnotesize
+The complete local smooth \textbf{point} classification of the printed equation on $p,q>0$ yields:
+\begin{center}\renewcommand{\arraystretch}{1.23}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Exponent & Admitted basis & Dimension\\\midrule
+$m\ne1,3$ & $X_1,X_2,X_3,X_4$ & $4$\\
+$m=3$ & $X_1,X_2,X_3,X_4,X_5$ & $5$\\
+$m=1$ & $X_1,X_2,X_3,X_4,X_6$ & $5$\\\bottomrule
+\end{tabular}\end{center}
+\vspace{0.07cm}
+\[
+\begin{gathered}
+X_1=\partial_t,\ X_2=\partial_s,\ X_3=\partial_\phi,\quad
+X_4=t\partial_t+s\partial_s+\phi\partial_\phi,\\
+\underbrace{X_5=t\partial_t-2s\partial_s}_{m=3\ \mathrm{only}},\qquad
+\underbrace{X_6=t\partial_\phi}_{m=1\ \mathrm{only}}.
+\end{gathered}
+\]
+\begin{block}{Why ``exceptional''?}
+The rank of the determining system changes at an exponent. Neither $m=3$ symmetry nor the $m=1$ boost persists automatically at neighboring $m$.
+\end{block}
+\scope{The $m=1$ boost is omitted in the cited source. ``Local point algebra'' is not the algebra of the physically corrected/full SVE models. [Manuscript \S8.3]}
+\end{frame}
+\begin{frame}[shrink=12]{Quotient geometry: why one PDE variable disappears}
+\footnotesize
+Choose a verified projectable subgroup $H$. On a constant-rank regular chart require
+\[
+\ell=\operatorname{rank}(\text{base orbit})
+=\operatorname{rank}(\text{total orbit})>0,
+\qquad d=p_{\mathrm{base}}-\ell.
+\]
+For $X_4=t\partial_t+s\partial_s+\phi\partial_\phi$ with $t>0$, an explicit \textbf{adapted coordinate chart} is
+\[
+\boxed{y=\log(t/t_*),\quad z=s/t,\quad W=\phi/t},\qquad
+\det\frac{\partial(y,z)}{\partial(t,s)}=t^{-2}\ne0,\quad W_\phi=t^{-1}\ne0.
+\]
+\begin{center}
+\fcolorbox{SVEBlue}{SVEWash}{\parbox{.91\linewidth}{\centering
+Orbit coordinate $y$ is forgotten by the local quotient:\\[3pt]
+$\underbrace{(t,s,\phi)}_{\text{original field chart}}
+\longmapsto(y,z,W)\longmapsto(z,W)$\\[4pt]
+$Q=0\ \Longleftrightarrow\ \partial_yW=0\ \Longleftrightarrow\ W=F(z)$\\[3pt]
+$\boxed{\phi(t,s)=tF(s/t)}$}}
+\end{center}
+\scope{$p_{\mathrm{base}}=2$, $\ell=1$, hence $d=1$. This describes only $H$-invariant graphs, not the whole PDE solution set; it is a \emph{local} quotient, not a global geometric quotient.}
+\end{frame}
+\begin{frame}[shrink=30]{Boundary conditions can invalidate a usable reduction}
+\small
+\textbf{Three separate gates:} equation symmetry, existence of a regular invariant graph, and compatibility with the \emph{posed data}.
+\vspace{0.16cm}
+For a prescribed boundary hypersurface $\Gamma=\{\rho(t,s)=0\}$, a projectable symmetry preserving that boundary must satisfy
+\[
+\boxed{X\rho\big|_{\Gamma}=0}.
+\]
+The boundary relation $\mathcal B(t,s,\phi^{(k)})=0$ must also be preserved by the appropriate prolonged action on the boundary-data manifold.
+\begin{block}{Explicit counterexample: common scaling}
+For $X_4=t\partial_t+s\partial_s+\phi\partial_\phi$ and a fixed initial-time surface $t=t_0>0$, take $\rho=t-t_0$. Then
+\[
+X_4\rho|_{t=t_0}=t_0\ne0.
+\]
+The PDE admits $X_4$, but the \emph{fixed-time boundary-value problem} does not inherit this symmetry.
+\end{block}
+\scope{Special data may still admit an invariant solution; this differs from symmetry of the whole fixed-data problem. Also check $p,q>0$, chart Jacobians, and all denominator guards.}
+\end{frame}
+\begin{frame}{Nine source cases: one-dimensional invariants}
+\scriptsize
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\textwidth}{@{}c p{3.0cm} p{3.2cm} X@{}}
+\toprule
+Case & Generator & Invariants $(z,W)$ & Invariant graph\\
+\midrule
+3.1 & $X_1$ & $(s,\phi)$ & $\phi=F(s)$\\
+3.2 & $X_2$ & $(t,\phi)$ & $\phi=F(t)$\\
+3.3 & $X_3$ & $(t,s)$ & no invariant graph\\
+3.4 & $X_4$ & $(s/t,\phi/t)$ & $\phi=tF(s/t)$\\
+3.5 & $X_5$, $m=3$ & $(st^2,\phi)$ & $\phi=F(st^2)$\\
+3.6 & $X_1+\alpha X_2$ & $(s-\alpha t,\phi)$ & $\phi=F(s-\alpha t)$\\
+3.7 & $X_1+\alpha X_3$ & $(s,\phi-\alpha t)$ & $\phi=\alpha t+F(s)$\\
+3.8 & $X_2+\alpha X_3$ & $(t,\phi-\alpha s)$ & $\phi=\alpha s+F(t)$\\
+3.9 & $X_1+\alpha X_2+\alpha_3X_3$ & $(s-\alpha t,\phi-\alpha_3t)$ & $\phi=\alpha_3t+F(s-\alpha t)$\\
+\bottomrule
+\end{tabularx}
+\vspace{0.15cm}
+Rows 3.7 and 3.8 correct the source's exchanged graphs.  The nine rows are an
+audited selection, not a complete optimal system for every parameter stratum.
+\end{frame}
+\begin{frame}{Case 3.4: common scaling has an exact first integral}
+\footnotesize
+Let $z=s/t$, $\phi=tF(z)$, $P=F'$, $C=F''$, $H=F'''$, and $V=F-zP$.
+Since $D_tG=-(z/t)DG$ and $D_sG=(1/t)DG$,
+\begin{align*}
+p&=V,&q&=P,&a&=z^2C/t,&b&=-zC/t,&c&=C/t,\\
+r&=-(3z^2C+z^3H)/t^2,&x&=-(C+zH)/t^2,&y&=H/t^2.
+\end{align*}
+The currents reduce to
+\[
+\mathcal A=t^{-1}(z^2P-g/P^2)C,\qquad
+\mathcal J=-t^{-1}m\kappa zV^{m-1}C/P.
+\]
+Therefore
+\begin{equation*}
+E_m[tF(s/t)]=t^{-2}D(K_4C),\qquad
+K_4=-z^3P+\frac{gz}{P^2}+\frac{gm\kappa zV^{m-1}}P.
+\end{equation*}
+The third-order equation $K_4H+(DK_4)C=0$ integrates to
+\begin{equation}
+\boxed{K_4F''=I_0},\qquad
+\boxed{F'=P,\quad P'=I_0/K_4},\quad K_4\ne0.\tag{5}
+\end{equation}
+The constant $I_0=K_4(z_0,F_0,P_0)C_0$ retains the third initial datum.
+\end{frame}
+\begin{frame}[shrink=25]{At $m=3$: the extra symmetry requires a separate chart}
+\footnotesize
+Only on the cubic stratum, the verified extra generator $X_5=t\partial_t-2s\partial_s$ has flow
+\[
+(t,s,\phi)\mapsto(e^\varepsilon t,e^{-2\varepsilon}s,\phi).
+\]
+On $t>0$ its independent invariants are $z=st^2$ and $W=\phi$, hence $\phi=F(st^2)$; the adapted orbit coordinate is $y=\log(t/t_*)$.
+\[
+\boxed{E_3[F(st^2)]=t^{-1}\mathcal R_5[F]},\qquad
+\mathcal R_5[F]=2z\,D\mathcal U_5-g\,D\mathcal V_5.
+\]
+The third-order reduced equation is \emph{not automatically solvable in normal form}. The coefficient of $F^{(3)}$ is
+\[
+L_5=-\frac{2z}{(F')^2}\bigl((12g\kappa-4)z^2(F')^3+g\bigr).
+\]
+\begin{block}{Branch discipline}
+Require $z>0$, $F'>0$ and $L_5\ne0$ before dividing. An exact singular-normal-form power profile exists on a separate undivided branch.
+\end{block}
+\scope{$m=3$ is an exceptional equation parameter, not an ``extra'' group-flow parameter. The common scaling $X_4$ remains admitted for every $m\ge1$.}
+\end{frame}
+\begin{frame}{Cases 3.6 and 3.9: traveling profiles become quadratures}
+\footnotesize
+Let $z=s-\alpha t$, $\phi=\alpha_3t+F(z)$,
+$P=F'$, $C=F''$, $H=F'''$, and $v=\alpha_3-\alpha P>0$.
+Then
+\[
+p=v,\ q=P,\ a=\alpha^2C,\ b=-\alpha C,\ c=C,\quad
+r=-\alpha^3H,\ x=-\alpha H,\ y=H.
+\]
+Direct substitution into the original currents gives
+\begin{align*}
+E_m&=-\alpha D\{\mathcal B(P)C\},\\
+\mathcal B(P)&=\alpha^2P-\frac g{P^2}
+-\frac{gm\kappa(\alpha_3-\alpha P)^{m-1}}P.
+\end{align*}
+For $\alpha\ne0$ and $\mathcal B\ne0$,
+\begin{equation}
+\boxed{\mathcal B(P)F''=I_0},\qquad
+\boxed{F'=P,\quad P'=I_0/\mathcal B(P)}.\tag{7}
+\end{equation}
+If $\mathcal Y'(P)=\mathcal B(P)$, then
+\[
+\mathcal Y(P(z))-\mathcal Y(P_0)=I_0(z-z_0),\qquad
+F(z)=F_0+\int_{z_0}^{z}P(\zeta)\,d\zeta.
+\]
+The branches $I_0=0$ and $\alpha=0$ must be retained before division.
+\end{frame}
+\begin{frame}[shrink=12]{The correction claim is supported by exact witnesses}
+\small
+\textbf{Method:} substitute each \emph{printed} reduced equation into the original master residual, not into an imported simplified formula.
+\vspace{0.18cm}
+\begin{block}{A single decisive rational witness: source Eq. (24)}
+At $m=3$, $g=1$, $\kappa=1/30$ and
+\[
+(z,F,F',F'',F^{(3)})=(1,2,\tfrac12,\tfrac1{10},\tfrac{23}{250}),
+\]
+the source's displayed reduced equation is zero, but exact original-PDE substitution gives
+\[
+\boxed{E_m[\phi]=\frac{2367}{5000}\ne0}\qquad(t=s=1).
+\]
+\end{block}
+Other exact comparisons find a missing chain-rule denominator in source (27), swapped invariant graphs in cases 3.7--3.8, and errors in other displayed reductions.
+\scope{A counterexample disproves universal equality of formulas, not every special solution. Source corrections and the omitted boost support a correction study; broader solver novelty is not established.}
+\end{frame}
+\begin{frame}[shrink=15]{Constructed local profiles: analytical and numerical checks}
+\centering
+\includegraphics[width=.90\linewidth]{dissertation_assets/series_profiles.pdf}
+\vspace{0.06cm}
+\begin{minipage}{.91\linewidth}\footnotesize
+\textbf{Independent checks:} sixth-degree Taylor recurrence, classic Fehlberg 4(5), and DOP853 saved nodes for constructed cubic scaling/traveling IVPs ($g=1$, $\kappa=1/30$). Their curves overlap at this plotting scale.
+\scope{Figure extracted from the supplied annotated manuscript (its Fig. 3). Finite agreement is not a certified global error or Taylor remainder bound.}
+\end{minipage}
+\end{frame}
+\begin{frame}[shrink=30]{ML is a proposal gate, not an achieved PDE solver}
+\footnotesize
+After an \emph{exactly verified} profile reduction on a regular branch, set
+\[
+F'=P,\qquad P'=C,\qquad C'=R(z,F,P,C).
+\]
+A learner may propose a \emph{nonconstant} function $I(z,F,P,C)$, but it becomes a first integral only after \textbf{exact symbolic certification}:
+\[
+\boxed{D_zI=I_z+PI_F+CI_P+RI_C=0}.
+\]
+For a genuinely order-lowering chart in this representation additionally require
+\[
+I_C\ne0,\quad I\text{ independent of known integrals},\quad
+I=I_0\text{ compatible with data}.
+\]
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}\begin{block}{What is already proved?}
+Classical first integrals in cases 3.4, 3.6 and 3.9, without ML.
+\end{block}
+\column{.48\textwidth}\begin{block}{What remains open?}
+Learn a \emph{new} certifiable integral or ODE symmetry; test incremental benefit against classical reduced solvers.
+\end{block}
+\end{columns}
+\scope{Small collocation residual, fitting a profile, and reducing neural input dimension are not proofs of lower ODE order, convergence, or computational advantage.}
+\end{frame}
+\begin{frame}[shrink=12]{Conclusion and defensible dissertation claims}
+\small
+\begin{enumerate}
+\setlength{\itemsep}{0.24cm}
+\item \textbf{Classification:} On the declared positive chart, the printed scalar model has point-algebra dimensions $4,5,5$ on the generic, $m=3$, and $m=1$ strata; the last contains a missing boost.
+\item \textbf{Equation corrections:} Nine selected source cases are separated into regular ODEs, identities, undefined charts, and a no-graph symmetry. Rational witnesses expose erroneous printed reductions.
+\item \textbf{Independent mathematical checks:} Exact first integrals, locally justified series, guarded reconstructed fields, and finite RKF45/DOP853 checks support a reproducible correction study.
+\end{enumerate}
+\vspace{0.15cm}
+\begin{center}\color{SVEBlue}\rule{.93\linewidth}{.8pt}\end{center}
+\textbf{Next contribution to test:} Can machine-proposed, \emph{symbolically certified} first integrals lower reduced-ODE order beyond established classical controls?
+\scope{Not claimed: full physical SVE equivalence, global solutions, arbitrary boundary data, learned integrals, or neural speedup. Technical derivations and all numerical limits are in the backup.}
+\end{frame}
+\appendix
+\section{Technical backup}
+\begin{frame}{Backup: notation and the role of quotients}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}p{2.4cm}X@{}}
+\toprule
+Symbol & Meaning and non-equivalence\\\midrule
+$(t,s)$ & Time and one material label: a $1+1$-dimensional PDE, \emph{not} two spatial dimensions\\
+$\phi(t,s)$ & Particle position; $u=\phi_t$, $h=1/\phi_s$ on $\phi_s>0$ in normalized mass coordinates\\
+$g,\kappa,m$ & Fixed gravity, transport coefficient, and exponent during equation-symmetry tests\\
+$\varepsilon$ & One-parameter group-flow displacement, not an exponent or derivative abbreviation\\
+$p,q,a,b,c$ & Jet abbreviations: $\phi_t,\phi_s,\phi_{tt},\phi_{ts},\phi_{ss}$\\
+$G,\mathfrak g,H$ & Local symmetry group, its Lie algebra, and a selected subgroup (or subalgebra)\\
+$y,z,W$ & Orbit coordinate, independent invariant, and fibre invariant: $(t,s,\phi)\mapsto(y,z,W)$\\
+$Q=0$ & Invariant-solution graph gate, \emph{not} the PDE equation-symmetry criterion\\
+\bottomrule
+\end{tabularx}
+\scope{The quotient forgets the $y$ direction only on a regular transverse chart and for the selected $H$-invariant solution subclass.}
+\end{frame}
+\begin{frame}{Backup: this Lie group is not $SO(3)$}
+\footnotesize
+The point-symmetry algebra for the cubic printed SVE equation is five-dimensional. The translation ideal
+\[
+\mathfrak n=\operatorname{span}\{X_1,X_2,X_3\},\qquad
+[\mathfrak n,\mathfrak n]=0
+\]
+is abelian, and $[X_4,X_5]=0$, whereas $X_4,X_5$ act diagonally on translations. Hence
+\[
+[\mathfrak g_3,\mathfrak g_3]=\mathfrak n,\qquad
+[\mathfrak n,\mathfrak n]=0.
+\]
+This algebra is \textbf{solvable}, with a local semidirect-product structure $\mathbb R^3\rtimes\mathbb R^2$; it cannot be $\mathfrak{so}(3)$, the three-dimensional simple rotation algebra.
+\vspace{.15cm}
+\begin{block}{Why discuss adjoints anyway?}
+For any Lie group, conjugation acts on its Lie algebra. Here that action classifies one-dimensional subalgebras for nonredundant \emph{local} similarity reductions. The source convention is $\operatorname{Ad}(e^{\varepsilon U})V=e^{-\varepsilon\operatorname{ad}_U}V$.
+\end{block}
+\scope{No physical $SO(3)$ spatial rotational symmetry is being asserted. At $m=3$, $X_5$ is an anisotropic dilation of material/time coordinates.}
+\end{frame}
+\begin{frame}{The dissertation argument is one connected chain}
+\small
+The calculation begins with the equation, and every later object must pass the
+previous gate:
+\begin{equation*}
+\boxed{E_m=0}
+\xrightarrow{\;\pr^{(3)}X(E_m)|_{E_m=0}=0\;}
+\boxed{\mathfrak g_m}
+\xrightarrow{\;Q=0\;}
+\boxed{\phi=\mathcal T[F]}
+\xrightarrow{\;E_m[\mathcal T F]=0\;}
+\boxed{\mathcal R[F]=0}
+\xrightarrow{\;\D I=\mu\mathcal R\;}
+\boxed{I=I_0}.
+\end{equation*}
+\vspace{0.25cm}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash\bfseries}p{3.2cm}X@{}}
+Completed result & Local point classification of the printed scalar SVE equation on a positive chart, nine audited similarity cases, corrected reduced equations, exact first integrals, local series, and finite numerical checks.\\[2mm]
+Next research gate & A machine may propose an ODE first integral or reduced-ODE symmetry, but exact differentiation must certify genuine order reduction before any usefulness claim.\\
+\end{tabularx}
+\scope{PDE dimension reduction $2\to1$ and ODE order reduction $3\to2$ are different results.}
+\end{frame}
+\begin{frame}{Total differentiation produces the master equation}
+\footnotesize
+Introduce
+\[
+a=\phi_{tt},\ b=\phi_{ts},\ c=\phi_{ss},\qquad
+r=\phi_{ttt},\ w=\phi_{tts},\ x=\phi_{tss},\ y=\phi_{sss}.
+\]
+For expressions through second order,
+\begin{align*}
+D_t&=\partial_t+p\partial_\phi+a\partial_p+b\partial_q
+       +r\partial_a+w\partial_b+x\partial_c+\cdots,\\
+D_s&=\partial_s+q\partial_\phi+b\partial_p+c\partial_q
+       +w\partial_a+x\partial_b+y\partial_c+\cdots.
+\end{align*}
+The three nontrivial product rules are
+\begin{align*}
+D_t(qa)&=ab+qr,\\
+D_t(cq^{-2})&=xq^{-2}-2cbq^{-3},\\
+D_s(p^{m-1}bq^{-1})&=(m-1)p^{m-2}\frac{b^2}{q}
+ +p^{m-1}\frac{x}{q}-p^{m-1}\frac{bc}{q^2}.
+\end{align*}
+\scope{The letters $a,b,c$ are derivative coordinates, not transformation parameters.}
+\end{frame}
+\begin{frame}{Expanded master equation and normal form}
+\small
+Substitution of the preceding derivatives into $E_m=D_t\mathcal A-gD_s\mathcal J$
+gives
+\begin{align}
+E_m={}&qr+ab-g\frac{x}{q^2}+2g\frac{cb}{q^3}\notag\\
+&-gm\kappa\left((m-1)p^{m-2}\frac{b^2}{q}
+ +p^{m-1}\frac{x}{q}-p^{m-1}\frac{bc}{q^2}\right)=0.\tag{1}
+\end{align}
+Its $r$ coefficient is $q>0$, hence the equation manifold has the regular
+normal form
+\begin{align*}
+r=\mathcal N={}&-\frac{ab}{q}+\frac{gx}{q^3}-\frac{2gcb}{q^4}\\
+&+gm\kappa\left((m-1)p^{m-2}\frac{b^2}{q^2}
+ +p^{m-1}\frac{x}{q^2}-p^{m-1}\frac{bc}{q^3}\right).
+\end{align*}
+The remaining jets are free coordinates, so their coefficients may be split in
+the determining identity.
+\scope{Solving for $r$ is local to $q\ne0$; it neither covers $q=0$ nor proves global PDE well-posedness.}
+\end{frame}
+\begin{frame}{The characteristic comes from moving a graph}
+\small
+Start with an unrestricted near-identity point transformation
+\begin{align*}
+\widetilde t&=t+\varepsilon\tau(t,s,\phi)+O(\varepsilon^2),&
+\widetilde s&=s+\varepsilon\xi(t,s,\phi)+O(\varepsilon^2),\\
+\widetilde\phi&=\phi+\varepsilon\eta(t,s,\phi)+O(\varepsilon^2),&
+X&=\tau\partial_t+\xi\partial_s+\eta\partial_\phi.
+\end{align*}
+If $\phi=f(t,s)$ is a graph and $\widetilde f=f+\varepsilon\delta f+O(\varepsilon^2)$,
+then
+\[
+\widetilde f(t+\varepsilon\tau,s+\varepsilon\xi)
+=f+\varepsilon\eta+O(\varepsilon^2).
+\]
+Taylor expansion at the original base point yields the complete graph-change
+formula
+\begin{equation}
+\boxed{\delta f=\eta-\tau f_t-\xi f_s},\qquad
+\boxed{Q=\eta-\tau\phi_t-\xi\phi_s}.\tag{2}
+\end{equation}
+Thus $Q[f]=0$ selects a graph fixed by the flow.  The distinct equation-symmetry
+test concerns the equation manifold, not the fixed graph; it comes next.
+\end{frame}
+\begin{frame}{Prolongation supplies the equation-symmetry test}
+\small
+Differentiating the transformed graph relation gives
+\begin{align*}
+\eta^t&=D_t\eta-pD_t\tau-qD_t\xi,\qquad
+\eta^s=D_s\eta-pD_s\tau-qD_s\xi,\\
+\eta^{Ii}&=D_i\eta^I-\phi_{It}D_i\tau-\phi_{Is}D_i\xi,\qquad
+i\in\{t,s\},\quad \eta^\varnothing=\eta.
+\end{align*}
+Because (1) depends only on $p,q,a,b,c,r,x$, its prolonged derivative is exactly
+\begin{equation*}
+\pr^{(3)}X(E_m)=\eta^tE_p+\eta^sE_q+\eta^{tt}E_a+
+\eta^{ts}E_b+\eta^{ss}E_c+\eta^{ttt}E_r+\eta^{tss}E_x.
+\end{equation*}
+The determining equation is the free-jet identity
+\begin{equation}
+\boxed{\Omega:=\left.\pr^{(3)}X(E_m)\right|_{r=\mathcal N}=0}.\tag{3}
+\end{equation}
+\scope{The recursion, not a guessed scaling ansatz, determines how $X$ acts on all derivatives.  Full third-order coefficients appear in the backup slides.}
+\end{frame}
+\begin{frame}{Free-jet splitting determines the coefficient functions}
+\footnotesize
+The restrictions are imposed in sequence; each coefficient below uses all
+previous restrictions:
+\begin{align*}
+[y]\Omega&=\frac{g(\kappa mp^mq+p)}{pq^2}(\xi_t+p\xi_\phi)=0
+ &&\Longrightarrow\quad \xi=\xi(s),\\[1mm]
+[w]\Omega&=\frac{2g(\kappa mp^mq+p)}{pq^2}(\tau_s+q\tau_\phi)=0
+ &&\Longrightarrow\quad \tau=\tau(t),\\[1mm]
+[ab]\Omega&=-\eta_s/q=0
+ &&\Longrightarrow\quad \eta=\eta(t,\phi),\\[1mm]
+[a]\Omega&=q(4p\eta_{\phi\phi}-3\tau''+4\eta_{t\phi})=0
+ &&\Longrightarrow\quad \eta=A(t)\phi+B(t),\quad4A'=3\tau''.
+\end{align*}
+The remaining $x$ coefficient then yields the complete finite system
+\begin{equation}
+\boxed{
+2\tau'+\xi'-3A=0,\quad4A'=3\tau'',\quad
+(m-3)(A-\tau')=0,\quad(m-1)A'=0,\quad(m-1)B'=0.}
+\tag{4}
+\end{equation}
+At $m=1$, substitution into the full prolonged equation adds
+$bB''+qB'''=0$, hence $B''=0$.  The factors $m-1$ and $m-3$ must be split
+before division.
+\end{frame}
+\begin{frame}{Classification theorem and listed Lie symmetries}
+\scriptsize
+\begin{block}{Theorem: local smooth point algebra on $p,q>0$}
+For fixed $g,\kappa>0$ and $m\ge1$, the printed scalar equation has dimension
+$4$ for $m\notin\{1,3\}$, dimension $5$ for $m=3$, and dimension $5$ for
+$m=1$, with the bases listed below.
+\end{block}
+\vspace{-0.1cm}
+\begin{tabularx}{\textwidth}{@{}c>{\raggedright\arraybackslash}p{5.3cm}p{2.0cm}X@{}}
+\toprule
+Field & Generator & Admission & One-parameter flow $(\widetilde t,\widetilde s,\widetilde\phi)$\\
+\midrule
+$X_1$ & $\partial_t$ & all $m$ & $(t+\varepsilon,s,\phi)$\\
+$X_2$ & $\partial_s$ & all $m$ & $(t,s+\varepsilon,\phi)$\\
+$X_3$ & $\partial_\phi$ & all $m$ & $(t,s,\phi+\varepsilon)$\\
+$X_4$ & $t\partial_t+s\partial_s+\phi\partial_\phi$ & all $m$ & $(e^\varepsilon t,e^\varepsilon s,e^\varepsilon\phi)$\\
+$X_5$ & $t\partial_t-2s\partial_s$ & $m=3$ & $(e^\varepsilon t,e^{-2\varepsilon}s,\phi)$\\
+$X_6$ & $t\partial_\phi$ & $m=1$ & $(t,s,\phi+\varepsilon t)$\\
+\bottomrule
+\end{tabularx}
+\vspace{0.12cm}
+Sufficiency follows from
+$\pr X_{1,2,3}(E_m)=0$, $\pr X_4(E_m)=-2E_m$,
+$\pr X_5(E_m)+E_m=(3-m)E_{\rm bed}$, and $\pr X_6(E_1)=0$.
+\scope{The source omits the $m=1$ boost $X_6$.  This theorem remains local to point transformations on the stated chart.}
+\end{frame}
+\begin{frame}{Commutators fix the adjoint action}
+\scriptsize
+With $[U,V]^j=U^i\partial_iV^j-V^i\partial_iU^j$, for example
+$[X_1,X_4]=X_1$ and $[X_2,X_5]=-2X_2$.  At $m=3$:
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}c|ccccc@{}}
+\toprule
+$[\text{row},\text{column}]$ & $X_1$ & $X_2$ & $X_3$ & $X_4$ & $X_5$\\
+\midrule
+$X_1$ & $0$ & $0$ & $0$ & $X_1$ & $X_1$\\
+$X_2$ & $0$ & $0$ & $0$ & $X_2$ & $-2X_2$\\
+$X_3$ & $0$ & $0$ & $0$ & $X_3$ & $0$\\
+$X_4$ & $-X_1$ & $-X_2$ & $-X_3$ & $0$ & $0$\\
+$X_5$ & $-X_1$ & $2X_2$ & $0$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The source convention for inner adjoints is
+\[
+\operatorname{Ad}(e^{\varepsilon U})V
+=e^{-\varepsilon\operatorname{ad}_U}V
+=V-\varepsilon[U,V]+\frac{\varepsilon^2}{2}[U,[U,V]]-\cdots.
+\]
+Hence $\operatorname{Ad}(e^{\varepsilon X_1})X_4=X_4-\varepsilon X_1$,
+which removes a translation component.  At $m=1$, replace $X_5$ by $X_6$
+and add $[X_1,X_6]=X_3$.
+\scope{The two reverse-order signs in the last row correct source Table 1.}
+\end{frame}
+\begin{frame}{One-dimensional optimal systems}
+\scriptsize
+Lines are equivalent under connected inner adjoints and nonzero real line
+rescaling.  For generic $m\ne1,3$, the disjoint representatives are
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Coefficient stratum & Representative\\
+\midrule
+$h\ne0$ & $\langle X_4\rangle$\\
+$h=0,\ v_1\ne0$ & $\langle X_1+\nu_2X_2+\nu_3X_3\rangle$\\
+$h=v_1=0,\ v_2\ne0$ & $\langle X_2+\nu_3X_3\rangle$\\
+$h=v_1=v_2=0$ & $\langle X_3\rangle$\\
+\bottomrule
+\end{tabular}
+\end{center}
+At $m=3$, a nonzero dilation direction $d_4X_4+d_5X_5$ is projective; the
+three resonant survivors are
+\[
+X_5+cX_3,\qquad X_4-X_5+cX_1,\qquad X_4+\tfrac12X_5+cX_2.
+\]
+Pure translations also retain support, signs, and, when $v_3\ne0$, the invariant
+$K=v_1^2v_2/v_3^3$.  At $m=1$ the families are
+\[
+X_4+\nu X_6;\quad X_6,\ X_6+\sigma X_1+\nu X_2,\ X_6+\sigma X_2;\quad
+X_1+\nu X_2,\ X_2+\nu X_3,\ X_3.
+\]
+\scope{This is an algebraic orbit classification.  Graph rank, equation domain, data compatibility, and solver value remain separate tests.}
+\end{frame}
+\begin{frame}[shrink=3]{Lemma: an invariant graph compresses the PDE}
+\footnotesize
+\begin{block}{Invariant-graph lemma}
+Let $X$ be an admitted projectable point generator on a constant-rank chart,
+with equal positive base and total orbit ranks, locally transverse
+invariant graphs, and invertible base/fibre chart Jacobians. If invariants satisfy
+$X(z)=X(W)=0$, then the invariant graph condition $Q=0$ integrates locally to
+$W=F(z)$.  Substitution restricts $\phi(t,s)$ to one profile $F$ of one
+variable; only the subsequent pullback of $E_m$ determines the profile ODE.
+\end{block}
+For $X_4=t\partial_t+s\partial_s+\phi\partial_\phi$,
+\[
+z=\frac{s}{t},\qquad W=\frac{\phi}{t},\qquad
+\boxed{\phi=tF(s/t)},\qquad Q=\phi-t\phi_t-s\phi_s=0.
+\]
+For $X_5$ at $m=3$, $z=st^2$, $W=\phi$, hence $\phi=F(st^2)$.  For
+$X_1+\alpha X_2+\alpha_3X_3$,
+\[
+z=s-\alpha t,\qquad W=\phi-\alpha_3t,
+\qquad \boxed{\phi=\alpha_3t+F(s-\alpha t)}.
+\]
+\scope{The symmetry condition selects a candidate graph.  It does not itself solve the master equation.}
+\end{frame}
+\begin{frame}{Nine source cases: pullbacks and outcomes}
+\tiny
+\setlength{\tabcolsep}{4pt}
+Write $P=F'$, $C=F''$, $H=F'''$, $V=F-zP$, and
+\begin{align*}
+K_4&=-z^3P+\frac{gz}{P^2}+\frac{gm\kappa zV^{m-1}}{P},\\
+\mathcal B(P)&=\alpha^2P-\frac g{P^2}
+-\frac{gm\kappa(\alpha_3-\alpha P)^{m-1}}P.
+\end{align*}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\dimexpr\linewidth-2pt\relax}{@{}c p{4.4cm} X@{}}
+\toprule
+Case & Original-PDE pullback & Equation or exceptional outcome\\
+\midrule
+3.1 & $0$ in current form & stationary family; $P>0$, but $p=0$\\
+3.2 & undefined & $q=0$ violates the master-equation domain\\
+3.3 & no graph & $Q=1$ cannot vanish\\
+3.4 & $t^{-2}D(K_4C)$ & $K_4H+(DK_4)C=0$; $P,V>0$\\
+3.5 & $-2z\mathcal C_5/(tP^3)$ & $\mathcal C_5=0$; $m=3$, $z,P>0$\\
+3.6 & $-\alpha D(\mathcal BC)$, $\alpha_3=0$ & $\mathcal BH+\mathcal B'C^2=0$ for $\alpha\ne0$\\
+3.7 & $0$ & arbitrary $F(s)$; $\alpha,P>0$\\
+3.8 & $\alpha H$ & $F'''=0$; $\alpha,F'>0$\\
+3.9 & $-\alpha D(\mathcal BC)$ & same traveling ODE for $\alpha\ne0$; identity for $\alpha=0$\\
+\bottomrule
+\end{tabularx}
+\vspace{0.1cm}
+Regular evolution additionally requires $K_4\ne0$ in 3.4, the cubic leading
+coefficient nonzero in 3.5, and $\mathcal B\ne0$ in the traveling rows.
+\end{frame}
+\begin{frame}{Exceptional rows have mathematically different meanings}
+\small
+The five nonstandard outcomes cannot be forced into one numerical template:
+\begin{align*}
+\text{3.1: }&\phi=F(s),\quad p=0,\quad E_m=0
+ &&\text{stationary current-form branch outside }p>0,\\
+\text{3.2: }&\phi=F(t),\quad q=0
+ &&\text{currents undefined},\\
+\text{3.3: }&X_3=\partial_\phi,\quad Q=1
+ &&\text{valid equation symmetry, no fixed graph},\\
+\text{3.7: }&\phi=\alpha t+F(s),\quad E_m=0
+ &&\text{arbitrary smooth }F\text{ with }\alpha,F'>0,\\
+\text{3.8: }&\phi=\alpha s+F(t),\quad E_m=\alpha F'''
+ &&\text{exact }F=c_0+c_1t+\tfrac12c_2t^2.
+\end{align*}
+For example, $\phi=t+s+s^3/6$ solves 3.7 on $s>0$ although its spatial
+profile has $F'''=1$.  This directly shows why exchanging rows 3.7 and 3.8
+changes the mathematics.
+\scope{Identity, undefined chart, no invariant graph, and regular ODE are distinct statuses, not degrees of numerical failure.}
+\end{frame}
+\begin{frame}{Case 3.5: cubic scaling reduces again, with chart guards}
+\scriptsize
+At $m=3$, use $z=st^2$ and $\phi=F(z)$.  With $\chi=12g\kappa-4$ the
+undivided profile equation is
+\begin{align*}
+0=\mathcal C_5={}&P(\chi z^2P^3+g)H+(\chi z^2P^3-2g)C^2\\
+&+(60g\kappa-12)zP^4C+(24g\kappa-2)P^5.
+\end{align*}
+It contains $P,C,H$ but not $F$.  Set $\mu=F'$.  The inherited $X_4$ action
+on $(z,\mu)$ is $3z\partial_z-2\mu\partial_\mu$, with invariants
+\[
+\Sigma=z^{2/3}\mu,\qquad M=z^{5/3}\mu'.
+\]
+Define
+\[
+N(\Sigma,M)=(\chi\Sigma^3-2g)M^2
++(60g\kappa-12)\Sigma^4M+(24g\kappa-2)\Sigma^5.
+\]
+The corrected first-order equation is
+\begin{equation}
+\boxed{\frac{dM}{d\Sigma}=
+\frac{\frac53M-N(\Sigma,M)/[\Sigma(\chi\Sigma^3+g)]}
+     {\frac23\Sigma+M}}.\tag{6}
+\end{equation}
+It requires $\Sigma>0$, $\chi\Sigma^3+g\ne0$, and
+$\frac23\Sigma+M\ne0$.  Source (27) omits the last chain-rule denominator.
+\end{frame}
+\begin{frame}{The source audit finds exact counterexamples}
+\tiny
+Unless stated otherwise, take $m=3$, $g=1$, $\kappa=1/30$, $z=1$,
+$P=1/2$, $C=1/10$ on the positive chart.
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}p{1.1cm}X@{}}
+\toprule
+Source & Exact comparison with the original master equation\\
+\midrule
+(24) & Printed zero at $F=2,H=23/250$ gives $E_m=2367/5000\ne0$.\\
+(25),(26) & Printed zero at $H=-88/25$ gives $E_m=437/25$; the rewrite inherits the failure.\\
+(27) & Printed $M_\Sigma=89/117$; the chain rule gives $-187/65$.\\
+(28),(29) & At $\alpha=-1,H=0$, printed zero gives $E_m=169/1000$.\\
+(30) & Printed $M_\Xi/M=172/35$; the first integral requires $338/71$.\\
+(31) & Its nonzero branch gives $(\mathcal B(P)M(P))'=960/8281\ne0$.\\
+(32) & Its quadratic is sufficient but not necessary; the source uses the wrong graph.\\
+(33) & At $\alpha=-1,\alpha_3=1,H=-5/119$, printed zero gives $40337/119000$.\\
+(34) & The literal integral implies a jet with $E_m=-118420/328509\ne0$.\\
+\bottomrule
+\end{tabularx}
+\vspace{0.1cm}
+The exact power $F=a_\star z^{1/3}$ with $a_\star^3=45$ still solves the
+undivided 3.4 and 3.5 equations, but lies where the divided 3.4 leading
+coefficient vanishes.
+\scope{These witnesses refute universal displayed reductions, not every special solution and not the independently verified generator algebra.}
+\end{frame}
+\begin{frame}{Lemma: regular profile jets have analytic series}
+\footnotesize
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\begin{block}{Local analytic existence and recurrence}
+Suppose a corrected pullback has the regular form
+$L(z,F,P,C)H+N(z,F,P,C)=0$ on the recorded positive branch, with
+$L(z_0,F_0,P_0,C_0)\ne0$.  Then
+$(F,P,C)'=(P,C,R)$, $R=-N/L$, has a unique local analytic solution germ.
+For $\xi=z-z_0$ and $F=\sum_{j\ge0}a_j\xi^j$,
+\end{block}
+\begin{equation}
+\boxed{a_{n+3}=\frac{[\xi^n]R(z_0+\xi,F_{n+2},F'_{n+2},F''_{n+2})}
+{(n+3)(n+2)(n+1)}}.\tag{8}
+\end{equation}
+Here $a_0=F_0$, $a_1=P_0$, $a_2=C_0/2$, so
+\[
+a_3=R_0/6,\qquad
+a_4=\frac1{24}(R_z+P_0R_F+C_0R_P+R_0R_C)_0.
+\]
+The degree-$N$ polynomial checks $\xi^0,\ldots,\xi^{N-3}$ exactly.  The lemma
+proves only a local germ, not a global solution, convergence radius, or
+remainder bound.
+\end{frame}
+\begin{frame}{Five regular cubic families have explicit initial series}
+\footnotesize
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+Use $g=1$, $\kappa=1/30$.  Except for 3.8, the initial jet is
+$(1,2,1/2,1/10)$; for 3.8 it is $(0,0,1,1/10)$.  Every row starts
+\[
+F(z_0+\xi)=F_0+P_0\xi+\frac{C_0}{2}\xi^2+a_3\xi^3+O(\xi^4).
+\]
+{\centering
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}ccll@{}}
+\toprule
+Case & Leading coefficient $L_0$ & $a_3$ & Status\\
+\midrule
+3.4 & $79/20$ & $-11/2370$ & common scaling\\
+3.5 & $-22/5$ & $83/1100$ & cubic scaling\\
+3.6 & $-71/20$ & $169/21300$ & traveling, $\alpha_3=0$\\
+3.8 & $1$ & $0$ & exact $F(t)=t+t^2/20$\\
+3.9 & $-79/20$ & $173/23700$ & traveling, $\alpha_3=1$\\
+\bottomrule
+\end{tabular}
+\par}
+For example,
+\[
+F(1+\xi)=2+\frac{\xi}{2}+\frac{\xi^2}{20}
+-\frac{11\xi^3}{2370}+O(\xi^4),\qquad \phi=tF(s/t).
+\]
+All 21 degree-six series pass exact residual checks through $\xi^3$.
+\end{frame}
+\begin{frame}{Classic Fehlberg 4(5) supplies the adaptive solver}
+\footnotesize
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+For $\bm y=(F,P,C)$ and $\bm y'=\bm f(z,\bm y)=(P,C,R)$, one trial step uses
+six shared stages:
+\begin{align*}
+\bm k_i&=\bm f\!\left(z_n+c_i\Delta z,
+ \bm y_n+\Delta z\sum_{j<i}a_{ij}\bm k_j\right),\quad i=1,\ldots,6,\\
+\bm y_{n+1}^{(4)}&=\bm y_n+\Delta z\sum_i b_i^{(4)}\bm k_i,\qquad
+\bm y_{n+1}^{(5)}=\bm y_n+\Delta z\sum_i b_i^{(5)}\bm k_i.
+\end{align*}
+The normalized embedded error is
+\begin{equation}
+e=\left[\frac13\sum_{j=1}^{3}
+\left(\frac{y_{n+1,j}^{(5)}-y_{n+1,j}^{(4)}}
+{\mathrm{atol}+\mathrm{rtol}\max(|y_{n,j}|,|y_{n+1,j}^{(5)}|)}\right)^2
+\right]^{1/2}.\tag{9}
+\end{equation}
+Accept the fifth-order state when $e\le1$ and scale the next step by
+$\min(5,\max(0.2,0.9e^{-1/5}))$.  Defaults are
+$\mathrm{rtol}=10^{-9}$ and $\mathrm{atol}=10^{-11}$.
+\scope{Stages respect all guards; SciPy RK45 is Dormand--Prince, not Fehlberg.}
+\end{frame}
+\begin{frame}{Convergence and reconstructed-PDE checks are finite evidence}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.2cm}X@{}}
+\toprule
+Check & Measured result and interpretation\\
+\midrule
+Fixed-step RKF45 & $N=1,2,4,8,16,32,64$; 55 of 147 errors resolved.  Last resolved orders are $4.97$--$4.98$ for 3.4 and $4.93$ for 3.5.  Each short traveling row supplies only one resolved pair.\\[1mm]
+Tolerance sweep & Scaling endpoint errors decrease from about $10^{-7}$ to $10^{-11}$ after the step history changes.  Short traveling cases plateau because the solver retains the same two steps.\\[1mm]
+Original PDE stencil & At $h=0.003$, reconstructed residual maxima are $7.98\times10^{-7}$ for DOP853 and $9.36\times10^{-7}$ for tight RKF45.  A $0.001t^3$ perturbation changes the residual by at least $0.00241$.\\
+\bottomrule
+\end{tabularx}
+\vspace{0cm}
+All 21 regular IVPs reached their endpoints under the declared sampled guards.
+Finer finite-difference probes became roundoff-limited and sometimes worsened.
+\scope{No finite sample proves positivity between nodes, a continuous residual bound, global continuation, or arbitrary initial-boundary compatibility.}
+\end{frame}
+\begin{frame}{Reconstruction gives position, velocity, and depth}
+\footnotesize
+The two-dimensional display uses one time coordinate and one material
+coordinate, not two spatial dimensions.  On a normalized mass coordinate,
+\[
+x_{\rm phys}=\phi(t,s),\qquad u(t,s)=\phi_t(t,s),\qquad
+h(t,s)=\frac1{\phi_s(t,s)}.
+\]
+\begin{center}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}clll@{}}
+\toprule
+Case & $\phi(t,s)$ & $u(t,s)$ & $h(t,s)$\\
+\midrule
+3.4 & $tF(s/t)$ & $F-zF'$ & $1/F'$\\
+3.5 & $F(st^2)$ & $2zF'/t$ & $1/(t^2F')$\\
+3.6, 3.9 & $\alpha_3t+F(s-\alpha t)$ & $\alpha_3-\alpha F'$ & $1/F'$\\
+3.7 & $\alpha t+F(s)$ & $\alpha$ & $1/F'$\\
+3.8 & $\alpha s+F(t)$ & $F'$ & $1/\alpha$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\scope{Only points whose invariant coordinate lies in the solved interval may be reconstructed.  These are kinematic fields; the bed equations require a separate check.}
+\end{frame}
+\begin{frame}{A variational Lagrangian would add a new route, not rewrite this one}
+\footnotesize
+Material or ``Lagrange'' coordinates and a variational Lagrangian are different
+concepts.  A candidate density $\mathcal L$ would have to satisfy
+\begin{equation}
+\frac{\delta\mathcal L}{\delta\phi}
+=\sum_{i,j\ge0}(-D_t)^i(-D_s)^j
+\frac{\partial\mathcal L}{\partial\phi_{t^is^j}}
+=0,
+\tag{10}
+\end{equation}
+possibly after a separately proved equivalent reformulation of the scalar
+equation.  The source reports that it could not find such a formulation; this
+is not a nonexistence theorem.
+\vspace{0.1cm}
+If a valid action were obtained, one would still need to prove that a point
+symmetry preserves $\mathcal L$ up to a total divergence.  Only then would
+Noether's theorem give a conservation current, which might provide additional
+first integrals or boundary diagnostics.
+\vspace{0.1cm}
+The reductions (5)--(7) need no action: their currents and first integrals were
+checked directly against the printed master equation.
+\scope{A future variational structure could strengthen conservation analysis, but it would not retroactively validate incorrect source reductions.}
+\end{frame}
+\begin{frame}{Replication findings and precise nonclaims}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.5cm}X@{}}
+\toprule
+Status & Statement\\
+\midrule
+\Exact & The unrestricted determining calculation gives dimensions $4,5,5$ on the generic, cubic, and linear-flux strata and finds the omitted $m=1$ boost.\\[1mm]
+\Exact & All nine listed reductions have explicit graph and equation statuses.  Corrected 3.4, 3.6, and 3.9 equations possess verified first integrals; 3.8 is quadratic; a cubic power profile occupies a singular undivided branch.\\[1mm]
+\Numerical & Twenty-one constructed regular IVPs, degree-six series, two solvers, integral checks, and reconstructed finite-difference residuals agree within the reported finite tests.\\[1mm]
+Not claimed & Maximal generalized-symmetry classification, global continuation, arbitrary-data well-posedness, full bed-field equivalence, a variational action, a certified continuous numerical error, or machine-learning advantage.\\
+\bottomrule
+\end{tabularx}
+\source{Source audit: Paliathanasis, Leon and Leach, Mathematics 14 (2026), 433.  Presentation sequence adapted from Bruz\'on and Gandarias (2021), not their transformations.}
+\end{frame}
+\begin{frame}{The next stage tests machine-assisted ODE order reduction}
+\footnotesize
+After a verified quotient, write
+\[
+F'=P,\qquad P'=C,\qquad C'=R(z,F,P,C).
+\]
+A learned proposal $I(z,F,P,C)$ is accepted as a first integral only if
+\begin{equation}
+\boxed{D_zI=I_z+PI_F+CI_P+RI_C=0},\qquad
+\boxed{I_C\ne0},\tag{11}
+\end{equation}
+with $I$ nonconstant, independent of known integrals, and compatible with the
+initial data.  These conditions make $I=I_0$ locally solvable for $C$ and lower
+the order.  A small sampled defect or a fitted profile is insufficient.
+\vspace{0.08cm}
+The three research interests organize that experiment.  \textbf{(1)} The
+Lagrange-coordinate option requires an explicit model-equivalence check.
+\textbf{(2)} Parameter and projected-orbit-rank strata record where a symmetry
+appears, disappears, or becomes unusable.  \textbf{(3)} Task-dependent
+trivial-symmetry filtration applies equation, graph, data, and solver-value
+gates.
+\scope{Hybrid architecture design and conservation analogies are later work.  Existing first integrals are classical verified controls, not learned discoveries.}
+\end{frame}
+\begin{frame}{Conclusion}
+\large
+The replication survives because it produces three defensible results:
+\vspace{0.35cm}
+\begin{enumerate}
+\item An unrestricted point calculation corrects the parameter-stratum
+classification by adding $t\partial_\phi$ at $m=1$.
+\item Direct pullback of the original master equation separates five regular
+profile families from identity, undefined, and no-graph cases, and it exposes
+exact errors in source equations (24)--(34).
+\item Verified first integrals, Taylor recurrences, and independent numerical
+checks make the corrected local ODEs reproducible and provide the controls for
+future machine-assisted order reduction.
+\end{enumerate}
+\vfill
+{\color{SVEBlue}\rule{\textwidth}{0.7pt}}\par\smallskip
+{\small\color{SVEMuted}Every conclusion retains its model, parameter stratum,
+chart, denominator, and exact-versus-numerical status.}
+\end{frame}
+\begin{frame}{Selected references}
+\scriptsize
+\setbeamertemplate{bibliography item}[text]
+\begin{thebibliography}{99}
+\setlength{\itemsep}{1pt}
+\bibitem{ap} A. Paliathanasis, G. Leon, and P. G. L. Leach,
+\emph{Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables},
+Mathematics 14 (2026), 433.
+\bibitem{bg} M. S. Bruz\'on and M. L. Gandarias,
+\emph{Symmetry Analysis and Conservation Laws of a Family of Boussinesq Equations},
+in \emph{Symmetries and Applications of Differential Equations}, Springer, 2021, pp. 153--171.
+\bibitem{olver} P. J. Olver, \emph{Applications of Lie Groups to Differential Equations}, 2nd ed., Springer, 1993.
+\bibitem{teschl} G. Teschl, \emph{Ordinary Differential Equations and Dynamical Systems}, AMS, 2012.
+\bibitem{uddin} M. J. Uddin et al., \emph{Two parameters Lie group analysis and numerical solution of unsteady free convective flow of non-Newtonian fluid}, Alexandria Engineering Journal, 2016.
+\bibitem{fn} E. D. Fern\'andez-Nieto et al., \emph{Formal deduction of the Saint-Venant--Exner model including arbitrarily sloping sediment beds and associated energy}, ESAIM: M2AN 51 (2017), 115--145.
+\bibitem{noether} E. Noether, \emph{Invariant Variation Problems}, 1918; English translation, 2005.
+\bibitem{otto} S. E. Otto et al., \emph{A Unified Framework to Enforce, Discover, and Promote Symmetry in Machine Learning}, JMLR 26 (2025), 1--83.
+\end{thebibliography}
+\end{frame}
+\begin{frame}{Backup: higher prolongation coefficients}
+\scriptsize
+The second- and third-order coefficients actually used in (3) are
+\begin{align*}
+\eta^{tt}&=D_t^2\eta-pD_t^2\tau-qD_t^2\xi-2aD_t\tau-2bD_t\xi,\\
+\eta^{ts}&=D_tD_s\eta-pD_tD_s\tau-qD_tD_s\xi
+-aD_s\tau-bD_s\xi-bD_t\tau-cD_t\xi,\\
+\eta^{ss}&=D_s^2\eta-pD_s^2\tau-qD_s^2\xi-2bD_s\tau-2cD_s\xi,\\
+\eta^{ttt}&=D_t\eta^{tt}-rD_t\tau-wD_t\xi,\\
+\eta^{tss}&=D_t\eta^{ss}-xD_t\tau-yD_t\xi.
+\end{align*}
+The necessary master partials include
+\begin{align*}
+E_a&=b,\qquad
+E_b=a+\frac{2gc}{q^3}-\frac{2gm\kappa(m-1)p^{m-2}b}{q}
++\frac{gm\kappa p^{m-1}c}{q^2},\\
+E_c&=\frac{2gb}{q^3}+\frac{gm\kappa p^{m-1}b}{q^2},\qquad
+E_r=q,\qquad E_x=-\frac g{q^2}-\frac{gm\kappa p^{m-1}}q.
+\end{align*}
+The free coordinates $w$ and $y$ enter through these prolonged coefficients
+even though the original $E_m$ has no explicit $w$ or $y$ term.
+\end{frame}
+\begin{frame}{Backup: classic Fehlberg tableau}
+\scriptsize
+\begin{center}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}c|rrrrrr@{}}
+\toprule
+$c_i$ & \multicolumn{6}{c}{$a_{ij}$}\\
+\midrule
+$0$ & $0$ & & & & &\\
+$1/4$ & $1/4$ & $0$ & & & &\\
+$3/8$ & $3/32$ & $9/32$ & $0$ & & &\\
+$12/13$ & $1932/2197$ & $-7200/2197$ & $7296/2197$ & $0$ & &\\
+$1$ & $439/216$ & $-8$ & $3680/513$ & $-845/4104$ & $0$ &\\
+$1/2$ & $-8/27$ & $2$ & $-3544/2565$ & $1859/4104$ & $-11/40$ & $0$\\
+\midrule
+$b^{(4)}$ & $25/216$ & $0$ & $1408/2565$ & $2197/4104$ & $-1/5$ & $0$\\
+$b^{(5)}$ & $16/135$ & $0$ & $6656/12825$ & $28561/56430$ & $-9/50$ & $2/55$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The implementation propagates the fifth-order estimate and uses the
+fourth--fifth difference only as the local adaptive indicator.
+\end{frame}
+\begin{frame}{Backup: symbolic replication workflow}
+\footnotesize
+\begin{enumerate}
+\item Expand $E=D_t\mathcal A-gD_s\mathcal J$ in third-order jets and solve for the permitted leading derivative.
+\item Introduce unrestricted $\tau,\xi,\eta$, form $Q$, construct $\eta^I$, and split $\pr^{(3)}X(E)|_{E=0}$ in free jets.
+\item Integrate separately on $m=1$, $m=3$, and $m\ne1,3$; substitute every basis field into the full prolonged equation.
+\item Compute brackets and adjoints, then solve $X(z)=X(W)=0$ for each selected subgroup.
+\item Differentiate each graph through order three in $(t,s)$ and substitute it into the original master equation.
+\item Check every proposed first integral by exact total differentiation before dividing by any coefficient.
+\item Compare with the printed formulas through exact substitutions; retain every nonzero witness.
+\item At regular initial jets, construct Taylor coefficients, verify the undivided residual, solve by classic RKF45, and compare with DOP853 and lower-order equations.
+\item Reconstruct $\phi,u,h$ only on the solved chart and evaluate the original two-variable residual independently.
+\end{enumerate}
+\scope{The program performs these symbolic operations; source formulas are comparison inputs rather than trusted executable equations.}
+\end{frame}
+\begin{frame}{Backup: series and numerical profiles}
+\centering\includegraphics[width=.95\linewidth]{dissertation_assets/series_profiles.pdf}
+\scope{Extracted from the supplied annotated manuscript, Figure 3 (top panels).}
+\end{frame}
+\begin{frame}{Backup: Taylor differences at finite nodes}
+\centering\includegraphics[width=.92\linewidth]{dissertation_assets/series_errors.pdf}
+\scope{Extracted from the supplied annotated manuscript, Figure 3 (bottom panels). Log-scale differences are not a certified continuous error estimate.}
+\end{frame}
+\begin{frame}{Backup: first-integral diagnostics}
+\centering\includegraphics[width=.92\linewidth]{dissertation_assets/first_integral_checks.pdf}
+\scope{Extracted from the supplied annotated manuscript, Figure 4. Drift and solution differences near roundoff are finite diagnostics.}
+\end{frame}
+\end{document}

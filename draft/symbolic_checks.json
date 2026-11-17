@@ -1,0 +1,11 @@
+{
+  "critical_jacobian": "Matrix([[2, 3], [-4*c/5 - 33/5, -11/5]])",
+  "determinant": "(12*c + 77)/5",
+  "original_undivided_numerator_remainders_orders_0_1_2": [
+    "0",
+    "0",
+    "0"
+  ],
+  "a2": "(150*a**3 + 184*a**2 + 642*a + 1155)/(450*a + 310)",
+  "scope": "Exact symbolic checks only; convergence is proved in the manuscript, no numerical radius claimed."
+}
