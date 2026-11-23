@@ -1,6 +1,6 @@
 """Unrestricted first-order SVE determining system and exact proof checks.
 
-The proof of maximality is in FIRST_ORDER_DERIVATION.md. This module checks
+The proof of maximality is in delivery/derivations/eulerian-first-order.md. This module checks
 its algebra and independently prolongs generators; a finite candidate test
 is not the source of the completeness claim. All computations are exact.
 """
@@ -266,9 +266,9 @@ def run_verification():
 
     return {
         "model": "h_t+u*h_x+h*u_x=0; u_t+u*u_x+g*(h_x+B_x)=0; B_t+m*K*u^(m-1)*u_x=0",
-        "assumptions": ["local smooth point symmetries", "open connected coordinate domain", "h>0", "u>0", "g>0", "K>=0", "1<=m<=4"],
+        "assumptions": ["local smooth point symmetries", "open connected coordinate domain", "h>0", "u>0", "g>0", "K>=0", "m>=1"],
         "claim_status": "complete_unrestricted_point_algebra_derived; independent_review_required",
-        "proof": "FIRST_ORDER_DERIVATION.md",
+        "proof": "delivery/derivations/eulerian-first-order.md",
         "dimensions": {"K>0,m!=3":4,"K>0,m=3":5,"K=0,m_removed":5},
         "checks": checks,
         "check_count": len(checks),

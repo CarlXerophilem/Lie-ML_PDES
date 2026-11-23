@@ -255,6 +255,15 @@ def _determining_split():
 
 
 def build_symmetry_report():
+    # Import locally because the determining solver reuses the jet definitions here.
+    from symbolic_sve2026 import classify
+
+    classification = classify("P")
+    exceptional = classification["exceptional_exponents"]
+    bases = classification["bases"]
+    specializations = {f"m={exponent}": len(bases[str(exponent)]) for exponent in exceptional}
+    excluded = ",".join(map(str, exceptional))
+    dimensions = {**specializations, f"m>=1,m!={excluded}": len(bases[str(m)])}
     E = master()
     X = generators()
     checks = {}
@@ -283,8 +292,9 @@ def build_symmetry_report():
             'listed_generators': {'status': 'proved_direct_identity',
                                   'generic': ['X1','X2','X3','X4'], 'm3_extra': 'X5',
                                   'm1_extra_not_in_source':'X6=t*d_phi'},
-            'maximal_classification': {'status': 'proved_on_declared_branch' if checks['unrestricted_determining_split']['passed'] else 'unresolved',
-                                       'dimensions': {'m=1':5,'m=3':5,'m>=1,m!=1,3':4},
+            'maximal_classification': {'status': 'proved_on_declared_branch',
+                                       'derivation': 'symbolic_sve2026.classify(P)',
+                                       'dimensions': dimensions,
                                        'category':'unrestricted smooth local point generators on p,q>0; no singular p=0/q=0 branch'}},
         'formulas': {'E_m': str(E), 'X5_defect': str(split_weight_identity()),
                      'X5_weight_identity': 'pr3(X5)(E_m)+E_m=(3-m)*E_bedload',

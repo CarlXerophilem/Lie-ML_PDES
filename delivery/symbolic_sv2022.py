@@ -4,6 +4,11 @@ from _eulerian_first_order import (branch_generators, flux_matrix, run_verificat
                                   s, t, x, h, u, B, K, m, g)
 
 
+def _require(condition, stage):
+    if not condition:
+        raise ArithmeticError(stage)
+
+
 def run():
     proof = run_verification()
     coordinates = (t, x, h, u, B)
@@ -22,9 +27,11 @@ def run():
     profile = (1/s.sqrt(f), s.sqrt(f), slope*t+2-f/2-1/s.sqrt(f))
     residual = s.Matrix(profile).diff(t)+flux_matrix(2*K*s.sqrt(f)).subs(
         {h:profile[0],u:profile[1]})*s.Matrix(profile).diff(x)
-    assert residual.subs(g,1).applyfunc(s.simplify) == s.Matrix([0,0,slope+K*f.diff(x)])
+    expected = s.Matrix([0, 0, slope + K*f.diff(x)])
+    _require(residual.subs(g, 1).applyfunc(s.simplify) == expected,
+             "Cartesian bed-drift substitution")
     weights = s.Matrix([[-1,-1,1],[-1,0,1],[0,2,1]])
-    assert weights.det() != 0
+    _require(weights.det() != 0, "cubic determining weights")
     return {
         "scope": "Local smooth point symmetries, all real m>=1, K,g,h,u>0",
         "verified_proof_identities": proof["check_count"],
