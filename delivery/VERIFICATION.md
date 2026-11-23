@@ -10,6 +10,7 @@ Run from the repository root. Use Python without the optimization flag so the ex
 python -m pip install -r delivery/requirements.txt
 python delivery/symbolic_sv2022.py
 python delivery/symbolic_sve2026.py
+python -B delivery/test_sve2026_ansatz_layers.py
 python delivery/symbolic_new_model2026.py
 python delivery/reproduce_sve2026.py --order 6 --output build/delivery/reproduction.json
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_sv2022.py
@@ -39,14 +40,7 @@ For \(E_1\), the [determining proof](derivations/eulerian-first-order.md) starts
 
 Write \(T,X,Z\) for translations and \(D,S\) for the common and cubic relative scaling. The weights of the cubic scaling \(aD+bS\) are \((-a-b,-a,2b)\). Translation conjugations remove components with nonzero weight. A zero weight leaves one coefficient with connected normal forms \(0,1,-1\) after fixing the scaled direction. In the translation-only cubic case the two scaling actions and overall line scaling have rank three on the logarithms of magnitudes. Their orbits are therefore determined by supports and relative signs. In the generic algebra \(Z\) is central, so \(D+cZ\) retains \(c\in\mathbb R\). With \(Z\) normalized to one, the other two coefficients are either zero or an oriented unit vector. When the \(Z\) component vanishes, the lines form \(\mathbb{RP}^1\).
 
-For \(M\), put \(p=\phi_t\), \(q=\phi_s\) and \(k=g\kappa mp^{m-1}\). Start with arbitrary smooth \((\tau,\xi,\eta)(t,s,\phi)\). Eliminate \(\phi_{ttt}\) using its coefficient \(q\) and restrict the determining equation to zero second jets. The coefficient of \(\phi_{tts}\) in \(q^4\mathrm{pr}^{(3)}X(M)\) is
-
-\[
--2(\xi_t+p\xi_\phi)q^5+(2k\tau_\phi-\eta_t)q^4+
- (p\eta_s+2k\tau_s+2g\tau_\phi)q^3+2g\tau_s q^2.
-\]
-
-The independent positive \(p,q\) force \(\xi=\xi(s)\), \(\tau=\tau(t)\) and \(\eta=\eta(\phi)\). The \(\phi_{tss}\) coefficient then separates into \(3\eta_\phi-\xi_s-2\tau_t=0\) and \((3-m)(\eta_\phi-\tau_t)=0\). Independence of the arguments gives constant derivatives. The full prolongation checks sufficiency. The unrestricted split for \(P\) retains the time-linear field shift at \(m=1\). The classifying adjoint actions are in the reproduction. The generic orbit classes apply at \(m=1\) for \(M\).
+For the 2026 scalar equations, the [frozen ansatz layers](derivations/sve2026-ansatz-layers.md) separate the arbitrary point coefficients, necessary jet splits, affine kernels, full-equation sufficiency and the material invariant graph. The symbolic entry derives coefficient rows and exceptional exponents before constructing each basis. The independent regression suite disables the historical source fixtures during discovery and recomputes prolongation via the characteristic. See the [test log](logs/sve2026_ansatz_layers.txt).
 
 The exact regular Taylor campaign uses rational input values and orders 3 to 8. A nonzero leading coefficient permits the analytic IVP theorem for real \(m\) on the positive chart. The Laurent example separately has a convergence disk proved by contraction. Rotation alone leaves two independent variables, while rotation plus time and bed drift leaves only radius. Fixed boundary geometry can exclude translations admitted by interior equations.
 
