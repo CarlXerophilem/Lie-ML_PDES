@@ -1,7 +1,7 @@
 # LieML / SVE 项目第一性原理审计
 
 **审计日期：** 2026-10-01  
-**审计对象：** `draft/main.tex`、`draft/interim report week 2.docx`、源论文 PDF、现有 SVE 证书与聚焦测试  
+**审计对象：** `draft/main.tex`、[归档的第二周 interim report](<../.old/2026-11-17-42f5654/draft/interim report week 2.docx>)、源论文 PDF、现有 SVE 证书与聚焦测试  
 **当前设计阶段：** 架构审查；本文不授权修改生产算法或把未证结果写成结论
 
 ## 执行判定

@@ -2,13 +2,27 @@
 
 **Review handoff:** [Gemini review brief](docs/gemini-review-handoff.md) · [agent instructions](AGENTS.md) · [current citation/source map](ref/README.md).
 
-**Current dissertation:** [LaTeX source](draft/dissertation_wku.tex) · [51-page PDF](draft/dissertation_wku.pdf) · [build notes](draft/README.md).
+**Compact dissertation:** [LaTeX source](draft/dissertation_wku_compact.tex) · [24-page PDF](draft/dissertation_wku_compact.pdf).
+
+**Full-length review edition:** [LaTeX source](draft/dissertation_wku.tex) · [51-page PDF](draft/dissertation_wku.pdf) · [build notes](draft/README.md).
 
 This is the MATH 4890 dissertation by **Yihong Xiao**, supervised by **Dr. Puneet Rana**. The title is *Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs*, with Saint–Venant–Exner case studies. The supplied WKU template supplies the cover and front matter. The recorded submission date is 11 November 2026; the declaration remains unsigned.
 
 The 17 November 2026 synchronization installs the prepared dissertation on `codex/final`. Its research questions, model definitions, six chapters, three appendices, theorem statements and proofs are unchanged. Earlier manuscript sources and the previous README are preserved in [.old/2026-11-17-42f5654/](.old/2026-11-17-42f5654/). The archive contains an exact snapshot of the previous `draft/` tree, including its supporting assets. Solver code and frozen evidence carriers retain their existing bytes.
 
 This README summarizes the research motivations and questions expressed in our project discussions. The current dissertation governs its mathematical claims. Earlier ambitions and exploratory questions remain visible below, but do not silently enlarge its frozen scope. The older README's five-chapter/25-page description has been superseded by this supplied-template edition.
+
+## Compact dissertation at a glance
+
+- **Goal.** Determine how parameter-dependent Lie symmetries can yield physically reconstructible reference solutions for specified Saint–Venant–Exner problems, including singular regimes.
+- **Method.** Work in jet-space coordinates to verify selected Lie actions, restrict to invariant graphs, and derive equations on regular quotient charts. Keep the printed residual `P` and the materially compatible residual `M` separate. Compare their reduced operators in the same normalization and reconstruct from `M` on an admissible chart. Use local series and classical or neural approximations with independent residual and data checks.
+- **Result.** The compact manuscript establishes local `M → E1` reconstruction, an exact material travelling wave, a convergent Laurent branch on a specified cubic stratum, and two local analytic crossings at a compatible saddle of the separate cubic annular model. Chebyshev collocation gave smaller sampled errors in all three recorded benchmarks. Matched-accuracy neural cost savings, complete point-symmetry and optimal-system classification on the full parameter domain, and additional singular-branch coverage are release obligations or research questions.
+
+**Confirmed keywords for the final edition:** parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint–Venant–Exner system, material reconstruction, singular branches, Laurent series, structure-constrained neural approximation. The currently compiled compact PDF has the six keywords printed in its abstract.
+
+The rotating tank used for the third computational case is the depth-averaged exchange system `E_exch` on `(t,x,y)`. Three-dimensional illustrations depict the physical tank geometry. The axisymmetric swirl benchmark and the cubic annular saddle are separate cases. The original Klausen LieSolver replay is an external method check; the SVE parameter-and-branch approach is a proposed adaptation.
+
+Earlier interim reports are in the [archived draft](.old/2026-11-17-42f5654/draft/). The retired Gemini Python draft is recoverable from [the pre-cleanup commit](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/f92d4020579ec9013511420a9f1be1c060948e93/research_artifacts/SVE-reproduced-20261012/gemini-code-1792476737954.py). Its source fails compilation at line 186. The maintained [source reproduction entry point](research_artifacts/SVE-reproduced-20261012/main.py) remains available.
 
 ## 1. Research motivation and frozen questions
 
