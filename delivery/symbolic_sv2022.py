@@ -1,10 +1,6 @@
 """Final expressions for 1+1 Eulerian Grass SVE, g,K,h,u>0 and real m>=1."""
 import json
-from pathlib import Path
-import sys
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "symm/LieSymm/_snapshot"))
-from research_first_order import (branch_generators, flux_matrix, run_verification,
+from _eulerian_first_order import (branch_generators, flux_matrix, run_verification,
                                   s, t, x, h, u, B, K, m, g)
 
 
@@ -43,7 +39,7 @@ def run():
         },
         "m2_bed_drift_quotient": "K*Y' + b = 0; Y=u^2, h=1/u, B=bt+2-Y/2-h, g=1",
         "m2_remaining_residual": str(s.simplify(residual[2].subs(g,1))),
-        "classification_proof": "symm/LieSymm/_snapshot/FIRST_ORDER_DERIVATION.md; range extension and orbits in delivery/VERIFICATION.md",
+        "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
     }
 
 

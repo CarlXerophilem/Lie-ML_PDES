@@ -1,5 +1,5 @@
 {
-  "classification_proof": "symm/LieSymm/_snapshot/FIRST_ORDER_DERIVATION.md; range extension and orbits in delivery/VERIFICATION.md",
+  "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
   "coordinate_order": [
     "t",
     "x",

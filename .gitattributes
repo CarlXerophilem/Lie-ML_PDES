@@ -72,3 +72,12 @@ research_artifacts/annular-transcritical-theorem-20261101/*.zip filter=lfs diff=
 research_artifacts/sve-regular-correction-20261117/** -text
 draft/dissertation_wku.tex -text
 draft/dissertation_wku.pdf binary
+
+# Active bibliography uses real Git PDF blobs. Archived pointer paths retain LFS.
+ref/*.pdf -filter -diff -merge -text
+.old/2026-11-23-repository-audit/ref/*.pdf filter=lfs diff=lfs merge=lfs -text
+.old/2026-11-23-repository-audit/ref/large-pdfs/applications-of-lie-groups-to-differential-equations.pdf filter=lfs diff=lfs merge=lfs -text
+.old/2026-11-23-repository-audit/research_artifacts/archives-20261021/*.zip filter=lfs diff=lfs merge=lfs -text
+.old/2026-11-23-repository-audit/research_artifacts/sve-P-residual-20261021/*.zip filter=lfs diff=lfs merge=lfs -text
+.old/2026-11-23-repository-audit/research_artifacts/annular-transcritical-theorem-20261101/*.zip filter=lfs diff=lfs merge=lfs -text
+delivery/annular-transcritical-theorem-20261101/*.zip filter=lfs diff=lfs merge=lfs -text

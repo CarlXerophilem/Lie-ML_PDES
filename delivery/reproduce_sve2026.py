@@ -1277,10 +1277,10 @@ def main():
     assert all(row["status"]=="regular_analytic_germ" for row in evidence["mixed_series"])
     evidence["critical_examples"] = singular_examples()
     evidence["material_Laurent"] = cubic_material_laurent(opts.order)
-    pth = Path(__file__).resolve().parents[1]/"ref/main"
     from hashlib import sha256
-    source = next(iter(sorted(pth.glob("*00433-v3.pdf"))),None)
-    evidence["primary_pdf_sha256"] = sha256(source.read_bytes()).hexdigest() if source else None
+    source = (Path(__file__).resolve().parents[1] / "ref" /
+              "Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables.pdf")
+    evidence["primary_pdf_sha256"] = sha256(source.read_bytes()).hexdigest()
     evidence["scope"] = "All nine printed section entries; exact regular initial-jet examples and selected singular branches"
     emit(evidence,opts.output)
     if opts.output:

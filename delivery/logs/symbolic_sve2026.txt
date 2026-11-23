@@ -21,7 +21,6 @@
       "u"
     ]
   },
-  "M_m1_boost_defect": "-3*c**2*g/q**4 + g*y/q**3 - w",
   "P_m1": {
     "X1": [
       "1",
@@ -75,28 +74,6 @@
       "-2*s",
       "0"
     ]
-  },
-  "common_scaling": {
-    "M": "-(3*C**2*F**3*g - 6*C**2*F**2*P*g*z + C**2*F*P**2*g*kappa*m*z*(F - P*z)**m + 3*C**2*F*P**2*g*z**2 + C**2*P**3*g*kappa*m**2*z**2*(F - P*z)**m - 2*C**2*P**3*g*kappa*m*z**2*(F - P*z)**m + 2*C*F**3*P**4*z - 3*C*F**2*P**5*z**2 - C*F**2*P**2*g - C*F*P**3*g*kappa*m*(F - P*z)**m + 2*C*F*P**3*g*z + C*P**7*z**4 + C*P**4*g*kappa*m*z*(F - P*z)**m - C*P**4*g*z**2 + F**3*H*P**4*z**2 - F**3*H*P*g - 2*F**2*H*P**5*z**3 + 2*F**2*H*P**2*g*z + F*H*P**6*z**4 - F*H*P**3*g*kappa*m*z*(F - P*z)**m - F*H*P**3*g*z**2 + H*P**4*g*kappa*m*z**2*(F - P*z)**m)/(P**4*(-F + P*z)**2)",
-    "M_minus_P": "(-3*C**2*F*g + C**2*P**4*z**3 + 2*C**2*P*g*z - 2*C*F*P**4*z + 2*C*P**5*z**2 - F*H*P**4*z**2 + F*H*P*g + H*P**5*z**3 - H*P**2*g*z)/P**4",
-    "P": "-(C**2*F**2*P**3*z**3 + 2*C**2*F**2*g*z - 2*C**2*F*P**4*z**4 + C**2*F*P*g*kappa*m*z*(F - P*z)**m - 4*C**2*F*P*g*z**2 + C**2*P**5*z**5 + C**2*P**2*g*kappa*m**2*z**2*(F - P*z)**m - 2*C**2*P**2*g*kappa*m*z**2*(F - P*z)**m + 2*C**2*P**2*g*z**3 + 3*C*F**2*P**4*z**2 - C*F**2*P*g - 6*C*F*P**5*z**3 - C*F*P**2*g*kappa*m*(F - P*z)**m + 2*C*F*P**2*g*z + 3*C*P**6*z**4 + C*P**3*g*kappa*m*z*(F - P*z)**m - C*P**3*g*z**2 + F**2*H*P**4*z**3 - F**2*H*P*g*z - 2*F*H*P**5*z**4 - F*H*P**2*g*kappa*m*z*(F - P*z)**m + 2*F*H*P**2*g*z**2 + H*P**6*z**5 + H*P**3*g*kappa*m*z**2*(F - P*z)**m - H*P**3*g*z**3)/(P**3*(-F + P*z)**2)",
-    "checks": {
-      "1": {
-        "M_leading": "1/30",
-        "M_on_P_jet": "-23/100",
-        "P_leading": "1/30"
-      },
-      "2": {
-        "M_leading": "1/15",
-        "M_on_P_jet": "-23/100",
-        "P_leading": "1/15"
-      },
-      "3": {
-        "M_leading": "1/10",
-        "M_on_P_jet": "-23/100",
-        "P_leading": "1/10"
-      }
-    }
   },
   "connected_optimal_lines": {
     "exceptional": {
@@ -188,13 +165,9 @@
     "s",
     "phi"
   ],
-  "scope": "Unrestricted smooth point symmetries for real m>=1 on p=phi_t>0, q=phi_s>0; g,kappa>0",
-  "singular_common_scaling": {
-    "analytic_germs": "If L=0 at the centre, I_0 must vanish. Affine F and the analytic first-order root branch L=0 exhaust the local analytic germs through that jet.",
-    "p_derivatives_at_L_zero": {
-      "M": "-3*F*g/p - beta*g*p**2*z**2*(F - p*z)**(m - 2)*(m - 1) - beta*g*p*z*(F - p*z)**(m - 1)",
-      "P": "-beta*g*p*z*(F - p*z)**(m - 2)*(m - 1) - 2*beta*g*(F - p*z)**(m - 1) - 3*g/p"
-    },
-    "scope": "z,p,V,g,beta>0 and m>=1"
-  }
+  "material_scaling": {
+    "first_integral": "C*(F*(-z**2 + g/P**3) + g*kappa*m*z*(F - P*z)**(m - 1)/P)",
+    "leading": "F*(-z**2 + g/P**3) + g*kappa*m*z*(F - P*z)**(m - 1)/P"
+  },
+  "scope": "Unrestricted smooth point symmetries for real m>=1 on p=phi_t>0, q=phi_s>0; g,kappa>0"
 }

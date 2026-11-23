@@ -1,0 +1,19 @@
+Repository audit | 23 November 2026
+Baseline 126a5981d74aaa3a504a85ce509ca5c4052666f0
+Manuscript bibliography: 20 cited keys, each in the flat reference index.
+Built all four PDFs. See pdf_build.txt.
+Ran the three maintained symbolic entry points successfully.
+Reproduced 9 published section entries, 11 displayed equation audits, and 23 regular Taylor jets.
+Reproduction JSON SHA-256: 415cabb3722a3d25d963feaf0464b07555bcf9ef7c2e46df4dd4c071760c0338
+Bundled v3 PDF SHA-256: 2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5
+Annular native replay from fresh outputs (start 2026-11-23T06:10:54.227449+00:00):
+  replay-1-determine_shared_affine: return code 0
+  replay-2-derive_invariants: return code 0
+  replay-3-replay_reduction: return code 0
+  replay-4-check_cartesian: return code 0
+  360d4cc2de9c6ecc472d086d3834bc826af5ca8121f45fec4a8d7e2cbd420dba  results/cartesian.json
+  48b68b71887543ad9a54ee5bbffd01a662ab70155d10ff4f20230ac7f5ee88d3  results/derived-invariants.json
+  7233e77c227bbd06d68213c061a284e8ea17f971063ce87f01cad9e77e70d662  results/derived-reduction.json
+  de440865bb0250c22efc5a83d34753beffaf7b7dda499933fadf7683fbd6497b  results/shared-affine-symmetries.json
+  b1e86d7bb72c765b05047508f4109d037e6033d33b190a0022a12db63ff2a724  results/unsplit-determining-equations.json
+The numerical comparison table uses the existing verified benchmark logs. No retraining was performed in this audit.

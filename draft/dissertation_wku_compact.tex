@@ -22,9 +22,7 @@
 \definecolor{teal}{HTML}{087F8C}
 \definecolor{warm}{HTML}{B65528}
 \definecolor{keyred}{HTML}{AB2634}
-\definecolor{reviewblue}{HTML}{144F9C}
 \newcommand{\keyeq}[1]{\textcolor{keyred}{#1}}
-\newcommand{\reviewnote}[1]{\textcolor{reviewblue}{\textit{Revision: #1}}}
 \hypersetup{colorlinks=true,linkcolor=ink,citecolor=teal,urlcolor=teal,
  pdfauthor={Yihong Xiao},
  pdftitle={Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs},
@@ -134,9 +132,9 @@ above remains unsigned for the author's review.}
 \addcontentsline{toc}{chapter}{Abstract}
 \noindent\textbf{Goal.} Determine how parameter-dependent Lie symmetries and singular branches of Saint--Venant--Exner equations provide physically reconstructible reference solutions for specified nearby problems.
 
-\medskip\noindent\textbf{Method.} Verify prolonged actions in jet coordinates, derive invariant graphs and restrict the equations to regular quotient charts. Compare the printed scalar $P$ and the material scalar $M$ on a shared quotient. Lift the profiles to the original fields and independently check the balances. Compare exact, series, numerical and learned profiles on declared data.
+\medskip\noindent\textbf{Method.} Verify prolonged actions in jet coordinates, derive invariant graphs and restrict the equations to regular quotient charts. Reconstruct Eulerian water and bed fields from the compatible material equation and check the original balances. Reproduce the published scalar equation separately. Compare exact, series, numerical and learned profiles on declared data.
 
-\medskip\noindent\textbf{Result.} On their stated local charts, the analysis gives material reconstruction, an exact travelling wave, a convergent cubic Laurent branch and two analytic crossing germs at a compatible saddle of the separate annular model. On the positive charts the point symmetries of $E_1$, $P$ and $M$ are classified for real $m\ge1$. Chebyshev collocation gives smaller sampled field errors than the liquid-block model on the controlled benchmarks. \reviewnote{Classify the remaining singular profiles and planar symmetries before extending the scope. A matched-accuracy cost claim requires a paired correction test.}
+\medskip\noindent\textbf{Result.} On their stated local charts, the analysis gives material reconstruction, an exact travelling wave, a convergent cubic Laurent branch and two analytic crossing germs at a compatible saddle of the separate annular model. On the positive charts the point symmetries of $E_1$, $P$ and $M$ are classified for real $m\ge1$. Chebyshev collocation gives smaller sampled field errors than the liquid-block model on the controlled benchmarks.
 
 \medskip\noindent\textbf{Keywords} \quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner system, material reconstruction, singular branches, Laurent series, structure-constrained neural approximation.
 \clearpage
@@ -169,7 +167,7 @@ $\vartheta,\theta$ & Equation or trace parameters, and fitted approximation coef
 \pagenumbering{arabic}
 
 \chapter{Introduction}\label{ch:introduction}
-Shallow water moving over a mobile bed transports both water and sediment. Flow changes the bed through its sediment flux. In turn, the bed slope changes the pressure force on the flow. Lie symmetry gives a way to derive lower-dimensional equations for selected solutions of this coupled system \cite{fernandez2017,olver,oliveri}. The central question here is whether a verified invariant family can provide a useful reference for computing solutions of a specified nearby problem.
+Shallow water moving over a mobile bed transports both water and sediment. Flow changes the bed through its sediment flux. In turn, the bed slope changes the pressure force on the flow. Lie symmetry gives a way to derive lower-dimensional equations for selected solutions of this coupled system \cite{fernandez2017,olver,oliveri}. Prescribed-bottom Saint--Venant classifications and flat-bottom rotating shallow-water symmetries provide related settings \cite{gungor2026,chesnokov}. An exact coupled mobile-bed reference is given by Berthon et al.~\cite{berthon2012}. The central question here is whether a verified invariant family can provide a useful reference for computing solutions of a specified nearby problem.
 
 Three issues determine the answer. First, parameters can change the admitted generator class and the regularity of constitutive terms. Second, the base orbit rank and transversality determine which variables a reduction can remove. Third, reduced coefficients can vanish, requiring a different analytic chart even when the symmetry action remains regular. These issues concern the equation and its data. A change of the sediment exponent alone does not describe every change of model.
 
@@ -225,7 +223,7 @@ The material balances are $A+gb_s=0$ and
 $b_t-(\phi_t/\phi_s)b_s+\beta T_m=0$. Their compatibility equation is $M$. Equation (7) of the 2026 source defines a separate reproduction target $P$ \cite{ap}:
 \begin{align}
  P[\phi]&=D_t A-g\beta D_s T_m,\label{eq:P}\\
- \keyeq{M[\phi]}&\keyeq{{}=P[\phi]-D_s\!\left(\frac{\phi_t}{\phi_s}A\right).}\label{eq:M}
+ \keyeq{M[\phi]}&\keyeq{{}=D_t A-D_s\!\left(g\beta T_m+\frac{\phi_t}{\phi_s}A\right).}\label{eq:M}
 \end{align}
 The last term comes from differentiating the bed at a fixed Eulerian position. For example, $\phi=t+s+s^3/6$ has $P[\phi]=0$, while $M[\phi]=8g(2-5s^2)/(2+s^2)^4$ equals $g$ at $s=0$.
 
@@ -250,9 +248,8 @@ $-\phi_{ts}/\phi_s^2+\phi_t\phi_{ss}/\phi_s^3$, which cancels $\phi_s^{-1}D_s(\p
 \node[box,text width=5.35cm] (m) at (6.65,-1.65) {\textbf{Compatible scalar equation $M$}\\Local recovery by the closed bed form};
 \draw[Latex-Latex,ink,thick] (e)--(l);
 \draw[Latex-Latex,ink,thick] (l)--(m);
-\draw[gray,densely dashed] (p)--(m) node[midway,above,warm,font=\small] {$P\ne M$};
 \end{tikzpicture}
-\caption[Three water and sediment descriptions]{The two local equivalences use the invertible chart and the bed gauge of Proposition~\ref{prop:material}. The scalar reproduction target has a different residual.}
+\caption[Three water and sediment descriptions]{The two local equivalences use the invertible chart and the bed gauge of Proposition~\ref{prop:material}. The published scalar is audited in a separate reproduction.}
 \label{fig:material-chart}
 \end{figure}
 
@@ -277,7 +274,7 @@ In a declared finite class with analytic determining matrix $A(\mu)$, any fixed-
 \end{equation}
 This follows by differentiating the determining identity. An obstruction follows if a linear functional annihilates the whole range of $\mathscr D_{\mu_0}$ in the proposed correction class and is nonzero on the right. A finite search or a test against only diagonal fields cannot prove this for all point fields \cite{dengreid2024}. Similarly, a space of actual analytic symmetry germs is finite dimensional exactly when some finite jet map is injective on it: the descending jet kernels stabilize in finite dimension and have zero intersection by analyticity. Formal jet kernels alone give no realization argument.
 
-On the positive chart $p=\phi_t>0$, $q=\phi_s>0$, the unrestricted smooth point algebras of $P$ and $M$ have the common basis $\partial_t,\partial_s,\partial_\phi,t\partial_t+s\partial_s+\phi\partial_\phi$. At $m=3$ both admit the additional $X_5=t\partial_t-2s\partial_s$. At $m=1$ only $P$ admits $t\partial_\phi$. Its finite defect on $M$ is $-\varepsilon D_s(A/\phi_s)$.
+On the positive chart $p=\phi_t>0$, $q=\phi_s>0$, the unrestricted smooth point algebras of $P$ and $M$ have the common basis $\partial_t,\partial_s,\partial_\phi,t\partial_t+s\partial_s+\phi\partial_\phi$. At $m=3$ both admit the additional $X_5=t\partial_t-2s\partial_s$. At $m=1$ only $P$ admits $t\partial_\phi$.
 
 For $M$, start with arbitrary functions $\tau,\xi,\eta$ of $(t,s,\phi)$. Solve the equation for $\phi_{ttt}$ using its coefficient $q$ and restrict the determining identity to zero second jets. The coefficient of the free $\phi_{tts}$ jet, multiplied by $q^4$, splits in $q$ and $p$. Its highest and lowest powers give $\xi_t=\xi_\phi=\tau_s=0$. The two middle coefficients give $\tau_\phi=\eta_s=\eta_t=0$. The free $\phi_{tss}$ coefficient then gives
 \[
@@ -307,7 +304,7 @@ Thus
  tP[F]=2\sigma A_\sigma'-g\beta J_\sigma',\qquad
  -t M[F]/2=A_\sigma+\tfrac12g\beta J_\sigma' .
 \end{equation}
-The factor $t$ removed from $P$ is nonzero. The reduced third-order equation has one independent variable, even though its reconstructed solution evolves with $t$. The second identity uses the extra term $-2t^{-1}(\sigma A_\sigma)'$ from~\eqref{eq:M}; it will be used for the physical Laurent branch.
+The factor $t$ removed from $P$ is nonzero. The reduced third-order equation has one independent variable, even though its reconstructed solution evolves with $t$. The material identity follows by substituting the same graph into~\eqref{eq:M} and is used for the physical Laurent branch.
 
 
 A simpler Eulerian reference follows from the symmetry
@@ -334,18 +331,11 @@ These fields solve all of $E_1$ locally. Introducing $p=F'$ reduces derivative o
 
 \chapter{Singularity-Adapted Analytic Profiles}\label{ch:series}
 \section{First integrals and the leading coefficient}
-The joint dilation $t\partial_t+s\partial_s+\phi\partial_\phi$ acts on $P$ and $M$ with residual weight $-2$. Its invariant graph on $t>0$ is $\phi=tF(z)$ with $z=s/t$. Put $p=F'$, $V=F-zp$, and require $p,V>0$. In this section $V$ is the material velocity. Substituting $A=F''(z^2p-g/p^2)/t$ and $T_m=-zV^{m-1}F''/(tp)$ gives
+The joint dilation $t\partial_t+s\partial_s+\phi\partial_\phi$ acts on the material equation with residual weight $-2$. Its invariant graph on $t>0$ is $\phi=tF(z)$ with $z=s/t$. Put $p=F'$, $V=F-zp$, and require $p,V>0$. In this section $V$ is the material velocity. Substituting $A=F''(z^2p-g/p^2)/t$ and $T_m=-zV^{m-1}F''/(tp)$ gives
 \begin{align}
- t^2P[tF]&=(L_P F'')', & L_P&=-z^3p+gz/p^2+g\beta zV^{m-1}/p,\label{eq:Lp}\\
  \keyeq{t^2M[tF]}&\keyeq{{}=(L_M F'')'}, & L_M&=F(g/p^3-z^2)+g\beta zV^{m-1}/p.\label{eq:Lc}
 \end{align}
-For the common normalization $\mathcal R_A=t^2 A[tF]$ with $A=P,M$, subtraction gives
-\[
-\keyeq{\mathcal R_M-\mathcal R_P
- =\frac{d}{dz}\left[V\left(\frac{g}{p^3}-z^2\right)F''\right].}
-\]
-The two operators share a quotient chart. This identity expresses the fixed-position bed transport contribution in that chart.
-On a connected interval $\keyeq{L F''=I_0}$ for the corresponding $L$ and a constant $I_0$. At $L\ne0$, the analytic system $F'=p$, $p'=I_0/L(z,F,p)$ supplies a unique local analytic solution for prescribed $F,p,I_0$. If $F(z_0+\rho)=\sum a_j\rho^j$, then
+Write $L=L_M$. On a connected interval the equation gives $\keyeq{L F''=I_0}$ for a constant $I_0$. At $L\ne0$, the analytic system $F'=p$, $p'=I_0/L(z,F,p)$ supplies a unique local analytic solution for prescribed $F,p,I_0$. If $F(z_0+\rho)=\sum a_j\rho^j$, then
 \[
  (n+2)(n+1)a_{n+2}=[\rho^n],\frac{I_0}{L(z_0+\rho,F_{n+1},F_{n+1}')},
 \]
@@ -354,7 +344,7 @@ where $F_{n+1}$ truncates at degree $n+1$ and $n\ge0$. For $M$, writing $A_*=tA$
 For $M$, the Eulerian first-order coefficient matrix is
 $A_E=\left(\begin{smallmatrix} u&h&0\\g&u&g\\0&q_u&0\end{smallmatrix}\right)$.
 A fixed $z$ has physical speed $F$. With $u-F=-zp$, $h=1/p$, the determinant is
-$\det(A_E-FI)=p^2 L_M$. Thus $L_M=0$ expresses tangency of an orbit to an Eulerian characteristic in this chart. It is distinct from a rank jump in the determining matrix. The undivided profile equation remains meaningful there. For instance, at $m=3$, $F=A_0z^{1/3}$, $z>0$, lies on the zero-leading-coefficient branch, with $A_0^3=27g/(1-12g\kappa)$ for $P$ and $27g/(1-4g\kappa)$ for $M$, where the respective denominators are positive. These values follow by inserting the power in the corresponding $L$.
+$\det(A_E-FI)=p^2 L_M$. Thus $L_M=0$ expresses tangency of an orbit to an Eulerian characteristic in this chart. It is distinct from a rank jump in the determining matrix. The undivided profile equation remains meaningful there. For instance, at $m=3$, $F=A_0z^{1/3}$, $z>0$, lies on the zero-leading-coefficient branch, with $A_0^3=27g/(1-4g\kappa)$ when $4g\kappa<1$. This value follows by inserting the power directly in $L_M$.
 
 \section{A convergent cubic Laurent branch}
 Use the cubic $M$ equation in~\eqref{eq:cubic-reduced}, with $t,\sigma,p>0$ on the real solution chart. A pole $F\sim-w_0/\sigma$, $w_0>0$, balances its leading terms only when $g\beta=3/4$. Set $\xi=g\sigma^4/w_0^3$, $Y=\sigma^2 F'/w_0$ and let primes on $Y$ denote $\xi$ derivatives. Then the equation becomes
@@ -508,81 +498,48 @@ A continuous residual controls error only with such stability or, for a regular 
 $e^{L(z-z_0)}e_0+\int_{z_0}^z e^{L(z-\xi)}\|\widehat Y'-f(\xi,\widehat Y)\|\,d\xi$ \cite{teschl2012,mishra2023}.
 For an analytic remainder, a fixed-point defect bound $\eta$ on a complex disk gives value error $E=\eta/(1-q)$. Cauchy's inequalities on a smaller disk at distance $d$ from the boundary bound the first and second derivative errors by $E/d$ and $2E/d^2$. Exact chart prefixes can then be multiplied back using the product rule. Sampled real residuals do not establish a complex disk defect.
 
-The retained field-correction prototype has $m=g=1$. For the travelling-wave reference $(h_R,u_R,B_R)$ and changed initial depth $h_R e^{\varepsilon b_*(x)}$, it uses
+One Eulerian correction prototype uses $m=g=1$. For the travelling-wave reference $(h_R,u_R,B_R)$ and changed initial depth $h_R e^{\varepsilon b_*(x)}$, it uses
 \[
  h_\theta=h_R e^{\varepsilon b_*(x)+t\varepsilon n_h},\quad
  u_\theta=u_R e^{t\varepsilon n_u},\quad B_\theta=B_R+t\varepsilon n_B .
 \]
-These formulas enforce the initial data, positivity, and the exact reference at zero amplitude. The three outputs of the network depend on the coordinates and supplied reference data. The implementation uses a finite classical corrector. An explicit function-space complement and the bounds in Proposition~\ref{prop:validate} remain open for the implemented system.
+These formulas enforce the initial data, positivity, and the exact reference at zero amplitude. The three outputs of the network depend on the coordinates and supplied reference data. A finite classical corrector was prototyped. A function-space complement and the bounds of Proposition~\ref{prop:validate} for this problem remain open.
 
-\section{Three small invariant solution-map comparisons}\label{sec:comparison}
-% Frozen metrics from the original compact dissertation build.
-\newcommand{\EulerNeuralRms}{1.06\times 10^{-5}}
-\newcommand{\EulerNeuralMax}{3.26\times 10^{-5}}
-\newcommand{\EulerNeuralRes}{1.42\times 10^{-3}}
-\newcommand{\EulerChebRms}{0.00\times 10^{0}}
-\newcommand{\EulerChebMax}{0.00\times 10^{0}}
-\newcommand{\EulerChebRes}{0.00\times 10^{0}}
-\newcommand{\PrintedNeuralRms}{9.48\times 10^{-6}}
-\newcommand{\PrintedNeuralMax}{2.02\times 10^{-5}}
-\newcommand{\PrintedNeuralRes}{2.24\times 10^{-2}}
-\newcommand{\PrintedChebRms}{2.28\times 10^{-12}}
-\newcommand{\PrintedChebMax}{4.42\times 10^{-12}}
-\newcommand{\PrintedChebRes}{1.24\times 10^{-9}}
-\newcommand{\BasinNeuralRms}{1.05\times 10^{-5}}
-\newcommand{\BasinNeuralMax}{4.07\times 10^{-5}}
-\newcommand{\BasinNeuralRes}{3.47\times 10^{-3}}
-\newcommand{\BasinChebRms}{2.60\times 10^{-13}}
-\newcommand{\BasinChebMax}{8.02\times 10^{-13}}
-\newcommand{\BasinChebRes}{1.91\times 10^{-11}}
-For each scalar reduced trial map use a trace $Y_0(z,p)$ and $k$ prescribed initial derivatives up to order $k-1$. With normalized $\widehat z=2(z-z_0)-1$, normalized scalar trace parameter $\widehat p\in[-1,1]$, and $w=12$, fit
-\[
- Y_\theta=Y_0+(z-z_0)^k(1,\widehat p)\Theta\,v(\widehat z),
- \qquad v_j=\tanh(a_j\widehat z+b_j),\qquad \Theta\in\mathbb R^{2\times w}.
-\]
-The hidden slopes and intercepts are fixed by the recorded seed. The linear readout is fitted by minimizing the mean square reduced residual over five trace settings and 24 interior midpoints each. The trace is exact in the trial form, so there is no separate data penalty. The classical comparator independently solves each requested trace by Chebyshev collocation with 12 polynomial features and a refinement at 18, using SciPy linear systems \cite{trefethen}. Exact solutions and original-equation substitutions were computed in SymPy:
+\section{Four controlled invariant profile tasks}\label{sec:comparison}
+Each method gets the same scalar equation and prescribed traces. We use four dimensionless tasks with exact solutions.
 \begin{enumerate}
- \item $E_1$: use the verified time-plus-bed shift with $m=2$, $\kappa=1/2$, $g=1$, $z=x\in[0,1]$, $p=u(0)^2\in[1,1.4]$. Solve $Y'/2+1/4=0$ with $Y=u^2=p-x/2$. Set $h=1/u$, $B=t/4+2-Y/2-h$.
- \item Printed $P$: take $m=1$, $g=1$, $\kappa=1/10$ and $\phi=ts+F(t)$, invariant under $\partial_s+t\partial_\phi$. On $t\in[1,2]$, $s\in[1,1.5]$, $\phi_s=t>0$. The printed residual is $(tF'')'$. Solve $tF''=p$ with $F(1)=0$, $F'(1)=1/2$, and $p\in[.6,1]$. Then $F=(t-1)/2+p(t\log t-t+1)$.
- \item Rotating exchange: learn only the offset $Y=b(t)$ in~\eqref{eq:swirl-exact} using $Y'+3Y-9/10=0$ and $p=b(0)$. The exact pressure balance, solid swirl and spatial bed profile enter the reconstruction.
+ \item $E_1$ bed drift. At $m=2$, $\kappa=1/2$ and $g=1$, solve $Y'/2+1/4=0$ for $Y=u^2$ on $x\in[0,1]$ with $p=Y(0)\in[1,1.4]$. Then $h=1/u$ and $B=t/4+2-Y/2-h$. Sample the fields at $t=1/2$.
+ \item Published scalar $P$. Set $m=1$, $g=1$, $\kappa=1/10$ and $\phi=ts+F(t)$, invariant under $\partial_s+t\partial_\phi$. On $t\in[1,2]$, solve $tF''=p$ for $p\in[.6,1]$, $F(1)=0$, $F'(1)=1/2$. The exact profile is $F=(t-1)/2+p(t\log t-t+1)$. Sample the particle map at $s=1.25$ and evaluate the third-order residual $(tF'')'$.
+ \item Material travelling wave. At $m=2$, $c=-1$, $g=1$ and $\beta=1/10$, solve $Y'=1/5$ for $Y=F'(z)$ on $z\in[0,1]$ with $p=Y(0)\in[1,1.4]$. The lift at $t=1/2$ has $h=1/Y$, $u=Y$ and $B=3-1/Y-Y^2/2-1/100$. The remaining Eulerian bed residual is $\beta(Y'-1/5)$.
+ \item Rotating exchange. Learn the time offset $b$ on $t\in[0,1]$ in~\eqref{eq:swirl-exact} using $b'+3b=9/10$ with $p=b(0)\in[.08,.20]$. Sample the physical fields at $r=1.25$.
 \end{enumerate}
-The neural solutions are evaluated at four unused trace values and 401 interior coordinate points per trace. The Eulerian fields are evaluated at $t=1/2$, the material position at $s=1.25$, and the rotating fields at $r=1.25$. Each field value is dimensionless. Root mean square aggregates all sampled field components. Maximum error is the largest absolute sampled error.
+
+For $k$ given initial derivatives through order $k-1$, use an exact trace lift $Y_0(z,p)$ and the trial map
+\begin{align*}
+ Y_\theta&=Y_0(z,p)+(z-z_0)^k(1,\widehat p)\Theta v_1,\\
+ v_1&=v_0+\operatorname{diag}(\tanh\gamma)\tanh(Av_0),&
+ v_0&=\tanh(a\widehat z+b).
+\end{align*}
+Here $\widehat z,\widehat p$ are affine rescalings to $[-1,1]$, and the feature width is six. This is a small residual-gated architecture inspired by Tao, Wang and Liu \cite{tao2026}. We fit the reduced residual by SciPy least squares with seed 27 and a budget of 150 function evaluations. Training uses five trace values and 24 coordinate midpoints per trace. The independent classical controls are degree-15 Chebyshev collocation with the same trace lift \cite{trefethen} and two linked degree-22 Taylor charts. Exact solutions provide the evaluation targets.
+
+All methods use four held-out trace values and 401 interior coordinate points per trace. Table~\ref{tab:new-results} reports the maximum sampled absolute field error, together with the largest absolute original-equation residual for the liquid block.
 \begin{table}[htb]\centering\small
 \begin{tabular}{@{}lrrrr@{}}\toprule
-Case & \shortstack{Neural root\\mean square} & \shortstack{Neural\\maximum} & \shortstack{Chebyshev\\maximum} & \shortstack{Neural residual\\maximum}\\\midrule
-2022 Eulerian & $\EulerNeuralRms$ & $\EulerNeuralMax$ & $0$ & $\EulerNeuralRes$\\
-2026 printed scalar & $\PrintedNeuralRms$ & $\PrintedNeuralMax$ & $\PrintedChebMax$ & $\PrintedNeuralRes$\\
-Rotating exchange & $\BasinNeuralRms$ & $\BasinNeuralMax$ & $\BasinChebMax$ & $\BasinNeuralRes$\\
+Case & \shortstack{Liquid-block\\field error} & \shortstack{Chebyshev\\field error} & \shortstack{Taylor\\field error} & \shortstack{Liquid-block\\residual}\\\midrule
+Eulerian drift & $6.07\times10^{-8}$ & $4.44\times10^{-16}$ & $0$ & $2.24\times10^{-6}$\\
+Published scalar & $1.30\times10^{-6}$ & $3.11\times10^{-15}$ & $3.63\times10^{-9}$ & $1.17\times10^{-2}$\\
+Material wave & $7.64\times10^{-8}$ & $4.44\times10^{-16}$ & $4.44\times10^{-16}$ & $3.58\times10^{-7}$\\
+Rotating exchange & $2.24\times10^{-6}$ & $1.22\times10^{-15}$ & $1.11\times10^{-16}$ & $2.68\times10^{-4}$\\
 \bottomrule\end{tabular}
-\caption[Three invariant benchmark comparisons]{Errors against exact fields, and maximum reduced residual of the neural solution, on unused traces and evaluation coordinates. Zero is a computed double-precision result.}
+\caption[Controlled profile comparisons]{Maximum errors on the dimensionless sampled fields and sampled residuals. The affine Taylor control attained zero observed error for the Eulerian drift.}
 \label{tab:new-results}
 \end{table}
+The Chebyshev error was smaller than the liquid-block error on all four tasks. The $P$ run illustrates the effect of differentiating a learned profile. Its field error is $1.30\times10^{-6}$ and its third-order residual reaches $1.17\times10^{-2}$.
 
-\paragraph{Retained scalar evidence.}
-The earlier scalar study used different $P$ and $M$ common-scaling problems and 12 classical reference cases. Of 40 approximation runs, 16 reached the budget, including all 12 Taylor--tanh runs. The medians below retain those stops \cite{scalarartifact}.
-\begin{table}[htb]\centering\small
-\begin{tabular}{@{}lrrrr@{}}\toprule
-Method & Runs & Budget stops & Median error $P$ & Median error $M$\\\midrule
-Hard-data tanh & 12 & 4 & $1.16\times10^{-11}$ & $1.22\times10^{-10}$\\
-Taylor--tanh & 12 & 12 & $1.83\times10^{-12}$ & $7.20\times10^{-11}$\\
-Chebyshev & 4 & 0 & $2.44\times10^{-15}$ & $1.61\times10^{-13}$\\
-Two-variable tanh & 12 & 0 & $2.12\times10^{-5}$ & $3.66\times10^{-5}$\\
-\bottomrule\end{tabular}
-\caption[Historical scalar approximation results]{Median dimensionless profile errors and budget stops for the earlier common-scaling runs.}
-\label{tab:historical}
-\end{table}
-Chebyshev has smaller sampled field error in the new comparisons and the smallest historical medians. The neural operator interpolates a prescribed one-parameter trace family. The tests do not establish total-cost savings, accuracy for unrestricted data, or a continuous solution certificate.
+At an annular saddle, a prospective trial map is $H_\theta=H_*+s_\pm\rho+\rho^2m_\theta(\rho)$. This fixes the algebraic slope and leaves the undivided residual $DH_\theta'-N$ available for an independent check. For the residual block, the bound $\|\tanh\gamma\|_\infty\|A\|_2<1$ would imply a bi-Lipschitz map by contraction. The benchmark does not impose this bound.
 
-\section{Smooth trial maps and scope}
-At an annular saddle, preserve the algebraically selected slope by using
-$H_\theta=H_*+s_\pm\rho+\rho^2 m_\theta(\rho)$ and evaluate $DH_\theta'-N$ as written. The numerator compatibility and branch slope remain explicit. One possible smooth hidden map is the residual block
-\[
- \mathcal G(v)=v+\operatorname{diag}(\alpha)\tanh(Av+b),
- \qquad v,\alpha,b\in\mathbb R^w,\quad A\in\mathbb R^{w\times w},
-\]
-from Tao, Wang and Liu \cite{tao2026}. If $\|\alpha\|_\infty\|A\|_2<1$, its perturbation has Lipschitz constant below one, so the block is bi-Lipschitz onto $\mathbb R^w$ by the contraction theorem. Smooth or invertible hidden features do not alter a physical singular denominator. The archived 12-feature comparison uses the plain hyperbolic tangent. A separate CPU replay trains a six-feature liquid residual block with exact coordinate derivatives up to order three and compares with SciPy Chebyshev and two connected Taylor charts on four withheld traces. It includes an extra $M\to E_1$ travelling-wave control. Chebyshev maximum sampled field errors were below $4\times10^{-15}$ across the four cases. The largest liquid-block field error was $2.24\times10^{-6}$, while the printed scalar's third-derivative residual reached $1.17\times10^{-2}$. This last discrepancy motivates evaluating the original equations as well as field values.
-
-The parameter-sensitive continuation prototype preserves the first integral on the regular common-scaling chart. It uses $L_\lambda=L_P+\lambda(L_M-L_P)$ and differentiates the regular initial-value system with respect to $\lambda$. On the four run parameters $m=1,2,3,4$, the tangent prediction at $\lambda=1/4$ is closer on the test grid to the target than the unmodified $P$ seed. Closer predicted values leave correction cost and singular-chart validity as separate questions. The original Klausen algorithm is checked separately on its heat and wave configurations. Global continuation, arbitrary-data certification, and a matched-cost neural advantage remain unresolved.
+\section{Open problems}
+The $P$--$M$ comparison and continuation are deferred. A future study must specify common admissible data and an accuracy measure before benchmarking a correction. The original LieSolver method uses superposition on linear homogeneous initial-boundary value problems \cite{klausen2026}. Its heat and wave replays are recorded separately. For this nonlinear model, global continuation, general planar point symmetries and a matched-cost neural advantage remain open.
 \clearpage
 \begingroup
 \small
@@ -591,9 +548,6 @@ The parameter-sensitive continuation prototype preserves the first integral on t
 \setlength{\bibsep}{1pt plus .3pt minus .3pt}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{References}
-\bibitem[Exner(1925)]{exner1925}
-Felix M. Exner. \"Uber die Wechselwirkung zwischen Wasser und Geschiebe in Fl\"ussen. \emph{Sitzungsberichte der Akademie der Wissenschaften in Wien, Mathematisch-Naturwissenschaftliche Klasse}, 134:165--203, 1925.
-
 \bibitem[Fern\'andez-Nieto et~al.(2017)]{fernandez2017}
 Enrique D. Fern\'andez-Nieto, Tom\'as Morales de Luna, Gladys Narbona-Reina, and Jean de Dieu Zabsonr\'e. Formal deduction of the Saint--Venant--Exner model including arbitrarily sloping sediment beds and associated energy. \emph{ESAIM: M2AN}, 51(1):115--145, 2017. \doi{10.1051/m2an/2016018}.
 
@@ -622,20 +576,6 @@ Christophe Berthon, St\'ephane Cordier, Olivier Delestre, and Minh Hoang Le. An 
 \bibitem[Teschl(2012)]{teschl2012}
 Gerald Teschl. \emph{Ordinary Differential Equations and Dynamical Systems}, GSM 140. American Mathematical Society, 2012. \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf}. Consulted: author preliminary version; manifold Theorems 9.4--9.6, printed pp. 259--260 (PDF pp. 270--271).
 
-\bibitem[Lagaris et~al.(1998)Lagaris, Likas, and Fotiadis]{lagaris}
-I.~E. Lagaris, A.~Likas, and D.~I. Fotiadis. Artificial Neural Networks for Solving Ordinary and Partial Differential Equations. \emph{IEEE Transactions on Neural Networks}, 9(5):987--1000, 1998. \doi{10.1109/72.712178}. Consulted preprint: \url{https://arxiv.org/abs/physics/9705023v1}.
-
-\bibitem[Akhound-Sadegh et~al.(2023)]{sympinn}
-Tara Akhound-Sadegh, Laurence Perreault-Levasseur, Johannes Brandstetter, Max Welling, and Siamak Ravanbakhsh. Lie Point Symmetry and Physics Informed Networks. \emph{Advances in Neural Information Processing Systems}, 36, 2023. Consulted preprint: \url{https://arxiv.org/abs/2311.04293v1}.
-
-\bibitem[Otto et~al.(2025)]{otto}
-Samuel E. Otto, Nicholas Zolman, J. Nathan Kutz, and Steven L. Brunton. A Unified Framework to Enforce, Discover, and Promote Symmetry in Machine Learning. \emph{Journal of Machine Learning Research}, 26(248):1--83, 2025. \url{https://jmlr.org/papers/v26/24-1315.html}.
-
-\bibitem[Wang et~al.(2020)]{wang2020}
-Sifan Wang, Yujun Teng, and Paris Perdikaris. Understanding and mitigating
-gradient pathologies in physics-informed neural networks. Preprint,
-arXiv:2001.04536v1, 2020. \url{https://arxiv.org/abs/2001.04536v1}.
-
 \bibitem[Mishra and Molinaro(2023)]{mishra2023}
 Siddhartha Mishra and Roberto Molinaro. Estimates on the generalization error of physics-informed neural networks for approximating PDEs. \emph{IMA Journal of Numerical Analysis}, 43(1):1--43, 2023. \doi{10.1093/imanum/drab093}. Consulted preprint: \url{https://arxiv.org/abs/2006.16144v3}.
 
@@ -645,17 +585,11 @@ Lloyd N. Trefethen. \emph{Spectral Methods in MATLAB}. SIAM, Philadelphia, 2000.
 \bibitem[G\"ung\"or et~al.(2026)]{gungor2026}
 Faruk G\"ung\"or, Cihangir \"Ozemir, and Pedro J. Torres. Lie symmetry analysis of the Saint--Venant equations with variable bottom. Preprint, 25 October 2026. \url{https://arxiv.org/abs/2610.34129v1}.
 
-\bibitem[Lie--ML Project(2026a)]{scalarartifact}
-Lie--ML PDE Solver Project. Retained scalar benchmark: symbolic certificates,
-classical reference cases and forty bounded approximation runs. 10 October 2026.
-Version-bound carrier and run-level JSON in \code{research_artifacts/sve-progress-20261010}.
-\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/28eaf15237d58654a841be84f3e066f340b5f17d/research_artifacts/sve-progress-20261010}{Versioned source and data (28eaf15)}.
-
 \bibitem[Lie--ML Project(2026b)]{theoremartifact}
 Lie--ML PDE Solver Project. A Local Smooth Transcritical Continuation Theorem
 for the Coupled Annular Saint--Venant--Exner System. Proof and replay package,
 1 November 2026. Published at commit \code{c48d999}.
-\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/c48d9994e4bfaf69a91913c73a59e7ef8f1e1bf7/research_artifacts/annular-transcritical-theorem-20261101}{Versioned proof, source audit and replay package}.
+\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/codex/final/delivery/annular-transcritical-theorem-20261101}{Proof, source audit and replay package}.
 
 \bibitem[Deng and Reid(2024)]{dengreid2024}
 Siyuan Deng and Gregory Reid. Contributions to the Algorithmic Foundations of
@@ -668,12 +602,6 @@ Emmy Noether. Invariant Variation Problems. M.~A. Tavel's English translation
 of the 1918 paper, \emph{Transport Theory and Statistical Physics},
 1(3):183--207, 1971. Project-supplied reproduction,
 arXiv:physics/0503066v3; consulted Section~1.
-
-\bibitem[Bluman and Cheviakov(2005)]{bluman2005}
-George Bluman and Alexei F. Cheviakov. Framework for potential systems and
-nonlocal symmetries: Algorithmic approach. \emph{Journal of Mathematical
-Physics}, 46:123506, 2005. \doi{10.1063/1.2142834}.
-Project-supplied PDF, introduction.
 
 \bibitem[Westreich and Podolak(1982)]{westreich1982}
 David Westreich and Ester Podolak. Systems of Briot--Bouquet Equations with
@@ -692,6 +620,11 @@ Ze Tao, Hanxuan Wang, and Fujun Liu. LNN-PINN: A Unified Physics-Only Training F
 Afroja Parvin, Giovanni Samaey, and Julian Koellermeier. A Hyperbolic Moment-Based
 Shallow Water Model for Coupled Bedload--Suspended Load Morphodynamics with
 Variable Density. Preprint, arXiv:2505.22278v2, 2026. \url{https://arxiv.org/abs/2505.22278v2}.
+
+\bibitem[Klausen et~al.(2026)]{klausen2026}
+Ren\'e P.~Klausen, Ivan Timofeev, Jonas Naujoks, Johannes Frank, Thomas Wiegand, Sebastian Lapuschkin, and Wojciech Samek.
+LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries.
+Preprint, arXiv:2510.25731v2. \url{https://arxiv.org/abs/2510.25731v2}.
 
 \end{thebibliography}
 \endgroup

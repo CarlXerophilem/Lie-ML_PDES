@@ -1,11 +1,11 @@
-3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+3.12.14
 pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian)
-contribution_workflow.txt: LaTeX exit 0. 1 page, 46110 bytes. No undefined references or overfull boxes.
-ml_workflow.txt: LaTeX exit 0. 1 page, 46612 bytes. No undefined references or overfull boxes.
-defense_wku_madrid-3.txt: LaTeX exit 0. 19 pages, 407914 bytes. No undefined references or overfull boxes.
-dissertation_wku_compact-3.txt: LaTeX exit 0. 24 pages, 482163 bytes. No undefined references or overfull boxes.
+dissertation_wku_compact: 24 pages, three passes, no unresolved citations/references or overfull boxes.
+defense_wku_madrid: 19 pages, three passes, no unresolved citations/references or overfull boxes.
+contribution_workflow.pdf: standalone build passed.
+ml_workflow.pdf: standalone build passed.
 
-b839e267b29612f8dbe50473f8a766a2b46909d31b61e52fca9116ba2d5011c5  draft/dissertation_wku_compact.pdf
-2e8aea8339968a21093bde850ed7d87032fdee45a28051b59c0c0971c63e9032  draft/defense_wku_madrid.pdf
-613493e44e78bc2b635afa2f7f0a1850294dedf71fddffaf0be4ce082c4af9a6  draft/figures/final-delivery/contribution_workflow.pdf
-5fc09cffe5660c4057852b565ed74396888346ecce6bc70341a69df9ddd2bb4b  draft/figures/final-delivery/ml_workflow.pdf
+d52e82ab7f4f93d2fc78e18e666290945fbd08883d53f441dda3de1e970a44f5  draft/dissertation_wku_compact.pdf
+11e30896dd1ea9dac701c82aa48bef66f09db389174a64a85b7525fecefa43c0  draft/defense_wku_madrid.pdf
+665eb30e2718d01dba818c706a27cf88bc87fa2a8df2e657bc5baa0b15cec0a2  draft/figures/final-delivery/contribution_workflow.pdf
+27b43bb58f586db9ace0cd071341192d23ae0804cfab84af1cc12096a375322a  draft/figures/final-delivery/ml_workflow.pdf
