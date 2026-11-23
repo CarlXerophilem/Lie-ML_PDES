@@ -21,6 +21,10 @@
 \definecolor{ink}{HTML}{263B5E}
 \definecolor{teal}{HTML}{087F8C}
 \definecolor{warm}{HTML}{B65528}
+\definecolor{keyred}{HTML}{AB2634}
+\definecolor{reviewblue}{HTML}{144F9C}
+\newcommand{\keyeq}[1]{\textcolor{keyred}{#1}}
+\newcommand{\reviewnote}[1]{\textcolor{reviewblue}{\textit{Revision: #1}}}
 \hypersetup{colorlinks=true,linkcolor=ink,citecolor=teal,urlcolor=teal,
  pdfauthor={Yihong Xiao},
  pdftitle={Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs},
@@ -128,13 +132,13 @@ above remains unsigned for the author's review.}
 \clearpage
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
-This dissertation asks when verified Lie-invariant solutions of nonlinear partial differential equations give useful references for nearby problems. The test setting is a family of shallow-water equations coupled to bed evolution. A local mass-coordinate transformation yields a scalar equation that reconstructs the one-dimensional Saint--Venant--Exner system. A published scalar equation is kept as a separate reproduction target.
+\noindent\textbf{Goal.} Determine how parameter-dependent Lie symmetries and singular branches of Saint--Venant--Exner equations provide physically reconstructible reference solutions for specified nearby problems.
 
-Prolongation and transversality give a local correspondence between selected invariant solutions and quotient equations. The corresponding profiles include an explicit material travelling wave and, at a specified cubic parameter stratum, a convergent Laurent branch with derivative tail estimates. An independent rotating annular model has two local analytic crossing profiles when its undivided radial equation has a saddle. The crossing theorem and the regular annular certificate concern distinct data.
+\medskip\noindent\textbf{Method.} Verify prolonged actions in jet coordinates, derive invariant graphs and restrict the equations to regular quotient charts. Compare the printed scalar $P$ and the material scalar $M$ on a shared quotient. Lift the profiles to the original fields and independently check the balances. Compare exact, series, numerical and learned profiles on declared data.
 
-The computational stage uses verified profiles as references for approximation or correction. Three small invariant tests compare a physics-trained neural solution map with Chebyshev collocation and exact symbolic solutions. Chebyshev gives smaller sampled errors in these tests. A separate rotating model with reversible bed exchange is assessed only on an explicit swirl family. For corrections beyond these families, continuous error control requires a stability argument and a norm appropriate to reconstruction.
+\medskip\noindent\textbf{Result.} On their stated local charts, the analysis gives material reconstruction, an exact travelling wave, a convergent cubic Laurent branch and two analytic crossing germs at a compatible saddle of the separate annular model. On the positive charts the point symmetries of $E_1$, $P$ and $M$ are classified for real $m\ge1$. Chebyshev collocation gives smaller sampled field errors than the liquid-block model on the controlled benchmarks. \reviewnote{Classify the remaining singular profiles and planar symmetries before extending the scope. A matched-accuracy cost claim requires a paired correction test.}
 
-\medskip\noindent\textbf{Keywords} \quad Lie symmetry, invariant reduction, Saint--Venant--Exner system, Laurent series, physical reconstruction, neural approximation.
+\medskip\noindent\textbf{Keywords} \quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner system, material reconstruction, singular branches, Laurent series, structure-constrained neural approximation.
 \clearpage
 \tableofcontents
 \clearpage
@@ -221,14 +225,14 @@ The material balances are $A+gb_s=0$ and
 $b_t-(\phi_t/\phi_s)b_s+\beta T_m=0$. Their compatibility equation is $M$. Equation (7) of the 2026 source defines a separate reproduction target $P$ \cite{ap}:
 \begin{align}
  P[\phi]&=D_t A-g\beta D_s T_m,\label{eq:P}\\
- M[\phi]&=P[\phi]-D_s\!\left(\frac{\phi_t}{\phi_s}A\right).\label{eq:M}
+ \keyeq{M[\phi]}&\keyeq{{}=P[\phi]-D_s\!\left(\frac{\phi_t}{\phi_s}A\right).}\label{eq:M}
 \end{align}
 The last term comes from differentiating the bed at a fixed Eulerian position. For example, $\phi=t+s+s^3/6$ has $P[\phi]=0$, while $M[\phi]=8g(2-5s^2)/(2+s^2)^4$ equals $g$ at $s=0$.
 
 \begin{proposition}[Local physical reconstruction]\label{prop:material}
 On a simply connected material chart with $\phi_s,\phi_t>0$, a sufficiently smooth $M$ solution determines a bed, unique up to a constant, by
 \begin{equation}\label{eq:bed-form}
- db=-\frac{A}{g}\,ds-\left(\frac{\phi_t A}{g\phi_s}+\beta T_m\right)dt.
+ \keyeq{db=-\frac{A}{g}\,ds-\left(\frac{\phi_t A}{g\phi_s}+\beta T_m\right)dt.}
 \end{equation}
 On each small chart where $x=\phi(t,s)$ is invertible, the fields $h=1/\phi_s$, $u=\phi_t$, $B=b$, composed with the inverse, solve $E_1$.
 \end{proposition}
@@ -263,6 +267,9 @@ Here repeated component indices are summed and $J$ is a derivative multi-index. 
 
 For a selected Lie subalgebra whose point orbits and projected base orbits both have rank $k$, assume local quotients exist and use a chart transverse to the base orbits. Invariant graphs satisfy $Q_X=0$ for its generators. In adapted coordinates each graph then depends on $d-k$ base invariants. To see the local correspondence, restrict each invariant graph to a transverse section, then take the union of its orbits. Equal ranks and the section hypothesis make this lift locally single-valued. Substitute the lift into the original equations. Invariance of the equation locus extends the vanishing residual off the section within that chart. Singular strata, graphs with different isotropy, and domain or boundary data require their own checks \cite{anderson2000}. A vertical translation of a field can preserve the equation while $Q_X=1$ rules out invariant graphs for that generator.
 
+For a projectable subgroup $H$, let $B_0$ denote the base and $\bar E\to B_0/H$ the reduced bundle on a regular transverse chart. A reduced section determines a local invariant lift. Pull the original residual back by the jet map of that lift. The invariant equations are $\keyeq{Q_X=0}$ for $X\in\mathfrak h$. A generator in the normalizer of $\mathfrak h$ preserves its orbit foliation, so $N_{\mathfrak g}(\mathfrak h)/\mathfrak h$ supplies the inherited infinitesimal action, possibly with a kernel. For the cubic scaling, $\partial_\phi$ commutes with $X_5$ and descends to $\partial_F$. The common-scaling first integral follows directly from the residual identity below.
+
+
 \section{Parameter dependence of generators}
 In a declared finite class with analytic determining matrix $A(\mu)$, any fixed-rank analytic parameter chart gives a local analytic basis for $\ker A(\mu)$. A nonzero maximal minor solves pivot coordinates in terms of the free coordinates. At a rank jump extra directions can exist only at the exceptional value, as shown by $\mu a=0$. For a differentiable family of generators through $X_0$ in a fixed determining space, the directional derivative $X_1$ must satisfy
 \begin{equation}\label{eq:continue}
@@ -270,10 +277,17 @@ In a declared finite class with analytic determining matrix $A(\mu)$, any fixed-
 \end{equation}
 This follows by differentiating the determining identity. An obstruction follows if a linear functional annihilates the whole range of $\mathscr D_{\mu_0}$ in the proposed correction class and is nonzero on the right. A finite search or a test against only diagonal fields cannot prove this for all point fields \cite{dengreid2024}. Similarly, a space of actual analytic symmetry germs is finite dimensional exactly when some finite jet map is injective on it: the descending jet kernels stabilize in finite dimension and have zero intersection by analyticity. Formal jet kernels alone give no realization argument.
 
-For the scalar $P$, an affine point-coefficient check gives the generic translations $\partial_t,\partial_s,\partial_\phi$ and common dilation $t\partial_t+s\partial_s+\phi\partial_\phi$, with extra $t\partial_\phi$ at $m=1$ or $t\partial_t-2s\partial_s$ at $m=3$. The five-dimensional counts are for the declared affine class. An example of a restricted optimal system uses the verified subalgebra $\langle\partial_t,\partial_s,\partial_\phi,t\partial_t+s\partial_s+\phi\partial_\phi\rangle$. The first three fields span an abelian ideal. If the dilation coefficient is nonzero, conjugation by translations removes the other three coefficients. If it is zero, the connected adjoint action rescales the translation line. The representatives are the dilation line and translation lines parameterized by the real projective plane. At $m=1$, $t\partial_\phi$ preserves $P$ by leaving $\phi_{tt},\phi_s,\phi_{ss},\phi_{ts}$ unchanged. On $M$ its finite defect is $-\varepsilon D_s(A/\phi_s)$ and is generally nonzero.
+On the positive chart $p=\phi_t>0$, $q=\phi_s>0$, the unrestricted smooth point algebras of $P$ and $M$ have the common basis $\partial_t,\partial_s,\partial_\phi,t\partial_t+s\partial_s+\phi\partial_\phi$. At $m=3$ both admit the additional $X_5=t\partial_t-2s\partial_s$. At $m=1$ only $P$ admits $t\partial_\phi$. Its finite defect on $M$ is $-\varepsilon D_s(A/\phi_s)$.
+
+For $M$, start with arbitrary functions $\tau,\xi,\eta$ of $(t,s,\phi)$. Solve the equation for $\phi_{ttt}$ using its coefficient $q$ and restrict the determining identity to zero second jets. The coefficient of the free $\phi_{tts}$ jet, multiplied by $q^4$, splits in $q$ and $p$. Its highest and lowest powers give $\xi_t=\xi_\phi=\tau_s=0$. The two middle coefficients give $\tau_\phi=\eta_s=\eta_t=0$. The free $\phi_{tss}$ coefficient then gives
+\[
+ 3\eta_\phi=\xi_s+2\tau_t,\qquad (m-3)(\eta_\phi-\tau_t)=0 .
+\]
+The three derivatives depend on separate variables and are constant. The full prolongation verifies the resulting generators. The companion calculation for $P$ also splits unrestricted coefficients and retains the time-linear $\phi$ translation at $m=1$. Exact checks and connected one-dimensional adjoint representatives for every parameter stratum are in the final delivery code and verification record.
+
 
 \section{The 2022 and 2026 equations}
-For $E_1$, time and space translations, simultaneous time and space dilation, and a bed shift are verified. At $m=3$ a further verified generator is
+For $E_1$ with positive transport and positive depth and velocity, the unrestricted first-order determining system gives time and space translations, simultaneous time and space dilation, and a bed shift for every real $m\ge1$. The proof separates $m=1$ before using the derivative of the transport coefficient, which is positive on $m>1$. At $m=3$ a further verified generator is
 \[
  X_5=t\partial_t-u\partial_u-2h\partial_h-2B\partial_B .
 \]
@@ -323,9 +337,15 @@ These fields solve all of $E_1$ locally. Introducing $p=F'$ reduces derivative o
 The joint dilation $t\partial_t+s\partial_s+\phi\partial_\phi$ acts on $P$ and $M$ with residual weight $-2$. Its invariant graph on $t>0$ is $\phi=tF(z)$ with $z=s/t$. Put $p=F'$, $V=F-zp$, and require $p,V>0$. In this section $V$ is the material velocity. Substituting $A=F''(z^2p-g/p^2)/t$ and $T_m=-zV^{m-1}F''/(tp)$ gives
 \begin{align}
  t^2P[tF]&=(L_P F'')', & L_P&=-z^3p+gz/p^2+g\beta zV^{m-1}/p,\label{eq:Lp}\\
- t^2M[tF]&=(L_M F'')', & L_M&=F(g/p^3-z^2)+g\beta zV^{m-1}/p.\label{eq:Lc}
+ \keyeq{t^2M[tF]}&\keyeq{{}=(L_M F'')'}, & L_M&=F(g/p^3-z^2)+g\beta zV^{m-1}/p.\label{eq:Lc}
 \end{align}
-On a connected interval $L F''=I_0$ for the corresponding $L$ and a constant $I_0$. At $L\ne0$, the analytic system $F'=p$, $p'=I_0/L(z,F,p)$ supplies a unique local analytic solution for prescribed $F,p,I_0$. If $F(z_0+\rho)=\sum a_j\rho^j$, then
+For the common normalization $\mathcal R_A=t^2 A[tF]$ with $A=P,M$, subtraction gives
+\[
+\keyeq{\mathcal R_M-\mathcal R_P
+ =\frac{d}{dz}\left[V\left(\frac{g}{p^3}-z^2\right)F''\right].}
+\]
+The two operators share a quotient chart. This identity expresses the fixed-position bed transport contribution in that chart.
+On a connected interval $\keyeq{L F''=I_0}$ for the corresponding $L$ and a constant $I_0$. At $L\ne0$, the analytic system $F'=p$, $p'=I_0/L(z,F,p)$ supplies a unique local analytic solution for prescribed $F,p,I_0$. If $F(z_0+\rho)=\sum a_j\rho^j$, then
 \[
  (n+2)(n+1)a_{n+2}=[\rho^n],\frac{I_0}{L(z_0+\rho,F_{n+1},F_{n+1}')},
 \]
@@ -388,7 +408,7 @@ The slope and the remaining profile equation follow by setting
 \begin{align}
  V&=C_1/(rH),& W&=C_2/r-fr/2,& Q&=C_3/r-cr/2,\notag\\
  S&=V^2+W^2,& P_Z&=(KV-Q/S)/G,& D&=gH-V^2,\notag\\
- N&=H(S/r+fW-gP_Z), & DH'&=N,& Z'&=P_Z.\label{eq:DN}
+ N&=H(S/r+fW-gP_Z), & \keyeq{DH'}&\keyeq{{}=N},& Z'&=P_Z.\label{eq:DN}
 \end{align}
 On $r,H>0$, $C_1\ne0$, $G>0$ the reconstruction gives the original radial residual $(DH'-N)/H$, with all other components zero. It remains valid at $D=0$ for a $C^1$ profile since $P_Z$ is then $C^1$ and $Z$ is $C^2$. The constant $C_1$ requires compatible water flux through the boundaries. The net outward sediment flux on the annulus is $-c\pi(r_1^2-r_0^2)$ and must match any prescribed drift.
 
@@ -435,18 +455,18 @@ There are saddles for $c<-77/12$. At $c=-7$ the eigenvalues are $(-1\pm\sqrt{141
 On $1\le r\le21/20$, take $H(1)\in[1.199,1.201]$ and $Z(1)=0$,
 $g,K,G,f,C_1,C_2\in[.999,1.001]$ independently, $c\in[-7.001,-6.999]$ and $C_3\in[-4.4385,-4.4365]$. The retained rational interval calculation uses 500 cells of length $10^{-4}$. On each, an enlarged tube for the entry enclosure $J$ verifies $J+[0,\Delta](N/D)\subset\operatorname{int}(\text{tube})$ and propagates both $H$ and $Z$. The resulting continuous bounds are $H>1.1581$, $S>.8436$, $D>.4772$ throughout this box. The unsplit tube check was inconclusive. The accepted regular enclosure supplies no numerical radius for Theorem~\ref{thm:critical} \cite{theoremartifact}.
 
-\section{Proposed rotating model with reversible bed exchange}\label{sec:exchange}
-For $E_{\rm exch}$, consider a shallow rotating basin with a flat reference datum and exchangeable bed thickness $B\ge0$. The fluid carries an areal mobile load $a=hC$, where $C$ is concentration in equivalent bed volume per water volume. Thus $a$ and $B$ have dimensions of length. Assume constant density, a fixed vertical rotation rate $\Omega$, and first-order exchange
+\section{Depth-averaged rotating tank with reversible bed exchange}\label{sec:exchange}
+For $E_{\rm exch}$, consider a physical three-dimensional tank represented by a depth-averaged model on $(t,x,y)$. The tank is a shallow rotating basin with a flat reference datum and exchangeable bed thickness $B\ge0$. The fluid carries an areal mobile load $a=hC$, where $C$ is concentration in equivalent bed volume per water volume. Thus $a$ and $B$ have dimensions of length. Assume constant density, a fixed vertical rotation rate $\Omega$, and first-order exchange
 $J=k_d a-k_e B$ with nonnegative rates of units inverse time. In the rotating frame replace $f$ in~\eqref{eq:planar} by $2\Omega$, add the term $-\Omega^2(x,y)$ to its momentum residual and use
 \begin{equation}\label{eq:exchange}
- B_t+\nabla\cdot\mathbf Q=J,\qquad
+ \keyeq{B_t+\nabla\cdot\mathbf Q=J},\qquad
  a_t+\nabla\cdot(a\mathbf w-D_a h\nabla C)=-J .
 \end{equation}
 The diffusivity $D_a\ge0$ has units length squared per time before scaling. Adding the equations enforces conservation of $B+a$ with the summed flux. Paired bed and mobile-load balances also occur in suspended-sediment models
 with erosion and deposition~\cite{parvin2026}. The first-order exchange
 law here is an idealized constant-density chemical closure. In particular $J$ depends on thickness relative to the fixed datum, so a constant bed shift changes the rate if $k_e>0$. A time-plus-bed drift cannot be borrowed from $E_2$.
 
-Rigid rotations preserve the equations on a circular annulus. In the rotation-invariant class write $h=H(t,r)$, $\mathbf w=V(t,r)\mathbf e_r+W(t,r)\mathbf e_\theta$, $B=B(t,r)$ and $a=a(t,r)$. The two exchange equations on this quotient are
+Rigid rotations preserve the equations on a circular annulus. Translations were used first in the straight channel because the local coefficients are independent of position, and their characteristic equations integrate directly. In the rotating tank, rotations follow from planar covariance and preserve the concentric boundary circles. The fixed centrifugal potential selects a centre. The planar translation algebra and the rotation field can occur in the same local algebra for a different model, with rotation acting on the translation directions by the commutator. In the rotation-invariant class write $h=H(t,r)$, $\mathbf w=V(t,r)\mathbf e_r+W(t,r)\mathbf e_\theta$, $B=B(t,r)$ and $a=a(t,r)$. The two exchange equations on this quotient are
 \begin{align*}
  B_t+\frac1r\partial_r(rQ_r)&=J,\qquad Q_r=(V^2+W^2)(KV-GB_r),\\
  a_t+\frac1r\partial_r\!\left[r(aV-D_aH\partial_r(a/H))\right]&=-J .
@@ -560,7 +580,9 @@ $H_\theta=H_*+s_\pm\rho+\rho^2 m_\theta(\rho)$ and evaluate $DH_\theta'-N$ as wr
  \mathcal G(v)=v+\operatorname{diag}(\alpha)\tanh(Av+b),
  \qquad v,\alpha,b\in\mathbb R^w,\quad A\in\mathbb R^{w\times w},
 \]
-from Tao, Wang and Liu \cite{tao2026}. If $\|\alpha\|_\infty\|A\|_2<1$, its perturbation has Lipschitz constant below one, so the block is bi-Lipschitz onto $\mathbb R^w$ by the contraction theorem. Smooth or invertible hidden features do not alter a physical singular denominator. The implemented 12-feature comparison uses the plain hyperbolic tangent. The residual block is an architecture proposal for future critical-branch approximation. Global continuation, arbitrary-data certification, and a matched-cost neural advantage remain unresolved.
+from Tao, Wang and Liu \cite{tao2026}. If $\|\alpha\|_\infty\|A\|_2<1$, its perturbation has Lipschitz constant below one, so the block is bi-Lipschitz onto $\mathbb R^w$ by the contraction theorem. Smooth or invertible hidden features do not alter a physical singular denominator. The archived 12-feature comparison uses the plain hyperbolic tangent. A separate CPU replay trains a six-feature liquid residual block with exact coordinate derivatives up to order three and compares with SciPy Chebyshev and two connected Taylor charts on four withheld traces. It includes an extra $M\to E_1$ travelling-wave control. Chebyshev maximum sampled field errors were below $4\times10^{-15}$ across the four cases. The largest liquid-block field error was $2.24\times10^{-6}$, while the printed scalar's third-derivative residual reached $1.17\times10^{-2}$. This last discrepancy motivates evaluating the original equations as well as field values.
+
+The parameter-sensitive continuation prototype preserves the first integral on the regular common-scaling chart. It uses $L_\lambda=L_P+\lambda(L_M-L_P)$ and differentiates the regular initial-value system with respect to $\lambda$. On the four run parameters $m=1,2,3,4$, the tangent prediction at $\lambda=1/4$ is closer on the test grid to the target than the unmodified $P$ seed. Closer predicted values leave correction cost and singular-chart validity as separate questions. The original Klausen algorithm is checked separately on its heat and wave configurations. Global continuation, arbitrary-data certification, and a matched-cost neural advantage remain unresolved.
 \clearpage
 \begingroup
 \small

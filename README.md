@@ -2,7 +2,7 @@
 
 **Review handoff:** [Gemini review brief](docs/gemini-review-handoff.md) · [agent instructions](AGENTS.md) · [current citation/source map](ref/README.md).
 
-**Compact dissertation:** [LaTeX source](draft/dissertation_wku_compact.tex) · [24-page PDF](draft/dissertation_wku_compact.pdf).
+**Review build** · [Compact dissertation PDF](draft/dissertation_wku_compact.pdf) · [Madrid defense PDF](draft/defense_wku_madrid.pdf) · [Reproducible commands and evidence](delivery/VERIFICATION.md).
 
 **Full-length review edition:** [LaTeX source](draft/dissertation_wku.tex) · [51-page PDF](draft/dissertation_wku.pdf) · [build notes](draft/README.md).
 
@@ -16,13 +16,23 @@ This README summarizes the research motivations and questions expressed in our p
 
 - **Goal.** Determine how parameter-dependent Lie symmetries can yield physically reconstructible reference solutions for specified Saint–Venant–Exner problems, including singular regimes.
 - **Method.** Work in jet-space coordinates to verify selected Lie actions, restrict to invariant graphs, and derive equations on regular quotient charts. Keep the printed residual `P` and the materially compatible residual `M` separate. Compare their reduced operators in the same normalization and reconstruct from `M` on an admissible chart. Use local series and classical or neural approximations with independent residual and data checks.
-- **Result.** The compact manuscript establishes local `M → E1` reconstruction, an exact material travelling wave, a convergent Laurent branch on a specified cubic stratum, and two local analytic crossings at a compatible saddle of the separate cubic annular model. Chebyshev collocation gave smaller sampled errors in all three recorded benchmarks. Matched-accuracy neural cost savings, complete point-symmetry and optimal-system classification on the full parameter domain, and additional singular-branch coverage are release obligations or research questions.
+- **Result.** The compact manuscript establishes local `M → E1` reconstruction, an exact material travelling wave, a convergent Laurent branch on a specified cubic stratum, and two local analytic crossings at a compatible saddle of the separate cubic annular model. The delivery establishes the local smooth point algebras and connected adjoint line classes for the positive-chart 1+1 equations at every real \(m\ge1\). Chebyshev collocation gave smaller sampled field errors in the new liquid-block checks. The additional singular and planar classifications and matched-accuracy correction cost remain open.
 
-**Confirmed keywords for the final edition:** parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint–Venant–Exner system, material reconstruction, singular branches, Laurent series, structure-constrained neural approximation. The currently compiled compact PDF has the six keywords printed in its abstract.
+**Confirmed keywords for the final edition:** parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint–Venant–Exner system, material reconstruction, singular branches, Laurent series, structure-constrained neural approximation.
 
 The rotating tank used for the third computational case is the depth-averaged exchange system `E_exch` on `(t,x,y)`. Three-dimensional illustrations depict the physical tank geometry. The axisymmetric swirl benchmark and the cubic annular saddle are separate cases. The original Klausen LieSolver replay is an external method check; the SVE parameter-and-branch approach is a proposed adaptation.
 
 Earlier interim reports are in the [archived draft](.old/2026-11-17-42f5654/draft/). The retired Gemini Python draft is recoverable from [the pre-cleanup commit](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/f92d4020579ec9013511420a9f1be1c060948e93/research_artifacts/SVE-reproduced-20261012/gemini-code-1792476737954.py). Its source fails compilation at line 186. The maintained [source reproduction entry point](research_artifacts/SVE-reproduced-20261012/main.py) remains available.
+
+### Run the delivery
+
+| Model | Exact SymPy entry | Classical and liquid-block entry |
+|---|---|---|
+| 2022 Eulerian | [symbolic_sv2022.py](delivery/symbolic_sv2022.py) | [ml_sv2022.py](delivery/ml_sv2022.py) |
+| 2026 printed and compatible scalars | [symbolic_sve2026.py](delivery/symbolic_sve2026.py) | [ml_sve2026.py](delivery/ml_sve2026.py) |
+| Rotating tank and separate annular quotient | [symbolic_new_model2026.py](delivery/symbolic_new_model2026.py) | [ml_new_model2026.py](delivery/ml_new_model2026.py) |
+
+The [2026 reproduction](delivery/reproduce_sve2026.py) recomputes the nine published reduction entries, equation-by-equation errata and series checks. The [verification report](delivery/VERIFICATION.md) gives the branch choices, raw logs, build commands and independent Klausen replay. The two stand-alone figures are [contribution workflow](draft/figures/final-delivery/contribution_workflow.pdf) and [learning workflow](draft/figures/final-delivery/ml_workflow.pdf).
 
 ## 1. Research motivation and frozen questions
 
@@ -32,8 +42,8 @@ The dissertation's three motivations in §1.2 are retained:
 
 | Motivation | Mathematical question | Present scope |
 |---|---|---|
-| Parameters | Which parameter strata change admitted symmetry directions, regularity, or admissible reductions? | Restricted scalar strata, exponent regularity, and an explicit annular critical parameter family |
-| Symmetry structure | Which independent generators, brackets, subgroup equivalences, and orbit ranks determine useful reductions? | A restricted optimal system and a verified rank-two annular quotient |
+| Parameters | Which parameter strata change admitted symmetry directions, regularity, or admissible reductions? | Complete positive-chart 1+1 point strata, exponent regularity, and an explicit annular critical parameter family |
+| Symmetry structure | Which independent generators, brackets, subgroup equivalences, and orbit ranks determine useful reductions? | Connected adjoint line classes in 1+1 and a verified rank-two annular quotient |
 | Series and geometry | How do coefficient recurrences, singular loci, branches, and continuation determine analytical representations? | Local series, a restricted Laurent branch, and local critical crossing results |
 
 The guiding question expressed in the discussion was:

@@ -1,0 +1,23 @@
+[2026-11-23 13:13:37] - Experiment folder: outputs/2026-11-23/13-13-37_wave-gauss-g20_10-b5_4-mse6-seed0
+[2026-11-23 13:13:37] - Generating reference data with 100 modes ...
+[2026-11-23 13:13:39] - Reference data generated | MSE_pde=0.00e+00 | MSE_icbc=6.94e-14
+[2026-11-23 13:13:39] - ConstraintSet with 4 constraints, 5000 total samples:
+  Constraint('IC_u0', n=1500, deriv=(0, 0), w=1.0)
+  Constraint('IC_ut0', n=1000, deriv=(0, 1), w=1.0)
+  Constraint('BC_left', n=1250, deriv=(0, 0), w=1.0)
+  Constraint('BC_right', n=1250, deriv=(0, 0), w=1.0)
+[2026-11-23 13:13:39] - Action           MSEtrain   MSEtest   MSEdomain Trafos•start_fun         Parameters
+[2026-11-23 13:13:39] - Add 1  a:-0.46 | 2.00e-02 | 2.0e-02 | 3.2e-02 | T4•T1( sin(x)*cos(t) ) | θ1:3.1e+00 θ4:3.0e+00
+[2026-11-23 13:13:39] - Add 2  a:-0.33 | 3.59e-03 | 3.6e-03 | 6.2e-03 | T4•T1( sin(x)*cos(t) ) | θ1:3.7e-02 θ4:9.4e+00
+[2026-11-23 13:13:40] - Add 3  a:+0.14 | 6.26e-04 | 6.3e-04 | 1.2e-03 | T4•T1( sin(x)*cos(t) ) | θ1:2.0e-01 θ4:1.6e+01
+[2026-11-23 13:13:40] - Add 4  a:+0.04 | 4.07e-04 | 4.1e-04 | 6.7e-04 | T4•T1( sin(x)*cos(t) ) | θ1:3.0e+00 θ4:2.2e+01
+[2026-11-23 13:13:41] - Add 5  a:+0.02 | 3.00e-04 | 3.0e-04 | 6.2e-04 | T4•T1( sin(x)*cos(t) ) | θ1:2.0e+00 θ4:9.7e+00
+[2026-11-23 13:13:41] - Refine batch   | 1.35e-05 | 1.3e-05 | 2.3e-05
+[2026-11-23 13:13:41] - Add 6  a:-9e-3 | 1.91e-06 | 1.9e-06 | 2.3e-06 | T4•T1( sin(x)*cos(t) ) | θ1:3.0e+00 θ4:2.8e+01
+[2026-11-23 13:13:41] - Add 7  a:-1e-3 | 1.50e-06 | 1.5e-06 | 2.0e-06 | T4•T1( sin(x)*cos(t) ) | θ1:1.4e+00 θ4:1.5e+01
+[2026-11-23 13:13:42] - Add 8  a:+2e-3 | 1.12e-06 | 1.1e-06 | 1.6e-06 | T4•T1( sin(x)*cos(t) ) | θ1:3.1e+00 θ4:3.5e+01
+[2026-11-23 13:13:42] - Add 9  a:+8e-4 | 8.61e-07 | 8.6e-07 | 1.4e-06 | T4•T1( sin(x)*cos(t) ) | θ1:1.3e+00 θ4:2.8e+01
+[2026-11-23 13:13:42] - nparams: 18
+[2026-11-23 13:13:43] - L2RE domain: 4.0e-03
+[2026-11-23 13:13:43] - Training complete. Model saved to outputs/2026-11-23/13-13-37_wave-gauss-g20_10-b5_4-mse6-seed0
+[2026-11-23 13:13:43] - 'fit' took 4.41 s
