@@ -91,3 +91,38 @@ Similarly, a two-dimensional subalgebra in two independent variables need not
 have base rank two. Optimal-system enumeration does not waive the rank check.
 The annular, printed, compatible and exchange models retain their distinct
 balance counts and claims.
+
+## Proof obligations and the selected saddle experiment
+
+The expanded run now includes [43 evidence obligations](results/OBLIGATIONS.md).
+Read [the mathematical qualifications](MATHEMATICAL_SCOPE.md) before treating
+any condition as a completeness theorem. Principal Jacobian checks reject
+repeated-root presentations; section inverse, transverse-minor and nonzero-weight
+evidence are distinct from symbolic residual identities. Identity checking can
+return `unknown`, and vertical fields with fixed graphs have a separate status.
+Closure and Jacobi are replayed for every instantiated algebra.
+
+The selected c=-7 annular saddle has two exact BB disk certificates. Coefficients
+are in Q(sqrt(141)); integer-squaring-verified rational enclosures and triangle
+majorants bound the **complex polydisks**. Original r, H, speed and desingularized
+leading factors are checked as well as the simplified Psi denominator. These
+bounds prove a particular local analytic branch; they do not complete the
+classification of singularities. The earlier N3 `picard_rhs: null` remains correct
+for the singular H equation, even after its BB certificate has been established.
+
+For the CPU-only Taylor/DOP853 reference experiment, install the optional
+`requirements-experiment.txt` in a separate environment, then run:
+
+```sh
+PYTHONPATH=delivery python -B -m lie_reduce.run --catalogue --reference-experiment --stage-seconds 15
+```
+
+The BB stage has at least a 30-second limit; the optional reference experiment
+has a 60-second limit. The latter records exact coefficients through degree 40,
+exact undivided residual coefficients, continuous Cauchy tail bounds at degrees
+5/10/20/40, and 401-point high-precision residual diagnostics. DOP853 starts from
+series-derived data away from the singular point; it checks an independent
+integration algorithm, not an independently defined solution. Scaled remainder
+errors are reported so the small physical interval cannot hide diagnostic error.
+No neural training occurs. Numerical dependencies are loaded only for that
+optional experiment. Successful symbolic execution still sets `complete: false`.

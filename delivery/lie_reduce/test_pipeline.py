@@ -8,6 +8,48 @@ from .task import to_task
 
 
 class PipelineTests(unittest.TestCase):
+    def test_singular_equation_presentation_rejected(self):
+        from .jets import JetSpace
+        from .spec import PDESpec
+        t,x,u=sp.symbols('t x u');j=JetSpace((t,x),(u,),1);ut=j.jet(0,1,0)
+        spec=PDESpec('repeated_root',j,(ut**2,),(ut,))
+        with self.assertRaisesRegex(ValueError,'Jacobian'):spec.shell()
+        regular=PDESpec('regular',j,(ut,),(ut,))
+        self.assertEqual(regular.shell_certificate()['regularity']['status'],'proved_nonzero')
+
+    def test_unknown_is_not_nonzero(self):
+        from .identities import zero_record,nonzero_record
+        x=sp.Symbol('x',real=True)
+        self.assertEqual(zero_record(sp.sin(x)**2+sp.cos(x)**2-1)['status'],'unknown')
+        self.assertEqual(zero_record((x+1)**2-x*x-2*x-1)['status'],'proved_zero')
+        self.assertEqual(zero_record(sp.Float(0.1))['status'],'unknown')
+        self.assertEqual(nonzero_record(x)['status'],'conditional')
+        self.assertEqual(nonzero_record(sp.exp(x))['status'],'proved_nonzero')
+
+    def test_vertical_fixed_locus_and_bad_section(self):
+        from .jets import JetSpace
+        from .spec import PDESpec
+        from .reduce import Graph
+        t,x,u=sp.symbols('t x u');j=JetSpace((t,x),(u,),1)
+        spec=PDESpec('stationary',j,(j.jet(0,1,0),),(j.jet(0,1,0),))
+        self.assertEqual(reduce(spec,(0,0,u)).status,'vertical_fixed_locus')
+        self.assertEqual(reduce(spec,(0,0,1)).status,'no invariant graph')
+        self.assertEqual(reduce(spec,(0,0,0)).status,'rejected')
+        z=sp.Symbol('z');F=sp.Function('F')(z)
+        bad=Graph(z,sp.S.Zero,(F,),(F.subs(z,x),),{t:0,x:z})
+        self.assertEqual(reduce(spec,(1,0,0),bad).status,'rejected')
+
+    def test_explicit_saddle_disks(self):
+        from .critical import certify
+        record=certify()
+        self.assertEqual(record['determinant'],-sp.Rational(7,5))
+        self.assertEqual(record['shared_halfwidth'],sp.Rational(1,512))
+        for branch in record['branches']:
+            disk=branch['disk']
+            self.assertLess(disk['Lambda_upper'],1)
+            self.assertLess(disk['image_upper'],disk['R_w'])
+            self.assertTrue(all(v>0 for v in disk['original_chart_modulus_lowers'].values()))
+
     def test_unrelated_heat_equation(self):
         from .jets import JetSpace
         from .spec import PDESpec

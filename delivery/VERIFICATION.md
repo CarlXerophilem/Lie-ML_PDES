@@ -113,6 +113,7 @@ and `PYTHONPATH=delivery python -B -m lie_reduce.test_pipeline`.
 The new degree-two search is replayed at m=1,2,3,4; it does not replace the
 all-real-m smooth-class proofs. Appendix B supplies the catalogue rather than
 being automatically discovered. The E2 rank-two section is supplied explicitly;
-no two-dimensional optimal-system completeness is claimed. N3 remains an
-implicit critical task until a separately verified BB operator is available.
+no two-dimensional optimal-system completeness is claimed. The singular N3 H equation remains an implicit critical task. A separate
+exact complex-disk BB certificate and optional Taylor/DOP853 reference experiment
+now cover the selected c=-7 saddle; see the 43-condition evidence ledger.
 The manuscript and existing numerical tables are not changed by this stage.

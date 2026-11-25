@@ -70,3 +70,27 @@ def coordinates_in_basis(X,basis,coordinates):
 def adjoint_matrix(X,basis,coordinates,epsilon):
     ad=sp.Matrix.hstack(*(sp.Matrix(coordinates_in_basis(bracket(X,Y,coordinates),basis,coordinates)) for Y in basis))
     return (epsilon*ad).exp()
+
+
+def verify_lie_algebra(spec,basis):
+    """Closure and Jacobi in the supplied finite basis, separately from optimality."""
+    from .identities import require_zero
+    coords=spec.jets.independent+spec.jets.dependent
+    fields=list(basis.values());names=list(basis)
+    constants={}
+    for i,X in enumerate(fields):
+        for k,Y in enumerate(fields):
+            coeff=coordinates_in_basis(bracket(X,Y,coords),fields,coords)
+            if any(v.has(*coords) for v in coeff):raise ArithmeticError('nonconstant structure coefficients')
+            constants[i,k]=sp.Matrix(coeff)
+    count=0
+    for i,j,k in combinations(range(len(fields)),3):
+        jac=sp.zeros(len(fields),1)
+        for a,b,c in ((i,j,k),(j,k,i),(k,i,j)):
+            jac+=sum((constants[b,c][d]*constants[a,d] for d in range(len(fields))),sp.zeros(len(fields),1))
+        for v in jac:require_zero(v,'Jacobi')
+        count+=1
+    return {'status':'verified','structure_constants':{f'[{names[i]},{names[j]}]':tuple(c)
+             for (i,j),c in constants.items() if i<j},'jacobi_triples':count,
+             'group_convention':'connected inner group; no discrete identifications',
+             'optimal_system_completeness':'not established by closure or Jacobi checks'}

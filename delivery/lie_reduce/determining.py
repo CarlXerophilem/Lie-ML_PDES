@@ -1,6 +1,7 @@
 """Discovery in a declared polynomial coefficient class; never a smooth-class theorem."""
 import sympy as sp
 from .strata import rank_locus
+from .identities import require_zero
 
 
 def symmetries(spec, degree=2):
@@ -26,6 +27,9 @@ def symmetries(spec, degree=2):
     if rhs != sp.zeros(matrix.rows,1):
         raise ValueError('inhomogeneous determining equations')
     basis = [tuple(sp.expand(v.subs(dict(zip(constants,k)))) for v in field) for k in matrix.nullspace()]
-    return dict(scope='polynomial point coefficients on specified principal chart',degree=degree,
+    for generator in basis:
+        for equation in spec.equations:
+            require_zero(j.act(equation,generator).subs(shell,simultaneous=True),'full prolongation sufficiency')
+    return dict(full_prolongation_verified=True,symmetry_type='point only',scope='polynomial point coefficients on specified principal chart',degree=degree,
                 basis=basis,matrix=matrix,rank=matrix.rank(),denominators=denominators,
                 strata=rank_locus(matrix,spec.parameters))

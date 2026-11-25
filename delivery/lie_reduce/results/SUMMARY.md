@@ -1,6 +1,6 @@
 # Symbolic run summary
 
-Total run: 53.734 wall seconds; finite searches and catalogue reductions: 48.753 seconds.
+Total run: 72.981 wall seconds; finite searches and catalogue reductions: 48.878 seconds.
 
 - verified: 131
 - no invariant graph: 21

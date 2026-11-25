@@ -1,4 +1,7 @@
 """Bounded-time, no-ML symbolic pipeline: python -m lie_reduce.run."""
+import os
+for key in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS'):
+    os.environ[key]='1'
 import argparse
 import dataclasses
 import hashlib
@@ -13,7 +16,7 @@ import sympy as sp
 from .models import scalar,euler
 from .determining import symmetries
 from .reduce import reduce
-from .algebra import catalogue,weights,add,coordinates_in_basis
+from .algebra import catalogue,weights,add,coordinates_in_basis,verify_lie_algebra
 
 
 class StageTimeout(Exception): pass
@@ -54,7 +57,7 @@ def span_equal(left,right,coords):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--out',default='delivery/lie_reduce/results')
-    parser.add_argument('--stage-seconds',type=int,default=15);parser.add_argument('--catalogue',action='store_true')
+    parser.add_argument('--stage-seconds',type=int,default=15);parser.add_argument('--catalogue',action='store_true');parser.add_argument('--reference-experiment',action='store_true')
     args=parser.parse_args();out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     whole_start=time.perf_counter();whole_cpu=time.process_time()
     from .frozen_PM import verify
@@ -79,7 +82,9 @@ def main():
                     result['frozen_basis_span_equal']=True
                 result.pop('matrix');result['reference_span_equal']=equal
                 return result
-            entry={'model':name,'m':m,'discovery':timed(discovery,args.stage_seconds),'brackets':weights(spec,basis),'reductions':[]}
+            entry={'model':name,'m':m,'discovery':timed(discovery,args.stage_seconds),'brackets':weights(spec,basis),
+                   'principal_chart':timed(spec.shell_certificate,args.stage_seconds),
+                   'algebra':timed(lambda:verify_lie_algebra(spec,basis),args.stage_seconds),'reductions':[]}
             choices=catalogue(spec,basis,m) if args.catalogue else []
             if m==3:choices += [{'id':'table3.2.cubic','generator':basis['Y5' if name!='E1' else 'X5']}]
             if name!='E1':
@@ -107,6 +112,17 @@ def main():
                         'completeness':'no automatic optimal-system or unrestricted smooth classification claim'}
     from .benchmarks import export
     report['task_exports']=timed(export,args.stage_seconds)
+    from .critical import certify
+    report['critical_certificate']=timed(certify,max(args.stage_seconds,30))
+    if args.reference_experiment:
+        from .experiment import run as reference_experiment
+        if report['critical_certificate']['status']=='completed':
+            report['reference_experiment']=timed(lambda:reference_experiment(report['critical_certificate']['value'],out),60)
+        else:
+            report['reference_experiment']={'status':'blocked','reason':'BB certificate failed'}
+    from .obligations import ledger,write_ledger
+    report['proof_obligations']=ledger(report)
+    write_ledger(report['proof_obligations'],out)
     report['environment']={'python':sys.version,'sympy':sp.__version__,'platform':platform.platform(),
                            'cpu':Path('/proc/cpuinfo').read_text().split('model name')[1].split('\n')[0].strip(': \t')}
     report['source_sha256']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(__file__).parent.glob('*.py')}
