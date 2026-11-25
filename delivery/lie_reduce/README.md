@@ -126,3 +126,43 @@ integration algorithm, not an independently defined solution. Scaled remainder
 errors are reported so the small physical interval cannot hide diagnostic error.
 No neural training occurs. Numerical dependencies are loaded only for that
 optional experiment. Successful symbolic execution still sets `complete: false`.
+
+## Degenerate presentations and vertical fixed graphs
+
+`presentation.square_free_presentation(spec)` is an explicit opt-in operation.
+It returns the original and normalized specifications, exact polynomial
+factorization identities, original denominator exclusions, and a capped list of
+factor components. It does not mutate the input or silently choose a component.
+For `(u_t)**2=0`, the regularized equation is `u_t=0`; its finite point-symmetry
+kernel is independently compared with the regular reference. For
+`(u_t)**2*(u_x)**3=0`, both factors remain. A component's own symmetry algebra
+need not equal that of their union. Intersections and smooth branch switching
+are not classified.
+
+The supported presentation operation is square-free factorization over rational
+coefficients, **not** a real-radical or general differential-ideal solver. Thus
+`(u_t)**2+(u_x)**2=0` is not automatically replaced by two real constraints.
+Unknown parameter factors are kept; only factors proved nonzero on the declared
+chart may be dropped. `PDESpec.domain_exclusions` retains additional original
+holes. If an expression was already cancelled before construction of `PDESpec`,
+the caller must supply its lost denominator restrictions explicitly.
+
+`fixed.vertical_fixed_graphs(spec, field)` first checks the full point-symmetry
+identity on the regular PDE chart. It then solves polynomial fixed-locus
+constraints and differentiates each candidate graph into every original PDE:
+
+- `u*d/du` for `u_t=0` gives the verified graph `u=0`; it is excluded on `u>0`.
+- `d/du` has no fixed graph.
+- `u*(u-1)*d/du` for `u_t=0` gives two checked fixed graphs.
+- Fixing only one component of a vector field can leave a constrained **PDE**.
+- A nonsymmetry is rejected before any Lie-reduction claim is made.
+
+These graphs have base orbit rank zero and do not reduce the number of
+independent variables. Parametric candidate enumeration is not asserted complete;
+unknown parameter strata, realness, smoothness and domain restrictions remain
+explicit. The main JSON exports `presentation_and_fixed_graph_checks`, and the
+negative controls are in `test_presentations.py`.
+
+```sh
+PYTHONPATH=delivery python -B -m unittest lie_reduce.test_pipeline lie_reduce.test_presentations
+```

@@ -27,7 +27,7 @@ def ledger(report):
     setrow(3,'partial',['runs[*].principal_chart'],'Principal Jacobian is checked on shell; unresolved nonvanishing conditions remain explicit.')
     setrow(4,'partial',['runs[*].principal_chart'],'A unique simple principal branch is checked; this is not a PDE existence theorem.')
     setrow(5,'not_checked',[],'No general involutive completion or analytic Cauchy theorem hypotheses checker.')
-    setrow(6,'partial',['source_formula_audit'],'P and M remain separate; no blanket symmetry-preserving elimination claim.')
+    setrow(6,'partial',['source_formula_audit','presentation_and_fixed_graph_checks'],'P and M remain separate. Explicit square-free rational-presentation equivalence is checked, including all retained factors and original denominator exclusions; no arbitrary elimination claim.')
     setrow(7,'scoped',['runs[*].discovery'],'Degree-two point coefficient search; unrestricted claims rely on separate proofs.')
     setrow(8,'conditional',['runs[*].discovery','runs[*].principal_chart'],'Algebraic splitting on a regular principal chart; full formal integrability is not established.')
     setrow(9,'scoped',['runs[*].discovery','frozen_PM'],'Exact finite ansatz kernel and frozen P/M proof replay; no general Janet solver.')

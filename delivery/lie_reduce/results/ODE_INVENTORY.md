@@ -29,7 +29,7 @@ Generator: `['0', '0', 't']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+polynomial base constraint cannot hold on an open base patch; parameter specializations must be checked separately
 
 ### B.linear.G+-1T+cS
 
@@ -133,7 +133,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -189,7 +189,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## P, m=2
 
@@ -249,7 +249,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -305,7 +305,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## P, m=3
 
@@ -513,7 +513,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### B.cubic.translation.((0, 1), (1, -1))
 
@@ -701,7 +701,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## P, m=4
 
@@ -761,7 +761,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -817,7 +817,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## M, m=1
 
@@ -877,7 +877,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -933,7 +933,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## M, m=2
 
@@ -993,7 +993,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -1049,7 +1049,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## M, m=3
 
@@ -1257,7 +1257,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### B.cubic.translation.((0, 1), (1, -1))
 
@@ -1445,7 +1445,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## M, m=4
 
@@ -1505,7 +1505,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.Y4
 
@@ -1561,7 +1561,7 @@ Generator: `['0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ## E1, m=1
 
@@ -1727,7 +1727,7 @@ Generator: `['0', '0', '0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.bed_drift
 
@@ -1915,7 +1915,7 @@ Generator: `['0', '0', '0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.bed_drift
 
@@ -2235,7 +2235,7 @@ Generator: `['0', '0', '0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### B.cubic.translation.((0, 1), (1, -1))
 
@@ -2665,7 +2665,7 @@ Generator: `['0', '0', '0', '0', '1']`
 
 Status: **no invariant graph**.
 
-a vertical component cannot vanish on this chart
+fixed-locus constraint cannot vanish on declared chart
 
 ### table3.2.bed_drift
 
@@ -2692,5 +2692,5 @@ Conditions: `['h,u,g,kappa>0', 'm=4', '1 != 0', 'local flow chart; logarithm arg
 ## Annular E2 manual rank-two section
 
 ```text
-{'status': 'completed', 'reason': None, 'wall_seconds': 0.35966230905614793, 'cpu_seconds': 0.35993095899999616, 'user_cpu_seconds': 0.359930999999996, 'system_cpu_seconds': 0.0, 'process_peak_rss_bytes': 101945344, 'value': {'reduction': {'model': 'E2', 'status': 'verified', 'reason': '', 'graph': {'z': 'z', 'invariant': 'r', 'profiles': ['H(z)', 'V(z)', 'W(z)', 'Z(z)'], 'lifts': ['H(r)', 'V(r)', 'W(r)', 'c*t + Z(r)'], 'section': {'t': 0, 'theta': 0, 'r': 'z'}, 'conditions': [], 'orbit_coordinates': {}}, 'equations': ['(z*H(z)*Derivative(V(z), z) + z*V(z)*Derivative(H(z), z) + H(z)*V(z))/z', '-(f*z*W(z) - g*z*Derivative(H(z), z) - g*z*Derivative(Z(z), z) - z*V(z)*Derivative(V(z), z) + W(z)**2)/z', '(f*z + z*Derivative(W(z), z) + W(z))*V(z)/z', '(-G*z*V(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*V(z)*Derivative(V(z), z)*Derivative(Z(z), z) - G*z*W(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*W(z)*Derivative(W(z), z)*Derivative(Z(z), z) - G*V(z)**2*Derivative(Z(z), z) - G*W(z)**2*Derivative(Z(z), z) + 3*K*z*V(z)**2*Derivative(V(z), z) + 2*K*z*V(z)*W(z)*Derivative(W(z), z) + K*z*W(z)**2*Derivative(V(z), z) + K*V(z)**3 + K*V(z)*W(z)**2 + c*z)/z'], 'weights': [], 'first_integrals': [], 'leading_coefficients': [], 'conditions': ['r>0', 'h>0', 'g,K,G>0'], 'checks': {'base_orbit_rank': 2, 'point_orbit_rank': 2, 'on_shell': True, 'invariant_surface': True, 'pullback': True}, 'scope': 'manual two-dimensional subalgebra; two-dimensional optimal system not computed', 'degree': None}, 'first_integrals': ['z*H(z)*V(z)', 'f*z**2/2 + z*W(z)', 'c*z**2/2 + z*(-G*Derivative(Z(z), z) + K*V(z))*(V(z)**2 + W(z)**2)'], 'flux_identity_remainders': ['0', '0', '0'], 'V': 'C1/(z*H(z))', 'W': 'C2/z - f*z/2', 'P_Z': '(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G', 'D': '-C1**2/(z**2*H(z)**2) + g*H(z)', 'N': '(f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z)', 'undivided_ode': '(-C1**2/(z**2*H(z)**2) + g*H(z))*Derivative(H(z), z) - (f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z)', 'additional_conditions': ['V != 0 for angular integration', 'H>0', 'r>0', 'V**2+W**2>0'], 'singularity_candidates': {'leading_zero': 'Eq(-C1**2/(z**2*H(z)**2) + g*H(z), 0)', 'compatible_critical': ['Eq(-C1**2/(z**2*H(z)**2) + g*H(z), 0)', 'Eq((f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z), 0)'], 'classification': 'saddle requires an additional desingularized Jacobian check'}, 'task_status': 'critical N3 requires separate BB normal form; regular N/D export forbidden at D=0'}}
+{'status': 'completed', 'reason': None, 'wall_seconds': 0.3465600280323997, 'cpu_seconds': 0.3465435310000018, 'user_cpu_seconds': 0.3465440000000015, 'system_cpu_seconds': 0.0, 'process_peak_rss_bytes': 101920768, 'value': {'reduction': {'model': 'E2', 'status': 'verified', 'reason': '', 'graph': {'z': 'z', 'invariant': 'r', 'profiles': ['H(z)', 'V(z)', 'W(z)', 'Z(z)'], 'lifts': ['H(r)', 'V(r)', 'W(r)', 'c*t + Z(r)'], 'section': {'t': 0, 'theta': 0, 'r': 'z'}, 'conditions': [], 'orbit_coordinates': {}}, 'equations': ['(z*H(z)*Derivative(V(z), z) + z*V(z)*Derivative(H(z), z) + H(z)*V(z))/z', '-(f*z*W(z) - g*z*Derivative(H(z), z) - g*z*Derivative(Z(z), z) - z*V(z)*Derivative(V(z), z) + W(z)**2)/z', '(f*z + z*Derivative(W(z), z) + W(z))*V(z)/z', '(-G*z*V(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*V(z)*Derivative(V(z), z)*Derivative(Z(z), z) - G*z*W(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*W(z)*Derivative(W(z), z)*Derivative(Z(z), z) - G*V(z)**2*Derivative(Z(z), z) - G*W(z)**2*Derivative(Z(z), z) + 3*K*z*V(z)**2*Derivative(V(z), z) + 2*K*z*V(z)*W(z)*Derivative(W(z), z) + K*z*W(z)**2*Derivative(V(z), z) + K*V(z)**3 + K*V(z)*W(z)**2 + c*z)/z'], 'weights': [], 'first_integrals': [], 'leading_coefficients': [], 'conditions': ['r>0', 'h>0', 'g,K,G>0'], 'checks': {'base_orbit_rank': 2, 'point_orbit_rank': 2, 'on_shell': True, 'invariant_surface': True, 'pullback': True}, 'scope': 'manual two-dimensional subalgebra; two-dimensional optimal system not computed', 'degree': None}, 'first_integrals': ['z*H(z)*V(z)', 'f*z**2/2 + z*W(z)', 'c*z**2/2 + z*(-G*Derivative(Z(z), z) + K*V(z))*(V(z)**2 + W(z)**2)'], 'flux_identity_remainders': ['0', '0', '0'], 'V': 'C1/(z*H(z))', 'W': 'C2/z - f*z/2', 'P_Z': '(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G', 'D': '-C1**2/(z**2*H(z)**2) + g*H(z)', 'N': '(f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z)', 'undivided_ode': '(-C1**2/(z**2*H(z)**2) + g*H(z))*Derivative(H(z), z) - (f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z)', 'additional_conditions': ['V != 0 for angular integration', 'H>0', 'r>0', 'V**2+W**2>0'], 'singularity_candidates': {'leading_zero': 'Eq(-C1**2/(z**2*H(z)**2) + g*H(z), 0)', 'compatible_critical': ['Eq(-C1**2/(z**2*H(z)**2) + g*H(z), 0)', 'Eq((f*(C2/z - f*z/2) + (C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2)/z - g*(C1*K/(z*H(z)) - (C3/z - c*z/2)/(C1**2/(z**2*H(z)**2) + (C2/z - f*z/2)**2))/G)*H(z), 0)'], 'classification': 'saddle requires an additional desingularized Jacobian check'}, 'task_status': 'critical N3 requires separate BB normal form; regular N/D export forbidden at D=0'}}
 ```

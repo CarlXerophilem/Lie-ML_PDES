@@ -40,6 +40,9 @@ def timed(fn,seconds):
 
 
 def serial(value):
+    from .jets import JetSpace
+    if isinstance(value,JetSpace):
+        return {'independent':serial(value.independent),'dependent':serial(value.dependent),'order':value.order,'jet_symbols':serial(value.jets)}
     if dataclasses.is_dataclass(value): return serial(dataclasses.asdict(value))
     if isinstance(value,dict):return {str(k):serial(v) for k,v in value.items()}
     if isinstance(value,(tuple,list)):return [serial(v) for v in value]
@@ -120,6 +123,8 @@ def main():
             report['reference_experiment']=timed(lambda:reference_experiment(report['critical_certificate']['value'],out),60)
         else:
             report['reference_experiment']={'status':'blocked','reason':'BB certificate failed'}
+    from .edge_cases import run as edge_cases
+    report['presentation_and_fixed_graph_checks']=timed(edge_cases,args.stage_seconds)
     from .obligations import ledger,write_ledger
     report['proof_obligations']=ledger(report)
     write_ledger(report['proof_obligations'],out)

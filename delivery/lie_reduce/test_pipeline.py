@@ -32,7 +32,7 @@ class PipelineTests(unittest.TestCase):
         from .reduce import Graph
         t,x,u=sp.symbols('t x u');j=JetSpace((t,x),(u,),1)
         spec=PDESpec('stationary',j,(j.jet(0,1,0),),(j.jet(0,1,0),))
-        self.assertEqual(reduce(spec,(0,0,u)).status,'vertical_fixed_locus')
+        self.assertEqual(reduce(spec,(0,0,u)).checks['fixed_graphs']['branches'][0]['status'],'verified_fixed_solution')
         self.assertEqual(reduce(spec,(0,0,1)).status,'no invariant graph')
         self.assertEqual(reduce(spec,(0,0,0)).status,'rejected')
         z=sp.Symbol('z');F=sp.Function('F')(z)
@@ -137,7 +137,7 @@ class PipelineTests(unittest.TestCase):
     def test_invalid_generator_and_task(self):
         spec,b=scalar('M',2)
         self.assertEqual(reduce(spec,b['Y2']).status,'no invariant graph')
-        self.assertEqual(reduce(spec,(0,0,spec.jets.independent[0])).status,'no invariant graph')
+        self.assertEqual(reduce(spec,(0,0,spec.jets.independent[0])).status,'rejected')  # t*dphi is not an M symmetry.
         red=reduce(spec,b['Y4'])
         with self.assertRaises(ValueError):to_task(red,(1,0,0),(0,1))
         task=to_task(red,(1,1,0),(0,sp.Rational(1,64)))

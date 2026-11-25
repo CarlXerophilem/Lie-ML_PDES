@@ -451,10 +451,10 @@
   },
   "reference_boundary": "DOP853 shares certified series starting data away from the critical point; integration is a sampled check, not a second proof.",
   "resources": {
-    "wall_seconds": 3.038684671977535,
-    "user_cpu_seconds": 3.037352999999996,
-    "system_cpu_seconds": 0.0030060000000000087,
-    "process_peak_rss_bytes": 173654016
+    "wall_seconds": 3.096769972005859,
+    "user_cpu_seconds": 3.094419000000002,
+    "system_cpu_seconds": 0.0010050000000000059,
+    "process_peak_rss_bytes": 173875200
   },
   "status": "passed"
 }

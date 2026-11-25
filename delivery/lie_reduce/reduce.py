@@ -114,10 +114,10 @@ def reduce(spec,X,section=None):
     if any(v.has(*j.dependent) for v in X[:len(j.independent)]):
         return ReducedODE(spec.name,'unsupported',reason='base action is not projectable in this chart')
     if all(v==0 for v in X[:len(j.independent)]):
-        vertical=X[len(j.independent):]
-        if any(nonzero_record(v,spec.positive)['status']=='proved_nonzero' or (not v.has(*j.dependent) and v!=0) for v in vertical):
-            return ReducedODE(spec.name,'no invariant graph',reason='a vertical component cannot vanish on this chart')
-        return ReducedODE(spec.name,'vertical_fixed_locus',reason='solve eta=0 on the graph; a pure vertical field may have fixed graphs',conditions=tuple(sp.Eq(v,0) for v in vertical))
+        from .fixed import vertical_fixed_graphs
+        evidence=vertical_fixed_graphs(spec,X)
+        return ReducedODE(spec.name,evidence['status'],reason=evidence.get('reason',''),
+                          checks={'fixed_graphs':evidence},scope='vertical fixed graphs; no quotient to fewer independent variables')
     try: graph=section or automatic_graph(spec,X)
     except (NotImplementedError,ValueError) as exc:
         return ReducedODE(spec.name,'unsupported',str(exc))

@@ -117,3 +117,10 @@ no two-dimensional optimal-system completeness is claimed. The singular N3 H equ
 exact complex-disk BB certificate and optional Taylor/DOP853 reference experiment
 now cover the selected c=-7 saddle; see the 43-condition evidence ledger.
 The manuscript and existing numerical tables are not changed by this stage.
+
+The same pipeline now tests explicit square-free presentation changes and
+vertical fixed graphs. Repeated factors are removed only with zero-set
+equivalence records; unions retain every factor component. Fixed graphs are
+checked against every PDE after a full symmetry check, and rank-zero fixed
+loci are not mislabeled ODE reductions. See
+[the new negative controls](lie_reduce/test_presentations.py).

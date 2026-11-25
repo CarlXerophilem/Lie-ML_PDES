@@ -11,7 +11,7 @@ Checked local symbolic reductions within declared charts and a finite point-coef
 | 3 | Regular equation submanifold | partial | Principal Jacobian is checked on shell; unresolved nonvanishing conditions remain explicit. Evidence: runs[*].principal_chart |
 | 4 | Explicit principal chart | partial | A unique simple principal branch is checked; this is not a PDE existence theorem. Evidence: runs[*].principal_chart |
 | 5 | Local solvability / differential compatibility | not_checked | No general involutive completion or analytic Cauchy theorem hypotheses checker. Evidence: none |
-| 6 | Equivalent equation presentations | partial | P and M remain separate; no blanket symmetry-preserving elimination claim. Evidence: source_formula_audit |
+| 6 | Equivalent equation presentations | partial | P and M remain separate. Explicit square-free rational-presentation equivalence is checked, including all retained factors and original denominator exclusions; no arbitrary elimination claim. Evidence: source_formula_audit, presentation_and_fixed_graph_checks |
 | 7 | Declared coefficient class | scoped | Degree-two point coefficient search; unrestricted claims rely on separate proofs. Evidence: runs[*].discovery |
 | 8 | Free-jet splitting and exclusions | conditional | Algebraic splitting on a regular principal chart; full formal integrability is not established. Evidence: runs[*].discovery, runs[*].principal_chart |
 | 9 | Complete determining-system solution | scoped | Exact finite ansatz kernel and frozen P/M proof replay; no general Janet solver. Evidence: runs[*].discovery, frozen_PM |

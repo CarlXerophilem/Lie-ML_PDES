@@ -12,6 +12,7 @@ class PDESpec:
     parameters: tuple = ()
     conditions: tuple = ()
     positive: tuple = ()
+    domain_exclusions: tuple = ()
 
     def shell_certificate(self):
         """A simple root is required; solve() alone would wrongly accept Delta=ut**2."""
@@ -33,8 +34,11 @@ class PDESpec:
         regularity=nonzero_record(determinant,self.positive)
         if regularity['status']=='zero':
             raise ValueError('singular equation presentation: principal Jacobian vanishes on shell')
-        denominators=tuple(sp.denom(sp.cancel(v)) for v in (*self.equations,*solution.values()))
+        denominators=tuple(dict.fromkeys((*self.domain_exclusions,*(sp.denom(v) for v in self.equations),*(sp.denom(sp.cancel(v)) for v in solution.values()))))
         exclusions=tuple(nonzero_record(v,self.positive) for v in denominators)
+        for denominator in denominators:
+            if nonzero_record(denominator.subs(solution,simultaneous=True),self.positive)['status']=='zero':
+                raise ValueError('principal solution lies on an excluded denominator locus')
         return {'solution':solution,'principal_jacobian':jacobian,'determinant_on_shell':determinant,
                 'regularity':regularity,'denominators':denominators,'denominator_evidence':exclusions,
                 'local_solvability':'not implied by algebraic solve; requires analytic Cauchy or other theorem hypotheses',
