@@ -16,6 +16,19 @@ python delivery/reproduce_sve2026.py --order 6 --output build/delivery/reproduct
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_sv2022.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_sve2026.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_new_model2026.py
+
+The eight separated experiments are three 1+1 Lie scripts plus the rotating pair, and the same split for the profile fits. Each script prints a written verifier block. `reproduce_sve2026.generators` remains the printed list; the P script checks that this list spans the derived basis.
+
+~~~sh
+python -B delivery/experiment_lie_E1.py
+python -B delivery/experiment_lie_P.py
+python -B delivery/experiment_lie_M.py
+python -B delivery/experiment_lie_E2.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_E1.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_P.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_M.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_Eexch.py
+~~~
 bash delivery/build_pdfs.sh
 ~~~
 

@@ -74,7 +74,7 @@ def main():
             def discovery():
                 result=symmetries(spec,2)
                 equal=span_equal(result['basis'],list(basis.values()),spec.jets.independent+spec.jets.dependent)
-                if not equal: raise ArithmeticError('computed kernel differs from labelled reference span')
+                if not equal: raise ArithmeticError('degree-2 kernel differs from degree-1 canonical labels')
                 if name in ('P','M'):
                     frozen_data=json.loads((Path(__file__).with_name('frozen')/'PM.json').read_text())['models'][name]['bases']
                     frozen_basis=frozen_data.get(str(m),frozen_data['m'])
@@ -83,7 +83,9 @@ def main():
                     if not span_equal(result['basis'],reference,spec.jets.independent+spec.jets.dependent):
                         raise ArithmeticError('discovery differs from immutable frozen basis')
                     result['frozen_basis_span_equal']=True
-                result.pop('matrix');result['reference_span_equal']=equal
+                result.pop('matrix')
+                result['basis_source']='degree-1 determining nullspace, canonically labeled'
+                result['reference_span_equal']=equal
                 return result
             entry={'model':name,'m':m,'discovery':timed(discovery,args.stage_seconds),'brackets':weights(spec,basis),
                    'principal_chart':timed(spec.shell_certificate,args.stage_seconds),

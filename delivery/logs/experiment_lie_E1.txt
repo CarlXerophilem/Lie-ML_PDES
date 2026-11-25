@@ -1,0 +1,571 @@
+{
+  "chart": "h,u,g,K>0",
+  "model": "E1",
+  "not_claimed": "The integer polynomial audit is not the all-real-m classification.",
+  "polynomial_bases": {
+    "1": {
+      "dimension": 4,
+      "generators": {
+        "X1": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "X2": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "X3": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "X4": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "search_class": "polynomial point coefficients of degree at most 1"
+    },
+    "2": {
+      "dimension": 4,
+      "generators": {
+        "X1": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "X2": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "X3": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "X4": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "search_class": "polynomial point coefficients of degree at most 1"
+    },
+    "3": {
+      "dimension": 5,
+      "generators": {
+        "X1": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "X2": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "X3": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "X4": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ],
+        "X5": [
+          "t",
+          "0",
+          "-2*h",
+          "-u",
+          "-2*B"
+        ]
+      },
+      "search_class": "polynomial point coefficients of degree at most 1"
+    },
+    "4": {
+      "dimension": 4,
+      "generators": {
+        "X1": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "X2": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "X3": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "X4": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "search_class": "polynomial point coefficients of degree at most 1"
+    }
+  },
+  "reductions": {
+    "bed_drift_m2": {
+      "solver_output": {
+        "conditions": [
+          "h,u,g,kappa>0",
+          "m=2",
+          "1 != 0",
+          "local flow chart; logarithm arguments positive when used",
+          "F0(x) > 0",
+          "F1(x) > 0",
+          "g > 0",
+          "kappa > 0"
+        ],
+        "equations": [
+          "F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z)",
+          "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z)",
+          "alpha + 2*kappa*F1(z)*Derivative(F1(z), z)"
+        ],
+        "generators": [
+          [
+            "1",
+            "0",
+            "0",
+            "0",
+            "alpha"
+          ]
+        ],
+        "invariant": "x",
+        "kind": "pde_reduction",
+        "lifts": [
+          "F0(x)",
+          "F1(x)",
+          "alpha*t + F2(x)"
+        ],
+        "model": "E1",
+        "orbit_coordinates": {
+          "t": "orbit",
+          "x": "z"
+        },
+        "parameter_bindings": {
+          "m": "2"
+        },
+        "profile_functions": [
+          "F0",
+          "F1",
+          "F2"
+        ],
+        "scope": "specified local invariant graph; not exhaustive reduction classification",
+        "symbols": [
+          "alpha",
+          "g",
+          "kappa",
+          "t",
+          "x",
+          "z"
+        ],
+        "weights": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "status": "computed",
+      "verification": {
+        "checks": [
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          }
+        ],
+        "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+        "generic_base_orbit_rank": 1,
+        "paper_sha256": "99d2dcf2378caa8fbf751210836f5ba4d291d019e63376eedb158679cb6176f4",
+        "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred",
+        "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+        "status": "verified_local_identities",
+        "verifier": "independent_verifier.v1",
+        "weights": [
+          {
+            "nonzero": true,
+            "weight": "1"
+          },
+          {
+            "nonzero": true,
+            "weight": "1"
+          },
+          {
+            "nonzero": true,
+            "weight": "1"
+          }
+        ]
+      }
+    },
+    "cubic_scaling_m3": {
+      "solver_output": {
+        "conditions": [
+          "h,u,g,kappa>0",
+          "m=3",
+          "t != 0",
+          "local flow chart; logarithm arguments positive when used",
+          "F0(x)/t**2 > 0",
+          "F1(x)/t > 0",
+          "g > 0",
+          "kappa > 0"
+        ],
+        "equations": [
+          "F0(z)*Derivative(F1(z), z) - 2*F0(z) + F1(z)*Derivative(F0(z), z)",
+          "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) - F1(z)",
+          "3*kappa*F1(z)**2*Derivative(F1(z), z) - 2*F2(z)"
+        ],
+        "generators": [
+          [
+            "t",
+            "0",
+            "-2*h",
+            "-u",
+            "-2*B"
+          ]
+        ],
+        "invariant": "x",
+        "kind": "pde_reduction",
+        "lifts": [
+          "F0(x)/t**2",
+          "F1(x)/t",
+          "F2(x)/t**2"
+        ],
+        "model": "E1",
+        "orbit_coordinates": {
+          "t": "exp(orbit)",
+          "x": "z"
+        },
+        "parameter_bindings": {
+          "m": "3"
+        },
+        "profile_functions": [
+          "F0",
+          "F1",
+          "F2"
+        ],
+        "scope": "specified local invariant graph; not exhaustive reduction classification",
+        "symbols": [
+          "g",
+          "kappa",
+          "t",
+          "x",
+          "z"
+        ],
+        "weights": [
+          "exp(-3*orbit)",
+          "exp(-2*orbit)",
+          "exp(-3*orbit)"
+        ]
+      },
+      "status": "computed",
+      "verification": {
+        "checks": [
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          }
+        ],
+        "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+        "generic_base_orbit_rank": 1,
+        "paper_sha256": "99d2dcf2378caa8fbf751210836f5ba4d291d019e63376eedb158679cb6176f4",
+        "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred",
+        "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+        "status": "verified_local_identities",
+        "verifier": "independent_verifier.v1",
+        "weights": [
+          {
+            "nonzero": true,
+            "weight": "exp(-3*orbit)"
+          },
+          {
+            "nonzero": true,
+            "weight": "exp(-2*orbit)"
+          },
+          {
+            "nonzero": true,
+            "weight": "exp(-3*orbit)"
+          }
+        ]
+      }
+    }
+  },
+  "search_class": "Unrestricted smooth point symmetries for all real m>=1, plus a separate degree-1 polynomial audit at m=1,2,3,4.",
+  "smooth_classification": {
+    "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
+    "coordinate_order": [
+      "t",
+      "x",
+      "h",
+      "u",
+      "B"
+    ],
+    "m2_bed_drift_quotient": "K*Y' + b = 0; Y=u^2, h=1/u, B=bt+2-Y/2-h, g=1",
+    "m2_remaining_residual": "K*Derivative(Y(x), x) + b",
+    "optimal_lines_layout": {
+      "cubic_scaling": "H=aD+bS, projective (a:b). Normalize a=1 if a!=0, else b=1. For every zero weight in (-(a+b),-a,2b), append c times the corresponding T,X,Z with c=0,+1,-1.",
+      "cubic_translations": "Each nonempty support of T,X,Z with unit coefficients; signs modulo global sign.",
+      "generic_scaling": "D+cZ, c real",
+      "generic_translations": "RP1 in (T,X); Z; Z+cos(theta)T+sin(theta)X",
+      "names": "T=dt; X=dx; Z=dB; D=t*dt+x*dx; S=t*dt-2h*dh-u*du-2B*dB"
+    },
+    "scope": "Local smooth point symmetries, all real m>=1, K,g,h,u>0",
+    "strata": {
+      "positive_cubic": {
+        "basis": {
+          "bed_translation": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "common_base_scaling": [
+            "t",
+            "x",
+            "0",
+            "0",
+            "0"
+          ],
+          "relative_scaling": [
+            "t",
+            "0",
+            "-2*h",
+            "-u",
+            "-2*B"
+          ],
+          "space_translation": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "time_translation": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        "brackets": {
+          "[bed_translation,relative_scaling]": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "-2"
+          ],
+          "[common_base_scaling,space_translation]": [
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0"
+          ],
+          "[common_base_scaling,time_translation]": [
+            "-1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "[relative_scaling,bed_translation]": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "2"
+          ],
+          "[relative_scaling,time_translation]": [
+            "-1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "[space_translation,common_base_scaling]": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "[time_translation,common_base_scaling]": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "[time_translation,relative_scaling]": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      },
+      "positive_generic": {
+        "basis": {
+          "bed_translation": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "common_base_scaling": [
+            "t",
+            "x",
+            "0",
+            "0",
+            "0"
+          ],
+          "space_translation": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "time_translation": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        "brackets": {
+          "[common_base_scaling,space_translation]": [
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0"
+          ],
+          "[common_base_scaling,time_translation]": [
+            "-1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "[space_translation,common_base_scaling]": [
+            "0",
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "[time_translation,common_base_scaling]": [
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      }
+    },
+    "verified_proof_identities": 39
+  },
+  "written_verifier": {
+    "checker": "delivery/independent_verifier.py through lie_pde_reducer.verifier",
+    "reasons": [],
+    "status": "passed"
+  }
+}

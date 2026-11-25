@@ -1,7 +1,7 @@
 {
   "schema": "paper-pde-v1",
   "source_file": "draft/dissertation_wku_compact.tex",
-  "source_sha256": "67c507acbaeb9eaf54f1024fddbe6ea10503e366130b9b5a8d1da2acc7d7b688",
+  "source_sha256": "ca132586df61214a5aba4a8d0ad6173fcd7fb09ba495a54c63e9069c2354d4a8",
   "transcription_status": "explicit reviewed transcription; not auto-extracted mathematics",
   "model": "M",
   "independent": [
@@ -24,7 +24,7 @@
   "equations": [
     "D((D(phi(t,s),s)*D(phi(t,s),t,2)-g*D(phi(t,s),s,2)/D(phi(t,s),s)**2),t)-g*D((m*kappa*D(phi(t,s),t)**(m-1)*D(phi(t,s),t,s)/D(phi(t,s),s)),s)-D(D(phi(t,s),t)*(D(phi(t,s),s)*D(phi(t,s),t,2)-g*D(phi(t,s),s,2)/D(phi(t,s),s)**2)/D(phi(t,s),s),s)"
   ],
-  "source_excerpt": "{{}=D_t\\mathcal A-D_s\\!\\left(g\\beta T_m+\\frac{\\phi_t}{\\phi_s}\\mathcal A\\right).}\\label{eq:M}\n\\end{align}\n\nWhy do \\eqref{eq:P} and \\eqref{eq:M} disagree? A parcel moving at speed $u=\\phi_t$ records the material rate $b_t=(B_t+uB_x)(t,\\phi(t,s))$, not the fixed-position bed rate $B_t$. Subtracting $(\\phi_t/\\phi_s)b_s$ strips out the bed-advection term $uB_x$, and that subtraction is what produces $-D_s((\\phi_t/\\phi_s)\\mathcal A)$ in $\\mathcal M$. Dropping it amounts to imposing $b_t+\\beta T_m=0$, which lifts under an invertible map to an \\emph{advected} bed law $B_t+uB_x+\\kappa(u^m)_x=0$ rather than $\\mathcal E_1$. Direct comparison and continuation between $\\mathcal P$ and $\\mathcal M$ are deferred; below, $\\mathcal P$ is",
+  "source_excerpt": "\\keyeq{\\mathcal E_{L}[\\phi](t,s)}&\\keyeq{{}=D_t\\mathcal A-D_s\\!\\left(g\\beta T_m+\\frac{\\phi_t}{\\phi_s}\\mathcal A\\right).}\\label{eq:M}\n\\end{align}\n\nWhy do \\eqref{eq:P} and \\eqref{eq:M} disagree? A parcel moving at speed $u=\\phi_t$ records the material rate $b_t=(B_t+uB_x)(t,\\phi(t,s))$, not the fixed-position bed rate $B_t$. Subtracting $(\\phi_t/\\phi_s)b_s$ strips out the bed-advection term $uB_x$, and that subtraction is what produces $-D_s((\\phi_t/\\phi_s)\\mathcal A)$ ",
   "principal": [
     "D(phi(t,s),t,3)"
   ]

@@ -173,7 +173,12 @@ def build_model_report():
 
 
 def generators():
-    """Source v3 PDF p. 4, in (t,s,phi) coordinate order."""
+    """Printed v3 list on p. 4, in (t, s, phi) order.
+
+    This is the source transcription used by the formula audit. It is not the
+    determining solver. symbolic_sve2026.classify does not read it, and
+    experiment_lie_P.py checks that the list spans the derived bases.
+    """
     return {
         'X1': (sp.Integer(1), sp.Integer(0), sp.Integer(0)),
         'X2': (sp.Integer(0), sp.Integer(1), sp.Integer(0)),
