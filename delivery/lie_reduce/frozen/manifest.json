@@ -1,0 +1,8 @@
+{
+  "baseline": "b9842d6 plus pre-existing output-only V binding metadata; frozen before generalization",
+  "sha256": {
+    "frozen_PM.py": "5e16dcbacbd3ab1833b893526d60f68f1be9ad8a0d7ad8bd581eb6069c9d1ae4",
+    "reproduce_sve2026.py": "1800a195b180c84d588f7a43f888afddac7dbbeb792133f4b213beded22295ff",
+    "PM.json": "2d07dbf79f0f73a8508403d7785ca8896009390d1b3f01b0b3786bd837004fbd"
+  }
+}

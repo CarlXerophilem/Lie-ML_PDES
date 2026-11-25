@@ -1,0 +1,220 @@
+{
+  "coordinates": [
+    "t",
+    "s",
+    "phi"
+  ],
+  "material_scaling": {
+    "bindings": {
+      "V": "F - P*z"
+    },
+    "first_integral": "C*(-F*(P**3*z**2 - g)/P**3 + V**m*g*kappa*m*z/(P*V))",
+    "leading": "-F*(P**3*z**2 - g)/P**3 + V**m*g*kappa*m*z/(P*V)",
+    "velocity": "F - P*z"
+  },
+  "models": {
+    "M": {
+      "affine_coordinates": [
+        "Derivative(tau(t), t)",
+        "Derivative(xi(s), s)",
+        "Derivative(eta(u), u)"
+      ],
+      "affine_matrix": [
+        [
+          "-2",
+          "-1",
+          "3"
+        ],
+        [
+          "m - 3",
+          "0",
+          "3 - m"
+        ]
+      ],
+      "bases": {
+        "3": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "-t/2",
+            "s",
+            "0"
+          ],
+          [
+            "3*t/2",
+            "0",
+            "u"
+          ]
+        ],
+        "m": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "t",
+            "s",
+            "u"
+          ]
+        ]
+      },
+      "determining_splits": {
+        "w_slice": "2*g*q**2*Derivative(tau(t, s, u), s) + q**5*(-2*p*Derivative(xi(t, s, u), u) - 2*Derivative(xi(t, s, u), t)) + q**4*(2*g*kappa*m*p**m*Derivative(tau(t, s, u), u)/p - Derivative(eta(t, s, u), t)) + q**3*(2*g*kappa*m*p**m*Derivative(tau(t, s, u), s)/p + 2*g*Derivative(tau(t, s, u), u) + p*Derivative(eta(t, s, u), s))",
+        "x_slice_after_dependency_split": "q**3*(-g*kappa*m**2*p**m*Derivative(eta(u), u)/p + g*kappa*m**2*p**m*Derivative(tau(t), t)/p + 3*g*kappa*m*p**m*Derivative(eta(u), u)/p - 3*g*kappa*m*p**m*Derivative(tau(t), t)/p) + q**2*(3*g*Derivative(eta(u), u) - 2*g*Derivative(tau(t), t) - g*Derivative(xi(s), s))",
+        "zero_first_derivatives": [
+          "Derivative(xi(t, s, u), t)",
+          "Derivative(xi(t, s, u), u)",
+          "Derivative(tau(t, s, u), s)",
+          "Derivative(eta(t, s, u), s)",
+          "Derivative(tau(t, s, u), u)",
+          "Derivative(eta(t, s, u), t)"
+        ]
+      },
+      "exceptional_exponents": [
+        "3"
+      ]
+    },
+    "P": {
+      "affine_coordinates": [
+        "Derivative(tau(t), t)",
+        "Derivative(xi(s), s)",
+        "A(t)",
+        "Derivative(B(t), t)"
+      ],
+      "affine_matrix": [
+        [
+          "-2",
+          "-1",
+          "3",
+          "0"
+        ],
+        [
+          "m - 3",
+          "0",
+          "3 - m",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1 - m"
+        ]
+      ],
+      "bases": {
+        "1": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "t",
+            "s",
+            "u"
+          ],
+          [
+            "0",
+            "0",
+            "t"
+          ]
+        ],
+        "3": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "-t/2",
+            "s",
+            "0"
+          ],
+          [
+            "3*t/2",
+            "0",
+            "u"
+          ]
+        ],
+        "m": [
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "t",
+            "s",
+            "u"
+          ]
+        ]
+      },
+      "determining_splits": {
+        "free_a_after_eta_s_split": "4*p*Derivative(eta(t, u), (u, 2)) - 3*Derivative(tau(t), (t, 2)) + 4*Derivative(eta(t, u), t, u)",
+        "free_ab_after_base_split": "-Derivative(eta(t, s, u), s)",
+        "free_w_after_xi_split": "q*Derivative(tau(t, s, u), u) + Derivative(tau(t, s, u), s)",
+        "free_x_after_eta_affine": "3*g*A(t) - 2*g*Derivative(tau(t), t) - g*Derivative(xi(s), s) + q*(-g*kappa*m**2*p**m*A(t)/p + g*kappa*m**2*p**m*Derivative(tau(t), t)/p - g*kappa*m**2*p**m*u*Derivative(A(t), t)/p**2 - g*kappa*m**2*p**m*Derivative(B(t), t)/p**2 + 3*g*kappa*m*p**m*A(t)/p - 3*g*kappa*m*p**m*Derivative(tau(t), t)/p + g*kappa*m*p**m*u*Derivative(A(t), t)/p**2 + g*kappa*m*p**m*Derivative(B(t), t)/p**2)",
+        "free_y_normalized": "p*Derivative(xi(t, s, u), u) + Derivative(xi(t, s, u), t)"
+      },
+      "exceptional_exponents": [
+        "1",
+        "3"
+      ]
+    }
+  },
+  "scope": "Local smooth point generators on p,q,g,kappa>0; real m>=1"
+}

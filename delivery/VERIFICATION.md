@@ -99,3 +99,20 @@ From this repository run `python delivery/verify_klausen.py heat /path/to/local/
 ## Remaining validation
 
 The \(P\)–\(M\) comparison and continuation are deferred. The [audit archive](../.old/2026-11-23-repository-audit/) retains the prototype without making it part of the manuscript’s verification. Exhaustive singular classification, unrestricted planar classification and the matched-accuracy correction experiment remain open. A paired experiment would fix the target discretization, admissibility conditions, tolerances and corrector across both initializations. Function-space correction requires a bound in a reconstruction-compatible norm. Matched-accuracy cost is a measured outcome rather than an acceptance target for the small profile tests.
+
+## Generic finite-class Lie pipeline (no ML)
+
+The separate [Lie pipeline](lie_reduce/README.md) freezes the original P/M
+certificate, independently implements vector jets and prolongation, and exports
+[all computed reduction records](lie_reduce/results/ODE_INVENTORY.md).
+The [machine-readable run](lie_reduce/results/pipeline.json) records timing,
+CPU/RSS, source hashes, chart conditions and explicit rejection statuses.
+Run `PYTHONPATH=delivery python -B -m lie_reduce.run --catalogue --stage-seconds 15`
+and `PYTHONPATH=delivery python -B -m lie_reduce.test_pipeline`.
+
+The new degree-two search is replayed at m=1,2,3,4; it does not replace the
+all-real-m smooth-class proofs. Appendix B supplies the catalogue rather than
+being automatically discovered. The E2 rank-two section is supplied explicitly;
+no two-dimensional optimal-system completeness is claimed. N3 remains an
+implicit critical task until a separately verified BB operator is available.
+The manuscript and existing numerical tables are not changed by this stage.
