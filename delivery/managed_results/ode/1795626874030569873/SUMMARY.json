@@ -1,0 +1,127 @@
+[
+  {
+    "task": "N1",
+    "method": "taylor",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 6,
+      "max_steps": 5,
+      "max_training_cpu_seconds": 2.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.015339700039476156,
+      "user_cpu_seconds": 0.015288999999999997,
+      "system_cpu_seconds": 4.900000000000043e-05,
+      "process_peak_rss_bytes": 451710976
+    },
+    "verification_wall_seconds": 0.06615795299876481,
+    "termination": "requested_degree",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "chebyshev",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 6,
+      "max_steps": 5,
+      "max_training_cpu_seconds": 2.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.05320237996056676,
+      "user_cpu_seconds": 0.041686,
+      "system_cpu_seconds": 0.010969,
+      "process_peak_rss_bytes": 451710976
+    },
+    "verification_wall_seconds": 0.03413853095844388,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "pinn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 6,
+      "max_steps": 5,
+      "max_training_cpu_seconds": 2.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.9575716349063441,
+      "user_cpu_seconds": 0.8347429999999999,
+      "system_cpu_seconds": 0.061099,
+      "process_peak_rss_bytes": 451710976
+    },
+    "verification_wall_seconds": 0.5806906960206106,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "lnn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 6,
+      "max_steps": 5,
+      "max_training_cpu_seconds": 2.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.016015177010558546,
+      "user_cpu_seconds": 0.015006000000000075,
+      "system_cpu_seconds": 0.0010010000000000019,
+      "process_peak_rss_bytes": 451710976
+    },
+    "verification_wall_seconds": 1.3303121699718758,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "prefix",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 6,
+      "max_steps": 5,
+      "max_training_cpu_seconds": 2.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.03862902196124196,
+      "user_cpu_seconds": 0.03346500000000008,
+      "system_cpu_seconds": 0.003018999999999994,
+      "process_peak_rss_bytes": 451710976
+    },
+    "verification_wall_seconds": 0.6861131939804181,
+    "termination": "step_budget",
+    "verification": "approximation"
+  }
+]

@@ -236,7 +236,7 @@ def material_scaling(generator):
     flux = (hydro+transport.subs(velocity, F-z*P))*C
     difference = (pulled-profile_total(flux)).subs(F, velocity+z*P)
     _require(sp.factor(sp.expand(difference)) == 0, "full material first integral")
-    return {"velocity": str(F-z*P), "leading": str(hydro+transport),
+    return {"velocity": str(F-z*P), "bindings": {"V": str(F-z*P)}, "leading": str(hydro+transport),
             "first_integral": str(C*(hydro+transport))}
 
 

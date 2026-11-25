@@ -1,0 +1,64 @@
+{
+  "schema": "Definition 6.1 method record",
+  "task": "N2",
+  "method": "analytic",
+  "settings": {
+    "seed": 27,
+    "degree": 10,
+    "max_steps": 8000,
+    "max_training_cpu_seconds": 150,
+    "device": "CPU",
+    "dtype": "exact symbolic",
+    "threads": 1,
+    "run_class": "budgeted_run",
+    "training_used": false
+  },
+  "candidate": {
+    "representation": "implicit",
+    "expression": "(y**2*(-5*s - 192*y - 16*log(y) - log(65536) + 416) - 80)/(5*y**2)",
+    "status": "symbolic_quadrature",
+    "conditions": [
+      "dG/dy != 0",
+      "declared positive solution branch"
+    ],
+    "termination": "exact antiderivative"
+  },
+  "verification": {
+    "status": "exact_implicit_solution",
+    "symbolic_substitution": {
+      "status": "proved_zero",
+      "normal_form": "0"
+    },
+    "symbolic_trace": {
+      "status": "proved_zero",
+      "normal_form": "0"
+    },
+    "nonvanishing_required": "(y**2*(-192 - 16/y) + 2*y*(-5*s - 192*y - 16*log(y) - log(65536) + 416))/(5*y**2) - 2*(y**2*(-5*s - 192*y - 16*log(y) - log(65536) + 416) - 80)/(5*y**3)",
+    "conditions": [
+      "dG/dy != 0",
+      "declared positive solution branch"
+    ],
+    "verifier": "independent_verifier.v1",
+    "paper_sha256": "c395645285cc1fe2ad7bbffbaa1f7051111220c4a102fa695165003faf824f87",
+    "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+  },
+  "cost": {
+    "wall_seconds": 0.10495492292102426,
+    "user_cpu_seconds": 0.102964,
+    "system_cpu_seconds": 0.001986999999999999,
+    "process_peak_rss_bytes": 451710976
+  },
+  "verification_wall_seconds": 0.049511837074533105,
+  "training_input_fields": [
+    "id",
+    "initial",
+    "interval",
+    "operator",
+    "physical_scale",
+    "residual",
+    "residual_denominator",
+    "residual_numerator"
+  ],
+  "continuous_neural_certificate": false,
+  "metadata_correction": "Arithmetic label corrected after replay; coefficients, verification and timings unchanged."
+}

@@ -1,0 +1,1 @@
+{"success": true, "output": "/home/carl/research/projects/Lie-ML_PDES/delivery/nonlinear_results/m0/audit/annular", "nodes": ["nonlinear-1-determine_shared_affine", "nonlinear-2-derive_invariants", "nonlinear-3-replay_reduction", "nonlinear-4-check_cartesian"]}

@@ -1,0 +1,64 @@
+{
+  "schema": "Definition 6.1 method record",
+  "task": "N1",
+  "method": "analytic",
+  "settings": {
+    "seed": 27,
+    "degree": 10,
+    "max_steps": 8000,
+    "max_training_cpu_seconds": 150,
+    "device": "CPU",
+    "dtype": "exact symbolic",
+    "threads": 1,
+    "run_class": "budgeted_run",
+    "training_used": false
+  },
+  "candidate": {
+    "representation": "implicit",
+    "expression": "-s - 5*y**2/4 + 5/4",
+    "status": "symbolic_quadrature",
+    "conditions": [
+      "dG/dy != 0",
+      "declared positive solution branch"
+    ],
+    "termination": "exact antiderivative"
+  },
+  "verification": {
+    "status": "exact_implicit_solution",
+    "symbolic_substitution": {
+      "status": "proved_zero",
+      "normal_form": "0"
+    },
+    "symbolic_trace": {
+      "status": "proved_zero",
+      "normal_form": "0"
+    },
+    "nonvanishing_required": "-5*y/2",
+    "conditions": [
+      "dG/dy != 0",
+      "declared positive solution branch"
+    ],
+    "verifier": "independent_verifier.v1",
+    "paper_sha256": "870d0d0cdb55dd8e1ad9aceb93c10322cfc11323e062391787d67108fc97bc11",
+    "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+  },
+  "cost": {
+    "wall_seconds": 0.06428813503589481,
+    "user_cpu_seconds": 0.063292,
+    "system_cpu_seconds": 0.0009970000000000014,
+    "process_peak_rss_bytes": 73310208
+  },
+  "verification_wall_seconds": 0.0018416709499433637,
+  "training_input_fields": [
+    "id",
+    "initial",
+    "interval",
+    "operator",
+    "physical_scale",
+    "residual",
+    "residual_denominator",
+    "residual_numerator"
+  ],
+  "continuous_neural_certificate": false,
+  "metadata_correction": "Arithmetic label corrected after replay; coefficients, verification and timings unchanged."
+}

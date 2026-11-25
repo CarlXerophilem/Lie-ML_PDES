@@ -1,0 +1,71 @@
+{
+  "schema": "Definition 6.1 method record",
+  "task": "N1",
+  "method": "chebyshev",
+  "settings": {
+    "seed": 27,
+    "degree": 6,
+    "max_steps": 5,
+    "max_training_cpu_seconds": 2.0,
+    "device": "CPU",
+    "dtype": "float64",
+    "threads": 1,
+    "run_class": "pilot"
+  },
+  "candidate": {
+    "representation": "polynomial",
+    "coefficients": [
+      "0.9999999999999992",
+      "-0.38932438980770984",
+      "-0.20377387395097524",
+      "0.5045281946277286",
+      "-1.086619102820867",
+      "1.000457028410207",
+      "-0.37771009383656556"
+    ],
+    "status": "residual_tolerance",
+    "degree": 6,
+    "iterations": 6,
+    "collocation_residual_max": 4.9649173661237e-13,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "nodes": [
+      1.0,
+      0.9330127018922194,
+      0.75,
+      0.5,
+      0.2500000000000001,
+      0.06698729810778065,
+      0.0
+    ]
+  },
+  "verification": {
+    "status": "approximation",
+    "symbolic_substitution": true,
+    "symbolic_trace": {
+      "status": "not_proved",
+      "residual": "-1/1250000000000000"
+    },
+    "symbolic_residual": "267496715598800926192942680333963*s**11/125000000000000000000000000000000 - 103917747472074476145472225384503*s**10/10000000000000000000000000000000 + 45544206806938261166879903648251*s**9/2000000000000000000000000000000 - 718695624576353714478793100956509*s**8/25000000000000000000000000000000 + 1465120955881875279668583894826793*s**7/62500000000000000000000000000000 - 1323536433598114061004068071398871*s**6/125000000000000000000000000000000 - 313885111704828731126859008341779*s**5/50000000000000000000000000000000 + 165086835354069686444035948628227*s**4/10000000000000000000000000000000 - 1577852923103247581227141496036619*s**3/125000000000000000000000000000000 + 547370937902292010096589096963889*s**2/125000000000000000000000000000000 - 39995979281688211314817339501061*s/62500000000000000000000000000000 + 166806409254538616554872596373/6250000000000000000000000000000",
+    "continuous_error_bound": null,
+    "scope": "exact rational interpretation of recorded polynomial coefficients",
+    "verifier": "independent_verifier.v1",
+    "paper_sha256": "54b04948a7a7ba4ab59828cf032882490e16edf1191750676de929af1b434e51",
+    "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+  },
+  "cost": {
+    "wall_seconds": 0.05320237996056676,
+    "user_cpu_seconds": 0.041686,
+    "system_cpu_seconds": 0.010969,
+    "process_peak_rss_bytes": 451710976
+  },
+  "verification_wall_seconds": 0.03413853095844388,
+  "training_input_fields": [
+    "id",
+    "initial",
+    "interval",
+    "operator",
+    "physical_scale",
+    "residual"
+  ],
+  "continuous_neural_certificate": false
+}

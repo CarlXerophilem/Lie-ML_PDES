@@ -1,0 +1,12 @@
+{
+  "children_peak_rss_bytes": 97046528,
+  "command": [
+    "/home/carl/research/projects/Lie-ML_PDES/build/nonlinear-env/bin/python",
+    "-B",
+    "delivery/ml_new_model2026.py"
+  ],
+  "exit_code": 0,
+  "system_cpu_seconds": 0.018645999999999996,
+  "user_cpu_seconds": 1.2679399999999998,
+  "wall_seconds": 1.2431315620196983
+}

@@ -1063,7 +1063,7 @@ def compute_ode_series(case, exponent=3, order=6, *, z0=None,
     f0,p0,c0 = map(_series_rational, initial_jet)
     result = {'case':case,'m':exponent,'order':order,'z0':z0,
               'initial_jet':(f0,p0,c0),'g':gv,'kappa':kv,
-              'alpha':alpha,'alpha3':alpha3,'polynomial':None,
+              'alpha':alpha,'alpha3':alpha3,'mix_alpha':sp.sympify(mix_alpha),'polynomial':None,
               'coefficients':[],'verification':None,'leading_at_initial':None,
               'assumptions':['printed scalar equation','real local chart'],
               'local_existence':None}
@@ -1290,7 +1290,14 @@ def main():
     from hashlib import sha256
     source = (Path(__file__).resolve().parents[1] / "ref" /
               "Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables.pdf")
+    # Prefer the canonical flat reference directory; retain read compatibility
+    # with the user's existing reference library without silently changing PDFs.
+    if not source.exists():
+        source = source.parent / "main" / source.name
     evidence["primary_pdf_sha256"] = sha256(source.read_bytes()).hexdigest()
+    if evidence["primary_pdf_sha256"] != "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5":
+        raise ValueError("primary PDF differs from the audited publisher v3")
+    evidence["primary_pdf_path"] = str(source.relative_to(Path(__file__).resolve().parents[1]))
     evidence["scope"] = "All nine printed section entries; exact regular initial-jet examples and selected singular branches"
     emit(evidence,opts.output)
     if opts.output:

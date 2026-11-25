@@ -1,0 +1,502 @@
+[
+  {
+    "task": "N1",
+    "method": "taylor",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.015170074068009853,
+      "user_cpu_seconds": 0.015158999999999992,
+      "system_cpu_seconds": 0.0,
+      "process_peak_rss_bytes": 69357568
+    },
+    "verification_wall_seconds": 0.016006159014068544,
+    "termination": "requested_degree",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "chebyshev",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.05188830103725195,
+      "user_cpu_seconds": 0.04772399999999999,
+      "system_cpu_seconds": 0.004149000000000002,
+      "process_peak_rss_bytes": 102486016
+    },
+    "verification_wall_seconds": 0.01278128195554018,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "pinn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.8892930400324985,
+      "user_cpu_seconds": 0.8405560000000001,
+      "system_cpu_seconds": 0.046855999999999995,
+      "process_peak_rss_bytes": 345767936
+    },
+    "verification_wall_seconds": 0.5685342340730131,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "lnn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.04838439298328012,
+      "user_cpu_seconds": 0.046386999999999956,
+      "system_cpu_seconds": 0.0020000000000000018,
+      "process_peak_rss_bytes": 354078720
+    },
+    "verification_wall_seconds": 1.2944663610542193,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N1",
+    "method": "prefix",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.12260688899550587,
+      "user_cpu_seconds": 0.1167060000000002,
+      "system_cpu_seconds": 0.005909999999999999,
+      "process_peak_rss_bytes": 366247936
+    },
+    "verification_wall_seconds": 0.5859838280593976,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N2",
+    "method": "taylor",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.012011195998638868,
+      "user_cpu_seconds": 0.012010000000000076,
+      "system_cpu_seconds": 0.0,
+      "process_peak_rss_bytes": 366247936
+    },
+    "verification_wall_seconds": 0.019343410967849195,
+    "termination": "requested_degree",
+    "verification": "approximation"
+  },
+  {
+    "task": "N2",
+    "method": "chebyshev",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.006052130949683487,
+      "user_cpu_seconds": 0.006049999999999667,
+      "system_cpu_seconds": 1.000000000001e-06,
+      "process_peak_rss_bytes": 366247936
+    },
+    "verification_wall_seconds": 0.01811934693250805,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "verification": "approximation"
+  },
+  {
+    "task": "N2",
+    "method": "pinn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.024747931980527937,
+      "user_cpu_seconds": 0.02474899999999991,
+      "system_cpu_seconds": 0.0,
+      "process_peak_rss_bytes": 366247936
+    },
+    "verification_wall_seconds": 0.6683479869971052,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N2",
+    "method": "lnn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.049113968038000166,
+      "user_cpu_seconds": 0.049112000000000045,
+      "system_cpu_seconds": 0.0,
+      "process_peak_rss_bytes": 366247936
+    },
+    "verification_wall_seconds": 1.301784593029879,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N2",
+    "method": "prefix",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.1266151909949258,
+      "user_cpu_seconds": 0.11758600000000019,
+      "system_cpu_seconds": 0.00902,
+      "process_peak_rss_bytes": 368447488
+    },
+    "verification_wall_seconds": 0.5855181809747592,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3minus",
+    "method": "taylor",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 8.260009198915213,
+      "user_cpu_seconds": 8.24946,
+      "system_cpu_seconds": 0.010043999999999997,
+      "process_peak_rss_bytes": 368447488
+    },
+    "verification_wall_seconds": 4.826069199014455,
+    "termination": "requested_degree",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3minus",
+    "method": "chebyshev",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.7261260220548138,
+      "user_cpu_seconds": 0.7160589999999978,
+      "system_cpu_seconds": 0.010032999999999986,
+      "process_peak_rss_bytes": 368447488
+    },
+    "verification_wall_seconds": 4.3849996839417145,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3minus",
+    "method": "pinn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.342260655015707,
+      "user_cpu_seconds": 0.3325810000000011,
+      "system_cpu_seconds": 0.00970500000000002,
+      "process_peak_rss_bytes": 368447488
+    },
+    "verification_wall_seconds": 0.9781096510123461,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3minus",
+    "method": "lnn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.35377455898560584,
+      "user_cpu_seconds": 0.343669000000002,
+      "system_cpu_seconds": 0.010019,
+      "process_peak_rss_bytes": 373690368
+    },
+    "verification_wall_seconds": 1.709665947011672,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3minus",
+    "method": "prefix",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 2.6156923049129546,
+      "user_cpu_seconds": 2.599865000000001,
+      "system_cpu_seconds": 0.01599299999999998,
+      "process_peak_rss_bytes": 398725120
+    },
+    "verification_wall_seconds": 1.0207630699733272,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3plus",
+    "method": "taylor",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 8.308808550937101,
+      "user_cpu_seconds": 8.301748000000003,
+      "system_cpu_seconds": 0.006964999999999999,
+      "process_peak_rss_bytes": 398725120
+    },
+    "verification_wall_seconds": 4.820023481966928,
+    "termination": "requested_degree",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3plus",
+    "method": "chebyshev",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.6152904030168429,
+      "user_cpu_seconds": 0.6000159999999966,
+      "system_cpu_seconds": 0.015065999999999968,
+      "process_peak_rss_bytes": 398725120
+    },
+    "verification_wall_seconds": 4.372827892075293,
+    "termination": "nonlinear Newton with residual test and backtracking",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3plus",
+    "method": "pinn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.34321356599684805,
+      "user_cpu_seconds": 0.33422099999999944,
+      "system_cpu_seconds": 0.00900899999999999,
+      "process_peak_rss_bytes": 398725120
+    },
+    "verification_wall_seconds": 1.091912217088975,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3plus",
+    "method": "lnn",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 0.35484806005842984,
+      "user_cpu_seconds": 0.3478409999999954,
+      "system_cpu_seconds": 0.007019999999999971,
+      "process_peak_rss_bytes": 398725120
+    },
+    "verification_wall_seconds": 1.729974507004954,
+    "termination": "step_budget",
+    "verification": "approximation"
+  },
+  {
+    "task": "N3plus",
+    "method": "prefix",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 8,
+      "max_steps": 20,
+      "max_training_cpu_seconds": 3.0,
+      "device": "CPU",
+      "dtype": "float64",
+      "threads": 1,
+      "run_class": "pilot"
+    },
+    "cost": {
+      "wall_seconds": 2.4906801549950615,
+      "user_cpu_seconds": 2.4673110000000023,
+      "system_cpu_seconds": 0.023065999999999975,
+      "process_peak_rss_bytes": 403042304
+    },
+    "verification_wall_seconds": 1.1307076490484178,
+    "termination": "step_budget",
+    "verification": "approximation"
+  }
+]

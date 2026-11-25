@@ -1,0 +1,18 @@
+{
+  "children_peak_rss_bytes": 98791424,
+  "command": [
+    "/home/carl/research/projects/Lie-ML_PDES/build/nonlinear-env/bin/python",
+    "-B",
+    "delivery/annular-transcritical-theorem-20261101/replay.py",
+    "--out",
+    "/home/carl/research/projects/Lie-ML_PDES/delivery/nonlinear_results/m0/audit/annular",
+    "--campaign",
+    "/home/carl/research/projects/Lie-ML_PDES/delivery/nonlinear_results/m0/audit/campaign",
+    "--prefix",
+    "nonlinear"
+  ],
+  "exit_code": 0,
+  "system_cpu_seconds": 0.20068999999999998,
+  "user_cpu_seconds": 68.74373899999999,
+  "wall_seconds": 68.4054153719917
+}

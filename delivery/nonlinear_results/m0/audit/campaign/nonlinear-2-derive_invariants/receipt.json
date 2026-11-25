@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "/home/carl/research/projects/Lie-ML_PDES/build/nonlinear-env/bin/python",
+    "-B",
+    "/home/carl/research/projects/Lie-ML_PDES/delivery/nonlinear_results/m0/audit/annular/src/derive_invariants.py"
+  ],
+  "cwd": "/home/carl/research/projects/Lie-ML_PDES",
+  "runner_sha256": "70b1d2b3b45554da8867be32f600044a12164addcf5c5ee98f4b43df598a341a",
+  "start_utc": "2026-11-25T14:40:58.487864+00:00",
+  "timeout_seconds": 300,
+  "cpu_affinity": [
+    0
+  ],
+  "memory_budget_bytes": 4294967296,
+  "clock_ticks_per_second": 100,
+  "poll_interval_seconds": 0.05,
+  "thread_accounting_complete": false,
+  "parallel_enabled": false,
+  "mathematical_acceptance": false,
+  "pid": 3726054,
+  "stdout_bytes": 149,
+  "stderr_bytes": 0,
+  "exit_reason": "exited",
+  "returncode": 0,
+  "elapsed_seconds": 0.40379267802927643,
+  "user_seconds": 0.346715,
+  "system_seconds": 0.017984999999999998,
+  "wait4_maxrss_bytes": 74682368,
+  "sampled_tree_peak_rss_bytes": 74678272,
+  "cleanup_confirmed": true,
+  "output_complete": true,
+  "limitations": [
+    "Per-thread lifetimes and CPU migration between polls are not observed",
+    "wait4 CPU totals include only descendants waited for by their parent",
+    "RSS sum is sampled and can count shared pages more than once"
+  ]
+}

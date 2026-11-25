@@ -1,0 +1,373 @@
+{
+  "status": "INVARIANTS_AND_GRAPH_RECONSTRUCTION_DERIVED_FROM_DETERMINED_GENERATORS",
+  "source_sha256": "3f1af01e72e99d467b7ca7dc7bc1cfb493284c955c979c169d8f39e817925f5d",
+  "source_result_sha256": "de440865bb0250c22efc5a83d34753beffaf7b7dda499933fadf7683fbd6497b",
+  "selected_indices": {
+    "time": 0,
+    "rotation": 3,
+    "bed_translation": 4
+  },
+  "selection_boundary": "A useful subalgebra is chosen from returned generators; no optimal-subalgebra classification is asserted.",
+  "rotation": [
+    "0",
+    "-y",
+    "x",
+    "0",
+    "-v",
+    "u",
+    "0"
+  ],
+  "relative_time": [
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "c"
+  ],
+  "bracket": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "linear_invariants": [
+    "B",
+    "h",
+    "t"
+  ],
+  "invariant_solve_ledger": [
+    {
+      "monomials": [
+        "B",
+        "h",
+        "t",
+        "u",
+        "v",
+        "x",
+        "y"
+      ],
+      "matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "kernel": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "parameter_dependent_pivots": false
+    },
+    {
+      "monomials": [
+        "u**2",
+        "v**2",
+        "x**2",
+        "y**2",
+        "u*v",
+        "u*x",
+        "u*y",
+        "v*x",
+        "v*y",
+        "x*y"
+      ],
+      "matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "-2",
+          "2",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "-2",
+          "2",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "kernel": [
+        [
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "parameter_dependent_pivots": false
+    },
+    {
+      "monomials": [
+        "t",
+        "B"
+      ],
+      "matrix": [
+        [
+          "1",
+          "c"
+        ]
+      ],
+      "kernel": [
+        [
+          "-c",
+          "1"
+        ]
+      ],
+      "pivot": "1 in the t column; no division by c",
+      "parameter_strata": "all real c, including c=0"
+    }
+  ],
+  "quadratic_invariants": [
+    "u**2 + v**2",
+    "x**2 + y**2",
+    "-u*y + v*x",
+    "u*x + v*y"
+  ],
+  "radius_squared": "x**2 + y**2",
+  "radial_numerator": "u*x + v*y",
+  "angular_numerator": "-u*y + v*x",
+  "bed_invariant": "B - c*t",
+  "radius_choice": "r=sqrt(radius_squared)>0",
+  "adapted_coordinate_map": [
+    "t",
+    "r*cos(epsilon)",
+    "r*sin(epsilon)",
+    "H",
+    "V*cos(epsilon) - W*sin(epsilon)",
+    "V*sin(epsilon) + W*cos(epsilon)",
+    "Z + c*t"
+  ],
+  "adapted_coordinate_jacobian": "r",
+  "graph_forms": {
+    "h": "H(r)",
+    "u": "(x*V(r) - y*W(r))/r",
+    "v": "(x*W(r) + y*V(r))/r",
+    "B": "c*t + Z(r)"
+  },
+  "arbitrary_functions": [
+    "H(r)",
+    "V(r)",
+    "W(r)",
+    "Z(r)"
+  ],
+  "guards": [
+    "r>0; axis is a separate orbit-rank stratum",
+    "joint base and total orbit rank both equal two"
+  ],
+  "not_claimed": [
+    "preservation of arbitrary boundaries/data",
+    "maximal Lie algebra",
+    "optimal-subalgebra completeness"
+  ]
+}

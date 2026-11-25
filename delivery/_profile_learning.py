@@ -73,6 +73,8 @@ def operator(case, jets, z):
 
 
 def liquid_model(case,z,p,params,width):
+    # The affine readout exactly matches all four tasks' affine dependence on
+    # trace data. This tests interpolation in the trace, not nonlinear transfer.
     x=np.ravel(z-case.left)
     p=np.broadcast_to(p,z.shape).ravel()
     lo,hi=case.trace_interval
@@ -108,6 +110,8 @@ def fit_liquid(case,settings):
     def predict(z,p):
         return liquid_model(case,np.asarray(z),p,fit.x,w)
     return predict, {"nfev":fit.nfev,"parameters":len(initial),
+                     "status":"budget_exhausted" if fit.status == 0 else "optimizer_terminated",
+                     "interpretation":"fixed-budget approximation; no convergence claim",
                      "optimizer_status":fit.status,
                      "sample_train_rms":float(np.sqrt(np.mean(fit.fun**2)))}
 
@@ -192,7 +196,13 @@ def compare(case,settings=Settings()):
                 "trace_error_maximum":v["trace_error"],
                 "setup_and_prediction_seconds_all_traces":v["seconds"]}
              for k,v in logs.items()}
+    # Keep historical metric keys for regression. The displayed method name is
+    # adapted gated cell, not the original LNN-PINN architecture.
     return {"case":case.name,"settings":asdict(settings),"fit":fit,
+            "method_display_name":"adapted gated cell",
+            "trace_dependence":"affine interpolation; not nonlinear parameter learning",
+            "residual_orders":{"training":2,"diagnostic":3} if "P at m=1" in case.name
+                              else {"training":1,"diagnostic":1},
             "test_traces":traces.tolist(),"metrics":metrics}
 
 

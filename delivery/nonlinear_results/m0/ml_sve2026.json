@@ -1,0 +1,114 @@
+[
+  {
+    "case": "2026 P at m=1",
+    "settings": {
+      "seed": 27,
+      "width": 6,
+      "chebyshev_degree": 15,
+      "taylor_degree": 22,
+      "train_coordinates": 24,
+      "test_coordinates": 401,
+      "max_nfev": 150
+    },
+    "fit": {
+      "nfev": 150,
+      "parameters": 66,
+      "status": "budget_exhausted",
+      "interpretation": "fixed-budget approximation; no convergence claim",
+      "optimizer_status": 0,
+      "sample_train_rms": 1.9408581692530676e-05,
+      "elapsed_seconds": 1.126391225028783
+    },
+    "method_display_name": "adapted gated cell",
+    "trace_dependence": "affine interpolation; not nonlinear parameter learning",
+    "residual_orders": {
+      "training": 2,
+      "diagnostic": 3
+    },
+    "test_traces": [
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "metrics": {
+      "LNN-PINN": {
+        "field_rms": 6.176826300909146e-07,
+        "field_maximum": 1.295916603805125e-06,
+        "original_residual_maximum": 0.011698734927350074,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.0011713131098076701
+      },
+      "Chebyshev": {
+        "field_rms": 1.666939572341479e-15,
+        "field_maximum": 3.1086244689504383e-15,
+        "original_residual_maximum": 4.851202772826468e-10,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.008742097998037934
+      },
+      "Taylor": {
+        "field_rms": 1.289871522513012e-09,
+        "field_maximum": 3.6278215986840223e-09,
+        "original_residual_maximum": 1.902580261226028e-05,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.002508818986825645
+      }
+    }
+  },
+  {
+    "case": "2026 M to E1 at m=2",
+    "settings": {
+      "seed": 27,
+      "width": 6,
+      "chebyshev_degree": 15,
+      "taylor_degree": 22,
+      "train_coordinates": 24,
+      "test_coordinates": 401,
+      "max_nfev": 150
+    },
+    "fit": {
+      "nfev": 150,
+      "parameters": 66,
+      "status": "budget_exhausted",
+      "interpretation": "fixed-budget approximation; no convergence claim",
+      "optimizer_status": 0,
+      "sample_train_rms": 2.4999528120502504e-07,
+      "elapsed_seconds": 1.0132361269788817
+    },
+    "method_display_name": "adapted gated cell",
+    "trace_dependence": "affine interpolation; not nonlinear parameter learning",
+    "residual_orders": {
+      "training": 1,
+      "diagnostic": 1
+    },
+    "test_traces": [
+      1.05,
+      1.15,
+      1.25,
+      1.3499999999999999
+    ],
+    "metrics": {
+      "LNN-PINN": {
+        "field_rms": 2.447576229213154e-08,
+        "field_maximum": 7.640044796808354e-08,
+        "original_residual_maximum": 3.5751335315248326e-07,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.0012975840363651514
+      },
+      "Chebyshev": {
+        "field_rms": 8.599452706934262e-17,
+        "field_maximum": 4.440892098500626e-16,
+        "original_residual_maximum": 3.191891195797325e-16,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.010054752114228904
+      },
+      "Taylor": {
+        "field_rms": 9.687799744527783e-17,
+        "field_maximum": 4.440892098500626e-16,
+        "original_residual_maximum": 0.0,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.0009534289129078388
+      }
+    }
+  }
+]

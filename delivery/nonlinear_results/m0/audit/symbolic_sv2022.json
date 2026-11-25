@@ -1,0 +1,182 @@
+{
+  "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
+  "coordinate_order": [
+    "t",
+    "x",
+    "h",
+    "u",
+    "B"
+  ],
+  "m2_bed_drift_quotient": "K*Y' + b = 0; Y=u^2, h=1/u, B=bt+2-Y/2-h, g=1",
+  "m2_remaining_residual": "K*Derivative(Y(x), x) + b",
+  "optimal_lines_layout": {
+    "cubic_scaling": "H=aD+bS, projective (a:b). Normalize a=1 if a!=0, else b=1. For every zero weight in (-(a+b),-a,2b), append c times the corresponding T,X,Z with c=0,+1,-1.",
+    "cubic_translations": "Each nonempty support of T,X,Z with unit coefficients; signs modulo global sign.",
+    "generic_scaling": "D+cZ, c real",
+    "generic_translations": "RP1 in (T,X); Z; Z+cos(theta)T+sin(theta)X",
+    "names": "T=dt; X=dx; Z=dB; D=t*dt+x*dx; S=t*dt-2h*dh-u*du-2B*dB"
+  },
+  "scope": "Local smooth point symmetries, all real m>=1, K,g,h,u>0",
+  "strata": {
+    "positive_cubic": {
+      "basis": {
+        "bed_translation": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "common_base_scaling": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ],
+        "relative_scaling": [
+          "t",
+          "0",
+          "-2*h",
+          "-u",
+          "-2*B"
+        ],
+        "space_translation": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "time_translation": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "brackets": {
+        "[bed_translation,relative_scaling]": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-2"
+        ],
+        "[common_base_scaling,space_translation]": [
+          "0",
+          "-1",
+          "0",
+          "0",
+          "0"
+        ],
+        "[common_base_scaling,time_translation]": [
+          "-1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "[relative_scaling,bed_translation]": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "2"
+        ],
+        "[relative_scaling,time_translation]": [
+          "-1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "[space_translation,common_base_scaling]": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "[time_translation,common_base_scaling]": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "[time_translation,relative_scaling]": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "positive_generic": {
+      "basis": {
+        "bed_translation": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "common_base_scaling": [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ],
+        "space_translation": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "time_translation": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "brackets": {
+        "[common_base_scaling,space_translation]": [
+          "0",
+          "-1",
+          "0",
+          "0",
+          "0"
+        ],
+        "[common_base_scaling,time_translation]": [
+          "-1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "[space_translation,common_base_scaling]": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "[time_translation,common_base_scaling]": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    }
+  },
+  "verified_proof_identities": 39
+}

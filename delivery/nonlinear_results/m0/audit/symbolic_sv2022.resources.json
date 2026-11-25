@@ -1,0 +1,12 @@
+{
+  "children_peak_rss_bytes": 72851456,
+  "command": [
+    "/home/carl/research/projects/Lie-ML_PDES/build/nonlinear-env/bin/python",
+    "-B",
+    "/home/carl/research/projects/Lie-ML_PDES/delivery/symbolic_sv2022.py"
+  ],
+  "exit_code": 0,
+  "system_cpu_seconds": 0.023895,
+  "user_cpu_seconds": 1.3649959999999999,
+  "wall_seconds": 1.3946430300129578
+}
