@@ -27,6 +27,7 @@ This dissertation studies Saint–Venant–Exner systems through exact symmetry 
 
 ## Active delivery
 
+- [Managed symbolic and numerical workflow](delivery/MANAGED_SOLVERS.md): independent two-input verifier, pure-SymPy PDE manager, five-method ODE manager and recorded pilot diagnostics. Commercial CAS feature parity is not established.
 - [Symbolic Eulerian classification](delivery/symbolic_sv2022.py), [scalar and material certificates](delivery/symbolic_sve2026.py), and [planar fixtures](delivery/symbolic_new_model2026.py).
 - [Published scalar reproduction](delivery/reproduce_sve2026.py) with an equation audit and symbolic series.
 - [Eulerian](delivery/ml_sv2022.py), [scalar and material](delivery/ml_sve2026.py), and [rotating exchange](delivery/ml_new_model2026.py) numerical comparisons.

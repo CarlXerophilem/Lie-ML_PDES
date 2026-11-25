@@ -1,0 +1,42 @@
+RUN delivery/test_managed_pipeline.py
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.977s
+
+OK
+RUN -m unittest discover -s delivery/lie_reduce -p test_*.py
+EE
+======================================================================
+ERROR: test_pipeline (unittest.loader._FailedTest.test_pipeline)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_pipeline
+Traceback (most recent call last):
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/home/carl/research/projects/Lie-ML_PDES/delivery/lie_reduce/test_pipeline.py", line 3, in <module>
+    from .models import scalar,euler
+ImportError: attempted relative import with no known parent package
+
+
+======================================================================
+ERROR: test_presentations (unittest.loader._FailedTest.test_presentations)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_presentations
+Traceback (most recent call last):
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/home/carl/research/projects/Lie-ML_PDES/delivery/lie_reduce/test_presentations.py", line 4, in <module>
+    from .jets import JetSpace
+ImportError: attempted relative import with no known parent package
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (errors=2)

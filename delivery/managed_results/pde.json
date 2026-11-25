@@ -1,0 +1,639 @@
+[
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "E1",
+      "parameter_bindings": {
+        "m": "2"
+      },
+      "symbols": [
+        "alpha",
+        "g",
+        "kappa",
+        "t",
+        "x",
+        "z"
+      ],
+      "profile_functions": [
+        "F0",
+        "F1",
+        "F2"
+      ],
+      "generators": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "alpha"
+        ]
+      ],
+      "invariant": "x",
+      "lifts": [
+        "F0(x)",
+        "F1(x)",
+        "alpha*t + F2(x)"
+      ],
+      "equations": [
+        "F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z)",
+        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z)",
+        "alpha + 2*kappa*F1(z)*Derivative(F1(z), z)"
+      ],
+      "weights": [
+        "1",
+        "1",
+        "1"
+      ],
+      "orbit_coordinates": {
+        "t": "orbit",
+        "x": "z"
+      },
+      "conditions": [
+        "h,u,g,kappa>0",
+        "m=2",
+        "1 != 0",
+        "local flow chart; logarithm arguments positive when used",
+        "F0(x) > 0",
+        "F1(x) > 0",
+        "g > 0",
+        "kappa > 0"
+      ],
+      "scope": "specified local invariant graph; not exhaustive reduction classification"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "1",
+          "nonzero": true
+        },
+        {
+          "weight": "1",
+          "nonzero": true
+        },
+        {
+          "weight": "1",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 1,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "da13e8b695172a521fdef9be40f98a873ec3226564f39c10703cf6597e8312b9",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  },
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "E1",
+      "parameter_bindings": {
+        "m": "3"
+      },
+      "symbols": [
+        "g",
+        "kappa",
+        "t",
+        "x",
+        "z"
+      ],
+      "profile_functions": [
+        "F0",
+        "F1",
+        "F2"
+      ],
+      "generators": [
+        [
+          "t",
+          "0",
+          "-2*h",
+          "-u",
+          "-2*B"
+        ]
+      ],
+      "invariant": "x",
+      "lifts": [
+        "F0(x)/t**2",
+        "F1(x)/t",
+        "F2(x)/t**2"
+      ],
+      "equations": [
+        "F0(z)*Derivative(F1(z), z) - 2*F0(z) + F1(z)*Derivative(F0(z), z)",
+        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) - F1(z)",
+        "3*kappa*F1(z)**2*Derivative(F1(z), z) - 2*F2(z)"
+      ],
+      "weights": [
+        "exp(-3*orbit)",
+        "exp(-2*orbit)",
+        "exp(-3*orbit)"
+      ],
+      "orbit_coordinates": {
+        "t": "exp(orbit)",
+        "x": "z"
+      },
+      "conditions": [
+        "h,u,g,kappa>0",
+        "m=3",
+        "t != 0",
+        "local flow chart; logarithm arguments positive when used",
+        "F0(x)/t**2 > 0",
+        "F1(x)/t > 0",
+        "g > 0",
+        "kappa > 0"
+      ],
+      "scope": "specified local invariant graph; not exhaustive reduction classification"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "exp(-3*orbit)",
+          "nonzero": true
+        },
+        {
+          "weight": "exp(-2*orbit)",
+          "nonzero": true
+        },
+        {
+          "weight": "exp(-3*orbit)",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 1,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "da13e8b695172a521fdef9be40f98a873ec3226564f39c10703cf6597e8312b9",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  },
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "P",
+      "parameter_bindings": {
+        "m": "3"
+      },
+      "symbols": [
+        "g",
+        "kappa",
+        "s",
+        "t",
+        "z"
+      ],
+      "profile_functions": [
+        "F0"
+      ],
+      "generators": [
+        [
+          "t",
+          "-2*s",
+          "0"
+        ]
+      ],
+      "invariant": "s*t**2",
+      "lifts": [
+        "F0(s*t**2)"
+      ],
+      "equations": [
+        "-2*z*(12*g*kappa*z**2*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) + 12*g*kappa*z**2*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2))**2 + 60*g*kappa*z*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)) + 24*g*kappa*Derivative(F0(z), z)**5 + g*Derivative(F0(z), z)*Derivative(F0(z), (z, 3)) - 2*g*Derivative(F0(z), (z, 2))**2 - 4*z**2*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) - 4*z**2*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2))**2 - 12*z*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)) - 2*Derivative(F0(z), z)**5)/Derivative(F0(z), z)**3"
+      ],
+      "weights": [
+        "exp(-orbit)"
+      ],
+      "orbit_coordinates": {
+        "t": "exp(orbit)",
+        "s": "z*exp(-2*orbit)"
+      },
+      "conditions": [
+        "phi_t>0",
+        "phi_s>0",
+        "g,kappa>0",
+        "m=3",
+        "t != 0",
+        "local flow chart; logarithm arguments positive when used",
+        "2*s*t*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s*t**2) > 0",
+        "t**2*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s*t**2) > 0",
+        "g > 0",
+        "kappa > 0"
+      ],
+      "scope": "specified local invariant graph; not exhaustive reduction classification"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "exp(-orbit)",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 1,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "f12ecafc8476d2229faaa31aa33f80ccecc8c96db7c56d8a97b82c3b89871454",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  },
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "M",
+      "parameter_bindings": {
+        "m": "2"
+      },
+      "symbols": [
+        "g",
+        "kappa",
+        "s",
+        "t",
+        "z"
+      ],
+      "profile_functions": [
+        "F0"
+      ],
+      "generators": [
+        [
+          "t",
+          "s",
+          "phi"
+        ]
+      ],
+      "invariant": "s/t",
+      "lifts": [
+        "t*F0(s/t)"
+      ],
+      "equations": [
+        "-(2*g*kappa*z**2*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) - 2*g*kappa*z*F0(z)*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 3)) + 2*g*kappa*z*F0(z)*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2))**2 + 2*g*kappa*z*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)) - 2*g*kappa*F0(z)*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2)) - g*F0(z)*Derivative(F0(z), z)*Derivative(F0(z), (z, 3)) + 3*g*F0(z)*Derivative(F0(z), (z, 2))**2 - g*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2)) + z**2*F0(z)*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) + z**2*Derivative(F0(z), z)**5*Derivative(F0(z), (z, 2)) + 2*z*F0(z)*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)))/Derivative(F0(z), z)**4"
+      ],
+      "weights": [
+        "exp(-2*orbit)"
+      ],
+      "orbit_coordinates": {
+        "t": "exp(orbit)",
+        "s": "z*exp(orbit)"
+      },
+      "conditions": [
+        "phi_t>0",
+        "phi_s>0",
+        "g,kappa>0",
+        "m=2",
+        "t != 0",
+        "local flow chart; logarithm arguments positive when used",
+        "-s*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s/t)/t + F0(s/t) > 0",
+        "Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s/t) > 0",
+        "g > 0",
+        "kappa > 0"
+      ],
+      "scope": "specified local invariant graph; not exhaustive reduction classification"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "exp(-2*orbit)",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 1,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "e4495079a8b3e937d68808e3cad056d8689143dfb0d4f2e03d5683662e54f4a3",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  },
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "M",
+      "parameter_bindings": {
+        "m": "2"
+      },
+      "symbols": [
+        "c",
+        "g",
+        "gamma",
+        "kappa",
+        "s",
+        "t",
+        "z"
+      ],
+      "profile_functions": [
+        "F0"
+      ],
+      "generators": [
+        [
+          "1",
+          "c",
+          "gamma"
+        ]
+      ],
+      "invariant": "-c*t + s",
+      "lifts": [
+        "gamma*t + F0(-c*t + s)"
+      ],
+      "equations": [
+        "-(2*c**2*g*kappa*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) + c**2*gamma*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) - 2*c*g*gamma*kappa*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 3)) + 2*c*g*gamma*kappa*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2))**2 - g*gamma*Derivative(F0(z), z)*Derivative(F0(z), (z, 3)) + 3*g*gamma*Derivative(F0(z), (z, 2))**2)/Derivative(F0(z), z)**4"
+      ],
+      "weights": [
+        "1"
+      ],
+      "orbit_coordinates": {
+        "t": "orbit",
+        "s": "c*orbit + z"
+      },
+      "conditions": [
+        "phi_t>0",
+        "phi_s>0",
+        "g,kappa>0",
+        "m=2",
+        "1 != 0",
+        "local flow chart; logarithm arguments positive when used",
+        "-c*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, -c*t + s) + gamma > 0",
+        "Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, -c*t + s) > 0",
+        "g > 0",
+        "kappa > 0"
+      ],
+      "scope": "specified local invariant graph; not exhaustive reduction classification"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "1",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 1,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "e4495079a8b3e937d68808e3cad056d8689143dfb0d4f2e03d5683662e54f4a3",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  },
+  {
+    "status": "computed",
+    "solver_output": {
+      "kind": "pde_reduction",
+      "model": "E2",
+      "parameter_bindings": {},
+      "symbols": [
+        "G",
+        "K",
+        "c",
+        "f",
+        "g",
+        "r",
+        "t",
+        "z"
+      ],
+      "profile_functions": [
+        "H",
+        "V",
+        "W",
+        "Z"
+      ],
+      "generators": [
+        [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "c"
+        ]
+      ],
+      "invariant": "r",
+      "lifts": [
+        "H(r)",
+        "V(r)",
+        "W(r)",
+        "c*t + Z(r)"
+      ],
+      "equations": [
+        "(z*H(z)*Derivative(V(z), z) + z*V(z)*Derivative(H(z), z) + H(z)*V(z))/z",
+        "-(f*z*W(z) - g*z*Derivative(H(z), z) - g*z*Derivative(Z(z), z) - z*V(z)*Derivative(V(z), z) + W(z)**2)/z",
+        "(f*z + z*Derivative(W(z), z) + W(z))*V(z)/z",
+        "(-G*z*V(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*V(z)*Derivative(V(z), z)*Derivative(Z(z), z) - G*z*W(z)**2*Derivative(Z(z), (z, 2)) - 2*G*z*W(z)*Derivative(W(z), z)*Derivative(Z(z), z) - G*V(z)**2*Derivative(Z(z), z) - G*W(z)**2*Derivative(Z(z), z) + 3*K*z*V(z)**2*Derivative(V(z), z) + 2*K*z*V(z)*W(z)*Derivative(W(z), z) + K*z*W(z)**2*Derivative(V(z), z) + K*V(z)**3 + K*V(z)*W(z)**2 + c*z)/z"
+      ],
+      "weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "orbit_coordinates": {},
+      "conditions": [
+        "r>0",
+        "h>0",
+        "g,K,G>0"
+      ],
+      "scope": "manual two-dimensional subalgebra; two-dimensional optimal system not computed"
+    },
+    "verification": {
+      "status": "verified_local_identities",
+      "checks": [
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        },
+        {
+          "status": "proved_zero",
+          "normal_form": "0"
+        }
+      ],
+      "weights": [
+        {
+          "weight": "1",
+          "nonzero": true
+        },
+        {
+          "weight": "1",
+          "nonzero": true
+        },
+        {
+          "weight": "1",
+          "nonzero": true
+        },
+        {
+          "weight": "1",
+          "nonzero": true
+        }
+      ],
+      "generic_base_orbit_rank": 2,
+      "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+      "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+      "verifier": "independent_verifier.v1",
+      "paper_sha256": "9509fa35101f33db2fe0f63418401cf7a6dcc4d766ed9121361eea394ccc15e2",
+      "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+    }
+  }
+]

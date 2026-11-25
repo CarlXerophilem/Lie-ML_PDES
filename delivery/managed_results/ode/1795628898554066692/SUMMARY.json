@@ -1,0 +1,28 @@
+[
+  {
+    "task": "N1",
+    "method": "analytic",
+    "status": null,
+    "reason": null,
+    "settings": {
+      "seed": 27,
+      "degree": 10,
+      "max_steps": 8000,
+      "max_training_cpu_seconds": 150,
+      "device": "CPU",
+      "dtype": "exact symbolic",
+      "training_used": false,
+      "threads": 1,
+      "run_class": "budgeted_run"
+    },
+    "cost": {
+      "wall_seconds": 0.0637289370642975,
+      "user_cpu_seconds": 0.058736999999999984,
+      "system_cpu_seconds": 0.004983999999999999,
+      "process_peak_rss_bytes": 72966144
+    },
+    "verification_wall_seconds": 0.008332166937179863,
+    "termination": "exact antiderivative",
+    "verification": "exact_implicit_solution"
+  }
+]

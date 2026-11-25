@@ -1,0 +1,142 @@
+{
+  "status": "computed",
+  "discovery": {
+    "full_prolongation_verified": true,
+    "symmetry_type": "point only",
+    "scope": "polynomial point coefficients on specified principal chart",
+    "degree": 2,
+    "basis": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "rank": 101,
+    "denominators": [
+      "1"
+    ],
+    "strata": {
+      "generic_rank": 101,
+      "status": "constant_rank"
+    }
+  },
+  "solver_output": {
+    "kind": "point_generators",
+    "model": "E1",
+    "parameter_bindings": {
+      "m": "2"
+    },
+    "generators": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ]
+  },
+  "verification": {
+    "status": "verified_generators_on_regular_chart",
+    "checks": [
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      }
+    ],
+    "principal_determinant_required_nonzero": "1",
+    "scope": "independent full characteristic prolongation sufficiency; does not prove basis completeness",
+    "verifier": "independent_verifier.v1",
+    "paper_sha256": "da13e8b695172a521fdef9be40f98a873ec3226564f39c10703cf6597e8312b9",
+    "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+  }
+}

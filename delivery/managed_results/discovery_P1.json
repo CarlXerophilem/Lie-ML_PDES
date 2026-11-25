@@ -1,0 +1,109 @@
+{
+  "status": "computed",
+  "discovery": {
+    "full_prolongation_verified": true,
+    "symmetry_type": "point only",
+    "scope": "polynomial point coefficients on specified principal chart",
+    "degree": 2,
+    "basis": [
+      [
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "t",
+        "s",
+        "phi"
+      ],
+      [
+        "0",
+        "0",
+        "t"
+      ]
+    ],
+    "rank": 25,
+    "denominators": [
+      "1",
+      "phi_0_1**4"
+    ],
+    "strata": {
+      "generic_rank": 25,
+      "status": "constant_rank"
+    }
+  },
+  "solver_output": {
+    "kind": "point_generators",
+    "model": "P",
+    "parameter_bindings": {
+      "m": "1"
+    },
+    "generators": [
+      [
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "t",
+        "s",
+        "phi"
+      ],
+      [
+        "0",
+        "0",
+        "t"
+      ]
+    ]
+  },
+  "verification": {
+    "status": "verified_generators_on_regular_chart",
+    "checks": [
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      },
+      {
+        "status": "proved_zero",
+        "normal_form": "0"
+      }
+    ],
+    "principal_determinant_required_nonzero": "j0_01",
+    "scope": "independent full characteristic prolongation sufficiency; does not prove basis completeness",
+    "verifier": "independent_verifier.v1",
+    "paper_sha256": "f12ecafc8476d2229faaa31aa33f80ccecc8c96db7c56d8a97b82c3b89871454",
+    "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred"
+  }
+}

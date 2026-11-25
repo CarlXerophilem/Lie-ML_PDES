@@ -124,3 +124,19 @@ equivalence records; unions retain every factor component. Fixed graphs are
 checked against every PDE after a full symmetry check, and rank-zero fixed
 loci are not mislabeled ODE reductions. See
 [the new negative controls](lie_reduce/test_presentations.py).
+
+
+## Unified managers and isolated verification
+
+[lie_pde_reducer.py](lie_pde_reducer.py) exposes
+`verifier(solver_output, paper_txt_respective)` through an independent checker
+that imports no PDE/ODE solver modules. It reads explicit paper transcriptions,
+checks manuscript freshness, and independently differentiates the lifted fields.
+[spinn_ode_solver.py](spinn_ode_solver.py) manages exact Taylor recurrence,
+nonlinear Chebyshev collocation, standard PINN, the adapted one-input LNN
+architecture, and the series-prefix network. Analytic quadrature and a SymPy
+`dsolve` fallback pass through the same independent symbolic boundary without ML.
+[managed_statistics.py](managed_statistics.py) produces post-solve reference
+comparisons and quadrature-sensitivity records. See the
+[commands and capability limits](MANAGED_SOLVERS.md). The checked-in pilot is
+an interface experiment, not a replacement for the frozen thesis tables.

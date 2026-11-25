@@ -1,0 +1,37 @@
+{
+  "schema": "paper-pde-v1",
+  "source_file": "draft/dissertation_wku_compact.tex",
+  "source_sha256": "67c507acbaeb9eaf54f1024fddbe6ea10503e366130b9b5a8d1da2acc7d7b688",
+  "transcription_status": "explicit reviewed transcription; not auto-extracted mathematics",
+  "model": "E1",
+  "independent": [
+    "t",
+    "x"
+  ],
+  "dependent": [
+    "h",
+    "u",
+    "B"
+  ],
+  "parameters": [
+    "g",
+    "kappa",
+    "m"
+  ],
+  "positive_parameters": [
+    "g",
+    "kappa"
+  ],
+  "source_anchor": "eq:E",
+  "equations": [
+    "D(h(t,x),t)+D(h(t,x)*u(t,x),x)",
+    "D(u(t,x),t)+u(t,x)*D(u(t,x),x)+g*D(h(t,x)+B(t,x),x)",
+    "D(B(t,x),t)+kappa*D(u(t,x)**m,x)"
+  ],
+  "source_excerpt": "epth $h(t,x)$, velocity $u(t,x)$, and bed elevation $B(t,x)$ reads\n\\begin{align}\\label{eq:E}\n \\Delta_h(t,x)&=h_t+(hu)_x=0,\\qquad\n \\Delta_u(t,x)=u_t+uu_x+g(h+B)_x=0,\\notag\\\\\n \\Delta_B(t,x)&=B_t+\\kappa(u^m)_x=0 ,\n\\end{align}\nwith real $m\\ge1$ and $g,\\kappa>0$. \\discard{In the 2022 study \\mbox{\\cite{sve2022}}, the momentum balance is written in conservative form; its residual is $h\\Delta_u+u\\Delta_h$, so the two versions agree on $h>0$.} \\discard{A bed-slope term $-G_0u^n B_x$ can be added by changing $q_b(u)=\\kappa u^m$ to $q_b(u,B_x)=\\kappa u^m-G_0u^n B_x$, as in Chapter~\\mbox{\\ref{ch:continuation}}, while all $1+1$ results below retain $q_b(u)=\\kappa u^m$.} Restricting to $u>0$ keeps $u^m$ real analytic; at $u=0$, regula",
+  "principal": [
+    "D(h(t,x),t,1)",
+    "D(u(t,x),t,1)",
+    "D(B(t,x),t,1)"
+  ]
+}

@@ -1,0 +1,3 @@
+N2 analytic started
+{'task': 'N2', 'method': 'analytic', 'status': None, 'reason': None, 'settings': {'seed': 27, 'degree': 10, 'max_steps': 8000, 'max_training_cpu_seconds': 150, 'device': 'CPU', 'dtype': 'exact symbolic', 'training_used': False, 'threads': 1, 'run_class': 'budgeted_run'}, 'cost': {'wall_seconds': 0.10273146396502852, 'user_cpu_seconds': 0.10267000000000001, 'system_cpu_seconds': 5.300000000000096e-05, 'process_peak_rss_bytes': 73641984}, 'verification_wall_seconds': 0.05502879002597183, 'termination': 'exact antiderivative', 'verification': 'exact_implicit_solution'}
+/home/carl/research/projects/Lie-ML_PDES/delivery/managed_results/ode/1795628898810576899
