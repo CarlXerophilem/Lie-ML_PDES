@@ -1,0 +1,12 @@
+{
+  "depth_error": 0.01310441191541,
+  "bed_error": 0.008372336091,
+  "velocity_euclidean_error": 0.00934027232154468,
+  "min_r": 1.0,
+  "min_H": 1.158142915646593,
+  "min_S": 0.8436801644744709,
+  "min_D": 0.47723306243382096,
+  "momentum_residual_euclidean": 0.18633510895604494,
+  "bed_residual": 6.543307286367611,
+  "sediment_current_defect": 0.31238614172251256
+}

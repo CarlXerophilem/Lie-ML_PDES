@@ -26,6 +26,7 @@
 \usepackage[hyphens]{url}
 \usepackage{hyperref,bookmark}
 \usepackage{setspace,fancyhdr,titlesec,caption,placeins}
+\usepackage[normalem]{ulem}
 \definecolor{ink}{HTML}{263B5E}
 \definecolor{teal}{HTML}{087F8C}
 \definecolor{warm}{HTML}{B65528}
@@ -33,6 +34,7 @@
 \definecolor{authorblue}{HTML}{1748A4}
 \newcommand{\authornote}[1]{\textcolor{authorblue}{\textit{(#1)}}}
 \newcommand{\keyeq}[1]{\textcolor{keyred}{#1}}
+\newcommand{\discard}[1]{\textcolor{black!45}{\sout{#1}}}
 \hypersetup{colorlinks=true,linkcolor=ink,citecolor=teal,urlcolor=teal,
  pdfauthor={Yihong Xiao},
  pdftitle={Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs},
@@ -47,7 +49,7 @@
 \setlength{\intextsep}{10pt plus 2pt minus 2pt}
 \renewcommand{\topfraction}{.9}
 \renewcommand{\textfraction}{.08}
-\setstretch{1.05}
+\setstretch{1.02}
 \setlength{\emergencystretch}{2em}
 \setlength{\parskip}{0pt}
 \setcounter{tocdepth}{1}
@@ -154,11 +156,11 @@ included so the mathematical and computational claims can be checked.
 \chapter*{Abstract} %AlphaXiv-Skim format abstract
 \addcontentsline{toc}{chapter}{Abstract}
 
-\noindent\textbf{Goal.} Construct computable, physically admissible reference solutions for Saint--Venant--Exner systems and determine when a fitted reduced profile carries a rigorous continuous error bound.
+\noindent\textbf{Goal.} Build computable, physically admissible reference solutions for coupled shallow-water and mobile-bed (Saint--Venant--Exner) equations, and pin down when a fitted reduced profile actually carries a continuous error bound.
 
-\medskip\noindent\textbf{Method.} We classify parameter-dependent point symmetries on positive jet charts, restrict the governing equations to regular invariant graphs, and reconstruct physical water and bed fields via a compatible material bed one-form. For numerical approximation, we enforce prescribed traces and local analytic or singular branch structure before fitting the remaining free coefficients through an integral fixed-point defect.
+\medskip\noindent\textbf{Method.} Working on positive jet charts where depth and velocity stay bounded away from zero, I classify the classical point symmetries as the bedload exponent $m$ varies, restrict the PDEs to regular invariant graphs, and recover Eulerian water and bed fields by integrating a closed material bed one-form. Whenever a reduced profile is fitted numerically, the prescribed traces and any local singular prefix are fixed first; only the remaining free coefficients are fitted, and certification runs through an integral fixed-point defect rather than a raw differential residual.
 
-\medskip\noindent\textbf{Result.} Across all real transport exponents $m\ge1$ on positive $1+1$ charts, the critical exponent $m=3$ adds a scaling symmetry to the Eulerian system $\mathcal E_1$ and to both scalar equations $\mathcal P$ and $\mathcal M$, whereas at $m=1$ only the published scalar $\mathcal P$ gains an extra Galilean boost. Local analytic results establish regular Taylor series with an explicit sufficient radius, a convergent cubic Laurent branch at $g\kappa=1/4$, and two local analytic germs crossing an annular hydraulic saddle. A reproducible rotating-tank benchmark encloses the continuous profile error by exact rational Bernstein bounds and verifies all five lifted Cartesian balances. Across four controlled sampled profile tests, Chebyshev collocation achieves smaller field errors than the residual-gated neural cell.
+\medskip\noindent\textbf{Result.} Across all real exponents $m\ge1$ on the positive $1+1$ charts, $m=3$ is the sole exponent where the Eulerian system $\mathcal E_1$ and both scalar formulations $\mathcal P,\mathcal M$ gain a scaling generator, while at $m=1$ an extra Galilean boost enters only the printed scalar $\mathcal P$ because of its advected bed law. On the reduced ODEs, constructive contractions give a sufficient Taylor radius at regular points, a convergent cubic Laurent branch right at the threshold $g\kappa=1/4$, and two real-analytic germs crossing a hyperbolic annular saddle. On a rotating-tank swirl benchmark, exact rational Bernstein arithmetic certifies both the continuous profile error and all five lifted Cartesian balances. In four controlled sampled profile tests, however, degree-15 Chebyshev collocation beat the residual-gated neural cell in field error on every task.
 
 \medskip\noindent\textbf{Keywords}\quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner systems, material reconstruction, singular branches, fixed-point defect, structure-constrained approximation.
 
@@ -185,26 +187,24 @@ $\mathcal T,\ \Lambda$ & Profile fixed-point operator and an upper bound on its 
 \pagenumbering{arabic}
 
 \chapter{Introduction}\label{ch:introduction}
-This dissertation began with a simple geometric question about symmetry reduction: when a Lie group acts on a nonlinear partial differential equation, which variables can it eliminate, and what must remain intact so that a reduced profile actually reconstructs a physical solution? Studying two recent analyses of the Saint--Venant--Exner (SVE) shallow-water equations \cite{sve2022,ap} turned that question into a concrete program organized around \emph{two distinct kinds of degeneracy}.
+I began this project with a question about classical and nonclassical Lie symmetries: which variables can a symmetry actually remove from a nonlinear PDE, and what has to be preserved along the way so that a reduced profile can still be lifted back to a genuine physical solution? Reading two Saint--Venant--Exner (SVE) studies \cite{sve2022,ap} made that question concrete, because the coupled shallow-water and mobile-bed equations exhibit two very different ways the mathematical structure can break or enlarge.
 
-The first degeneracy lives in \emph{parameter space}. In the Exner sediment-transport law, the bedload flux scales as a power $u^m$ of the flow velocity; changing the transport exponent $m$ can drop the rank of the symmetry-determining equations and admit a new infinitesimal generator, thereby enlarging the family of available reductions. The second degeneracy lives along a \emph{reduced profile} itself. Once a symmetry subgroup reduces the PDE to an ordinary differential equation, the coefficient multiplying the highest derivative can vanish at a point of the solution. That vanishing does not change the Lie algebra, but it fundamentally changes the local analysis: regular Taylor series break down, and one must resolve characteristic tangencies, pole expansions, or hyperbolic saddle crossings.
+First, changing a physical parameter can enlarge the symmetry algebra itself. Because the Exner bedload flux scales like $u^m$, varying the exponent $m$ drops the rank of the determining system at $m=3$ and admits an extra scaling generator ($X_5$ in Eulerian variables, $Y_5$ in material variables), precisely where the parameter product $g\kappa$ becomes scaling-invariant. Second, even with all PDE parameters held fixed inside a single chosen reduction, the coefficient multiplying the highest derivative of the reduced ODE can vanish along a profile. What made this distinction sharp for me was comparing two concrete calculations: in the common-scaling reduction $(L(z)F'')'=0$ of the material equation $\mathcal M$, the factor $L(z)$ vanishes along a characteristic ray without adding any symmetry at all, and in the simple polynomial test $\phi(t,s)=t+s+s^3/6$ (Counterexample~\ref{ex:p-neq-m}), the printed scalar equation $\mathcal P$ vanishes identically while the physically compatible equation $\mathcal M$ leaves a nonzero residual $g$ at $s=0$. \authornote{Replace or narrow this calculation note if a different first counterexample motivated the split.}
 
-A mobile sediment bed is an ideal testing ground for whether these reductions survive contact with physics. Sediment transport deforms the bed, and the resulting bed slope feeds directly back into the water momentum balance \cite{fernandez2017,berthon2012}. Passing from Eulerian to Lagrangian mass coordinates---or to Eulerian polar coordinates in two horizontal dimensions---must preserve this coupling. Throughout the dissertation, jet coordinates are used to verify the prolonged group action, while orbit coordinates eliminate variables along a transverse section. An invariant surface selects a structured family of solutions of the governing PDE; chart positivity and prescribed traces then specify where the reduction and its local analysis apply. Within that symmetry-constrained family, numerical fitting determines only the remaining free coefficients, echoing the motivation behind invariant physics-informed neural networks \cite{arora2023} and complementing superposition-based frameworks such as LieSolver for linear initial-boundary value problems \cite{klausen2026}.
+A mobile bed forces every coordinate change to stay honest: sediment transport reshapes the bed, and the bed slope feeds straight back into the water momentum balance \cite{fernandez2017,berthon2012}. Throughout the dissertation, I use jet coordinates to verify classical point symmetries, orbit coordinates to select invariant profiles on a transverse section, and the closed bed one-form $\omega_{\mathcal M}$ to reconstruct physical water and bed fields. Although Noether's theorem originally motivated my interest in symmetry and conservation \cite{noether1918}, the material first integral $I_0$ obtained here comes directly from the exactness of the bed differential $dB$ rather than a variational symmetry. For selected regular and singular branches, I derive exact solutions or prove local convergence via disk-algebra contractions. On the computational side, I compare a small residual-gated fit inspired by LNN-PINN \cite{tao2026} (and invariant PINNs \cite{arora2023}, alongside linear-IBVP frameworks such as LieSolver \cite{klausen2026}) against Taylor and Chebyshev controls on reduced ODEs. Under the reported settings, Chebyshev collocation produced smaller maximum sampled field errors in all four tests; continuous certification is demonstrated separately on a degree-10 polynomial fit for the rotating-tank swirl. The next empirical question is whether learning can lower total cost when solving a nearby problem---for instance, perturbing the radial bed amplitude $\lambda$ in $B_s(r)=\lambda r^{-2}$ or shifting the drift $c$ across $[-7.1,-6.9]$---checked by lifting the corrected profile back to $(t,x,y)$ and verifying all five governing balances at the same certified accuracy.
 
 \paragraph{Research questions.}
 \begin{enumerate}\setlength{\itemsep}{2pt}
  \item[\textbf{Q1}] Which point symmetries are admitted as the transport exponent $m$ varies, and what invariant reductions do they produce?
- \item[\textbf{Q2}] Which material profiles genuinely reconstruct water and bed fields satisfying the original Eulerian balances?
+ \item[\textbf{Q2}] Which material profiles reconstruct water and bed fields that actually satisfy the original Eulerian balances?
  \item[\textbf{Q3}] When do the reduced profile equations admit regular Taylor series, a convergent pole expansion, or a smooth crossing through a critical point?
- \item[\textbf{Q4}] What can a numerical fit rigorously certify on a reduced problem, and what experimental evidence would establish a computational advantage from reduction?
+ \item[\textbf{Q4}] What can a numerical fit certify on a reduced problem, and what test would show a computational benefit from reduction at matched accuracy?
 \end{enumerate}
 
-\paragraph{Scope, contributions, and roadmap.}
-The one-dimensional symmetry classification covers unrestricted local smooth point symmetries on positive charts for all real $m\ge1$. The planar classification of the rotating cubic model $\mathcal E_2$ is carried out within a declared shared affine class. Within these boundaries, the dissertation makes five main contributions: (i) a complete point-symmetry classification and connected adjoint optimal-system catalogue for the three $1+1$ equations $\mathcal E_1$, $\mathcal P$, and $\mathcal M$; (ii) a compatible material reconstruction via a closed bed one-form, together with an audit of published scalar formulas; (iii) exact invariant waves and constructive convergence proofs for regular Taylor, cubic Laurent, and annular saddle profiles; (iv) a certified fixed-point defect replay alongside controlled sampled comparisons between classical and learned approximators; and (v) a physical dictionary translating reduced diagnostics back into the original governing balances (Table~\ref{tab:physics}).
-
-The chain of reasoning unfolds across five technical chapters. Chapter~\ref{ch:models} answers \textbf{Q2} by setting up the dimensionless Eulerian system $\mathcal E_1$ and contrasting the published scalar equation $\mathcal P$ with the compatible material equation $\mathcal M$. Chapter~\ref{ch:lie} answers \textbf{Q1} by reviewing jet and orbit reduction, classifying the point algebras, explaining the exceptional exponents $m=3$ and $m=1$, and cataloguing the resulting one-dimensional reductions. Chapters~\ref{ch:series} and~\ref{ch:continuation} address \textbf{Q3}: Chapter~\ref{ch:series} analyzes regular series, characteristic tangency, and a convergent cubic Laurent branch in $1+1$ dimensions, while Chapter~\ref{ch:continuation} moves to $2+1$ rotating annular models to prove a local analytic saddle-crossing theorem and introduce a rotating-tank exchange benchmark. Finally, Chapter~\ref{ch:computation} addresses \textbf{Q4} by developing continuous contraction-based error bounds, executing a rational Bernstein certification replay, and comparing classical and neural approximators.
-
-Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} map the entire pipeline from the governing PDEs to the physical balance checks. The one-dimensional route changes first to a Lagrangian mass label, whereas the planar route works in Eulerian polar coordinates; in both cases, the Lie quotient selects the reduced profile equation to be solved, certified, and lifted back to physical variables.
+\paragraph{Scope and overview.}
+The $1+1$ classification covers unrestricted local smooth point symmetries on positive charts for all real $m\ge1$, whereas the planar classification of the rotating cubic model $\mathcal E_2$ stays within a declared shared affine class. \discard{Within these boundaries, the dissertation makes five main contributions: (i) a complete point-symmetry classification and connected adjoint optimal-system catalogue for the three $1+1$ equations $\mathcal E_1$, $\mathcal P$, and $\mathcal M$; (ii) a compatible material reconstruction via a closed bed one-form, together with an audit of published scalar formulas; (iii) exact invariant waves and constructive convergence proofs for regular Taylor, cubic Laurent, and annular saddle profiles; (iv) a certified fixed-point defect replay alongside controlled sampled comparisons between classical and learned approximators; and (v) a physical dictionary translating reduced diagnostics back into the original governing balances.}
+\discard{The chain of reasoning unfolds across five technical chapters. Chapter~\mbox{\ref{ch:models}} answers \textbf{Q2} by setting up the dimensionless Eulerian system $\mathcal E_1$ and contrasting the published scalar equation $\mathcal P$ with the compatible material equation $\mathcal M$. Chapter~\mbox{\ref{ch:lie}} answers \textbf{Q1} by reviewing jet and orbit reduction, classifying the point algebras, explaining the exceptional exponents $m=3$ and $m=1$, and cataloguing the resulting one-dimensional reductions. Chapters~\mbox{\ref{ch:series}} and~\mbox{\ref{ch:continuation}} address \textbf{Q3}: Chapter~\mbox{\ref{ch:series}} analyzes regular series, characteristic tangency, and a convergent cubic Laurent branch in $1+1$ dimensions, while Chapter~\mbox{\ref{ch:continuation}} moves to $2+1$ rotating annular models to prove a local analytic saddle-crossing theorem and introduce a rotating-tank exchange benchmark. Finally, Chapter~\mbox{\ref{ch:computation}} addresses \textbf{Q4} by developing continuous contraction-based error bounds, executing a rational Bernstein certification replay, and comparing classical and neural approximators.}
+Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} summarize the full workflow from the dimensionless governing PDEs through symmetry reduction and profile certification back to physical balance checks (see Table~\ref{tab:physics} for the physical dictionary).
 
 \clearpage
 \begin{figure}[!ht]
@@ -337,13 +337,11 @@ Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} map the entire pipeline
 \end{figure}
 
 \chapter{Physical Model and Material Reconstruction}\label{ch:models}
-Before searching for symmetries, we must establish the governing equations and verify that passing to Lagrangian coordinates preserves the physical bed balance. This chapter answers \textbf{Q2}: we introduce the dimensionless Eulerian Saint--Venant--Exner system $\mathcal E_1$, pull it back to a mass-label chart, and explain why the published scalar equation $\mathcal P$ diverges from the compatible material equation $\mathcal M$ that genuinely reconstructs $\mathcal E_1$.
-
 \section{Eulerian water and bed equations}
-We work with the frictionless shallow-water momentum balance coupled to a power-law sediment closure as our reference model. Neglecting bulk viscosity is standard at large Reynolds numbers, whereas omitting bottom drag requires an additional assumption on the boundary stress \cite{fernandez2017}.
+The reference model couples frictionless shallow-water flow to a Grass-type power-law sediment flux. High Reynolds numbers justify dropping bulk viscosity, though omitting bottom drag is an extra assumption on the boundary stress \cite{fernandez2017}.
 
 \paragraph{Nondimensionalization.}
-To compare models cleanly across exponents $m$, let $L_0,H_0,U_0>0$ be characteristic horizontal, depth, and velocity scales, and set the advective time scale $T_0=L_0/U_0$. Denoting dimensional quantities by a subscript $\mathrm d$, we introduce the dimensionless variables
+Pick positive horizontal, depth, and velocity scales $L_0,H_0,U_0$, set $T_0=L_0/U_0$, and mark dimensional quantities with a subscript $\mathrm d$:
 \[
  \begin{gathered}
  (x,\phi)=(x_{\mathrm d},\phi_{\mathrm d})/L_0,\quad
@@ -352,63 +350,62 @@ To compare models cleanly across exponents $m$, let $L_0,H_0,U_0>0$ be character
  s=s_{\mathrm d}/(H_0L_0),\quad q_b=q_{b,\mathrm d}/(H_0U_0).
  \end{gathered}
 \]
-The dimensionless gravity and transport coefficients are then $g=g_{\mathrm d}H_0/U_0^2$ and
-$\kappa=A_{g,\mathrm d}U_0^{m-1}/[(1-\epsilon_{\rm bed})H_0]$, where $\epsilon_{\rm bed}$ is the bed porosity and the dimensional prefactor $A_{g,\mathrm d}$ carries units of $\mathrm{length}^{2-m}\mathrm{time}^{m-1}$. Throughout, we fix the reference scales across $m$ and compare dimensionless coefficients; all subsequent models, traces, errors, and residuals are dimensionless, while measured runtimes are reported separately in seconds.
+With bed porosity $\epsilon_{\rm bed}$, the two dimensionless parameters are $g=g_{\mathrm d}H_0/U_0^2$ and $\kappa=A_{g,\mathrm d}U_0^{m-1}/[(1-\epsilon_{\rm bed})H_0]$, \discard{where the dimensional prefactor $A_{g,\mathrm d}$ carries units of $\mathrm{length}^{2-m}\mathrm{time}^{m-1}$.} Fixing these scales across $m$ keeps every equation, trace, error, and residual below dimensionless; measured runtimes are given separately in seconds.
 
-In these variables, the one-dimensional Eulerian system $\mathcal E_1$ for water depth $h(t,x)$, velocity $u(t,x)$, and bed elevation $B(t,x)$ on the positive chart $h,u>0$ is
+On the positive chart $h,u>0$, the $1+1$ Eulerian system $\mathcal E_1$ for depth $h(t,x)$, velocity $u(t,x)$, and bed elevation $B(t,x)$ reads
 \begin{align}\label{eq:E}
  \Delta_h(t,x)&=h_t+(hu)_x=0,\qquad
  \Delta_u(t,x)=u_t+uu_x+g(h+B)_x=0,\notag\\
  \Delta_B(t,x)&=B_t+\kappa(u^m)_x=0 ,
 \end{align}
-with real transport exponent $m\ge1$ and positive parameters $g,\kappa>0$. In the 2022 study \cite{sve2022}, the momentum equation is written in conservative form; its residual is $h\Delta_u+u\Delta_h$, so the two formulations are equivalent on $h>0$. A bed-slope correction $-G_0u^n B_x$ can be included by replacing the Grass-type closure $q_b(u)=\kappa u^m$ with $q_b(u,B_x)=\kappa u^m-G_0u^n B_x$, as we will do in Chapter~\ref{ch:continuation}. All one-dimensional results that specify $q_b(u)=\kappa u^m$ retain that closure. Note that $u^m$ is real analytic on $u>0$, whereas its regularity at $u=0$ depends on $m$ and on how the flux is extended to negative velocities.
+with real $m\ge1$ and $g,\kappa>0$. \discard{In the 2022 study \mbox{\cite{sve2022}}, the momentum balance is written in conservative form; its residual is $h\Delta_u+u\Delta_h$, so the two versions agree on $h>0$.} \discard{A bed-slope term $-G_0u^n B_x$ can be added by changing $q_b(u)=\kappa u^m$ to $q_b(u,B_x)=\kappa u^m-G_0u^n B_x$, as in Chapter~\mbox{\ref{ch:continuation}}, while all $1+1$ results below retain $q_b(u)=\kappa u^m$.} Restricting to $u>0$ keeps $u^m$ real analytic; at $u=0$, regularity depends on $m$ and on how the flux is extended to negative velocities.
 
 \section{The printed scalar and a compatible scalar}\label{sec:material}
-Water mass conservation yields a natural change of variables. Since $d[h(t,x)\,dx-h(t,x)u(t,x)\,dt]=\Delta_h(t,x)\,dt\wedge dx$, continuity implies the local existence of a Lagrangian mass label $s(t,x)$ satisfying $s_x=h(t,x)$ and $s_t=-h(t,x)u(t,x)$. Because $h>0$, we may invert $s(t,x)$ at fixed $t$ to express the Eulerian position of a labelled fluid parcel as $x=\phi(t,s)$. Writing $b(t,s)=B(t,\phi(t,s))$ for the bed elevation seen along the parcel trajectory, the chain rule gives
+Because $d[h(t,x)\,dx-h(t,x)u(t,x)\,dt]=\Delta_h(t,x)\,dt\wedge dx$, water continuity locally supplies a Lagrangian mass label $s(t,x)$ satisfying $s_x=h$ and $s_t=-hu$. Since $h>0$, inverting $s(t,x)$ at fixed $t$ gives the parcel position $x=\phi(t,s)$. Writing $b(t,s)=B(t,\phi(t,s))$ for the bed elevation evaluated at the moving parcel, the chain rule yields
 \begin{equation}\label{eq:chain}\begin{gathered}
  h(t,\phi(t,s))=1/\phi_s,\quad u(t,\phi(t,s))=\phi_t,\\
  \partial_x=\phi_s^{-1}D_s,\quad
  \partial_t\big|_x=D_t-\frac{\phi_t}{\phi_s}D_s ,
 \end{gathered}\end{equation}
-where $D_t$ and $D_s$ denote partial differentiation in the material coordinates $(t,s)$. To write the pulled-back balances compactly, set
+where $D_t$ and $D_s$ are partial derivatives in $(t,s)$. Define the shorthand
 \[
  \mathcal A(t,s)=\phi_s\phi_{tt}-g\phi_{ss}/\phi_s^2,\qquad
  T_m(t,s)=\phi_t^{m-1}\phi_{ts}/\phi_s,\qquad \beta=m\kappa .
 \]
-Multiplying the momentum balance $\Delta_u=0$ by $\phi_s$ and pulling back the Exner law $\Delta_B=0$ via~\eqref{eq:chain} produces the material system
+Multiplying $\Delta_u=0$ by $\phi_s$ and pulling $\Delta_B=0$ back through~\eqref{eq:chain} gives two first-order equations for $b$:
 \[
  \mathcal A(t,s)+gb_s=0,\qquad
  b_t-\frac{\phi_t}{\phi_s}b_s+\beta T_m(t,s)=0 .
 \]
-Eliminating $b$ by cross-differentiation ($D_t b_s = D_s b_t$) yields the compatible third-order scalar equation $\mathcal M=0$. By contrast, Equation~(7) of the 2026 study \cite{ap} defines a different scalar equation $\mathcal P=0$:
+Cross-differentiating to eliminate $b$ ($D_t b_s=D_s b_t$) gives the compatible third-order scalar equation $\mathcal M=0$, whereas Equation~(7) of the 2026 paper \cite{ap} prints a different scalar equation $\mathcal P=0$:
 \begin{align}
  \mathcal P[\phi](t,s)&=D_t\mathcal A-g\beta D_s T_m,\label{eq:P}\\
  \keyeq{\mathcal M[\phi](t,s)}&\keyeq{{}=D_t\mathcal A-D_s\!\left(g\beta T_m+\frac{\phi_t}{\phi_s}\mathcal A\right).}\label{eq:M}
 \end{align}
 
-The discrepancy between \eqref{eq:P} and \eqref{eq:M} has a simple physical origin. Because the parcel moves at velocity $u=\phi_t$, its time derivative $b_t=(B_t+uB_x)(t,\phi(t,s))$ mixes the local bed rate $B_t$ with bed advection $uB_x$; subtracting $(\phi_t/\phi_s)b_s$ restores the fixed-position derivative $\partial_t|_x B$ appearing in~\eqref{eq:E}, and this subtraction generates the extra term $-D_s((\phi_t/\phi_s)\mathcal A)$ in $\mathcal M$. If instead one drops that term and imposes $b_t+\beta T_m(t,s)=0$, cross-differentiation with $\mathcal A+gb_s=0$ produces $\mathcal P=0$, which lifts under an invertible map to the \emph{advected} bed law $B_t+uB_x+\kappa(u^m)_x=0$ rather than the fixed-position Exner balance of $\mathcal E_1$. Direct comparison and continuation between $\mathcal P$ and $\mathcal M$ are deferred; in this dissertation, $\mathcal P$ is audited separately as a transcribed scalar equation, while $\mathcal M$ serves as the exact material counterpart of $\mathcal E_1$.
+Why do \eqref{eq:P} and \eqref{eq:M} disagree? A parcel moving at speed $u=\phi_t$ records the material rate $b_t=(B_t+uB_x)(t,\phi(t,s))$, not the fixed-position bed rate $B_t$. Subtracting $(\phi_t/\phi_s)b_s$ strips out the bed-advection term $uB_x$, and that subtraction is what produces $-D_s((\phi_t/\phi_s)\mathcal A)$ in $\mathcal M$. Dropping it amounts to imposing $b_t+\beta T_m=0$, which lifts under an invertible map to an \emph{advected} bed law $B_t+uB_x+\kappa(u^m)_x=0$ rather than $\mathcal E_1$. Direct comparison and continuation between $\mathcal P$ and $\mathcal M$ are deferred; below, $\mathcal P$ is audited separately as a transcribed scalar equation while $\mathcal M$ is the exact material counterpart of $\mathcal E_1$.
 
 \begin{counterexample}\label{ex:p-neq-m}
-To see that $\mathcal P$ and $\mathcal M$ have distinct solution sets even on the positive chart, consider $\phi(t,s)=t+s+s^3/6$, which satisfies $\phi_t=1>0$ and $\phi_s=q_1(s)=1+s^2/2>0$. Here $\mathcal A(t,s)=-gs/q_1(s)^2$ is independent of $t$ and $T_m\equiv 0$, so $\mathcal P[\phi](t,s)=0$ identically. Yet $\mathcal M[\phi](t,s)=-D_s(\mathcal A/\phi_s)=8g(2-5s^2)/(2+s^2)^4$, which equals $g\ne 0$ at $s=0$.
+Take $\phi(t,s)=t+s+s^3/6$, for which $\phi_t=1>0$ and $\phi_s=q_1(s)=1+s^2/2>0$. Here $\mathcal A(t,s)=-gs/q_1(s)^2$ is independent of $t$ and $T_m\equiv 0$, so $\mathcal P[\phi](t,s)=0$ everywhere. Yet $\mathcal M[\phi](t,s)=-D_s(\mathcal A/\phi_s)=8g(2-5s^2)/(2+s^2)^4$, which evaluates to $g\ne0$ at $s=0$.
 \end{counterexample}
 
 \begin{proposition}[Local physical reconstruction]\label{prop:material}
-On a simply connected material chart with $\phi_s,\phi_t>0$, any sufficiently smooth solution $\phi$ of $\mathcal M[\phi]=0$ determines a material bed elevation $b(t,s)$, unique up to an additive constant, through the exact one-form
+On a simply connected material chart with $\phi_s,\phi_t>0$, any sufficiently smooth solution $\phi$ of $\mathcal M[\phi]=0$ determines a material bed elevation $b(t,s)$, unique up to an additive constant, via the exact one-form
 \begin{equation}\label{eq:bed-form}
  \keyeq{db=\omega_{\mathcal M}=-\frac{\mathcal A(t,s)}{g}\,ds-\left(\frac{\phi_t\mathcal A(t,s)}{g\phi_s}+\beta T_m(t,s)\right)dt.}
 \end{equation}
-On each sufficiently small subchart where $x=\phi(t,s)$ is invertible, the lifted fields $h,u$ in \eqref{eq:chain} together with $B(t,\phi(t,s))=b(t,s)$ solve the Eulerian system $\mathcal E_1$.
+On each sufficiently small subchart where $x=\phi(t,s)$ is invertible, the fields $h,u$ from \eqref{eq:chain} together with $B(t,\phi(t,s))=b(t,s)$ solve $\mathcal E_1$.
 \end{proposition}
 \begin{proof}
-Exterior differentiation of \eqref{eq:bed-form} yields $d\omega_{\mathcal M}=-\mathcal M[\phi](t,s)\,dt\wedge ds/g$, so $\omega_{\mathcal M}$ is closed whenever $\mathcal M[\phi]=0$. On a simply connected chart, $\omega_{\mathcal M}=db$ for a primitive $b$ unique up to a constant, and reading off the $ds$ and $dt$ components recovers both material balances $\mathcal A+gb_s=0$ and $b_t-(\phi_t/\phi_s)b_s+\beta T_m=0$. For water continuity, differentiating $h=1/\phi_s$ via~\eqref{eq:chain} gives
+Direct exterior differentiation gives $d\omega_{\mathcal M}=-\mathcal M[\phi](t,s)\,dt\wedge ds/g$, so $\mathcal M[\phi]=0$ makes $\omega_{\mathcal M}$ closed. On a simply connected chart it integrates to a primitive $b$ unique up to a constant, whose partial derivatives recover $\mathcal A+gb_s=0$ and $b_t-(\phi_t/\phi_s)b_s+\beta T_m=0$. Water continuity holds identically because applying~\eqref{eq:chain} to $h=1/\phi_s$ yields
 \[
  h_t+(hu)_x=\left(-\frac{\phi_{ts}}{\phi_s^2}+\frac{\phi_t\phi_{ss}}{\phi_s^3}\right)+\frac{1}{\phi_s}D_s\!\left(\frac{\phi_t}{\phi_s}\right)=0 .
 \]
-Finally, since $\phi_s>0$, the inverse function theorem ensures that $x=\phi(t,s)$ is locally invertible and strictly increasing in $s$ at each fixed time, so the lifted fields $(h,u,B)$ are smooth and satisfy~\eqref{eq:E}.
+Because $\phi_s>0$, the inverse function theorem guarantees local invertibility of $x=\phi(t,s)$ (strictly increasing in $s$ at each fixed $t$), so $(h,u,B)$ is smooth and solves~\eqref{eq:E}.
 \end{proof}
 
 \begin{remark}[Bed periods]
-Closedness of $\omega_{\mathcal M}$ guarantees a single-valued bed $b$ on any simply connected chart. On a multiply connected domain (for instance, a domain with a hole), one must additionally check that all loop periods $\oint_\Gamma\omega_{\mathcal M}$ vanish; a single-valued global primitive exists on a connected domain precisely when every period is zero.
+Closedness of $\omega_{\mathcal M}$ suffices for a single-valued bed on any simply connected chart. If the domain has holes, a single-valued global primitive exists on a connected domain if and only if every loop period $\oint_\Gamma\omega_{\mathcal M}$ vanishes.
 \end{remark}
 
 
@@ -431,7 +428,7 @@ Closedness of $\omega_{\mathcal M}$ guarantees a single-valued bed $b$ on any si
 \end{figure}
 
 \chapter{Lie Reduction and Its Dependence on Parameters}\label{ch:lie}
-We now turn to \textbf{Q1}: how the point-symmetry algebra of each $1+1$ model depends on the transport exponent $m$, and what one-dimensional reductions follow. Table~\ref{tab:algebras} summarizes the classification upfront. For generic $m\ge1$, all three equations share a four-dimensional algebra; at $m=3$, every equation gains an additional scaling symmetry, while at $m=1$, only the printed scalar $\mathcal P$ acquires a Galilean boost. To make this classification transparent and usable, we first review the geometric tools of symmetry reduction, then prove Theorem~\ref{thm:class}, explain the structural origin of the two exceptional exponents, and finally derive the explicit reductions collected in Table~\ref{tab:reductions}.
+Table~\ref{tab:algebras} lists the complete local smooth point-symmetry algebras of $\mathcal E_1$, $\mathcal M$, and $\mathcal P$ on their positive charts for all real $m\ge1$: four generic generators, an extra scaling at $m=3$ across all three models, and a Galilean boost at $m=1$ in $\mathcal P$ alone.
 
 \begin{table}[!ht]\centering\small
 \begin{tabularx}{\linewidth}{@{}lXll@{}}
@@ -452,35 +449,35 @@ $\mathcal P$ & $Y_1,Y_2,Y_3,Y_4$ & $Y_6=t\partial_\phi$ & $Y_5$\\\bottomrule
 \end{table}
 
 \section{Three tools}\label{sec:lie-tools}
-Symmetry reduction rests on two distinct tangency conditions, illustrated side by side in Figure~\ref{fig:orbit-geometry}: an infinitesimal symmetry must be tangent to the \emph{equation locus} in jet space, whereas an invariant solution must have the symmetry tangent to its \emph{graph}. Recall that the $n$-jet of a graph $U(x)$ records its values and partial derivatives through order $n$, where the $d$ base coordinates $x=(x^i)$ include time, and a regular order-$n$ system $\Delta=0$ defines a smooth locus in jet space.
+Two tangency conditions sit behind every reduction (Figure~\ref{fig:orbit-geometry}): a symmetry must stay tangent to the \emph{equation locus} in jet space, while an invariant solution must have the symmetry tangent to its \emph{graph}. Here the $n$-jet of $U(x)$ collects values and partial derivatives up to order $n$ over $d$ base coordinates $x=(x^i)$ (time included), and a regular order-$n$ system $\Delta=0$ cuts out a locus in that jet bundle.
 
 \begin{definition}[Point symmetry]
-A vector field $X=\xi^i(x,U)\partial_{x^i}+\eta^a(x,U)\partial_{U^a}$ is an infinitesimal point symmetry of $\Delta=0$ if its $n$th prolongation is tangent to the equation locus, i.e.\ $\pr^{(n)}X(\Delta)=0$ whenever $\Delta=0$ in a regular jet chart. Its evolutionary characteristic is $Q_X^a(x,U,U_i)=\eta^a(x,U)-\xi^i(x,U)U_i^a$, where $U_i$ denotes the first-jet coordinates. Differentiating the transformed graph yields the prolongation recursion $\eta^a_{J,i}=D_i\eta^a_J-U^a_{J,j}D_i\xi^j$, initialized at $\eta^a_\varnothing=\eta^a$ with total derivative $D_i$ \cite[Chs.~2--3]{olver}.
+A vector field $X=\xi^i(x,U)\partial_{x^i}+\eta^a(x,U)\partial_{U^a}$ is an infinitesimal point symmetry of $\Delta=0$ when $\pr^{(n)}X(\Delta)=0$ on the locus $\Delta=0$ in a regular jet chart. Its evolutionary characteristic is $Q_X^a(x,U,U_i)=\eta^a(x,U)-\xi^i(x,U)U_i^a$, with first-jet coordinates $U_i$, and differentiating the transformed graph yields the prolongation recursion $\eta^a_{J,i}=D_i\eta^a_J-U^a_{J,j}D_i\xi^j$ starting from $\eta^a_\varnothing=\eta^a$ \cite[Chs.~2--3]{olver}.
 \end{definition}
 \begin{definition}[Local orbit and invariant graph]
-The local orbit of a point under a subalgebra $\mathfrak h$ is the set reached by composing local flows of generators in $\mathfrak h$. A projectable action induces well-defined base flows under $\pi(x,U)=x$; the point and base ranks are the dimensions of the spans of the generator values in $(x,U)$-space and $x$-space, respectively. A graph $U(x)$ is $\mathfrak h$-invariant if every $X\in\mathfrak h$ is tangent to it, which in coordinates reads $\keyeq{Q_X=0}$ for all $X\in\mathfrak h$.
+Composing local flows of generators in a subalgebra $\mathfrak h$ sweeps out the local orbit of a point. When the action is projectable under $\pi(x,U)=x$, it induces base flows; the point and base ranks are the dimensions of the generator spans in $(x,U)$-space and $x$-space. A graph $U(x)$ is $\mathfrak h$-invariant if every $X\in\mathfrak h$ is tangent to it, i.e.\ $\keyeq{Q_X=0}$ for all $X\in\mathfrak h$.
 \end{definition}
 \begin{definition}[Reduction map]
-Suppose the action of $\mathfrak h$ is projectable and its point and base orbit ranks both equal $k$ on a regular local quotient chart. Let $z$ denote the $d-k$ quotient coordinates, $\ell[F]$ the invariant lift of a profile $F(z)$, and $x_\Sigma(z)$ a local base section meeting each orbit plaque transversely in a single point. The reduction map is defined by
+Assume $\mathfrak h$ acts projectably with equal constant point and base orbit ranks $k$ on a regular local quotient chart. Let $z$ be the $d-k$ quotient coordinates, $\ell[F]$ the invariant lift of $F(z)$, and $x_\Sigma(z)$ a transverse local base section hitting each orbit plaque once. Define
 \begin{equation}\label{eq:reduction-map}
  \big(\mathcal R_{\mathfrak h}[\Delta](F)\big)(z)
    =c_\Sigma(z)\,\Delta\!\left(j^n(\ell[F])(x_\Sigma(z))\right),
  \qquad c_\Sigma(z)\ne0.
 \end{equation}
-When comparing residuals of different operators, the nonvanishing normalization factor $c_\Sigma$ is kept fixed; under a shared lift, section, and factor, $\mathcal R_{\mathfrak h}$ is linear in $\Delta$.
+Fixing the nonzero weight $c_\Sigma$, the lift, and the section makes $\mathcal R_{\mathfrak h}$ linear in the residual $\Delta$, which matters whenever two operators are compared on the same invariant graph.
 \end{definition}
 
 \begin{proposition}[Local reduction]\label{prop:regular-reduction}
-Under the hypotheses of the reduction map, every solution of the reduced system $\mathcal R_{\mathfrak h}[\Delta](F)=0$ lifts to an $\mathfrak h$-invariant solution of $\Delta=0$, and conversely every $\mathfrak h$-invariant solution restricts to a reduced solution. When $k=d-1$, the reduced system is a system of ordinary differential equations (possibly coupled with algebraic constraints).
+Under the hypotheses above, solutions of $\mathcal R_{\mathfrak h}[\Delta](F)=0$ lift to $\mathfrak h$-invariant solutions of $\Delta=0$, and every $\mathfrak h$-invariant solution restricts to a reduced solution. If $k=d-1$, the quotient is a system of ODEs (possibly with algebraic constraints).
 \end{proposition}
 \begin{proof}
-Extend the section graph along the group orbits. Because the point and base orbit ranks are equal and constant, projection maps each point-orbit plaque diffeomorphically onto its base plaque, yielding a well-defined graph $\ell[F]$. Tangency of $\pr^{(n)}X$ to the equation locus then propagates $\Delta=0$ from the section $\Sigma$ along the entire orbit.
+Drag the section graph along the group orbits. Equal constant ranks ensure that $\pi$ maps each point-orbit plaque diffeomorphically onto its base plaque, defining a smooth graph $\ell[F]$, and jet-space tangency of $\pr^{(n)}X$ carries $\Delta=0$ off $\Sigma$ along the entire orbit.
 \end{proof}
 
 \begin{example}\label{ex:x5}
-For the cubic scaling $X_5$ at $m=3$ on $t>0$, the joint invariants are $x,tu,t^2h,t^2B$, giving the invariant graph $(u,h,B)(t,x)=(U(x)/t,H(x)/t^2,Z(x)/t^2)$. Substituting this lift reduces the three time-dependent balance laws of $\mathcal E_1$ to three ODEs in $x$.
+On $t>0$ at $m=3$, the invariants of $X_5$ are $x,tu,t^2h,t^2B$, forcing $(u,h,B)(t,x)=(U(x)/t,H(x)/t^2,Z(x)/t^2)$ and turning the three PDEs of $\mathcal E_1$ into three ODEs in $x$.
 \end{example}
-Singular orbits and prescribed initial or boundary data require separate checks \cite{anderson2000}. Notice also that a purely vertical generator cannot admit an invariant graph: for the bed shift $\partial_B$, the characteristic is $Q_X^B=1$, which never vanishes.
+Singular orbits and prescribed data need separate checks \cite{anderson2000}. Purely vertical generators never yield invariant graphs: for the bed shift $\partial_B$, $Q_X^B=1$ cannot vanish.
 
 \begin{figure}[!ht]\centering
 \begin{tikzpicture}[x=1cm,y=1cm]
@@ -522,51 +519,49 @@ Singular orbits and prescribed initial or boundary data require separate checks 
 
 \section{Classification}\label{sec:classification}
 \begin{theorem}[Point algebras of $\mathcal E_1$, $\mathcal P$, and $\mathcal M$]\label{thm:class}
-For fixed $g,\kappa>0$ and any real $m\ge1$, the local smooth point-symmetry algebras of $\mathcal E_1$ (on $h,u>0$) and of $\mathcal P$ and $\mathcal M$ (on $\phi_t,\phi_s>0$) are precisely those listed in Table~\ref{tab:algebras}. Each algebra has dimension four except at the indicated exceptional exponents, where a single generator is added.
+Fix $g,\kappa>0$ and real $m\ge1$. On $h,u>0$ (for $\mathcal E_1$) and $\phi_t,\phi_s>0$ (for $\mathcal P,\mathcal M$), the local smooth point-symmetry algebras are exactly those in Table~\ref{tab:algebras}: dimension four generically, rising to five only where a single additional generator is listed.
 \end{theorem}
 \begin{proof}
-We give the proof for $\mathcal M$ starting from unrestricted smooth coefficient functions $(\tau,\xi,\eta)(t,s,\phi)$ and splitting the determining identity in free jet variables.
+For $\mathcal M$, start with unrestricted smooth coefficients $(\tau,\xi,\eta)(t,s,\phi)$ and split the determining equation in free jets.
 \begin{enumerate}\setlength{\itemsep}{2pt}
-\item Write $p_1=\phi_t>0$ and $q_1=\phi_s>0$. Since $\phi_{ttt}$ appears linearly in $\mathcal M=0$ with nonvanishing coefficient $q_1$, we eliminate $\phi_{ttt}$ on the equation locus.
-\item Setting all second jets to zero isolates the third-order terms. Multiplying the coefficient of the free jet $\phi_{tts}$ by $q_1^4$ and splitting by powers of $q_1$, the $q_1^5$ and $q_1^2$ terms force $\xi_t=\xi_\phi=\tau_s=0$. The $q_1^3$ term then splits in the free variable $p_1$ to give $\tau_\phi=\eta_s=0$, after which the $q_1^4$ term yields $\eta_t=0$.
-\item With these dependencies established---so $\tau=\tau(t)$, $\xi=\xi(s)$, and $\eta=\eta(\phi)$---removing positive factors from the coefficient of the free jet $\phi_{tss}$ leaves
+\item Set $p_1=\phi_t>0$ and $q_1=\phi_s>0$. Because $\phi_{ttt}$ enters $\mathcal M=0$ linearly with coefficient $q_1>0$, eliminate $\phi_{ttt}$ on shell.
+\item Zeroing all second jets leaves the third-order terms isolated. Multiply the coefficient of the free jet $\phi_{tts}$ by $q_1^4$ and collect powers of $q_1$: the $q_1^5$ and $q_1^2$ coefficients force $\xi_t=\xi_\phi=\tau_s=0$; splitting the $q_1^3$ coefficient in the free variable $p_1$ gives $\tau_\phi=\eta_s=0$; the $q_1^4$ coefficient then yields $\eta_t=0$.
+\item Now $\tau=\tau(t)$, $\xi=\xi(s)$, and $\eta=\eta(\phi)$. Clearing positive factors from the free $\phi_{tss}$ coefficient leaves
 \[
   3\eta_\phi=\xi_s+2\tau_t,\qquad
   (m-3)(\eta_\phi-\tau_t)=0 .
 \]
-Because each derivative in the first relation depends on a different variable, all three derivatives must be constant.
-\item Integrating gives the generic four-dimensional span $\langle Y_1,Y_2,Y_3,Y_4\rangle$ together with the exceptional generator $Y_5$ when $m=3$. Direct translation and scaling-weight checks confirm that every generator satisfies the full prolongation condition.
+Each term in the first relation depends on a separate variable, so all three derivatives are constant.
+\item Integrating gives $Y_1,\ldots,Y_4$, plus $Y_5$ when $m=3$; translations and scaling weights verify the full prolongation identity.
 \end{enumerate}
-Appendix~\ref{app:proofs} supplies the corresponding necessity and sufficiency proofs for $\mathcal E_1$ and $\mathcal P$.
+Appendix~\ref{app:proofs} carries out the parallel arguments for $\mathcal E_1$ and $\mathcal P$.
 \end{proof}
 
 \section{Why the exceptional exponents occur}\label{sec:exceptional}
-The algebraic classification above highlights two special exponents, $m=3$ and $m=1$. Both have transparent structural explanations.
+\paragraph{Cubic scaling ($m=3$).}
+Under $Y_5=t\partial_t-2s\partial_s$, both $D_t\mathcal A$ and $D_s(\phi_t\mathcal A/\phi_s)$ carry weight $-1$, while $D_s T_m$ carries weight $2-m$; they match only at $m=3$. In Eulerian variables, $X_5$ leaves the two water equations homogeneous and produces the on-shell bed residual $(3-m)\kappa(u^m)_x$.
 
-\paragraph{The cubic scaling at $m=3$.}
-Under the dilation $Y_5=t\partial_t-2s\partial_s$, the material terms $D_t\mathcal A$ and $D_s(\phi_t\mathcal A/\phi_s)$ both carry weight $-1$, whereas $D_s T_m$ carries weight $2-m$; these weights coincide precisely when $m=3$. In Eulerian variables, the water mass and momentum balances are homogeneous under $X_5$, while the prolonged action on the bed law leaves the on-shell residual $(3-m)\kappa(u^m)_x$, which vanishes only at $m=3$.
-
-Equivalently, consider the three-parameter scaling equivalence group $(t,x,u,h,B)\mapsto(Tt,Lx,(L/T)u,\chi h,\chi B)$ with $T,L,\chi>0$. Because the inertial terms scale by $L/T^2$ and $B_t$ scales by $\chi/T$, the dimensionless parameters transform as
+There is a cleaner way to see the same fact through parameter rescaling. Under the three-parameter dilation $(t,x,u,h,B)\mapsto(Tt,Lx,(L/T)u,\chi h,\chi B)$ with $T,L,\chi>0$, the inertial terms scale by $L/T^2$ and $B_t$ by $\chi/T$, so
 \begin{equation}\label{eq:parameter-action}
  \widetilde g=g(L/T)^2/\chi,\qquad
  \widetilde\kappa=\kappa\chi(L/T)^{1-m},\qquad
  \keyeq{\widetilde{g\kappa}=g\kappa(L/T)^{3-m}.}
 \end{equation}
-For $m\ne3$, this action is transitive on $(g,\kappa)\in\mathbb R_+^2$, so both coefficients can be normalized to unity. At $m=3$, however, the product $g\kappa$ becomes an essential scaling invariant, and the one-parameter stabilizer of $(g,\kappa)$ is precisely $X_5$.
+Whenever $m\ne3$, one can scale both $g$ and $\kappa$ to $1$. At $m=3$, the product $g\kappa$ refuses to scale away, and the stabilizer of $(g,\kappa)$ inside the dilation group is exactly $X_5$.
 
-\paragraph{The linear exponent at $m=1$.}
-At $m=1$, a Galilean boost $x\mapsto x+\epsilon t$ reads $\phi\mapsto\phi+\epsilon t$ in material coordinates. It leaves both $\mathcal A$ and $T_1=\phi_{ts}/\phi_s$ invariant, and therefore generates the extra symmetry $Y_6=t\partial_\phi$ of $\mathcal P$. In $\mathcal M$, however, the fixed-position bed derivative contributes the extra term $-\epsilon D_s(\mathcal A/\phi_s)$ under the boost; because this term contains the free jet $\phi_{tts}$, it obstructs $Y_6$ from being a symmetry of $\mathcal M$.
+\paragraph{Linear exponent ($m=1$).}
+At $m=1$, a Galilean boost $x\mapsto x+\epsilon t$ becomes $\phi\mapsto\phi+\epsilon t$ in mass coordinates. Neither $\mathcal A$ nor $T_1=\phi_{ts}/\phi_s$ sees this shift, so $Y_6=t\partial_\phi$ preserves $\mathcal P$. In $\mathcal M$, however, the fixed-position bed term picks up $-\epsilon D_s(\mathcal A/\phi_s)$, which contains the free jet $\phi_{tts}$ and blocks $Y_6$.
 
-\paragraph{Rank drops and parameter continuation.}
-Viewing the determining equations as a linear system on a finite-dimensional coefficient space clarifies how exceptional exponents arise. On a connected analytic parameter family, maximal rank holds off the common zero locus of the maximal minors (just as $\mu a=0$ gains a kernel direction at $\mu=0$). More generally, let $\mu$ collect the equation parameters and let $\mathscr D_\mu$ denote the on-shell determining operator on a fixed coefficient space and common jet chart. If a symmetry $X(\epsilon)$ continues differentiably along $\mu(\epsilon)=\mu_0+\epsilon\nu$ from $X_0=X(0)$, differentiating $\mathscr D_{\mu(\epsilon)}X(\epsilon)=0$ at $\epsilon=0$ yields the first-order continuation equation
+\paragraph{Rank drops and continuation.}
+On a connected analytic finite-dimensional determining class, maximal rank holds away from the common zero locus of the maximal minors (just as $\mu a=0$ opens a kernel direction at $\mu=0$). Writing $\mu$ for the equation parameters and $\mathscr D_\mu$ for the on-shell determining operator on a fixed coefficient space and common jet chart, any differentiable continuation $X(\epsilon)$ along $\mu(\epsilon)=\mu_0+\epsilon\nu$ from $X_0=X(0)$ satisfies
 \begin{equation}\label{eq:continue}
  \keyeq{\mathscr D_{\mu_0} X_1=-(\partial_\nu\mathscr D)_{\mu_0}X_0},
  \qquad X_1=\left.\frac{dX(\epsilon)}{d\epsilon}\right|_{\epsilon=0}.
 \end{equation}
-Thus an exceptional generator $X_0$ fails to continue in the direction $\nu$ whenever the right-hand side lies outside the range of $\mathscr D_{\mu_0}$ in the declared class \cite{dengreid2024}.
+Hence $X_0$ cannot continue along $\nu$ whenever the right-hand side falls outside $\operatorname{ran}\mathscr D_{\mu_0}$ in the declared class \cite{dengreid2024}.
 
 \section{One-dimensional reductions}\label{sec:reductions}
-Appendix~\ref{app:orbits} classifies all one-dimensional subalgebras up to connected inner adjoint equivalence for each case in Table~\ref{tab:algebras}. Table~\ref{tab:reductions} collects the specific reductions used throughout the rest of the dissertation; in each instance, one must verify that the chosen chart supports the prescribed traces and positivity conditions ($h,u>0$ or $\phi_t,\phi_s>0$).
+Appendix~\ref{app:orbits} classifies all one-dimensional subalgebras up to connected inner adjoint equivalence for each algebra in Table~\ref{tab:algebras}; Table~\ref{tab:reductions} lists the specific reductions used below, each subject to chart positivity ($h,u>0$ or $\phi_t,\phi_s>0$) and compatible traces.
 
 \begin{table}[!ht]\centering\small
 \begin{tabularx}{\linewidth}{@{}lXX@{}}
@@ -586,27 +581,26 @@ $Y_3+Y_6$ in $\mathcal P$ at $m=1$ & $\phi(t,s)=ts+F(t)$ & $(tF'')'=0$ (\S\ref{s
 \end{table}
 
 \paragraph{Two cubic scalings ($m=3$).}
-Substituting the $X_5$-invariant graph of Example~\ref{ex:x5} into $\mathcal E_1$ yields the Eulerian ODE system
+Inserting Example~\ref{ex:x5} into $\mathcal E_1$ gives the Eulerian ODEs
 \begin{equation}\label{eq:eulerian-cubic}
  (HU)'=2H(x),\quad U(x)(U'-1)+g(H'+Z')=0,\quad \kappa(U^3)'=2Z(x) .
 \end{equation}
-On $x,t>0$ with $4g\kappa<1$, these equations admit the exact polynomial simple wave
-$U(x)=2x/3$, $H(x)=(1-4g\kappa)x^2/(9g)$, and $Z(x)=4\kappa x^2/9$, to which a constant bed gauge may be restored after lifting.
+On $x,t>0$ with $4g\kappa<1$, they admit the exact polynomial wave $U(x)=2x/3$, $H(x)=(1-4g\kappa)x^2/(9g)$, and $Z(x)=4\kappa x^2/9$ (up to an additive bed constant after lifting).
 
-In material variables, the corresponding cubic scaling $Y_5$ has invariant $\sigma=st^2$ and graph $\phi(t,s)=F(\sigma)$. Setting $p(\sigma)=F'(\sigma)>0$ on $\sigma>0$, we introduce
+In material variables, $Y_5$ has invariant $\sigma=st^2$ and graph $\phi(t,s)=F(\sigma)$. With $p(\sigma)=F'(\sigma)>0$ on $\sigma>0$, abbreviate
 \begin{equation}\label{eq:cubic-terms}
  \mathcal A_\sigma(\sigma)=2\sigma p(\sigma)^2+4\sigma^2p(\sigma)p'-gp'/p(\sigma)^2,\quad
  \mathcal J_\sigma(\sigma)=8\sigma^2 p(\sigma)(p(\sigma)+\sigma p'),
 \end{equation}
-so that $\mathcal A(t,s)=\mathcal A_\sigma(\sigma)$ and $T_3(t,s)=t^{-3}\mathcal J_\sigma(\sigma)$. Since $tD_s((\phi_t/\phi_s)\mathcal A)=2(\sigma\mathcal A_\sigma)'$, normalizing by $t>0$ puts both cubic scalar reductions on a common footing:
+so $\mathcal A(t,s)=\mathcal A_\sigma(\sigma)$ and $T_3(t,s)=t^{-3}\mathcal J_\sigma(\sigma)$. Using $tD_s((\phi_t/\phi_s)\mathcal A)=2(\sigma\mathcal A_\sigma)'$ and multiplying by $t>0$ gives
 \begin{equation}\label{eq:cubic-reduced}
  t\mathcal P[\phi](t,s)=2\sigma\mathcal A_\sigma'-g\beta\mathcal J_\sigma',
  \qquad t\mathcal M[\phi](t,s)=-2\mathcal A_\sigma(\sigma)-g\beta\mathcal J_\sigma'.
 \end{equation}
-Their difference is precisely the bed-advection term restricted via \eqref{eq:reduction-map}. Because $\partial_\phi$ commutes with $Y_5$, it acts by shifting $F$, which is why the reduced equations depend only on $p(\sigma)=F'(\sigma)$.
+The two right-hand sides differ solely by the restricted bed-advection term from \eqref{eq:reduction-map}, and commuting $\partial_\phi$ with $Y_5$ explains why only $p=F'$ appears.
 
 \paragraph{Translation and travelling-wave profiles.}
-For the general translation combination $\phi(t,s)=\gamma t+F(z)$ with $z=s-ct$, write $p(z)=F'(z)$ and $u_\gamma(p)=\gamma-cp$. On the positive chart $p(z),u_\gamma(p(z))>0$, direct substitution gives
+For $\phi(t,s)=\gamma t+F(z)$ with $z=s-ct$, put $p(z)=F'(z)$ and $u_\gamma(p)=\gamma-cp$. On $p(z),u_\gamma(p(z))>0$, direct substitution gives
 \begin{align}
  \mathcal M[\phi](t,s)&=(L_{c,\gamma}(p(z))p')',&
  L_{c,\gamma}(p)&=\gamma(g/p^3-c^2)+g\beta c\,u_\gamma(p)^{m-1}/p,\notag\\
@@ -614,33 +608,30 @@ For the general translation combination $\phi(t,s)=\gamma t+F(z)$ with $z=s-ct$,
  L^{\mathcal P}_{c,\gamma}(p)&=c(-c^2p+g/p^2+g\beta u_\gamma(p)^{m-1}/p).
  \label{eq:tilted}
 \end{align}
-Indeed, $\mathcal A(t,s)=(c^2p(z)-g/p(z)^2)p'$ and $T_m(t,s)=-cu_\gamma(p(z))^{m-1}p'/p(z)$; in $\mathcal M$, the coefficient of $\mathcal A'$ combines with the advection factor to produce $-(\gamma\mathcal A/p)'$. Setting $I=L_{c,\gamma}(p(z))p'$ integrates $\mathcal M=0$ once to $\int_{p_0}^{p(z)}L_{c,\gamma}(v)\,\mathrm dv=I(z-z_0)$, giving a local quadrature wherever $L_{c,\gamma}(p(z))\ne0$. Integrating the bed one-form \eqref{eq:bed-form} via $b_s=-\mathcal A/g$ and $b_t+cb_s=I/g$ gives the explicit Eulerian lift
+Here $\mathcal A=(c^2p-g/p^2)p'$ and $T_m=-cu_\gamma(p)^{m-1}p'/p$; in $\mathcal M$, the $\mathcal A'$ term merges with bed advection into $-(\gamma\mathcal A/p)'$. Writing $I=L_{c,\gamma}(p)p'$ integrates $\mathcal M=0$ to the local quadrature $\int_{p_0}^{p(z)}L_{c,\gamma}(v)\,\mathrm dv=I(z-z_0)$ wherever $L_{c,\gamma}(p)\ne0$. Integrating \eqref{eq:bed-form} via $b_s=-\mathcal A/g$ and $b_t+cb_s=I/g$ gives the Eulerian lift
 \begin{equation}\label{eq:tilt-lift}
  \begin{gathered}x=\gamma t+F(z),\quad h(t,x)=1/p(z),\quad u(t,x)=u_\gamma(p(z)),\\ B(t,x)=b_0-1/p(z)-c^2p(z)^2/(2g)+(I/g)t,\end{gathered}
 \end{equation}
-which satisfies $h(t,x)(u(t,x)-\gamma)=-c$. Two special cases are especially transparent:
-\begin{itemize}\setlength{\itemsep}{1pt}
- \item When $c=0$, $\gamma>0$, and $I\ne0$, we have $p'=Ip^3/(\gamma g)$, producing a nonconstant depth profile translating rigidly at speed $\gamma$ with constant depth gradient $h_x=-I/(\gamma g)$ and uniform velocity $u(t,x)=\gamma$.
- \item When $\gamma=0$, positivity of $u_\gamma=-cp$ forces $c<0$. Setting $p^{m-2}p'=k$ yields $p(z)=p_0e^{k(z-z_0)}$ for $m=1$ and $p(z)^{m-1}=p_0^{m-1}+(m-1)k(z-z_0)$ for $m>1$ (with constant $p$ at $k=0$).
-\end{itemize}
-Similarly, for the spatially uniform family $\phi(t,s)=\gamma s+G(t)$ ($\gamma>0$), both $\mathcal P$ and $\mathcal M$ reduce to $G'''=0$; the $\mathcal M$ lift on $G'>0$ is $h(t,x)=1/\gamma$, $u(t,x)=G'(t)$, and $b(t,s)=b_0-(\gamma sG''+(G')^2/2)/g$. Meanwhile, the Eulerian bed-drift reduction $X_1+\alpha X_3$ in Table~\ref{tab:reductions} enforces constant discharge $H(x)U(x)$ and $U(x)^m=A_2-\alpha x/\kappa$, which recovers the $\gamma=0$ case of \eqref{eq:tilt-lift} with water flux $-c>0$ and drift rate $\alpha=I/g$.
+with $h(u-\gamma)=-c$. Two limiting cases are worth noting. If $c=0$, $\gamma>0$, and $I\ne0$, then $p'=Ip^3/(\gamma g)$ describes a nonconstant depth profile drifting at speed $\gamma$ with $h_x=-I/(\gamma g)$ and $u\equiv\gamma$. If $\gamma=0$, positivity forces $c<0$, and $p^{m-2}p'=k$ integrates to $p(z)=p_0e^{k(z-z_0)}$ at $m=1$ or $p(z)^{m-1}=p_0^{m-1}+(m-1)k(z-z_0)$ for $m>1$ (constant $p$ at $k=0$).
 
-\paragraph{General chart recipe for any representative.}\label{app:charts}
-To reduce any other representative $X=\tau(t)\partial_t+\xi(x)\partial_x+\eta(t,x,U)\cdot\partial_U$ (with $x=s$ in the scalar setting), choose a transverse section $t=t_*$ where $\tau(t_*)\ne0$, or $x=x_*$ where $\xi(x_*)\ne0$. The remaining coordinate labels the orbits, the restriction of $U$ to the section defines the profile $F$, and flowing along $X$ recovers the full invariant graph. Derivatives normal to the section follow by differentiating
+For $\phi(t,s)=\gamma s+G(t)$ ($\gamma>0$), both $\mathcal P$ and $\mathcal M$ collapse to $G'''=0$, lifting in $\mathcal M$ (on $G'>0$) to $h=1/\gamma$, $u=G'(t)$, and $b=b_0-(\gamma sG''+(G')^2/2)/g$. Meanwhile, the Eulerian bed-drift family $X_1+\alpha X_3$ in Table~\ref{tab:reductions} keeps $HU$ constant with $U^m=A_2-\alpha x/\kappa$, matching \eqref{eq:tilt-lift} at $\gamma=0$, flux $-c>0$, and $\alpha=I/g$.
+
+\paragraph{\discard{General chart recipe for any representative.}}\label{app:charts}
+\discard{To reduce any other representative $X=\tau(t)\partial_t+\xi(x)\partial_x+\eta(t,x,U)\cdot\partial_U$ (with $x=s$ in the scalar setting), choose a transverse section $t=t_*$ where $\tau(t_*)\ne0$, or $x=x_*$ where $\xi(x_*)\ne0$. The remaining coordinate labels the orbits, the restriction of $U$ to the section defines the profile $F$, and flowing along $X$ recovers the full invariant graph. Derivatives normal to the section follow by differentiating}
 \begin{equation}\label{eq:chart-reduction}
- U_t=\frac{\eta(t,x,U(t,x))-\xi(x)U_x}{\tau(t)},\qquad
- U_x=\frac{\eta(t,x,U(t,x))-\tau(t)U_t}{\xi(x)},
+ \textcolor{black!45}{U_t=\frac{\eta(t,x,U(t,x))-\xi(x)U_x}{\tau(t)},\qquad
+ U_x=\frac{\eta(t,x,U(t,x))-\tau(t)U_t}{\xi(x)},}
 \end{equation}
-respectively, before evaluating on the section. For $\mathcal E_1$ (using the coefficient matrix $A_E$ of Appendix~\ref{app:eulerian}), this yields the reduced ODEs
+\discard{respectively, before evaluating on the section. For $\mathcal E_1$ (using $A_E$ from Appendix~\mbox{\ref{app:eulerian}}), this yields}
 \[
- \begin{aligned}
+ \textcolor{black!45}{\begin{aligned}
   (\tau(t_*)A_E(F(x))-\xi(x)I)F'+\eta(t_*,x,F(x))&=0,\\
   (\xi(x_*)I-\tau(t)A_E(F(t)))F'+A_E(F(t))\eta(t,x_*,F(t))&=0,
- \end{aligned}
+ \end{aligned}}
 \]
-on $t=t_*$ and $x=x_*$, respectively, where primes differentiate in the surviving coordinate. For $\mathcal P$ and $\mathcal M$, one substitutes the resulting jets through order three into \eqref{eq:P} or \eqref{eq:M}. Purely vertical lines have no invariant graph, and chart positivity must always be verified before transferring a solution by adjoint equivalence: for instance, in $\mathcal P$ at $m=1$, a boost conjugates $Y_1+\gamma Y_2$ to $Y_1$, yet maps $\phi_t=\gamma>0$ to $\phi_t=0$, so one applies the chart formula directly to $Y_1+\gamma Y_2$.
+\discard{on $t=t_*$ and $x=x_*$, respectively, where primes differentiate in the surviving coordinate. For $\mathcal P$ and $\mathcal M$, one substitutes jets through order three into \mbox{\eqref{eq:P}} or \mbox{\eqref{eq:M}}. Purely vertical lines admit no invariant graph, and chart positivity must be checked before transferring a solution by adjoint equivalence: in $\mathcal P$ at $m=1$, a boost conjugates $Y_1+\gamma Y_2$ to $Y_1$ yet sends $\phi_t=\gamma>0$ to $\phi_t=0$, so one applies the chart formula directly to $Y_1+\gamma Y_2$.}
 
-An itemized audit of the published 2022 and 2026 formulas is recorded in Appendix~\ref{app:audit}.
+Appendix~\ref{app:audit} records the itemized audit of the 2022 and 2026 published formulas.
 
 \chapter{Singularities of the Reduced Profiles}\label{ch:series}
 Once a symmetry subgroup reduces a PDE to an ordinary differential equation, the second kind of degeneracy enters: the coefficient multiplying the highest derivative may vanish along a profile. Answering the one-dimensional part of \textbf{Q3}, we examine three regimes of increasing singularity---regular points admitting convergent Taylor series, characteristic tangencies where the leading coefficient vanishes, and a genuine pole at $m=3$ admitting a convergent Laurent branch---before recording how material-chart errors propagate back to Eulerian physical fields.

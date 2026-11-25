@@ -1,0 +1,3 @@
+! LaTeX Error: File `appendixnumberbeamer.sty' not found.
+! Emergency stop.
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -1,0 +1,170 @@
+[
+  {
+    "path": "draft/dissertation_wku_compact.pdf",
+    "sha256": "c3c91241df88f8ac1addcaab3a52154c8d5d9c1e8c60183b10ef908cbae04a4a",
+    "bytes": 747294,
+    "pages": 26,
+    "text_characters": 81309
+  },
+  {
+    "path": "ref/Understanding and Mitigating Gradient Pathologies in Physics-Informed Neural Networks.pdf",
+    "sha256": "937e4f3610d52f283e124492ec836740dba6cdb0390ff3919a583d25be2b3881",
+    "bytes": 7367775,
+    "pages": 28,
+    "text_characters": 153693
+  },
+  {
+    "path": "ref/main/A Hyperbolic Moment Based Shallow Water Model for Coupled Bedload–Suspended Load Morphodynamics with Variable Density.pdf",
+    "sha256": "50e5be6bfd3d13128280a02c8c74b62b8318e8b5428a791198c122035b31c384",
+    "bytes": 949465,
+    "pages": 50,
+    "text_characters": 302952
+  },
+  {
+    "path": "ref/main/A Unified Benchmark of Physics-Informed Neural Networks and Kolmogorov-Arnold Networks for Ordinary and Partial Differential Equations.pdf",
+    "sha256": "33090c6b702d0ff203c604e6b8e1974ee3b57dddf76f3cceee52d842c49a7020",
+    "bytes": 14752120,
+    "pages": 23,
+    "text_characters": 70773
+  },
+  {
+    "path": "ref/main/A Unified Framework to Enforce, Discover, and Promote Symmetry in Machine Learning.pdf",
+    "sha256": "0e6bc7ec407a4cf910842175f2f3fcf0c8294d9c8f741999ec7417fdd324c352",
+    "bytes": 4077994,
+    "pages": 83,
+    "text_characters": 257819
+  },
+  {
+    "path": "ref/main/Contributions to the Algorithmic Foundations of Approximate Lie Symmetry Algebras of Differential Equations.pdf",
+    "sha256": "e44eb7653be54ec878404074f6a2e1a02b6534d4d2465c1250630874595c34c5",
+    "bytes": 325823,
+    "pages": 14,
+    "text_characters": 28928
+  },
+  {
+    "path": "ref/main/Contributions to the Algorithmic Foundations of approx Lie Symmetry Algebras of DE.pdf",
+    "sha256": "e44eb7653be54ec878404074f6a2e1a02b6534d4d2465c1250630874595c34c5",
+    "bytes": 325823,
+    "pages": 14,
+    "text_characters": 28928
+  },
+  {
+    "path": "ref/main/Felix M. Exner Uber die Wechselwirkung zwischen Wasser und Geschiebe in Flussen.pdf",
+    "sha256": "fdf16e241fe20e02b37a095813a2b81b669307a38b3ca17f7f1aeee64389a0f9",
+    "bytes": 3028994,
+    "pages": 44,
+    "text_characters": 110765
+  },
+  {
+    "path": "ref/main/Formal Deduction of the Saint-Venant-Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy.pdf",
+    "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc",
+    "bytes": 1395379,
+    "pages": 31,
+    "text_characters": 118826
+  },
+  {
+    "path": "ref/main/Formal Deduction of the Saint–Venant–Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy.pdf",
+    "sha256": "d33ba2ce6faff6979703e334f29bb7a0da7c5ae41ec4c00da7ba501be14c63fc",
+    "bytes": 1395379,
+    "pages": 31,
+    "text_characters": 118826
+  },
+  {
+    "path": "ref/main/Framework for potential systems and nonlocal symmetries- Algorithmic approach.pdf",
+    "sha256": "ede131d39c009b54c52f2514b286bc3d32c9f59d1b54aa4e1d182419f576ad59",
+    "bytes": 756106,
+    "pages": 20,
+    "text_characters": 102549
+  },
+  {
+    "path": "ref/main/Group Invariant Solutions Without Transversality.pdf",
+    "sha256": "a9eb029675397390e37aa5f4f1e383675683c1a185287a308c1be1284c3e5273",
+    "bytes": 248243,
+    "pages": 34,
+    "text_characters": 119647
+  },
+  {
+    "path": "ref/main/Invariant reduction for partial differential equations. IV- symmetry that rescale geometric structures.pdf",
+    "sha256": "e9b3501dfae74de62246a066a9f89279a88b63c6074897a71172c6e1e25c5a03",
+    "bytes": 4973986,
+    "pages": 17,
+    "text_characters": 92275
+  },
+  {
+    "path": "ref/main/Learning First Integrals via Backward-Generated Data and Guided RL.pdf",
+    "sha256": "eb7fe9b66cacc51d98571fa0a939eda9c81931f439ea356a03c92a056dab871f",
+    "bytes": 987401,
+    "pages": 17,
+    "text_characters": 84778
+  },
+  {
+    "path": "ref/main/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables.pdf",
+    "sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5",
+    "bytes": 290300,
+    "pages": 11,
+    "text_characters": 58663
+  },
+  {
+    "path": "ref/main/Lie Symmetries of Differential Equations - Theory, Applications, and Symbolic Computation.pdf",
+    "sha256": "d779bbc9532c8a81736bc8b65e0f42410dd12a4b7b8264f9a7a6aed41dddf8b7",
+    "bytes": 12509437,
+    "pages": 502,
+    "text_characters": 1387473
+  },
+  {
+    "path": "ref/main/Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model.pdf",
+    "sha256": "54fa53cf28ff2f3cb224e45eece88e7f5d2184303a81ddd47ff8058304b16d86",
+    "bytes": 300262,
+    "pages": 12,
+    "text_characters": 67313
+  },
+  {
+    "path": "ref/main/Nemytskii neural operator a nonlinear model reduction method for parametrized partial differential equations.pdf",
+    "sha256": "c86b3cc17a9db9621ecc57308746e3f93e34af3b9ea3efc75d9f5e2f523beae9",
+    "bytes": 666856,
+    "pages": 30,
+    "text_characters": 74929
+  },
+  {
+    "path": "ref/main/Taylor-Model Physics-Informed Neural Networks (PINNs) for.pdf",
+    "sha256": "64e95652a63c2512922bf176ede87fdae2692d3d25ae639f92357edfd0560259",
+    "bytes": 671812,
+    "pages": 22,
+    "text_characters": 93512
+  },
+  {
+    "path": "ref/main/Understanding and mitigating gradient pathologies in physics-informed neural networks.pdf",
+    "sha256": "937e4f3610d52f283e124492ec836740dba6cdb0390ff3919a583d25be2b3881",
+    "bytes": 7367775,
+    "pages": 28,
+    "text_characters": 153693
+  },
+  {
+    "path": "ref/main/Well-balanced physics-based finite volume schemes for SVE.pdf",
+    "sha256": "aba342d9bb53ae6c742c7820fe97af92ad5339a5a96fd2b0f8c1e936e4f02983",
+    "bytes": 1931961,
+    "pages": 16,
+    "text_characters": 162663
+  },
+  {
+    "path": "ref/main/applications-of-lie-groups-to-differential-equations.pdf",
+    "sha256": "a61afbbc648b910a238183e6d8851caaaad2c19a8d78df251e8c336d8b59d781",
+    "bytes": 21783196,
+    "pages": 524,
+    "text_characters": 1282845
+  },
+  {
+    "path": "ref/main/noether(Invariant Variation Problems).pdf",
+    "sha256": "b9f73c19db726b7fd427a38fb786a4a0e7653472abd56d3a042e3b0255ac07d5",
+    "bytes": 224300,
+    "pages": 14,
+    "text_characters": 72717
+  },
+  {
+    "path": "ref/main/symmetries-and-applications-of-differential-equations-2021.pdf",
+    "sha256": "7ad2a827b4b2a994b12df0a1ea0c9a435ddcbab715fa8639595688c46b1cdba6",
+    "bytes": 4463220,
+    "pages": 287,
+    "text_characters": 791269
+  }
+]

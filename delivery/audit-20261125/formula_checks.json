@@ -1,0 +1,57 @@
+{
+  "tilted_material_m2": {
+    "passed": true,
+    "difference": "0"
+  },
+  "tilted_printed_m2": {
+    "passed": true,
+    "difference": "0"
+  },
+  "common_scaling_material_m2": {
+    "passed": true,
+    "difference": "0"
+  },
+  "characteristic_determinant_m2": {
+    "passed": true,
+    "difference": "0"
+  },
+  "cubic_wave_continuity": {
+    "passed": true,
+    "difference": "0"
+  },
+  "cubic_wave_momentum": {
+    "passed": true,
+    "difference": "0"
+  },
+  "cubic_wave_exner": {
+    "passed": true,
+    "difference": "0"
+  },
+  "annular_compatible_D": {
+    "passed": true,
+    "difference": "0"
+  },
+  "annular_compatible_N": {
+    "passed": true,
+    "difference": "0"
+  },
+  "annular_bed_slope": {
+    "passed": true,
+    "difference": "0"
+  },
+  "annular_jacobian": {
+    "passed": true,
+    "difference": "0"
+  },
+  "annular_determinant": {
+    "passed": true,
+    "difference": "0"
+  },
+  "regular_polydisk_majorants": {
+    "passed": true,
+    "L_minus_one_upper": "5485583/13824000",
+    "L_F_upper": "1109551/864000",
+    "L_p_upper": "70907/16875",
+    "radius": "1/64"
+  }
+}

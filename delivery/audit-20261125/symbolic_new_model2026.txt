@@ -1,0 +1,44 @@
+{
+  "E2_profiles": {
+    "D": "-C1**2/(r**2*H(r)**2) + g*H(r)",
+    "N": "(f*(C2/r - f*r/2) + (C1**2/(r**2*H(r)**2) + (C2/r - f*r/2)**2)/r - g*(C1*K/(r*H(r)) - (C3/r - c*r/2)/(C1**2/(r**2*H(r)**2) + (C2/r - f*r/2)**2))/G)*H(r)",
+    "P_Z": "(C1*K/(r*H(r)) - (C3/r - c*r/2)/(C1**2/(r**2*H(r)**2) + (C2/r - f*r/2)**2))/G",
+    "V": "C1/(r*H(r))",
+    "W": "C2/r - f*r/2"
+  },
+  "E2_rotation_plus_bed_drift_residuals": [
+    "(r*H(r)*Derivative(V(r), r) + r*V(r)*Derivative(H(r), r) + H(r)*V(r))/r",
+    "-(f*r*W(r) - g*r*Derivative(H(r), r) - g*r*Derivative(Z(r), r) - r*V(r)*Derivative(V(r), r) + W(r)**2)/r",
+    "(f*r + r*Derivative(W(r), r) + W(r))*V(r)/r",
+    "(-G*r*V(r)**2*Derivative(Z(r), (r, 2)) - 2*G*r*V(r)*Derivative(V(r), r)*Derivative(Z(r), r) - G*r*W(r)**2*Derivative(Z(r), (r, 2)) - 2*G*r*W(r)*Derivative(W(r), r)*Derivative(Z(r), r) - G*V(r)**2*Derivative(Z(r), r) - G*W(r)**2*Derivative(Z(r), r) + 3*K*r*V(r)**2*Derivative(V(r), r) + 2*K*r*V(r)*W(r)*Derivative(W(r), r) + K*r*W(r)**2*Derivative(V(r), r) + K*V(r)**3 + K*V(r)*W(r)**2 + c*r)/r"
+  ],
+  "E2_slope_equation": "D*dH/dr=N; dZ/dr=P_Z",
+  "rank_1_exchange_residuals": [
+    "Derivative(H(t, r), t) + (r*H(t, r)*Derivative(V(t, r), r) + r*V(t, r)*Derivative(H(t, r), r) + H(t, r)*V(t, r))/r",
+    "-Omega**2*r - 2*Omega*W(t, r) + g*(Derivative(B(t, r), r) + Derivative(H(t, r), r)) + V(t, r)*Derivative(V(t, r), r) + Derivative(V(t, r), t) - W(t, r)**2/r",
+    "2*Omega*V(t, r) + V(t, r)*Derivative(W(t, r), r) + Derivative(W(t, r), t) + V(t, r)*W(t, r)/r",
+    "-k_d*a(t, r) + k_e*B(t, r) + Derivative(B(t, r), t) + (r*(-G*Derivative(B(t, r), r) + K*V(t, r))*(2*V(t, r)*Derivative(V(t, r), r) + 2*W(t, r)*Derivative(W(t, r), r)) + r*(-G*Derivative(B(t, r), (r, 2)) + K*Derivative(V(t, r), r))*(V(t, r)**2 + W(t, r)**2) + (-G*Derivative(B(t, r), r) + K*V(t, r))*(V(t, r)**2 + W(t, r)**2))/r",
+    "k_d*a(t, r) - k_e*B(t, r) + Derivative(a(t, r), t) + (-D_a*(Derivative(a(t, r), r)/H(t, r) - a(t, r)*Derivative(H(t, r), r)/H(t, r)**2)*H(t, r) + r*(-D_a*(Derivative(a(t, r), r)/H(t, r) - a(t, r)*Derivative(H(t, r), r)/H(t, r)**2)*Derivative(H(t, r), r) - D_a*(Derivative(a(t, r), (r, 2))/H(t, r) - a(t, r)*Derivative(H(t, r), (r, 2))/H(t, r)**2 - 2*Derivative(H(t, r), r)*Derivative(a(t, r), r)/H(t, r)**2 + 2*a(t, r)*Derivative(H(t, r), r)**2/H(t, r)**3)*H(t, r) + V(t, r)*Derivative(a(t, r), r) + a(t, r)*Derivative(V(t, r), r)) + V(t, r)*a(t, r))/r"
+  ],
+  "rank_1_rotation_quotient_variables": [
+    "t",
+    "r"
+  ],
+  "scope": "Exact quotients and selected branch tests. No maximal planar point-symmetry classification.",
+  "swirl_b": "(p - 3/10)*exp(-3*t) + 3/10",
+  "swirl_r_Qr": "1/20",
+  "swirl_residuals": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "tank_rotation_generator": "-y*dx+x*dy-v*du+u*dv",
+  "wholly_separate_E2_rotation_residuals": [
+    "(r*H(t, r)*Derivative(V(t, r), r) + r*V(t, r)*Derivative(H(t, r), r) + r*Derivative(H(t, r), t) + H(t, r)*V(t, r))/r",
+    "-(f*r*W(t, r) - g*r*Derivative(B(t, r), r) - g*r*Derivative(H(t, r), r) - r*V(t, r)*Derivative(V(t, r), r) - r*Derivative(V(t, r), t) + W(t, r)**2)/r",
+    "(f*r*V(t, r) + r*V(t, r)*Derivative(W(t, r), r) + r*Derivative(W(t, r), t) + V(t, r)*W(t, r))/r",
+    "-(G*r*V(t, r)**2*Derivative(B(t, r), (r, 2)) + 2*G*r*V(t, r)*Derivative(B(t, r), r)*Derivative(V(t, r), r) + G*r*W(t, r)**2*Derivative(B(t, r), (r, 2)) + 2*G*r*W(t, r)*Derivative(B(t, r), r)*Derivative(W(t, r), r) + G*V(t, r)**2*Derivative(B(t, r), r) + G*W(t, r)**2*Derivative(B(t, r), r) - 3*K*r*V(t, r)**2*Derivative(V(t, r), r) - 2*K*r*V(t, r)*W(t, r)*Derivative(W(t, r), r) - K*r*W(t, r)**2*Derivative(V(t, r), r) - K*V(t, r)**3 - K*V(t, r)*W(t, r)**2 - r*Derivative(B(t, r), t))/r"
+  ]
+}

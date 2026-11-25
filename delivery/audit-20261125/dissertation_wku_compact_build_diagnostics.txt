@@ -1,0 +1,2 @@
+==> First Aid for varwidth.sty applied!
+Output written on /home/carl/research/projects/Lie-ML_PDES/build/dissertation-audit-20261125/build-root/build/delivery/draft/dissertation_wku_compact.pdf (26 pages, 655386 bytes).
