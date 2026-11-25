@@ -44,6 +44,16 @@ For the 2026 scalar equations, the [frozen ansatz layers](derivations/sve2026-an
 
 The exact regular Taylor campaign uses rational input values and orders 3 to 8. A nonzero leading coefficient permits the analytic IVP theorem for real \(m\) on the positive chart. The Laurent example separately has a convergence disk proved by contraction. Rotation alone leaves two independent variables, while rotation plus time and bed drift leaves only radius. Fixed boundary geometry can exclude translations admitted by interior equations.
 
+## Annular quotient and learned profile
+
+On the selected rank-2 annular action, the invariant chart leaves one radial profile. \(V\), \(W\), and \(Z\) are then recovered exactly, and a learner on this chart approximates only that profile, or its coefficient map in the drift \(c\).
+
+The selected generators are the commuting rotation \(R=-y\partial_x+x\partial_y-v\partial_u+u\partial_v\) and the drift \(T_c=\partial_t+c\partial_B\). For \(r>0\) both the point orbits and the base orbits have rank 2, so the invariant graph is \(h=H(r)\), \(\mathbf w=V(r)\mathbf e_r+W(r)\mathbf e_\theta\), and \(B=Z(r)+ct\). The undivided profile equation is \(DH'=N\), with \(V=C_1/(rH)\), \(W=C_2/r-fr/2\), \(Q=C_3/r-cr/2\), and \(Z'=P_Z\). Rotation alone leaves a partial differential system in \((t,r)\). The six generators span the kernel of the shared affine search, 56 coefficients of rank 50. [The annular assumptions](annular-transcritical-theorem-20261101/ASSUMPTIONS.md) keep that search inside the parameter-independent affine class.
+
+The four sampled tasks in the data table are separate scalar equations. Bed drift, printed \(P\), and the material travelling wave each use their own reduced operator and traces. The exchange task learns the offset \(b(t)\) after the swirl fixture \(V=0\), \(W=\omega r\), \(D_a=0\) on a quotient that still has coordinates \((t,r)\).
+
+The annular generators are the kernel of that declared affine determining system. The profile ODE is the governing system pulled back to the selected invariant graph. The crossing statement adds the saddle hypothesis, the frozen parameter slice, and an external existence argument. The slice \(g=K=G=f=C_1=C_2=1\), \(C_3=c/2-15/16\) makes \((r,H)=(1,1)\) critical. Saddles in this slice require \(c<-77/12\). At \(c=0\) the same critical point has a negative slope discriminant. In the compact dissertation the displayed proof is the disk-algebra contraction of the desingularized equation, identified there as a Briot–Bouquet equation. The annular note applies Teschl's stable-manifold theorems, Theorems 9.4–9.6, to the reduced planar field \((D,N)\). Printed \(P\) remains a transcribed scalar equation under a separate audit. The ball-contraction bound used for a profile defect is a general fixed-point fact about the chosen operator.
+
 ## Where ansätze enter
 
 | Layer | Form used | What justifies or removes the restriction |

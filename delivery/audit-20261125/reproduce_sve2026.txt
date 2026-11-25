@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/carl/research/projects/Lie-ML_PDES/delivery/reproduce_sve2026.py", line 1310, in <module>
+    main()
+  File "/home/carl/research/projects/Lie-ML_PDES/delivery/reproduce_sve2026.py", line 1293, in main
+    evidence["primary_pdf_sha256"] = sha256(source.read_bytes()).hexdigest()
+                                            ^^^^^^^^^^^^^^^^^^^
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/carl/miniforge3/envs/pinn/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/carl/research/projects/Lie-ML_PDES/ref/Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables.pdf'

@@ -158,9 +158,7 @@ included so the mathematical and computational claims are checked and made consi
 
 %\noindent\textbf{Goal.} Build computable, physically admissible reference solutions for coupled shallow-water and mobile-bed (Saint--Venant--Exner) equations, and pin down when a fitted reduced profile actually carries a continuous error bound.
 
-%\medskip\noindent\textbf{Method.} Working on positive jet charts where depth and velocity stay bounded away from zero, I classify the classical point symmetries as the bedload exponent $m$ varies, restrict the PDEs to regular invariant graphs, and recover Eulerian water and bed fields by integrating a closed material bed one-form. Whenever a reduced profile is fitted numerically, the prescribed traces and any local singular prefix are fixed first; only the remaining free coefficients are fitted, and certification runs through an integral fixed-point defect rather than a raw differential residual.
-
-%\medskip\noindent\textbf{Result.} Across all real exponents $m\ge1$ on the positive $1+1$ charts, $m=3$ is the sole exponent where the Eulerian system $\mathcal E_1$ and both scalar formulations $\mathcal E_{P},\mathcal E_{L}$ gain a scaling generator, while at $m=1$ an extra Galilean boost enters only the printed scalar $\mathcal E_{P}$ because of its advected bed law. On the reduced ODEs, constructive contractions give a sufficient Taylor radius at regular points, a convergent cubic Laurent branch right at the threshold $g\kappa=1/4$, and two real-analytic germs crossing a hyperbolic annular saddle. On a rotating-tank swirl benchmark, exact rational Bernstein arithmetic certifies both the continuous profile error and all five lifted Cartesian balances. In four controlled sampled profile tests, however, degree-15 Chebyshev collocation beat the residual-gated neural cell in field error on every task.
+%%%完成其它章节后自动生成，暂时不动.%%%
 
 \medskip\noindent\textbf{Keywords}\quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner systems, material reconstruction, singular branches, fixed-point defect, structure-constrained approximation.
 
@@ -171,10 +169,12 @@ included so the mathematical and computational claims are checked and made consi
 \toprule
 Symbol & Meaning\\\midrule
 $\mathcal E_1,\ \mathcal E_{P},\ \mathcal E_{L}$ & Eulerian $(1+1)$D equations\cite{sve2022}, printed scalar equations, compatible material scalar equations with a Lagrangian coordinate \cite{sve2026} \\
-$\mathcal E_2,\ \mathcal E_{\rm exch}$ & Cubic planar model and planar model with bed--load exchange\\
-$t,x,s,\phi$ & Time, Eulerian position, mass label, position of a labelled particle\\
+$\mathcal E_2,
+%issue: 定义不全面。 
+\,\mathcal E_{\rm 2\textbf{-} exch}$ & Cubic planar model and planar model with bed--load exchange\\
+$t,x,s,\phi(t,s)$ & Time, Eulerian position, mass label, position of a labelled particle\\
 $h,u,B,b,\ q_b$ & Depth, velocity, Eulerian and pulled-back bed, sediment flux\\
-$m,\kappa,\beta$ & Transport exponent in real number, transport coefficient, $\beta=m\kappa$\\
+$m,\kappa,\beta$  & Transport exponent in real number, transport coefficient, $\beta=m\kappa$\\ %补全所有常数，在第profile章节解释物理建模。e.g.: A_g =Grass bedload coefficient (an empirical constant)
 $Q_X,\ \mathscr D_\mu$ & Invariant-surface characteristic and on-shell determining operator\\
 $F,p,\ L_{\mathcal E_{L}},\ I_0$ & Material profile, its derivative, common-scaling leading coefficient, and the first integral\\
 $V,W,\ \Delta_c,\ \mathbf J_*$ & Radial and azimuthal velocities, radial leading coefficient, saddle Jacobian\\
@@ -194,8 +194,7 @@ I began with variable bed condition in a not every-day-aware fluid dynamics or p
 
 In short, two kinds of reduction guide the analysis layer. Changing the function's exponent $m$ in the bedload law $u^m$ can lower the determining rank and admit an extra generator ($X_5$ in Eulerian variables, $Y_5$ in material variables); with a generator fixed, the leading coefficient of a profile equation can vanish, so the regular form obtained by division fails there. A local tangency, pole or critical crossing then needs its own analysis. The first phenomenon changes the available symmetries. The second changes how a selected equation is solved.
 
-%precisely where the parameter product $g\kappa$ becomes scaling-invariant. Second, even with all PDE parameters held fixed inside a single chosen reduction, the coefficient multiplying the highest derivative of the reduced ODE can vanish along a profile. What made this distinction sharp for me was comparing two concrete calculations: in the common-scaling reduction $(L(z)F'')'=0$ of the material equation $\mathcal E_{L}$, the factor $L(z)$ vanishes along a characteristic ray without adding any symmetry at all, and in the simple polynomial test $\phi(t,s)=t+s+s^3/6$ (Counterexample~\ref{ex:p-neq-m}), the printed scalar equation $\mathcal E_{P}$ vanishes identically while the physically compatible equation $\mathcal E_{L}$ leaves a nonzero residual $g$ at $s=0$. \authornote{Replace or narrow this calculation note if a different first counterexample motivated the split.} 
-%A mobile bed equation in the PDE system forces every coordinate change to stay honest: sediment transport reshapes the bed, and the bed slope feeds straight back into the water momentum balance \cite{fernandez2017,berthon2012}. 
+%这里可以通顺些
 
 Throughout the dissertation, I will use jet coordinates to verify classical point symmetries derived from infinitesimal generator $X$, orbit coordinates to select invariant profiles on a transverse section, and the closed bed 1-form $\omega_{\mathcal E_{L}}$ to reconstruct physical water and bed fields, while keeping the conservation of mass unfocused (Noether's theorem   \cite{noether1918} won't be used here since describing conservation law is out of scope). 
 
@@ -212,6 +211,7 @@ Under the reported settings, Chebyshev collocation produced smaller maximum samp
  %\item[\textbf{Q3}] When do the reduced profile equations admit regular Taylor series, a convergent pole expansion, or a smooth crossing through a critical point?
  %\item[\textbf{Q4}] What can a numerical fit certify on a reduced problem, and what test would show a computational benefit from reduction at matched accuracy?
 %\end{enumerate}
+Enjoy the philosophy excavated from zero.
 
 \paragraph{Scope and overview.}
 %The $1+1$ classification covers unrestricted local smooth point symmetries on positive charts for all real $m\ge1$, whereas the planar classification of the rotating cubic model $\mathcal E_2$ stays within a declared shared affine class. \discard{Within these boundaries, the dissertation makes five main contributions: (i) a complete point-symmetry classification and connected adjoint optimal-system catalogue for the three $1+1$ equations $\mathcal E_1$, $\mathcal E_{P}$, and $\mathcal E_{L}$; (ii) a compatible material reconstruction via a closed bed one-form, together with an audit of published scalar formulas; (iii) exact invariant waves and constructive convergence proofs for regular Taylor, cubic Laurent, and annular saddle profiles; (iv) a certified fixed-point defect replay alongside controlled sampled comparisons between classical and learned approximators; and (v) a physical dictionary translating reduced diagnostics back into the original governing balances.}
@@ -366,11 +366,20 @@ With bed porosity $\epsilon_{\rm bed}$, the two dimensionless parameters are $g=
 
 On the positive chart $h,u>0$, the $1+1$ Eulerian system $\mathcal E_1$ for depth $h(t,x)$, velocity $u(t,x)$, and bed elevation $B(t,x)$ reads
 \begin{align}\label{eq:E}
- \Delta_h(t,x)&=h_t+(hu)_x=0,\\
- \Delta_u(t,x)& =u_t+uu_x+g(h+B)_x=0,\notag\\
- \Delta_B(t,x)&=B_t+\kappa(u^m)_x=0 ,
+ \Delta_{1,1}(t,x)&=h_t+(hu)_x=0,\\
+ \Delta_{1,2}(t,x)& =u_t+uu_x+g(h+B)_x=0,\notag\\
+ \Delta_{1,3}(t,x)&=B_t+\kappa(u^m)_x=0 ,
 \end{align}
-with real $m\ge1$ and $g,\kappa>0$. \discard{In the 2022 study \mbox{\cite{sve2022}}, the momentum balance is written in conservative form; its residual is $h\Delta_u+u\Delta_h$, so the two versions agree on $h>0$.} \discard{A bed-slope term $-G_0u^n B_x$ can be added by changing $q_b(u)=\kappa u^m$ to $q_b(u,B_x)=\kappa u^m-G_0u^n B_x$, as in Chapter~\mbox{\ref{ch:continuation}}, while all $1+1$ results below retain $q_b(u)=\kappa u^m$.} Restricting to $u>0$ keeps $u^m$ real analytic; at $u=0$, regularity depends on $m$ and on how the flux is extended to negative velocities.
+with real $m\ge1$ and $g,\kappa>0$. %\discard{In the 2022 study \mbox{\cite{sve2022}}, the momentum balance is written in conservative form; its residual is $h\Delta_u+u\Delta_h$, so the two versions agree on $h>0$.} \discard{A bed-slope term $-G_0u^n B_x$ can be added by changing $q_b(u)=\kappa u^m$ to $q_b(u,B_x)=\kappa u^m-G_0u^n B_x$, as in Chapter~\mbox{\ref{ch:continuation}}, while all $1+1$ results below retain $q_b(u)=\kappa u^m$.} 
+
+%在页脚注释说明sve2022, sve2026论文的公式错误由gpt符号计算验证.
+$\Delta_{2,1}=\Delta_{1,1}$, and 
+\begin{align*}
+    \Delta_{2,3} &= B_t + \zeta (A_g u^m)_x \\
+    &= B_t + \frac{m\, A_g}{1-\epsilon} u^{m-1}(u)_x=0
+\end{align*}
+for $\mathcal E_P$ \cite{sve2026}.
+Restricting to $u>0$ keeps $u^m$ real analytic; at $u=0$, regularity depends on $m$ and on how the flux is extended to negative velocities.
 
 \paragraph{The printed scalar and a compatible scalar}\label{sec:material}
 Because $d[h(t,x)\,dx-h(t,x)u(t,x)\,dt]=\Delta_h(t,x)\,dt\wedge dx$, water continuity locally supplies a Lagrangian mass label $s(t,x)$ satisfying $s_x=h$ and $s_t=-hu$. Since $h>0$, inverting $s(t,x)$ at fixed $t$ gives the parcel position $x=\phi(t,s)$. Writing $b(t,s)=B(t,\phi(t,s))$ for the bed elevation evaluated at the moving parcel, the chain rule yields

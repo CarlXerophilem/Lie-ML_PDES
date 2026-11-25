@@ -1,0 +1,102 @@
+{
+  "cartesian_original_residuals_of_trial": {
+    "bed": {
+      "continuous_abs_upper": {
+        "decimal": 0.00760858154296875,
+        "exact": "124659/16384000"
+      },
+      "polynomial": "-6561*t**10/896000"
+    },
+    "mobile_load": {
+      "continuous_abs_upper": {
+        "decimal": 0.00760858154296875,
+        "exact": "124659/16384000"
+      },
+      "polynomial": "6561*t**10/896000"
+    },
+    "momentum_x": {
+      "continuous_abs_upper": {
+        "decimal": 0.0,
+        "exact": "0"
+      },
+      "polynomial": "0"
+    },
+    "momentum_y": {
+      "continuous_abs_upper": {
+        "decimal": 0.0,
+        "exact": "0"
+      },
+      "polynomial": "0"
+    },
+    "water_mass": {
+      "continuous_abs_upper": {
+        "decimal": 0.0,
+        "exact": "0"
+      },
+      "polynomial": "0"
+    }
+  },
+  "certificate": {
+    "ball_radius": {
+      "decimal": 0.6,
+      "exact": "3/5"
+    },
+    "candidate_ball_upper": {
+      "decimal": 0.1517578125,
+      "exact": "777/5120"
+    },
+    "continuous_defect_upper_unweighted": {
+      "decimal": 0.0006942895666345373,
+      "exact": "1751787/2523136000"
+    },
+    "continuous_error_upper_unweighted": {
+      "decimal": 0.014580080899325285,
+      "exact": "5255361/360448000"
+    },
+    "continuous_error_upper_weighted": {
+      "decimal": 0.0027771582665381492,
+      "exact": "1751787/630784000"
+    },
+    "contraction_upper": {
+      "decimal": 0.75,
+      "exact": "3/4"
+    },
+    "norm": "sup_[0,1] exp(-gamma * t) * abs(error(t))",
+    "positive_lift_certified": true,
+    "sampled_defect_max_unweighted": {
+      "decimal": 0.0006656858766233766,
+      "exact": "6561/9856000"
+    }
+  },
+  "diagnostic_sampled_oracle_error_unweighted": 0.0005308236733918371,
+  "input": {
+    "check_cells": 128,
+    "degree": 10,
+    "fit_nodes": 17,
+    "gamma": "4",
+    "initial": "3/20",
+    "interval": [
+      "0",
+      "1"
+    ],
+    "method": "taylor",
+    "model": "dimensionless rotating exchange swirl",
+    "ode": "b'(t) + 3 b(t) = 9/10"
+  },
+  "schema_version": 1,
+  "sympy_version": "1.14.0",
+  "trace_exact": true,
+  "trial_coefficients_ascending": [
+    "3/20",
+    "9/20",
+    "-27/40",
+    "27/40",
+    "-81/160",
+    "243/800",
+    "-243/1600",
+    "729/11200",
+    "-2187/89600",
+    "729/89600",
+    "-2187/896000"
+  ]
+}
