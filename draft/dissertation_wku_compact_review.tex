@@ -1,11 +1,11 @@
 % Prepublication review manuscript. Editorial baseline: 044b0f8a4b39fc5c650b12bc0f24c86732ebbf13.
-% Reviewed against the author's codex/final commit 79614890006ea0420e80070f092a3f93c2d7063d.
+% Revised using review_plan.md and source replay at codex/final commit 8ea4a37c04d22d2b98781034ebf390c5e251a004.
 % House style: lead each chapter with its mathematical motivation, then give the
 % construction, hypotheses, and evidence. Keep the two degeneracies distinct,
 % name the applicable chart and norm, and use short signposts at proof transitions.
 % Use 1.05 body line spacing (1.0 in Chapter 4) and the existing section/float settings. Condense
 % repeated setup and defer unsupported extensions before changing typography.
-% Review prose and revised diagram labels are blue. Key equations retain red.
+% Review macros remain available; final prose is black. Key equations retain red.
 % Six-minute defense, nine slides: model and compatibility, parameter-to-algebra
 % map, universal flux reduction, planar geometry, solvability tests, defect
 % method, measured results, and conclusion. See defense_wku_madrid.tex.
@@ -37,11 +37,10 @@
 \definecolor{authorblue}{HTML}{1748A4}
 \newcommand{\authornote}[1]{\textcolor{authorblue}{\textit{(#1)}}}
 \newcommand{\keyeq}[1]{\textcolor{keyred}{#1}}
-% Blue additions follow the author's \revew convention. Older review marks remain.
-\DeclareRobustCommand{\revew}[1]{\textcolor{authorblue}{#1}}
-\DeclareRobustCommand{\review}[1]{\revew{#1}}
+\DeclareRobustCommand{\revew}[1]{#1}
+\DeclareRobustCommand{\review}[1]{#1}
 \pdfstringdefDisableCommands{\def\revew#1{#1}\def\review#1{#1}}
-\newenvironment{reviewtext}{\par\begingroup\color{authorblue}}{\par\endgroup}
+\newenvironment{reviewtext}{\par}{\par}
 \hypersetup{colorlinks=true,linkcolor=ink,citecolor=teal,urlcolor=teal,
  pdfauthor={Yihong Xiao},
  pdftitle={Parameter-Dependent Lie Symmetries and Semi-Analytical Solutions of Nonlinear PDEs},
@@ -148,11 +147,12 @@ ChatGPT drafted or revised explanatory prose, including the introduction,
 the chapter on Lie reduction and the conclusion. It also assisted with
 symbolic checks, derivations, LaTeX figures and Python reproduction code.
 Claude supplied feedback on the mathematical exposition and the proposed
-computational comparisons. Source references and the pinned replay are
+computational comparisons. Claude Opus 5.5 (in Cursor) helped design the
+SymPy Lie-reduction library for $(1\text{--}3)+1$D SVE systems used in
+Chapter~\ref{ch:models}; I checked those scripts by hand. ChatGPT also assisted with the planar potential formulation, parameter continuation, and the new benchmark code and numerical checks. Source references and the pinned replay are
 included so the mathematical and computational claims can be checked.
 
 \vfill
-\noindent\authornote{Confirm this disclosure and use the programme-approved declaration before signing.}
 \medskip
 
 \noindent Date \rule[-.3ex]{3.5cm}{.4pt}\hfill Signature \rule[-.3ex]{5.5cm}{.4pt}
@@ -164,11 +164,11 @@ included so the mathematical and computational claims can be checked.
 \chapter*{Abstract} %AlphaXiv-Skim format abstract
 \addcontentsline{toc}{chapter}{Abstract}
 
-\noindent\textbf{Goal.} \revew{Construct symmetry reductions and physically admissible reference solutions for Saint--Venant--Exner systems, with criteria for local solvability and certified approximation.}
+\noindent\textbf{Goal.} Construct parameter-dependent Lie-invariant solutions of Saint--Venant--Exner (SVE) systems, extending them across declared physical domains and certifying approximations.
 
-\medskip\noindent\textbf{Method.} \review{We map equation parameters to determining kernels and select admitted subalgebras; a common bed-drift symmetry reduces the autonomous Eulerian system for every $C^2$ velocity-dependent flux. Invariant graphs and the closed material bed form give the reduced equations and physical fields. Prescribed traces and branch conditions define the trial profiles. The rotating-tank polynomial fits an integral defect, while the gated cell in the sampled comparisons fits the reduced differential residual.}
+\medskip\noindent\textbf{Method.} Following the 2026 SVE symmetry and similarity-reduction method, we distinguish the printed scalar from its physically compatible counterpart. Determining kernels describe parameter strata; regular and Briot--Bouquet constructions describe reduced solution branches. A two-field planar potential formulation retains the three model parameters $m,K,G$. Exact reconstruction, analytical continuation, and independently verified neural-spectral profiles share one acceptance framework.
 
-\medskip\noindent\textbf{Result.} Across all real transport exponents $m\ge1$ on positive $1+1$ charts, the critical exponent $m=3$ adds a scaling symmetry to the Eulerian system $\mathcal E_1$ and to both scalar equations $\mathcal E_{P}$ and $\mathcal E_{L}$, whereas at $m=1$ only the published scalar $\mathcal E_{P}$ gains an extra Galilean boost. Selected translations reduce the autonomous Eulerian family for arbitrary $C^2$ velocity-dependent fluxes. Local analytic results establish regular Taylor series with an explicit sufficient radius, a convergent cubic Laurent branch at $g\kappa=1/4$, and two local analytic germs crossing an annular hydraulic saddle. \review{A rotating-tank replay encloses the continuous offset error with rational Bernstein bounds. In the Cartesian lift, three balances vanish identically and two have enclosed residuals.} Across four controlled sampled profile tests, Chebyshev collocation achieves smaller field errors than the residual-gated neural cell.
+\medskip\noindent\textbf{Result.} The positive $(1+1)$ charts admit classical point-symmetry classification for every real $m\ge1$. The exponent $m=3$ adds a scaling, and $m=1$ adds a boost only to the printed scalar. Bed-drift solutions extend over their maximal positive-velocity interval. In the planar model a parameter-dependent determinant identifies nondegenerate saddles; a separate exact swirl has a convex bed for $1\le m<2$. Two learned nonlinear annular branches use true equation parameters and have independently certified depth errors at 16 held-out branch--parameter pairs on $[.975,1.1]$; a nonzero common four-parameter neighborhood is also certified. The larger target $[.9,1.1]$ is not certified. A whole-domain drift control is certified in space at 12 held-out pairs. Local Taylor, Laurent and saddle constructions supply existence and convergence; neither general IBVP solvability nor a universal learning advantage is claimed.
 
 \medskip\noindent\textbf{Keywords}\quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner systems, material reconstruction, singular branches, fixed-point defect, structure-constrained approximation.
 
@@ -179,14 +179,14 @@ included so the mathematical and computational claims can be checked.
 \toprule
 Symbol & Meaning\\\midrule
 $\mathcal E_1,\mathcal E_P,\mathcal E_L$ & \revew{2022 Eulerian SVE~\cite{sve2022}, 2026 printed scalar~\cite{sve2026}, compatible Lagrangian scalar derived from $\mathcal E_1$}\\
-$\mathcal E_2,\mathcal E_{2\text{-}\mathrm{exch}}$ & \revew{Rotating planar cubic model and rotating model with bed--load exchange}\\
+$\mathcal E_2,\mathcal E_{2\text{-}\mathrm{exch}}$ & \revew{Rotating planar model and cubic exchange control}\\
 \revew{$\Delta_{i,j}$} & \revew{Eulerian residual. $i=1,2$ refers to the 2022 and 2026 papers, and $j=1,2,3$ to water mass, momentum and bed evolution.}\\
 $t,x,s,\phi(t,s)$ & Time, Eulerian position, mass label, \revew{inverse mass-coordinate function, $x=\phi(t,s)$}\\
 $h,u,B,b,q_b$ & Depth, velocity, Eulerian bed and its expression in mass coordinates, \revew{porosity-adjusted sediment flux}\\
 \revew{$L_0,H_0,U_0,T_0$} & \revew{Horizontal, depth, velocity and time scales, $T_0=L_0/U_0$}\\
 \revew{$g_{\rm d},A_{g,i,\rm d},\epsilon_{\rm bed}$} & \revew{Dimensional gravity, empirical Grass bedload coefficient and bed porosity}\\
 $g,m,\kappa_i,\kappa$ & \revew{Scaled gravity, transport exponent, bedload coefficient of source $i$, common coefficient $\kappa=\kappa_1=\kappa_2$}\\
-\revew{$\mathsf C,f,K,G$} & \revew{Coriolis matrix, Coriolis rate, cubic bedload coefficient and bed-slope coefficient}\\
+\revew{$\mathsf C,f,K,G$} & \revew{Coriolis matrix, Coriolis rate, bedload and bed-slope coefficients}\\
 \revew{$\Omega,\omega,k_d,k_e,D_a$} & \revew{Rotation and swirl rates, deposition and entrainment rates, mobile-load diffusivity}\\
 $Q_X,\mathscr D_\mu$ & Invariant-surface characteristic and on-shell determining operator\\
 $F,p,L(z),I_0$ & Material profile, its derivative, common-scaling leading coefficient and first integral\\
@@ -201,25 +201,21 @@ $\mathcal T,\Lambda,\varpi$ & \revew{Profile fixed-point operator, contraction b
 \pagenumbering{arabic}
 
 \chapter{Introduction}\label{ch:introduction}
-\revew{This dissertation develops a semi-analytical workflow for Saint--Venant--Exner (SVE) equations, together with a record of the symbolic calculations and the conditions for recovering physical solutions.}
+This dissertation follows the infinitesimal generators, one-dimensional subalgebra selection, and similarity reductions of Paliathanasis, Leon and Leach~\cite{sve2026}, together with the classical geometric foundations~\cite{olver,oliveri}. My motivation is mathematical: parameter changes can alter admitted symmetry directions, while singularities of a reduced equation can alter the existence of its solutions. I study these two mechanisms separately and use them to guide the construction, continuation and approximation of physically reconstructible profiles.
 
-\revew{I began with an interest in Lie symmetries, from classical examples such as the heat equation to the question of what conditional symmetries might allow. After reading the two SVE studies~\cite{sve2022,sve2026}, I became interested in the effect of the variable bed and its transport exponent. Their symmetry algebras depend on the exponent $m$, which may take any real value $m\ge1$ in our positive-velocity model. This led me to ask which variables a symmetry can remove from a nonlinear PDE and how much of its physical structure can be retained along the way.}
+The Saint--Venant--Exner equations couple shallow-water motion with changes of the sediment bed. The HEC-RAS technical reference~\cite[Sec.~2.9, Eq.~(2-46)]{hecras2019} includes a slope-dependent bed-change term. It motivates retaining bed-slope effects in the planar reference model; the present idealized equations are not a reconstruction or calibration of HEC-RAS.
 
-\revew{Two different parameter effects guide the analysis layer. Changing $m$ can lower the rank of the determining equations and introduce an additional generator. Once we choose a generator, the resulting profile may also reach a point where its leading coefficient vanishes. For the cubic case the combination $g\kappa$ determines when the simple wave loses positive depth and a Laurent pole becomes possible. In the rotating annular model, even with the PDE parameters fixed, changing the bed drift $c$ can alter the existence of a critical crossing.}
+The first discriminant is the rank of a determining operator, which governs available group actions. The second is a vanishing coefficient in a reduced equation, which governs local solvability. We distinguish the printed material scalar $\mathcal E_P$ from the compatible equation $\mathcal E_L$ and reconstruct the Eulerian fields through a mass-coordinate inverse and a closed bed form. A planar potential formulation adds a spatial variable, a second unknown function, and a bed-slope parameter within a specified vorticity and circulation class.
 
-\revew{I use jet coordinates to check the group action and orbit coordinates to select invariant profiles on a transverse section. By \emph{reconstruction}, I mean returning from such a reduced profile to the original physical variables. For the compatible material scalar $\mathcal E_L$, this involves finding the inverse mass-coordinate function $x=\phi(t,s)$, integrating the closed bed form $\omega_{\mathcal E_L}$ and inverting the mass coordinate to obtain $(h,u,B)(t,x)$. These fields must then satisfy the original Eulerian balances $\mathcal E_1$. Continuity supplies the mass coordinate throughout the calculation.}
-
-\revew{For the numerical layer, I first use the reduced equation to prescribe the trace and the trial form. I compare a residual-gated fit inspired by LNN-PINN~\cite{tao2026} and invariant PINNs~\cite{arora2023} with Taylor and Chebyshev controls. LieSolver~\cite{klausen2026} concerns linear initial-boundary value problems and provides further motivation.}
-\revew{The present four tests compare the methods at fixed settings. Chebyshev gives the smaller sampled field errors in all four, and a separate tank polynomial fit carries a continuous error bound.} \revew{The gated cell fitting time is about two seconds per task (Table~\ref{tab:profile-costs}). I am interested in whether learning can eventually lower the total cost for a nearby parameter or initial trace at the same certified accuracy.}
+The aim is an exact solution on its admissible domain whenever possible. Otherwise local analytic branches and their continuation provide the reference. Learning supplies candidate coefficients or profiles on the quotient; classical methods are independent controls. A continuous certificate, when available, is distinct from a sampled residual. General initial-boundary value problems, shocks and full planar group classification are outside the theorem scope.
 
 \paragraph{Scope and overview.}
-\revew{Chapter~\ref{ch:models} develops the parameter-to-algebra map and the arbitrary-flux translation reduction. Chapter~\ref{ch:continuation} derives the planar quotients. Chapter~\ref{ch:computation} studies solvability, convergent series, fitting and error bounds for the reduced equations. The point classification covers positive $(1+1)$D charts and all real $m\ge1$.}
-Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} summarize the two layers.
+Chapter~\ref{ch:models} establishes the parameter-to-algebra map and reduction. Chapter~\ref{ch:continuation} develops the higher-dimensional model and its critical branches. Chapter~\ref{ch:computation} gives global reference solutions, continuation and parameter-conditioned approximation; the final chapter separates proved results from empirical findings. Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} show the reasoning chain.
 
 \clearpage
 \begin{figure}[!ht]\centering
 \begin{tikzpicture}[
-  flowbox/.style={draw=ink!65,fill=ink!4,rounded corners=2pt,text width=12.7cm,align=center,inner sep=5pt,font=\small,text=authorblue},
+  flowbox/.style={draw=ink!65,fill=ink!4,rounded corners=2pt,text width=12.7cm,align=center,inner sep=5pt,font=\small},
   branch/.style={flowbox,text width=5.95cm,minimum height=1.05cm},
   route/.style={-{Latex[length=1.8mm]},draw=ink,line width=.8pt}]
 \node[flowbox] (pde) {\textbf{Dimensionless SVE equations:} $\mathcal E_1,\ \mathcal E_P$};
@@ -233,12 +229,12 @@ Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} summarize the two layer
 \draw[route] ([xshift=3.2cm]pde.south)--(plan.north);
 \node[flowbox,below=19mm of pde] (lie)
  {\textbf{Find admitted generators} (\S\ref{sec:classification})\\
- $\mathscr D_\mu X=0$: generic $m$, exceptional $m=1,3$};
+ $\mathscr D_\mu X=0$ with symbolic $m$: pivot minor and resonances, each candidate decided exactly};
 \draw[route] (lag.south)--([xshift=-3.2cm]lie.north);
 \draw[route] (plan.south)--([xshift=3.2cm]lie.north);
 \node[flowbox,below=4mm of lie] (reduce)
  {\textbf{Reduce by invariant graphs} (\S\ref{sec:lie-tools})\\
- $Q_X=0$, quotient variables $z\in\mathbb R^{d-k}$};
+ $Q_X=0$ on orbit chart $(z,v)$; accept if $\Delta=\mathsf M(z,v)\,\mathcal E[F](z)$, $\det\mathsf M\ne0$};
 \draw[route] (lie)--(reduce);
 \node[branch,below=5mm of reduce.south west,anchor=north west] (regular)
  {Regular profile equations\\ Invertible leading matrix};
@@ -253,7 +249,7 @@ Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} summarize the two layer
 
 \begin{figure}[!ht]\centering
 \begin{tikzpicture}[
-  flowbox/.style={draw=ink!65,fill=ink!4,rounded corners=2pt,text width=12.7cm,align=center,inner sep=5pt,font=\small,text=authorblue},
+  flowbox/.style={draw=ink!65,fill=ink!4,rounded corners=2pt,text width=12.7cm,align=center,inner sep=5pt,font=\small},
   branch/.style={flowbox,text width=5.95cm,minimum height=1.2cm},
   route/.style={-{Latex[length=1.8mm]},draw=ink,line width=.8pt}]
 \node[flowbox] (data) {\textbf{Reduced equation and prescribed traces} (\S\ref{sec:records})};
@@ -324,7 +320,7 @@ Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} summarize the two layer
 \revew{The units of $A_{g,i,\rm d}$ are $\mathrm{length}^{2-m}\mathrm{time}^{m-1}$. Both sources report the empirical range $1\le m\le4$~\cite{sve2022,sve2026}. We study the mathematical range $m\in[1,\infty)$, keeping $g,\kappa>0$ fixed while classifying each exponent. For $u>0$, $u^m=\exp(m\log u)$ is defined for every real $m$. At $m=0$ the flux is constant and the bed equation decouples from the velocity; for $0<m<1$ its derivative $mu^{m-1}$ is singular at $u=0$. We restrict the present theorem to $m\ge1$; behavior on $0\le m<1$ is a separate question.}
 
 \paragraph{Planar extension.}
-\revew{Compared with $\mathcal E_1$, $\mathcal E_2$ uses horizontal vectors $\mathbf x=(x,y)$, $\mathbf w=(u,v)$ and adds Coriolis acceleration $\mathsf C\mathbf w=f\mathcal J\mathbf w$, where $\mathcal J(u,v)=(-v,u)$, and bed-slope transport with coefficient $G$~\cite{chesnokov,fernandez2017}. The chosen cubic flux has $K=\kappa=K_{\rm d}U_0^2/H_0$ and $G=G_{\rm d}U_0/L_0$. The exchange variant adds centrifugal acceleration with frame rate $\Omega$ ($f=2\Omega$) and a mobile load $a=hC$, with concentration $C$, exchange rates $k_d,k_e$ and diffusivity $D_a$~\cite{parvin2026}. All rates, including $\omega$, scale by $T_0$ and $D_a=D_{a,\rm d}T_0/L_0^2$. The exchange closure is a model choice. Chapter~\ref{ch:continuation} specifies both systems.}
+\revew{Compared with $\mathcal E_1$, $\mathcal E_2$ uses horizontal vectors $\mathbf x=(x,y)$, $\mathbf w=(u,v)$ and adds Coriolis acceleration $\mathsf C\mathbf w=f\mathcal J\mathbf w$, where $\mathcal J(u,v)=(-v,u)$, and bed-slope transport with coefficient $G$~\cite{chesnokov,fernandez2017}. For general $m\ge1$, $K=\kappa=K_{\rm d}U_0^{m-1}/H_0$ and $G=G_{\rm d}U_0^{m-2}/L_0$ when the dimensional flux is written $|\mathbf w_{\rm d}|^{m-1}(K_{\rm d}\mathbf w_{\rm d}-G_{\rm d}\nabla B_{\rm d})$, with porosity absorbed. The exchange control uses $m=3$. The exchange variant adds centrifugal acceleration with frame rate $\Omega$ ($f=2\Omega$) and a mobile load $a=hC$, with concentration $C$, exchange rates $k_d,k_e$ and diffusivity $D_a$~\cite{parvin2026}. All rates, including $\omega$, scale by $T_0$ and $D_a=D_{a,\rm d}T_0/L_0^2$. The exchange closure is a model choice. Chapter~\ref{ch:continuation} specifies the planar system; Section~\ref{sec:exchange} defines the exchange control.}
 
 \section*{Eulerian to Lagrangian coordinates}
 \revew{Let $s=s(t,x)$ represent a mass coordinate. We seek $s_x=h$ and $s_t=-hu$, so the compatibility condition $s_{xt}=s_{tx}$ is exactly $\Delta_{1,1}=0$. Equivalently, the one-form $h\,dx-hu\,dt$ is closed. On a simply connected local chart, it therefore has a primitive $s(t,x)$, unique up to a constant. Along $x(t)$ with $x'=u(t,x(t))$, the derivative of $s(t,x(t))$ vanishes. Thus $s$ labels a moving point of the depth-averaged flow.}
@@ -455,47 +451,57 @@ generates a local flow. It is a classical infinitesimal point symmetry if its pr
 \end{proof}
 \revew{For example, the purely vertical bed shift has $Q^B_{\partial_B}=1$, so a graph invariant under that generator alone does not exist. Singular orbits, conditional symmetries and boundary data require separate checks~\cite{anderson2000}.}
 
+\paragraph{Computing the quotient in $d$ variables.}
+In two variables one can solve for the invariant $z(t,x)$ directly; with more variables this inversion is the hard step, and it can be avoided. Take $k=d-1$ generators whose coefficients are affine in $(x,U)$, so that each flow is a matrix exponential. Start from the profile graph $(x_\Sigma(z),F(z))$ on the section and move it by the group:
+$(x,U)=\exp(v_1X_1)\cdots\exp(v_{d-1}X_{d-1})\,(x_\Sigma(z),F(z))$.
+The group parameters $v$ and the section coordinate $z$ then serve as coordinates on the base, and $U=\ell[F](z,v)$ is the invariant graph written in them. Derivatives in $x$ follow from the chain rule $\partial_x=(\partial x/\partial(z,v))^{-\mathsf T}\partial_{(z,v)}$, so the invariants are never written explicitly. The reduction is accepted only after three exact identities: $Q_{X_j}[\ell[F]]=0$ for every $j$, $\det\partial x/\partial(z,v)\not\equiv0$, and
+\begin{equation}\label{eq:weight-matrix}
+ \Delta\big(j^n\ell[F]\big)(z,v)=\mathsf M(z,v)\,\mathcal E[F](z),\qquad \det\mathsf M\not\equiv0,
+\end{equation}
+with $\mathsf M$ free of $F$. This generalizes the scalar factor $c_\Sigma$ in \eqref{eq:reduction-map}: a rotation mixes the two momentum rows, so $\mathsf M$ is then a rotation matrix rather than diagonal. As a test independent of the SVE models, six seeded random scalar equations $u_t=\sum_i\nu_iu_{x_ix_i}+u\sum_ia_iu_{x_i}+\mu T$ in $(2+1)$D and $(3+1)$D, with a hidden coefficient or exponent in $T$, give eight strata with extra generators. Examples are a Galilean boost and a dilation at $\mu=0$ for $T=u$, and a dilation at $m=3$ for $T=\lambda u^m$. Each stratum reduces to an ODE through a closed subalgebra containing an extra generator.
+
 \begin{figure}[!ht]\centering
-\begin{tikzpicture}[x=1cm,y=1cm]
-\node[anchor=west,font=\small\bfseries] at (0,2.38) {Base orbits of $Y_5$};
-\draw[arr] (.1,.15)--(4.48,.15) node[right,font=\small] {$t$};
-\draw[arr] (.1,.15)--(.1,1.9) node[left,font=\small] {$s$};
-\draw[authorblue!85,densely dashed] (1.74,.15)--(1.74,1.72)
- node[above,font=\scriptsize,text=authorblue] {$\Sigma:\ t=t_*$};
-\foreach \level in {.78,1.33,1.9}{
-  \draw[teal,thick,domain=1.07:2.36,samples=36,variable=\u]
-    plot ({2.55*(\u-1)+.3},{.15+\level/(\u*\u)});
-  \fill[ink] (1.74,{.15+\level/(1.565*1.565)}) circle (1.1pt);
-  \draw[tarr] ({2.55*.76+.3},{.15+\level/(1.76*1.76)})
-       -- ({2.55*.98+.3},{.15+\level/(1.98*1.98)});
+\begin{tikzpicture}[x=1cm,y=1cm,
+  panel/.style={anchor=west,font=\small\bfseries},
+  tag/.style={font=\scriptsize,inner sep=2pt}]
+\node[panel] at (0,2.74) {(a) Orbits and section};
+\draw[arr] (.16,.33)--(4.55,.33) node[right,tag] {$t$};
+\draw[arr] (.16,.33)--(.16,2.31) node[left,tag] {$s$};
+\draw[authorblue,densely dashed,thick] (1.842,.33)--(1.842,2.27);
+\node[tag,text=authorblue,anchor=south] at (1.842,2.28) {$\Sigma:\ t=t_*$};
+\foreach \level/\idx in {.78/1,1.34/2,1.90/3}{
+  \draw[teal,thick,domain=1.03:2.44,samples=46,variable=\u]
+    plot ({.45+2.32*(\u-1)},{.33+\level/(\u*\u)});
+  \draw[tarr,domain=1.74:2.08,samples=13,variable=\u]
+    plot ({.45+2.32*(\u-1)},{.33+\level/(\u*\u)});
+  \filldraw[fill=white,draw=authorblue,thick]
+    (1.842,{.33+\level/(1.6*1.6)}) circle (1.55pt);
 }
-\node[font=\scriptsize,anchor=west] at (2.75,1.39) {$\sigma=st^2$};
+\node[tag,anchor=west,text=teal!80!ink,align=left] at (2.39,1.71)
+  {Orbit label\\$\sigma=st^2$};
+\node[tag,anchor=west] at (.15,.02) {$F(\sigma)=\phi(t_*,\sigma/t_*^2)$ on $\Sigma$};
 
-\draw[ink!22] (4.95,.09)--(4.95,2.27);
-
-\node[anchor=west,font=\small\bfseries] at (5.28,2.38) {Two tangency tests};
-\filldraw[fill=ink!6,draw=ink,rounded corners=.6pt]
- (5.35,1.21)--(7.15,1.21)--(7.61,1.81)--(5.81,1.81)--cycle;
-\draw[arr] (5.98,1.45)--(6.82,1.62);
-\node[anchor=west,font=\scriptsize] at (7.79,1.63)
- {$\pr^{(n)}X$ tangent in jet space};
-\node[anchor=west,font=\scriptsize] at (7.79,1.35)
- {Preserves the locus $\Delta=0$};
-\filldraw[fill=teal!8,draw=teal,rounded corners=.6pt]
- (5.35,.23)--(7.15,.23)--(7.61,.83)--(5.81,.83)--cycle;
-\draw[tarr] (5.98,.47)--(6.82,.64);
-\node[anchor=west,font=\scriptsize] at (7.79,.66)
- {$X$ tangent to a solution graph};
-\node[anchor=west,font=\scriptsize] at (7.79,.38)
- {\review{Preserves the graph as a set}};
+\draw[ink!25] (4.98,-.07)--(4.98,2.62);
+\node[panel] at (5.28,2.74) {(b) Two tangency tests};
+\node[box,anchor=west,text width=5.70cm,font=\scriptsize,align=left,inner sep=4.5pt]
+  (eqtest) at (5.35,2.11)
+   {\textbf{Preserve the equation locus}\\
+    $\pr^{(n)}X(\Delta)=0$ on $\Delta=0$};
+\node[mlbox,anchor=west,text width=5.70cm,align=left,inner sep=4.5pt]
+  (graphtest) at (5.35,1.10)
+   {\textbf{Require an invariant graph}\\$Q_X=0$; for $Y_5$, this gives $\phi=F(st^2)$.};
+\draw[arr] (graphtest.south)--($(graphtest.south)+(0,-.20)$);
+\node[tag,anchor=north,align=center] at (8.34,.45)
+  {Substitute the invariant graph in $\Delta$;\\
+   evaluate on $\Sigma$ to get an ODE in $\sigma$.};
 \end{tikzpicture}
-\caption[Orbit foliation and tangency]{\review{The transverse section $t=t_*$ represents the local Lie quotient of the base by the $Y_5$-orbits: each orbit corresponds to one $\sigma=st^2$. Reading $F(\sigma)=\phi(t_*,\sigma/t_*^2)$ there and extending it along the orbit gives $\phi(t,s)=F(st^2)$. The prolonged field preserves the equation locus and the point field preserves the invariant graph.}}
+\caption[Orbit section and the two tangency tests]{\revew{The section $\Sigma$ meets each displayed $Y_5$-orbit once. Its intersections, labelled by $\sigma=st^2$, represent the local quotient. Extending the trace $F$ along these orbits gives the invariant graph. The point field must be tangent to the graph; its prolongation must preserve the equation locus. The latter is why a reduced residual that vanishes on the section vanishes along the invariant extension.}}
 \label{fig:orbit-geometry}
 \end{figure}
 
-\section{Facts on Automated \texttt{SymPy} Reduction with Python}\label{sec:classification}
+\section{Determining equations and the classification}\label{sec:classification}
 
-\revew{For each fixed $\mu$ the on-shell determining operator is $\mathscr D_\mu X=(\pr^{(n)}X\Delta_\mu)|_{\Delta_\mu=0}$. It is linear in the unknown coefficient functions of $X$. The scripts construct the differential residuals, eliminate leading jets on a regular equation chart, and split the prolonged identity by the remaining independent jet coordinates. The resulting determining equations yield dependencies of the coefficient functions and finite linear systems for their slopes. We keep $m$ symbolic, separate rank-drop values, and check the full prolonged identity for every resulting generator. Selected admitted generators provide invariant graphs and reduced equations. The scalar and Eulerian programs in the Reproducibility section implement equation-specific exact splits and checks; solving arbitrary determining PDEs automatically remains open.}\par
+For each fixed $\mu$ the on-shell determining operator $\mathscr D_\mu X=(\pr^{(n)}X\Delta_\mu)|_{\Delta_\mu=0}$ is linear in the coefficient functions of $X$. We eliminate the leading jet on a regular chart and split the prolonged identity by the remaining free jets. The splits force $\tau=\tau(t)$, $\xi=\xi(s)$ and an affine $\eta$, so the smooth problem collapses to a finite linear system $A_i(m)a=0$ for the slopes, with $m$ kept symbolic. Every resulting generator is then substituted into the full prolonged equation.\par
 \begin{table}[!ht]\centering\small
 \begin{tabularx}{\linewidth}{@{}lXll@{}}
 \toprule
@@ -519,14 +525,17 @@ For fixed $g,\kappa>0$ and any real $m\ge1$, the local smooth point-symmetry alg
 \end{theorem}
 \revew{The four generic directions and the cubic extension were reported in~\cite{sve2022,sve2026}; Table~\ref{tab:algebras} corrects the former scaling and adds the printed scalar's linear-exponent boost. Appendix~\ref{app:proofs} proves the stated classification. A computation need only verify the generators it uses.}
 
-\begin{definition}[Parameter-to-symmetry map]\label{def:parameter-symmetry}
+\begin{theorem}[Parameter-to-symmetry map and constant-rank continuation]\label{def:parameter-symmetry}
 \revew{For $\mu=(g,\kappa,m)\in(0,\infty)^2\times[1,\infty)$, let $\mathcal G_i(\mu)=\ker\mathscr D_{i,\mu}$ denote the admitted point algebra for model $i\in\{1,P,L\}$. With the ordered candidate generators in Table~\ref{tab:algebras}, Theorem~\ref{thm:class} identifies a coefficient vector $a$ with $X=\sum_i a_iX_i$ or $Y=\sum_i a_iY_i$. The complete remaining constraints are}
 \begin{equation}\label{eq:parameter-kernel}
  \keyeq{A_1(m)=A_L(m)=(0,0,0,0,m-3),\quad
  A_P(m)=\begin{pmatrix}0&0&0&0&m-3&0\\0&0&0&0&0&m-1\end{pmatrix}.}
 \end{equation}
-\revew{Thus the kernel of $A_i(m)$ represents $\mathcal G_i(\mu)$ in its generating basis. For instance $m=5/2$ and $m=2$ give the same algebra. The family $\{(\mu,a):A_i(m)a=0\}$ has continuous defining equations and fibers of changing dimension. On each constant-rank region its kernels form a vector bundle; at a rank drop the exact kernel is discontinuous as a subspace (in the gap topology).}
-\end{definition}
+\revew{Thus the kernel of $A_i(m)$ represents $\mathcal G_i(\mu)$ in its generating basis. For instance $m=5/2$ and $m=2$ give the same algebra. The family $\{(\mu,a):A_i(m)a=0\}$ has analytic defining equations and fibers of varying dimension. For any analytic finite determining matrix on a constant-rank analytic parameter stratum, its kernels form a local analytic vector bundle, and kernel dimension is upper semicontinuous on the whole parameter set. At a rank drop the exact kernel cannot be continuous in the gap topology along an approaching higher-rank stratum.}
+\end{theorem}
+\begin{proof}
+For rank $k$, select a nonzero $k$-minor and permute rows and columns to put it in a block $A_{11}$. The remaining variables are free, and the pivot variables equal $-A_{11}^{-1}A_{12}$ times them. The other rows impose no further restrictions on the constant-rank stratum. This gives an analytic frame. Nonvanishing minors make rank lower semicontinuous; hence kernel dimension is upper semicontinuous. For the three models, Theorem~\ref{thm:class} identifies the finite kernel exactly. In particular $(m-3)a_5=0$ and, for $\mathcal E_P$, $(m-1)a_6=0$ exclude continuation of the exceptional directions as nonzero exact extra generators off their strata. Approximate symmetries are not needed for this conclusion.
+\end{proof}
 \revew{The one-dimensional subalgebras are the lines $\mathbb P(\mathcal G_i(\mu))$. The parameter map is used with \eqref{eq:reduction-map} by selecting a projectable admitted line on a regular chart with equal positive base and point ranks. Adjoint equivalence only matters when inequivalent representatives are sought~\cite{olver}.}
 
 \subsection{Tools for parameter stratification}\label{sec:exceptional}
@@ -545,9 +554,22 @@ Equivalently, consider the three-parameter scaling equivalence group $(t,x,u,h,B
 At $m=1$, a Galilean boost $x\mapsto x+\epsilon t$ reads $\phi\mapsto\phi+\epsilon t$ in material coordinates. It leaves both $\mathcal A$ and $T_1=\phi_{ts}/\phi_s$ invariant, and therefore generates the extra symmetry $Y_6=t\partial_\phi$ of $\mathcal E_{P}$. In $\mathcal E_{L}$, however, the fixed-position bed derivative contributes the extra term $-\epsilon D_s(\mathcal A/\phi_s)$ under the boost; because this term contains the free jet $\phi_{tts}$, it obstructs $Y_6$ from being a symmetry of $\mathcal E_{L}$.
 
 \begin{reviewtext}
-\paragraph{Rank drops.}
-For a finite determining matrix analytic in the parameters, maximal rank holds wherever at least one of its maximal-rank minors is nonzero~\cite{dengreid2024}. Here the jet splits establish the determining kernels on each exponent stratum. \revew{Changing $m$ changes which group actions are available. The local quotient dimension $d-k$ follows from the chosen regular orbit rank, so the extra cubic generator gives another one-variable reduction.}
+\paragraph{Locating exceptional exponents.}
+In the finite affine search, splitting powers $u^{am+b}$ is valid off coincidences $(a-a')m=b'-b$ on $u>0$, provided the coefficients do not depend on $u$. A nonzero generic maximal minor detects possible rank drops; add the power coincidences and any denominator exceptions and re-evaluate the original determining equations at each candidate. Table~\ref{tab:strata} records the affine search, not its extension to arbitrary coefficient functions. Appendix~\ref{app:proofs} supplies the smooth classifications.
 \end{reviewtext}
+\begin{table}[!ht]\centering\small
+\begin{tabular}{@{}lllll@{}}\toprule
+Model & Pivot-minor factors & Resonances & Jumps & Extra generators\\\midrule
+$\mathcal E_1$ & $m,\ m-1,\ m-3$ & $1,2,3$ & $m=0,3$ & $X_5$ at $m=3$\\
+$\mathcal E_P$ & $m,\ m-1,\ m-3$ & $0,\ldots,4$ & $m=0,1,3$ & $Y_6$ at $m=1$; $Y_5$ at $m=3$\\
+$\mathcal E_L$ & $m,\ m-3$ & $0,\ldots,4$ & $m=0,3$ & $Y_5$ at $m=3$\\\bottomrule
+\end{tabular}
+\caption[Automatically detected parameter strata]{Affine determining search with symbolic $m$. Generic kernels are four-dimensional; every candidate is decided by exact specialization.}
+\label{tab:strata}
+\end{table}
+
+\paragraph{Implementation.}
+All symbolic computations use \texttt{SymPy} alone, because I do not work with Mathematica or Maple. Claude Opus 5.5 helped design this small Lie-reduction library for SVE systems with one to three spatial variables. I checked the scripts by hand so that every step stays exact: each generator is substituted into the full prolonged equation, and each reduced equation is accepted only through the identities \eqref{eq:weight-matrix}.
 
 \subsection{Lie formulation of the bed-drift family}\label{sec:arbitrary-flux}
 \revew{Replace $\kappa u^m$ in $\mathcal E_1$ by any $Q\in C^2(I)$, where $I\subset(0,\infty)$ is an open velocity interval. The system $\mathcal E_1[Q]$ retains both water balances and has $B_t+D_xQ(u)=0$. Berthon et al.~\cite[Prop.~2.1 and Eqs.~(10)--(12)]{berthon2012} derived a constant-discharge bed-drift solution for a family of sediment laws. Here we identify the common generating symmetry and give the local inverse criterion for arbitrary $C^2$ velocity fluxes. The kernel $\mathcal G[Q]=\ker\mathscr D_Q$ contains $\partial_t,\partial_x,\partial_B$ because the equations are autonomous and use only derivatives of $B$. There is no need to classify other symmetries for the following reduction.}
@@ -562,6 +584,17 @@ For a finite determining matrix analytic in the parameters, maximal rank holds w
 \begin{proof}
 \revew{Substitution gives $(HU)'=0$, $UU'+g(H'+Z')=0$, and $\alpha+Q'(U)U'=0$. Integrate to obtain \eqref{eq:general-flux}; the inverse function theorem applies at $Q'(U_0)\ne0$. At $Q'(U_0)=0$, the third equation forces $\alpha=0$ for any finite $U'$. Restoring the invariant graph satisfies every original balance.}
 \end{proof}
+\paragraph{Maximal regular domain.}
+For a connected interval $I_*$ on which $Q'\ne0$, $Q$ is one-to-one. The profile in Proposition~\ref{prop:general-flux} is defined on exactly the component containing $x_0$ of
+\[
+ \{x: Q(U_0)-\alpha(x-x_0)\in Q(I_*)\}.
+\]
+This is the maximal interval within that monotonic regular chart. For $Q(u)=\kappa u^m$, $\kappa>0$, $m\ge1$, the positive branch is
+\begin{equation}\label{eq:global-drift}
+ U(x)=\left(U_0^m-\alpha(x-x_0)/\kappa\right)^{1/m}.
+\end{equation}
+Its domain is the entire half-line where the base is positive ($\mathbb R$ for $\alpha=0$). For $\alpha\ne0$, $U\to0$ at the finite endpoint and $H=C/U\to\infty$; no extension with finite positive depth crosses that endpoint. Reconstruction holds for all real $t$ on this spatial chart. This establishes a global invariant family, not an arbitrary-data solution.
+
 \revew{For $Q(u)=\kappa u^m$ ($m\ge1$), $Q'>0$ on the positive chart. For example, $Q(u)=e^u$ gives $U(x)=\log(e^{U_0}-\alpha(x-x_0))$ locally. Every nonconstant $C^2$ flux on a connected interval has a regular velocity; constant $Q$ admits steady profiles with $\alpha=0$. This guarantee is local to the autonomous velocity-flux SVE family. Other constitutive dependencies, forcing and boundary data require separate checks.}
 
 \subsection{One-dimensional reductions}\label{sec:reductions}
@@ -620,43 +653,60 @@ This follows from $\mathcal A(t,s)=F''(z^2p(z)-g/p(z)^2)/t$ and $T_m(t,s)=-zv_*(
 
 \revew{Where $L(z)\ne0$, $F'=p$, $p'=I_0/L(z)$ (see Section~\ref{sec:series-solvability}).}
 
-\chapter{Planar Reduction and Critical Profiles}\label{ch:continuation}
-\begin{reviewtext}
-Rotation and bed drift leave a single radial coordinate in the cubic annular system. \revew{We ask whether a radial solution can cross hydraulic criticality at fixed PDE parameters.} Adding reversible bed--load exchange then gives a separate test of how a reduced profile error transfers to the original balances.
-\end{reviewtext}
+\chapter{Higher-Dimensional SVE and Analytic Branches}\label{ch:continuation}
+The planar extension introduces three independent variables and a bed-slope parameter. A restricted potential formulation has two scalar unknowns and retains physical reconstruction. Rotation and bed drift furnish a rank-two quotient with two radial profiles.
 
-\section{Planar equations, rotation and radial integrals}\label{sec:annular-model}
-\review{In $n$ horizontal dimensions, with constant skew matrix $\mathsf C$, the family $\mathcal E_n$ is}
+\section{Planar model and potential formulation}\label{sec:annular-model}
+On an annulus $r=|\mathbf x|>0$, with $g,f,K,G>0$ and real $m\ge1$, define $\mathcal E_2$ by
 \begin{align}\label{eq:planar}
  h_t+\nabla\cdot(h\mathbf w)&=0,\notag\\
- \mathbf w_t+(\mathbf w\cdot\nabla)\mathbf w+g\nabla(h+B)+\mathsf C\mathbf w&=0,\notag\\
- B_t+\nabla\cdot\mathbf Q&=0,\quad
- \mathbf Q(t,\mathbf x)=|\mathbf w(t,\mathbf x)|^{m-1}(\kappa\mathbf w(t,\mathbf x)-G\nabla B),
+ \mathbf w_t+(\mathbf w\cdot\nabla)\mathbf w+g\nabla(h+B)+f\mathcal J\mathbf w&=0,\notag\\
+ B_t+\nabla\cdot\mathbf Q&=0,\notag\\
+ \mathbf Q&=|\mathbf w|^{m-1}(K\mathbf w-G\nabla B).
 \end{align}
-\begin{reviewtext}
-\revew{Use the model parameters defined in \S\ref{sec:physical-models}. With $n=1$, $u>0$, $G=0$ and $\mathsf C=0$, \eqref{eq:planar} gives $\mathcal E_1$. For $\mathcal E_2$ take $n=2$, $m=3$, $\kappa=K$ and $\mathsf C=f\mathcal J$.}
+The skew rotation is $\mathcal J(u,v)=(-v,u)$. The slope term is motivated by~\cite{fernandez2017,hecras2019}; $G>0$ adds diffusion to bed evolution, so the full system is not purely first-order hyperbolic. The two-dimensional reference has model parameters $(m,K,G)$ with $g,f$ fixed for the demonstrations.
 
-\revew{For $g,K,G,f>0$, the simultaneous rotation and time--bed-shift generators below preserve $\mathcal E_2$. These suffice for the selected quotient; a full planar group classification is unnecessary. Their symbolic verification is recorded in~\cite{theoremartifact}.}
+\begin{proposition}[Two-field potential formulation]\label{prop:potential}
+Assume smooth fields, $h>0$, $|\mathbf w|>0$, zero absolute vorticity $\operatorname{curl}\mathbf w+f=0$, and fixed circulation $2\pi C_2$ of $\mathbf w+(f/2)\mathcal J\mathbf x$ around the hole. Set
+\begin{equation}\label{eq:potential-lift}
+ \mathbf w=\nabla\psi+\left(C_2/r-fr/2\right)\mathbf e_\theta,
+ \qquad \Xi=\psi_t+\tfrac12|\mathbf w|^2+gh .
+\end{equation}
+Choosing the time gauge of the single-valued $\psi(t,x,y)$, the compatible equations for the two scalar functions $h$ and $\psi$ are
+\begin{equation}\label{eq:potential-pde}
+ \keyeq{\begin{aligned}
+ h_t+\nabla\cdot(h\mathbf w)&=0,\\
+ \Xi_t&=\nabla\cdot\left[|\mathbf w|^{m-1}(gK\mathbf w+G\nabla\Xi)\right].
+ \end{aligned}}
+\end{equation}
+They recover all the Eulerian balances with $B=-\Xi/g$.
+\end{proposition}
+\begin{proof}
+The field after subtracting the stated circulation and rotation has zero curl and zero period, so it is a gradient. The vector identity $(\mathbf w\cdot\nabla)\mathbf w=\nabla(|\mathbf w|^2/2)+(\operatorname{curl}\mathbf w)\mathcal J\mathbf w$ cancels Coriolis. Momentum becomes $\nabla(\Xi+gB)=0$; adding a time-only function to $\psi$ absorbs the spatial constant. Substitution of $B=-\Xi/g$ into Exner gives~\eqref{eq:potential-pde}. Conversely these identities recover the original three balances. This is an equivalence in the stated flow class, not a reduction of the unrestricted four-component system. The supplementary exact symbolic check verifies the lift, radial balances and critical determinant independently.
+\end{proof}
 
-On $r=\sqrt{x^2+y^2}\in(r_0,r_1)$ with $r_0>0$, take rotation $R=-y\partial_x+x\partial_y-v\partial_u+u\partial_v$ and drift $T_c=\partial_t+c\partial_B$. These commute, with projected fields $\partial_\theta$ and $\partial_t$, so both orbit ranks are two. The brackets with translations are $[R,\partial_x]=-\partial_y$ and $[R,\partial_y]=\partial_x$. The invariant fields are
-\end{reviewtext}
-
+\section{Rank-two reduction and radial integrals}\label{sec:radial}
+For the mother system rotations and time--bed shifts are admitted:
 \[
- h(t,\mathbf x)=H(r),\qquad
- \mathbf w(t,\mathbf x)=V(r)\mathbf e_r+W(r)\mathbf e_\theta,\qquad
- B(t,\mathbf x)=Z(r)+ct .
+ R=-y\partial_x+x\partial_y-v\partial_u+u\partial_v,
+ \qquad T_c=\partial_t+c\partial_B .
 \]
-\review{The mass and bed residuals are $(rHV)'/r$ and $c+(rQ)'/r$, with radial sediment flux $Q(r)=(V(r)^2+W(r)^2)(KV(r)-GZ')$. Azimuthal momentum gives $V(r)(W'+W(r)/r+f)$. For $V(r)\ne0$, integration yields}
+The projected fields $\partial_\theta,\partial_t$ have rank two away from the axis and commute. In the potential chart the corresponding generators are rotation on $(x,y)$ and $\partial_t-gct\partial_\psi$. The latter fixes $\psi=\Psi(r)-gct^2/2$ up to the choice of bed datum. The Eulerian invariant graphs are
 \[
- rH(r)V(r)=C_1,\qquad rW(r)+fr^2/2=C_2,\qquad rQ(r)+cr^2/2=C_3 .
+ h=H(r),\quad \mathbf w=V(r)\mathbf e_r+W(r)\mathbf e_\theta,
+ \quad B=Z(r)+ct .
 \]
-\review{Set $V(r,H)=C_1/(rH)$, $W(r)=C_2/r-fr/2$, $Q(r)=C_3/r-cr/2$ and $S(r,H)=V(r,H)^2+W(r)^2$. Radial momentum and sediment flux then give}
+The mass, azimuthal and bed balances give, for nonzero $V$,
+\[
+ rHV=C_1,\qquad rW+fr^2/2=C_2,\qquad rQ+cr^2/2=C_3 .
+\]
+Thus this branch belongs to the circulation class in Proposition~\ref{prop:potential}. The radial flux is $Q=S^{(m-1)/2}(KV-GZ')$ with $S=V^2+W^2$. Define $V=C_1/(rH)$, $W=C_2/r-fr/2$ and $Q=C_3/r-cr/2$. Then
 \begin{align}
- P_Z(r,H)&=(KV(r,H)-Q(r)/S(r,H))/G,\quad \Delta_c(r,H)=gH-V(r,H)^2,\notag\\
- N(r,H)&=H(S(r,H)/r+fW(r)-gP_Z(r,H)),\notag\\
- &\keyeq{\Delta_c(r,H(r))H'=N(r,H(r))},\qquad Z'=P_Z(r,H(r)).\label{eq:DN}
+ P_Z(r,H)&=\frac{KV-Q/S^{(m-1)/2}}{G},\qquad \Delta_c=gH-V^2,\notag\\
+ N(r,H)&=H(S/r+fW-gP_Z),\notag\\
+ &\keyeq{\Delta_c H'=N,\qquad Z'=P_Z.}\label{eq:DN}
 \end{align}
-\review{For $r,H>0$, $C_1\ne0$ and $G>0$, the mass integral gives $V'/V=-1/r-H'/H$. Thus radial momentum equals $(\Delta_c H'-N)/H$ and the other balances vanish under the integrated relations. Since $P_Z(r,H)$ remains smooth at $\Delta_c=0$, a $C^1$ solution of~\eqref{eq:DN} lifts across criticality. The boundary water flux fixes $C_1$. The net outward sediment flux is $-c\pi(r_1^2-r_0^2)$.}
+For $H,r>0$, $C_1\ne0$, the relations imply $V'/V=-1/r-H'/H$ and $S>0$. The radial momentum residual is $(\Delta_c H'-N)/H$; the other balances vanish identically under the first integrals. The two unknown profiles can be reconstructed without dividing by $\Delta_c$ at a compatible critical point. The net radial water flux has constant total $2\pi C_1$ through concentric circles; the net outward bed flux across the annulus is $-c\pi(r_1^2-r_0^2)$. Nonzero $C_1$ does not describe an impermeable closed tank.
 
 \section{Analytic crossing of a radial critical point}\label{sec:saddle}
 \begin{reviewtext}
@@ -673,35 +723,27 @@ where $\lambda_\pm$ are the eigenvalues of $\mathbf J_*$. Along either germ, $\D
 \end{theorem}
 \revew{The proof and the coefficient recurrence are given in Section~\ref{sec:saddle-convergence}.}
 
-\paragraph{Rank drop versus critical crossing.}
-As a concrete parameter slice, set $g=K=G=f=C_1=C_2=1$ and $C_3=c/2-15/16$. Then $(r_*,H_*)=(1,1)$ is a compatible critical point with bed slope $7/4$ and Jacobian
+\paragraph{Parameter continuation and saddle region.}
+For an anchored family set $g=f=C_1=C_2=1$ and $A_m=(5/4)^{(m-1)/2}$. Choose
 \[
- \mathbf J_*=\begin{pmatrix}2&3\\-(33+4c)/5&-11/5\end{pmatrix},\qquad
- \det\mathbf J_*=\frac{77+12c}{5}.
+ C_3=c/2+A_m(K-7G/4).
 \]
-\review{Changing $c$ selects a reduction of the same PDE, with $(g,K,G,f)=(1,1,1,1)$. For $c<-77/12$ the point is a saddle. At $c=-7$, the eigenvalues are $(-1\pm\sqrt{141})/10$ and slopes $(-21\pm\sqrt{141})/30$. At $c=0$, the slope discriminant is $-1539/25$, so there is no real $C^1$ crossing. The radial ratio $V^2/(gH)=1$ at $(1,1)$, while $S/(gH)=5/4$.}
-
-\section{Depth-averaged rotating tank with reversible bed exchange}\label{sec:exchange}
-\begin{reviewtext}
-\revew{Use the rotating frame and mobile-load parameters from \S\ref{sec:physical-models}, taking $B\ge0$ and retaining the cubic flux of $\mathcal E_2$. Set $f=2\Omega$ and include $-\Omega^2\mathbf x$ in momentum. The exchange equations in $\mathcal E_{2\text{-}\mathrm{exch}}$ are}
-\end{reviewtext}
-
-\begin{equation}\label{eq:exchange}
- \keyeq{B_t+\nabla\cdot\mathbf Q=J(t,\mathbf x)},\qquad
- a_t+\nabla\cdot(a\mathbf w-D_a h\nabla C)=-J(t,\mathbf x),
+Then $(r_*,H_*)=(1,1)$ satisfies $\Delta_c=N=0$ and $P_Z=7/4$ for all $m\ge1$, $K,G>0$. Direct differentiation gives
+\begin{equation}\label{eq:full-saddle-det}
+ \keyeq{\det\mathbf J_*=\frac{19}{2}+\frac{2K}{G}+\frac{3c}{GA_m}
+ -\frac{13}{5}(m-1)\left(\frac KG-\frac74\right).}
 \end{equation}
-with linear exchange rate $J(t,\mathbf x)=k_d a(t,\mathbf x)-k_e B(t,\mathbf x)$. \revew{See \S\ref{sec:physical-models} for their scales.} \review{Adding the equations gives a local balance for $B+a$ with combined boundary flux~\cite{parvin2026}.}
+For fixed $m,K,G$, its unique zero in $c$ defines the saddle threshold. The derivative with respect to $c$ is $3/(GA_m)>0$, so the lower side satisfies the saddle theorem. For $m=3,K=G=1$ the determinant is $(77+12c)/5$; the slopes at $c=-7$ are $(-21\pm\sqrt{141})/30$. Degeneracy of this discriminant invalidates the sufficient saddle test, not every possible solution. The noninteger power is real analytic on $S>0$. The implicit function theorem applied to $(\Delta_c,N)$ and the uniform local contraction in Section~\ref{sec:saddle-convergence} give local analytic dependence on all continuously varied coefficients and integration constants. This is different from determining-matrix rank drops.
 
-Rotations about the centrifugal axis preserve both the governing PDEs and the annular domain. Writing $h(t,\mathbf x)=H(t,r)$, $\mathbf w(t,\mathbf x)=V(t,r)\mathbf e_r+W(t,r)\mathbf e_\theta$, and keeping $B(t,r),a(t,r),J(t,r)$ for the fields expressed in axisymmetric coordinates produces the $(t,r)$ quotient system
-\begin{gather*}
- H_t+r^{-1}\partial_r(rHV)=0,\quad W_t+V(t,r)(W_r+W(t,r)/r+2\Omega)=0,\\
- V_t+V(t,r)V_r-W(t,r)^2/r+g(H+B)_r-2\Omega W(t,r)-\Omega^2r=0,\\
- B_t+r^{-1}\partial_r(rQ_r)=J(t,r),\quad Q_r(t,r)=(V(t,r)^2+W(t,r)^2)(KV(t,r)-GB_r),\\
- a_t+r^{-1}\partial_r\!\left[r(aV-D_aH\partial_r(a/H))\right]=-J(t,r).
-\end{gather*}
-\revew{Section~\ref{sec:swirl-profile} selects a one-variable solution of this quotient PDE.}
+\section{Exact convex-bed reference family}\label{sec:bowl}
+The same mother system admits a separate $V=0$ branch with $C_2=0$ and $W=-fr/2$; the azimuthal balance vanishes without division by $V$. For $c>0$ and $C_3=0$, take at a reference radius $r_0>0$
+\begin{align}
+ Z(r)&=Z_0+\frac{c}{2G(f/2)^{m-1}}\int_{r_0}^{r}s^{2-m}\,ds,\notag\\
+ H(r)&=E-Z(r)-\frac{f^2r^2}{8g}.\label{eq:bowl}
+\end{align}
+The integral equals $(r^{3-m}-r_0^{3-m})/(3-m)$ if $m\ne3$ and $\log(r/r_0)$ if $m=3$. Choosing $E$ above the maximum of $Z+f^2r^2/(8g)$ on any finite annulus guarantees positive depth. The radial flux $Q=-cr/2$ gives zero Exner residual; the gradient $g(H+Z)'=-f^2r/4$ balances centripetal and Coriolis forces. The mass and azimuthal balances vanish as $V=0$. For $1\le m<2$ the bed satisfies $Z'>0$ and $Z''>0$, yielding a convex radial bowl. It is an exact global reference on each declared annulus, not a closed-sediment tank: $c\ne0$ requires a net sediment flux. This family has a different circulation datum from the saddle example and does not assert a convexity constraint on the crossing branches.
 
-\chapter{Reduced Solvability and Certified Approximation}\label{ch:computation}
+\chapter{Global Reference Solutions and Certified Approximation}\label{ch:computation}
 \setstretch{1.0}
 \begin{reviewtext}
 \revew{After symbolic reduction, the local solvability criteria determine the analytic reference and its domain. Classical approximation and learning then use the same reduced equations and prescribed traces.}
@@ -745,6 +787,26 @@ For $c=0$, $\gamma>0$ and $I\ne0$, $p'=Ip^3/(\gamma g)$ gives a nonconstant dept
 For $\phi(t,s)=\gamma s+G(t)$ with $\gamma>0$, both scalars reduce to $G'''=0$. On $G'>0$ the compatible lift is $h=1/\gamma$, $u=G'(t)$ and $b(t,s)=b_0-(\gamma s G''+(G')^2/2)/g$.
 \end{reviewtext}
 
+\subsection{Auxiliary exchange model}\label{sec:exchange}
+\begin{reviewtext}
+\revew{Use the rotating frame and mobile-load parameters from \S\ref{sec:physical-models}, taking $B\ge0$ and retaining the cubic flux of $\mathcal E_2$. Set $f=2\Omega$ and include $-\Omega^2\mathbf x$ in momentum. The exchange equations in $\mathcal E_{2\text{-}\mathrm{exch}}$ are}
+\end{reviewtext}
+
+\begin{equation}\label{eq:exchange}
+ \keyeq{B_t+\nabla\cdot\mathbf Q=J(t,\mathbf x)},\qquad
+ a_t+\nabla\cdot(a\mathbf w-D_a h\nabla C)=-J(t,\mathbf x),
+\end{equation}
+with linear exchange rate $J(t,\mathbf x)=k_d a(t,\mathbf x)-k_e B(t,\mathbf x)$. \revew{See \S\ref{sec:physical-models} for their scales.} \review{Adding the equations gives a local balance for $B+a$ with combined boundary flux~\cite{parvin2026}.}
+
+Rotations about the centrifugal axis preserve both the governing PDEs and the annular domain. Writing $h(t,\mathbf x)=H(t,r)$, $\mathbf w(t,\mathbf x)=V(t,r)\mathbf e_r+W(t,r)\mathbf e_\theta$, and keeping $B(t,r),a(t,r),J(t,r)$ for the fields expressed in axisymmetric coordinates produces the $(t,r)$ quotient system
+\begin{gather*}
+ H_t+r^{-1}\partial_r(rHV)=0,\quad W_t+V(t,r)(W_r+W(t,r)/r+2\Omega)=0,\\
+ V_t+V(t,r)V_r-W(t,r)^2/r+g(H+B)_r-2\Omega W(t,r)-\Omega^2r=0,\\
+ B_t+r^{-1}\partial_r(rQ_r)=J(t,r),\quad Q_r(t,r)=(V(t,r)^2+W(t,r)^2)(KV(t,r)-GB_r),\\
+ a_t+r^{-1}\partial_r\!\left[r(aV-D_aH\partial_r(a/H))\right]=-J(t,r).
+\end{gather*}
+\revew{Section~\ref{sec:swirl-profile} selects a one-variable solution of this quotient PDE.}
+
 \subsection{Rotating-tank reference profile}\label{sec:swirl-profile}
 \review{For the benchmark take $V(t,r)=0$, $W(t,r)=\omega r$, $D_a=0$, $B_s(r)=1/(10r^2)$, $g=K=G=1$, $\omega=1/2$, $\Omega=1/3$, $k_d=2$ and $k_e=1$. Only the offset $b(t)$ remains to be determined:}
 \begin{align}\label{eq:swirl-exact}
@@ -753,6 +815,8 @@ For $\phi(t,s)=\gamma s+G(t)$ with $\gamma>0$, both scalars reduce to $G'''=0$. 
 \end{align}
 \begin{reviewtext}
 The gradient $g(H+B)_r=(\omega+\Omega)^2r$ balances centripetal, Coriolis and centrifugal terms. The constant $rQ_r(t,r)=2G\omega^2/10=1/20$ makes the bed flux divergence zero. Water and load fluxes through the rims vanish. Then $J(t,r)=9/10-3b(t)$ and the bed and load residuals are $\pm(b'-J)$. On $r\in[1,1.5]$, $t\in[0,1]$ and $b_{\rm i}=b(0)\in[.08,.20]$, the fields $h,B,a$ are positive, with $b(t)=3/10+(b_{\rm i}-3/10)e^{-3t}$.
+
+The offset direction is the vertical field $e^{-(k_d+k_e)t}(\partial_B-\partial_a)$. Its prolonged action annihilates the water, momentum and bed residuals on shell; the load residual leaves $-e^{-(k_d+k_e)t}\big[h^2(rV)_r+D_a h(h_r+rh_{rr})-D_a r h_r^2\big]$, which vanishes when $D_a=0$ and $(rV)_r=0$. The swirl is a separable solution family admitting a restricted solution shift. Because the field is vertical ($Q=e^{-(k_d+k_e)t}\neq0$), it gives no Lie quotient of its own.
 \end{reviewtext}
 
 \begin{figure}[!ht]\centering
@@ -812,82 +876,37 @@ Hence the vanishing $\keyeq{L(z)=0}$ means precisely that the similarity ray is 
 A striking example occurs at $m=3$: for $z>0$ and $4g\kappa<1$, the power profile $F(z)=A_0 z^{1/3}$ with $A_0^3=27g/(1-4g\kappa)$ satisfies $L(z)\equiv 0$ and $I_0=0$, giving $\phi(t,s)=A_0(st^2)^{1/3}$. Inverting $x=\phi(t,s)$ and integrating \eqref{eq:bed-form} recovers $u(t,x)=2x/(3t)$, $h(t,x)=3x^2/(A_0^3t^2)$, and $B(t,x)-b_0=4\kappa x^2/(9t^2)$, which is precisely the $X_5$-invariant Eulerian simple wave of~\eqref{eq:eulerian-cubic}.
 
 \subsection{A convergent cubic Laurent branch}\label{sec:laurent}
-What happens as $g\kappa\uparrow 1/4$ in the cubic model? The Eulerian simple wave of \eqref{eq:eulerian-cubic} loses positive depth ($H\propto 1-4g\kappa\to 0$) while its material amplitude $A_0$ diverges. At $g\kappa=1/4$, a separate local singular branch has a Laurent pole of the $Y_5$-reduced equation \eqref{eq:cubic-reduced}.
+As $g\kappa\uparrow 1/4$, the Eulerian simple wave of \eqref{eq:eulerian-cubic} loses positive depth ($H\propto 1-4g\kappa\to 0$) while its material amplitude $A_0$ diverges. At $g\kappa=1/4$, a separate local singular branch has a Laurent pole of the $Y_5$-reduced equation \eqref{eq:cubic-reduced}.
 
 \review{On the real chart $t,\sigma,p(\sigma)>0$, insert $F(\sigma)=-w_0/\sigma+O(1)$ with $w_0>0$ and a holomorphic remainder into~\eqref{eq:cubic-reduced}.} The leading residual is $(12-48g\kappa)w_0^2/\sigma^3$, which vanishes if and only if $g\kappa=1/4$. Introducing the rescaled variable $\xi=g\sigma^4/w_0^3$ and normalized slope $Y(\xi)=\sigma^2 F'(\sigma)/w_0$ (with primes now denoting $\xi$-derivatives), the reduced $\mathcal E_{L}$ equation transforms into
 \[
  3\xi Y''+\frac{3\xi(Y')^2}{Y(\xi)}+Y'-\frac{\xi Y'}{4Y(\xi)^3}+\frac{1}{8Y(\xi)^2}=0 .
 \]
-\review{For a holomorphic germ set $v_{\mathrm L}(\xi)=Y'(\xi)$ and $Y(\xi)=1+\xi\int_0^1v_{\mathrm L}(r\xi)\,dr$. Invert $3\xi v_{\mathrm L}'+v_{\mathrm L}$ along $r\xi$ to obtain $v_{\mathrm L}=\mathcal T_{\mathrm L}[v_{\mathrm L}]$:}
-\[
- (\mathcal T_{\mathrm L}[v_{\mathrm L}])(\xi)=\int_0^1 r^{-2/3}\left[-\frac{1}{24Y(r\xi)^2}
-   +r\xi\left(-\frac{v_{\mathrm L}(r\xi)^2}{Y(r\xi)}
-                +\frac{v_{\mathrm L}(r\xi)}{12Y(r\xi)^3}\right)\right]dr .
-\]
-Consider the closed sup-norm ball $\|v_{\mathrm L}\|_\infty\le M_{\mathrm L}$ on $|\xi|\le R$, choosing $R=M_{\mathrm L}=1/4$. Every candidate satisfies $|Y(\xi)|\ge a_0=1-RM_{\mathrm L}=15/16$, so the image norm is bounded by
-\[
- \|\mathcal T_{\mathrm L}[v_{\mathrm L}]\|_\infty
- \le \frac{1}{8a_0^2}+\frac{3R}{4}\left(\frac{M_{\mathrm L}^2}{a_0}+\frac{M_{\mathrm L}}{12a_0^3}\right)<0.160<M_{\mathrm L}.
-\]
-Moreover, for two candidates we have $|\delta Y(r\xi)|\le rR\|\delta v_{\mathrm L}\|_\infty$; bounding the partial derivatives of $-1/(24Y^2)$ and $-v^2/Y+v/(12Y^3)$ on $|Y-1|\le RM_{\mathrm L}$, $|v|\le M_{\mathrm L}$ and integrating $\int_0^1 r^{1/3}\,dr=3/4$ and $\int_0^1 r^{4/3}\,dr=3/7$ gives
-\[
- \operatorname{Lip}_\infty(\mathcal T_{\mathrm L})\le
- \frac{3R}{4}\left(\frac{1}{6a_0^3}+\frac{2M_{\mathrm L}}{a_0}\right)
- +\frac{3R^2}{7}\left(\frac{M_{\mathrm L}^2}{a_0^2}+\frac{M_{\mathrm L}}{4a_0^4}\right)
- <0.142 .
-\]
-By Banach's contraction theorem, $\mathcal T_{\mathrm L}$ has a unique fixed point in the stated disk-algebra ball, holomorphic on $|\xi|<1/4$ and continuous on its closure.
-
-Writing $Y(\xi)=\sum_{n\ge0}y_n\xi^n$ and clearing denominators by $8Y(\xi)^3$, the coefficient of $y_n$ at degree $n-1$ is $8n(3n-2)\ne0$ for all $n\ge1$, determining the series recursively. Integrating $F'(\sigma)=w_0\sigma^{-2}Y(\xi)$ yields the two-parameter Laurent expansion (with free constants $F_0$ and $w_0>0$)
+\begin{proposition}[Cubic Laurent branch]\label{prop:laurent}
+At $g\kappa=1/4$ the equation above has a unique germ $Y$ with $Y(0)=1$, holomorphic on $|\xi|<1/4$, and
 \[
  F(\sigma)=F_0+\frac{w_0}{\sigma}\sum_{n\ge0}\frac{y_n\xi^n}{4n-1}
-   =F_0-\frac{w_0}{\sigma}-\frac{g\sigma^3}{24w_0^2}
-                  -\frac{g^2\sigma^7}{512w_0^5}+O(\sigma^{11}) .
+   =F_0-\frac{w_0}{\sigma}-\frac{g\sigma^3}{24w_0^2}-\frac{g^2\sigma^7}{512w_0^5}+O(\sigma^{11})
 \]
-Let $F^{[N]}(\sigma)$ denote the truncation at $n=N$. Since $|Y(\xi)|\le 17/16$ on $|\xi|\le 1/4$, Cauchy's estimate gives $|y_n|\le (17/16)4^n$. For $\vartheta=4g|\sigma|^4/w_0^3<1$, summing the geometric tail yields explicit truncation bounds:
-\begin{align*}
- |F(\sigma)-F^{[N]}(\sigma)|&\le\frac{17w_0}{16|\sigma|}
-                 \frac{\vartheta^{N+1}}{(4N+3)(1-\vartheta)},\\
- |F'(\sigma)-(F^{[N]})'(\sigma)|&\le\frac{17w_0}{16|\sigma|^2}
-                 \frac{\vartheta^{N+1}}{1-\vartheta}.
-\end{align*}
-\review{The branch lifts on the positive real chart. Equation~\eqref{eq:bed-form} and $3g\kappa\mathcal J_\sigma'=-2\mathcal A_\sigma$ give $b(t,s)=b_0+3\kappa\mathcal J_\sigma(\sigma)/(2t^2)$. Bounding its error also requires second derivatives, available by Cauchy estimates on smaller compact annuli.}
+with free constants $F_0$ and $w_0>0$. For $\vartheta=4g|\sigma|^4/w_0^3<1$ the truncation $F^{[N]}$ at $n=N$ satisfies
+$|F-F^{[N]}|\le\frac{17w_0}{16|\sigma|}\frac{\vartheta^{N+1}}{(4N+3)(1-\vartheta)}$.
+\end{proposition}
+\begin{proof}
+Set $v=Y'$ and $Y(\xi)=1+\xi\int_0^1v(r\xi)\,dr$. Inverting $3\xi v'+v$ along rays gives $v=\mathcal T_{\mathrm L}[v]$ with
+\[
+ (\mathcal T_{\mathrm L}[v])(\xi)=\int_0^1 r^{-2/3}\Big[-\frac{1}{24Y(r\xi)^2}
+   +r\xi\Big(-\frac{v(r\xi)^2}{Y(r\xi)}+\frac{v(r\xi)}{12Y(r\xi)^3}\Big)\Big]dr .
+\]
+On the ball $\|v\|_\infty\le1/4$ over $|\xi|\le1/4$ one has $|Y|\ge15/16$; the triangle inequality and $\int_0^1r^{1/3}dr=3/4$, $\int_0^1r^{4/3}dr=3/7$ give $\|\mathcal T_{\mathrm L}[v]\|_\infty<0.160$ and $\operatorname{Lip}(\mathcal T_{\mathrm L})<0.142$. Banach's theorem gives the germ. In $Y=\sum y_n\xi^n$ the coefficient of $y_n$ is $8n(3n-2)\ne0$, so the series is recursive; Cauchy's estimate $|y_n|\le(17/16)4^n$ and integration of $F'=w_0\sigma^{-2}Y$ give the expansion and the geometric tail.
+\end{proof}
+\review{On the positive real chart, \eqref{eq:bed-form} and $3g\kappa\mathcal J_\sigma'=-2\mathcal A_\sigma$ give the bed $b(t,s)=b_0+3\kappa\mathcal J_\sigma(\sigma)/(2t^2)$.}
 
 
 \subsection{Annular saddle convergence and interval bounds}\label{sec:saddle-convergence}
-\begin{proof}[Proof of Theorem~\ref{thm:critical}]
-\emph{Step 1: Saddle geometry and possible slopes.}
-\review{At the critical point, $(\Delta_c)_H=g+2V(r_*,H_*)^2/H_*=3g$. The field $(\dot r,\dot H)=(\Delta_c,N)$ has a saddle since $\det\mathbf J_*<0$. Its eigenvectors have nonzero first component, since $\mathbf J_*(0,1)=(3g,N_H)^{\mathsf T}$. Writing them as $(1,\ell_\pm)$ gives the slope equation. The first-order terms of $\Delta_cH'=N$ give the same equation for every $C^1$ profile, with $\Delta_c(r_*+\rho,H(r_*+\rho))=\lambda_\pm\rho+o(\rho)$, $\rho=r-r_*$.}
+The two slopes in Theorem~\ref{thm:critical} have nonzero eigenvalues of opposite sign. For $\rho=r-r_*$ write $H=H_*+\rho(\ell+w)$. The reduced chart has $\rho w'=a w+\Psi(\rho,w)$ with $a=\lambda_o/\lambda-1<-1$, $\Psi(0,0)=\Psi_w(0,0)=0$. The analytic integral contraction and coefficient recurrence are established in Appendix~\ref{app:saddle-proof}; they prove both real analytic germs and uniqueness among $C^1$ crossings. The local proof is the starting point for global continuation, not a whole-domain certificate.
 
-\emph{Step 2: Desingularization to a Briot--Bouquet equation.}
-\review{Fix a slope $\ell$ with eigenvalue $\lambda$ and opposite eigenvalue $\lambda_o$. Write $H(r_*+\rho)=H_*+\rho(\ell+w(\rho))$. Evaluate $\Delta_c,N$ at $(r_*+\rho,H_*+\rho(\ell+w))$ and divide by $\rho$, giving $d(\rho,w),n(\rho,w)$. The numerators vanish at $\rho=0$ for every $w$, so both quotients extend holomorphically, with $d(0,0)=\lambda\ne0$. For $\Psi=n/d-\ell-(1+a)w$ the equation is}
-\[
- \rho w'=a w(\rho)+\Psi(\rho,w(\rho)),\qquad
- a=\lambda_o/\lambda-1<-1,\qquad
- \Psi(0,0)=\Psi_w(0,0)=0 ,
-\]
-\review{Indeed, $N_H-\ell(\Delta_c)_H=\operatorname{tr}\mathbf J_*-\lambda=\lambda_o$, so $(n/d)_w(0,0)=\lambda_o/\lambda=1+a$.}
-
-\emph{Step 3: Disk-algebra contraction and uniqueness.}
-Put $b=-a>1$ and choose complex radii $R,R_w>0$ small enough that $d\ne0$ on the polydisc $|\rho|\le R$, $|w|\le R_w$, where $|\Psi(\rho,0)|\le K_\Psi|\rho|$, $|\Psi_w(\rho,w)|\le L_\Psi<b$, and $K_\Psi R/(b+1)+L_\Psi R_w/b<R_w$ (possible by continuity and $\Psi_w(0,0)=0$). The integral operator
-\[
- (\mathcal T[w])(\rho)=\int_0^1 q^{b-1}\Psi(q\rho,w(q\rho))\,dq
-\]
-\review{maps the closed disk-algebra ball $\|w\|_R\le R_w$ into itself. Its Lipschitz bound is $L_\Psi/b<1$ by integration of $q^{b-1}$. The fixed point solves the singular ODE by differentiation. For any real $C^1$ germ of slope $\ell$, $w(\rho)\to0$. For either sign of $\rho$, the ODE gives $\frac{d}{dq}(q^bw(q\rho))=q^{b-1}\Psi(q\rho,w(q\rho))$ for $q>0$. Integration from $0$ to $1$ gives $w=\mathcal T[w]$ since $b>0$. On a smaller real interval this germ is in the ball, where the same contraction gives uniqueness. The common $C^1$ slope selects one branch, and conjugation proves reality for real parameters.}
-
-\emph{Step 4: Analytic parameter dependence and reconstruction.}
-\review{The analytic implicit-function theorem continues $(r_*,H_*)$ since $\det\mathbf J_*\ne0$. The simple eigenvalues and slopes vary analytically. For nearby complex parameters $|q^{b-1}|=q^{\operatorname{Re}b-1}$. Shrink the parameter neighborhood to keep the strict ball and Lipschitz inequalities uniform. Iteration from zero is then jointly holomorphic. Integrating $Z'=P_Z(r,H(r))$ from the fixed bed trace $Z(r_*)$ reconstructs $\mathcal E_2$.}
-\end{proof}
-
-Equation $\rho w'=aw+\Psi(\rho,w)$ is a singular ODE of Briot--Bouquet type \cite{westreich1982}. Truncating $H(r_*+\rho)$ at degree $n-1$ as $H_{n-1}(\rho)$, the $n$th Taylor coefficient ($n\ge2$) is given recursively by
-\[
- a_n=-\frac{[\rho^n]\big(\Delta_c(r_*+\rho,H_{n-1}(\rho))H_{n-1}'(\rho)-N(r_*+\rho,H_{n-1}(\rho))\big)}
-               {n\lambda-\lambda_o},
-\]
-whose denominator $n\lambda+(\Delta_c)_H\ell-N_H=n\lambda-\lambda_o$ never vanishes because $\lambda$ and $\lambda_o$ have opposite signs. From $\|w\|_R\le R_w$, Cauchy's inequalities give $|a_n|\le R_w/R^{n-1}$; hence on any smaller disk $|\rho|\le\vartheta R$ ($0\le\vartheta<1$), the degree-$L$ ($L\ge1$) truncation has value error at most $R_wR\vartheta^{L+1}/(1-\vartheta)$ and derivative error at most $R_w\vartheta^L\big((L+1)/(1-\vartheta)+\vartheta/(1-\vartheta)^2\big)$.
-
-\paragraph{A separate regular certificate.}
-Away from criticality, interval arithmetic certifies entire parameter boxes. On $1\le r\le 21/20$, consider initial data $H(1)\in[1.199,1.201]$, $Z(1)=0$, independent parameter intervals $g,K,G,f,C_1,C_2\in[.999,1.001]$, $c\in[-7.001,-6.999]$, and $C_3\in[-4.4385,-4.4365]$. Dividing $[1,21/20]$ into 500 cells of width $\delta_r=10^{-4}$, rational interval arithmetic verifies on every cell $I_r$ that $J_H+[0,\delta_r](N/\Delta_c)(I_r,I_H)\subset\operatorname{int}(I_H)$, where $J_H$ is the entry interval and $I_H$ the enclosing tube. Propagating both $H(r)$ and $Z(r)$ yields the continuous uniform bounds $H>1.1581$, $S>.8436$, and $\Delta_c>.4772$ throughout the parameter box \cite{theoremartifact}.
+\paragraph{A regular certificate.}
+Away from criticality, rational interval arithmetic on 500 cells of $[1,21/20]$ certifies the whole box $H(1)\in[1.199,1.201]$, $g,K,G,f,C_1,C_2\in[.999,1.001]$, $c\in[-7.001,-6.999]$, $C_3\in[-4.4385,-4.4365]$, with $H>1.1581$, $S>.8436$ and $\Delta_c>.4772$ throughout~\cite{theoremartifact}.
 
 \section{Reference records and free coefficients}\label{sec:records}
 
@@ -972,90 +991,93 @@ To reproduce the supplemental bound, use the rational trial coefficients from th
 \label{tab:replay}
 \end{table}
 
-\section{Sampled profile comparisons}\label{sec:comparison}
-\begin{reviewtext}
-We compare trial families on four dimensionless linear ODEs with known solutions. The trial inputs are the reduced operator and prescribed traces. Tasks~1 and~3 use different coordinates and data within one travelling-bed family.
-\end{reviewtext}
+\section{Parameter-conditioned profile experiments}\label{sec:comparison}
+The four historical trace-only tests (Appendix~\ref{app:historical-comparison}) remain controls: their rule selected Taylor three times and Chebyshev once, and the learned cell passed the sampled gate on only one task. We now condition on parameters entering the reduced operator, rather than merely the trace.
 
-\begin{enumerate}\setlength{\itemsep}{2pt}
- \item \emph{$\mathcal E_1$ bed drift.} At $m=2$, $\kappa=1/2$, and $g=1$, solve $Y'/2+1/4=0$ for $Y(x)=u(t,x)^2$ on $x\in[0,1]$ with trace $\varpi=Y(0)\in[1,1.4]$. Reconstruct $h(t,x)=1/u(t,x)$ and $B(t,x)=t/4+2-Y(x)/2-h(t,x)$, and sample the physical fields at $t=1/2$.
- \item \emph{Published scalar $\mathcal E_{P}$.} At $m=1$, $g=1$, and $\kappa=1/10$, use the $(\partial_s+t\partial_\phi)$-invariant graph $\phi(t,s)=ts+F(t)$ on $t\in[1,2]$ and solve $tF''=\varpi$ for $\varpi\in[.6,1]$ with $F(1)=0$, $F'(1)=1/2$. The exact profile is $F(t)=(t-1)/2+\varpi(t\log t-t+1)$. Sample the position function at $s=1.25$ and evaluate the third-order residual $(tF'')'$.
- \item \emph{Material travelling wave.} At $m=2$, $c=-1$, $g=1$, and $\kappa=1/20$, solve $Y'=1/5$ for $Y(z)=F'(z)$ on $z\in[0,1]$ with $\varpi=Y(0)\in[1,1.4]$. At $t=1/2$ and $x=\phi(t,s)$, the lift gives $(h,u)(t,x)=(1/Y(z),Y(z))$ and $B(t,x)=3-1/Y(z)-Y(z)^2/2-1/100$, with exact lifted Exner residual $\Delta_{1,3}(t,x)=2\kappa(Y'-1/5)$.
- \item \emph{Rotating exchange.} Learn the time offset $b(t)$ on $t\in[0,1]$ in~\eqref{eq:swirl-exact} from $b'+3b(t)=9/10$ with $\varpi=b(0)\in[.08,.20]$, and sample the lifted fields at $r=1.25$.
-\end{enumerate}
+\paragraph{Architecture and baseline.}
+A deterministic neural-spectral trial uses a fixed tanh hidden layer of the normalized parameter vector $\nu$, with trained readout coefficients:
+\[
+ R_\theta(z,\nu)=\sum_{j=0}^{5}z^j a_j^\top
+ [1,\widehat\nu,\tanh(W\widehat\nu+b)] .
+\]
+Only the $a_j$ are optimized by least squares (seed 27 for hidden weights). This is a parameter-conditioned random-feature network with polynomial spatial basis, not a recurrent LNN or the original LieSolver. The physical trace and slope are imposed exactly. Training uses reduced equations, not exact solution labels.
 
-For $k$ prescribed initial derivatives through order $k-1$, each trial model combines an exact trace lift $Y_0(z,\varpi)$ with a trace-vanishing remainder:
-\begin{align*}
- Y_\theta(z,\varpi)&=Y_0(z,\varpi)+(z-z_0)^k(1,\widehat\varpi)\Theta v_1(\widehat z),\\
- v_1(\widehat z)&=v_0(\widehat z)+\operatorname{diag}(\tanh\mathbf d_g)\tanh(Wv_0(\widehat z)),&
- v_0(\widehat z)&=\tanh(a\widehat z+b).
-\end{align*}
-\begin{reviewtext}
-The affine inputs $\widehat z,\widehat\varpi$ lie in $[-1,1]$. The network is a six-feature feed-forward cell inspired by the liquid-residual block~\cite{tao2026}. Across the five training traces, it jointly fits the reduced differential residual at 24 midpoints per trace by SciPy least squares (seed 27, 150 function evaluations). Chebyshev uses a degree-15 remainder and the same exact trace lift, solving one collocation system per requested trace~\cite{trefethen}. Taylor uses two linked degree-22 charts. All methods share four held-out traces and 401 interior evaluation points per trace. Exact values enter only at evaluation.
+\paragraph{Whole-domain drift control.}
+In~\eqref{eq:global-drift} take $x_0=0$, $\alpha=1/4$, $\kappa=1/2$, $g=C=1$, $E=2$, $m\in[1,4]$, $U_0\in[1,1.4]$. Then
+\[
+ U=(U_0^m-x/2)^{1/m}\ge1/2,\quad x\in[0,1],
+\]
+and $h=1/U$, $B=2-h-U^2/2+t/4$ are exact for all these parameters and all $t$. Fit $\widehat U=U_0+xR_\theta(x,(m,U_0))$ with 12 hidden features and 30 training parameter pairs, using the integral defect
+\begin{equation}\label{eq:flux-defect}
+ D_\theta=(\widehat U^m-U_0^m)/2+x/4.
+\end{equation}
+The mean value theorem on the positive domain gives $\norm{\widehat U-U}_\infty\le16\norm{D_\theta}_\infty$ if both speeds exceed $1/2$. For each test pair, the certified lower derivative bound of $U\mapsto U^m/2$ sharpens this factor. On 12 held-out $m,U_0$ pairs the maximum sampled velocity error is $7.251\times10^{-3}$ and the largest continuous bound is $7.289\times10^{-3}$, using 500 radial cells and a derivative enclosure of the defect. The exact family remains the preferred solver.
 
-Table~\ref{tab:new-results} gives the sampled errors. Chebyshev attains smaller field errors on each task. On $\mathcal E_{P}$, training uses $t\widehat F''-\varpi$ and the reported diagnostic differentiates it. For $e(t)=\widehat F(t)-F(t)$, the sampled field error is $1.30\times10^{-6}$ and the sampled diagnostic $(te'')'$ reaches $1.17\times10^{-2}$.
-\end{reviewtext}
+\paragraph{Nonlinear annular parameter family.}
+The training box is $m\in[2.9,3.1]$, $K,G\in[.99,1.01]$, $c\in[-7.05,-6.95]$, with the matching $C_3$ preceding~\eqref{eq:full-saddle-det}. Real interval evaluation encloses the determinant in $[-2.218,-.588]$ throughout this box. A preliminary DOP853 integration from the analytic crossing (started at $|\rho|=10^{-5}$ with $w=0$) attempts the predeclared radial domain $[.9,1.1]$. For all eight held-out tuples and both branches the outward side reaches $1.1$, but inward stepping stops: the reached $|\rho|$ ranges from $.0485$ to $.0606$ on the negative eigenvalue branch and $.0351$ to $.0455$ on the positive. This is numerical noncompletion, not a proof of a maximal endpoint. We separately report coverage on $[.975,1.1]$ (62.5\% of the original radial length), without treating the larger target as passed.
 
-\begin{table}[htb]\centering\small
-\begin{tabular}{@{}lrrrr@{}}\toprule
-Case & \shortstack{Gated cell\\field error} & \shortstack{Chebyshev\\field error} & \shortstack{Taylor\\field error} & \shortstack{Gated cell\\residual}\\\midrule
-Eulerian drift & $6.07\times10^{-8}$ & $4.44\times10^{-16}$ & $0$ & $2.24\times10^{-6}$\\
-Published scalar & $1.30\times10^{-6}$ & $3.11\times10^{-15}$ & $3.63\times10^{-9}$ & $1.17\times10^{-2}$\\
-Material wave & $7.64\times10^{-8}$ & $4.44\times10^{-16}$ & $4.44\times10^{-16}$ & $3.58\times10^{-7}$\\
-Rotating exchange & $2.24\times10^{-6}$ & $1.22\times10^{-15}$ & $1.11\times10^{-16}$ & $2.68\times10^{-4}$\\
-\bottomrule\end{tabular}
-\caption[Controlled profile comparisons]{Maximum errors on the dimensionless sampled fields and sampled residuals. The affine Taylor control attained zero observed error for the Eulerian drift.}
-\label{tab:new-results}
-\end{table}
+For each branch fit $\widehat w=\rho R_\theta(10\rho,\nu)$, so $\widehat H=1+\ell\rho+\rho\widehat w$. The 14 hidden features use 48 training tuples and 54 radial nodes; eight distinct interior tuples are held out (parameter sampling seed 29). The loss is the squared desingularized differential residual divided by $\rho^2$ away from zero, with no profile labels. Independent DOP853 references start at $|\rho|=10^{-7}$ and are sampled at 501 points.
 
-\begin{reviewtext}
-For a profile bounded by $M_\varrho$ and holomorphic on a Bernstein ellipse ($\varrho>1$), the degree-$d$ truncation error is at most $2M_\varrho\varrho^{-d}/(\varrho-1)$~\cite{trefethen}. Task~2 has its logarithmic singularity at $-3$ after $t\mapsto2t-3$, allowing $1<\varrho<3+2\sqrt{2}$. Table~\ref{tab:profile-costs} reports fixed-setting costs; the fit used all 150 evaluations. A matched-accuracy comparison must also include verification time.
-\end{reviewtext}
+\begin{theorem}[Real continuation barrier]\label{thm:barrier}
+Let $\rho w'=\mathfrak f(\rho,w)$ be the analytic desingularization of~\eqref{eq:DN} with the saddle slope fixed, and let $w(0)=\widehat w(0)=0$. On $I=[-.025,.1]$ suppose the closed tube $|w-\widehat w(\rho)|\le e$ lies in the chart of $\mathfrak f$. If for every $\rho\in I$,
+\[
+ \begin{aligned}
+ \mathfrak f(\rho,\widehat w+e)-\rho\widehat w'&<0,\\
+ \mathfrak f(\rho,\widehat w-e)-\rho\widehat w'&>0,
+ \end{aligned}
+\]
+the selected local saddle germ extends over $I$ with $|w-\widehat w|\le e$ and $|H-\widehat H|\le e|\rho|$.
+\end{theorem}
+\begin{proof}
+On either side use the outward coordinate $s=|\rho|$. A first exit through a tube boundary contradicts the strict inward sign of $s\,d(w-\widehat w)/ds$. The analytic germ starts inside at zero. Away from zero the tube is compact in the regular chart, so the ODE continuation theorem excludes finite-time termination within it.
+\end{proof}
 
+For each held-out tuple, real interval arithmetic verifies the two signs, positivity and the nonvanishing divided leading coefficient on 500 cells; Appendix~\ref{app:interval-params} describes the cancellation-free evaluation. If $L_Z$ encloses $|(P_Z)_H|$ in the tube, integration with matched $Z(1)$ bounds the reconstructed bed profile error by $e L_Z\rho^2/2$ for the exactly integrated candidate. Numerical quadrature requires its own bound. Table~\ref{tab:param-results} separates reference samples from interval errors. The same barrier with coefficient mean-value enclosures certifies both branches uniformly on $[.975,1.1]$ for the box centered at $(3,1,1,-7)$ with halfwidths $(1.9\,10^{-5},1.9\,10^{-6},1.9\,10^{-6},9\,10^{-6})$, with depth error at most $5.001\,10^{-3}$.
 \begin{table}[!ht]\centering\small
-\begin{tabular}{@{\hspace{1mm}}lrrrr@{\hspace{1mm}}}\toprule
- & Cell fit & Cell evaluation & Chebyshev & Taylor\\\midrule
-Eulerian drift & 1.916 & 0.0018 & 0.0134 & 0.0015\\
-Printed scalar & 1.886 & 0.0020 & 0.0143 & 0.0036\\
-Material wave & 1.860 & 0.0019 & 0.0144 & 0.0015\\
-Rotating exchange & 1.786 & 0.0019 & 0.0138 & 0.0045\\
-\bottomrule\end{tabular}
-\caption{Median seconds over three single-thread BLAS replays (AMD EPYC 9V74). Cell evaluation covers four traces. Classical times include construction and evaluation at those traces.}
-\label{tab:profile-costs}
+\begin{tabularx}{\linewidth}{@{}Xrrr@{}}\toprule
+Test & Sampled max. & Continuous bound & Accepted\\\midrule
+$\mathcal E_1$ velocity, $m,U_0$ & $7.251\,10^{-3}$ & $7.289\,10^{-3}$ & 12/12\\
+Annular $H$, $\ell_-$ & $8.717\,10^{-5}$ & $2.501\,10^{-3}$ & 8/8\\
+Annular $H$, $\ell_+$ & $1.454\,10^{-4}$ & $5.001\,10^{-3}$ & 8/8\\\bottomrule
+\end{tabularx}
+\caption[Parameter-conditioned approximation]{Worst held-out field error and outward-rounded continuous bound (annular bounds rounded upward). These entries certify each held-out tuple in space; the common parameter box is certified separately.}\label{tab:param-results}
 \end{table}
+
+\begin{figure}[!ht]\centering
+\begin{tikzpicture}
+\begin{axis}[width=.91\linewidth,height=4.2cm,xmin=.9,xmax=1.1,ymin=.865,ymax=1.075,
+ xlabel={$r$},ylabel={$H(r)$},legend style={at={(.97,.95)},anchor=north east,font=\scriptsize},
+ tick label style={font=\scriptsize},grid=major,axis on top]
+ \path[fill=ink!7] (axis cs:.9,.865) rectangle (axis cs:.975,1.075);
+ \draw[ink!65,densely dashed] (axis cs:.975,.865)--(axis cs:.975,1.075);
+ \draw[ink!50,densely dotted] (axis cs:1,.865)--(axis cs:1,1.075);
+ \node[font=\scriptsize,anchor=north] at (axis cs:.936,1.072){uncertified};
+\addplot[very thick,teal] coordinates {(0.975000,1.02473025) (0.977500,1.02252988) (0.980000,1.02025333) (0.982500,1.01790762) (0.985000,1.01549902) (0.987500,1.01303310) (0.990000,1.01051482) (0.992500,1.00794863) (0.995000,1.00533846) (0.997500,1.00268786) (1.000000,1.00000000) (1.002500,0.99727774) (1.005000,0.99452368) (1.007500,0.99174016) (1.010000,0.98892933) (1.012500,0.98609319) (1.015000,0.98323355) (1.017500,0.98035214) (1.020000,0.97745055) (1.022500,0.97453031) (1.025000,0.97159285) (1.027500,0.96863953) (1.030000,0.96567166) (1.032500,0.96269048) (1.035000,0.95969721) (1.037500,0.95669298) (1.040000,0.95367890) (1.042500,0.95065601) (1.045000,0.94762530) (1.047500,0.94458774) (1.050000,0.94154420) (1.052500,0.93849553) (1.055000,0.93544250) (1.057500,0.93238585) (1.060000,0.92932624) (1.062500,0.92626429) (1.065000,0.92320056) (1.067500,0.92013555) (1.070000,0.91706975) (1.072500,0.91400360) (1.075000,0.91093752) (1.077500,0.90787193) (1.080000,0.90480724) (1.082500,0.90174391) (1.085000,0.89868246) (1.087500,0.89562346) (1.090000,0.89256764) (1.092500,0.88951583) (1.095000,0.88646910) (1.097500,0.88342871) (1.100000,0.88039623)};
+\addlegendentry{$\ell_-$}
+\addplot[very thick,warm] coordinates {(0.975000,1.01252876) (0.977500,1.01076838) (0.980000,1.00914920) (0.982500,1.00765751) (0.985000,1.00628163) (0.987500,1.00501163) (0.990000,1.00383916) (0.992500,1.00275718) (0.995000,1.00175980) (0.997500,1.00084210) (1.000000,1.00000000) (1.002500,0.99923007) (1.005000,0.99852948) (1.007500,0.99789582) (1.010000,0.99732708) (1.012500,0.99682152) (1.015000,0.99637763) (1.017500,0.99599407) (1.020000,0.99566962) (1.022500,0.99540316) (1.025000,0.99519363) (1.027500,0.99504005) (1.030000,0.99494144) (1.032500,0.99489689) (1.035000,0.99490550) (1.037500,0.99496646) (1.040000,0.99507896) (1.042500,0.99524229) (1.045000,0.99545581) (1.047500,0.99571897) (1.050000,0.99603131) (1.052500,0.99639250) (1.055000,0.99680235) (1.057500,0.99726076) (1.060000,0.99776779) (1.062500,0.99832364) (1.065000,0.99892862) (1.067500,0.99958314) (1.070000,1.00028772) (1.072500,1.00104291) (1.075000,1.00184929) (1.077500,1.00270740) (1.080000,1.00361768) (1.082500,1.00458040) (1.085000,1.00559557) (1.087500,1.00666283) (1.090000,1.00778137) (1.092500,1.00894973) (1.095000,1.01016573) (1.097500,1.01142624) (1.100000,1.01272703)};
+\addlegendentry{$\ell_+$}
+\end{axis}
+\end{tikzpicture}
+\caption[Learned annular branches and certified coverage]{Two learned branches at a held-out $(m,K,G,c)$ tuple. The radial interval $[.975,1.1]$ is certified separately for each; the original target $[.9,1.1]$ includes an uncertified inward portion (shaded).}
+\label{fig:param-branches}
+\end{figure}
+\FloatBarrier
+
+\paragraph{Classical correction and total cost.}
+At each of the 16 annular queries solve the same degree-five coefficient problem by nonlinear least squares over 54 Chebyshev nodes. A cold zero coefficient vector and the learned readout give two independent initializations. Both pass the same $w$-tube radius $.05$ (nominal $H$ tolerance $.005$) on $[.975,1.1]$ (16/16). Across the queries, cold and warm starts require 148 and 86 residual evaluations respectively. The measured total correction times are $.082$ and $.051$ s, while interval certification takes about $20$ s for each route. The learned fit takes $.86$ s for both branches. This is reduced correction work but not an established total-cost advantage. The numerical residual does not substitute for the continuous interval certificate; full parameter-box coverage and maximum-domain endpoints remain separate tasks.
+
 
 \FloatBarrier
 
 \setstretch{1.05}
 \chapter{Conclusion}\label{ch:conclusion}
-\begin{reviewtext}
-The rank of the determining equations governs the choice of reduction. The leading profile coefficient governs its local analysis. Table~\ref{tab:physics} traces the consequences back to the physical model.
-\end{reviewtext}
+The study extends the SVE2026 symmetry--similarity strategy into a workflow that distinguishes determining-rank changes from singularities of the reduced equations. The finite determining kernel classifies the point algebras of the three $(1+1)$ models on positive charts, and constant-rank strata have analytic kernel frames. A common bed-shift symmetry also reduces general autonomous velocity fluxes.
 
-\begin{table}[!ht]\centering\small
-\begin{tabularx}{\linewidth}{@{}p{.31\linewidth}X@{}}
-\toprule
-Diagnostic & Meaning in the original equations\\\midrule
-$g\kappa$ invariant at $m=3$ & An essential parameter under the scaling group \eqref{eq:parameter-action}.\\
-$Y_6=t\partial_\phi$ at $m=1$ in $\mathcal E_{P}$ & The boost preserves the alternative advected bed law. The fixed-position bed derivative of $\mathcal E_1$ produces the extra term in $\mathcal E_{L}$.\\
-$L(z)=0$ & A material ray has an Eulerian characteristic speed. The cubic power law reconstructs the $X_5$ simple wave.\\
-$g\kappa=1/4$ at $m=3$ & The simple wave loses positive depth. This same value allows the Laurent balance, which has a separate local germ.\\
-$\Delta_c(r_*,H_*)=N(r_*,H_*)=0$, $\det\mathbf J_*<0$ & Radial hydraulic criticality with two analytic crossings, each with its own slope.\\
-$I_0$ & The coefficient of $\log(t/t_*)$ in the reconstructed bed is $I_0/g$.\\\bottomrule
-\end{tabularx}
-\caption{Dictionary from Lie-reduced structure to the physical model.}
-\label{tab:physics}
-\end{table}
+The compatible material scalar supplies a local physical inverse; its printed counterpart does not satisfy the same fixed-position bed law. The exact Eulerian drift and the planar convex-bed family exist on their declared domains. In the planar circulation class the two-field potential formulation recovers the mother balances, and the explicit multi-parameter determinant determines the nondegenerate saddle region. Two analytic crossing branches follow under the stated hypotheses.
 
-\begin{reviewtext}
-\begin{description}\setlength{\itemsep}{2pt}
- \item[\revew{Reduction.}] The parameter-to-algebra map covers every real $m\ge1$. A verified translation--bed-shift subalgebra reduces the autonomous Eulerian SVE for arbitrary smooth $Q(u)$, with local existence at $Q'(U_0)\ne0$.
- \item[\revew{Recovery of the physical fields.}] A positive solution of $\mathcal E_{L}=0$ recovers the Eulerian fields locally by the closed bed form, up to a bed constant. A global bed requires vanishing periods.
- \item[\revew{Solvability.}] The regularity and Briot--Bouquet tests guide solver selection. The Taylor radius, Laurent convergence and two saddle germs provide constructive results on the stated charts.
- \item[\revew{Certification.}] The tank replay certifies a continuous offset error and encloses all five lifted balance residuals. Chebyshev gives smaller field errors on the four sampled tasks. Matched-accuracy cost on the nonlinear branch remains open.
-\end{description}
-\revew{Future work is the functional group-classification problem $Q\mapsto\ker\mathscr D_Q$: determine all extra symmetries and exceptional constitutive laws for arbitrary admissible $Q(u)$, and extend the reduction to fluxes depending on depth or bed slope. Automated resonance handling, general planar or conditional symmetries remain open. The next matched-accuracy test should use one annular saddle branch for $c\in[-7.1,-6.9]$ with common traces and field accuracy, comparing fit, evaluation and certification costs.}
-\end{reviewtext}
+The numerical experiments learn actual equation parameters: $m,U_0$ in the exact drift control and $m,K,G,c$ in the nonlinear radial branches. Interval barriers certify depth error at all 16 held-out branch--parameter pairs on $[.975,1.1]$, and the bed profile error follows for exact quadrature. The predeclared larger interval $[.9,1.1]$ is not certified. Learned initialization reduces nonlinear correction evaluations from 148 to 86 at the same barrier tolerance; certification dominates the measured wall time and no end-to-end advantage is established. Both branches also have a uniform certificate on the smaller nonzero parameter box about $(3,1,1,-7)$; coverage of the entire training box is not established.
+
+The remaining mathematical problems include functional group classification for arbitrary constitutive laws, analysis of degenerate crossings beyond the saddle determinant, and maximal continuation when regularity or a physical constraint fails. General initial-boundary value problems are outside these results. All claims of global coverage here refer to their named domains and all claims of continuous error to the certified parameter domains and norms.
 
 \appendix
 \chapter{Determining-system proofs and source checks}\label{app:proofs}
@@ -1133,6 +1155,118 @@ For $\mathcal E_1$, substitution into the quasilinear system of Appendix~\ref{ap
 The two lines correspond to $t=t_*$ and $x=x_*$, with primes in the surviving coordinate. For either scalar, differentiate the invariant-surface identity to obtain jets through order three before restricting to the section. Check positivity after any adjoint transformation; for instance the $m=1$ boost can send $\phi_t>0$ to $\phi_t=0$.
 \end{reviewtext}
 
+\section{Connected-adjoint representatives for the printed scalar}\label{app:optimal}
+The source's $(X_1,X_2,X_3,X_4,X_5)$ correspond to $(Y_1,Y_3,Y_2,Y_4,Y_5)$ here. The following catalogue uses the source order, connected inner adjoints and nonzero line rescaling. At generic $m\ne1,3$ the translation lines are projective: $X_1+aX_2+bX_3$, $X_2+aX_3$, $X_3$. A nonzero dilation coefficient removes all translation terms and gives $X_4$.
+
+At $m=3$, let $A=aX_4+bX_5$, $(a:b)\in\mathbb{RP}^1$. The weights on the translations are $-(a+b),-(a-2b),-a$. A nonzero weight removes the associated translation by conjugation. A zero weight leaves a term with coefficient normalized to $0,1,-1$ by positive scaling after fixing the direction $A$:
+\[
+ X_5+dX_3,\qquad X_4-X_5+dX_1,\qquad X_4+X_5/2+dX_2.
+\]
+Translation-only representatives are $X_1,X_2,X_3,X_1\pm X_2,X_3\pm X_1,X_3\pm X_2,X_3\pm X_1+kX_2$ ($k\ne0$). This follows by the diagonal action $(v_1,v_2,v_3)\mapsto\lambda(e^\epsilon v_1,e^{-2\epsilon}v_2,v_3)$, including support strata. For $m=1$ the added $X_6=t\partial_\phi$ satisfies $[X_1,X_6]=X_3$. Connected representatives are
+\[
+ \begin{gathered}
+ X_4+aX_6,\quad X_6,\quad X_6\pm X_1+aX_2,\quad X_6\pm X_2,\\
+ X_1+aX_2,\quad X_2+aX_3,\quad X_3 .
+ \end{gathered}
+\]
+Indeed, if the $X_4$ coefficient is nonzero, translation adjoints remove all three translation coefficients; if only the $X_6$ coefficient is nonzero, translations remove $X_3$ and positive common scaling fixes the nonzero $X_1$ or $X_2$ magnitude. In pure translations the $X_6$ adjoint shifts the $X_3$ coefficient when $X_1$ is nonzero. These are algebraic line classes, not automatically admissible invariant graphs: trace, ranks and positivity still need checking. This catalogue and the individual formula audit are recorded by the source replay in the Reproducibility section.
+
+\section{Source reduction audit}
+The printed and compatible cubic powers differ: for $\phi=A(st^2)^{1/3}$ their amplitude conditions are respectively $(1-12g\kappa)A^3=27g$ and $(1-4g\kappa)A^3=27g$. At the printed travelling chart, if $p=F'$ and $L_P(p)p'$ is the integrated flux coefficient from~\eqref{eq:tilted}, the substitution $W(p)=\int^p L_P(v)\,dv$ gives $(W(p(z)))''=0$ wherever $L_P\ne0$. This supplies the secondary linearization without identifying the printed law with the compatible physical law. Source Sections 3.1--3.3 require chart/vertical-graph checks; 3.4--3.5 require the common and cubic scaling substitutions, including the additional nonzero Jacobian condition on the Abel chart; 3.6--3.9 require the travelling and tilted translation substitutions, including the reversed graphs and qualified Eq.~(32). The replay has individual equation records for these cases; it records failed printed identities and corrected forms rather than asserting completeness of the printed closed forms. A fresh replay at Taylor order six checked nine source sections, eleven displayed equation audits and 23 Taylor jets, with failures and corrections recorded individually.
+
+\section{Annular saddle convergence and interval bounds}\label{app:saddle-proof}
+\begin{proof}[Proof of Theorem~\ref{thm:critical}]
+\emph{Slopes.} At the critical point $(\Delta_c)_H=3g$, so $\mathbf J_*(0,1)^{\mathsf T}=(3g,N_H)^{\mathsf T}$ and both eigenvectors of the saddle $\det\mathbf J_*<0$ can be written $(1,\ell_\pm)$. The first-order terms of $\Delta_cH'=N$ give the same slope equation for every $C^1$ profile, and along it $\Delta_c(r_*+\rho,H(r_*+\rho))=\lambda_\pm\rho+o(\rho)$, a simple zero.
+
+\emph{Desingularization.} Fix a slope $\ell$ with eigenvalue $\lambda$ and opposite eigenvalue $\lambda_o$, and write $H(r_*+\rho)=H_*+\rho(\ell+w(\rho))$. Dividing $\Delta_c$ and $N$ by $\rho$ gives holomorphic $d(\rho,w),n(\rho,w)$ with $d(0,0)=\lambda\ne0$. Since $N_H-\ell(\Delta_c)_H=\operatorname{tr}\mathbf J_*-\lambda=\lambda_o$,
+\[
+ \rho w'=a w+\Psi(\rho,w),\qquad a=\lambda_o/\lambda-1<-1,\qquad \Psi(0,0)=\Psi_w(0,0)=0,
+\]
+a Briot--Bouquet equation~\cite{westreich1982} with $b=-a>1$ nonresonant.
+
+\emph{Contraction and uniqueness.} On a polydisc $|\rho|\le R$, $|w|\le R_w$ with $|\Psi(\rho,0)|\le K_\Psi|\rho|$, $|\Psi_w|\le L_\Psi<b$ and $K_\Psi R/(b+1)+L_\Psi R_w/b<R_w$, the operator $(\mathcal T[w])(\rho)=\int_0^1q^{b-1}\Psi(q\rho,w(q\rho))\,dq$ maps the disk-algebra ball into itself with Lipschitz constant $L_\Psi/b<1$. Any real $C^1$ germ of slope $\ell$ satisfies $\tfrac{d}{dq}(q^bw(q\rho))=q^{b-1}\Psi$, hence $w=\mathcal T[w]$, so it is the fixed point; conjugation shows it is real for real parameters. Analytic dependence on parameters follows from the implicit-function theorem at $\det\mathbf J_*\ne0$ and uniform contraction; integrating $Z'=P_Z(r,H(r))$ reconstructs $\mathcal E_2$.
+\end{proof}
+The Taylor coefficients of $H$ follow from the undivided residual,
+\[
+ a_n=-\frac{[\rho^n]\big(\Delta_c(r_*+\rho,H_{n-1})H_{n-1}'-N(r_*+\rho,H_{n-1})\big)}{n\lambda-\lambda_o},\qquad n\ge2,
+\]
+whose denominator never vanishes because $\lambda\lambda_o<0$. Cauchy's inequalities give $|a_n|\le R_w/R^{n-1}$, so on $|\rho|\le\vartheta R$ the degree-$L$ truncation has value error at most $R_wR\vartheta^{L+1}/(1-\vartheta)$.
+
+
+\section{Interval arithmetic for the parameter experiments}\label{app:interval-params}
+For the anchored annular chart let $\rho=r-1$, $Y=\ell+w$, $H=1+\rho Y$, $V=1/(rH)$, $W=1/r-r/2$. With $S_0=5/4$ and $a=(m-1)/2$, define the divided differences
+\[
+ v_d=-\frac{1+Y+\rho Y}{rH},\quad w_d=-1/r-1/2,\quad
+ s_d=v_d(V+1)+w_d(W+1/2).
+\]
+Then $V-1=\rho v_d$, $W-1/2=\rho w_d$, $S-S_0=\rho s_d$ exactly. For $Q_0=A_m(K-7G/4)$ and $C_3=c/2+Q_0$ put $q_d=-C_3/r-c/2$. We form
+\[
+ \begin{aligned}
+ M&=-a\int_0^1(S_0+\theta\rho s_d)^{-a-1}\,d\theta,\\
+ p_d&=(Kv_d-q_d S^{-a}-Q_0s_d M)/G .
+ \end{aligned}
+\]
+Thus $P_Z-7/4=\rho p_d$. The nonsingular divided functions are
+\[
+ d=Y-v_d(V+1),\qquad n=H[(s_d-S_0)/r+w_d-p_d],
+ \quad\mathfrak f=n/d-\ell-w .
+\]
+They represent $\Delta_c/\rho$ and $N/\rho$ and extend through zero. Composite midpoint quadrature of $M$ uses six subintervals; the remainder enclosure is $\sup|a(a+1)(a+2)(\rho s_d)^2(S_0+\theta\rho s_d)^{-a-3}|/(24\cdot6^2)$ for $0\le\theta\le1$. This eliminates the false $0/0$ singularity in interval evaluation. The independent barrier checker uses outward interval enclosures of the exact binary weights and sample parameters, with mpmath interval precision 25 decimal digits, real exponential/logarithm for the powers, and outward-rounded reported bounds. Coefficients of the polynomial spatial trial are enclosed using interval evaluation of the fixed tanh features. It checks full closed cells, including zero, not only sample nodes. For the drift certificate, the defect at each cell midpoint plus the derivative bound times half the cell length encloses its maximum. The true and candidate speed lower bounds give the lower derivative bound used in the mean value theorem. No assumption of complex analyticity of a trained network on a disk is needed for these real-domain bounds. The numerical reference integration itself is not used as a rigorous certificate. For the nonzero parameter box, each polynomial coefficient is enclosed by its central value plus the sum of the bounds on its partial derivatives in the normalized parameters times their maximal displacements. The derivative enclosures use $\tanh'=1-\tanh^2$. The same barrier checker then acts on interval parameters, including the interval slope and coefficients, rather than on isolated test tuples.
+
+\section{Historical trace-conditioned profile comparisons}\label{app:historical-comparison}
+\begin{reviewtext}
+We compare trial families on four dimensionless linear ODEs with known solutions. The trial inputs are the reduced operator and prescribed traces. Tasks~1 and~3 use different coordinates and data within one travelling-bed family.
+\end{reviewtext}
+
+\begin{enumerate}\setlength{\itemsep}{2pt}
+ \item \emph{$\mathcal E_1$ bed drift.} At $m=2$, $\kappa=1/2$, and $g=1$, solve $Y'/2+1/4=0$ for $Y(x)=u(t,x)^2$ on $x\in[0,1]$ with trace $\varpi=Y(0)\in[1,1.4]$. Reconstruct $h(t,x)=1/u(t,x)$ and $B(t,x)=t/4+2-Y(x)/2-h(t,x)$, and sample the physical fields at $t=1/2$.
+ \item \emph{Published scalar $\mathcal E_{P}$.} At $m=1$, $g=1$, and $\kappa=1/10$, use the $(\partial_s+t\partial_\phi)$-invariant graph $\phi(t,s)=ts+F(t)$ on $t\in[1,2]$ and solve $tF''=\varpi$ for $\varpi\in[.6,1]$ with $F(1)=0$, $F'(1)=1/2$. The exact profile is $F(t)=(t-1)/2+\varpi(t\log t-t+1)$. Sample the position function at $s=1.25$ and evaluate the third-order residual $(tF'')'$.
+ \item \emph{Material travelling wave.} At $m=2$, $c=-1$, $g=1$, and $\kappa=1/20$, solve $Y'=1/5$ for $Y(z)=F'(z)$ on $z\in[0,1]$ with $\varpi=Y(0)\in[1,1.4]$. At $t=1/2$ and $x=\phi(t,s)$, the lift gives $(h,u)(t,x)=(1/Y(z),Y(z))$ and $B(t,x)=3-1/Y(z)-Y(z)^2/2-1/100$, with exact lifted Exner residual $\Delta_{1,3}(t,x)=2\kappa(Y'-1/5)$.
+ \item \emph{Rotating exchange.} Learn the time offset $b(t)$ on $t\in[0,1]$ in~\eqref{eq:swirl-exact} from $b'+3b(t)=9/10$ with $\varpi=b(0)\in[.08,.20]$, and sample the lifted fields at $r=1.25$.
+\end{enumerate}
+
+For $k$ prescribed initial derivatives through order $k-1$, each trial model combines an exact trace lift $Y_0(z,\varpi)$ with a trace-vanishing remainder:
+\begin{align*}
+ Y_\theta(z,\varpi)&=Y_0(z,\varpi)+(z-z_0)^k(1,\widehat\varpi)\Theta v_1(\widehat z),\\
+ v_1(\widehat z)&=v_0(\widehat z)+\operatorname{diag}(\tanh\mathbf d_g)\tanh(Wv_0(\widehat z)),&
+ v_0(\widehat z)&=\tanh(a\widehat z+b).
+\end{align*}
+\begin{reviewtext}
+The affine inputs $\widehat z,\widehat\varpi$ lie in $[-1,1]$. The network is a six-feature feed-forward cell inspired by the liquid-residual block~\cite{tao2026}. Across the five training traces, it jointly fits the reduced differential residual at 24 midpoints per trace by SciPy least squares (seed 27, 150 function evaluations). Chebyshev uses a degree-15 remainder and the same exact trace lift, solving one collocation system per requested trace~\cite{trefethen}. Taylor uses two linked degree-22 charts. All methods share four held-out traces and 401 interior evaluation points per trace. Exact values enter only at evaluation.
+
+The three routes play different roles. Symbolic substitution together with Taylor recurrences detects closed-form and polynomial profiles exactly, within the proposed classes; this does not enumerate all analytic or closed-form solutions. Taylor charts inside the certified radius and Chebyshev collocation are the baseline series solvers. The gated cell is a grey-box trial family: the trace lift and the factor $(z-z_0)^k$ are fixed by the reduced equation, and only $\Theta,W,a,b,\mathbf d_g$ (66 parameters) are learned. Its intended use is a parameter neighbourhood or a higher-order system, where one fit replaces repeated collocation.
+
+A method is selected without the exact profile. It is admissible if its trace error is at most $10^{-8}$ and its sampled residual in the original balance is at most $10^{-6}$; among admissible methods we take the smallest residual, then the lowest cost. Exact solutions enter only afterwards, as validation. Table~\ref{tab:new-results} gives the outcome. Taylor is selected on Tasks~1, 3 and~4. On $\mathcal E_P$, where $t\log t$ limits the series, Taylor's residual reaches $1.9\times10^{-5}$ and Chebyshev is selected. The gated cell is admissible only on Task~3; on $\mathcal E_P$ its field error is $1.30\times10^{-6}$ while the differentiated diagnostic $(te'')'$ for $e=\widehat F-F$ reaches $1.17\times10^{-2}$.
+\end{reviewtext}
+
+\begin{table}[htb]\centering\small
+\begin{tabular}{@{}lrrrrl@{}}\toprule
+Case & \shortstack{Gated cell\\field error} & \shortstack{Chebyshev\\field error} & \shortstack{Taylor\\field error} & \shortstack{Gated cell\\residual} & Selected\\\midrule
+Eulerian drift & $6.06\times10^{-8}$ & $4.44\times10^{-16}$ & $0$ & $2.24\times10^{-6}$ & Taylor\\
+Published scalar & $1.30\times10^{-6}$ & $3.11\times10^{-15}$ & $3.63\times10^{-9}$ & $1.17\times10^{-2}$ & Chebyshev\\
+Material wave & $7.64\times10^{-8}$ & $4.44\times10^{-16}$ & $4.44\times10^{-16}$ & $3.58\times10^{-7}$ & Taylor\\
+Rotating exchange & $1.48\times10^{-6}$ & $1.22\times10^{-15}$ & $1.11\times10^{-16}$ & $1.77\times10^{-4}$ & Taylor\\
+\bottomrule\end{tabular}
+\caption[Controlled profile comparisons]{Maximum sampled field errors and gated-cell residuals over four held-out traces and 401 points each. The last column applies the residual rule above, which does not use the exact profile.}
+\label{tab:new-results}
+\end{table}
+
+\begin{reviewtext}
+For a profile bounded by $M_\varrho$ and holomorphic on a Bernstein ellipse ($\varrho>1$), the degree-$d$ truncation error is at most $2M_\varrho\varrho^{-d}/(\varrho-1)$~\cite{trefethen}. Task~2 has its logarithmic singularity at $-3$ after $t\mapsto2t-3$, allowing $1<\varrho<3+2\sqrt{2}$. Table~\ref{tab:profile-costs} separates the one-time fit from the cost of answering new traces. Per trace, the cell is about $3\times10^{-3}$\,s cheaper than Chebyshev, so its $1.9$\,s fit is recovered only after roughly $600$ traces; the crossover is a timing-only extrapolation. Taylor costs vary by task; no matched-accuracy or certified-cost crossover has been established. Verification time is not included.
+\end{reviewtext}
+
+\begin{table}[!ht]\centering\small
+\begin{tabular}{@{}lcc@{}}\toprule
+Method & One-time setup & Four new traces\\\midrule
+Gated cell & $1.79$--$1.92$ (fit) & $0.0018$--$0.0020$\\
+Chebyshev & none & $0.013$--$0.014$\\
+Taylor & none & $0.0015$--$0.0045$\\
+\bottomrule\end{tabular}
+\caption[Profile costs]{Seconds, ranges over the four tasks; median of three single-thread replays (AMD EPYC 9V74). Classical times include construction at each trace.}
+\label{tab:profile-costs}
+\end{table}
+
+
 \normalsize
 \begingroup
 \small
@@ -1158,6 +1292,12 @@ Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach. Lie Symmetries and 
 
 \bibitem[Druzhkov and Cheviakov(2024)]{druzhkov2024}
 Kostya Druzhkov and Alexei Cheviakov. Invariant Reduction for Partial Differential Equations. I: Conservation Laws and Systems with Two Independent Variables. Preprint, 2024. \url{https://arxiv.org/abs/2412.02965v1}.
+
+\bibitem[USACE HEC(2019)]{hecras2019}
+U.S. Army Corps of Engineers, Hydrologic Engineering Center.
+\emph{HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual}.
+Beta Release Draft, October 2019, Sec.~2.9, Eq.~(2-46).
+\href{https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf}{Technical reference manual}.
 
 \bibitem[Chesnokov(2008)]{chesnokov}
 Alexander Chesnokov. Symmetries and exact solutions of the rotating shallow water equations.
@@ -1241,6 +1381,13 @@ enclosure cells and $\gamma=4$. Each command prints JSON with the trace,
 trial coefficients, contraction and continuous bounds, and the five lifted
 residuals. Use \code{--output} with a filename to save the report. \review{The reproduction note specifies the inputs, outputs and tests. Use the exact strings in \code{trial_coefficients_ascending} for the supplementary uniform bound in \S\ref{sec:replay}.}
 
+The four Lie reductions ($\mathcal E_1$, $\mathcal E_P$, $\mathcal E_L$, $\mathcal E_2$), the four profile comparisons of Table~\ref{tab:new-results}, the arbitrary-flux bed reductions, the comparison with the preset profiles, and the strata and $(d+1)$D quotients of Table~\ref{tab:strata} run with one command (about 70 seconds):
+\begin{verbatim}
+python -m pip install -r delivery/requirements.txt
+bash delivery/reproduce_all.sh
+\end{verbatim}
+Each script writes its JSON record to \code{delivery/logs/} and exits with a nonzero status if its written verifier fails.
+
 \smallskip\noindent
 \href{https://github.com/CarlXerophilem/Lie-ML_PDES/blob/f498d648cce0633007430063bea008a2f4aac52a/delivery/semianalytic_defect.py}{Git source at commit \code{f498d648cce0633007430063bea008a2f4aac52a}}\\
 \code{delivery/semianalytic_defect.py}
@@ -1255,6 +1402,9 @@ with \code{OPENBLAS_NUM_THREADS=1}, \code{OMP_NUM_THREADS=1}, and
 \code{MKL_NUM_THREADS=1}.
 
 
+
+\paragraph{New parameter-conditioned experiments.}
+The independent \code{verify_planar.py} checks ten exact identities using SymPy. The accompanying supplementary scripts \code{parameter_experiments.py}, \code{parameter_bounds.py}, \code{compare_continuation.py}, and \code{verify_parameter_neighborhoods.py}, with their JSON receipts, regenerate the new tests with NumPy, SciPy and mpmath in that order (single BLAS thread). The fresh SVE2026 replay uses the source at \href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/8ea4a37c04d22d2b98781034ebf390c5e251a004/delivery}{commit \code{8ea4a37c}} and its recorded source PDF. These new files are not attributed to the earlier pinned repository commit.
 
 \end{document}
 
