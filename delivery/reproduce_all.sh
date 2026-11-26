@@ -36,6 +36,13 @@ else
     verdict=FAILED; status=1
 fi
 printf '%-22s %-7s %4ss\n' "strata + (d+1)D quotient" "$verdict" "$(( $(date +%s) - start ))"
+start=$(date +%s)
+if python3 verify_planar.py > logs/verify_planar.json 2> logs/verify_planar.err; then
+    verdict=passed
+else
+    verdict=FAILED; status=1
+fi
+printf '%-22s %-7s %4ss\n' "planar E2 identities" "$verdict" "$(( $(date +%s) - start ))"
 python3 - <<'EOF'
 import json
 print('\nprofile method selection (sampled residual rule)')

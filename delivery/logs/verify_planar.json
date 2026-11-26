@@ -1,0 +1,177 @@
+{
+ "checks": {
+  "potential: curl w = -f": {
+   "zero": true,
+   "note": "zero absolute vorticity of the lifted velocity"
+  },
+  "potential: momentum x": {
+   "zero": true,
+   "note": "Bernoulli lift cancels advection and Coriolis"
+  },
+  "potential: momentum y": {
+   "zero": true,
+   "note": ""
+  },
+  "potential: Exner equivalence": {
+   "zero": true,
+   "note": "B=-Xi/g turns Exner into the second potential equation"
+  },
+  "vector identity (w.grad)w = grad|w|^2/2 + curl(w) J w": {
+   "zero": true,
+   "note": ""
+  },
+  "rotation R: residual 0": {
+   "zero": true,
+   "note": ""
+  },
+  "rotation R: residual 1": {
+   "zero": true,
+   "note": ""
+  },
+  "rotation R: residual 2": {
+   "zero": true,
+   "note": ""
+  },
+  "rotation R: residual 3": {
+   "zero": true,
+   "note": ""
+  },
+  "drift T_c: residual 0": {
+   "zero": true,
+   "note": ""
+  },
+  "drift T_c: residual 1": {
+   "zero": true,
+   "note": ""
+  },
+  "drift T_c: residual 2": {
+   "zero": true,
+   "note": ""
+  },
+  "drift T_c: residual 3": {
+   "zero": true,
+   "note": ""
+  },
+  "R and T_c admitted for every (m,K,G,f,g,c)": {
+   "zero": true
+  },
+  "radial: mass flux rHV=C1": {
+   "zero": true,
+   "note": ""
+  },
+  "radial: azimuthal integral rW+fr^2/2=C2": {
+   "zero": true,
+   "note": ""
+  },
+  "radial: Exner integral rQ+cr^2/2=C3 with Z'=P_Z": {
+   "zero": true,
+   "note": ""
+  },
+  "radial: momentum = (Delta_c H' - N)/H": {
+   "zero": true,
+   "note": ""
+  },
+  "radial: N is G-homogeneous of degree 0 in (K,c,C3,G); parameters (m,g,f,C1,C2,K/G,c/G,C3/G)": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: Delta_c=0": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: N=0": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: P_Z=S0+fW0": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: (Delta_c)_H = 3": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: d det/dc = 3/(G S0^a) > 0": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor f=1: review determinant": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor f=0: bend determinant": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor f=0: threshold c_*": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor f=1, m=3, K=G=1: (77+12c)/5": {
+   "zero": true,
+   "note": ""
+  },
+  "anchor: closed forms": {
+   "S0": "f**2/4 - f + 2",
+   "P_star": "2 - f**2/4",
+   "C3": "c/2 + (-G*(f**2/4 + f*(1 - f/2) - f + 2) + K)*(f**2/4 - f + 2)**(m/2 - 1/2)",
+   "det_J": "3*c/(G*S0**((m-1)/2)) + ((3*G*f**4*m + 3*G*f**4 - 24*G*f**3 - 40*G*f**2*m + 120*G*f**2 - 128*G*f + 128*G*m + 128*G + 12*K*f**2*m - 4*K*f**2 - 32*K*f - 64*K*m + 128*K)/(4*G*(f**2 - 4*f + 8)))",
+   "det_J_bend_f0": "(3*2**(1/2 - m/2)*c + 4*G*(m + 1) + K*(4 - 2*m))/G",
+   "c_star_bend_f0": "2**(m/2 + 1/2)*(-2*G*(m + 1) + K*(m - 2))/3"
+  },
+  "bowl: mass": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: azimuthal momentum": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: C2=0 for W=-fr/2": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: radial momentum": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: Exner with Q=-cr/2": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: Z'' = (2-m) Z'/r": {
+   "zero": true,
+   "note": ""
+  },
+  "bowl: Z''/(c(2-m)) = 2^(m-2)(fr)^(1-m)/G > 0": {
+   "zero": true,
+   "note": "Z''>0 when c>0 and m<2; Z''=0 at m=2; Z''<0 when c>0 and m>2"
+  },
+  "drift: mass": {
+   "zero": true,
+   "note": ""
+  },
+  "drift: momentum": {
+   "zero": true,
+   "note": ""
+  },
+  "drift: Exner": {
+   "zero": true,
+   "note": ""
+  },
+  "drift: d(U0^m)/dm = U0^m log U0 >= 0 for U0>=1": {
+   "zero": true,
+   "note": ""
+  },
+  "drift: base at m=1, x=1 equals U0-1/2 >= 1/2": {
+   "zero": true,
+   "note": ""
+  },
+  "drift: d((1/2)^(1/m))/dm = (1/2)^(1/m) log2/m^2 >= 0": {
+   "zero": true,
+   "note": "so U >= (1/2)^(1/m) >= 1/2 for U0>=1, m>=1, x in [0,1]"
+  }
+ },
+ "failed": [],
+ "seconds": 4.0
+}
