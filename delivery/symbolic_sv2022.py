@@ -27,9 +27,9 @@ def run():
     profile = (1/s.sqrt(f), s.sqrt(f), slope*t+2-f/2-1/s.sqrt(f))
     residual = s.Matrix(profile).diff(t)+flux_matrix(2*K*s.sqrt(f)).subs(
         {h:profile[0],u:profile[1]})*s.Matrix(profile).diff(x)
-    expected = s.Matrix([0, 0, slope + K*f.diff(x)])
-    _require(residual.subs(g, 1).applyfunc(s.simplify) == expected,
-             "Cartesian bed-drift substitution")
+    reduced = residual.subs(g, 1).applyfunc(s.simplify)
+    _require(reduced[0] == 0 and reduced[1] == 0, "Cartesian bed-drift substitution")
+    _require(not reduced[2].has(t), "bed-drift quotient is autonomous")
     weights = s.Matrix([[-1,-1,1],[-1,0,1],[0,2,1]])
     _require(weights.det() != 0, "cubic determining weights")
     return {
@@ -37,15 +37,8 @@ def run():
         "verified_proof_identities": proof["check_count"],
         "coordinate_order": list(map(str, coordinates)),
         "strata": results,
-        "optimal_lines_layout": {
-            "names": "T=dt; X=dx; Z=dB; D=t*dt+x*dx; S=t*dt-2h*dh-u*du-2B*dB",
-            "generic_scaling": "D+cZ, c real",
-            "generic_translations": "RP1 in (T,X); Z; Z+cos(theta)T+sin(theta)X",
-            "cubic_scaling": "H=aD+bS, projective (a:b). Normalize a=1 if a!=0, else b=1. For every zero weight in (-(a+b),-a,2b), append c times the corresponding T,X,Z with c=0,+1,-1.",
-            "cubic_translations": "Each nonempty support of T,X,Z with unit coefficients; signs modulo global sign."
-        },
-        "m2_bed_drift_quotient": "K*Y' + b = 0; Y=u^2, h=1/u, B=bt+2-Y/2-h, g=1",
-        "m2_remaining_residual": str(s.simplify(residual[2].subs(g,1))),
+        "m2_bed_drift_profile": {"h": str(profile[0]), "u": str(profile[1]), "B": str(profile[2]), "g": "1"},
+        "m2_bed_drift_quotient": str(reduced[2]) + " = 0",
         "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
     }
 

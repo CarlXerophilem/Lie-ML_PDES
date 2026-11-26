@@ -1,0 +1,970 @@
+{
+  "manuscript_strata": {
+    "E1": {
+      "generic_dimension": 4,
+      "pivot_minor_factors": [
+        "m - 3",
+        "m - 1",
+        "m",
+        "kappa",
+        "g"
+      ],
+      "resonances": [
+        "1",
+        "2",
+        "3"
+      ],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "-t/2",
+              "0",
+              "h",
+              "u/2",
+              "B"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "1",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "pivot minor"
+        },
+        {
+          "value": "2",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        },
+        {
+          "value": "3",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "-t/2",
+              "0",
+              "h",
+              "u/2",
+              "B"
+            ]
+          ],
+          "source": "pivot minor"
+        }
+      ]
+    },
+    "P": {
+      "generic_dimension": 4,
+      "pivot_minor_factors": [
+        "m - 3",
+        "m - 1",
+        "m",
+        "kappa",
+        "g"
+      ],
+      "resonances": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 6,
+          "jump": 2,
+          "extra": [
+            [
+              "-t/2",
+              "s",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "t"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "1",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "0",
+              "0",
+              "t"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "2",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        },
+        {
+          "value": "3",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "-t/2",
+              "s",
+              "0"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "4",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        }
+      ]
+    },
+    "M": {
+      "generic_dimension": 4,
+      "pivot_minor_factors": [
+        "m - 3",
+        "m",
+        "kappa",
+        "g"
+      ],
+      "resonances": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "-t/2",
+              "s",
+              "0"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "1",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        },
+        {
+          "value": "2",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        },
+        {
+          "value": "3",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "-t/2",
+              "s",
+              "0"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "4",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance"
+        }
+      ]
+    },
+    "jumps": {
+      "E1": [
+        "0",
+        "3"
+      ],
+      "P": [
+        "0",
+        "1",
+        "3"
+      ],
+      "M": [
+        "0",
+        "3"
+      ]
+    },
+    "match": true,
+    "reading": "m=3: dilation X5/Y5 in all three; m=1: Galilean boost in P only (obstructed in M); m=0: transport switched off (degenerate). Resonant m=2,4 decided with no jump."
+  },
+  "E2_polar": {
+    "model": "E2 polar (t,r,theta)",
+    "generators": "d_theta, d_t + c d_B",
+    "status": "verified",
+    "weights": [
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "odes": [
+      "(z*F0(z)*Derivative(F1(z), z) + z*F1(z)*Derivative(F0(z), z) + F0(z)*F1(z))/z",
+      "-(f*z*F2(z) - g*z*Derivative(F0(z), z) - g*z*Derivative(F3(z), z) - z*F1(z)*Derivative(F1(z), z) + F2(z)**2)/z",
+      "(f*z + z*Derivative(F2(z), z) + F2(z))*F1(z)/z",
+      "(-G*z*F1(z)**2*Derivative(F3(z), (z, 2)) - 2*G*z*F1(z)*Derivative(F1(z), z)*Derivative(F3(z), z) - G*z*F2(z)**2*Derivative(F3(z), (z, 2)) - 2*G*z*F2(z)*Derivative(F2(z), z)*Derivative(F3(z), z) - G*F1(z)**2*Derivative(F3(z), z) - G*F2(z)**2*Derivative(F3(z), z) + 3*K*z*F1(z)**2*Derivative(F1(z), z) + 2*K*z*F1(z)*F2(z)*Derivative(F2(z), z) + K*z*F2(z)**2*Derivative(F1(z), z) + K*F1(z)**3 + K*F1(z)*F2(z)**2 + c*z)/z"
+    ],
+    "difference_to_supplied_graph": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "match": true
+  },
+  "E2_planar": {
+    "model": "E2 planar Cartesian (t,x,y)",
+    "generators": "rotation (-y d_x + x d_y - v d_u + u d_v), d_t + c d_B",
+    "status": "verified",
+    "weight_kind": "matrix",
+    "weights": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "0",
+      "cos(v1)",
+      "-sin(v1)",
+      "0",
+      "0",
+      "sin(v1)",
+      "cos(v1)",
+      "0",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "ansatz": [
+      "F0(z)",
+      "F1(z)*cos(v1) - F2(z)*sin(v1)",
+      "F1(z)*sin(v1) + F2(z)*cos(v1)",
+      "c*v2 + F3(z)"
+    ],
+    "base": [
+      "v2",
+      "z*cos(v1)",
+      "z*sin(v1)"
+    ],
+    "odes": [
+      "(z*F0(z)*Derivative(F1(z), z) + z*F1(z)*Derivative(F0(z), z) + F0(z)*F1(z))/z",
+      "-(f*z*F2(z) - g*z*Derivative(F0(z), z) - g*z*Derivative(F3(z), z) - z*F1(z)*Derivative(F1(z), z) + F2(z)**2)/z",
+      "(f*z + z*Derivative(F2(z), z) + F2(z))*F1(z)/z",
+      "(-G*z*F1(z)**2*Derivative(F3(z), (z, 2)) - 2*G*z*F1(z)*Derivative(F1(z), z)*Derivative(F3(z), z) - G*z*F2(z)**2*Derivative(F3(z), (z, 2)) - 2*G*z*F2(z)*Derivative(F2(z), z)*Derivative(F3(z), z) - G*F1(z)**2*Derivative(F3(z), z) - G*F2(z)**2*Derivative(F3(z), z) + 3*K*z*F1(z)**2*Derivative(F1(z), z) + 2*K*z*F1(z)*F2(z)*Derivative(F2(z), z) + K*z*F2(z)**2*Derivative(F1(z), z) + K*F1(z)**3 + K*F1(z)*F2(z)**2 + c*z)/z"
+    ],
+    "equal_to_polar_quotient": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "match": true
+  },
+  "random": [
+    {
+      "model": "random3D#0",
+      "pde": "-mu*u + u*u_0_0_1 - 2*u_0_0_2 - 2*u_0_2_0 + u_1_0_0 = 0",
+      "hidden_parameter": "mu",
+      "generic_dimension": 3,
+      "pivot_minor_factors": [
+        "mu"
+      ],
+      "resonances": [],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 5,
+          "jump": 2,
+          "extra": [
+            [
+              "0",
+              "0",
+              "t",
+              "1"
+            ],
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, 0, t, 1)",
+              "(-2*t, -x1, -x2, u)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z*exp(-2*v2)",
+              "exp(-v2)",
+              "v1*z*exp(-2*v2)"
+            ],
+            "ansatz": [
+              "v1 + F0(z)*exp(v2)"
+            ],
+            "ode": [
+              "-(8*z**3*Derivative(F0(z), (z, 2)) + 20*z**2*Derivative(F0(z), z) + 4*z*F0(z) - z*Derivative(F0(z), z) - F0(z))/z"
+            ],
+            "weights": [
+              "exp(3*v2)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0)",
+          "(0, 1, 0, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "v2",
+          "z"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "F0(z)*Derivative(F0(z), z) - 5*F0(z) - 2*Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    },
+    {
+      "model": "random4D#0",
+      "pde": "-mu*u - 2*u*u_0_0_0_1 - 2*u*u_0_0_1_0 + u*u_0_1_0_0 - u_0_0_0_2 - 2*u_0_0_2_0 - 2*u_0_2_0_0 + u_1_0_0_0 = 0",
+      "hidden_parameter": "mu",
+      "generic_dimension": 5,
+      "pivot_minor_factors": [
+        "mu"
+      ],
+      "resonances": [],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 7,
+          "jump": 2,
+          "extra": [
+            [
+              "0",
+              "t",
+              "-2*t",
+              "-2*t",
+              "1"
+            ],
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "-x3",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, t, -2*t, -2*t, 1)",
+              "(-2*t, -x1, -x2, -x3, u)",
+              "(0, 1, 0, 0, 0)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z*exp(-2*v2)",
+              "(v1*z + v3*exp(v2))*exp(-2*v2)",
+              "-2*v1*z*exp(-2*v2)",
+              "(-2*v1*z + exp(v2))*exp(-2*v2)"
+            ],
+            "ansatz": [
+              "v1 + F0(z)*exp(v2)"
+            ],
+            "ode": [
+              "-(12*z**3*Derivative(F0(z), (z, 2)) + 30*z**2*Derivative(F0(z), z) + 6*z*F0(z) - z*Derivative(F0(z), z) - F0(z))/z"
+            ],
+            "weights": [
+              "exp(3*v2)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0, 0)",
+          "(0, 1, 0, 0, 0)",
+          "(0, 0, 1, 0, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "v2",
+          "v3",
+          "z"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "-2*F0(z)*Derivative(F0(z), z) - 5*F0(z) - Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    },
+    {
+      "model": "random3D#1",
+      "pde": "u*u_0_0_1 - u**m - 3*u_0_0_2 - u_0_2_0 + u_1_0_0 = 0",
+      "hidden_parameter": "m",
+      "generic_dimension": 3,
+      "pivot_minor_factors": [
+        "m - 3",
+        "m"
+      ],
+      "resonances": [
+        "-1",
+        "0",
+        "1/2",
+        "1",
+        "2"
+      ],
+      "strata": [
+        {
+          "value": "-1",
+          "kernel_dimension": 3,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "0",
+          "kernel_dimension": 4,
+          "jump": 1,
+          "extra": [
+            [
+              "0",
+              "0",
+              "t",
+              "1"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, 0, t, 1)",
+              "(0, 1, 0, 0)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z",
+              "v2",
+              "v1*z"
+            ],
+            "ansatz": [
+              "v1 + F0(z)"
+            ],
+            "ode": [
+              "(z*Derivative(F0(z), z) - z + F0(z))/z"
+            ],
+            "weights": [
+              "1"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        },
+        {
+          "value": "1/2",
+          "kernel_dimension": 3,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "1",
+          "kernel_dimension": 3,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "2",
+          "kernel_dimension": 3,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "3",
+          "kernel_dimension": 4,
+          "jump": 1,
+          "extra": [
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(-2*t, -x1, -x2, u)",
+              "(1, 0, 0, 0)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "v2*exp(-2*v1)",
+              "z*exp(-v1)",
+              "exp(-v1)"
+            ],
+            "ansatz": [
+              "F0(z)*exp(v1)"
+            ],
+            "ode": [
+              "-3*z**2*Derivative(F0(z), (z, 2)) - z*F0(z)*Derivative(F0(z), z) - 12*z*Derivative(F0(z), z) - F0(z)**3 - F0(z)**2 - 6*F0(z) - Derivative(F0(z), (z, 2))"
+            ],
+            "weights": [
+              "exp(3*v1)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0)",
+          "(0, 1, 0, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "v2",
+          "z"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "-F0(z)**5 + F0(z)*Derivative(F0(z), z) - 3*Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    },
+    {
+      "model": "random4D#1",
+      "pde": "-2*u*u_0_0_0_1 + u*u_0_1_0_0 + u**m - u_0_0_0_2 - 3*u_0_0_2_0 - u_0_2_0_0 + u_1_0_0_0 = 0",
+      "hidden_parameter": "m",
+      "generic_dimension": 5,
+      "pivot_minor_factors": [
+        "m - 3",
+        "m"
+      ],
+      "resonances": [
+        "-1",
+        "0",
+        "1/2",
+        "1",
+        "2"
+      ],
+      "strata": [
+        {
+          "value": "-1",
+          "kernel_dimension": 5,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "0",
+          "kernel_dimension": 6,
+          "jump": 1,
+          "extra": [
+            [
+              "0",
+              "t",
+              "0",
+              "-2*t",
+              "1"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, t, 0, -2*t, 1)",
+              "(0, 1, 0, 0, 0)",
+              "(0, 0, 1, 0, 0)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z",
+              "v1*z + v2",
+              "v3",
+              "-2*v1*z"
+            ],
+            "ansatz": [
+              "v1 + F0(z)"
+            ],
+            "ode": [
+              "(z*Derivative(F0(z), z) + z + F0(z))/z"
+            ],
+            "weights": [
+              "1"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        },
+        {
+          "value": "1/2",
+          "kernel_dimension": 5,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "1",
+          "kernel_dimension": 5,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "2",
+          "kernel_dimension": 5,
+          "jump": 0,
+          "extra": [],
+          "source": "power resonance",
+          "status": "decided"
+        },
+        {
+          "value": "3",
+          "kernel_dimension": 6,
+          "jump": 1,
+          "extra": [
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "-x3",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(-2*t, -x1, -x2, -x3, u)",
+              "(1, 0, 0, 0, 0)",
+              "(0, 1, 0, 0, 0)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "v2*exp(-2*v1)",
+              "v3*exp(-v1)",
+              "z*exp(-v1)",
+              "exp(-v1)"
+            ],
+            "ansatz": [
+              "F0(z)*exp(v1)"
+            ],
+            "ode": [
+              "-z**2*Derivative(F0(z), (z, 2)) + 2*z*F0(z)*Derivative(F0(z), z) - 4*z*Derivative(F0(z), z) + F0(z)**3 + 2*F0(z)**2 - 2*F0(z) - 3*Derivative(F0(z), (z, 2))"
+            ],
+            "weights": [
+              "exp(3*v1)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0, 0)",
+          "(0, 1, 0, 0, 0)",
+          "(0, 0, 1, 0, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "v2",
+          "v3",
+          "z"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "F0(z)**5 - 2*F0(z)*Derivative(F0(z), z) - Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    },
+    {
+      "model": "random3D#2",
+      "pde": "-mu*u_0_1_0*x1 + u*u_0_0_1 - u_0_0_2 - u_0_2_0 + u_1_0_0 = 0",
+      "hidden_parameter": "mu",
+      "generic_dimension": 3,
+      "pivot_minor_factors": [
+        "mu"
+      ],
+      "resonances": [],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 5,
+          "jump": 2,
+          "extra": [
+            [
+              "0",
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, 1, 0, 0)",
+              "(-2*t, -x1, -x2, u)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z*exp(-2*v2)",
+              "v1",
+              "exp(-v2)"
+            ],
+            "ansatz": [
+              "F0(z)*exp(v2)"
+            ],
+            "ode": [
+              "-4*z**2*Derivative(F0(z), (z, 2)) - 2*z*F0(z)*Derivative(F0(z), z) - 10*z*Derivative(F0(z), z) - F0(z)**2 - 2*F0(z) + Derivative(F0(z), z)"
+            ],
+            "weights": [
+              "exp(3*v2)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0)",
+          "(0, 0, 1, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "z",
+          "v2"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "-5*z*Derivative(F0(z), z) - Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    },
+    {
+      "model": "random4D#2",
+      "pde": "-mu*u_0_1_0_0*x1 + u*u_0_0_0_1 - u*u_0_0_1_0 + u*u_0_1_0_0 - u_0_0_0_2 - u_0_0_2_0 - u_0_2_0_0 + u_1_0_0_0 = 0",
+      "hidden_parameter": "mu",
+      "generic_dimension": 4,
+      "pivot_minor_factors": [
+        "mu"
+      ],
+      "resonances": [],
+      "strata": [
+        {
+          "value": "0",
+          "kernel_dimension": 7,
+          "jump": 3,
+          "extra": [
+            [
+              "0",
+              "-x2 - x3",
+              "x1 - x3",
+              "x1 + x2",
+              "0"
+            ],
+            [
+              "0",
+              "t",
+              "-t",
+              "t",
+              "1"
+            ],
+            [
+              "-2*t",
+              "-x1",
+              "-x2",
+              "-x3",
+              "u"
+            ]
+          ],
+          "source": "pivot minor",
+          "status": "decided",
+          "reduction": {
+            "subalgebra": [
+              "(0, -x2 - x3, x1 - x3, x1 + x2, 0)",
+              "(0, t, -t, t, 1)",
+              "(-2*t, -x1, -x2, -x3, u)"
+            ],
+            "uses_extra": true,
+            "base": [
+              "z*exp(-2*v3)",
+              "(3*v2*z - 2*exp(v3)*sin(sqrt(3)*v1 + pi/6) + exp(v3))*exp(-2*v3)/3",
+              "(-3*v2*z + 2*exp(v3)*cos(sqrt(3)*v1 + pi/3) - exp(v3))*exp(-2*v3)/3",
+              "(3*v2*z + 2*exp(v3)*cos(sqrt(3)*v1) + exp(v3))*exp(-2*v3)/3"
+            ],
+            "ansatz": [
+              "v2 + F0(z)*exp(v3)"
+            ],
+            "ode": [
+              "-(12*z**3*Derivative(F0(z), (z, 2)) + 24*z**2*Derivative(F0(z), z) + 3*z*F0(z) - 2*z*Derivative(F0(z), z) - 2*F0(z) - 1)/(2*z)"
+            ],
+            "weights": [
+              "exp(3*v3)"
+            ],
+            "tried": [
+              "verified"
+            ]
+          }
+        }
+      ],
+      "generic_reduction": {
+        "subalgebra": [
+          "(1, 0, 0, 0, 0)",
+          "(0, 0, 1, 0, 0)",
+          "(0, 0, 0, 1, 0)"
+        ],
+        "uses_extra": false,
+        "base": [
+          "v1",
+          "z",
+          "v2",
+          "v3"
+        ],
+        "ansatz": [
+          "F0(z)"
+        ],
+        "ode": [
+          "-5*z*Derivative(F0(z), z) + F0(z)*Derivative(F0(z), z) - Derivative(F0(z), (z, 2))"
+        ],
+        "weights": [
+          "1"
+        ],
+        "tried": [
+          "verified"
+        ],
+        "sample_value": 5
+      }
+    }
+  ],
+  "summary": {
+    "manuscript_strata_match": true,
+    "E2_polar_match": true,
+    "E2_planar_verified": true,
+    "random_models": 6,
+    "random_jump_strata": 8,
+    "jump_strata_reduced_with_extra_generator": 8,
+    "generic_strata_reduced": 6
+  }
+}

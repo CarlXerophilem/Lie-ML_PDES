@@ -196,6 +196,7 @@ def compare(case,settings=Settings()):
                 "trace_error_maximum":v["trace_error"],
                 "setup_and_prediction_seconds_all_traces":v["seconds"]}
              for k,v in logs.items()}
+    selection=select_method(metrics)
     # Keep historical metric keys for regression. The displayed method name is
     # adapted gated cell, not the original LNN-PINN architecture.
     return {"case":case.name,"settings":asdict(settings),"fit":fit,
@@ -203,7 +204,21 @@ def compare(case,settings=Settings()):
             "trace_dependence":"affine interpolation; not nonlinear parameter learning",
             "residual_orders":{"training":2,"diagnostic":3} if "P at m=1" in case.name
                               else {"training":1,"diagnostic":1},
-            "test_traces":traces.tolist(),"metrics":metrics}
+            "test_traces":traces.tolist(),"metrics":metrics,"selection":selection}
+
+
+def select_method(metrics,trace_tolerance=1e-8,residual_tolerance=1e-6):
+    """Choose from quantities available without the exact profile; field errors only validate the choice."""
+    admissible=[k for k,v in metrics.items()
+                if v["trace_error_maximum"]<=trace_tolerance and v["original_residual_maximum"]<=residual_tolerance]
+    ranked=sorted(admissible,key=lambda k:(metrics[k]["original_residual_maximum"],
+                                           metrics[k]["setup_and_prediction_seconds_all_traces"]))
+    chosen=ranked[0] if ranked else None
+    return {"rule":"admit trace error <= %g and sampled original residual <= %g; rank by residual, then cost"
+                   %(trace_tolerance,residual_tolerance),
+            "admissible":ranked,"rejected":sorted(set(metrics)-set(admissible)),"selected":chosen,
+            "selected_field_maximum":metrics[chosen]["field_maximum"] if chosen else None,
+            "evidence_level":"sampled residual on 401 held-out coordinates; not a continuous bound"}
 
 
 def cli(cases):

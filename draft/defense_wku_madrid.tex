@@ -1253,6 +1253,35 @@ This is the printed equation. The physical reconstruction adds the derivative $-
 \smallnote{Symbols are dimensionless after scaling. Before scaling, $t$ has units of time, $x,h,B,\phi$ of length, $u$ of speed, and $s$ of length squared.}
 \end{frame}
 
+\begin{frame}[t]{Where the exponent creates extra symmetry}
+\vspace{1mm}
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}
+\lead{Search with $m$ left symbolic}\par
+\small
+\begin{enumerate}\setlength{\itemsep}{2pt}
+ \item Take a general generator with unknown affine coefficients and require $\pr X(\Delta)=0$ on solutions.
+ \item Split by free derivatives; treat $u^{m+k}$ as an independent monomial. This gives a linear system $\mathsf A(m)\,a=0$.
+ \item The kernel can grow only where a pivot minor of $\mathsf A(m)$ vanishes or two powers coincide.
+ \item Decide each candidate by solving the system again at that exact $m$.
+\end{enumerate}
+\column{.49\textwidth}
+\lead{Result: the classification is recovered}\par\smallskip
+\centering
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llll@{}}\toprule
+ & Candidates & Extra at $m\ge1$ & Generator\\\midrule
+$E_1$ & $0,1,2,3$ & $m=3$ & $X_5$ scaling\\
+$P$ & $0,\ldots,4$ & $m=1,\ 3$ & boost $t\partial_\phi$, $Y_5$\\
+$E_L$ & $0,\ldots,4$ & $m=3$ & $Y_5$ (no boost)\\\bottomrule
+\end{tabular}\par\smallskip
+\raggedright\small Generic algebras are four-dimensional. $m=3$ makes $g\kappa$ scale-invariant; at $m=1$ the boost survives only in the printed scalar.
+\end{columns}
+\vspace{1.5mm}
+\divider
+\smallnote{The same test on random $(2+1)$D and $(3+1)$D equations with a hidden coefficient finds every extra generator and reduces each case to an ODE.}
+\end{frame}
+
 \begin{frame}[t]{The semi-analytical reduction workflow}
 \centering\includegraphics[width=\textwidth]{figures/final-delivery/contribution_workflow.pdf}\par
 \vspace{1mm}
@@ -1280,48 +1309,15 @@ This is the printed equation. The physical reconstruction adds the derivative $-
 \small If the base and point orbit ranks both equal $k$, a transverse slice leaves $d-k$ of the $d$ independent variables.
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.43\linewidth}>{\raggedright\arraybackslash}p{.48\linewidth}@{}}
  $(t,x)\mapsto x$ & Ordinary differential equation\\[1.1mm]
- $(t,x,y)\mapsto(t,r)$ & Partial differential equation\\
+ $(t,x,y)\mapsto(t,r)$ & PDE (rotation only, $k=1$)\\[1.1mm]
+ $(t,x,y)\mapsto r$ & ODE (rotation and bed drift, $k=2$)\\
 \end{tabular}
 \smallskip
-\small In the rotating exchange model, rotation removes the angle and leaves time and radius. Further reduction requires further structure.
+\small The code builds the orbit chart $(z,v)$ for any $d$ and accepts $\Delta=\mathsf M(z,v)\,\mathcal E[F](z)$ with $\det\mathsf M\ne0$. The exchange offset $b(t)$ is a conditional, vertical family, not a further quotient.
 \end{columns}
 {\footnotesize\color{muted}\credit{olver}\quad\credit{oliveri}\par}
 \end{frame}
 
-\begin{frame}[t]{How a generator acts on derivatives}
-\vspace{1mm}
-\begin{columns}[T,onlytextwidth]
-\column{.455\textwidth}
-\lead{Infinitesimal generator}\par
-\small For base coordinates $z=(t,x)\in\R^2$ and fields $U=(u,h,B)\in\R^3$, write
-\[
- X=\xi^i\partial_{z_i}+\eta^a\partial_{U^a}.
-\]
-Its \textbf{first prolongation} differentiates the transformed graph. On the first derivative $U_i^a$ its coefficient is
-\[
- \eta_i^a=D_i\eta^a-(D_i\xi^j)U_j^a .
-\]
-Here $i,j$ index the two base coordinates and $a$ the three fields. A symmetry makes $\pr^{(1)}X$ tangent to the first-order equation locus.
-\source{\credit{olver}}
-\column{.505\textwidth}
-\lead{Sediment balance under time scaling}\par
-\small For the 2022 system take
-\[
- X=t\partial_t-u\partial_u-2h\partial_h-2B\partial_B.
-\]
-Time scales by $e^\varepsilon$, velocity by $e^{-\varepsilon}$, and depth and bed by $e^{-2\varepsilon}$. Hence $B_t$ and $(u^m)_x$ scale by $e^{-3\varepsilon}$ and $e^{-m\varepsilon}$.
-\smallskip
-
-With $\Delta_B=B_t+\kappa(u^m)_x$, the tangency test gives
-\[
- \left.\pr^{(1)}X\,\Delta_B\right|_{\Delta_B=0}
-       =(3-m)\kappa(u^m)_x .
-\]
-The water balances also scale uniformly, so this is a symmetry at $m=3$.
-\end{columns}
-\smallskip
-\smallnote{Invariance gives $tu=U(x)$ and $t^2h=H(x)$. Then $t^3[h_t+(hu)_x]=(HU)'-2H=0$.}
-\end{frame}
 
 \begin{frame}[t]{Combining variables removes time from the profile}
 \vspace{.6mm}
@@ -1400,7 +1396,7 @@ Here $\mathcal J$ turns velocity counterclockwise by a right angle, $D_a$ is dif
   \node[teal,anchor=west] at (-1.89,1.15) {$a$};
 \end{tikzpicture}\par\smallskip
 \raggedright
-\smallnote{Adding the bed and mobile-load equations conserves their total after accounting for boundary flux. Rotation leaves a partial differential system in $(t,r)$.}
+\smallnote{Adding the bed and mobile-load equations conserves their total after accounting for boundary flux. Rotation leaves a $(t,r)$ system; with bed drift instead of exchange it becomes the radial ODE $(gH-V^2)H'=N$, whose saddle gives two analytic critical crossings.}
 \end{columns}
 \vspace{1mm}
 \smallnote{Before scaling, $h,B,a$ are lengths, $C$ is a volume fraction, $k_d,k_e,\Omega$ have units of inverse time, and $D_a$ is area per time.}
@@ -1452,98 +1448,98 @@ Here $\mathcal J$ turns velocity counterclockwise by a right angle, $D_a$ is dif
 \smallnote{Each panel shows a dimensionless scalar profile of one dimensionless coordinate.}
 \end{frame}
 
-\begin{frame}[t]{Classical and learned routes on one quotient}
+
+
+
+\begin{frame}[t]{Selecting a solver without the exact solution}
+\small Three routes share one reduced equation and exact trace: Taylor and Chebyshev series, and a grey-box gated cell whose 66 weights only shape a trace-vanishing remainder.
+Admit a method if trace error $\le10^{-8}$ and residual of the original balance $\le10^{-6}$; pick the smallest residual. Exact solutions only validate.
+\vspace{1.5mm}
+
+\centering
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lrrrl@{}}
+\toprule
+Case & Gated cell & Chebyshev & Taylor & Selected\\
+\midrule
+2022 Eulerian & $6.06\times10^{-8}$ & $4.44\times10^{-16}$ & $0$ & Taylor\\
+Printed scalar $P$ & $1.30\times10^{-6}$ & $3.11\times10^{-15}$ & $3.63\times10^{-9}$ & Chebyshev\\
+Material $M\to E_1$ & $7.64\times10^{-8}$ & $4.44\times10^{-16}$ & $4.44\times10^{-16}$ & Taylor\\
+Rotating exchange & $1.48\times10^{-6}$ & $1.22\times10^{-15}$ & $1.11\times10^{-16}$ & Taylor\\
+\bottomrule
+\end{tabular}
+\vspace{1.5mm}
+
+\raggedright
+\lead{The original balance decides.}
+On $P$ the $t\log t$ profile limits Taylor (residual $1.9\times10^{-5}$), so Chebyshev is chosen. The gated cell has field error $1.30\times10^{-6}$ there, yet residual $1.17\times10^{-2}$.
+\par\smallskip
+\smallnote{Maximum field errors over four withheld traces, 401 points each. 66-parameter gated cell, one fit for all traces. \texttt{bash delivery/reproduce\_all.sh} regenerates every entry.}
+\source{\credit{trefethen}}
+\end{frame}
+
+
+
+\begin{frame}[t]{Conclusion}
+\vspace{1mm}
+\begin{columns}[T,onlytextwidth]
+\column{.5\textwidth}
+\lead{Established}\par
+\small
+\begin{itemize}\setlength{\itemsep}{2pt}
+ \item The exponent controls the algebra: extra generators exactly at $m=3$, and at $m=1$ for the printed scalar.
+ \item Bed drift $\partial_t+\alpha\partial_B$ reduces $E_1$ for every $C^2$ flux $Q(u)$; for $\alpha\ne0$ a $C^1$ profile through $U_0$ exists iff $Q'(U_0)\ne0$.
+ \item Rotation and drift reduce planar SVE to one radial ODE; a saddle gives two analytic crossings.
+ \item A residual rule picks the solver without the exact solution; the tank profile has a continuous error bound.
+\end{itemize}
+\column{.46\textwidth}
+\lead{Open}\par
+\small
+\begin{itemize}\setlength{\itemsep}{2pt}
+ \item Classify the extra symmetries of $E_1[Q]$ for all fluxes $Q$.
+ \item Non-affine and conditional symmetries (the exchange offset).
+ \item Whether learning beats series at matched certified accuracy on higher-order or multi-parameter profiles.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{References, reproducibility and AI disclosure}
+\footnotesize
+\begin{columns}[T,onlytextwidth]
+\column{.49\textwidth}
+\lead{Reduction and physical models}\par\smallskip
+\href{https://doi.org/10.1007/978-1-4612-4350-2}{Olver (1993). \emph{Applications of Lie Groups to Differential Equations}.}\par\smallskip
+\href{https://doi.org/10.1007/978-3-032-12791-4}{Oliveri (2026). \emph{Lie Symmetries of Differential Equations}.}\par\smallskip
+\href{https://doi.org/10.3390/sym14081679}{Paliathanasis (2022). One-dimensional Saint--Venant--Exner model.}\par\smallskip
+\href{https://doi.org/10.3390/math14030433}{Paliathanasis, Leon and Leach (2026). Shallow water with bed elevation in Lagrange variables.}\par\smallskip
+\href{https://www.usgs.gov/media/images/bedforms-produced-three-experiments}{Rubin (2005). USGS flume bedforms photographs.}
+\column{.48\textwidth}
+\lead{Numerical and learning methods}\par\smallskip
+\href{https://doi.org/10.1137/1.9780898719598}{Trefethen (2000). \emph{Spectral Methods in MATLAB}.}\par\smallskip
+\href{https://doi.org/10.1016/j.cpc.2026.110237}{Tao et al. (2026). Smooth residual blocks in LNN-PINN.}\par\smallskip
+\href{https://arxiv.org/abs/2511.02481v4}{Eshaghi et al. (2026). Neural operator warm starts.}\par\smallskip
+\href{https://arxiv.org/abs/2511.07684v2}{Li et al. (2026). Nemytskii neural operator.}\par\smallskip
+\href{https://arxiv.org/abs/2001.04536v1}{Wang et al. (2020). Gradient pathologies in PINNs.}\par\smallskip
+\href{https://proceedings.mlr.press/v288/nagesh25a.html}{Nagesh et al. (2025). Taylor-model PINNs for ODEs.}
+\end{columns}
+\divider
+\lead{Code and source}\enspace
+\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/codex/final}{GitHub branch}
+\quad\href{https://github.com/CarlXerophilem/Lie-ML_PDES/blob/codex/final/draft/dissertation_wku_compact.pdf}{Compact dissertation}\par\smallskip
+\lead{AI disclosure}\enspace OpenAI ChatGPT and Anthropic Claude (in Cursor) assisted with editing, exposition and slides. Claude Opus 5.5 helped design the SymPy Lie reducer for $(1\text{--}3)+1$D SVE systems, since I do not use Mathematica or Maple; I checked the scripts by hand. All results were rerun and checked by the author.
+\end{frame}
+
+\appendix
+
+\begin{frame}[t]{Backup \enspace Classical and learned routes on one quotient}
 \centering
 \includegraphics[width=.92\textwidth,height=.73\textheight,keepaspectratio]{figures/final-delivery/ml_workflow.pdf}
 \par\smallskip
 \raggedright\smallnote{The original Klausen method is verified separately on heat and wave equations. The $P$--$M$ comparison and continuation are future work.}
 \end{frame}
 
-\begin{frame}[t]{What the liquid-block model fits}
-\small
-Let $\delta=z-z_0$ and $\beta(p)=(1,\widehat p)$. Use
-\[
- Y_\Theta=Y_0+\delta^k\,\beta(p)\Theta\,v_1,\qquad
- v_0=\tanh(A_0\widehat z+b_0),\quad
- v_1=v_0+\tanh(\gamma)\odot\tanh(A_1v_0).
-\]
-The trace lift $Y_0$ supplies initial derivatives through order $k-1$.
-The factor $\delta^k$ preserves these values during training.
-\begin{columns}[T,onlytextwidth]
-\column{.47\textwidth}
-\lead{Fit the reduced equation}\par\smallskip
-Use six channels, five trace values and 24 interior points per trace.
-Train the feature block and readout together by SciPy least squares.
-Differentiate the trial map by the chain and product rules.
-\column{.49\textwidth}
-\lead{Check the original equation}\par\smallskip
-Compare with Chebyshev and Taylor at the same four withheld traces.
-Evaluate 401 interior points per trace and report field and residual
-errors after the lift.
-\end{columns}
-\smallskip
-\smallnote{Exact solutions enter the evaluation. The equations and prescribed traces supply the fit.}
-\source{Tao, Wang and Liu (2026)}
-\end{frame}
-
-\begin{frame}[t]{How to compare correction work at equal accuracy}
-\small
-\begin{columns}[T,onlytextwidth]
-\column{.48\textwidth}
-\lead{Change the start only}\par\smallskip
-Use a deterministic Lie reference or a projected learned profile in the
-same coefficient space. Apply the same damped Newton correction
-\[
- DG_h(c_n)\Delta c_n=-G_h(c_n),\qquad
- c_{n+1}=c_n+\alpha_n\Delta c_n .
-\]
-Fix the branch, grid policy, constraints, tolerances and budget.
-\column{.48\textwidth}
-\lead{Measure both routes}\par\smallskip
-\begin{itemize}
-\item Initial defect and admissibility margins.
-\item Final field error, residual, traces and flux.
-\item Steps, evaluations, wall time and failures.
-\item Fit, inference and fallback costs.
-\end{itemize}
-\end{columns}
-\begin{block}{Initial milestone}
-Run both routes and report the paired outcomes. Equal or worse results
-for the learned start are valid outcomes. A later speed claim needs
-less correction work at the same accepted accuracy.
-\end{block}
-\source{\credit{eshaghi}\quad\credit{li}}
-\end{frame}
-
-\begin{frame}[t]{Error against exact solutions}
-\small Maximum sampled absolute field errors for the new CPU replay.
-\vspace{2mm}
-
-\centering
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.35}
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-Case & Liquid block & Chebyshev & Taylor\\
-\midrule
-2022 Eulerian & $6.07\times10^{-8}$ & $4.44\times10^{-16}$ & $0$\\
-Printed scalar $P$ & $1.30\times10^{-6}$ & $3.11\times10^{-15}$ & $3.63\times10^{-9}$\\
-Material $M\to E_1$ & $7.64\times10^{-8}$ & $4.44\times10^{-16}$ & $4.44\times10^{-16}$\\
-Rotating exchange & $2.24\times10^{-6}$ & $1.22\times10^{-15}$ & $1.11\times10^{-16}$\\
-\bottomrule
-\end{tabular}
-\vspace{2mm}
-
-\raggedright
-\lead{The original balance matters.}
-The liquid-block $P$ profile has field error $1.30\times10^{-6}$, yet its
-third-derivative residual reaches $1.17\times10^{-2}$ on the same grid.
-\par\smallskip
-\smallnote{Four withheld traces and 401 interior points per trace. These runs test direct prediction cost and accuracy. A paired nonlinear correction experiment remains open.}
-\source{\credit{trefethen}}
-\end{frame}
-
-\begin{frame}[t]{Symmetry, singularities, and smooth trial maps}
+\begin{frame}[t]{Backup \enspace Symmetry, singularities, and smooth trial maps}
 \vspace{.7mm}
 \begin{columns}[T,onlytextwidth]
 \column{.445\textwidth}
@@ -1583,34 +1579,96 @@ Here $v,\alpha,b\in\R^w$ and $A\in\R^{w\times w}$. The bound $\|\alpha\|_\infty\
 \end{columns}
 \end{frame}
 
-
-\begin{frame}[t]{References and reproducibility}
-\footnotesize
+\begin{frame}[t]{Backup \enspace How a generator acts on derivatives}
+\vspace{1mm}
 \begin{columns}[T,onlytextwidth]
-\column{.49\textwidth}
-\lead{Reduction and physical models}\par\smallskip
-\href{https://doi.org/10.1007/978-1-4612-4350-2}{Olver (1993). \emph{Applications of Lie Groups to Differential Equations}.}\par\smallskip
-\href{https://doi.org/10.1007/978-3-032-12791-4}{Oliveri (2026). \emph{Lie Symmetries of Differential Equations}.}\par\smallskip
-\href{https://doi.org/10.3390/sym14081679}{Paliathanasis (2022). One-dimensional Saint--Venant--Exner model.}\par\smallskip
-\href{https://doi.org/10.3390/math14030433}{Paliathanasis, Leon and Leach (2026). Shallow water with bed elevation in Lagrange variables.}\par\smallskip
-\href{https://www.usgs.gov/media/images/bedforms-produced-three-experiments}{Rubin (2005). USGS flume bedforms photographs.}
-\column{.48\textwidth}
-\lead{Numerical and learning methods}\par\smallskip
-\href{https://doi.org/10.1137/1.9780898719598}{Trefethen (2000). \emph{Spectral Methods in MATLAB}.}\par\smallskip
-\href{https://doi.org/10.1016/j.cpc.2026.110237}{Tao et al. (2026). Smooth residual blocks in LNN-PINN.}\par\smallskip
-\href{https://arxiv.org/abs/2511.02481v4}{Eshaghi et al. (2026). Neural operator warm starts.}\par\smallskip
-\href{https://arxiv.org/abs/2511.07684v2}{Li et al. (2026). Nemytskii neural operator.}\par\smallskip
-\href{https://arxiv.org/abs/2001.04536v1}{Wang et al. (2020). Gradient pathologies in PINNs.}\par\smallskip
-\href{https://proceedings.mlr.press/v288/nagesh25a.html}{Nagesh et al. (2025). Taylor-model PINNs for ODEs.}
+\column{.455\textwidth}
+\lead{Infinitesimal generator}\par
+\small For base coordinates $z=(t,x)\in\R^2$ and fields $U=(u,h,B)\in\R^3$, write
+\[
+ X=\xi^i\partial_{z_i}+\eta^a\partial_{U^a}.
+\]
+Its \textbf{first prolongation} differentiates the transformed graph. On the first derivative $U_i^a$ its coefficient is
+\[
+ \eta_i^a=D_i\eta^a-(D_i\xi^j)U_j^a .
+\]
+Here $i,j$ index the two base coordinates and $a$ the three fields. A symmetry makes $\pr^{(1)}X$ tangent to the first-order equation locus.
+\source{\credit{olver}}
+\column{.505\textwidth}
+\lead{Sediment balance under time scaling}\par
+\small For the 2022 system take
+\[
+ X=t\partial_t-u\partial_u-2h\partial_h-2B\partial_B.
+\]
+Time scales by $e^\varepsilon$, velocity by $e^{-\varepsilon}$, and depth and bed by $e^{-2\varepsilon}$. Hence $B_t$ and $(u^m)_x$ scale by $e^{-3\varepsilon}$ and $e^{-m\varepsilon}$.
+\smallskip
+
+With $\Delta_B=B_t+\kappa(u^m)_x$, the tangency test gives
+\[
+ \left.\pr^{(1)}X\,\Delta_B\right|_{\Delta_B=0}
+       =(3-m)\kappa(u^m)_x .
+\]
+The water balances also scale uniformly, so this is a symmetry at $m=3$.
 \end{columns}
-\divider
-\lead{Code and source}\enspace
-\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/codex/final}{GitHub branch}
-\quad\href{https://github.com/CarlXerophilem/Lie-ML_PDES/blob/codex/final/draft/dissertation_wku_compact.pdf}{Compact dissertation}\par\smallskip
-OpenAI ChatGPT assisted with editing, mathematical exposition, verification code, and slides.
+\smallskip
+\smallnote{Invariance gives $tu=U(x)$ and $t^2h=H(x)$. Then $t^3[h_t+(hu)_x]=(HU)'-2H=0$.}
 \end{frame}
 
-\appendix
+\begin{frame}[t]{Backup \enspace What the liquid-block model fits}
+\small
+Let $\delta=z-z_0$ and $\beta(p)=(1,\widehat p)$. Use
+\[
+ Y_\Theta=Y_0+\delta^k\,\beta(p)\Theta\,v_1,\qquad
+ v_0=\tanh(A_0\widehat z+b_0),\quad
+ v_1=v_0+\tanh(\gamma)\odot\tanh(A_1v_0).
+\]
+The trace lift $Y_0$ supplies initial derivatives through order $k-1$.
+The factor $\delta^k$ preserves these values during training.
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}
+\lead{Fit the reduced equation}\par\smallskip
+Use six channels, five trace values and 24 interior points per trace.
+Train the feature block and readout together by SciPy least squares.
+Differentiate the trial map by the chain and product rules.
+\column{.49\textwidth}
+\lead{Check the original equation}\par\smallskip
+Compare with Chebyshev and Taylor at the same four withheld traces.
+Evaluate 401 interior points per trace and report field and residual
+errors after the lift.
+\end{columns}
+\smallskip
+\smallnote{Exact solutions enter the evaluation. The equations and prescribed traces supply the fit.}
+\source{Tao, Wang and Liu (2026)}
+\end{frame}
+
+\begin{frame}[t]{Backup \enspace How to compare correction work at equal accuracy}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{.48\textwidth}
+\lead{Change the start only}\par\smallskip
+Use a deterministic Lie reference or a projected learned profile in the
+same coefficient space. Apply the same damped Newton correction
+\[
+ DG_h(c_n)\Delta c_n=-G_h(c_n),\qquad
+ c_{n+1}=c_n+\alpha_n\Delta c_n .
+\]
+Fix the branch, grid policy, constraints, tolerances and budget.
+\column{.48\textwidth}
+\lead{Measure both routes}\par\smallskip
+\begin{itemize}
+\item Initial defect and admissibility margins.
+\item Final field error, residual, traces and flux.
+\item Steps, evaluations, wall time and failures.
+\item Fit, inference and fallback costs.
+\end{itemize}
+\end{columns}
+\begin{block}{Initial milestone}
+Run both routes and report the paired outcomes. Equal or worse results
+for the learned start are valid outcomes. A later speed claim needs
+less correction work at the same accepted accuracy.
+\end{block}
+\source{\credit{eshaghi}\quad\credit{li}}
+\end{frame}
 
 \begin{frame}[t]{Backup \enspace Archived fixed-feature derivative formulas}
 \small

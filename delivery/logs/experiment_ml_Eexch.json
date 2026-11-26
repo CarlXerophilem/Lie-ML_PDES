@@ -1,0 +1,79 @@
+{
+  "model": "E_exch",
+  "record": {
+    "case": "2026 rotating tank",
+    "fit": {
+      "elapsed_seconds": 2.6282047780696303,
+      "interpretation": "fixed-budget approximation; no convergence claim",
+      "nfev": 150,
+      "optimizer_status": 0,
+      "parameters": 66,
+      "sample_train_rms": 1.2206453374415225e-06,
+      "status": "budget_exhausted"
+    },
+    "method_display_name": "adapted gated cell",
+    "metrics": {
+      "Chebyshev": {
+        "field_maximum": 1.2212453270876722e-15,
+        "field_rms": 3.13078755917023e-16,
+        "original_residual_maximum": 2.8310687127941492e-14,
+        "setup_and_prediction_seconds_all_traces": 0.01118973596021533,
+        "trace_error_maximum": 0.0
+      },
+      "LNN-PINN": {
+        "field_maximum": 1.4796635418312665e-06,
+        "field_rms": 2.7472805167673067e-07,
+        "original_residual_maximum": 0.00017684582331856102,
+        "setup_and_prediction_seconds_all_traces": 0.0013929898850619793,
+        "trace_error_maximum": 0.0
+      },
+      "Taylor": {
+        "field_maximum": 1.1102230246251565e-16,
+        "field_rms": 1.6300794327081886e-17,
+        "original_residual_maximum": 3.3306690738754696e-16,
+        "setup_and_prediction_seconds_all_traces": 0.0027975409757345915,
+        "trace_error_maximum": 0.0
+      }
+    },
+    "residual_orders": {
+      "diagnostic": 1,
+      "training": 1
+    },
+    "selection": {
+      "admissible": [
+        "Taylor",
+        "Chebyshev"
+      ],
+      "evidence_level": "sampled residual on 401 held-out coordinates; not a continuous bound",
+      "rejected": [
+        "LNN-PINN"
+      ],
+      "rule": "admit trace error <= 1e-08 and sampled original residual <= 1e-06; rank by residual, then cost",
+      "selected": "Taylor",
+      "selected_field_maximum": 1.1102230246251565e-16
+    },
+    "settings": {
+      "chebyshev_degree": 15,
+      "max_nfev": 150,
+      "seed": 27,
+      "taylor_degree": 22,
+      "test_coordinates": 401,
+      "train_coordinates": 24,
+      "width": 6
+    },
+    "test_traces": [
+      0.095,
+      0.125,
+      0.15500000000000003,
+      0.185
+    ],
+    "trace_dependence": "affine interpolation; not nonlinear parameter learning"
+  },
+  "search_class": "Offset on the exact swirl family. Not an annular E2 saddle and not a planar symmetry search.",
+  "task": "2026 rotating tank",
+  "written_verifier": {
+    "checker": "written check of field, residual and trace metrics on the held-out grid",
+    "reasons": [],
+    "status": "passed"
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "chart": "phi_t>0, phi_s>0, g,kappa>0",
+  "derived": {
+    "affine_coordinates": [
+      "Derivative(tau(t), t)",
+      "Derivative(xi(s), s)",
+      "Derivative(eta(u), u)"
+    ],
+    "bases": {
+      "3": [
+        [
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "-t/2",
+          "s",
+          "0"
+        ],
+        [
+          "3*t/2",
+          "0",
+          "u"
+        ]
+      ],
+      "m": [
+        [
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "t",
+          "s",
+          "u"
+        ]
+      ]
+    },
+    "determining_splits": {
+      "w_slice": "2*g*q**2*Derivative(tau(t, s, u), s) + q**5*(-2*p*Derivative(xi(t, s, u), u) - 2*Derivative(xi(t, s, u), t)) + q**4*(2*g*kappa*m*p**m*Derivative(tau(t, s, u), u)/p - Derivative(eta(t, s, u), t)) + q**3*(2*g*kappa*m*p**m*Derivative(tau(t, s, u), s)/p + 2*g*Derivative(tau(t, s, u), u) + p*Derivative(eta(t, s, u), s))",
+      "x_slice_after_dependency_split": "q**3*(-g*kappa*m**2*p**m*Derivative(eta(u), u)/p + g*kappa*m**2*p**m*Derivative(tau(t), t)/p + 3*g*kappa*m*p**m*Derivative(eta(u), u)/p - 3*g*kappa*m*p**m*Derivative(tau(t), t)/p) + q**2*(3*g*Derivative(eta(u), u) - 2*g*Derivative(tau(t), t) - g*Derivative(xi(s), s))",
+      "zero_first_derivatives": [
+        "Derivative(xi(t, s, u), t)",
+        "Derivative(xi(t, s, u), u)",
+        "Derivative(tau(t, s, u), s)",
+        "Derivative(eta(t, s, u), s)",
+        "Derivative(tau(t, s, u), u)",
+        "Derivative(eta(t, s, u), t)"
+      ]
+    },
+    "exceptional_exponents": [
+      "3"
+    ]
+  },
+  "material_scaling": {
+    "bindings": {
+      "V": "F - P*z"
+    },
+    "first_integral": "C*(-F*(P**3*z**2 - g)/P**3 + V**m*g*kappa*m*z/(P*V))",
+    "leading": "-F*(P**3*z**2 - g)/P**3 + V**m*g*kappa*m*z/(P*V)",
+    "velocity": "F - P*z"
+  },
+  "model": "M",
+  "not_claimed": "No continuation from the printed scalar P into M.",
+  "polynomial_labels_span_smooth_basis": [
+    {
+      "exponent": 1,
+      "labels": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4"
+      ],
+      "span_equal": true,
+      "stratum": "m"
+    },
+    {
+      "exponent": 2,
+      "labels": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4"
+      ],
+      "span_equal": true,
+      "stratum": "m"
+    },
+    {
+      "exponent": 3,
+      "labels": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4",
+        "Y5"
+      ],
+      "span_equal": true,
+      "stratum": "3"
+    },
+    {
+      "exponent": 4,
+      "labels": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4"
+      ],
+      "span_equal": true,
+      "stratum": "m"
+    }
+  ],
+  "reductions": {
+    "cubic_m3": {
+      "solver_output": {
+        "conditions": [
+          "phi_t>0",
+          "phi_s>0",
+          "g,kappa>0",
+          "m=3",
+          "t != 0",
+          "local flow chart; logarithm arguments positive when used",
+          "2*s*t*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s*t**2) > 0",
+          "t**2*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s*t**2) > 0",
+          "g > 0",
+          "kappa > 0"
+        ],
+        "equations": [
+          "-2*(12*g*kappa*z**3*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 3)) + 12*g*kappa*z**3*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2))**2 + 60*g*kappa*z**2*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2)) + 24*g*kappa*z*Derivative(F0(z), z)**4 - g*Derivative(F0(z), (z, 2)) + 4*z**2*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2)) + 2*z*Derivative(F0(z), z)**4)/Derivative(F0(z), z)**2"
+        ],
+        "generators": [
+          [
+            "t",
+            "-2*s",
+            "0"
+          ]
+        ],
+        "invariant": "s*t**2",
+        "kind": "pde_reduction",
+        "lifts": [
+          "F0(s*t**2)"
+        ],
+        "model": "M",
+        "orbit_coordinates": {
+          "s": "z*exp(-2*orbit)",
+          "t": "exp(orbit)"
+        },
+        "parameter_bindings": {
+          "m": "3"
+        },
+        "profile_functions": [
+          "F0"
+        ],
+        "scope": "specified local invariant graph; not exhaustive reduction classification",
+        "symbols": [
+          "g",
+          "kappa",
+          "s",
+          "t",
+          "z"
+        ],
+        "weights": [
+          "exp(-orbit)"
+        ]
+      },
+      "status": "computed",
+      "verification": {
+        "checks": [
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          }
+        ],
+        "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+        "generic_base_orbit_rank": 1,
+        "paper_sha256": "6803a30ed2df15e60c8e3e10118e7dbb8aedc1fe0dcd89da2a5d339717f2b1be",
+        "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred",
+        "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+        "status": "verified_local_identities",
+        "verifier": "independent_verifier.v1",
+        "weights": [
+          {
+            "nonzero": true,
+            "weight": "exp(-orbit)"
+          }
+        ]
+      }
+    },
+    "scaling_m2": {
+      "solver_output": {
+        "conditions": [
+          "phi_t>0",
+          "phi_s>0",
+          "g,kappa>0",
+          "m=2",
+          "t != 0",
+          "local flow chart; logarithm arguments positive when used",
+          "-s*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s/t)/t + F0(s/t) > 0",
+          "Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, s/t) > 0",
+          "g > 0",
+          "kappa > 0"
+        ],
+        "equations": [
+          "-(2*g*kappa*z**2*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) - 2*g*kappa*z*F0(z)*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 3)) + 2*g*kappa*z*F0(z)*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2))**2 + 2*g*kappa*z*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)) - 2*g*kappa*F0(z)*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 2)) - g*F0(z)*Derivative(F0(z), z)*Derivative(F0(z), (z, 3)) + 3*g*F0(z)*Derivative(F0(z), (z, 2))**2 - g*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2)) + z**2*F0(z)*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) + z**2*Derivative(F0(z), z)**5*Derivative(F0(z), (z, 2)) + 2*z*F0(z)*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 2)))/Derivative(F0(z), z)**4"
+        ],
+        "generators": [
+          [
+            "t",
+            "s",
+            "phi"
+          ]
+        ],
+        "invariant": "s/t",
+        "kind": "pde_reduction",
+        "lifts": [
+          "t*F0(s/t)"
+        ],
+        "model": "M",
+        "orbit_coordinates": {
+          "s": "z*exp(orbit)",
+          "t": "exp(orbit)"
+        },
+        "parameter_bindings": {
+          "m": "2"
+        },
+        "profile_functions": [
+          "F0"
+        ],
+        "scope": "specified local invariant graph; not exhaustive reduction classification",
+        "symbols": [
+          "g",
+          "kappa",
+          "s",
+          "t",
+          "z"
+        ],
+        "weights": [
+          "exp(-2*orbit)"
+        ]
+      },
+      "status": "computed",
+      "verification": {
+        "checks": [
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          }
+        ],
+        "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+        "generic_base_orbit_rank": 1,
+        "paper_sha256": "6803a30ed2df15e60c8e3e10118e7dbb8aedc1fe0dcd89da2a5d339717f2b1be",
+        "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred",
+        "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+        "status": "verified_local_identities",
+        "verifier": "independent_verifier.v1",
+        "weights": [
+          {
+            "nonzero": true,
+            "weight": "exp(-2*orbit)"
+          }
+        ]
+      }
+    },
+    "tilted_m2": {
+      "solver_output": {
+        "conditions": [
+          "phi_t>0",
+          "phi_s>0",
+          "g,kappa>0",
+          "m=2",
+          "1 != 0",
+          "local flow chart; logarithm arguments positive when used",
+          "-c*Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, -c*t + s) + gamma > 0",
+          "Subs(Derivative(F0(_xi_1), _xi_1), _xi_1, -c*t + s) > 0",
+          "g > 0",
+          "kappa > 0"
+        ],
+        "equations": [
+          "-(2*c**2*g*kappa*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) + c**2*gamma*Derivative(F0(z), z)**4*Derivative(F0(z), (z, 3)) - 2*c*g*gamma*kappa*Derivative(F0(z), z)**3*Derivative(F0(z), (z, 3)) + 2*c*g*gamma*kappa*Derivative(F0(z), z)**2*Derivative(F0(z), (z, 2))**2 - g*gamma*Derivative(F0(z), z)*Derivative(F0(z), (z, 3)) + 3*g*gamma*Derivative(F0(z), (z, 2))**2)/Derivative(F0(z), z)**4"
+        ],
+        "generators": [
+          [
+            "1",
+            "c",
+            "gamma"
+          ]
+        ],
+        "invariant": "-c*t + s",
+        "kind": "pde_reduction",
+        "lifts": [
+          "gamma*t + F0(-c*t + s)"
+        ],
+        "model": "M",
+        "orbit_coordinates": {
+          "s": "c*orbit + z",
+          "t": "orbit"
+        },
+        "parameter_bindings": {
+          "m": "2"
+        },
+        "profile_functions": [
+          "F0"
+        ],
+        "scope": "specified local invariant graph; not exhaustive reduction classification",
+        "symbols": [
+          "c",
+          "g",
+          "gamma",
+          "kappa",
+          "s",
+          "t",
+          "z"
+        ],
+        "weights": [
+          "1"
+        ]
+      },
+      "status": "computed",
+      "verification": {
+        "checks": [
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          },
+          {
+            "normal_form": "0",
+            "status": "proved_zero"
+          }
+        ],
+        "equivalence": "conditional on original denominators, chart, section rank and nonzero weights",
+        "generic_base_orbit_rank": 1,
+        "paper_sha256": "6803a30ed2df15e60c8e3e10118e7dbb8aedc1fe0dcd89da2a5d339717f2b1be",
+        "paper_transcription": "explicit input; semantic agreement of transcription with prose is not inferred",
+        "scope": "independent PDE-to-graph substitution and invariant-surface identities; not a classification-completeness proof",
+        "status": "verified_local_identities",
+        "verifier": "independent_verifier.v1",
+        "weights": [
+          {
+            "nonzero": true,
+            "weight": "1"
+          }
+        ]
+      }
+    }
+  },
+  "search_class": "Unrestricted smooth point generators on phi_t, phi_s, g, kappa>0, real m>=1. Degree-1 polynomial labels are an integer audit.",
+  "written_verifier": {
+    "checker": "delivery/independent_verifier.py through lie_pde_reducer.verifier; first integral from symbolic_sve2026.material_scaling",
+    "reasons": [],
+    "status": "passed"
+  }
+}

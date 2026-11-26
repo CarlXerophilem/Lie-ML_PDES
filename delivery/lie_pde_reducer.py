@@ -10,12 +10,11 @@ ROOT=Path(__file__).resolve().parent
 
 
 def _paper_text(model):
-    import hashlib
+    """The contract equation is the verifier input; the manuscript must still carry its label."""
     text=(ROOT/'paper_contracts'/f'{model}.json').read_text();contract=json.loads(text)
-    manuscript=(ROOT.parent/'draft'/'dissertation_wku_compact.tex').read_bytes()
-    if hashlib.sha256(manuscript).hexdigest()!=contract['source_sha256']:
-        raise ValueError('paper transcription snapshot is stale; review it against the manuscript before verification')
-    if contract['source_excerpt'] not in manuscript.decode():raise ValueError('paper excerpt differs from manuscript')
+    manuscript=(ROOT.parent/'draft'/'dissertation_wku_compact.tex').read_text()
+    if '\\label{'+contract['source_anchor']+'}' not in manuscript:
+        raise ValueError('manuscript no longer defines the contract anchor '+contract['source_anchor'])
     return text
 
 

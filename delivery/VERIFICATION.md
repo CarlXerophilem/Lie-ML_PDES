@@ -153,3 +153,23 @@ architecture, and the series-prefix network. Analytic quadrature and a SymPy
 comparisons and quadrature-sensitivity records. See the
 [commands and capability limits](MANAGED_SOLVERS.md). The checked-in pilot is
 an interface experiment, not a replacement for the frozen thesis tables.
+
+## Parameter strata and quotients in d independent variables
+
+`python3 check_multid.py` (also stage 12 of `reproduce_all.sh`, about 35 s)
+writes `logs/check_multid.json` and exits nonzero on any mismatch.
+
+- [hidden.py](lie_reduce/hidden.py): general degree-1 generator with symbolic
+  exponent `m`; powers `b**(m+k)` split as `W_b*b**k`. Candidate strata are the
+  roots of one pivot minor of the determining matrix plus power resonances; each
+  is decided by exact specialization (rational values split over `b**(1/q)`).
+  Expected jumps: E1 `{0,3}`, P `{0,1,3}`, M `{0,3}`. Scope: affine coefficient
+  class; Appendix A of the dissertation gives the smooth classification.
+- [multid.py](lie_reduce/multid.py): rank `d-1` affine subalgebra, orbit chart
+  from matrix-exponential flows, jets by the inverse Jacobian. Accepted only if
+  `Q_X=0`, the chart Jacobian is not identically zero, and
+  `Delta(z,v) = M(z,v) E(z)` with `M` profile-free and `det M` not identically zero.
+  Checks: polar E2 equals the supplied annular graph; Cartesian E2 under
+  rotation and `d_t + c d_B` needs a rotation weight matrix and equals polar E2.
+- Seeded random scalar models in 2+1 and 3+1 D: every jump stratum is reduced
+  through a closed subalgebra containing an extra generator.
