@@ -29,3 +29,5 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | `li` | [Nemytskii Neural Operator: A Nonlinear Model Reduction Method for Parametrized Partial Differential Equations](https://arxiv.org/abs/2511.07684v2) | Linked |
 | `wang` | [Understanding and Mitigating Gradient Pathologies in Physics-Informed Neural Networks](https://arxiv.org/abs/2001.04536v1) | [PDF](Understanding%20and%20Mitigating%20Gradient%20Pathologies%20in%20Physics-Informed%20Neural%20Networks.pdf) |
 | `nagesh` | [Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary Differential Equations](https://proceedings.mlr.press/v288/nagesh25a.html) | Linked |
+| `hairer1993` | [Solving Ordinary Differential Equations I: Nonstiff Problems](https://doi.org/10.1007/978-3-540-78862-1) | Linked · §II.5 (8th-order embedded pair), §II.6 (dense output for DOP853), Appendix (Fortran DOP853) |
+| `zeng2008` | [Flow and Bathymetry in Sharp Open-Channel Bends: Experiments and Predictions](https://doi.org/10.1029/2007WR006303) | Linked · EPFL bend geometry only |
