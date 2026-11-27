@@ -1,0 +1,118 @@
+\begin{tikzpicture}
+  % Panel 1: convex-bed family Z(r) for m = 1, 1.5, 2, 3
+  \begin{axis}[
+    name=leftax,
+    scale only axis,
+    width=4.0cm,
+    height=3.4cm,
+    xmin=0.6, xmax=1.8,
+    ymin=-1.15, ymax=1.35,
+    xtick={0.6, 1.0, 1.4, 1.8},
+    ytick={-1, -0.5, 0, 0.5, 1},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    xlabel={$r$},
+    ylabel={$Z(r)$},
+    ylabel style={yshift=-2pt},
+    xlabel style={yshift=2pt},
+    axis line style={ink!75},
+    tick style={ink!75},
+    title style={font=\footnotesize, yshift=-3pt},
+    title={exact beds $Z(r)$},
+    legend pos=north west,
+    legend style={font=\scriptsize, draw=none, fill=none,
+      inner sep=1.5pt, row sep=-1.5pt},
+    legend cell align=left,
+    domain=0.6:1.8,
+    samples=80,
+  ]
+    \draw[black!25, dotted, line width=0.5pt] (axis cs:0.6,0) -- (axis cs:1.8,0);
+    \addplot[ink, line width=1.0pt] {0.5*(x^2 - 1)/2};
+    \addlegendentry{$m=1$}
+    \addplot[ink!65!teal, line width=1.0pt] {pow(2,-0.5)*(pow(x,1.5) - 1)/1.5};
+    \addlegendentry{$m=1.5$}
+    \addplot[ink!30!teal, line width=1.0pt] {x - 1};
+    \addlegendentry{$m=2$}
+    \addplot[teal, line width=1.0pt] {2*ln(x)};
+    \addlegendentry{$m=3$}
+    \fill[ink] (axis cs:1,0) circle (1.2pt);
+  \end{axis}
+
+  % Panel 2: water column for m = 1.5 (E = 2.6)
+  \begin{axis}[
+    name=midax,
+    at={($(leftax.south east)+(1.35cm,0)$)},
+    anchor=south west,
+    scale only axis,
+    width=4.0cm,
+    height=3.4cm,
+    xmin=0.6, xmax=1.8,
+    ymin=-0.45, ymax=3.15,
+    xtick={0.6, 1.0, 1.4, 1.8},
+    ytick={0, 1, 2, 3},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    xlabel={$r$},
+    ylabel={elevation},
+    ylabel style={yshift=-3pt},
+    xlabel style={yshift=2pt},
+    axis line style={ink!75},
+    tick style={ink!75},
+    title style={font=\footnotesize, yshift=-3pt},
+    title={water column ($m=1.5$)},
+    domain=0.6:1.8,
+    samples=80,
+  ]
+    \path[name path=bot] (axis cs:0.6,-0.45) -- (axis cs:1.8,-0.45);
+    \addplot[ink, line width=1.0pt, name path=bed] {pow(2,-0.5)*(pow(x,1.5) - 1)/1.5};
+    \addplot[teal, line width=1.05pt, name path=surf] {2.6 - x^2/8};
+
+    \addplot[ink!12] fill between[of=bed and bot];
+    \addplot[teal!12] fill between[of=bed and surf];
+
+    % Re-stroke curves cleanly
+    \addplot[ink, line width=1.0pt] {pow(2,-0.5)*(pow(x,1.5) - 1)/1.5};
+    \addplot[teal, line width=1.05pt] {2.6 - x^2/8};
+
+    \node[font=\scriptsize, text=teal!90!black, anchor=south west, inner sep=1.5pt]
+      at (axis cs:0.65, 2.58) {$H+Z=E-r^2/8$};
+    \node[font=\scriptsize, text=ink, anchor=north west, inner sep=1.5pt]
+      at (axis cs:1.42, 0.28) {$Z$};
+    \draw[{Latex[length=1.1mm]}-{Latex[length=1.1mm]}, teal!80!ink, line width=0.55pt]
+      (axis cs:1.20, 0.16) -- (axis cs:1.20, 2.40)
+      node[midway, right, font=\scriptsize, inner sep=1.5pt] {$H$};
+  \end{axis}
+
+  % Element 3: minimal 3D annulus kinematic sketch
+  \begin{scope}[shift={($(midax.east)+(2.05cm,-0.08cm)$)}]
+    \node[font=\footnotesize, anchor=south] at (0, 1.72) {kinematic sketch};
+
+    % Annulus top surface and subtle depth rim
+    \fill[teal!10, even odd rule]
+      (0,0) ellipse (1.42cm and 0.48cm)
+      (0,0) ellipse (0.78cm and 0.26cm);
+    \draw[ink, line width=0.75pt] (0,0) ellipse (1.42cm and 0.48cm);
+    \draw[ink, line width=0.75pt] (0,0) ellipse (0.78cm and 0.26cm);
+    \draw[ink!55, line width=0.6pt]
+      (-1.42cm,0) -- (-1.42cm,-0.32cm)
+      (1.42cm,0) -- (1.42cm,-0.32cm);
+    \draw[ink!55, line width=0.6pt]
+      (-1.42cm,-0.32cm) arc[start angle=180, end angle=360, x radius=1.42cm, y radius=0.48cm];
+
+    % Rotation axis
+    \draw[-{Latex[length=1.5mm]}, ink, densely dashed, line width=0.75pt]
+      (0,-0.42cm) -- (0,1.25cm)
+      node[right, font=\scriptsize, inner sep=2pt] {$f>0$};
+
+    % Radius arrow pointing up-left, well clear of swirl arrow
+    \draw[-{Latex[length=1.25mm]}, ink, line width=0.7pt]
+      (0,0) -- (-1.04cm,0.16cm)
+      node[above, pos=0.65, font=\scriptsize, inner sep=1.5pt] {$r$};
+
+    % Clockwise swirl arrow W = -fr/2 along front-right of annulus
+    \draw[-{Latex[length=1.5mm]}, teal, thick]
+      (1.06cm, -0.06cm) arc[start angle=-8, end angle=-74, x radius=1.10cm, y radius=0.37cm];
+    \node[font=\scriptsize, text=teal!90!black, anchor=north]
+      at (0, -0.92cm) {$W = -fr/2$};
+  \end{scope}
+\end{tikzpicture}

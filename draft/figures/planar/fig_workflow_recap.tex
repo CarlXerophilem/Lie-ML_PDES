@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+  wbox/.style={box, font=\scriptsize, inner sep=3.2pt, minimum height=6.6mm},
+  wml/.style={mlbox, font=\scriptsize, inner sep=3.2pt, minimum height=6.6mm},
+  wwarn/.style={warnbox, font=\scriptsize, inner sep=3.2pt, minimum height=6.6mm},
+]
+  % Column 1: symbolic reduced ODE
+  \node[wbox] (ode)
+    {\textbf{Reduced ODE}\\(symbolic)};
+
+  % Column 2: three symbolic outcomes (matched width)
+  \node[wbox, minimum width=3.35cm, right=4.5mm of ode] (germ)
+    {\textbf{Singular germ}\\Briot--Bouquet / saddle};
+  \node[wbox, draw=teal!80!ink, fill=teal!5, minimum width=3.35cm, above=2.5mm of germ] (exact)
+    {Exact global profile};
+  \node[wwarn, minimum width=3.35cm, below=2.5mm of germ] (obs)
+    {Unresolved / obstruction};
+
+  % Column 3: certified continuation
+  \node[wbox, right=4.0mm of germ] (cont)
+    {\textbf{Certified}\\\textbf{continuation}\\interval barrier\\on declared slice};
+
+  % Column 4: learned or spectral candidate + same certificate
+  \node[wml, right=4.0mm of cont] (cand)
+    {\textbf{Learned / spectral}\\candidate +\\same certificate};
+
+  % Column 5: outcome status
+  \node[wbox, right=4.0mm of cand] (stat)
+    {\textbf{Status}\\certified, failed,\\or obstruction};
+
+  % Branching junction from reduced ODE
+  \coordinate (split) at ($(ode.east)!0.48!(germ.west)$);
+  \draw[ink, thick] (ode.east) -- (split);
+  \draw[tarr] (split) |- (exact.west);
+  \draw[arr] (split) -- (germ.west);
+  \draw[warr] (split) |- (obs.west);
+
+  % Main certification chain from singular germ
+  \draw[arr] (germ.east) -- (cont.west);
+  \draw[arr] (cont.east) -- (cand.west);
+  \draw[arr] (cand.east) -- (stat.west);
+\end{tikzpicture}

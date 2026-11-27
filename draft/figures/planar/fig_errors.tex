@@ -1,0 +1,110 @@
+\begin{tikzpicture}
+  \begin{groupplot}[
+    group style={
+      group size=2 by 1,
+      horizontal sep=7.5mm,
+      y descriptions at=edge left,
+    },
+    scale only axis,
+    width=5.85cm,
+    height=2.85cm,
+    xmin=0.88, xmax=3.05,
+    ymode=log,
+    ymin=1e-15, ymax=3e1,
+    xtick={1.0, 1.5, 2.0, 2.5, 3.0},
+    ytick={1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1e0},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    xlabel={$\delta = \gamma_* - \gamma$},
+    xlabel style={yshift=2pt},
+    axis line style={ink!75},
+    tick style={ink!75},
+    ymajorgrids=true,
+    grid style={black!9},
+    unbounded coords=jump,
+    title style={font=\footnotesize, yshift=-3pt},
+  ]
+    % Left: stage A
+    \nextgroupplot[
+      title={stage A},
+      ylabel={$\max |H - \widehat H|$},
+      ylabel style={yshift=-2pt},
+      legend to name=planarerrlegend,
+      legend columns=4,
+      legend style={
+        font=\scriptsize,
+        draw=ink!30,
+        fill=white,
+        inner sep=2pt,
+        row sep=-1pt,
+        column sep=4pt,
+        /tikz/every even column/.append style={column sep=6pt},
+      },
+      legend cell align=left,
+    ]
+      % Sampled (filled)
+      \addplot[only marks, ink, mark=square*, mark size=1.5pt]
+        table[x=delta, y=chebyshev_sampled] {figures/planar/errors_A.dat};
+      \addlegendentry{Chebyshev (sampled)}
+      \addplot[only marks, warm, mark=triangle*, mark size=1.8pt]
+        table[x=delta, y=pinn_sampled] {figures/planar/errors_A.dat};
+      \addlegendentry{PINN (sampled)}
+      \addplot[only marks, black!55, mark=diamond*, mark size=1.9pt]
+        table[x=delta, y=rf_sampled] {figures/planar/errors_A.dat};
+      \addlegendentry{RF (sampled)}
+      \addplot[only marks, teal, mark=*, mark size=1.5pt]
+        table[x=delta, y=gated_sampled] {figures/planar/errors_A.dat};
+      \addlegendentry{gated (sampled)}
+
+      % Certified bounds (open)
+      \addplot[only marks, ink, mark=square, mark size=2.1pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=chebyshev_bound] {figures/planar/errors_A.dat};
+      \addlegendentry{Chebyshev (bound)}
+      \addplot[only marks, warm, mark=triangle, mark size=2.4pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=pinn_bound] {figures/planar/errors_A.dat};
+      \addlegendentry{PINN (bound)}
+      \addplot[only marks, black!55, mark=diamond, mark size=2.5pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=rf_bound] {figures/planar/errors_A.dat};
+      \addlegendentry{RF (bound)}
+      \addplot[only marks, teal, mark=o, mark size=2.1pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=gated_bound] {figures/planar/errors_A.dat};
+      \addlegendentry{gated (bound)}
+
+    % Right: stage B
+    \nextgroupplot[
+      title={stage B},
+    ]
+      % Sampled (filled)
+      \addplot[only marks, ink, mark=square*, mark size=1.5pt]
+        table[x=delta, y=chebyshev_sampled] {figures/planar/errors_B.dat};
+      \addplot[only marks, warm, mark=triangle*, mark size=1.8pt]
+        table[x=delta, y=pinn_sampled] {figures/planar/errors_B.dat};
+      \addplot[only marks, black!55, mark=diamond*, mark size=1.9pt]
+        table[x=delta, y=rf_sampled] {figures/planar/errors_B.dat};
+      \addplot[only marks, teal, mark=*, mark size=1.5pt]
+        table[x=delta, y=gated_sampled] {figures/planar/errors_B.dat};
+
+      % Certified bounds (open; nan rows skipped automatically)
+      \addplot[only marks, ink, mark=square, mark size=2.1pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=chebyshev_bound] {figures/planar/errors_B.dat};
+      \addplot[only marks, warm, mark=triangle, mark size=2.4pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=pinn_bound] {figures/planar/errors_B.dat};
+      \addplot[only marks, black!55, mark=diamond, mark size=2.5pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=rf_bound] {figures/planar/errors_B.dat};
+      \addplot[only marks, teal, mark=o, mark size=2.1pt,
+        mark options={fill=none, line width=0.65pt}]
+        table[x=delta, y=gated_bound] {figures/planar/errors_B.dat};
+  \end{groupplot}
+
+  % Shared legend centered above both panels
+  \node[anchor=south, inner sep=0pt]
+    at ($(group c1r1.north)!0.5!(group c2r1.north)+(0, 5.2mm)$)
+    {\pgfplotslegendfromname{planarerrlegend}};
+\end{tikzpicture}
