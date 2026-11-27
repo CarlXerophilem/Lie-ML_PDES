@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lie-reduce"
+version = "0.1.0"
+description = "Exact symbolic Lie point-symmetry reduction for declared PDE charts"
+readme = "delivery/lie_reduce/README.md"
+requires-python = ">=3.10"
+dependencies = ["sympy==1.14.0"]
+
+[project.optional-dependencies]
+regular = ["numpy==2.3.5", "scipy==1.17.0"]
+
+[project.scripts]
+lie-reduce = "lie_reduce.cli:main"
+
+[project.urls]
+Repository = "https://github.com/CarlXerophilem/Lie-ML_PDES"
+
+[tool.setuptools]
+package-dir = {"" = "delivery"}
+packages = ["lie_reduce"]
+py-modules = ["_profile_learning"]

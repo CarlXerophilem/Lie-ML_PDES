@@ -1,9 +1,0 @@
-{
-  "actual_bytes_repr": "b'unique history\\r\\n'",
-  "fixture_expected_bytes_repr": "b'unique history\\n'",
-  "actual_sha256": "2151b5d13494e888175e6f3b46332df4ac4c7be71faf956a4f4cb275959c09ad",
-  "manifest_sha256": "ad536b16bef2d19cc9650651b5e811868f11a9adbabd88000cd1c1425fdf5c0d",
-  "audit_issues": [
-    "available_history_preserved: history.md"
-  ]
-}

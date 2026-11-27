@@ -1,6 +1,8 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Cited literature and source notes
 
-This flat directory indexes sources cited in the [compact manuscript](../draft/dissertation_wku_compact.tex), [Madrid defense](../draft/defense_wku_madrid.tex), and [`@delivery` user manual](../delivery/README.md). The PDF filenames use full titles. Publisher links retain citation coverage where a bundled copy is unavailable. The [literature verification record](Literature%20Verification%20and%20Source%20Boundaries.md) gives the checks and limits of attribution, including the final 20-entry dissertation bibliography audit (27 November 2026).
+This directory indexes sources cited in the [compact manuscript](../draft/dissertation_wku_compact.tex), [Madrid defense](../draft/defense_wku_madrid.tex), and [`@delivery` user manual](../delivery/README.md). The PDF filenames use full titles. Publisher links retain citation coverage where a bundled copy is unavailable. The [literature verification record](Literature%20Verification%20and%20Source%20Boundaries.md) gives the checks and limits of attribution, including the final 20-entry dissertation bibliography audit (27 November 2026).
 
 | Key | Full title and source | Repository access |
 |---|---|---|
@@ -9,9 +11,9 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | `paola2005` | [A generalized Exner equation for sediment mass balance](https://geoweb.uwyo.edu/geol5330/PaolaandVoller2005_JGR_GenExnerEquation.pdf), 110 (2005), F04014 | Open article · doi: 10.1029/2004JF000274 |
 | `fernandez2017` | [Formal Deduction of the Saint-Venant-Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy](https://www.numdam.org/item/M2AN_2017__51_1_115_0/) | [PDF](main/Formal%20Deduction%20of%20the%20Saint-Venant-Exner%20Model%20Including%20Arbitrarily%20Sloping%20Sediment%20Beds%20and%20Associated%20Energy.pdf) |
 | `burger2025` | [Well-Balanced Physics-Based Finite Volume Schemes for Saint-Venant–Exner-Type Models of Sediment Transport](https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2025/pp25-18.pdf) | [PDF](main/Well-balanced%20physics-based%20finite%20volume%20schemes%20for%20SVE.pdf) |
-| `olver` | [Applications of Lie Groups to Differential Equations](https://link.springer.com/book/10.1007/978-1-4612-4350-2) | Linked |
+| `olver` | [Applications of Lie Groups to Differential Equations](https://link.springer.com/book/10.1007/978-1-4612-4350-2) | [Existing PDF](main/applications-of-lie-groups-to-differential-equations.pdf) · redistribution rights require review |
 | `oliveri` | [Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation](https://link.springer.com/book/10.1007/978-3-032-12791-4) | [PDF](main/Lie%20Symmetries%20of%20Differential%20Equations%20-%20Theory%2C%20Applications%2C%20and%20Symbolic%20Computation.pdf) |
-| `anderson2000` | [Group Invariant Solutions without Transversality](https://arxiv.org/abs/math-ph/9910015) | Linked |
+| `anderson2000` | [Group Invariant Solutions without Transversality](https://arxiv.org/abs/math-ph/9910015) | [Open preprint copy](main/Group%20Invariant%20Solutions%20Without%20Transversality.pdf) |
 | `sve2022` | [Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model](https://www.mdpi.com/2073-8994/14/8/1679) | [PDF](main/Lie%20Symmetry%20Analysis%20of%20the%20One-Dimensional%20Saint-Venant-Exner%20Model.pdf) |
 | `sve2026` (`ap`) | [Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables](https://www.mdpi.com/2227-7390/14/3/433) | [PDF](main/Lie%20Symmetries%20and%20Similarity%20Solutions%20for%20a%20Shallow-Water%20Model%20with%20Bed%20Elevation%20in%20Lagrange%20Variables.pdf) · Publisher PDF v3 |
 | `hecras2019` | [HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual](https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf) | Linked · Beta Release Draft, Sec. 2.9, Eq. (2-46)/(2-48) |
@@ -38,3 +40,16 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | `nagesh2025` (`nagesh`) | [Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary Differential Equations](https://proceedings.mlr.press/v288/nagesh25a.html) | [PDF](main/Taylor-Model%20Physics-Informed%20Neural%20Networks%20%28PINNs%29%20for.pdf) |
 | `hairer1993` | [Solving Ordinary Differential Equations I: Nonstiff Problems](https://doi.org/10.1007/978-3-540-78862-1) | Linked · §II.5 (8th-order embedded pair), §II.6 (dense output for DOP853), Appendix (Fortran DOP853) |
 | `zeng2008` | [Flow and Bathymetry in Sharp Open-Channel Bends: Experiments and Predictions](https://doi.org/10.1029/2007WR006303) | Linked · EPFL bend geometry only |
+
+
+## DOI and lawful PDF acquisition
+
+[DOI inventory](doi_inventory.json) enumerates the 14 explicit DOIs in the current dissertation, and two additional DOI-linked related-work references. It records existing PDF paths and SHA-256 hashes, publisher or author links, and missing copies. Seven of the dissertation's DOI references already have a local version (two are books; some are author preprints). Seven are link-only. The original Exner scan is retained separately and has no DOI in the bibliography.
+
+To obtain available open PDFs for private reading on a machine with public Internet access:
+
+```sh
+python bin/fetch_open_references.py
+```
+
+The downloader uses official publisher, author, university and arXiv URLs from the inventory. It validates PDF headers and writes to the ignored `build/references/` directory; access failures remain visible. It does not turn an open-to-read copy into a public redistribution license or bypass access controls. Springer and SIAM book references remain linked when no authorized open full book is available. Review licenses of existing repository copies before public redistribution. The seven open-to-read missing PDFs (five current dissertation references plus two related-work references) were successfully retrieved and validated during this audit after retrying public URLs. They remain in the ignored local reading directory because their copyright or arXiv license does not establish public mirroring rights. The two missing books are link-only; no authorized open full-book copy was established.

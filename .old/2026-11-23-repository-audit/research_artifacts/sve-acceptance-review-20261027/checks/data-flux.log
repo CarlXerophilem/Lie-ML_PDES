@@ -1,3 +1,0 @@
-usage: project.py [-h] [--out OUT] [--data-report DATA_REPORT]
-                  {audit,workflow,data-flux}
-project.py: error: --out must be outside source/evidence directories; use build/<command>

@@ -1,8 +1,0 @@
-{
-  "start_monotonic": 978699.417379969,
-  "boot_id": "9bf24667-1c4e-4167-bf48-c86b0743db0c",
-  "start_utc": "2026-11-25T14:40:29.205309+00:00",
-  "memory_budget_bytes": 4294967296,
-  "parallel_enabled": false,
-  "cleanup_unconfirmed": false
-}

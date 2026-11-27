@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Assumptions, pivots and claim boundaries
 
 | Object or operation | Guard or hypothesis | Zero/excluded stratum and consequence |

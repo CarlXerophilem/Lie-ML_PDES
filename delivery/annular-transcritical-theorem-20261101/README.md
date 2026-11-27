@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Local smooth transcritical continuation — 1 November 2026
 
 The [eight-page proof](pdf/local-continuation.pdf) establishes exactly two smooth local crossing germs in a derived invariant class of the full two-dimensional rotating Saint–Venant–Exner system with sediment flux `K |w|^2 w - G |w|^2 grad B`. At a positive compatible hydraulic critical point, the hypothesis is `D=N=0` and `det d(D,N)<0`. Both branches reconstruct all original Cartesian equations, including at the critical radius.

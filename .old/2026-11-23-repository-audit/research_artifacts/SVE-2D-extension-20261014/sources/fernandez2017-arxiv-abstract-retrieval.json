@@ -1,9 +1,0 @@
-{
-  "request_url": "https://arxiv.org/abs/1506.05642v1",
-  "final_url": "https://arxiv.org/abs/1506.05642v1",
-  "status_code": 200,
-  "retrieved_utc": "2026-10-13T18:28:44.596382+00:00",
-  "bytes": 45228,
-  "sha256": "3d6987a65b922b4eb72f27a0873bf94c9d1280ee3ebcfc95f9ae862e5ee8342a",
-  "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-arxiv-abstract.html"
-}

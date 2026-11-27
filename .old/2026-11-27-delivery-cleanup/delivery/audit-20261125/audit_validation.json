@@ -1,8 +1,0 @@
-{
-  "report_local_links": "all resolve",
-  "audit_json": "all parse",
-  "source_unchanged": true,
-  "pdf_unchanged": true,
-  "head": "65985e3fc6098ec54514e83dc2ea16049ce62e98",
-  "audit_files": 20
-}

@@ -1,3 +1,0 @@
-Verified 9 sections, 11 displayed equation audits, 23 Taylor jets and the listed critical branches.
-Identical JSON under PYTHONHASHSEED=0 and 42.
-SHA-256 415cabb3722a3d25d963feaf0464b07555bcf9ef7c2e46df4dd4c071760c0338

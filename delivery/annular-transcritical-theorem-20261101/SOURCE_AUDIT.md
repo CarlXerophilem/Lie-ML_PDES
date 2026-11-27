@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Source–claim audit for this proof note
 
 Publication note: this is the recorded local theorem-package audit. Its original source PDFs, extracted text and raw alphaXiv page bodies remain local; consult SOURCE_AUDIT.json for versions, hashes and public URLs. Detailed validation paths are available after restoring theorem-evidence.zip.

@@ -1,27 +1,31 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # 研究路径与证据边界
 
-整理基线为 `codex/final` 的 `126a598`。本页综合该提交可达的 40 条提交记录以及旧 `docs/` 的研究、教学、工作流与验收说明。[原始文档树](../.old/2026-11-23-repository-audit/docs/) 和 [实验包去向](artifact_audit.md) 可用于逐项追溯。历史验收结果按当时的合同解读。
+整理基线为 `codex/final` 的 `126a598`。本页综合该提交可达的 40 条提交记录以及旧 `docs/` 的研究、教学、工作流与验收说明。[原始文档树](https://github.com/CarlXerophilem/Lie-ML_PDES/tree/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs) 和 [实验包去向](artifact_audit.md) 可用于逐项追溯。历史验收结果按当时的合同解读。
+
+当前归档已压缩为 [CoT.json](../.old/CoT.json)，原文件在清理前的固定提交中保留。
 
 ## 从问题到论文
 
 | 阶段 | 研究问题与方法 | 形成的证据与边界 |
 |---|---|---|
-| 2026 年 8–9 月，通用框架与流体基线 | 建模 \(J^n\)、生成元、延拓、确定方程和约化。比较显式推导、纯数值与学习层。 | 形成初版提案、流体试验和通用求解器草案。部署与可视化文档记录实现能力，数学结论仍需在指定方程上复核。 |
-| 10 月上旬，SVE 专门化 | 将 Eulerian \(E_1\)、印刷标量 \(P\)、物质兼容标量 \(M\) 按坐标与通量分开。追踪三次点附近的参数障碍。 | 三次点的对角缩放延拓障碍有符号证据，范围限所选生成元类。学习与李理论笔记把表示、损失、误差和证书分开。 |
+| 2026 年 8–9 月，通用框架与流体基线 | 建模 $J^n$、生成元、延拓、确定方程和约化。比较显式推导、纯数值与学习层。 | 形成初版提案、流体试验和通用求解器草案。部署与可视化文档记录实现能力，数学结论仍需在指定方程上复核。 |
+| 10 月上旬，SVE 专门化 | 将 Eulerian $E_1$、印刷标量 $P$、物质兼容标量 $M$ 按坐标与通量分开。追踪三次点附近的参数障碍。 | 三次点的对角缩放延拓障碍有符号证据，范围限所选生成元类。学习与李理论笔记把表示、损失、误差和证书分开。 |
 | 10 月第 3–4 周，约化与边界 | 从任意系数点场写出延拓和切触条件，分离自由射流。把一维最优系、轨道秩、可积性、边界稳定子和解的重构作为不同门槛。 | 约化合同、数据与通量相容检查、CPU 基线开始分开记录。138/156 谱组合通过历史门槛，神经候选与失败控制按原日志保留。 |
 | 10 月中旬，逐式复现与平面探索 | 逐项比对 2026 原文式 (7) 至式 (27) 及其余代表元；用手算稿与动画解释从确定方程到相似变量。扩展到旋转与床高演化。 | 有效、需补假设与有反例的公式逐项标识。二维先导包与自由边界范围审计界定后续定理的内容。 |
-| 10 月下旬，精度和严格验收 | 建立印刷 \(P\) 解族与目录，进行高精度独立参考检查。严格 CAS 重试考察任意函数、退化分支及等价消元链。 | 高精度参考 11/11，原 float64 结果 10/11。旧严格任务未通过，保留复核和运行错误的成因。晚期正图手工确定方程结果以自己的假设覆盖相应点对称，历史通用任务仍有原验收边界。 |
-| 11 月，局部定理与答辩 | 以闭床一形式重构 \(E_1\)，构造行波和收敛的 Laurent 分支。将环域径向约化保留为 \(DH'=N\)，在相容鞍点构造两个穿越解芽。 | 定理、独立代入和受控采样分层。旋转换床示例采用固体涡旋剖面和 \(D_a=0\)，平面共享仿射分类的限制保留。 |
-| 11 月下旬，复核与整理 | 确立 compact 论文和 Madrid 答辩，核验文献范围、复现入口与资料路径。 | `delivery/` 保留可运行证据。\(P\)–\(M\) 的比较与延拓列为待办。 |
-| 11 月 27 日，平面闭合 | 审稿版中的 ML 数字无脚本支撑，按计划重写：`verify_planar.py` 精确检查一般 \(f\) 的行列式与阈值 \(c_*\)；在 \(f=0\) 河湾鞍点支上以区间屏障比较 Chebyshev、PINN、随机特征与门控网络，并在相同容差下核算成本。 | 每个数字来自 `logs/planar_ml/` 收据与 `numbers.tex`。窄切片四种路线全部认证；宽切片 PINN 失败（负结果保留）；学习只在多查询暖启动中可能摊销，未确立端到端优势。原 \(f=1\) 设置作为对照重跑。 |
+| 10 月下旬，精度和严格验收 | 建立印刷 $P$ 解族与目录，进行高精度独立参考检查。严格 CAS 重试考察任意函数、退化分支及等价消元链。 | 高精度参考 11/11，原 float64 结果 10/11。旧严格任务未通过，保留复核和运行错误的成因。晚期正图手工确定方程结果以自己的假设覆盖相应点对称，历史通用任务仍有原验收边界。 |
+| 11 月，局部定理与答辩 | 以闭床一形式重构 $E_1$，构造行波和收敛的 Laurent 分支。将环域径向约化保留为 $DH'=N$，在相容鞍点构造两个穿越解芽。 | 定理、独立代入和受控采样分层。旋转换床示例采用固体涡旋剖面和 $D_a=0$，平面共享仿射分类的限制保留。 |
+| 11 月下旬，复核与整理 | 确立 compact 论文和 Madrid 答辩，核验文献范围、复现入口与资料路径。 | `delivery/` 保留可运行证据。$P$–$M$ 的比较与延拓列为待办。 |
+| 11 月 27 日，平面闭合 | 审稿版中的 ML 数字无脚本支撑，按计划重写：`verify_planar.py` 精确检查一般 $f$ 的行列式与阈值 $c_*$；在 $f=0$ 河湾鞍点支上以区间屏障比较 Chebyshev、PINN、随机特征与门控网络，并在相同容差下核算成本。 | 每个数字来自 `logs/planar_ml/` 收据与 `numbers.tex`。窄切片四种路线全部认证；宽切片 PINN 失败（负结果保留）；学习只在多查询暖启动中可能摊销，未确立端到端优势。原 $f=1$ 设置作为对照重跑。 |
 
 ## 旧文档的阅读线索
 
-- [Lie 约化](../.old/2026-11-23-repository-audit/docs/Lie_reduction.md)、[完整工作流](../.old/2026-11-23-repository-audit/docs/workflow.md) 和 [PDE 形式化](../.old/2026-11-23-repository-audit/docs/pde_formalization_and_reduction.md) 记录从射流相切到商方程与原方程重构。
-- [方法总图](../.old/2026-11-23-repository-audit/docs/methodology-map-through-20261019.md)、[项目地图](../.old/2026-11-23-repository-audit/docs/project-map.md) 和 [研究路线](../.old/2026-11-23-repository-audit/docs/research-roadmap-20261021.md) 明确 exact-first、受控变体及扩展二维的顺序。
-- [机器学习基础](../.old/2026-11-23-repository-audit/docs/The%20Mathematical%20Essence%20of%20Machine%20Learning.md)、[三层基线](../.old/2026-11-23-repository-audit/docs/three_layer_baselines.md) 和 [Week 4](../.old/2026-11-23-repository-audit/docs/week-4_plan.md) 解释为何要固定数据与验收，并独立比较经典算法。
-- [式 (27) 手算](../.old/2026-11-23-repository-audit/docs/sve_equation27_handwritten_manuscript.md)、[动画脚本](../.old/2026-11-23-repository-audit/docs/2026-10-17-sve-equation27-manim.md) 和 [参考阅读](../.old/2026-11-23-repository-audit/docs/basic-reference-reading-notes-20261010.md) 是推导和教学资料。后续复现脚本给出逐式审计状态。
-- [验收记录](../.old/2026-11-23-repository-audit/docs/validation.md)、[数值精度修复](../.old/2026-11-23-repository-audit/docs/residual-resolution-20261021.md) 和 [严格 CAS 失败分析](../.old/2026-11-23-repository-audit/docs/lie-failure-analysis-20261027.md) 保留工程与数学负结果。旧执行手册、远程交接、海报与通用计划随原树归档。
+- [Lie 约化](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/Lie_reduction.md)、[完整工作流](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/workflow.md) 和 [PDE 形式化](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/pde_formalization_and_reduction.md) 记录从射流相切到商方程与原方程重构。
+- [方法总图](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/methodology-map-through-20261019.md)、[项目地图](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/project-map.md) 和 [研究路线](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/research-roadmap-20261021.md) 明确 exact-first、受控变体及扩展二维的顺序。
+- [机器学习基础](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/The%20Mathematical%20Essence%20of%20Machine%20Learning.md)、[三层基线](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/three_layer_baselines.md) 和 [Week 4](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/week-4_plan.md) 解释为何要固定数据与验收，并独立比较经典算法。
+- [式 (27) 手算](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/sve_equation27_handwritten_manuscript.md)、[动画脚本](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/2026-10-17-sve-equation27-manim.md) 和 [参考阅读](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/basic-reference-reading-notes-20261010.md) 是推导和教学资料。后续复现脚本给出逐式审计状态。
+- [验收记录](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/validation.md)、[数值精度修复](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/residual-resolution-20261021.md) 和 [严格 CAS 失败分析](https://github.com/CarlXerophilem/Lie-ML_PDES/blob/dc9a44517a85312fe09945d94b9a7a5e0aba4ef7/.old/2026-11-23-repository-audit/docs/lie-failure-analysis-20261027.md) 保留工程与数学负结果。旧执行手册、远程交接、海报与通用计划随原树归档。
 
 ## 逐提交索引
 

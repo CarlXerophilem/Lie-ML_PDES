@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-27",
+  "scope": "Public branch cleanup; no re-training and no manuscript modification",
+  "baseline_commit": "dc9a44517a85312fe09945d94b9a7a5e0aba4ef7",
+  "python": "3.12.14",
+  "sympy": "1.14.0",
+  "wheel_install": "passed (non-editable wheel, run outside repository)",
+  "installed_cli": {
+    "evaluated_subalgebras": 1,
+    "verified_quotients": 1,
+    "scalar_ode_quotients": 1
+  },
+  "library_api_smoke": "passed",
+  "symbolic_replay": {
+    "status": "passed",
+    "scripts": [
+      "symbolic_sv2022.py",
+      "symbolic_sve2026.py",
+      "symbolic_new_model2026.py",
+      "verify_planar.py",
+      "reproduce_sve2026.py"
+    ],
+    "planar_checks": 42,
+    "planar_failures": [],
+    "regular_taylor_germs": 23,
+    "source_pdf_sha256": "2b853b7ecf58820105384d8931dcd1f989fd0a1cb2ea7553430f4cd55e8cc5f5"
+  },
+  "markdown_katex": {
+    "formulas": 402,
+    "rendered": true,
+    "failures": []
+  },
+  "private_literature_download": "Seven missing open-to-read PDF references retrieved and validated; two book references link-only. No new public mirrors; see ref/doi_inventory.json.",
+  "legacy_replay": "not run (preserved prior receipts)"
+}

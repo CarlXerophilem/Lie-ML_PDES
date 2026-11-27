@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Dissertation: Current Research Understanding
 
 **Author's handwritten research map — 27 November 2026**
@@ -46,14 +48,14 @@ $$
 $$
 The first test is tangency to the **equation locus**, not invariance of a particular graph:
 $$
- \operatorname{pr}^{(n)}X(q)\in T_q\mathcal S_{\Delta_\mu}
+ \mathrm{pr}^{(n)}X(q)\in T_q\mathcal S_{\Delta_\mu}
  \iff
- \operatorname{pr}^{(n)}X(\Delta_\mu)(q)=0
+ \mathrm{pr}^{(n)}X(\Delta_\mu)(q)=0
  \quad(q\in\mathcal S_{\Delta_\mu}).
 $$
 This defines the linear determining operator:
 $$
- \mathscr D_\mu X=\left.\operatorname{pr}^{(n)}X(\Delta_\mu)\right|_{\Delta_\mu=0},
+ \mathscr D_\mu X=\left.\mathrm{pr}^{(n)}X(\Delta_\mu)\right|_{\Delta_\mu=0},
  \qquad \boxed{\mathfrak g_\mu=\ker\mathscr D_\mu}.
 $$
 Compute and verify admitted generators **before** selecting a reduction. The determining equation does not itself produce an ODE.
@@ -191,7 +193,7 @@ A first integral helps reduce order; it does not always yield an elementary clos
 | Regular quadrature with monotone locally invertible primitive | Exact implicit solution; e.g. $\int^p L_i(v)\,dv=Iz+C$, with $p,u>0,\ L_i\ne0$ |
 | Cubic scaling, $m=3,\ 4g\kappa<1$ | Positive-depth exact similarity wave on $x,t>0$ |
 | Analytic $MY'=N$, $\det M(z_0,Y_0;\mu)\ne0$ | Unique convergent local Taylor series for the prescribed trace |
-| Singular $M$, $N\notin\operatorname{im}M$ | No $C^1$ solution through those data |
+| Singular $M$, $N\notin\mathrm{im}M$ | No $C^1$ solution through those data |
 | Adapted holomorphic equation $\rho w'=f_0(\rho,w)$, $f_0(0,0)=0$, no positive integer eigenvalue of $\partial_w f_0(0,0)$ | Convergent Briot–Bouquet Taylor germ |
 | Radial saddle: $\Delta_c=N=0,\ \det\mathbf J_*<0$ | Two local analytic crossing germs |
 | Compatible cubic equation, $m=3,\ g\kappa=1/4,\ w_0>0$ | Convergent simple-pole Laurent branch |

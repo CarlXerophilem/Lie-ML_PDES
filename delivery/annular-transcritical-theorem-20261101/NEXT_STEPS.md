@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Next milestone: certified ML-assisted ODE solution and 2D reconstruction
 
 The local theorem is the mathematical foundation. It does not complete the dissertation's required semi-analytic solver, which must include ML or a comparable learned architecture. The next milestone keeps the exact same two-dimensional PDE and the derived solution class.

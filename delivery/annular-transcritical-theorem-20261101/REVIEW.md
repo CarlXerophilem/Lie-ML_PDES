@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Independent local reasoning review
 
 A separate local language-model reviewer read the full proof and the cited original Teschl passages. It performed no symbolic computation, training, file modifications or remote operations. Its report is a critical reasoning check, not a peer-review acceptance or a formal proof-assistant certificate.

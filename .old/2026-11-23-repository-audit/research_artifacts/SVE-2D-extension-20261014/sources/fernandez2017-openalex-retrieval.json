@@ -1,9 +1,0 @@
-{
-  "request_url": "https://api.openalex.org/works/https://doi.org/10.1051/m2an/2016018",
-  "final_url": "https://api.openalex.org/works/https://doi.org/10.1051/m2an/2016018",
-  "retrieved_utc": "2026-10-13T18:25:35.234784+00:00",
-  "status_code": 200,
-  "bytes": 20436,
-  "sha256": "37b2eb1e10837c4f50bda09b7c53b4124b8a825af0becb5bd642835399d2656a",
-  "file": "research_artifacts\\SVE-2D-extension-20261014\\sources\\fernandez2017-openalex.json"
-}

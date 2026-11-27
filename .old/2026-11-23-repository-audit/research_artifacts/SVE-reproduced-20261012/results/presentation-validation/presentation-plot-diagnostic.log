@@ -1,9 +1,0 @@
-============================= test session starts =============================
-platform win32 -- Python 3.14.2, pytest-9.0.1, pluggy-1.6.0 -- C:\Python314\python.exe
-rootdir: D:\MATHs\math 4890 LieML
-plugins: anyio-4.13.0, typeguard-4.6.0
-collecting ... collected 1 item
-
-research_artifacts/SVE-reproduced-20261012/tests/test_manuscript_plots.py::test_plot_campaign_checks_integrals_and_refuses_changed_reference PASSED
-
-============================== 1 passed in 3.47s ==============================

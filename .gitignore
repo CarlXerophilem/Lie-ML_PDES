@@ -56,3 +56,7 @@ docs/.old
 /flow.jpg
 /main-annotated.pdf
 /midterm_dissertation.pptx
+
+# Local Python package builds
+*.egg-info/
+dist/

@@ -1,3 +1,5 @@
+<!-- Math rendering: GitHub MathJax / KaTeX compatible LaTeX. Use $...$ or standalone $$ blocks; no custom macros or injected scripts. -->
+
 # Manuscript and defense workflow
 
 The [compact dissertation](dissertation_wku_compact.pdf) is the manuscript of record. The [Madrid defense](defense_wku_madrid.pdf) presents the mathematical argument and the controlled numerical evidence. Both include their editable [manuscript source](dissertation_wku_compact.tex) and [slide source](defense_wku_madrid.tex).
