@@ -125,10 +125,6 @@ Undergraduate Dissertation (MATH 4890)
 
 I, the undersigned, hereby declare that this submission is entirely my own work, in my own words, and that all sources used in researching it are fully acknowledged and all quotations properly identified. It has not been submitted, in whole or in part, by me or another person, for the purpose of obtaining any other credit/grade. I have a citation to AI system used to generate the text if I used AI-generated text. I understand the ethical implications of my research, and this work meets the requirements of College of Science, Mathematics and Technology.
 
-\bigskip
-\noindent\textbf{AI assistance disclosure.}
-ChatGPT assisted with mathematical exposition, the planar potential equivalence, the critical-point Jacobian determinant, and scope review. Claude Opus 5.5 and Gemini (in Cursor) helped implement the \texttt{SymPy} Lie-reduction library, the planar symbolic checks, and the reproducible numerical and supplementary machine-learning scripts in \code{delivery/}, and assisted in editing prose and figures from my section-by-section specifications and handwritten research outline. Grok independently audited the Python scripts. I checked every derivation and script by hand; formulas first obtained with AI assistance are noted in footnotes, and every reported number is generated from committed code with JSON receipts in Appendix~\ref{app:reproducibility}.
-
 \vfill
 \noindent\textbf{Date:} \rule[-8pt]{11.5cm}{0.1em}
 
@@ -142,7 +138,7 @@ ChatGPT assisted with mathematical exposition, the planar potential equivalence,
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
-\noindent\textbf{Goal.} Understand how physical parameters change the Lie symmetries of coupled shallow-water and sediment-transport partial differential equations (PDEs), reduce the governing PDEs to ordinary differential equations (ODEs) when regular invariant charts exist, and determine the existence and valid domains of exact or convergent series solutions.
+\noindent\textbf{Goal.} To understand how physical parameters change the Lie symmetries of coupled shallow-water and sediment-transport partial differential equations (PDEs), reduce the governing PDEs to ordinary differential equations (ODEs) when regular invariant charts exist, and by the way build a semi-analytic method that can obtain, determine the existence and valid domains of exact or convergent series solutions.
 
 \medskip\noindent\textbf{Method.} Starting from the one-dimensional Saint--Venant--Exner (SVE) models of Paliathanasis (2022) and Paliathanasis, Leon, and Leach (2026), we verify coordinate compatibility between the Eulerian system $\mathcal E_1$, the printed scalar $\mathcal E_P$, and the compatible Lagrangian scalar $\mathcal E_L$ before computing admitted point symmetries $\mathfrak g_\mu=\ker\mathscr D_\mu$, selecting regular invariant graphs, and extracting symbolic first integrals. Motivated by bedload and downslope bed-diffusion closures in morphodynamics and the U.S.\ Army Corps of Engineers HEC-RAS 2D sediment transport framework, we then introduce an idealized $(2+1)$D planar SVE model $\mathcal E_2$, reduce it under rotation and bed-drift symmetries to a singular radial ODE $\Delta_c(r,H)H'=N(r,H)$, apply regular and Briot--Bouquet/Laurent solvability tests, and compare classical Chebyshev collocation and continuation against a supplementary crossing-exact neural remainder model (\texttt{LNN-PINN}) on both water depth $H$ and mobile sediment bed $Z$.
 
@@ -189,10 +185,12 @@ Two distinct mathematical objects govern invariant solutions of parameterized no
 
 Our physical setting is morphodynamic sediment transport governed by the Saint--Venant--Exner (SVE) equations, which couple shallow-water hydrodynamics to mobile-bed aggradation and scour through Exner's sediment conservation law. Paliathanasis~\cite{sve2022} and Paliathanasis, Leon, and Leach~\cite{sve2026} studied $(1+1)$D Eulerian and Lagrangian SVE models with Grass power-law bedload flux $q_b=\kappa u^m$ via classical Lie point symmetries~\cite{olver,oliveri}. Checking their mass-coordinate transformation directly on jet space uncovers an omitted bed-advection term between the printed scalar $\mathcal E_P$ and the physically compatible Lagrangian scalar $\mathcal E_L$ required to reconstruct single-valued Eulerian water and bed profiles.
 
-In realistic river, reservoir, and coastal engineering---exemplified by the U.S.\ Army Corps of Engineers (USACE) Hydrologic Engineering Center's \texttt{HEC-RAS} two-dimensional sediment transport system~\cite[Sec.~2.9]{hecras2019} and physics-based sloping-bed SVE solvers~\cite{fernandez2017,burger2025}, which model reservoir sediment flushing, dam removal, navigation-channel dredging, levee breaches, and alluvial bendway scour---bed evolution depends not only on streamwise shear transport ($m\ge1$) but also on downslope gravitational bed-slope diffusion. These applications motivate extending our reduction workflow to a $(2+1)$D planar SVE family $\mathcal E_2$ with sediment flux $\mathbf Q=|\mathbf w|^{m-1}(K\mathbf w-G\nabla B)$ and exploring realistic dimensionless exponent and transport-to-slope ranges ($m\in[1.5,3.5]$, $k=K/G\in[2,10]$). This engineering literature motivates our constitutive form and parameter box; it does not calibrate our idealized frictionless reference profiles to a specific field site.
+In real toilet draining or river engineering, we need to model many aspects such as reservoir sediment flushing, dam removal, and navigation-channel dredging, while bed evolution depends not only on streamwise shear transport ($m\ge1$) but also on downslope gravitational bed-slope diffusion, see demos from the U.S.\ Army Corps of Engineers (USACE) Hydrologic Engineering Center's \texttt{HEC-RAS} two-dimensional sediment transport system~\cite[Sec.~2.9]{hecras2019} and physics-based sloping-bed SVE solvers~\cite{fernandez2017,burger2025} . These facts motivate extending our reduction workflow to a $(2+1)$D planar SVE family $\mathcal E_2$ with sediment flux $\mathbf Q=|\mathbf w|^{m-1}(K\mathbf w-G\nabla B)$ and exploring realistic dimensionless exponent and \textit{transport-to-slope} ranges ($m\in[1.5,3.5]$, $k=K/G\in[2,10]$). We would tend to discover the box in grey with Lie symmetry.
 
 \paragraph{Contribution and semi-analytical workflow.}
-This dissertation builds an end-to-end parameter-dependent semi-analytical workflow (Figure~\ref{fig:workflow}): start from a physically compatible PDE chart, compute admitted point symmetries $\ker\mathscr D_\mu$ before choosing a regular invariant graph, reduce to ODEs, extract exact symbolic first integrals, apply regular or singular (Briot--Bouquet and Laurent) solvability tests, and extend profiles across admissible domains via classical Chebyshev collocation and continuation with analytical error bounds to reconstruct both water depth and sediment-bed elevation. Modern Lie-group analysis is used constructively---checking orbit rank and enumerating concrete solution regimes without requiring exhaustive optimal-system catalogues when a shared physical symmetry is already admitted. Machine learning enters last as a secondary comparative study (Section~\ref{sec:comparison}): embedding the exact crossing value and slope~\cite{arora2023,nagesh2025} inside a liquid-residual network (\texttt{LNN-PINN}~\cite{tao2026}), we learn only the post-crossing remainder and benchmark it directly against Chebyshev collocation. General initial--boundary value problems (IBVPs), turbulent friction, suspended load, and shock waves lie outside our scope.
+This thesis builds an end-to-end parameter-dependent semi-analytical workflow (Figure~\ref{fig:workflow}): start from a physically compatible PDE chart, compute admitted point symmetries $\ker\mathscr D_\mu$ before choosing a regular invariant graph, reduce to ODEs, extract exact symbolic first integrals, apply regular or singular (Briot--Bouquet and Laurent) solvability tests, and extend profiles across admissible domains via classical Chebyshev collocation and continuation with analytical error bounds to reconstruct both water depth and sediment-bed elevation. Modern Lie-group analysis is used constructively with orbit rank and enumerating concrete solution regimes computations 
+%without requiring traversal optimal-system
+, when a shared physical symmetry is already admitted. Machine learning enters last as a secondary comparative study (Section~\ref{sec:comparison}): embedding the exact crossing value and slope~\cite{arora2023,nagesh2025} inside a liquid-residual network (\texttt{LNN-PINN}~\cite{tao2026}), we learn only the post-crossing remainder and benchmark it directly against Chebyshev collocation. General initial--boundary value problems (IBVPs), turbulent friction, suspended load, and shock waves lie outside our scope.
 
 \begin{figure}[!ht]\centering
 \begin{tikzpicture}[
@@ -219,7 +217,7 @@ This dissertation builds an end-to-end parameter-dependent semi-analytical workf
 \draw[arrs] (ex.west)--node[above,lbl]{Yes}(closed.east);
 
 \node[dbox,right=7.5mm of ex] (reg) {Regular/singular\\solvability test};
-\draw[arrs] (ex.east)--node[above,lbl]{Not obtained}(reg.west);
+\draw[arrs] (ex.east)--node[above,lbl]{No}(reg.west);
 
 \node[cbox,text width=3.2cm,below left=5.5mm and -5mm of reg] (tay) {\textbf{Convergent germ}\\Taylor / B--B / Laurent};
 \node[ubox,text width=2.8cm,below right=5.5mm and -3mm of reg] (unres) {\textbf{Record unresolved}\\no nonexistence claim};
@@ -229,7 +227,7 @@ This dissertation builds an end-to-end parameter-dependent semi-analytical workf
 \node[cbox,text width=4.1cm,below=5mm of tay,xshift=6mm] (class) {\textbf{Classical continuation \& Cheb.}\\extend germ on admissible chart};
 \draw[arrs] (tay.south) -- ([xshift=-6mm]class.north);
 
-\node[fbox,text width=5.0cm] (ver) at ($(ex |- class.south)+(0,-6.8mm)$) {\textbf{Domain \& error verification}\\$h,u>0$, sonic limits $\Delta_c\neq0$, tail bounds};
+\node[fbox,text width=4.5cm] (ver) at ($(ex |- class.south)+(0,-6.8mm)$) {\textbf{Domain \& error verification}\\$h,u>0$, sonic limits $\Delta_c\neq0$, tail bounds};
 \draw[arrs] (closed.south) |- (ver.west);
 \draw[arrs] (class.south) |- (ver.east);
 
@@ -316,7 +314,7 @@ Exactness of $\omega_{\mathcal E_L}$ recovers $\mathcal A+gb_s=0$ and $b_t-(\phi
  {\textbf{Material $(\phi,b)$}\\ fixed-$x$ Exner rate};
 \node[box,text width=2.95cm,minimum height=0.96cm] (m) at (9.3,0)
  {\textbf{Compatible $\mathcal E_L$}\\ closed bed 1-form};
-\node[warnbox,font=\footnotesize,text width=4.4cm,minimum height=.80cm] (p) at (4.55,-1.48)
+\node[warnbox,font=\footnotesize,text width=4.4cm,minimum height=.80cm] (p) at (4.55,-1.98)
  {\textbf{Printed $\mathcal E_P$}\\ uses $b_t+m\kappa T_m=0$};
 \draw[Latex-Latex,ink,thick] (e)--node[above,font=\scriptsize]{$x=\phi(t,s)$} (l);
 \draw[Latex-Latex,ink,thick] (l)--node[above,font=\scriptsize]{$\dd\omega_{\mathcal E_L}=0$} (m);
@@ -355,7 +353,7 @@ Purely vertical shifts admit no invariant graph (for instance $Q_{\partial_B}^B=
 \begin{tikzpicture}[x=1cm,y=1cm,
   panel/.style={anchor=west,font=\small\bfseries},
   tag/.style={font=\scriptsize,inner sep=2pt}]
-\node[panel] at (0,2.68) {(a) Group orbits and transverse section};
+%\node[panel] at (0,2.68) {Group orbits and transverse section and two distinct tangency tests};
 \draw[arr] (.16,.33)--(4.55,.33) node[right,tag] {$t$};
 \draw[arr] (.16,.33)--(.16,2.25) node[left,tag] {$s$};
 \draw[authorblue,densely dashed,thick] (1.842,.33)--(1.842,2.22);
@@ -373,7 +371,6 @@ Purely vertical shifts admit no invariant graph (for instance $Q_{\partial_B}^B=
 \node[tag,anchor=west] at (.15,.02) {$F(\sigma)=\phi(t_*,\sigma/t_*^2)$ on $\Sigma$};
 
 \draw[ink!25] (4.98,-.05)--(4.98,2.58);
-\node[panel] at (5.28,2.68) {(b) Two distinct tangency tests};
 \node[box,anchor=west,text width=5.65cm,font=\scriptsize,align=left,inner sep=4.2pt]
   (eqtest) at (5.35,2.05)
    {\textbf{1. Equation locus:} $\mathscr D_\mu X=\pr^{(n)}X(\Delta_\mu)|_{\Delta_\mu=0}=0$};
@@ -467,9 +464,9 @@ differing by the reduced coordinate-advection correction $2(\sigma\mathcal A_\si
 
 \chapter{Planar Sediment-Transport Model and Hydraulic Crossings}\label{ch:continuation}
 
-\section{Sloping-bed planar SVE equations and HEC-RAS motivation}\label{sec:annular-model}
+\section{Sloping-bed planar SVE equations}\label{sec:annular-model}
 
-To test parameter-dependent reduction in two horizontal dimensions $\mathbf x=(x,y)$ on an annulus $r=|\mathbf x|>0$, we couple shallow-water flow ($h>0$, $|\mathbf w|>0$, $g>0$, Coriolis rate $f\ge0$) to a sloping-bed Exner sediment balance ($K,G>0$, real $m\ge1$):
+Now it's time to exploit on our pure-analytic layer just built with benchmarks models constructed as "SVE + 1". To test parameter-dependent reduction in two horizontal dimensions $\mathbf x=(x,y)$ on an annulus $r=|\mathbf x|>0$, we couple shallow-water flow ($h>0$, $|\mathbf w|>0$, $g>0$, Coriolis rate $f\ge0$) to a sloping-bed Exner sediment balance ($K,G>0$, real $m\ge1$):
 \begin{align}\label{eq:planar}
  h_t+\nabla\cdot(h\mathbf w)&=0,\notag\\
  \mathbf w_t+(\mathbf w\cdot\nabla)\mathbf w+g\nabla(h+B)+f\mathcal J\mathbf w&=0,\notag\\
@@ -478,7 +475,7 @@ To test parameter-dependent reduction in two horizontal dimensions $\mathbf x=(x
 \end{align}
 Here $\mathbf w=(u,v)$, and $\mathcal J(u,v)=(-v,u)$ is a $90^\circ$ \emph{quarter-turn} (not to be confused with the critical-point Jacobian $\mathbf J_*$ below). The sediment flux $\mathbf Q$ combines streamwise advective bedload transport $K|\mathbf w|^{m-1}\mathbf w$ with downslope gravity-driven sediment diffusion $-G|\mathbf w|^{m-1}\nabla B$. When $G=f=0$ in one dimension,~\eqref{eq:planar} reduces to $\mathcal E_1$ at $K=\kappa$; for $G>0$, Exner bed diffusion makes $\mathcal E_2$ mixed hyperbolic--parabolic rather than purely hyperbolic~\cite{fernandez2017,burger2025}.
 
-In engineering sediment modeling---notably the USACE \texttt{HEC-RAS} 2D Sediment Transport Technical Reference Manual~\cite[Sec.~2.9, Eqs.~(2-46)--(2-48)]{hecras2019} and field/flume morphodynamic solvers for reservoir flushing, dam removal, channel dredging, and curved-reach scour~\cite{fernandez2017,burger2025}---effective bedload capacity powers span $m\in[1.5,3.5]$ (covering Meyer-Peter--M\"uller threshold transport near $1.5$--$3$ and Grass cubic transport at $m=3$), while gravitational bed-slope dispersion acts with $0<G<K$. These applications motivate our constitutive law and exploratory transport-to-slope ratio $k=K/G\in[2,10]$, without calibrating $K,G$ to a specific frictional river reach.
+In engineering sediment modeling, notably I found and decides to use the USACE \texttt{HEC-RAS} 2D Sediment Transport Technical Reference Manual~\cite[Sec.~2.9, Eqs.~(2-46)--(2-48)]{hecras2019} and field/flume morphodynamic solvers for reservoir flushing, dam removal, channel dredging, and curved-reach scour~\cite{fernandez2017,burger2025}---effective bedload capacity powers span $m\in[1.5,3.5]$ (covering Meyer-Peter--M\"uller threshold transport near $1.5$--$3$ and Grass cubic transport at $m=3$), while gravitational bed-slope dispersion acts with $0<G<K$. These applications motivate our constitutive law and exploratory transport-to-slope ratio $k=K/G\in[2,10]$, without calibrating $K,G$ to a specific frictional river reach.
 
 For every $(m,K,G,f,g,c)$, $\mathcal E_2$ admits horizontal rotation and uniform time--bed drift:
 \begin{equation}\label{eq:planar-symmetries}
@@ -505,7 +502,9 @@ where $q_r=|\mathbf w|^{m-1}(KV-GZ')$ is the radial bedload flux. Thus $2\pi C_1
  \keyeq{\boxed{\Delta_c(r,H)H'=N(r,H),\qquad Z'=P_Z(r,H).}}
  \end{gathered}
 \end{equation}
-Because $C_1\ne0$ requires radial water and sediment flux across concentric circles,~\eqref{eq:DN} describes an \emph{open annular throughflow sector} (such as idealized radial spillway/outfall scour or permeable annular test sections, Figure~\ref{fig:bend}, using the EPFL bend aspect ratio $0.62$--$1.38$~\cite{zeng2008} solely as a geometric scale motivation), not a closed river bend with impermeable banks. For general coupled sediment closures, symbolic solvers (\texttt{SymPy}/\texttt{Maple}/\texttt{Mathematica} \texttt{dsolve}) find no closed-form quadrature (\code{has_closed_quadrature = False}), motivating both classical continuation and future symbolic-ML search.
+Because $C_1\ne0$ requires radial water and sediment flux across concentric circles,~\eqref{eq:DN} describes an \emph{open annular throughflow sector} (such as idealized radial spillway/outfall scour or permeable annular test sections, Figure~\ref{fig:bend}, using the EPFL bend aspect ratio $0.62$--$1.38$~\cite{zeng2008} solely as a geometric scale motivation), not a closed river bend with impermeable banks. For general coupled sediment closures, symbolic solvers (\texttt{SymPy}
+%/\texttt{Maple}/\texttt{Mathematica} \texttt{dsolve}
+) find no closed-form quadrature (\code{has_closed_quadrature = False}), motivating both classical continuation and future symbolic-ML search.
 
 \begin{figure}[!ht]\centering
 \input{figures/planar/fig_bend.tex}
@@ -522,7 +521,7 @@ The leading coefficient of~\eqref{eq:DN} vanishes precisely at unit radial Froud
 Thus $\Delta_c=0$ is a physically consistent hydraulic critical crossing within $\mathcal E_2$, not a numerical artifact, coupling flow criticality to the sediment bed slope $P_Z$ inside $N(r,H)$. Smooth crossing requires $N(r_*,H_*)=0$.
 
 \begin{theorem}[Two local analytic crossings]\label{thm:critical}
-Let model and integral parameters vary real-analytically near a point $(r_*,H_*)\in(0,\infty)^2$ where $\Delta_c(r_*,H_*)=N(r_*,H_*)=0$ and $\keyeq{\det\mathbf J_*<0}$ for $\mathbf J_*=D_{(r,H)}(\Delta_c,N)|_{(r_*,H_*)}$. Then~\eqref{eq:DN} admits exactly two $C^1$ local depth germs $H_\pm(r)$ through $(r_*,H_*)$. Both germs are real-analytic, depend real-analytically on nearby parameters, and reconstruct smooth water and sediment-bed solutions via $Z'=P_Z(r,H_\pm)$. Their slopes $\ell_\pm=H_\pm'(r_*)$ satisfy
+Let model and integral parameters vary real-analytically near a point $(r_*,H_*)\in(0,\infty)^2$ where $\Delta_c(r_*,H_*)=N(r_*,H_*)=0$ and $\keyeq{\det\mathbf J_*<0}$ for radial Jacobian matrix $\mathbf J_*=D_{(r,H)}(\Delta_c,N)|_{(r_*,H_*)}$. Then~\eqref{eq:DN} admits exactly two $C^1$ local depth germs $H_\pm(r)$ through $(r_*,H_*)$. Both germs are real-analytic, depend real-analytically on nearby parameters, and they reconstruct smooth water and sediment-bed solutions via $Z'=P_Z(r,H_\pm)$. The slopes of the germs$\ell_\pm=H_\pm'(r_*)$ satisfy
 \begin{equation}\label{eq:slope-quad}
  (\Delta_c)_H\ell^2+\bigl((\Delta_c)_r-N_H\bigr)\ell-N_r=0,\qquad
  (\Delta_c)_r+(\Delta_c)_H\ell_\pm=\lambda_\pm\quad(\lambda_-<0<\lambda_+),
@@ -552,8 +551,9 @@ Hence $\delta>0$ selects the open saddle region (Figure~\ref{fig:saddle-region};
 \chapter{Analytical Solvability, Classical Approximation, and Supplementary ML}\label{ch:computation}
 
 \section{Conditions for analytical solvability}\label{sec:solver-criteria}
+In order to fetch credible result while solving the ODEs, we need to consider several constraints.
 
-First integrals lower differential order, but closed forms or convergent series still require explicit regularity or singularity criteria. Table~\ref{tab:solution-conditions} organizes all nine solvability outcomes across our $(1+1)$D and $(2+1)$D reduced SVE equations.
+Recall from \ref{fig:workflow} that the first integrals lower differential order, but closed forms or convergent series still require explicit regularity or singularity criteria. Table~\ref{tab:solution-conditions} organizes all nine solvability outcomes across our $(1+1)$D and $(2+1)$D reduced SVE equations, which intuitively support as a classification linked to the computed Lie symmetries:
 
 \begin{table}[!ht]\centering\small
 \renewcommand{\arraystretch}{1.14}
@@ -594,7 +594,7 @@ When $4g\kappa\to1$,~\eqref{eq:cubic-wave} loses positive depth. Setting $\xi=g\
 \begin{equation}\label{eq:laurent-series}
  \keyeq{F(\sigma)=F_0-\frac{w_0}{\sigma}-\frac{g\sigma^3}{24w_0^2}-\frac{g^2\sigma^7}{512w_0^5}+O(\sigma^{11}),\qquad 0<|\sigma|<(w_0^3/(4g))^{1/4},}
 \end{equation}
-with rigorous tail bound $|F-F^{[N]}|\le\frac{17w_0}{16|\sigma|}\frac{\vartheta^{N+1}}{(4N+3)(1-\vartheta)}$ for $\vartheta=4g|\sigma|^4/w_0^3<1$.
+with rigorous \footnote{Suggested by Claude-Opus-5.5 model.} tail bound $|F-F^{[N]}|\le\frac{17w_0}{16|\sigma|}\frac{\vartheta^{N+1}}{(4N+3)(1-\vartheta)}$ for $\vartheta=4g|\sigma|^4/w_0^3<1$.
 \end{proposition}
 
 \section{Classical computation and continuous error bounds}\label{sec:classical}
@@ -795,4 +795,7 @@ bash delivery/build_pdfs.sh
 \end{verbatim}
 Running \code{bash delivery/reproduce_ml.sh} executes \code{planar_ode_experiments.py} and \code{figure_data.py} in \code{delivery/}, writing \code{logs/planar_ml/planar_ode_results.json}, \code{weights_lnn_pinn.npz}, \code{draft/figures/planar/annulus_*.dat}, and \code{numbers.tex}. Archived multi-network and interval-barrier scripts remain preserved under \code{.old/}.
 
+\chapter{AI assistance disclosure.}
+ChatGPT assisted with mathematical exposition, the planar model's declaration, its potential equivalence, the critical-point Jacobian determinant appeared during interim process, and scope review. Claude Opus 5.5 and Gemini (in Cursor, with semi-automatic simple \texttt{/grill-me} instruction provided) helped implement the \texttt{SymPy} Lie-reduction library, the planar symbolic checks, and the reproducible numerical and supplementary machine-learning scripts in \code{delivery/}, and assisted in editing prose and figures from my section-by-section specifications and handwritten research outline. Grok independently audited the Python scripts. I checked every derivation by hand and ensured that every script is in-scope; formulas first obtained with AI assistance are noted in footnotes, and every reported number is generated from committed code with JSON receipts in Appendix~\ref{app:reproducibility}.
+The complete CoT and research path is archived here \url{https://github.com/CarlXerophilem/Lie-ML_PDES}.
 \end{document}
