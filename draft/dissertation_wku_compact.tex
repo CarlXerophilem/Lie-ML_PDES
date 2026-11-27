@@ -3,17 +3,18 @@
 % House style: lead each chapter with its mathematical motivation, then give the
 % construction, hypotheses, and evidence. Keep the two degeneracies distinct,
 % name the applicable chart and norm, and use short signposts at proof transitions.
-% Use 1.05 body line spacing (1.0 in Chapter 4) and the existing section/float settings. Condense
-% repeated setup and defer unsupported extensions before changing typography.
+% WKU template format: 12pt single spacing, the stated margins, Roman front matter, Arabic body.
+% Condense repeated setup and defer unsupported extensions before changing typography.
 % Review macros remain available; final prose is black. Key equations retain red.
 % Six-minute defense, nine slides: model and compatibility, parameter-to-algebra
 % map, universal flux reduction, planar geometry, solvability tests, defect
 % method, measured results, and conclusion. See defense_wku_madrid.tex.
 % The author declaration is an unsigned review draft.
 % Compact dissertation based on the reviewed 18 November 2026 WKU source.
-\documentclass[11pt,a4paper,oneside]{report}
+\documentclass[12pt,a4paper,oneside]{report}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 \usepackage{lmodern}
 \usepackage[nopatch=footnote]{microtype}
 \usepackage[top=1in,bottom=0.689in,hmargin=1.25in,nohead,includefoot,foot=0.311in,footskip=0.5827in]{geometry}
@@ -29,7 +30,7 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[hyphens]{url}
 \usepackage{hyperref,bookmark}
-\usepackage{setspace,fancyhdr,titlesec,caption,placeins}
+\usepackage{fancyhdr,titlesec,caption,placeins}
 \definecolor{ink}{HTML}{263B5E}
 \definecolor{teal}{HTML}{087F8C}
 \definecolor{warm}{HTML}{B65528}
@@ -43,7 +44,8 @@
  pdfsubject={Undergraduate dissertation, MATH 4890}}
 \titleformat{\chapter}[hang]{\normalfont\Large\bfseries\raggedright}{\thechapter.}{.7em}{}
 \titlespacing*{\chapter}{0pt}{-20pt}{12pt}
-\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{.6em}{}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{.6em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{.6em}{}
 \titlespacing*{\section}{0pt}{10pt plus 2pt}{4pt}
 \titlespacing*{\subsection}{0pt}{9pt plus 2pt}{3pt}
 \captionsetup{font=small,labelfont=bf,skip=4pt}
@@ -51,10 +53,9 @@
 \setlength{\intextsep}{10pt plus 2pt minus 2pt}
 \renewcommand{\topfraction}{.9}
 \renewcommand{\textfraction}{.08}
-\setstretch{1.05}
 \setlength{\emergencystretch}{2em}
 \setlength{\parskip}{0pt}
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \makeatletter
 \renewcommand{\@pnumwidth}{2.8em}
 \renewcommand{\@tocrmarg}{3.8em}
@@ -83,7 +84,7 @@
 \fancypagestyle{plain}{\fancyhf{}\fancyfoot[R]{\thepage}\renewcommand{\headrulewidth}{0pt}}
 \setlength{\tabcolsep}{1mm}
 \renewcommand{\arraystretch}{1.3}
-\renewcommand{\bibname}{References}
+\addto\captionsenglish{\renewcommand{\bibname}{References}}
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
 \tikzset{box/.style={draw=ink,fill=ink!4,rounded corners=2pt,
  align=center,inner sep=5pt,font=\small},
@@ -101,67 +102,55 @@
 \begin{titlepage}
 \thispagestyle{plain}
 \noindent\IfFileExists{wku_programme_header.pdf}{\includegraphics[width=\textwidth]{wku_programme_header.pdf}}{\textbf{Programme in Mathematical Sciences}\par\smallskip\hrule}
-\vspace{18mm}
+\bigskip\bigskip\bigskip\bigskip
+
 \begin{center}
 \textbf{College of Science, Mathematics and Technology}\par
-\medskip
+\bigskip
 \textbf{Wenzhou-Kean University}\par
-\vspace{8mm}
+\bigskip\bigskip
 \IfFileExists{WKU.png}{\includegraphics[width=2.2055in,height=1.9055in]{WKU.png}}{\rule{0pt}{1.9055in}}\par
-\vspace{25mm}
+\bigskip\bigskip\bigskip\bigskip
 {\bfseries Parameter-Dependent Lie Symmetries\par
 and Semi-Analytical Solutions\par
 of Nonlinear PDEs\par}
-\vspace{4mm}
+\bigskip
 Saint--Venant--Exner Case Studies\par
-%{\small Lie-Invariant Reference Families and Targeted Corrections\par}
-\vspace{3mm}
 Undergraduate Dissertation (MATH 4890)
 \end{center}
-\vspace{10mm}
-\noindent\begin{tabularx}{\textwidth}{@{}lX@{}}
-\textbf{Student Name:} & \underline{Yihong Xiao}\\[4pt]
-\textbf{Student ID:} & \underline{1308225}\\[4pt]
-\textbf{Major:} & \underline{Mathematical Sciences}\\[-2pt]
- & \underline{(Data Analytics Option)}\\[4pt]
-\textbf{Supervisor:} & \underline{Dr.\ Puneet Rana}\\[4pt]
-\textbf{Review version:} & 26 November 2026
-\end{tabularx}
+
+\bigskip\bigskip
+\noindent\begin{minipage}{\textwidth}
+\raggedright
+\textbf{Student Name:} \underline{Yihong Xiao}\\[8pt]
+\textbf{Student ID:} \underline{1308225}\\[8pt]
+\textbf{Major:} \underline{Mathematical Sciences (Data Analytics Option)}\\[8pt]
+\textbf{Supervisor:} \underline{Dr.\ Puneet Rana}\\[8pt]
+\textbf{Date of Submission:} \underline{November 27, 2026}
+\end{minipage}
 \end{titlepage}
 \hypersetup{pageanchor=true}
 \setcounter{page}{2}
 \chapter*{Author's Declaration}
 \addcontentsline{toc}{chapter}{Author's Declaration}
 
-\textbf{Draft declaration.}
-I take responsibility for the final text, the attribution of sources and the
-mathematical claims. I will verify that the submitted work and the disclosure
-below meet the programme's requirements before signing.
+I, the undersigned, hereby declare that this submission is entirely my own work, in my own words, and that all sources used in researching it are fully acknowledged and all quotations properly identified. It has not been submitted, in whole or in part, by me or another person, for the purpose of obtaining any other credit/grade. I have a citation to AI system used to generate the text if I used AI-generated text. I understand the ethical implications of my research, and this work meets the requirements of College of Science, Mathematics and Technology.
 
-\medskip
+\bigskip
 \noindent\textbf{AI assistance disclosure.}
-ChatGPT drafted or revised explanatory prose in the introduction and the
-chapter on Lie reduction, proposed the planar potential formulation and the
-saddle determinant, and wrote first drafts of the benchmark code. Claude Opus 5.5
-(in Cursor) helped design the SymPy Lie-reduction library for
-$(1\text{--}3)+1$D SVE systems used in Chapter~\ref{ch:models} and implemented
-the planar symbolic checks, the benchmark and the interval certifier of
-Chapter~\ref{ch:computation}. Gemini drafted the prose of Chapters~3--5 from my
-section-by-section decisions and styled the figures. Grok independently audited
-the Python scripts. I checked every derivation and script by hand; formulas
-first obtained with AI assistance are marked by footnotes, and every reported
-number is produced by a committed script with a JSON record.
+ChatGPT drafted or revised explanatory prose in the introduction and the chapter on Lie reduction, proposed the planar potential formulation and the saddle determinant, and wrote first drafts of the benchmark code. Claude Opus 5.5 (in Cursor) helped design the SymPy Lie-reduction library for $(1\text{--}3)+1$D SVE systems used in Chapter~\ref{ch:models} and implemented the planar symbolic checks, the benchmark and the interval certifier of Chapter~\ref{ch:computation}. Gemini drafted the prose of Chapters~3--5 from my section-by-section decisions and styled the figures. Grok independently audited the Python scripts. I checked every derivation and script by hand; formulas first obtained with AI assistance are marked by footnotes, and every reported number is produced by a committed script with a JSON record.
 
 \vfill
-\medskip
+\noindent\textbf{Date:} \rule[-8pt]{11.5cm}{0.1em}
 
-\noindent Date \rule[-.3ex]{3.5cm}{.4pt}\hfill Signature \rule[-.3ex]{5.5cm}{.4pt}
+\bigskip
+\noindent\textbf{Name (printed letters):} \rule[-8pt]{7.8cm}{0.1em}
+
+\bigskip
+\noindent\textbf{Signature:} \rule[-8pt]{10.55cm}{0.1em}
 
 \clearpage
-
-
-\begingroup\setstretch{1.0}\small
-\chapter*{Abstract} %AlphaXiv-Skim format abstract
+\chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
 \noindent\textbf{Goal.} Construct parameter-dependent Lie-invariant solutions of Saint--Venant--Exner (SVE) systems, extending them across declared physical domains and certifying approximations.
@@ -170,12 +159,23 @@ number is produced by a committed script with a JSON record.
 
 \medskip\noindent\textbf{Result.} The positive $(1+1)$ charts admit classical point-symmetry classification for every real $m\ge1$. The exponent $m=3$ adds a scaling, and $m=1$ adds a boost only to the printed scalar. Bed-drift solutions extend over their maximal positive-velocity interval. In the planar model a parameter-dependent determinant identifies nondegenerate saddles; a separate exact swirl has a convex bed for $1\le m<2$. For a non-rotating river bend with HEC-RAS bed-slope ratios $K/G\in[2,10]$, the threshold $c_*$ has a closed form. On held-out parameters, interval barriers certify the transcritical branch on $r\in[0.9,1.1]$ for Chebyshev, PINN, random-feature and gated networks (\NumCertAGated{} each); on $r\in[0.5,2]$ the gated cell certifies \NumCertBGated{} tuples and the plain PINN \NumCertBPinn. Learned warm starts reduce correction work, but no end-to-end cost advantage of learning is established. A whole-domain drift control is certified at \NumDriftCert{} held-out pairs. Local Taylor, Laurent and saddle constructions supply existence and convergence; neither general IBVP solvability nor a universal learning advantage is claimed.
 
-\medskip\noindent\textbf{Keywords}\quad Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner systems, material reconstruction, singular branches, fixed-point defect, structure-constrained approximation.
+\bigskip
+\noindent\textbf{Keywords:} Parameter-dependent Lie symmetries, jet bundles, invariant reduction, Saint--Venant--Exner systems, material reconstruction, singular branches, fixed-point defect, structure-constrained approximation.
 
-\section*{Notations}
+\clearpage
+\tableofcontents
+\clearpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\clearpage
+\chapter*{List of Symbols and Abbreviations}
+\addcontentsline{toc}{chapter}{List of Symbols and Abbreviations}
 {\footnotesize
-\renewcommand{\arraystretch}{1.01}
-\begin{tabularx}{\linewidth}{@{}p{.30\linewidth}X@{}}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}p{.32\linewidth}X@{}}
 \toprule
 Symbol & Meaning\\\midrule
 $\mathcal E_1,\mathcal E_P,\mathcal E_L$ & 2022 Eulerian SVE~\cite{sve2022}, 2026 printed scalar~\cite{sve2026}, compatible Lagrangian scalar derived from $\mathcal E_1$\\
@@ -194,9 +194,6 @@ $V,W,\Delta_c,\mathbf J_*$ & Radial and azimuthal velocities, radial leading coe
 $c,C_j$ & Uniform bed drift and constants from ODE integration\\
 $\mathcal T,\Lambda,\varpi$ & Profile fixed-point operator, contraction bound and prescribed trace\\\bottomrule
 \end{tabularx}}
-\endgroup
-\clearpage
-\tableofcontents
 \clearpage
 \pagenumbering{arabic}
 
@@ -207,7 +204,7 @@ The Saint--Venant--Exner equations couple shallow-water motion with changes of t
 
 The first discriminant is the rank of a determining operator, which governs available group actions. The second is a vanishing coefficient in a reduced equation, which governs local solvability. We distinguish the printed material scalar $\mathcal E_P$ from the compatible equation $\mathcal E_L$ and reconstruct the Eulerian fields through a mass-coordinate inverse and a closed bed form. A planar potential formulation adds a spatial variable, a second unknown function, and a bed-slope parameter within a specified vorticity and circulation class.
 
-The aim is an exact solution on its admissible domain whenever possible. Otherwise local analytic branches and their continuation provide the reference. Learning supplies candidate coefficients or profiles on the quotient; classical methods are independent controls. A continuous certificate, when available, is distinct from a sampled residual. General initial-boundary value problems, shocks and full planar group classification are outside the theorem scope.
+The aim is an exact solution on its admissible domain whenever possible. Otherwise local analytic branches and their continuation provide the reference. Learning supplies candidate coefficients or profiles on the quotient, drawing on invariant PINNs~\cite{arora2023} and liquid residual blocks~\cite{tao2026}, while classical methods are independent controls; unlike linear superposition schemes for IBVPs~\cite{klausen2026}, our nonlinear profiles are certified directly by interval barriers. A continuous certificate, when available, is distinct from a sampled residual. General initial-boundary value problems, shocks and full planar group classification are outside the theorem scope.
 
 \paragraph{Scope and overview.}
 Chapter~\ref{ch:models} establishes the parameter-to-algebra map and reduction. Chapter~\ref{ch:continuation} develops the higher-dimensional model and its critical branches. Chapter~\ref{ch:computation} gives global reference solutions, continuation and parameter-conditioned approximation; the final chapter separates proved results from empirical findings. Figures~\ref{fig:workflow} and~\ref{fig:defect-workflow} show the reasoning chain.
@@ -514,7 +511,7 @@ $\mathcal E_{P}$ & $Y_1,Y_2,Y_3,Y_4$ & $Y_6=t\partial_\phi$ & $Y_5$\\\bottomrule
  X_5=t\partial_t-u\partial_u-2h\partial_h-2B\partial_B,\qquad
  Y_5=t\partial_t-2s\partial_s .
 \]
-\caption{Generators on the positive charts. In the $\mathcal E_{L}$--$\mathcal E_1$ correspondence, indices $1,2,4,5$ give corresponding actions, with $5$ restricted to $m=3$. The bed constant and the mass-label origin are independent gauges.}
+\caption[Generators on the positive charts]{Generators on the positive charts. In the $\mathcal E_{L}$--$\mathcal E_1$ correspondence, indices $1,2,4,5$ give corresponding actions, with $5$ restricted to $m=3$. The bed constant and the mass-label origin are independent gauges.}
 \label{tab:algebras}
 \end{table}
 
@@ -532,7 +529,7 @@ For $\mu=(g,\kappa,m)\in(0,\infty)^2\times[1,\infty)$, let $\mathcal G_i(\mu)=\k
 Thus the kernel of $A_i(m)$ represents $\mathcal G_i(\mu)$ in its generating basis. For instance $m=5/2$ and $m=2$ give the same algebra. The family $\{(\mu,a):A_i(m)a=0\}$ has analytic defining equations and fibers of varying dimension. For any analytic finite determining matrix on a constant-rank analytic parameter stratum, its kernels form a local analytic vector bundle, and kernel dimension is upper semicontinuous on the whole parameter set. At a rank drop the exact kernel cannot be continuous in the gap topology along an approaching higher-rank stratum.
 \end{theorem}
 \begin{proof}
-For rank $k$, select a nonzero $k$-minor and permute rows and columns to put it in a block $A_{11}$. The remaining variables are free, and the pivot variables equal $-A_{11}^{-1}A_{12}$ times them. The other rows impose no further restrictions on the constant-rank stratum. This gives an analytic frame. Nonvanishing minors make rank lower semicontinuous; hence kernel dimension is upper semicontinuous. For the three models, Theorem~\ref{thm:class} identifies the finite kernel exactly. In particular $(m-3)a_5=0$ and, for $\mathcal E_P$, $(m-1)a_6=0$ exclude continuation of the exceptional directions as nonzero exact extra generators off their strata. Approximate symmetries are not needed for this conclusion.
+For rank $k$, select a nonzero $k$-minor and permute rows and columns to put it in a block $A_{11}$. The remaining variables are free, and the pivot variables equal $-A_{11}^{-1}A_{12}$ times them. The other rows impose no further restrictions on the constant-rank stratum. This gives an analytic frame. Nonvanishing minors make rank lower semicontinuous; hence kernel dimension is upper semicontinuous. For the three models, Theorem~\ref{thm:class} identifies the finite kernel exactly. In particular $(m-3)a_5=0$ and, for $\mathcal E_P$, $(m-1)a_6=0$ exclude continuation of the exceptional directions as nonzero exact extra generators off their strata. Approximate symmetry frameworks~\cite{dengreid2024} are not needed for this conclusion.
 \end{proof}
 The one-dimensional subalgebras are the lines $\mathbb P(\mathcal G_i(\mu))$. The parameter map is used with \eqref{eq:reduction-map} by selecting a projectable admitted line on a regular chart with equal positive base and point ranks. Adjoint equivalence only matters when inequivalent representatives are sought~\cite{olver}.
 
@@ -643,7 +640,7 @@ Consider the common-scaling reduction under $Y_4$, given by $\phi(t,s)=tF(z)$ wi
  \keyeq{t^2\mathcal E_{L}[\phi](t,s)=(L(z)F'')'},\quad
  L_{\mathcal E_{L}}(z,F,p)=F(g/p^3-z^2)+gm\kappa z(F-zp)^{m-1}/p.
 \end{equation}
-This follows from $\mathcal A(t,s)=F''(z^2p(z)-g/p(z)^2)/t$ and $T_m(t,s)=-zv_*(z)^{m-1}F''/(tp(z))$. Integrating once yields the first integral $I_0=L(z)F''$, which is constant along any $Y_4$-invariant profile.
+This follows from $\mathcal A(t,s)=F''(z^2p(z)-g/p(z)^2)/t$, and from $T_m(t,s)=-zv_*(z)^{m-1}F''/(tp(z))$. Integrating once yields the first integral $I_0=L(z)F''$, which is constant along any $Y_4$-invariant profile.
 
 Where $L(z)\ne0$, $F'=p$, $p'=I_0/L(z)$ (see Section~\ref{sec:series-solvability}).
 
@@ -771,7 +768,6 @@ Every invariant solution in this chapter has $B(t,r)=Z(r)+ct$, so its bed shape 
 Comparing Sections~\ref{sec:saddle} and~\ref{sec:bowl} clarifies the computational split ahead. The rotating bowl~\eqref{eq:bowl} is an exact global family in closed form on any finite annulus with $E$ sufficiently large, whereas the non-rotating bend crossing of Section~\ref{sec:saddle} is proved only locally and admits no closed form. In Chapter~\ref{ch:computation}, exact families serve as input checks and controls, while the bend saddle branch is the primary target for certified continuation and parameter-conditioned learning.
 
 \chapter{Global Reference Solutions and Certified Approximation}\label{ch:computation}
-\setstretch{1.0}
 Solvability criteria decide what a reduced equation can deliver before any numerical solver or network is run. Within its declared affine search class, the symbolic reducer of Chapter~\ref{ch:models} reduces Saint--Venant--Exner systems with up to three spatial variables ($(3+1)$D) to ordinary differential equations. What remains after symbolic reduction---the ``ashes''---is an exact global profile, a singular local germ, or an unresolved obstruction. For $G>0$, $\mathcal E_2$ is mixed hyperbolic--parabolic, so its reduced ODE combines a characteristic singularity ($\Delta_c=0$) with a diffusive bed relation. This chapter extends the germs to declared domains and assigns learning only to the hard branch (Figure~\ref{fig:workflow-recap}).
 
 \begin{figure}[!ht]\centering
@@ -905,10 +901,11 @@ Five routes share the same slices, parameter tuples, crossing trace and slope, t
  \item \emph{Plain residual PINN:} a $4$--$32$--$32$--$1$ $\tanh$ multilayer perceptron trained on the raw differential residual $\Delta_c H'-N$~\cite{mishra2023}.
  \item \emph{Random-feature $\tanh\times$Chebyshev network (RF):} fixed random $\tanh$ parameter features paired with a Chebyshev spatial basis via a learned readout.\footnote{The random-feature $\tanh\times$Chebyshev architecture was designed with the help of ChatGPT and Claude; interval certification does not depend on how a candidate is designed.}
  \item \emph{Gated residual cell:} an LNN-inspired width-$32$ block~\cite{tao2026},
- \[
-  v_0=\tanh(Ax+b),\qquad v_1=v_0+\tanh(d)\odot\tanh(Wv_0),\qquad
-  R=\sum_{i=1}^{32}v_{1,i}\big((1,\hat\nu)\Theta\big)_i .
- \]
+ \begin{align*}
+  v_0&=\tanh(Ax+b),&
+  v_1&=v_0+\tanh(d)\odot\tanh(Wv_0),\\
+  R&=\sum_{i=1}^{32}v_{1,i}\big((1,\hat\nu)\Theta\big)_i .
+ \end{align*}
 \end{enumerate}
 The three neural routes have matched parameter counts (on stage~A: $\NumTrainAPinnParams$ for PINN, $\NumTrainARfParams$ for RF, $\NumTrainAGatedParams$ for the gated cell; on stage~B: $\NumTrainBPinnParams$, $\NumTrainBRfParams$, $\NumTrainBGatedParams$) and the same L-BFGS budget of $3000$ iterations. Both RF and the gated cell minimize the desingularized defect loss $\rho\widehat w'-(N/\Delta_c-\ell-\widehat w)$; training nodes beyond a training tuple's \code{DOP853} reach are dropped ($\NumTrainAPoints$ active points on stage~A and $\NumTrainBPoints$ on stage~B).
 
@@ -918,6 +915,7 @@ My hypothesis for the gated cell is not that it outperforms Chebyshev collocatio
 Table~\ref{tab:param-results} summarizes held-out accuracy and barrier certification on the primary box. On stage~A, all four approximation routes certify \NumCertACheb{} held-out tuples across both sides. On stage~B, Chebyshev certifies \NumCertBCheb{}, the gated cell certifies \NumCertBGated{}, RF certifies \NumCertBRf{}, and the plain residual PINN certifies \NumCertBPinn{}. The PINN fails on stage~B with sampled error $\NumErrBPinn$ and final training RMS residual $\NumTrainBPinnRms$: a genuine negative result caused by ill-conditioning of the undivided residual $\Delta_c H'-N$ across the wide slice. Figures~\ref{fig:param-branches} and~\ref{fig:param-errors} compare the branch profiles, coverage bars, and error scaling against $\delta$.
 
 \begin{table}[!ht]\centering\small
+\setlength{\tabcolsep}{.85mm}
 \begin{tabularx}{\linewidth}{@{}Xrrrrrrr@{}}\toprule
  & \multicolumn{3}{c}{Stage~A ($r\in[0.9,1.1]$)} & \multicolumn{4}{c}{Stage~B ($r\in[0.5,2]$)}\\\cmidrule(lr){2-4}\cmidrule(l){5-8}
 Route & Sampled err. & Cert. & Max $H$ bnd & Sampled err. & Cert. & Max $H$ bnd & Cov.\ (\%)\\\midrule
@@ -984,7 +982,6 @@ Gated cell & \NumWarmNfevAGated & \NumOnlyTolAGated & \NumBreakFixAGated & \NumW
 Table~\ref{tab:cost} separates the two deployment modes. Learned-only evaluation never breaks even: certifying a network at the common tolerance takes longer per tuple than solving and certifying Chebyshev from scratch ($\NumOnlySecAGated$\,s versus $\NumClassicalSecA$\,s for the gated cell on stage~A, and $\NumOnlySecBGated$\,s versus $\NumClassicalSecB$\,s on stage~B), and on stage~B neither the PINN nor RF passes the tolerance certificate on any held-out tuple. Warm-starting Chebyshev from a trained network cuts stage-A residual evaluations from $\NumColdNfevA$ to $\NumWarmNfevAGated$ for the gated cell (\NumWarmOkAGated{} side queries succeed). Collocation, however, is a small share of the per-tuple time, which is dominated by the interval certificate, so the largest wall-time saving of any route is $\NumGainFixMaxA\%$ on stage~A and $\NumGainFixMaxB\%$ on stage~B. I treat any difference below $\NumGainMin\%$ of the classical time as unresolved, because timings with parallel certification workers vary by a few percent between runs; Table~\ref{tab:cost} therefore reports no break-even count for these routes. On stage~B, the PINN warm start degrades to $\NumWarmNfevBPinn$ evaluations and fails on $4$ of $16$ side queries (\NumWarmOkBPinn{} succeed), RF reduces evaluations from $\NumColdNfevB$ to $\NumWarmNfevBRf$, and the gated cell matches the cold count (\NumWarmNfevBGated{}). On this benchmark, learning gives no end-to-end cost advantage at equal certified tolerance.
 \FloatBarrier
 
-\setstretch{1.05}
 \chapter{Conclusion}\label{ch:conclusion}
 Table~\ref{tab:status} separates every main result of this dissertation by its mathematical and computational status.
 
@@ -1017,6 +1014,113 @@ On the analytical side, this study extends the symmetry--similarity strategy of~
 On the computational side, interval barriers certify continuous depth bounds on declared radial slices and nonzero three-parameter neighbourhoods, independently of how a candidate profile is constructed. Across the five-route benchmark on the non-rotating bend saddle branch, the gated residual cell certifies \NumCertBGated{} held-out tuples on the wide stage-B slice where the plain residual PINN fails (\NumCertBPinn); on this benchmark, training on the desingularized defect avoids the ill-conditioning of the raw residual. Classical Chebyshev collocation nonetheless remains the strongest per-tuple solver; learned-only evaluation never breaks even because interval certification of a network costs more per tuple than solving and certifying Chebyshev directly, and warm starts reduce residual evaluations without a resolvable wall-time saving, since the certificate dominates the cost of every query.
 
 Three concrete problems remain open. First, genuine morphodynamic bed-shape evolution goes beyond the uniform-drift ansatz $B=Z(r)+ct$ and requires an initial-boundary-value formulation. Second, adding bed friction to the planar bend introduces a non-gradient drag term that breaks both the potential formulation and the azimuthal first integral, requiring a new reduction. Third, the non-saddle regime $c\ge c_*$ (degenerate and node-type crossings) and certified maximal continuation up to physical or characteristic boundaries require separate local and global analysis.
+
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+I thank my supervisor, Dr.\ Puneet Rana, for guidance throughout this dissertation, and the College of Science, Mathematics and Technology at Wenzhou-Kean University for the support of the Mathematical Sciences programme.
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{References}
+\bibitem[Fern\'andez-Nieto et~al.(2017)]{fernandez2017}
+Enrique D. Fern\'andez-Nieto, Tom\'as Morales de Luna, Gladys Narbona-Reina, and Jean de Dieu Zabsonr\'e. Formal deduction of the Saint--Venant--Exner model including arbitrarily sloping sediment beds and associated energy. \emph{ESAIM: M2AN}, 51(1):115--145, 2017. \doi{10.1051/m2an/2016018}.
+
+\bibitem[Olver(1993)]{olver}
+Peter~J. Olver. \emph{Applications of Lie Groups to Differential Equations}. Springer, 2nd edition, 1993. \doi{10.1007/978-1-4612-4350-2}. Consulted: corrected third printing (1998).
+
+\bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
+Ian~M. Anderson, Mark~E. Fels, and Charles~G. Torre. Group Invariant Solutions without Transversality. \emph{Communications in Mathematical Physics}, 212(3):653--686, 2000. \doi{10.1007/s002200000215}.
+
+\bibitem[Paliathanasis(2022)]{sve2022}
+Andronikos Paliathanasis. Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model. \emph{Symmetry}, 14:1679, 2022. \doi{10.3390/sym14081679}.
+
+\bibitem[Paliathanasis et~al.(2026)Paliathanasis, Leon, and Leach]{sve2026}
+Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach. Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables. \emph{Mathematics}, 14:433, 2026. \doi{10.3390/math14030433}.
+
+\bibitem[Druzhkov and Cheviakov(2024)]{druzhkov2024}
+Kostya Druzhkov and Alexei Cheviakov. Invariant Reduction for Partial Differential Equations. I: Conservation Laws and Systems with Two Independent Variables. Preprint, 2024. \url{https://arxiv.org/abs/2412.02965v1}.
+
+\bibitem[USACE HEC(2019)]{hecras2019}
+U.S. Army Corps of Engineers, Hydrologic Engineering Center.
+\emph{HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual}.
+Beta Release Draft, October 2019, Sec.~2.9, Eq.~(2-46).
+\href{https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf}{Technical reference manual}.
+
+\bibitem[Zeng et~al.(2008)Zeng, Constantinescu, Blanckaert, and Weber]{zeng2008}
+Jie Zeng, George Constantinescu, Koen Blanckaert, and Larry Weber.
+Flow and bathymetry in sharp open-channel bends: Experiments and predictions.
+\emph{Water Resources Research}, 44(9):W09401, 2008. \doi{10.1029/2007WR006303}.
+
+\bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993}
+Ernst Hairer, Syvert P. N{\o}rsett, and Gerhard Wanner.
+\emph{Solving Ordinary Differential Equations I: Nonstiff Problems}.
+Springer Series in Computational Mathematics 8, 2nd revised edition, Springer, 1993, Sec.~II.5--II.6. \doi{10.1007/978-3-540-78862-1}.
+
+\bibitem[Chesnokov(2008)]{chesnokov}
+Alexander Chesnokov. Symmetries and exact solutions of the rotating shallow water equations.
+Preprint, arXiv:0808.1490v1, 2008. \url{https://arxiv.org/abs/0808.1490v1}.
+
+\bibitem[Berthon et~al.(2012)]{berthon2012}
+Christophe Berthon, St\'ephane Cordier, Olivier Delestre, and Minh Hoang Le. An analytical solution of the shallow water system coupled to the Exner equation. \emph{Comptes Rendus Math\'ematique}, 350:183--186, 2012. \doi{10.1016/j.crma.2012.01.007}.
+
+\bibitem[Teschl(2012)]{teschl2012}
+Gerald Teschl. \emph{Ordinary Differential Equations and Dynamical Systems}, GSM 140. American Mathematical Society, 2012. \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf}. Consulted: author preliminary version; manifold Theorems 9.4--9.6, printed pp. 259--260 (PDF pp. 270--271).
+
+\bibitem[Arora et~al.(2024)Arora, Bihlo, and Valiquette]{arora2023}
+Shivam Arora, Alex Bihlo, and Francis Valiquette.
+Invariant Physics-Informed Neural Networks for Ordinary Differential Equations.
+\emph{Journal of Machine Learning Research}, 25(233):1--24, 2024. \url{https://jmlr.org/papers/v25/23-1511.html}.
+
+\bibitem[Mishra and Molinaro(2023)]{mishra2023}
+Siddhartha Mishra and Roberto Molinaro. Estimates on the generalization error of physics-informed neural networks for approximating PDEs. \emph{IMA Journal of Numerical Analysis}, 43(1):1--43, 2023. \doi{10.1093/imanum/drab093}. Consulted preprint: \url{https://arxiv.org/abs/2006.16144v3}.
+
+\bibitem[Trefethen(2000)]{trefethen}
+Lloyd N. Trefethen. \emph{Spectral Methods in MATLAB}. SIAM, Philadelphia, 2000. \doi{10.1137/1.9780898719598}. Method passage checked in the official author sample, Chapter 6.
+
+\bibitem[Lie--ML Project(2026b)]{theoremartifact}
+Lie--ML PDE Solver Project. A Local Smooth Transcritical Continuation Theorem
+for the Coupled Annular Saint--Venant--Exner System. Proof and replay package,
+1 November 2026. Archived replay:
+\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/f498d648cce0633007430063bea008a2f4aac52a/delivery/annular-transcritical-theorem-20261101}{Proof, source audit and replay package}.
+
+\bibitem[Deng and Reid(2024)]{dengreid2024}
+Siyuan Deng and Gregory Reid. Contributions to the Algorithmic Foundations of
+Approximate Lie Symmetry Algebras of Differential Equations. Preprint,
+arXiv:2410.20608v1, 2024. Project-supplied PDF, abstract and introduction.
+\url{https://arxiv.org/abs/2410.20608v1}.
+
+\bibitem[Noether(1918)]{noether1918}
+Emmy Noether. Invariant Variation Problems. M.~A. Tavel's English translation
+of the 1918 paper, \emph{Transport Theory and Statistical Physics},
+1(3):183--207, 1971. Project-supplied reproduction,
+arXiv:physics/0503066v3; consulted Section~1.
+
+\bibitem[Rong(2013)]{rong2013}
+Feng Rong. The Briot--Bouquet systems and the center families for holomorphic dynamical systems. \emph{Advances in Mathematics}, 245:237--249, 2013. \doi{10.1016/j.aim.2013.06.021}. Proposition~2.1.
+
+\bibitem[Westreich and Podolak(1982)]{westreich1982}
+David Westreich and Ester Podolak. Systems of Briot--Bouquet Equations with
+Analytic Solutions. \emph{Canadian Mathematical Bulletin}, 25(2):230--233,
+1982. \doi{10.4153/CMB-1982-032-0}. Cited for the classical singular-ODE
+setting; the nonresonant saddle contraction used here is proved explicitly.
+
+
+\bibitem[Oliveri(2026)]{oliveri}
+Francesco Oliveri. \emph{Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation}. Birkh\"auser, Cham, 2026. \doi{10.1007/978-3-032-12791-4}.
+
+\bibitem[Tao et~al.(2026)Tao, Wang, and Liu]{tao2026}
+Ze Tao, Hanxuan Wang, and Fujun Liu. LNN-PINN: A Unified Physics-Only Training Framework with Liquid Residual Blocks. \emph{Computer Physics Communications}, 326:110237, 2026. \doi{10.1016/j.cpc.2026.110237}.
+
+\bibitem[Parvin et~al.(2026)Parvin, Samaey, and Koellermeier]{parvin2026}
+Afroja Parvin, Giovanni Samaey, and Julian Koellermeier. A Hyperbolic Moment-Based
+Shallow Water Model for Coupled Bedload--Suspended Load Morphodynamics with
+Variable Density. Preprint, arXiv:2505.22278v2, 2026. \url{https://arxiv.org/abs/2505.22278v2}.
+
+\bibitem[Klausen et~al.(2026)]{klausen2026}
+Ren\'e P.~Klausen, Ivan Timofeev, Jonas Naujoks, Johannes Frank, Thomas Wiegand, Sebastian Lapuschkin, and Wojciech Samek.
+LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries.
+Preprint, arXiv:2510.25731v2. \url{https://arxiv.org/abs/2510.25731v2}.
+
+\end{thebibliography}
 
 \appendix
 \chapter{Determining-system proofs and source checks}\label{app:proofs}
@@ -1076,14 +1180,14 @@ For $X=\tau(t)\partial_t+\xi(x)\partial_x+\eta(t,x,U)\cdot\partial_U$, take $t=t
 
 \begin{equation}\label{eq:chart-reduction}
  U_t=\frac{\eta(t,x,U(t,x))-\xi(x)U_x}{\tau(t)},\qquad
- U_x=\frac{\eta(t,x,U(t,x))-\tau(t)U_t}{\xi(x)},
+ U_x=\frac{\eta(t,x,U(t,x))-\tau(t)U_t}{\xi(x)}.
 \end{equation}
 For $\mathcal E_1$, substitution into the quasilinear system of Appendix~\ref{app:eulerian} gives
 
 \[
  \begin{aligned}
   (\tau(t_*)A_E(F(x))-\xi(x)I)F'+\eta(t_*,x,F(x))&=0,\\
-  (\xi(x_*)I-\tau(t)A_E(F(t)))F'+A_E(F(t))\eta(t,x_*,F(t))&=0,
+  (\xi(x_*)I-\tau(t)A_E(F(t)))F'+A_E(F(t))\eta(t,x_*,F(t))&=0.
  \end{aligned}
 \]
 The two lines correspond to $t=t_*$ and $x=x_*$, with primes in the surviving coordinate. For either scalar, differentiate the invariant-surface identity to obtain jets through order three before restricting to the section. Check positivity after any adjoint transformation; for instance the $m=1$ boost can send $\phi_t>0$ to $\phi_t=0$.
@@ -1102,7 +1206,7 @@ Translation-only representatives are $X_1,X_2,X_3,X_1\pm X_2,X_3\pm X_1,X_3\pm X
  X_1+aX_2,\quad X_2+aX_3,\quad X_3 .
  \end{gathered}
 \]
-Indeed, if the $X_4$ coefficient is nonzero, translation adjoints remove all three translation coefficients; if only the $X_6$ coefficient is nonzero, translations remove $X_3$ and positive common scaling fixes the nonzero $X_1$ or $X_2$ magnitude. In pure translations the $X_6$ adjoint shifts the $X_3$ coefficient when $X_1$ is nonzero. These are algebraic line classes, not automatically admissible invariant graphs: trace, ranks and positivity still need checking. This catalogue and the individual formula audit are recorded by the source replay in the Reproducibility section.
+Indeed, if the $X_4$ coefficient is nonzero, translation adjoints remove all three translation coefficients; if only the $X_6$ coefficient is nonzero, translations remove $X_3$ and positive common scaling fixes the nonzero $X_1$ or $X_2$ magnitude. In pure translations the $X_6$ adjoint shifts the $X_3$ coefficient when $X_1$ is nonzero. These are algebraic line classes, not automatically admissible invariant graphs: trace, ranks and positivity still need checking. This catalogue and the individual formula audit are recorded by the source replay in Appendix~\ref{app:reproducibility}.
 
 \section{Source reduction audit}
 The printed and compatible cubic powers differ: for $\phi=A(st^2)^{1/3}$ their amplitude conditions are respectively $(1-12g\kappa)A^3=27g$ and $(1-4g\kappa)A^3=27g$. At the printed travelling chart, if $p=F'$ and $L_P(p)p'$ is the integrated flux coefficient from~\eqref{eq:tilted}, the substitution $W(p)=\int^p L_P(v)\,dv$ gives $(W(p(z)))''=0$ wherever $L_P\ne0$. This supplies the secondary linearization without identifying the printed law with the compatible physical law. Source Sections 3.1--3.3 require chart/vertical-graph checks; 3.4--3.5 require the common and cubic scaling substitutions, including the additional nonzero Jacobian condition on the Abel chart; 3.6--3.9 require the travelling and tilted translation substitutions, including the reversed graphs and qualified Eq.~(32). The replay has individual equation records for these cases; it records failed printed identities and corrected forms rather than asserting completeness of the printed closed forms. A fresh replay at Taylor order six checked nine source sections, eleven displayed equation audits and 23 Taylor jets, with failures and corrections recorded individually.
@@ -1143,8 +1247,8 @@ whose denominator never vanishes because $\lambda\lambda_o<0$. Cauchy's inequali
 With $g=C_1=C_2=1$, $(r_*,H_*)=(1,1)$, $W_0=1-f/2$, $S_0=(1-f/2)^2+1$, $P_*=2-f^2/4$, and $C_3=c/2+S_0^{(m-1)/2}(K-P_*G)$, the determinant $\det\mathbf J_*=3c/(G\,S_0^{(m-1)/2})+\Phi_f(m,K/G)$ of Section~\ref{sec:saddle} has the explicit rational part (verified symbolically in \code{verify_planar.py} for symbolic $f$)
 \[
  \Phi_f(m,\kappa)=\frac{\splitfrac{3f^4(m+1)-24f^3-40f^2m+120f^2-128f+128(m+1)}{+12\kappa f^2m-4\kappa f^2-32\kappa f-64\kappa m+128\kappa}}{4(f^2-4f+8)},
- \qquad \kappa=\frac{K}{G}.
 \]
+where $\kappa=K/G$.
 Setting $f=0$ gives $4(m+1)+(K/G)(4-2m)$ and~\eqref{eq:bend-det}; setting $f=1$ gives~\eqref{eq:full-saddle-det}.
 
 \section{Regular series radius and characteristic tangency}\label{app:regular}
@@ -1177,11 +1281,11 @@ At the anchored crossing with $r=1+\rho$, $Y=\ell+w$, $H=1+\rho Y$, $V=1/(rH)$, 
  w_d=-\frac{1}{r}-\frac{f}{2},
 \]
 together with $s_d=v_d(V+1)+w_d(W+W_0)$ (so $S-S_0=\rho s_d$ identically) and $q_d=-C_3/(Gr)-\gamma/2$. The power difference is enclosed by the mean-value form $(S^{-a}-S_0^{-a})/(S-S_0)\in M=-a\,\xi^{-a-1}$ with $\xi\in\operatorname{hull}(S_0,S)$, yielding
-\[
- p_d=\kappa v_d-q_d S^{-a}-(Q_0/G)s_d M,\qquad
- n=H\bigl[(s_d-S_0)/r+fw_d-p_d\bigr],\qquad
+\begin{align*}
+ p_d&=\kappa v_d-q_d S^{-a}-(Q_0/G)s_d M,\\
+ n&=H\bigl[(s_d-S_0)/r+fw_d-p_d\bigr],\qquad
  \mathfrak f=n/d-\ell-w .
-\]
+\end{align*}
 On cells away from $\rho=0$, a centred (mean-value) enclosure built from first-order Taylor jets is intersected with the natural divided enclosure to suppress wrapping.
 
 \paragraph{Cells, tube search, and drift certificate.}
@@ -1323,117 +1427,7 @@ Taylor & none & $0.0015$--$0.0045$\\
 \end{table}
 
 
-\normalsize
-\begingroup
-\small
-\raggedright
-\setstretch{0.97}
-\setlength{\bibsep}{1pt plus .3pt minus .3pt}
-\begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{References}
-\bibitem[Fern\'andez-Nieto et~al.(2017)]{fernandez2017}
-Enrique D. Fern\'andez-Nieto, Tom\'as Morales de Luna, Gladys Narbona-Reina, and Jean de Dieu Zabsonr\'e. Formal deduction of the Saint--Venant--Exner model including arbitrarily sloping sediment beds and associated energy. \emph{ESAIM: M2AN}, 51(1):115--145, 2017. \doi{10.1051/m2an/2016018}.
-
-\bibitem[Olver(1993)]{olver}
-Peter~J. Olver. \emph{Applications of Lie Groups to Differential Equations}. Springer, 2nd edition, 1993. \doi{10.1007/978-1-4612-4350-2}. Consulted: corrected third printing (1998).
-
-\bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
-Ian~M. Anderson, Mark~E. Fels, and Charles~G. Torre. Group Invariant Solutions without Transversality. \emph{Communications in Mathematical Physics}, 212(3):653--686, 2000. \doi{10.1007/s002200000215}.
-
-\bibitem[Paliathanasis(2022)]{sve2022}
-Andronikos Paliathanasis. Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model. \emph{Symmetry}, 14:1679, 2022. \doi{10.3390/sym14081679}.
-
-\bibitem[Paliathanasis et~al.(2026)Paliathanasis, Leon, and Leach]{sve2026}
-Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach. Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables. \emph{Mathematics}, 14:433, 2026. \doi{10.3390/math14030433}.
-
-\bibitem[Druzhkov and Cheviakov(2024)]{druzhkov2024}
-Kostya Druzhkov and Alexei Cheviakov. Invariant Reduction for Partial Differential Equations. I: Conservation Laws and Systems with Two Independent Variables. Preprint, 2024. \url{https://arxiv.org/abs/2412.02965v1}.
-
-\bibitem[USACE HEC(2019)]{hecras2019}
-U.S. Army Corps of Engineers, Hydrologic Engineering Center.
-\emph{HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual}.
-Beta Release Draft, October 2019, Sec.~2.9, Eq.~(2-46).
-\href{https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf}{Technical reference manual}.
-
-\bibitem[Zeng et~al.(2008)Zeng, Constantinescu, Blanckaert, and Weber]{zeng2008}
-Jie Zeng, George Constantinescu, Koen Blanckaert, and Larry Weber.
-Flow and bathymetry in sharp open-channel bends: Experiments and predictions.
-\emph{Water Resources Research}, 44(9):W09401, 2008. \doi{10.1029/2007WR006303}.
-
-\bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993}
-Ernst Hairer, Syvert P. N{\o}rsett, and Gerhard Wanner.
-\emph{Solving Ordinary Differential Equations I: Nonstiff Problems}.
-Springer Series in Computational Mathematics 8, 2nd revised edition, Springer, 1993, Sec.~II.5--II.6. \doi{10.1007/978-3-540-78862-1}.
-
-\bibitem[Chesnokov(2008)]{chesnokov}
-Alexander Chesnokov. Symmetries and exact solutions of the rotating shallow water equations.
-Preprint, arXiv:0808.1490v1, 2008. \url{https://arxiv.org/abs/0808.1490v1}.
-
-\bibitem[Berthon et~al.(2012)]{berthon2012}
-Christophe Berthon, St\'ephane Cordier, Olivier Delestre, and Minh Hoang Le. An analytical solution of the shallow water system coupled to the Exner equation. \emph{Comptes Rendus Math\'ematique}, 350:183--186, 2012. \doi{10.1016/j.crma.2012.01.007}.
-
-\bibitem[Teschl(2012)]{teschl2012}
-Gerald Teschl. \emph{Ordinary Differential Equations and Dynamical Systems}, GSM 140. American Mathematical Society, 2012. \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf}. Consulted: author preliminary version; manifold Theorems 9.4--9.6, printed pp. 259--260 (PDF pp. 270--271).
-
-\bibitem[Arora et~al.(2024)Arora, Bihlo, and Valiquette]{arora2023}
-Shivam Arora, Alex Bihlo, and Francis Valiquette.
-Invariant Physics-Informed Neural Networks for Ordinary Differential Equations.
-\emph{Journal of Machine Learning Research}, 25(233):1--24, 2024. \url{https://jmlr.org/papers/v25/23-1511.html}.
-
-\bibitem[Mishra and Molinaro(2023)]{mishra2023}
-Siddhartha Mishra and Roberto Molinaro. Estimates on the generalization error of physics-informed neural networks for approximating PDEs. \emph{IMA Journal of Numerical Analysis}, 43(1):1--43, 2023. \doi{10.1093/imanum/drab093}. Consulted preprint: \url{https://arxiv.org/abs/2006.16144v3}.
-
-\bibitem[Trefethen(2000)]{trefethen}
-Lloyd N. Trefethen. \emph{Spectral Methods in MATLAB}. SIAM, Philadelphia, 2000. \doi{10.1137/1.9780898719598}. Method passage checked in the official author sample, Chapter 6.
-
-\bibitem[Lie--ML Project(2026b)]{theoremartifact}
-Lie--ML PDE Solver Project. A Local Smooth Transcritical Continuation Theorem
-for the Coupled Annular Saint--Venant--Exner System. Proof and replay package,
-1 November 2026. Archived replay:
-\href{https://github.com/CarlXerophilem/Lie-ML_PDES/tree/f498d648cce0633007430063bea008a2f4aac52a/delivery/annular-transcritical-theorem-20261101}{Proof, source audit and replay package}.
-
-\bibitem[Deng and Reid(2024)]{dengreid2024}
-Siyuan Deng and Gregory Reid. Contributions to the Algorithmic Foundations of
-Approximate Lie Symmetry Algebras of Differential Equations. Preprint,
-arXiv:2410.20608v1, 2024. Project-supplied PDF, abstract and introduction.
-\url{https://arxiv.org/abs/2410.20608v1}.
-
-\bibitem[Noether(1918)]{noether1918}
-Emmy Noether. Invariant Variation Problems. M.~A. Tavel's English translation
-of the 1918 paper, \emph{Transport Theory and Statistical Physics},
-1(3):183--207, 1971. Project-supplied reproduction,
-arXiv:physics/0503066v3; consulted Section~1.
-
-\bibitem[Rong(2013)]{rong2013}
-Feng Rong. The Briot--Bouquet systems and the center families for holomorphic dynamical systems. \emph{Advances in Mathematics}, 245:237--249, 2013. \doi{10.1016/j.aim.2013.06.021}. Proposition~2.1.
-
-\bibitem[Westreich and Podolak(1982)]{westreich1982}
-David Westreich and Ester Podolak. Systems of Briot--Bouquet Equations with
-Analytic Solutions. \emph{Canadian Mathematical Bulletin}, 25(2):230--233,
-1982. \doi{10.4153/CMB-1982-032-0}. Cited for the classical singular-ODE
-setting; the nonresonant saddle contraction used here is proved explicitly.
-
-
-\bibitem[Oliveri(2026)]{oliveri}
-Francesco Oliveri. \emph{Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation}. Birkh\"auser, Cham, 2026. \doi{10.1007/978-3-032-12791-4}.
-
-\bibitem[Tao et~al.(2026)Tao, Wang, and Liu]{tao2026}
-Ze Tao, Hanxuan Wang, and Fujun Liu. LNN-PINN: A Unified Physics-Only Training Framework with Liquid Residual Blocks. \emph{Computer Physics Communications}, 326:110237, 2026. \doi{10.1016/j.cpc.2026.110237}.
-
-\bibitem[Parvin et~al.(2026)Parvin, Samaey, and Koellermeier]{parvin2026}
-Afroja Parvin, Giovanni Samaey, and Julian Koellermeier. A Hyperbolic Moment-Based
-Shallow Water Model for Coupled Bedload--Suspended Load Morphodynamics with
-Variable Density. Preprint, arXiv:2505.22278v2, 2026. \url{https://arxiv.org/abs/2505.22278v2}.
-
-\bibitem[Klausen et~al.(2026)]{klausen2026}
-Ren\'e P.~Klausen, Ivan Timofeev, Jonas Naujoks, Johannes Frank, Thomas Wiegand, Sebastian Lapuschkin, and Wojciech Samek.
-LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries.
-Preprint, arXiv:2510.25731v2. \url{https://arxiv.org/abs/2510.25731v2}.
-
-\end{thebibliography}
-\endgroup
-
-\section*{Reproducibility}\addcontentsline{toc}{chapter}{Reproducibility}
+\chapter{Reproducibility}\label{app:reproducibility}
 The repository path below fixes the Python source to the commit used for
 Table~\ref{tab:replay}. From the repository root, install the pinned SymPy
 dependency and run the fit and the independent Taylor control.

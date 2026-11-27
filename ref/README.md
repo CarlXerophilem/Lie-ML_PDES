@@ -4,12 +4,15 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 
 | Key | Full title and source | Repository access |
 |---|---|---|
-| `fernandez2017` | [Formal Deduction of the Saint-Venant-Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy](https://doi.org/10.1051/m2an/2016018) | [PDF](Formal%20Deduction%20of%20the%20Saint-Venant-Exner%20Model%20Including%20Arbitrarily%20Sloping%20Sediment%20Beds%20and%20Associated%20Energy.pdf) |
+| `fernandez2017` | [Formal Deduction of the Saint-Venant-Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy](https://doi.org/10.1051/m2an/2016018) | [PDF](main/Formal%20Deduction%20of%20the%20Saint-Venant-Exner%20Model%20Including%20Arbitrarily%20Sloping%20Sediment%20Beds%20and%20Associated%20Energy.pdf) |
 | `olver` | [Applications of Lie Groups to Differential Equations](https://doi.org/10.1007/978-1-4612-4350-2) | Linked |
-| `oliveri` | [Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation](https://doi.org/10.1007/978-3-032-12791-4) | [PDF](Lie%20Symmetries%20of%20Differential%20Equations%20-%20Theory%2C%20Applications%2C%20and%20Symbolic%20Computation.pdf) |
+| `oliveri` | [Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation](https://doi.org/10.1007/978-3-032-12791-4) | [PDF](main/Lie%20Symmetries%20of%20Differential%20Equations%20-%20Theory%2C%20Applications%2C%20and%20Symbolic%20Computation.pdf) |
 | `anderson2000` | [Group Invariant Solutions without Transversality](https://doi.org/10.1007/s002200000215) | Linked |
-| `sve2022` | [Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model](https://doi.org/10.3390/sym14081679) | [PDF](Lie%20Symmetry%20Analysis%20of%20the%20One-Dimensional%20Saint-Venant-Exner%20Model.pdf) |
-| `ap` | [Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables](https://doi.org/10.3390/math14030433) | [PDF](Lie%20Symmetries%20and%20Similarity%20Solutions%20for%20a%20Shallow-Water%20Model%20with%20Bed%20Elevation%20in%20Lagrange%20Variables.pdf) · Publisher PDF v3 |
+| `sve2022` | [Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model](https://doi.org/10.3390/sym14081679) | [PDF](main/Lie%20Symmetry%20Analysis%20of%20the%20One-Dimensional%20Saint-Venant-Exner%20Model.pdf) |
+| `sve2026` (`ap`) | [Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables](https://doi.org/10.3390/math14030433) | [PDF](main/Lie%20Symmetries%20and%20Similarity%20Solutions%20for%20a%20Shallow-Water%20Model%20with%20Bed%20Elevation%20in%20Lagrange%20Variables.pdf) · Publisher PDF v3 |
+| `hecras2019` | [HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual](https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf) | Linked · Beta Release Draft, Sec. 2.9, Eq. (2-46)/(2-48) |
+| `rong2013` | [The Briot-Bouquet Systems and the Center Families for Holomorphic Dynamical Systems](https://doi.org/10.1016/j.aim.2013.06.021) | Linked · Proposition 2.1 |
+| `arora2023` | [Invariant Physics-Informed Neural Networks for Ordinary Differential Equations](https://jmlr.org/papers/v25/23-1511.html) | Linked |
 | `druzhkov2024` | [Invariant Reduction for Partial Differential Equations. I: Conservation Laws and Systems with Two Independent Variables](https://arxiv.org/abs/2412.02965v1) | Linked |
 | `chesnokov` | [Symmetries and Exact Solutions of the Rotating Shallow Water Equations](https://arxiv.org/abs/0808.1490v1) | Linked |
 | `berthon2012` | [An Analytical Solution of the Shallow Water System Coupled to the Exner Equation](https://doi.org/10.1016/j.crma.2012.01.007) | Linked |
@@ -18,11 +21,11 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | `trefethen` | [Spectral Methods in MATLAB](https://doi.org/10.1137/1.9780898719598) | Linked |
 | `gungor2026` | [Lie Symmetry Analysis of the Saint–Venant Equations with Variable Bottom](https://arxiv.org/abs/2610.34129v1) | Linked |
 | `theoremartifact` | [A Local Smooth Transcritical Continuation Theorem for the Coupled Annular Saint–Venant–Exner System](../delivery/annular-transcritical-theorem-20261101/README.md) | Linked · Project proof and replay |
-| `dengreid2024` | [Contributions to the Algorithmic Foundations of Approximate Lie Symmetry Algebras of Differential Equations](https://arxiv.org/abs/2410.20608v1) | [PDF](Contributions%20to%20the%20Algorithmic%20Foundations%20of%20Approximate%20Lie%20Symmetry%20Algebras%20of%20Differential%20Equations.pdf) |
-| `noether1918` | [Invariant Variation Problems](https://arxiv.org/abs/physics/0503066v3) | [PDF](Invariant%20Variation%20Problems.pdf) · Tavel translation |
+| `dengreid2024` | [Contributions to the Algorithmic Foundations of Approximate Lie Symmetry Algebras of Differential Equations](https://arxiv.org/abs/2410.20608v1) | [PDF](main/Contributions%20to%20the%20Algorithmic%20Foundations%20of%20Approximate%20Lie%20Symmetry%20Algebras%20of%20Differential%20Equations.pdf) |
+| `noether1918` | [Invariant Variation Problems](https://arxiv.org/abs/physics/0503066v3) | [PDF](main/noether%28Invariant%20Variation%20Problems%29.pdf) · Tavel translation |
 | `westreich1982` | [Systems of Briot-Bouquet Equations with Analytic Solutions](https://doi.org/10.4153/CMB-1982-032-0) | Linked |
 | `tao2026` | [LNN-PINN: A Unified Physics-Only Training Framework with Liquid Residual Blocks](https://doi.org/10.1016/j.cpc.2026.110237) | Linked |
-| `parvin2026` | [A Hyperbolic Moment-Based Shallow Water Model for Coupled Bedload–Suspended Load Morphodynamics with Variable Density](https://arxiv.org/abs/2505.22278v2) | [PDF](A%20Hyperbolic%20Moment-Based%20Shallow%20Water%20Model%20for%20Coupled%20Bedload-Suspended%20Load%20Morphodynamics%20with%20Variable%20Density.pdf) |
+| `parvin2026` | [A Hyperbolic Moment-Based Shallow Water Model for Coupled Bedload–Suspended Load Morphodynamics with Variable Density](https://arxiv.org/abs/2505.22278v2) | [PDF](main/A%20Hyperbolic%20Moment%20Based%20Shallow%20Water%20Model%20for%20Coupled%20Bedload%E2%80%93Suspended%20Load%20Morphodynamics%20with%20Variable%20Density.pdf) |
 | `klausen2026` | [LieSolver: PDE-Constrained Learning for IBVPs via Lie Symmetries](https://arxiv.org/abs/2510.25731v2) | Linked · 2026 revision. The 2025 preprint title differs. |
 | `rubin` | [Bedforms Produced by Three Experiments](https://www.usgs.gov/media/images/bedforms-produced-three-experiments) | Linked · Defense photo credit |
 | `eshaghi` | [NOWS: Neural Operator Warm Starts for Accelerating Iterative Solvers](https://arxiv.org/abs/2511.02481v4) | Linked |
