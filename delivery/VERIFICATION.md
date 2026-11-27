@@ -109,9 +109,25 @@ From this repository run `python delivery/verify_klausen.py heat /path/to/local/
 | Heat | 40 | \(1.951\times10^{-6}\) | \(7.012\times10^{-4}\) | Above threshold at budget |
 | Wave | 9 | \(8.611\times10^{-7}\) | \(4.342\times10^{-3}\) | Met |
 
+## Planar symbolic checks and river-bend benchmark
+
+`python3 delivery/verify_planar.py` (stage of `reproduce_all.sh`, about 4 s) checks 42 exact SymPy identities and writes `logs/verify_planar.json`: the potential lift and reverse recovery of the three Eulerian balances, admission of \(R\) and \(T_c\) for every \((m,K,G,f,g,c)\), the radial integrals and \(\Delta_cH'=N\), the anchored crossing for symbolic \(f\) (determinant, \(c_*\) at \(f=0\), the \(f=1\) review formula), the convex bowl (\(f>0\)) and the drift family with its lower bound \(U\ge1/2\).
+
+`bash delivery/reproduce_ml.sh` (pinned [requirements-ml.txt](requirements-ml.txt), single-threaded BLAS with parallel workers, about 7 min on 16 cores) runs the hard benchmark on the \(f=0\) bend saddle branch and writes receipts to [logs/planar_ml/](logs/planar_ml/):
+
+| Script | Receipt | Content |
+|---|---|---|
+| [parameter_experiments.py](parameter_experiments.py) | `experiments.json`, `grids.json`, weights | Declared design ([planar/bench.py](planar/bench.py)): box \(m\in[1.5,3.5]\), \(K/G\in[2,10]\), \(\delta=\gamma_*-\gamma\in[1,3]\) and a near-threshold box; seeds 27/29; stage A \(r\in[0.9,1.1]\), stage B \(r\in[0.5,2]\); DOP853 references, Chebyshev, PINN, RF and gated cell; drift, bowl and \(f=1\) review controls |
+| [parameter_bounds.py](parameter_bounds.py) | `bounds.json` | Interval barrier certificates ([planar/certify.py](planar/certify.py)) with chart gates, endpoint labels, coverage and the bed bound \(L_Ze s^2/2\) |
+| [verify_parameter_neighborhoods.py](verify_parameter_neighborhoods.py) | `neighborhoods.json` | Certificates on parameter boxes, an mpmath cross-check of the enclosures and an ulp check of the float elementary functions |
+| [compare_continuation.py](compare_continuation.py) | `continuation.json` | Cold and warm Chebyshev correction and learned-only certification at a common \(H\) tolerance, with break-even counts |
+| [figure_data.py](figure_data.py) | `draft/figures/planar/*.dat`, `numbers.tex` | Figure tables and one LaTeX macro per number quoted in the dissertation |
+
+Every number in Chapters 3–5 of the compact dissertation is a macro from `numbers.tex`. DOP853 is a sampled reference only. A side is `certified` when the contiguous certified prefix reaches the slice end; `obstruction_numerical` means the reference itself stopped before the slice end and the certified reach is at least 90% of the reference extent; every other side is `certification_failed`. Break-even counts are reported only when the wall-time saving exceeds 5% of the classical per-tuple cost; smaller differences are `not_resolved`. The saddle theorem stays local; certified statements hold only on the stated slices and boxes.
+
 ## Remaining validation
 
-The \(P\)–\(M\) comparison and continuation are deferred. The [audit archive](../.old/2026-11-23-repository-audit/) retains the prototype without making it part of the manuscript’s verification. Exhaustive singular classification, unrestricted planar classification and the matched-accuracy correction experiment remain open. A paired experiment would fix the target discretization, admissibility conditions, tolerances and corrector across both initializations. Function-space correction requires a bound in a reconstruction-compatible norm. Matched-accuracy cost is a measured outcome rather than an acceptance target for the small profile tests.
+The \(P\)–\(M\) comparison and continuation are deferred. The [audit archive](../.old/2026-11-23-repository-audit/) retains the prototype without making it part of the manuscript’s verification. Exhaustive singular classification and unrestricted planar classification remain open. The equal-tolerance correction experiment is now run on the bend branch (`continuation.json`); it shows no end-to-end advantage of learning. Shape evolution as an initial-boundary-value problem, a friction model and the region \(c\ge c_*\) remain open.
 
 ## Generic finite-class Lie pipeline (no ML)
 
