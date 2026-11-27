@@ -3,7 +3,7 @@
   "record": {
     "case": "2026 rotating tank",
     "fit": {
-      "elapsed_seconds": 0.9907934381626546,
+      "elapsed_seconds": 1.0024017370305955,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -18,21 +18,21 @@
         "field_maximum": 1.2212453270876722e-15,
         "field_rms": 3.13078755917023e-16,
         "original_residual_maximum": 2.8310687127941492e-14,
-        "setup_and_prediction_seconds_all_traces": 0.008557669818401337,
+        "setup_and_prediction_seconds_all_traces": 0.00889557390473783,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 1.4796635418312665e-06,
         "field_rms": 2.7472805167673067e-07,
         "original_residual_maximum": 0.00017684582331856102,
-        "setup_and_prediction_seconds_all_traces": 0.0011215477716177702,
+        "setup_and_prediction_seconds_all_traces": 0.0011509042233228683,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 1.1102230246251565e-16,
         "field_rms": 2.5159717570057927e-17,
         "original_residual_maximum": 2.220446049250313e-16,
-        "setup_and_prediction_seconds_all_traces": 0.003888634964823723,
+        "setup_and_prediction_seconds_all_traces": 0.0036434161011129618,
         "trace_error_maximum": 0.0
       }
     },

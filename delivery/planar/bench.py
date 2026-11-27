@@ -1,38 +1,38 @@
-"""Declared benchmark design for the planar E2 crossing (fixed before any training run).
+"""Irreducible planar E2 ODE surrogate layer: symbolic-parameter LNN-PINN only.
 
-Parameters nu = (m, kappa=K/G, delta=gamma_*-gamma) with gamma=c/G, so delta>0 means det J_* < 0 (saddle).
-Stage A is r in [0.9, 1.1] and stage B is r in [0.5, 2]; both are radial slices transverse to <R, T_c>.
-The three networks share the ansatz H = 1 + rho(ell + w_hat), w_hat = rho R(rho_hat, nu_hat), the same
-training tuples, radial nodes, optimizer, iteration budget and about 1.25k trainable parameters; they
-differ in architecture and loss.
+Active symbolic parameter space:
+    nu = (m, k = K/G, delta = gamma_*(m, k) - c/G) in [1.5, 3.5] x [2, 10] x [1, 3],
+where det J_*(nu) = -3 * 2^((1-m)/2) * delta < 0 guarantees two analytic crossing germs.
+
+Radial domain:
+    r in [0.85, 2.0] (s_in = 0.15, s_out = 1.0), where every parameter tuple in the box
+    stays strictly inside the smooth physical chart (H > 0, S > 0, Delta_c != 0 away from r = 1).
+    LNN-PINN trains 100% physics-only from the live SymPy ReducedODE AST with zero DOP853
+    labels and zero DOP853 domain-masking oracle.
 """
 import time
-
 import numpy as np
 import torch
 
-from .cands import Net, cheb_side
-from .model import Anchor, cstar
+from .model import Anchor, compiled_planar_ast, gamma_star
 
 torch.set_default_dtype(torch.float64)
 
 F_BEND = 0.0
 BOX = {'m': (1.5, 3.5), 'kappa': (2.0, 10.0), 'delta': (1.0, 3.0)}
-NEAR_BOX = {'m': (1.5, 3.5), 'kappa': (2.0, 10.0), 'delta': (0.05, 0.25)}
-REVIEW_BOX = {'m': (2.9, 3.1), 'K': (0.99, 1.01), 'G': (0.99, 1.01), 'c': (-7.05, -6.95)}
 SEED_TRAIN, SEED_TEST = 27, 29
 N_TRAIN, N_TEST = 48, 8
-STAGES = {
-    'A': {'r': (0.9, 1.1), 'sides': {1: 0.1, -1: 0.1}, 'rc': 0.0, 'rs': 0.1, 'nodes': 54, 'cheb': {1: 12, -1: 12}},
-    'B': {'r': (0.5, 2.0), 'sides': {1: 1.0, -1: 0.5}, 'rc': 0.25, 'rs': 0.75, 'nodes': 96, 'cheb': {1: 28, -1: 24}},
+
+ANNULUS = {
+    'r': (0.85, 2.0),
+    'sides': {1: 1.0, -1: 0.15},
+    'rc': 0.425,
+    'rs': 0.575,
+    'nodes': 84,
+    'cheb': {1: 28, -1: 16},
 }
-ROUTES = {
-    'chebyshev': 'Chebyshev collocation per tuple (classical)',
-    'dop853': 'DOP853 from the Taylor germ (reference only)',
-    'pinn': 'plain residual PINN: tanh MLP 4-32-32-1, raw residual Delta_c H\' - N',
-    'rf': 'random-feature tanh x Chebyshev network, defect loss (AI-designed)',
-    'gated': 'LNN-style gated cell, defect loss',
-}
+NEAR_WINDOW = (0.9, 1.1)
+INWARD_SONIC_PROBE_SMAX = 0.5  # probes down toward r = 0.5 to illustrate physical sonic stop Delta_c -> 0
 LBFGS_ITERS = 3000
 
 
@@ -40,34 +40,30 @@ def sample(box, n, seed):
     rng = np.random.default_rng(seed)
     keys = list(box)
     u = rng.random((n, len(keys)))
-    return [{k: float(box[k][0] + (box[k][1] - box[k][0])*u[i, j]) for j, k in enumerate(keys)} for i in range(n)]
+    return [{k: float(box[k][0] + (box[k][1] - box[k][0]) * u[i, j]) for j, k in enumerate(keys)} for i in range(n)]
 
 
 def nu_hat(t):
-    return [(t['m'] - 2.5)/1.0, (t['kappa'] - 6.0)/4.0, (t['delta'] - 2.0)/1.0]
+    """Affine normalization of nu = (m, k, delta) onto [-1, 1]^3."""
+    return [(t['m'] - 2.5) / 1.0, (t['kappa'] - 6.0) / 4.0, (t['delta'] - 2.0) / 1.0]
 
 
 def tuple_model(t, f=F_BEND):
-    """Float Anchor, branch data and gamma for a (m, kappa, delta) tuple."""
-    gs = cstar(t['m'], t['kappa'], f)
+    """Build Anchor, exact threshold gamma_*, and Briot-Bouquet branch data for tuple t."""
+    gs = gamma_star(t['m'], t['kappa'], f)
     gamma = gs - t['delta']
     M = Anchor(t['m'], t['kappa'], gamma, f)
     det, br = M.slopes()
     return M, float(gamma), float(gs), float(det), br
 
 
-def radial_nodes(stage):
-    """Chebyshev nodes on the stage slice in rho, excluding |rho| < 1e-3 (the crossing is imposed exactly)."""
-    st = STAGES[stage]
-    lo, hi = -st['sides'][-1], st['sides'][1]
-    n = st['nodes']
+def radial_nodes():
+    """Chebyshev collocation nodes in rho = r - 1 on [-0.15, 1.0], excluding |rho| < 1e-3."""
+    lo, hi = -ANNULUS['sides'][-1], ANNULUS['sides'][1]
+    n = ANNULUS['nodes']
     k = np.arange(n)
-    x = 0.5*(lo + hi) + 0.5*(hi - lo)*np.cos((2*k + 1)*np.pi/(2*n))
+    x = 0.5 * (lo + hi) + 0.5 * (hi - lo) * np.cos((2.0 * k + 1.0) * np.pi / (2.0 * n))
     return np.sort(x[np.abs(x) >= 1e-3])
-
-
-# ---------------------------------------------------------------- symbolic-AST torch operator
-_COMPILED_FRAK = None
 
 
 def _eval_sympy_torch(node, env):
@@ -93,52 +89,16 @@ def _eval_sympy_torch(node, env):
     raise ValueError(f'Unsupported SymPy AST node in torch operator: {node}')
 
 
-def _get_compiled_frak():
-    global _COMPILED_FRAK
-    if _COMPILED_FRAK is not None:
-        return _COMPILED_FRAK
-    import sympy as sp
-    from symbolic_new_model2026 import discover_planar_e2
-
-    spec, _, _, red = discover_planar_e2()
-    z = red.graph.z
-    F0 = red.target_profile
-    dF0 = sp.diff(F0, z)
-    eq = red.reduced_equations[0]
-
-    # Extract Delta_c * H' - N == 0 directly from the reduced equation (Delta_c H' - N)/H == 0
-    Dc_sym = sp.cancel(F0 * sp.diff(eq, dF0))
-    N_sym = sp.cancel(-F0 * sp.expand(eq - sp.diff(eq, dF0) * dF0))
-
-    # Nondimensionalize at g = G = C1 = C2 = 1, K = kappa, c = gamma, and solve N(1, 1) == 0 for C3
-    H_s, rho_s, w_s, ell_s, kap_s, gam_s = sp.symbols('H_s rho_s w_s ell_s kappa_s gamma_s', real=True)
-    m_s = next(p for p in spec.parameters if str(p) == 'm')
-    f_s = next(p for p in spec.parameters if str(p) == 'f')
-    g_s = next(p for p in spec.parameters if str(p) == 'g')
-    K_s = next(p for p in spec.parameters if str(p) == 'K')
-    G_s = next(p for p in spec.parameters if str(p) == 'G')
-    c_s, C1_s, C2_s, C3_s = sp.symbols('c C1 C2 C3', real=True)
-
-    nd_sub = {g_s: 1, G_s: 1, K_s: kap_s, c_s: gam_s, C1_s: 1, C2_s: 1, F0: H_s}
-    Dc_nd = sp.cancel(Dc_sym.subs(nd_sub))
-    N_nd = sp.together(N_sym.subs(nd_sub))
-    C3_anchor = sp.solve(N_nd.subs({z: 1, H_s: 1}), C3_s, simplify=False)[0]
-    N_anchored = N_nd.subs(C3_s, C3_anchor)
-
-    chart_sub = {z: 1 + rho_s, H_s: 1 + rho_s * (ell_s + w_s)}
-    Dc_ast = Dc_nd.subs(chart_sub)
-    N_ast = N_anchored.subs(chart_sub)
-    _COMPILED_FRAK = (Dc_ast, N_ast, (rho_s, w_s, m_s, kap_s, gam_s, ell_s, f_s))
-    return _COMPILED_FRAK
-
-
-def frak_parts(rho, w, P):
-    Dc_ast, N_ast, (rho_s, w_s, m_s, kap_s, gam_s, ell_s, f_s) = _get_compiled_frak()
+def frak_parts_torch(rho, w, P):
+    """Evaluate (Delta_c, N) in PyTorch directly on the live SymPy ReducedODE AST."""
+    ast = compiled_planar_ast()
+    Dc_ast, N_ast = ast['Dc_chart_ast'], ast['N_chart_ast']
+    rho_s, w_s, m_s, k_s, gam_s, ell_s, f_s = ast['chart_symbols']
     env = {
         rho_s: rho,
         w_s: w,
         m_s: P['m'],
-        kap_s: P['kappa'],
+        k_s: P['kappa'],
         gam_s: P['gamma'],
         ell_s: P['ell'],
         f_s: P['f'],
@@ -146,170 +106,154 @@ def frak_parts(rho, w, P):
     return _eval_sympy_torch(Dc_ast, env), _eval_sympy_torch(N_ast, env)
 
 
-# ---------------------------------------------------------------- networks
-class MLP(torch.nn.Module):
-    kind = 'mlp'
+class LNNPINN(torch.nn.Module):
+    """Gated liquid residual block (Tao, Wang & Liu 2026) learning the crossing-exact remainder:
+        v_0 = tanh(A x + b),   v_1 = v_0 + tanh(d) * tanh(W v_0),
+        R_theta(rho_hat, nu_hat) = sum_i v_{1,i} ((1, nu_hat) Theta)_i,
+        H_theta(r; nu) = 1 + ell_+(nu) * rho + rho^2 * R_theta(rho_hat, nu_hat).
+    """
 
-    def __init__(self, width=32):
+    def __init__(self, in_dim=4, width=32):
         super().__init__()
-        self.l1, self.l2, self.l3 = torch.nn.Linear(4, width), torch.nn.Linear(width, width), torch.nn.Linear(width, 1)
-
-    def forward(self, rh, nu):
-        x = torch.cat([rh[:, None], nu], 1)
-        return self.l3(torch.tanh(self.l2(torch.tanh(self.l1(x)))))[:, 0]
-
-    def export(self):
-        return {'layers': [(l.weight.detach().numpy().copy(), l.bias.detach().numpy().copy()) for l in (self.l1, self.l2, self.l3)]}
-
-
-class RF(torch.nn.Module):
-    kind = 'rf'
-
-    def __init__(self, J, hidden=14, seed=SEED_TRAIN):
-        super().__init__()
-        g = np.random.default_rng(seed)
-        self.Wf = torch.tensor(g.normal(size=(hidden, 3)))
-        self.bf = torch.tensor(g.normal(size=hidden))
-        self.A = torch.nn.Parameter(torch.zeros(J, 4 + hidden))
-
-    def forward(self, rh, nu):
-        phi = torch.cat([torch.ones_like(rh)[:, None], nu, torch.tanh(nu @ self.Wf.T + self.bf)], 1)
-        coef = phi @ self.A.T
-        T = [torch.ones_like(rh), rh]
-        for _ in range(2, self.A.shape[0]):
-            T.append(2*rh*T[-1] - T[-2])
-        return (torch.stack(T[:self.A.shape[0]], 1)*coef).sum(1)
-
-    def export(self):
-        return {'A': self.A.detach().numpy().copy(), 'Wf': self.Wf.numpy().copy(), 'bf': self.bf.numpy().copy()}
-
-
-class Gated(torch.nn.Module):
-    """v0 = tanh(A x + b), v1 = v0 + tanh(d) * tanh(W v0), R = sum_i v1_i ((1, nu) Theta)_i."""
-    kind = 'gated'
-
-    def __init__(self, width=32):
-        super().__init__()
-        self.inp = torch.nn.Linear(4, width)
-        self.W = torch.nn.Parameter(torch.randn(width, width)/np.sqrt(width))
+        self.inp = torch.nn.Linear(in_dim, width)
+        self.W = torch.nn.Parameter(torch.randn(width, width) / np.sqrt(width))
         self.d = torch.nn.Parameter(torch.zeros(width))
-        self.Theta = torch.nn.Parameter(0.1*torch.randn(4, width)/np.sqrt(width))
+        self.Theta = torch.nn.Parameter(0.005 * torch.randn(in_dim, width) / np.sqrt(width))
 
     def forward(self, rh, nu):
-        v0 = torch.tanh(self.inp(torch.cat([rh[:, None], nu], 1)))
-        v1 = v0 + torch.tanh(self.d)*torch.tanh(v0 @ self.W.T)
-        coef = torch.cat([torch.ones_like(rh)[:, None], nu], 1) @ self.Theta
-        return (v1*coef).sum(1)
+        x = torch.cat([rh[:, None], nu], dim=1)
+        v0 = torch.tanh(self.inp(x))
+        v1 = v0 + torch.tanh(self.d) * torch.tanh(v0 @ self.W.T)
+        coef = torch.cat([torch.ones_like(rh)[:, None], nu], dim=1) @ self.Theta
+        return (v1 * coef).sum(dim=1)
 
     def export(self):
-        return {'A': self.inp.weight.detach().numpy().copy(), 'b': self.inp.bias.detach().numpy().copy(),
-                'W': self.W.detach().numpy().copy(), 'd': self.d.detach().numpy().copy(),
-                'Theta': self.Theta.detach().numpy().copy()}
-
-
-def make_net(route, stage):
-    torch.manual_seed(SEED_TRAIN)
-    if route == 'pinn':
-        return MLP()
-    if route == 'rf':
-        return RF(J=8, hidden=150) if stage == 'A' else RF(J=14, hidden=85)
-    if route == 'gated':
-        return Gated()
-    raise ValueError(route)
+        return {
+            'A': self.inp.weight.detach().numpy().copy(),
+            'b': self.inp.bias.detach().numpy().copy(),
+            'W': self.W.detach().numpy().copy(),
+            'd': self.d.detach().numpy().copy(),
+            'Theta': self.Theta.detach().numpy().copy(),
+        }
 
 
 def n_params(net):
     return int(sum(p.numel() for p in net.parameters()))
 
 
-def batch(tuples, stage, masks=None):
-    """Flattened training tensors: rho, nu_hat and operator constants per point."""
-    st = STAGES[stage]
-    nodes = radial_nodes(stage)
+def build_training_batch(tuples):
+    """Pure physics-only collocation grid on r in [0.85, 2.0] x 48 tuples (zero DOP853 oracle)."""
+    nodes = radial_nodes()
     rows = []
-    for i, t in enumerate(tuples):
-        keep = nodes if masks is None else nodes[masks[i]]
-        for rho in keep:
-            rows.append([rho] + nu_hat(t) + [t['m'], t['kappa'], t['gamma'], t['ell']])
-    X = torch.tensor(np.array(rows))
+    for t in tuples:
+        nh = nu_hat(t)
+        for rho in nodes:
+            rows.append([rho, nh[0], nh[1], nh[2], t['m'], t['kappa'], t['gamma'], t['ell']])
+    X = torch.tensor(np.array(rows, dtype=float))
     rho = X[:, 0].clone().requires_grad_(True)
+    nu = X[:, 1:4]
     P = {'m': X[:, 4], 'kappa': X[:, 5], 'gamma': X[:, 6], 'ell': X[:, 7], 'f': F_BEND}
-    return rho, X[:, 1:4], P, st
+    return rho, nu, P
 
 
-def w_and_dw(net, rho, nu, st, create_graph=True):
-    rh = (rho - st['rc'])/st['rs']
-    w = rho*net(rh, nu)
+def w_and_dw(net, rho, nu, create_graph=True):
+    rh = (rho - ANNULUS['rc']) / ANNULUS['rs']
+    w = rho * net(rh, nu)
     dw, = torch.autograd.grad(w.sum(), rho, create_graph=create_graph)
     return w, dw
 
 
-def residuals(net, rho, nu, P, st, loss):
-    w, dw = w_and_dw(net, rho, nu, st)
-    Dc, N = frak_parts(rho, w, P)
-    if loss == 'raw':
-        return Dc*(P['ell'] + w + rho*dw) - N
-    return rho*dw - (N/Dc - P['ell'] - w)
+def desingularized_defect(net, rho, nu, P, create_graph=True):
+    w, dw = w_and_dw(net, rho, nu, create_graph=create_graph)
+    Dc, N = frak_parts_torch(rho, w, P)
+    return rho * dw - (N / Dc - P['ell'] - w)
 
 
-def train(route, stage, tuples, masks=None, iters=LBFGS_ITERS):
-    net = make_net(route, stage)
-    rho, nu, P, st = batch(tuples, stage, masks)
-    loss_kind = 'raw' if route == 'pinn' else 'defect'
-    opt = torch.optim.LBFGS(net.parameters(), lr=1.0, max_iter=iters, max_eval=int(1.25*iters), history_size=50,
-                            tolerance_grad=1e-14, tolerance_change=1e-16, line_search_fn='strong_wolfe')
+def train_lnn_pinn(tuples, adam_iters=400, iters=LBFGS_ITERS, seed=SEED_TRAIN):
+    torch.manual_seed(seed)
+    net = LNNPINN(in_dim=4, width=32)
+    rho, nu, P = build_training_batch(tuples)
+    t0 = time.perf_counter()
+
+    # Stage 1: Adam warm-up smoothly enters the physical chart basin (H > 0, Delta_c != 0)
+    adam = torch.optim.Adam(net.parameters(), lr=3e-3)
+    for _ in range(adam_iters):
+        adam.zero_grad()
+        res_a = desingularized_defect(net, rho, nu, P, create_graph=True)
+        loss_a = torch.mean(res_a * res_a)
+        loss_a.backward()
+        adam.step()
+    warmup_rms = float(torch.sqrt(loss_a).item())
+
+    # Stage 2: L-BFGS refinement with domain-positivity line-search guard
+    opt = torch.optim.LBFGS(
+        net.parameters(), lr=1.0, max_iter=iters, max_eval=int(1.25 * iters),
+        history_size=60, tolerance_grad=1e-14, tolerance_change=1e-16,
+        line_search_fn='strong_wolfe',
+    )
     evals = [0]
 
     def closure():
         opt.zero_grad()
-        r = residuals(net, rho, nu, P, st, loss_kind)
-        L = torch.mean(r*r)
-        L.backward()
+        w, dw = w_and_dw(net, rho, nu, create_graph=True)
+        H = 1.0 + rho * (P['ell'] + w)
+        if bool((H <= 1e-4).any()):
+            return torch.tensor(1e10, dtype=torch.float64)
+        Dc, N = frak_parts_torch(rho, w, P)
+        res = rho * dw - (N / Dc - P['ell'] - w)
+        loss = torch.mean(res * res)
+        if not torch.isfinite(loss):
+            return torch.tensor(1e10, dtype=torch.float64)
+        loss.backward()
         evals[0] += 1
-        return L
-    t0 = time.perf_counter()
+        return loss
+
     opt.step(closure)
     secs = time.perf_counter() - t0
-    r = residuals(net, rho, nu, P, st, loss_kind).detach().numpy()
-    d = residuals(net, rho, nu, P, st, 'defect').detach().numpy()
-    return net, {'loss': loss_kind, 'final_rms_loss_residual': float(np.sqrt(np.mean(r*r))),
-                 'train_max_defect': float(np.max(np.abs(d))), 'loss_evaluations': evals[0],
-                 'points': int(rho.shape[0]), 'parameters': n_params(net), 'seconds': secs}
+    res_np = desingularized_defect(net, rho, nu, P, create_graph=False).detach().numpy()
+    return net, {
+        'model': 'LNN-PINN (width-32 gated liquid residual block, crossing-exact Briot-Bouquet prefix)',
+        'optimizer': f'Adam ({adam_iters} steps, lr=3e-3) + L-BFGS (strong_wolfe, max_iter={iters})',
+        'loss': 'desingularized Briot-Bouquet defect: rho * dw/drho - (N/Delta_c - ell_+ - w)',
+        'domain_oracle_used': False,
+        'profile_labels_used': False,
+        'parameters': n_params(net),
+        'collocation_points': int(rho.shape[0]),
+        'n_train_tuples': len(tuples),
+        'nodes_per_tuple': int(rho.shape[0] // len(tuples)),
+        'adam_warmup_rms_defect': warmup_rms,
+        'lbfgs_loss_evaluations': int(evals[0]),
+        'train_rms_defect': float(np.sqrt(np.mean(res_np * res_np))),
+        'train_max_defect': float(np.max(np.abs(res_np))),
+        'seconds': float(secs),
+    }
 
 
-def predict(net, t, stage, rho):
-    """w_hat at float rho for one tuple (torch forward pass)."""
-    st = STAGES[stage]
-    r = torch.tensor(np.asarray(rho, float))
-    nu = torch.tensor([nu_hat(t)]*len(r))
+def predict_profile_and_jet(net, t, rho):
+    """Evaluate H_theta(r; nu), dH_theta/dr, w_theta(rho), dw_theta/drho, and ||dH_theta/dnu||."""
+    rho_t = torch.tensor(np.asarray(rho, dtype=float), requires_grad=True)
+    nu_t = torch.tensor([nu_hat(t)] * len(rho_t), dtype=torch.float64, requires_grad=True)
+    rh = (rho_t - ANNULUS['rc']) / ANNULUS['rs']
+    R_val = net(rh, nu_t)
+    w_t = rho_t * R_val
+    dw_t, = torch.autograd.grad(w_t.sum(), rho_t, create_graph=False, retain_graph=True)
+    dR_dnu, = torch.autograd.grad(R_val.sum(), nu_t, create_graph=False)
+
+    rho_np = rho_t.detach().numpy()
+    w_np = w_t.detach().numpy()
+    dw_np = dw_t.detach().numpy()
+    ell = float(t['ell'])
+    H_np = 1.0 + rho_np * (ell + w_np)
+    dH_np = ell + w_np + rho_np * dw_np
+    P = {'m': t['m'], 'kappa': t['kappa'], 'gamma': t['gamma'], 'ell': ell, 'f': F_BEND}
     with torch.no_grad():
-        return (r*net((r - st['rc'])/st['rs'], nu)).numpy()
-
-
-def as_candidate(kind, weights, t, stage, nu=None):
-    """Interval-capable candidate for the certifier; nu defaults to the point nu_hat(t)."""
-    st = STAGES[stage]
-    return Net(kind, weights, st['rc'], st['rs'], nu_hat(t) if nu is None else nu)
-
-
-def save_weights(path, kind, weights):
-    flat = {'kind': kind}
-    if kind == 'mlp':
-        for i, (W, b) in enumerate(weights['layers']):
-            flat[f'W{i}'], flat[f'b{i}'] = W, b
-    else:
-        flat.update(weights)
-    np.savez(path, **flat)
-
-
-def load_weights(path):
-    z = np.load(path, allow_pickle=False)
-    kind = str(z['kind'])
-    if kind == 'mlp':
-        n = sum(1 for k in z.files if k.startswith('W'))
-        return kind, {'layers': [(z[f'W{i}'], z[f'b{i}']) for i in range(n)]}
-    return kind, {k: z[k] for k in z.files if k != 'kind'}
-
-
-def chebyshev_candidate(coeffs, dom, side):
-    return cheb_side(np.asarray(coeffs, float), dom, side)
+        Dc, N = frak_parts_torch(rho_t.detach(), w_t.detach(), P)
+        defect_np = (rho_t.detach() * dw_t.detach() - (N / Dc - ell - w_t.detach())).numpy()
+    return {
+        'w': w_np,
+        'dw': dw_np,
+        'H': H_np,
+        'dH_dr': dH_np,
+        'defect': defect_np,
+        'param_grad_norm_mean': float(torch.linalg.vector_norm(dR_dnu, dim=1).mean().item()),
+    }

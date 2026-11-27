@@ -3,7 +3,7 @@
   "record": {
     "case": "2022 E1",
     "fit": {
-      "elapsed_seconds": 1.0312399419490248,
+      "elapsed_seconds": 0.9955738671123981,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -18,21 +18,21 @@
         "field_maximum": 6.661338147750939e-16,
         "field_rms": 1.0486434891082532e-16,
         "original_residual_maximum": 3.858025010572419e-15,
-        "setup_and_prediction_seconds_all_traces": 0.00846587773412466,
+        "setup_and_prediction_seconds_all_traces": 0.008475719019770622,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 6.059860591101085e-08,
         "field_rms": 1.3581746310098731e-08,
         "original_residual_maximum": 2.2402153708189765e-06,
-        "setup_and_prediction_seconds_all_traces": 0.0011294528376311064,
+        "setup_and_prediction_seconds_all_traces": 0.0011007089633494616,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 0.0,
         "field_rms": 0.0,
         "original_residual_maximum": 0.0,
-        "setup_and_prediction_seconds_all_traces": 0.002587510971352458,
+        "setup_and_prediction_seconds_all_traces": 0.002547054784372449,
         "trace_error_maximum": 0.0
       }
     },

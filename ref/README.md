@@ -5,6 +5,7 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | Key | Full title and source | Repository access |
 |---|---|---|
 | `fernandez2017` | [Formal Deduction of the Saint-Venant-Exner Model Including Arbitrarily Sloping Sediment Beds and Associated Energy](https://doi.org/10.1051/m2an/2016018) | [PDF](main/Formal%20Deduction%20of%20the%20Saint-Venant-Exner%20Model%20Including%20Arbitrarily%20Sloping%20Sediment%20Beds%20and%20Associated%20Energy.pdf) |
+| `burger2025` | [Well-Balanced Physics-Based Finite Volume Schemes for Saint-Venant–Exner-Type Models of Sediment Transport](https://doi.org/10.1016/j.advwatres.2025.105178) | [PDF](main/Well-balanced%20physics-based%20finite%20volume%20schemes%20for%20SVE.pdf) |
 | `olver` | [Applications of Lie Groups to Differential Equations](https://doi.org/10.1007/978-1-4612-4350-2) | Linked |
 | `oliveri` | [Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation](https://doi.org/10.1007/978-3-032-12791-4) | [PDF](main/Lie%20Symmetries%20of%20Differential%20Equations%20-%20Theory%2C%20Applications%2C%20and%20Symbolic%20Computation.pdf) |
 | `anderson2000` | [Group Invariant Solutions without Transversality](https://doi.org/10.1007/s002200000215) | Linked |
@@ -31,6 +32,6 @@ This flat directory indexes sources cited in the [compact manuscript](../draft/d
 | `eshaghi` | [NOWS: Neural Operator Warm Starts for Accelerating Iterative Solvers](https://arxiv.org/abs/2511.02481v4) | Linked |
 | `li` | [Nemytskii Neural Operator: A Nonlinear Model Reduction Method for Parametrized Partial Differential Equations](https://arxiv.org/abs/2511.07684v2) | Linked |
 | `wang` | [Understanding and Mitigating Gradient Pathologies in Physics-Informed Neural Networks](https://arxiv.org/abs/2001.04536v1) | [PDF](Understanding%20and%20Mitigating%20Gradient%20Pathologies%20in%20Physics-Informed%20Neural%20Networks.pdf) |
-| `nagesh` | [Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary Differential Equations](https://proceedings.mlr.press/v288/nagesh25a.html) | Linked |
+| `nagesh2025` (`nagesh`) | [Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary Differential Equations](https://proceedings.mlr.press/v288/nagesh25a.html) | [PDF](main/Taylor-Model%20Physics-Informed%20Neural%20Networks%20%28PINNs%29%20for.pdf) |
 | `hairer1993` | [Solving Ordinary Differential Equations I: Nonstiff Problems](https://doi.org/10.1007/978-3-540-78862-1) | Linked · §II.5 (8th-order embedded pair), §II.6 (dense output for DOP853), Appendix (Fortran DOP853) |
 | `zeng2008` | [Flow and Bathymetry in Sharp Open-Channel Bends: Experiments and Predictions](https://doi.org/10.1029/2007WR006303) | Linked · EPFL bend geometry only |

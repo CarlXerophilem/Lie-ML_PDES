@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
-# Planar E2 ML benchmark (about 7 minutes on 16 cores); writes JSON receipts to logs/planar_ml/.
-# Order matters: experiments -> bounds -> neighbourhoods -> continuation -> figure tables in draft/figures/planar/.
-set -uo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")"
-mkdir -p logs/planar_ml
-export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
-status=0
-for name in parameter_experiments parameter_bounds verify_parameter_neighborhoods compare_continuation figure_data; do
-    start=$(date +%s)
-    if python3 "$name.py" > "logs/planar_ml/$name.out" 2> "logs/planar_ml/$name.err"; then
-        verdict=passed
-    else
-        verdict=FAILED; status=1
-    fi
-    printf '%-32s %-7s %4ss\n' "$name" "$verdict" "$(( $(date +%s) - start ))"
-    [ "$verdict" = passed ] || break
+# Reproduce the Chapter 4 irreducible planar ODE benchmark (Taylor, DOP853, 1D Chebyshev,
+# and joint 4D physics-only LNN-PINN surrogate) plus LaTeX figure tables and macros.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+LOG="$ROOT/delivery/logs/planar_ml"
+mkdir -p "$LOG"
+
+for name in planar_ode_experiments figure_data; do
+  echo "==> $name"
+  python3 "$ROOT/delivery/$name.py" | tee "$LOG/$name.stdout"
 done
-exit $status
+
+echo "Done. Receipts in $LOG"

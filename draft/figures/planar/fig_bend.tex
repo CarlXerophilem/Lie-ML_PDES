@@ -1,60 +1,71 @@
 \begin{tikzpicture}
-  % Left: plan view of annular-sector river bend (r in [0.62, 1.38], opening 120 deg)
+  % Left: plan view of open annular sediment-throughflow sector (r in [0.62, 1.38], opening 120 deg)
   \begin{scope}[shift={(0,0)}]
-    \def\Rsc{2.15} % cm per unit dimensionless radius
+    \def\Rsc{2.12} % cm per unit dimensionless radius
     \pgfmathsetmacro\Rin{0.62*\Rsc}
     \pgfmathsetmacro\Rmid{1.00*\Rsc}
     \pgfmathsetmacro\Rout{1.38*\Rsc}
 
-    % Shaded sector
+    % Shaded open annular sector
     \fill[teal!8]
       (0:\Rin) arc[start angle=0, end angle=120, radius=\Rin]
       -- (120:\Rout) arc[start angle=120, end angle=0, radius=\Rout] -- cycle;
 
-    % Inner and outer walls
-    \draw[ink, line width=0.9pt]
+    % Open concentric inflow/outflow boundaries (dashed, not impermeable walls)
+    \draw[ink!85, densely dashed, line width=0.85pt]
       (0:\Rin) arc[start angle=0, end angle=120, radius=\Rin];
-    \draw[ink, line width=0.9pt]
+    \draw[ink!85, densely dashed, line width=0.85pt]
       (0:\Rout) arc[start angle=0, end angle=120, radius=\Rout];
 
-    % Upstream boundary (theta = 120 deg)
-    \draw[ink!55, densely dashed, line width=0.6pt] (120:\Rin) -- (120:\Rout);
+    % Open radial water & sediment throughflow arrows across inner/outer arcs
+    \foreach \ang in {28, 64, 98}{
+      \draw[-{Latex[length=1.35mm, width=1.0mm]}, warm!90!ink, line width=0.6pt]
+        (\ang:{\Rin-0.22}) -- (\ang:{\Rin+0.14});
+      \draw[-{Latex[length=1.35mm, width=1.0mm]}, warm!90!ink, line width=0.6pt]
+        (\ang:{\Rout-0.14}) -- (\ang:{\Rout+0.24});
+    }
+
+    % Azimuthal cut (theta = 120 deg)
+    \draw[ink!45, dotted, line width=0.6pt] (120:\Rin) -- (120:\Rout);
 
     % Radial construction lines from centre O
     \draw[black!35, densely dotted] (0,0) -- (0:\Rin);
     \draw[black!35, densely dotted] (0,0) -- (120:\Rin);
     \fill[ink] (0,0) circle (1.2pt) node[below left, font=\scriptsize, inner sep=1.5pt] {$O$};
-    \draw[black!45, line width=0.45pt] (0:0.52) arc[start angle=0, end angle=120, radius=0.52];
-    \node[font=\scriptsize, text=black!65] at (60:0.78) {$120^\circ$};
+    \draw[black!45, line width=0.45pt] (0:0.50) arc[start angle=0, end angle=120, radius=0.50];
+    \node[font=\scriptsize, text=black!65] at (60:0.75) {$120^\circ$};
 
-    % Orbits of \partial_\theta (rotation R): 3 dashed concentric arcs with arrowheads
+    % Orbits of \partial_\theta (rotation R): concentric arcs with arrowheads
     \foreach \rad in {0.78, 1.00, 1.22}{
       \pgfmathsetmacro\rr{\rad*\Rsc}
       \draw[teal!85!ink, densely dashed, line width=0.65pt]
         (114:\rr) arc[start angle=114, end angle=6, radius=\rr];
       \draw[-{Latex[length=1.45mm, width=1.1mm]}, teal!85!ink, line width=0.65pt]
-        (68:\rr) arc[start angle=68, end angle=48, radius=\rr];
+        (58:\rr) arc[start angle=58, end angle=40, radius=\rr];
     }
 
-    % Downstream transversal section theta = 0
+    % Transverse radial section theta = 0
     \draw[warm, line width=1.35pt] (0:\Rin) -- (0:\Rout);
     \node[font=\scriptsize, text=warm, anchor=north, inner sep=2pt]
       at (0:{0.5*(\Rin+\Rout)}) {section $\theta=0$};
 
+    % Critical radius dot r_* = 1
+    \fill[keyred] (0:\Rmid) circle (1.6pt);
+
     % Radius tick marks along theta = 0
-    \foreach \val/\lbl in {0.62/$0.62$, 1.00/$1$, 1.38/$1.38$}{
+    \foreach \val/\lbl in {0.62/$0.62$, 1.00/$r_*{=}1$, 1.38/$1.38$}{
       \pgfmathsetmacro\xx{\val*\Rsc}
       \draw[ink, line width=0.5pt] (\xx, 0.06) -- (\xx, -0.06);
       \node[font=\tiny, text=ink, anchor=north] at (\xx, -0.35) {\lbl};
     }
-    \node[font=\scriptsize, text=ink, anchor=west, inner sep=2pt] at (\Rout+0.04, 0.02) {$r$};
+    \node[font=\scriptsize, text=ink, anchor=west, inner sep=2pt] at (\Rout+0.08, 0.02) {$r$};
 
-    % Orbit label cleanly above the bend
+    % Labels cleanly above the sector
     \node[font=\scriptsize, text=teal!85!ink, align=center]
-      at (68:{\Rout+0.50}) {orbits of $\partial_\theta$ (rotation $R$)};
+      at (64:{\Rout+0.58}) {rotation orbits $R$ \& open radial throughflow ($V,q_r$)};
   \end{scope}
 
-  % Right: elevation profiles along section theta = 0 from profile_B.dat
+  % Right: water and mobile sediment-bed profile along section theta = 0
   \begin{axis}[
     at={(4.65cm,-0.32cm)},
     scale only axis,
@@ -75,21 +86,21 @@
     restrict x to domain=0.62:1.38,
     unbounded coords=jump,
     title style={font=\footnotesize, yshift=-3pt},
-    title={section $\theta=0$ profile},
+    title={radial water \& mobile-bed section ($\theta=0$)},
   ]
-    % Reference bottom path for bed fill
+    % Reference bottom path for mobile sediment-bed fill
     \path[name path=bot] (axis cs:0.62,-3.0) -- (axis cs:1.38,-3.0);
 
-    % Bed Z_ref
+    % Mobile sediment bed Z_ref
     \addplot[ink, line width=1.0pt, name path=bed]
       table[x=r, y=Z_ref] {figures/planar/profile_B.dat};
 
-    % Free surface H_ref + Z_ref
+    % Free water surface H_ref + Z_ref
     \addplot[teal, line width=1.1pt, name path=surf]
       table[x=r, y=HZ_ref] {figures/planar/profile_B.dat};
 
-    % Shaded bed and water column
-    \addplot[ink!12] fill between[of=bed and bot];
+    % Shaded mobile sediment bed and water column
+    \addplot[warm!14] fill between[of=bed and bot];
     \addplot[teal!14] fill between[of=bed and surf];
 
     % Re-stroke curves cleanly over fills
@@ -98,25 +109,30 @@
     \addplot[teal, line width=1.1pt]
       table[x=r, y=HZ_ref] {figures/planar/profile_B.dat};
 
-    % Centreline marker r = 1
-    \draw[black!35, densely dotted, line width=0.55pt]
+    % Critical radius marker r_* = 1
+    \draw[keyred!60, densely dotted, line width=0.6pt]
       (axis cs:1.0,-3.0) -- (axis cs:1.0,2.40);
+    \node[font=\tiny, text=keyred, anchor=south east, inner sep=1.5pt]
+      at (axis cs:0.99, 1.82) {$\mathrm{Fr}_r=1$};
 
-    % Curve labels placed cleanly away from ticks and dotted line
+    % Curve labels
     \node[font=\scriptsize, text=teal!90!black, anchor=south east, inner sep=1.5pt]
-      at (axis cs:1.28, 1.62) {$H+Z$};
-    \node[font=\scriptsize, text=ink, anchor=north, inner sep=1.5pt]
-      at (axis cs:1.10, -0.06) {$Z$};
+      at (axis cs:1.30, 1.62) {$H+Z$ (free surface)};
+    \node[font=\scriptsize, text=ink, anchor=north east, inner sep=1.5pt]
+      at (axis cs:0.98, -0.35) {mobile bed $Z(r)$};
 
     % Depth H indicator at r = 1.24
     \draw[{Latex[length=1.1mm]}-{Latex[length=1.1mm]}, teal!80!ink, line width=0.55pt]
       (axis cs:1.24, -0.22) -- (axis cs:1.24, 1.54)
       node[midway, right, font=\scriptsize, inner sep=1.5pt] {$H$};
 
-    % Time-bed drift T_c arrow next to the bed
+    % Sediment flux q_r & bed aggradation/incision T_c arrows
+    \draw[-{Latex[length=1.5mm]}, ink!85, thick]
+      (axis cs:0.70, -1.85) -- (axis cs:0.90, -1.85)
+      node[midway, below, font=\tiny, inner sep=1.5pt] {sediment $q_r$};
     \draw[-{Latex[length=1.6mm]}, warm, thick]
-      (axis cs:1.04, -2.55) -- (axis cs:1.04, -1.45);
+      (axis cs:1.04, -2.58) -- (axis cs:1.04, -1.48);
     \node[font=\scriptsize, text=warm, anchor=west, align=left, inner sep=2pt]
-      at (axis cs:1.06, -2.02) {$T_c=\partial_t+c\,\partial_B$\\[-1pt](bed drift)};
+      at (axis cs:1.06, -2.04) {$T_c=\partial_t+c\,\partial_B$\\[-1pt](aggradation/incision)};
   \end{axis}
 \end{tikzpicture}

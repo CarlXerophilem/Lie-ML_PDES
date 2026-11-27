@@ -3,7 +3,7 @@
   "record": {
     "case": "2026 M to E1 at m=2",
     "fit": {
-      "elapsed_seconds": 1.0192114170640707,
+      "elapsed_seconds": 1.0418418718036264,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -18,21 +18,21 @@
         "field_maximum": 4.440892098500626e-16,
         "field_rms": 8.700138434926761e-17,
         "original_residual_maximum": 3.157196726277789e-16,
-        "setup_and_prediction_seconds_all_traces": 0.008783060358837247,
+        "setup_and_prediction_seconds_all_traces": 0.00928143784403801,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 7.640522659002613e-08,
         "field_rms": 2.4491156777237324e-08,
         "original_residual_maximum": 3.5751706129946714e-07,
-        "setup_and_prediction_seconds_all_traces": 0.0011038151569664478,
+        "setup_and_prediction_seconds_all_traces": 0.0011868719011545181,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 4.440892098500626e-16,
         "field_rms": 9.560042948023923e-17,
         "original_residual_maximum": 3.469446951953614e-18,
-        "setup_and_prediction_seconds_all_traces": 0.0030176560394465923,
+        "setup_and_prediction_seconds_all_traces": 0.0031641810201108456,
         "trace_error_maximum": 0.0
       }
     },

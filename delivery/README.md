@@ -1,6 +1,6 @@
 # `@delivery` User Manual: Symbolic PDE-to-ODE Reduction & Unparsed ML Pipeline
 
-`delivery/` contains the executable symbolic Lie-symmetry reducer, in-memory AST numerical/ML profile solvers, interval-barrier saddle certifier, verification logs, and PDF build scripts for the dissertation ([`../draft/dissertation_wku_compact.tex`](../draft/dissertation_wku_compact.tex)) and defense slides ([`../draft/defense_wku_madrid.tex`](../draft/defense_wku_madrid.tex)).
+`delivery/` contains the executable symbolic Lie-symmetry reducer, in-memory AST numerical/ML profile solvers, planar transcritical Briot–Bouquet ODE benchmark suite, verification logs, and PDF build scripts for the dissertation ([`../draft/dissertation_wku_compact.tex`](../draft/dissertation_wku_compact.tex)) and defense slides ([`../draft/defense_wku_madrid.tex`](../draft/defense_wku_madrid.tex)).
 
 ---
 
@@ -18,9 +18,9 @@ The pipeline maps a system of nonlinear PDEs to reduced ODEs and numerical/learn
    Discovered generators are RREF-normalized into a deterministic basis (`X1..Xn` or `Y1..Yn`). Closed, projectable rank-$(d-1)$ subalgebras $[\mathfrak{h}, \mathfrak{h}] \subset \mathfrak{h}$ are enumerated from basis singletons and symbolic linear combinations $X_i + \alpha_1 X_j$.
 4. **Matrix-Exponential Orbit Quotient & First-Integral Elimination (`lie_reduce/multid.py`, `lie_reduce/reduce.py`)**:
    From a transverse coordinate slice, matrix-exponential flows build the orbit chart $(z, \mathbf{v}) \mapsto \mathbf{x}$ and invariant surface $Q_{\mathfrak{h}}[U] = 0$. A quotient is accepted only when $\Delta(z, \mathbf{v}) = \mathsf{M}(z, \mathbf{v})\,\mathcal{E}[F](z)$ with profile-free $\mathsf{M}$ and $\det\mathsf{M} \not\equiv 0$. Exact balances satisfying the Euler operator test $\mathsf{E}_a(\mu_\ell \mathcal{E}) = 0$ ($\mu_\ell \in \{1, z, z^{-1}, z^2\}$) are integrated to $\mathcal{I}_\ell(z, F, F') = C_\ell$, eliminating algebraic and cyclic profiles while preserving all symbolic parameters $\mu$ and constants $C_\ell$.
-5. **Unparsed In-Memory AST-to-ML Handoff (`_profile_learning.py`, `planar/bench.py`, `planar/certify.py`)**:
+5. **Unparsed In-Memory AST-to-Solver Handoff (`_profile_learning.py`, `planar/model.py`, `planar/classical.py`, `planar/bench.py`)**:
    - **Regular branches ($\Delta_c \neq 0$)**: `Case.from_reduction` compiles the live SymPy `ReducedODE` AST directly in-memory (`sp.lambdify` + AST power-series traversal) to run linked two-chart Taylor recurrence, linear/nonlinear Chebyshev collocation, and a trace-exact gated residual cell (`LNN-PINN`), selecting admissible solvers solely via trace error ($\le 10^{-8}$) and governing-balance residual ($\le 10^{-6}$).
-   - **Transcritical saddle branches ($\Delta_c = N = 0$ in $E_2$)**: `planar/bench.py` and `planar/certify.py` evaluate desingularized Briot–Bouquet slopes $s_\pm$ and enclose candidate profiles (`Chebyshev`, `PINN`, `RF`, `gated`) via outward-rounded `float64` interval barriers.
+   - **Transcritical saddle branches ($\Delta_c = N = 0$ in $E_2$)**: `planar/model.py`, `planar/classical.py`, and `planar/bench.py` ingest the live SymPy `ReducedODE` AST from `discover_planar_e2()`, verify the three solvability gates automatically, compute exact Briot–Bouquet slopes $\ell_\pm$ and $K=16$ Taylor germs, continue inward/outward with `DOP853` (equipped with sonic/dry-bed terminal events), and compare classical 1D Chebyshev collocation against a crossing-exact joint-parameter `LNN-PINN` remainder network on $r\in[0.85,2.0]$. (Earlier outward-rounded interval-barrier and 5-route continuation scripts are preserved under [`../.old/2026-11-27-interval-and-multiroute-archive/`](../.old/2026-11-27-interval-and-multiroute-archive/).)
 
 ---
 
@@ -100,7 +100,7 @@ python delivery/reduce_pde.py --model my_model.py --ml --output delivery/logs/my
 # (1..3)+1D random PDE -> ML suite (check_multid.py), and 42 planar identities (verify_planar.py)
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 bash delivery/reproduce_all.sh
 
-# Run the planar river-bend saddle continuation & interval-barrier certification suite (requires requirements-ml.txt)
+# Run the planar river-bend Briot-Bouquet ODE, 1D Chebyshev & supplementary LNN-PINN benchmark suite (requires requirements-ml.txt)
 bash delivery/reproduce_ml.sh
 
 # Build vector workflow figures, compact dissertation PDF, and Madrid defense slides PDF
@@ -120,7 +120,7 @@ bash delivery/build_pdfs.sh
 | [`logs/experiment_ml_E1.json`](logs/experiment_ml_E1.json), [`P`](logs/experiment_ml_P.json), [`M`](logs/experiment_ml_M.json), [`Eexch`](logs/experiment_ml_Eexch.json) | `python -B delivery/experiment_ml_<MODEL>.py` | Held-out field errors, parent-balance residuals, trace errors, and solver selection across `Taylor`, `Chebyshev`, and `LNN-PINN` |
 | [`logs/bed_kappa_u__3_.json`](logs/bed_kappa_u__3_.json), [`logs/bed_Q_u__.json`](logs/bed_Q_u__.json) | `python -m lie_reduce.bed --flux '<law>'` | Bed-drift reduction of $E_1[Q]$ for power-law and arbitrary symbolic $C^2$ bedload flux $Q(u)$ |
 | [`logs/verify_planar.json`](logs/verify_planar.json) | `python delivery/verify_planar.py` | 42 exact SymPy identities for potential lift, general-$f$ saddle determinant, critical drift $c_*$, convex bowl, and drift lower bound |
-| [`logs/planar_ml/experiments.json`](logs/planar_ml/experiments.json), [`bounds.json`](logs/planar_ml/bounds.json), [`neighborhoods.json`](logs/planar_ml/neighborhoods.json), [`continuation.json`](logs/planar_ml/continuation.json) | `bash delivery/reproduce_ml.sh` | River-bend $f=0$ saddle `DOP853` references, `Chebyshev`/`PINN`/`RF`/`gated` fits, `float64` interval-barrier certificates, `mpmath` cross-checks, and warm- vs. cold-start continuation costs |
+| [`logs/planar_ml/planar_ode_results.json`](logs/planar_ml/planar_ode_results.json), [`planar_ode_grids.json`](logs/planar_ml/planar_ode_grids.json), [`weights_lnn_pinn.npz`](logs/planar_ml/weights_lnn_pinn.npz) | `bash delivery/reproduce_ml.sh` | Live SymPy-AST `ReducedODE` solvability gates, Briot–Bouquet $K=16$ Taylor germs, `DOP853` references with sonic/dry-bed event probes, classical 1D Chebyshev collocation, supplementary joint-parameter `LNN-PINN` remainder fits on $r\in[0.85,2.0]$, Cauchy majorant check, and non-power $C^2$ flux / convex-bowl controls |
 
 ---
 
@@ -139,5 +139,5 @@ bash delivery/build_pdfs.sh
    - `integrate_and_eliminate` integrates exact total-derivative balances detected via the Euler operator $\mathsf{E}_a(\mu_\ell \mathcal{E}) = 0$ for multipliers $\mu_\ell \in \{1, z, z^{-1}, z^2\}$ and eliminates algebraically solvable or cyclic profiles. Coupled reduced ODE systems without enough elementary variational integrals remain verified multi-component ODEs (`len(reduced_equations) > 1`) rather than scalar ODEs.
 5. **Numerical/ML solver & certification scope**:
    - `_profile_learning.Case.from_reduction` (`--ml`) accepts verified **regular** scalar ODEs of order $1 \le r \le 3$ on bounded intervals where the leading derivative coefficient $\Delta_c$ does not vanish. Its residual gate ($\le 10^{-6}$ on held-out grids) is a **sampled diagnostic**, not a continuous error proof.
-   - Transcritical singularities ($\Delta_c(r_*, H_*) = N(r_*, H_*) = 0$) cannot be integrated by generic IVP/PINN routines directly through $r_*$; they require nondegenerate saddle hypotheses ($\det DF(r_*, H_*) < 0$), desingularized Briot–Bouquet germs, and outward-rounded interval-barrier verification (`planar/certify.py`), certified only on the declared slices and parameter boxes.
-   - Direct $P$–$M$ continuation, turbulent bed friction closures, and supercritical/fold regimes $c \ge c_*$ remain open problems.
+   - Transcritical singularities ($\Delta_c(r_*, H_*) = N(r_*, H_*) = 0$) cannot be integrated by generic IVP/PINN routines directly through $r_*$; they require nondegenerate saddle hypotheses ($\det DF(r_*, H_*) < 0$), desingularized Briot–Bouquet germs (`planar/classical.py`), adaptive `DOP853` continuation up to maximal Picard–Lindelöf / second-sonic chart boundaries, and classical Chebyshev collocation (`planar/bench.py`).
+   - Direct $P$–$M$ continuation, turbulent bed friction closures, supercritical/fold regimes $c \ge c_*$, and symbolic-ML search for general closures remain open problems.

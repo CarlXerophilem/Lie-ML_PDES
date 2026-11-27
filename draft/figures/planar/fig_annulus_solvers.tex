@@ -1,0 +1,126 @@
+\begin{tikzpicture}
+  % Left panel: Saddle crossing branches (ell_+, ell_-) and inward second sonic boundary below r = 0.85
+  \begin{axis}[
+    name=leftax,
+    scale only axis,
+    width=5.10cm,
+    height=3.80cm,
+    xmin=0.58, xmax=1.35,
+    ymin=0.72, ymax=1.55,
+    xtick={0.65, 0.85, 1.0, 1.15, 1.30},
+    ytick={0.8, 1.0, 1.2, 1.4},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    xlabel={$r$},
+    ylabel={$H(r)$},
+    ylabel style={yshift=-2pt},
+    xlabel style={yshift=2pt},
+    axis line style={ink!75},
+    tick style={ink!75},
+    ymajorgrids=true,
+    grid style={black!7},
+    title style={font=\footnotesize, yshift=-3pt},
+    title={(a) Saddle crossing \& inward sonic limit},
+    clip=true,
+  ]
+    % Shaded smooth annulus region r >= 0.85
+    \fill[teal!7] (axis cs:0.85,0.72) rectangle (axis cs:1.35,1.55);
+    \draw[teal!65!ink, densely dashed, line width=0.6pt]
+      (axis cs:0.85,0.72) -- (axis cs:0.85,1.55);
+    \node[font=\tiny, text=teal!85!black, anchor=north west, inner sep=1.5pt]
+      at (axis cs:0.855,1.53) {$r\ge 0.85$ smooth};
+
+    % Critical crossing line r = 1
+    \draw[black!30, dotted, line width=0.55pt] (axis cs:1.0,0.72) -- (axis cs:1.0,1.55);
+
+    % Second crossing branch ell_-
+    \addplot[ink!60, densely dashdotted, line width=0.95pt]
+      table[x=r, y=H_minus] {figures/planar/annulus_branch_minus.dat};
+
+    % Primary crossing branch ell_+ down to inward sonic stop r_stop = 0.636
+    \addplot[teal, line width=1.15pt]
+      table[x=r, y=H_plus] {figures/planar/annulus_sonic.dat};
+
+    % Critical anchor (1, 1) and inward sonic stop marker
+    \fill[ink] (axis cs:1.0,1.0) circle (1.5pt);
+    \fill[keyred] (axis cs:0.6361,1.352) circle (1.6pt);
+    \node[font=\tiny, text=keyred, anchor=north west, align=left, inner sep=1.5pt]
+      at (axis cs:0.59,1.31) {sonic stop\\[-1pt]$\Delta_c\to 0$ ($r\approx 0.636$)};
+    \node[font=\scriptsize, text=teal!90!black, anchor=south east, inner sep=1.5pt]
+      at (axis cs:1.33,1.25) {$\ell_+$};
+    \node[font=\scriptsize, text=ink!75, anchor=north east, inner sep=1.5pt]
+      at (axis cs:1.16,0.87) {$\ell_-$};
+  \end{axis}
+
+  % Right panel: Global annulus r in [0.85, 2.0] showing water depth H(r) AND mobile sediment bed Z(r)
+  \begin{axis}[
+    name=rightax,
+    at={($(leftax.south east)+(1.48cm,0)$)},
+    anchor=south west,
+    scale only axis,
+    width=5.65cm,
+    height=3.80cm,
+    xmin=0.85, xmax=2.00,
+    ymin=-7.10, ymax=9.60,
+    xtick={0.85, 1.0, 1.25, 1.5, 1.75, 2.0},
+    ytick={-6, -3, 0, 3, 6, 9},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    xlabel={$r$},
+    ylabel={$H(r),\ Z(r)$},
+    ylabel style={yshift=-2pt},
+    xlabel style={yshift=2pt},
+    axis line style={ink!75},
+    tick style={ink!75},
+    ymajorgrids=true,
+    grid style={black!7},
+    unbounded coords=jump,
+    restrict y to domain=-8.0:14.5,
+    title style={font=\footnotesize, yshift=-3pt},
+    title={(b) Water depth $H$ \& sediment bed $Z$ on $[0.85,2]$},
+    legend pos=north west,
+    legend style={font=\tiny, draw=ink!25, fill=white, fill opacity=0.92,
+      inner sep=1.8pt, row sep=-1pt},
+    legend cell align=left,
+  ]
+    \draw[black!28, dotted, line width=0.5pt] (axis cs:1.0,-7.10) -- (axis cs:1.0,9.60);
+    \draw[black!22, solid, line width=0.4pt] (axis cs:0.85,0.0) -- (axis cs:2.00,0.0);
+
+    % DOP853 reference (H and Z)
+    \addplot[ink, line width=1.2pt]
+      table[x=r, y=H_dop] {figures/planar/annulus_solvers.dat};
+    \addlegendentry{Taylor + \texttt{DOP853}}
+
+    % 1D Chebyshev spectral collocation (H)
+    \addplot[teal, densely dashed, line width=1.05pt]
+      table[x=r, y=H_cheb] {figures/planar/annulus_solvers.dat};
+    \addlegendentry{1D Chebyshev ($N=44$)}
+
+    % Zero-shot LNN-PINN surrogate (H)
+    \addplot[warm, dash pattern=on 3pt off 1.8pt, line width=1.05pt]
+      table[x=r, y=H_lnn] {figures/planar/annulus_solvers.dat};
+    \addlegendentry{Zero-shot \texttt{LNN-PINN}}
+
+    % Pure Briot-Bouquet Taylor K=16 diverging beyond complex convergence disk
+    \addplot[keyred, densely dotted, line width=1.1pt]
+      table[x=r, y=H_tay] {figures/planar/annulus_solvers.dat};
+    \addlegendentry{Pure Taylor ($K=16$)}
+
+    % Reconstructed mobile sediment bed Z(r) (DOP853, Chebyshev, LNN-PINN)
+    \addplot[ink, line width=1.1pt, forget plot]
+      table[x=r, y=Z_dop] {figures/planar/annulus_solvers.dat};
+    \addplot[teal, densely dashed, line width=0.95pt, forget plot]
+      table[x=r, y=Z_cheb] {figures/planar/annulus_solvers.dat};
+    \addplot[warm, dash pattern=on 3pt off 1.8pt, line width=0.95pt, forget plot]
+      table[x=r, y=Z_lnn] {figures/planar/annulus_solvers.dat};
+
+    \fill[ink] (axis cs:1.0,1.0) circle (1.35pt);
+    \fill[ink] (axis cs:1.0,0.0) circle (1.35pt);
+    \node[font=\tiny, text=ink, anchor=south east, inner sep=1.5pt]
+      at (axis cs:1.97,5.25) {$H(r)$};
+    \node[font=\tiny, text=ink, anchor=north east, inner sep=1.5pt]
+      at (axis cs:1.97,-3.65) {bed $Z(r)$};
+    \node[font=\tiny, text=keyred, anchor=east, align=right, inner sep=1.5pt]
+      at (axis cs:1.67,7.75) {Taylor diverges\\[-1pt]$|r-1|>R(\nu_0)$};
+  \end{axis}
+\end{tikzpicture}
