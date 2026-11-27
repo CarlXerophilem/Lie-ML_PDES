@@ -3,7 +3,7 @@
   "record": {
     "case": "2026 rotating tank",
     "fit": {
-      "elapsed_seconds": 2.6282047780696303,
+      "elapsed_seconds": 0.9907934381626546,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -11,27 +11,28 @@
       "sample_train_rms": 1.2206453374415225e-06,
       "status": "budget_exhausted"
     },
+    "handoff_mode": "direct_symbolic_ast_lambdify (symbolic_dsolve_ast)",
     "method_display_name": "adapted gated cell",
     "metrics": {
       "Chebyshev": {
         "field_maximum": 1.2212453270876722e-15,
         "field_rms": 3.13078755917023e-16,
         "original_residual_maximum": 2.8310687127941492e-14,
-        "setup_and_prediction_seconds_all_traces": 0.01118973596021533,
+        "setup_and_prediction_seconds_all_traces": 0.008557669818401337,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 1.4796635418312665e-06,
         "field_rms": 2.7472805167673067e-07,
         "original_residual_maximum": 0.00017684582331856102,
-        "setup_and_prediction_seconds_all_traces": 0.0013929898850619793,
+        "setup_and_prediction_seconds_all_traces": 0.0011215477716177702,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 1.1102230246251565e-16,
-        "field_rms": 1.6300794327081886e-17,
-        "original_residual_maximum": 3.3306690738754696e-16,
-        "setup_and_prediction_seconds_all_traces": 0.0027975409757345915,
+        "field_rms": 2.5159717570057927e-17,
+        "original_residual_maximum": 2.220446049250313e-16,
+        "setup_and_prediction_seconds_all_traces": 0.003888634964823723,
         "trace_error_maximum": 0.0
       }
     },
@@ -61,6 +62,7 @@
       "train_coordinates": 24,
       "width": 6
     },
+    "symbolic_ode": "3*b(t) + Derivative(b(t), t) - 9/10 = 0",
     "test_traces": [
       0.095,
       0.125,

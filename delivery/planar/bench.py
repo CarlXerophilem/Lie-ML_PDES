@@ -66,20 +66,84 @@ def radial_nodes(stage):
     return np.sort(x[np.abs(x) >= 1e-3])
 
 
-# ---------------------------------------------------------------- torch operator
+# ---------------------------------------------------------------- symbolic-AST torch operator
+_COMPILED_FRAK = None
+
+
+def _eval_sympy_torch(node, env):
+    if node in env:
+        return env[node]
+    if node.is_Number:
+        return float(node)
+    if node.is_Add:
+        acc = 0.0
+        for arg in node.args:
+            acc = acc + _eval_sympy_torch(arg, env)
+        return acc
+    if node.is_Mul:
+        acc = 1.0
+        for arg in node.args:
+            acc = acc * _eval_sympy_torch(arg, env)
+        return acc
+    if node.is_Pow:
+        base_v = _eval_sympy_torch(node.base, env)
+        if node.exp.is_Integer:
+            return base_v ** int(node.exp)
+        return base_v ** _eval_sympy_torch(node.exp, env)
+    raise ValueError(f'Unsupported SymPy AST node in torch operator: {node}')
+
+
+def _get_compiled_frak():
+    global _COMPILED_FRAK
+    if _COMPILED_FRAK is not None:
+        return _COMPILED_FRAK
+    import sympy as sp
+    from symbolic_new_model2026 import discover_planar_e2
+
+    spec, _, _, red = discover_planar_e2()
+    z = red.graph.z
+    F0 = red.target_profile
+    dF0 = sp.diff(F0, z)
+    eq = red.reduced_equations[0]
+
+    # Extract Delta_c * H' - N == 0 directly from the reduced equation (Delta_c H' - N)/H == 0
+    Dc_sym = sp.cancel(F0 * sp.diff(eq, dF0))
+    N_sym = sp.cancel(-F0 * sp.expand(eq - sp.diff(eq, dF0) * dF0))
+
+    # Nondimensionalize at g = G = C1 = C2 = 1, K = kappa, c = gamma, and solve N(1, 1) == 0 for C3
+    H_s, rho_s, w_s, ell_s, kap_s, gam_s = sp.symbols('H_s rho_s w_s ell_s kappa_s gamma_s', real=True)
+    m_s = next(p for p in spec.parameters if str(p) == 'm')
+    f_s = next(p for p in spec.parameters if str(p) == 'f')
+    g_s = next(p for p in spec.parameters if str(p) == 'g')
+    K_s = next(p for p in spec.parameters if str(p) == 'K')
+    G_s = next(p for p in spec.parameters if str(p) == 'G')
+    c_s, C1_s, C2_s, C3_s = sp.symbols('c C1 C2 C3', real=True)
+
+    nd_sub = {g_s: 1, G_s: 1, K_s: kap_s, c_s: gam_s, C1_s: 1, C2_s: 1, F0: H_s}
+    Dc_nd = sp.cancel(Dc_sym.subs(nd_sub))
+    N_nd = sp.together(N_sym.subs(nd_sub))
+    C3_anchor = sp.solve(N_nd.subs({z: 1, H_s: 1}), C3_s, simplify=False)[0]
+    N_anchored = N_nd.subs(C3_s, C3_anchor)
+
+    chart_sub = {z: 1 + rho_s, H_s: 1 + rho_s * (ell_s + w_s)}
+    Dc_ast = Dc_nd.subs(chart_sub)
+    N_ast = N_anchored.subs(chart_sub)
+    _COMPILED_FRAK = (Dc_ast, N_ast, (rho_s, w_s, m_s, kap_s, gam_s, ell_s, f_s))
+    return _COMPILED_FRAK
+
+
 def frak_parts(rho, w, P):
-    a = (P['m'] - 1)/2
-    f = P['f']
-    W0 = 1 - f/2
-    S0 = W0*W0 + 1
-    C3g = P['gamma']/2 + S0**a*(P['kappa'] - (S0 + f*W0))
-    r = 1 + rho
-    H = 1 + rho*(P['ell'] + w)
-    V = 1/(r*H)
-    W = 1/r - f*r/2
-    S = V*V + W*W
-    PZ = P['kappa']*V - (C3g/r - P['gamma']*r/2)*S**(-a)
-    return H - V*V, H*(S/r + f*W - PZ)
+    Dc_ast, N_ast, (rho_s, w_s, m_s, kap_s, gam_s, ell_s, f_s) = _get_compiled_frak()
+    env = {
+        rho_s: rho,
+        w_s: w,
+        m_s: P['m'],
+        kap_s: P['kappa'],
+        gam_s: P['gamma'],
+        ell_s: P['ell'],
+        f_s: P['f'],
+    }
+    return _eval_sympy_torch(Dc_ast, env), _eval_sympy_torch(N_ast, env)
 
 
 # ---------------------------------------------------------------- networks

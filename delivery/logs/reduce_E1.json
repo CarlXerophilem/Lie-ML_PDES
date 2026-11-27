@@ -1,0 +1,882 @@
+{
+  "model": {
+    "target": "delivery/lie_reduce/models.py:euler_spec",
+    "name": "E1",
+    "independent_variables": [
+      "t",
+      "x"
+    ],
+    "dependent_variables": [
+      "h",
+      "u",
+      "B"
+    ],
+    "jet_order": 1,
+    "equations_count": 3,
+    "symbolic_parameters": [
+      "g",
+      "K",
+      "m"
+    ],
+    "detected_symbolic_exponent": "m",
+    "domain_conditions": [
+      "h,u,g,K>0",
+      "m>=1"
+    ]
+  },
+  "discovery": {
+    "search_degree": 1,
+    "basis_dimension": 4,
+    "basis": {
+      "X1": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "X2": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "X3": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "X4": [
+        "t",
+        "x",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "enumerated_rank_d_minus_1_subalgebras": 9,
+    "smooth_classification": {
+      "smooth_to_affine_proved": true,
+      "generic_dimension": 0
+    },
+    "parameter_strata": {
+      "parameter": "m",
+      "preserved_parameters": [
+        "g",
+        "K",
+        "m"
+      ],
+      "generic_kernel_dimension": 4,
+      "generic_basis": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ],
+      "pivot_minor_factors": [
+        "m - 3",
+        "m - 1",
+        "m",
+        "K",
+        "g"
+      ],
+      "minor_roots": [
+        "0",
+        "1",
+        "3"
+      ],
+      "resonances": [
+        "1",
+        "2",
+        "3"
+      ],
+      "strata": [
+        {
+          "value": "0",
+          "status": "decided",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "t",
+              "0",
+              "-2*h",
+              "-u",
+              "-2*B"
+            ]
+          ],
+          "basis": [
+            [
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "t",
+              "x",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            [
+              "t",
+              "0",
+              "-2*h",
+              "-u",
+              "-2*B"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "1",
+          "status": "decided",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "basis": [
+            [
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "t",
+              "x",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          ],
+          "source": "pivot minor"
+        },
+        {
+          "value": "2",
+          "status": "decided",
+          "kernel_dimension": 4,
+          "jump": 0,
+          "extra": [],
+          "basis": [
+            [
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "t",
+              "x",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          ],
+          "source": "power resonance"
+        },
+        {
+          "value": "3",
+          "status": "decided",
+          "kernel_dimension": 5,
+          "jump": 1,
+          "extra": [
+            [
+              "t",
+              "0",
+              "-2*h",
+              "-u",
+              "-2*B"
+            ]
+          ],
+          "basis": [
+            [
+              "1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "t",
+              "x",
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0",
+              "0",
+              "1"
+            ],
+            [
+              "t",
+              "0",
+              "-2*h",
+              "-u",
+              "-2*B"
+            ]
+          ],
+          "source": "pivot minor"
+        }
+      ]
+    }
+  },
+  "reductions": [
+    {
+      "subalgebra_id": "X1",
+      "generators": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.1094,
+      "quotient_coordinate": "z",
+      "target_profile": "F1(z)",
+      "preserved_parameters": [
+        "K",
+        "g",
+        "m"
+      ],
+      "first_integrals": [
+        {
+          "constant": "C1",
+          "flux": "F0(z)*F1(z)",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C2",
+          "flux": "g*F0(z) + g*F2(z) + F1(z)**2/2",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C3",
+          "flux": "F1(z)",
+          "multiplier": "1",
+          "status": "verified"
+        }
+      ],
+      "eliminated_profiles": {
+        "F0(z)": "C1/F1(z)",
+        "F2(z)": "(-2*C1*g + 2*C2*F1(z) - F1(z)**3)/(2*g*F1(z))"
+      },
+      "reduced_equations": [
+        "K*m*F1(z)**(m - 1)*Derivative(F1(z), z) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "C1/F1(x)",
+        "F1(x)",
+        "(-2*C1*g + 2*C2*F1(x) - F1(x)**3)/(2*g*F1(x))"
+      ],
+      "checks": {
+        "on_shell": true,
+        "invariant_surface": true,
+        "pullback": true,
+        "base_orbit_rank": 1,
+        "transversality": {
+          "status": "proved_nonzero",
+          "expression": "1",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_nonvanishing": [
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          }
+        ],
+        "section_inverse": true
+      }
+    },
+    {
+      "subalgebra_id": "X2",
+      "generators": [
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'",
+      "wall_seconds": 0.0188
+    },
+    {
+      "subalgebra_id": "X4",
+      "generators": [
+        [
+          "t",
+          "x",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.1478,
+      "quotient_coordinate": "z",
+      "target_profile": null,
+      "preserved_parameters": [
+        "K",
+        "g",
+        "m"
+      ],
+      "first_integrals": [],
+      "eliminated_profiles": {},
+      "reduced_equations": [
+        "-z*Derivative(F0(z), z) + F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
+        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) - z*Derivative(F1(z), z) + F1(z)*Derivative(F1(z), z) = 0",
+        "K*m*F1(z)**(m - 1)*Derivative(F1(z), z) - z*Derivative(F2(z), z) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "F0(x/t)",
+        "F1(x/t)",
+        "F2(x/t)"
+      ],
+      "checks": {
+        "on_shell": true,
+        "invariant_surface": true,
+        "pullback": true,
+        "base_orbit_rank": 1,
+        "transversality": {
+          "status": "proved_nonzero",
+          "expression": "1",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_nonvanishing": [
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-orbit)",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-orbit)",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-orbit)",
+            "method": "exact signs and declared positive symbols"
+          }
+        ],
+        "section_inverse": true
+      }
+    },
+    {
+      "subalgebra_id": "X1 + alpha_1*X2",
+      "generators": [
+        [
+          "1",
+          "alpha_1",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.4721,
+      "quotient_coordinate": "z",
+      "target_profile": "F1(z)",
+      "preserved_parameters": [
+        "C1",
+        "K",
+        "alpha_1",
+        "g",
+        "m"
+      ],
+      "first_integrals": [
+        {
+          "constant": "C1",
+          "flux": "(-alpha_1 + F1(z))*F0(z)",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C2",
+          "flux": "-alpha_1*F1(z) + g*F0(z) + g*F2(z) + F1(z)**2/2",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C3",
+          "flux": "K*F1(z)**m - alpha_1*F2(z)",
+          "multiplier": "1",
+          "status": "verified"
+        }
+      ],
+      "eliminated_profiles": {
+        "F0(z)": "C1/(-alpha_1 + F1(z))",
+        "F2(z)": "(-2*C1*g - 2*C2*alpha_1 + 2*C2*F1(z) - 2*alpha_1**2*F1(z) + 3*alpha_1*F1(z)**2 - F1(z)**3)/(-2*alpha_1*g + 2*g*F1(z))"
+      },
+      "reduced_equations": [
+        "(C1*alpha_1**2*g - C1*alpha_1*g*F1(z) - K*alpha_1**3*g*m*F1(z)**(m - 1) + 3*K*alpha_1**2*g*m*F1(z)**m - 3*K*alpha_1*g*m*F1(z)**(m + 1) + K*g*m*F1(z)**(m + 2) + alpha_1**5 - 4*alpha_1**4*F1(z) + 6*alpha_1**3*F1(z)**2 - 4*alpha_1**2*F1(z)**3 + alpha_1*F1(z)**4)*Derivative(F1(z), z)/(g*(-alpha_1**3 + 3*alpha_1**2*F1(z) - 3*alpha_1*F1(z)**2 + F1(z)**3)) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "C1/(-alpha_1 + F1(-alpha_1*t + x))",
+        "F1(-alpha_1*t + x)",
+        "(-2*C1*g - 2*C2*alpha_1 + 2*C2*F1(-alpha_1*t + x) - 2*alpha_1**2*F1(-alpha_1*t + x) + 3*alpha_1*F1(-alpha_1*t + x)**2 - F1(-alpha_1*t + x)**3)/(-2*alpha_1*g + 2*g*F1(-alpha_1*t + x))"
+      ],
+      "checks": {
+        "on_shell": true,
+        "invariant_surface": true,
+        "pullback": true,
+        "base_orbit_rank": 1,
+        "transversality": {
+          "status": "proved_nonzero",
+          "expression": "1",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_nonvanishing": [
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          }
+        ],
+        "section_inverse": true
+      }
+    },
+    {
+      "subalgebra_id": "X1 + alpha_1*X3",
+      "generators": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "alpha_1"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.0946,
+      "quotient_coordinate": "z",
+      "target_profile": "F1(z)",
+      "preserved_parameters": [
+        "K",
+        "alpha_1",
+        "g",
+        "m"
+      ],
+      "first_integrals": [
+        {
+          "constant": "C1",
+          "flux": "F0(z)*F1(z)",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C2",
+          "flux": "g*F0(z) + g*F2(z) + F1(z)**2/2",
+          "multiplier": "1",
+          "status": "verified"
+        },
+        {
+          "constant": "C3",
+          "flux": "K*F1(z)**m + alpha_1*z",
+          "multiplier": "1",
+          "status": "verified"
+        }
+      ],
+      "eliminated_profiles": {
+        "F0(z)": "C1/F1(z)",
+        "F2(z)": "(-2*C1*g + 2*C2*F1(z) - F1(z)**3)/(2*g*F1(z))"
+      },
+      "reduced_equations": [
+        "K*m*F1(z)**(m - 1)*Derivative(F1(z), z) + alpha_1 = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "C1/F1(x)",
+        "F1(x)",
+        "(-2*C1*g + 2*C2*F1(x) + 2*alpha_1*g*t*F1(x) - F1(x)**3)/(2*g*F1(x))"
+      ],
+      "checks": {
+        "on_shell": true,
+        "invariant_surface": true,
+        "pullback": true,
+        "base_orbit_rank": 1,
+        "transversality": {
+          "status": "proved_nonzero",
+          "expression": "1",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_nonvanishing": [
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "1",
+            "method": "exact signs and declared positive symbols"
+          }
+        ],
+        "section_inverse": true
+      }
+    },
+    {
+      "subalgebra_id": "X1 + alpha_1*X4",
+      "generators": [
+        [
+          "alpha_1*t + 1",
+          "alpha_1*x",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.3657,
+      "quotient_coordinate": "z",
+      "target_profile": null,
+      "preserved_parameters": [
+        "K",
+        "alpha_1",
+        "g",
+        "m"
+      ],
+      "first_integrals": [],
+      "eliminated_profiles": {},
+      "reduced_equations": [
+        "-alpha_1*z*Derivative(F0(z), z) + F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
+        "-alpha_1*z*Derivative(F1(z), z) + g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) = 0",
+        "K*m*F1(z)**(m - 1)*Derivative(F1(z), z) - alpha_1*z*Derivative(F2(z), z) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "F0(z)",
+        "F1(z)",
+        "F2(z)"
+      ],
+      "checks": {
+        "base_orbit_rank": 1,
+        "subalgebra": true,
+        "on_shell": true,
+        "invariant_surface": true,
+        "chart_jacobian": {
+          "status": "proved_nonzero",
+          "expression": "-exp(2*alpha_1*v1)",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_kind": "diagonal",
+        "weight_determinant": {
+          "status": "proved_nonzero",
+          "expression": "exp(-3*alpha_1*v1)",
+          "method": "exact signs and declared positive symbols"
+        },
+        "pullback_identity": "Delta(z,v) = M(z,v) E(z) exactly"
+      }
+    },
+    {
+      "subalgebra_id": "X2 + alpha_1*X3",
+      "generators": [
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "alpha_1"
+        ]
+      ],
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'",
+      "wall_seconds": 0.0219
+    },
+    {
+      "subalgebra_id": "X2 + alpha_1*X4",
+      "generators": [
+        [
+          "alpha_1*t",
+          "alpha_1*x + 1",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.3961,
+      "quotient_coordinate": "z",
+      "target_profile": null,
+      "preserved_parameters": [
+        "K",
+        "alpha_1",
+        "g",
+        "m"
+      ],
+      "first_integrals": [],
+      "eliminated_profiles": {},
+      "reduced_equations": [
+        "-alpha_1*z*F0(z)*Derivative(F1(z), z) - alpha_1*z*F1(z)*Derivative(F0(z), z) + Derivative(F0(z), z) = 0",
+        "-alpha_1*g*z*Derivative(F0(z), z) - alpha_1*g*z*Derivative(F2(z), z) - alpha_1*z*F1(z)*Derivative(F1(z), z) + Derivative(F1(z), z) = 0",
+        "-K*alpha_1*m*z*F1(z)**(m - 1)*Derivative(F1(z), z) + Derivative(F2(z), z) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "F0(z)",
+        "F1(z)",
+        "F2(z)"
+      ],
+      "checks": {
+        "base_orbit_rank": 1,
+        "subalgebra": true,
+        "on_shell": true,
+        "invariant_surface": true,
+        "chart_jacobian": {
+          "status": "proved_nonzero",
+          "expression": "exp(2*alpha_1*v1)",
+          "method": "exact signs and declared positive symbols"
+        },
+        "weight_kind": "diagonal",
+        "weight_determinant": {
+          "status": "proved_nonzero",
+          "expression": "exp(-3*alpha_1*v1)",
+          "method": "exact signs and declared positive symbols"
+        },
+        "pullback_identity": "Delta(z,v) = M(z,v) E(z) exactly"
+      }
+    },
+    {
+      "subalgebra_id": "X3 + alpha_1*X4",
+      "generators": [
+        [
+          "alpha_1*t",
+          "alpha_1*x",
+          "0",
+          "0",
+          "1"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 0.1504,
+      "quotient_coordinate": "z",
+      "target_profile": null,
+      "preserved_parameters": [
+        "K",
+        "alpha_1",
+        "g",
+        "m"
+      ],
+      "first_integrals": [],
+      "eliminated_profiles": {},
+      "reduced_equations": [
+        "-z*Derivative(F0(z), z) + F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
+        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) - z*Derivative(F1(z), z) + F1(z)*Derivative(F1(z), z) = 0",
+        "(K*alpha_1*m*F1(z)**(m - 1)*Derivative(F1(z), z) - alpha_1*z*Derivative(F2(z), z) + 1)/alpha_1 = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "F0(x/t)",
+        "F1(x/t)",
+        "(alpha_1*F2(x/t) + log(t))/alpha_1"
+      ],
+      "checks": {
+        "on_shell": true,
+        "invariant_surface": true,
+        "pullback": true,
+        "base_orbit_rank": 1,
+        "transversality": {
+          "status": "conditional",
+          "expression": "alpha_1",
+          "required_condition": "Ne(alpha_1, 0)",
+          "reason": "nonvanishing not established on the whole chart"
+        },
+        "weight_nonvanishing": [
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-alpha_1*orbit)",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-alpha_1*orbit)",
+            "method": "exact signs and declared positive symbols"
+          },
+          {
+            "status": "proved_nonzero",
+            "expression": "exp(-alpha_1*orbit)",
+            "method": "exact signs and declared positive symbols"
+          }
+        ],
+        "section_inverse": true
+      }
+    }
+  ],
+  "ml_handoff": {
+    "subalgebra_id": "X1",
+    "status": "completed",
+    "handoff_mode": "direct_symbolic_ast_lambdify (compiled_dop853_ast)",
+    "numeric_parameter_slice": {
+      "K": "1",
+      "g": "6/5",
+      "m": "2"
+    },
+    "selection": {
+      "rule": "admit trace error <= 1e-08 and sampled original residual <= 1e-06; rank by residual, then cost",
+      "admissible": [
+        "Taylor",
+        "Chebyshev"
+      ],
+      "rejected": [
+        "LNN-PINN"
+      ],
+      "selected": "Taylor",
+      "selected_field_maximum": 0.0,
+      "evidence_level": "sampled residual on 401 held-out coordinates; not a continuous bound"
+    },
+    "metrics": {
+      "LNN-PINN": {
+        "field_rms": 2.745718849928515e-08,
+        "field_maximum": 7.58914240339692e-08,
+        "original_residual_maximum": 4.500908133729667e-06,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.0009867697954177856
+      },
+      "Chebyshev": {
+        "field_rms": 0.0,
+        "field_maximum": 0.0,
+        "original_residual_maximum": 0.0,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.018674496095627546
+      },
+      "Taylor": {
+        "field_rms": 0.0,
+        "field_maximum": 0.0,
+        "original_residual_maximum": 0.0,
+        "trace_error_maximum": 0.0,
+        "setup_and_prediction_seconds_all_traces": 0.002865426940843463
+      }
+    }
+  },
+  "summary": {
+    "evaluated_subalgebras": 9,
+    "verified_quotients": 7,
+    "scalar_ode_quotients": 3
+  }
+}

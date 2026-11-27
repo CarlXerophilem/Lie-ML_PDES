@@ -3,7 +3,7 @@
   "record": {
     "case": "2026 P at m=1",
     "fit": {
-      "elapsed_seconds": 3.3032413199543953,
+      "elapsed_seconds": 1.1518534070346504,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -11,27 +11,28 @@
       "sample_train_rms": 1.940855770648044e-05,
       "status": "budget_exhausted"
     },
+    "handoff_mode": "direct_symbolic_ast_lambdify (symbolic_dsolve_ast)",
     "method_display_name": "adapted gated cell",
     "metrics": {
       "Chebyshev": {
         "field_maximum": 3.1086244689504383e-15,
-        "field_rms": 1.666939572341479e-15,
+        "field_rms": 1.6644391039077344e-15,
         "original_residual_maximum": 4.851202772826468e-10,
-        "setup_and_prediction_seconds_all_traces": 0.015430892817676067,
+        "setup_and_prediction_seconds_all_traces": 0.009489040123298764,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 1.296103518733105e-06,
-        "field_rms": 6.177309865084824e-07,
+        "field_rms": 6.177309865123224e-07,
         "original_residual_maximum": 0.011698726889858402,
-        "setup_and_prediction_seconds_all_traces": 0.0035435401368886232,
+        "setup_and_prediction_seconds_all_traces": 0.0011681260075420141,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 3.6278215986840223e-09,
-        "field_rms": 1.289871522513012e-09,
+        "field_rms": 1.2898715180033977e-09,
         "original_residual_maximum": 1.902580261226028e-05,
-        "setup_and_prediction_seconds_all_traces": 0.0028031920082867146,
+        "setup_and_prediction_seconds_all_traces": 0.006330704083666205,
         "trace_error_maximum": 0.0
       }
     },
@@ -61,6 +62,7 @@
       "train_coordinates": 24,
       "width": 6
     },
+    "symbolic_ode": "-C1 + z*Derivative(F0(z), (z, 2)) = 0",
     "test_traces": [
       0.65,
       0.75,

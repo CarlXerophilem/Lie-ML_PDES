@@ -31,6 +31,7 @@ flowchart TD
     H["Unresolved checks and comparisons"] --> I["Future work"]
 ~~~
 
-- [Contribution workflow](figures/final-delivery/contribution_workflow.pdf) and [classical and learned comparison](figures/final-delivery/ml_workflow.pdf) are the vector figures used in the defense. See their [contribution source](figures/final-delivery/contribution_workflow.tex) and [comparison source](figures/final-delivery/ml_workflow.tex).
+- [Contribution workflow](figures/final-delivery/contribution_workflow.pdf) and [classical and learned comparison](figures/final-delivery/ml_workflow.pdf) are the formula-driven vector figures used in the defense alongside the dedicated `Overall workflow: jet-space PDE to certified profile` slide in [defense_wku_madrid.tex](defense_wku_madrid.tex). See their [contribution source](figures/final-delivery/contribution_workflow.tex) and [comparison source](figures/final-delivery/ml_workflow.tex).
 - The figures for the material-coordinate geometry and the rotating basin are defined in the LaTeX sources.
-- The [verification dossier](../delivery/VERIFICATION.md) connects the manuscript claims to calculations and contains the reproducible build entry point.
+- The [`@delivery` user manual](../delivery/README.md) documents how the general symbolic reducer (`python delivery/reduce_pde.py --model <path-to-model-file/sympy-compiled-PDEs> --output <path-to-experiment-log>`) works, where experiment logs live (`delivery/logs/`), and the mathematical/computational boundaries of each stage.
+- The [verification dossier](../delivery/VERIFICATION.md) connects the manuscript claims to calculations and contains the reproducible build entry point (`bash delivery/build_pdfs.sh`).

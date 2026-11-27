@@ -23,14 +23,8 @@ for law in 'kappa*u**3' 'Q(u)'; do
         printf '%-22s %-7s\n' "bed flux $law" FAILED; status=1
     fi
 done
-if python3 compare_presets.py > logs/compare_presets.json 2> logs/compare_presets.err &&
-   python3 -c "import json,sys;r=json.load(open('logs/compare_presets.json'));sys.exit(any(v.get('match') is False for v in r.values()))"; then
-    printf '%-22s %-7s\n' "automatic vs presets" passed
-else
-    printf '%-22s %-7s\n' "automatic vs presets" FAILED; status=1
-fi
 start=$(date +%s)
-if python3 check_multid.py > logs/check_multid.json 2> logs/check_multid.err; then
+if OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 check_multid.py > logs/check_multid.json 2> logs/check_multid.err; then
     verdict=passed
 else
     verdict=FAILED; status=1

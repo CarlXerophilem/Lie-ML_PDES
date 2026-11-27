@@ -1,168 +1,66 @@
-# Checked Lie reduction, without ML
+# Deterministic Symbolic Lie Reduction (`delivery/lie_reduce`)
 
-This is a new pipeline, separate from the three maintained symbolic entries. The
-manuscript and legacy learning results are unchanged. It accepts vector PDEs and
-computes point prolongations without importing the old P/M prolongation engine.
+`lie_reduce` is the symbolic core of the [`@delivery` user manual](../README.md). Built on complete SymPy jet spaces (`JetSpace`), it discovers point-symmetry Lie algebras, resolves symbolic parameter strata, enumerates closed rank-$(d-1)$ subalgebra combinations, constructs matrix-exponential orbit quotients, and eliminates variational first integrals while keeping all physical and integration parameters symbolic.
 
-Run from the repository root (Python 3.10+, SymPy 1.14):
+---
 
-```sh
-PYTHONPATH=delivery python -B -m lie_reduce.frozen_PM
-PYTHONPATH=delivery python -B -m lie_reduce.test_pipeline
-PYTHONPATH=delivery python -B -m lie_reduce.run --catalogue --stage-seconds 15
-```
+## 1. How It Works
 
-`results/pipeline.json` contains equations, generators, basis coordinates, graph
-conditions, first-integral identities, leading coefficients, stage timings,
-CPU/RSS accounting, environment and source hashes. `results/ODE_INVENTORY.md`
-lists every computed ODE. `results/SUMMARY.md` records status counts. RSS is the
-process high-water mark, **not** an individual stage's incremental memory.
-The schema is a **symbolic provenance extension** of Definition 6.1, not a
-numerical error certificate or trained-model record.
+1. **Jet-space representation (`jets.py`, `spec.py`)**: Builds $J^k(\mathbb{R}^d, \mathbb{R}^m)$, total derivatives $D_i$, prolonged generator action $\operatorname{pr}^{(k)}X(\Delta)$, and verified principal-derivative shells (`PDESpec.shell_certificate()`).
+2. **Symmetry discovery & strata (`determining.py`, `strata.py`, `hidden.py`, `identities.py`)**:
+   - Splits on-shell determining equations over free jet variables after normalizing symbolic exponents ($u^m$, $(u^2+v^2)^{(m-1)/2}$) into independent positive base symbols.
+   - `smooth_symmetries` performs automated Spencer second-partial elimination to prove smooth-to-affine reduction on $E_1$, $P$, and $M$ ($m \ge 1$).
+   - `strata` computes exact pivot-minor roots and power resonances, deciding jump dimensions by exact specialization.
+3. **Algebra & subalgebra enumeration (`algebra.py`)**: Normalizes basis generators (`canonical_basis_dict`), verifies Lie brackets and Jacobi identities, and enumerates closed projectable rank-$(d-1)$ subalgebras (`enumerate_subalgebras`).
+4. **Orbit-chart quotient & quadrature (`multid.py`, `reduce.py`)**: Integrates affine generator flows via matrix exponentials to form $(z, \mathbf{v}) \mapsto \mathbf{x}$, verifies $\Delta(z,\mathbf{v}) = \mathsf{M}(z,\mathbf{v})\,\mathcal{E}[F](z)$ with $\det\mathsf{M} \neq 0$, checks exactness via the Euler operator (`multi_flux_check`), and eliminates algebraic/cyclic profiles (`integrate_and_eliminate`).
+5. **Models & flux extensions (`models.py`, `bed.py`)**: Supplies pure symbolic specifications (`euler_spec`, `scalar_spec`, `planar_e2_spec`, `polar_e2_spec`, `exchange_spec`) and arbitrary autonomous bedload flux reductions $Q(u)$.
 
-## What is secured
+---
 
-- `frozen/` preserves the P/M proof sources and their complete JSON, byte-hashed.
-  `frozen_PM` runs the frozen source in its own process and compares the JSON.
-  It preserves the pre-existing output-only `V = F - P*z` binding addition.
-- `JetSpace` supports any number of independent and dependent variables and a
-  declared finite jet order. Independent tests compare every third-order
-  coefficient with the frozen prolongation for nonlinear point fields.
-- `PDESpec` specifies PDEs, principal derivatives, parameters and positive
-  quantities. No principal coefficient is assumed positive. A unique explicit
-  principal chart is required and denominator exclusions are returned.
-- `symmetries` solves the full coefficient system within the declared polynomial
-  point-field class, degree 2 by default. P/M and E1 are replayed at m=1,2,3,4;
-  P/M bases are compared by span with the immutable JSON, not by list order.
-  An unrelated heat equation regression exercises the same engine.
-- Appendix B representatives are explicit inputs. Their membership, brackets,
-  local graphs, scalar weights and reduced equations are computed. The
-  representative catalogue itself is **not** discovered or proved optimal by
-  this program. Connected-chart equivalence is not inferred from algebraic
-  conjugacy. Each graph carries its pulled-back positivity conditions.
-- Table 3.2 graph pullbacks are checked against a separately differentiated
-  frozen PDE implementation. Source X5 is manuscript Y5. Printed Eq. (25)
-  remains refuted; the correct PDE pullback and exact source witnesses are
-  both exported. P and M remain distinct equations.
-- E2 uses an explicit polar rank-two section, not a planar optimal system.
-  All four balances are pulled back, three first-integral identities are
-  verified and elimination gives undivided `D H' = N`. The two critical slopes
-  are computed from D and N. No division by D occurs at the critical point.
+## 2. How to Run
 
-## Explicit boundaries
-
-1. Polynomial splitting currently requires polynomial jet dependence after
-   clearing denominators. **Symbolic noninteger m is unsupported in the new
-   discovery engine.** Tests at four exponents do not prove an all-real-m
-   classification. That claim remains supported by the frozen smooth-class
-   proof. The generic catalogue row is instantiated at m=2 and m=4.
-2. Multivariate rank drops are the common zero set of the maximal-minor ideal,
-   including denominator exclusions. Separate univariate gcds are unsound:
-   `[a,b]` loses rank at `(0,0)` despite having gcd 1. Enumeration is capped;
-   exceeding the cap is explicitly `not_computed`. Further stratification is
-   not silently claimed.
-3. Automatic graph construction covers diagonal affine base flows and affine
-   vertical flows (including the printed m=1 boost). Other flows require an
-   explicit graph. Rewriting in orbit coordinates avoids expensive comparisons
-   of equivalent `Subs(Derivative(...))` expressions.
-4. Positive quantities that vanish identically give `chart-incompatible`;
-   undecided profile inequalities remain conditions, not a positivity proof.
-   Nonzero projection, equal orbit/base ranks and transversality are necessary;
-   **subalgebra dimension alone is not orbit rank**.
-5. A verified Euler-operator zero is a local exactness test. The implemented
-   flux constructor must additionally pass its differentiated identity. A
-   leading-coefficient zero is only a singularity candidate. `dsolve` is not
-   used as an unrestricted or higher-order Lie solver.
-6. `to_task` exports a local regular scalar normal form only after checking
-   the initial denominator. It does not certify an entire interval. N1 and
-   N2 interface records are exported; N2 uses a short smoke-test interval,
-   not the later fold-distance experiment. N3 is an implicit critical task
-   with `picard_rhs: null` until the BB normal form and its bounds are verified.
-   The chapter-six benchmark/ML implementation is therefore still gated.
-7. Every symbolic stage has a time limit. Failed, unsupported, chart-incompatible
-   and timed-out outcomes are retained. No experiment invokes ML.
-
-## Changes to the proposed implementation
-
-The existing `_positive_unit` is left frozen: its caller already divides by
-its return value. A positive dummy check can be sufficient on a larger domain;
-changing it mechanically to `m=1+mu` is not itself a proof improvement.
-Similarly, a two-dimensional subalgebra in two independent variables need not
-have base rank two. Optimal-system enumeration does not waive the rank check.
-The annular, printed, compatible and exchange models retain their distinct
-balance counts and claims.
-
-## Proof obligations and the selected saddle experiment
-
-The expanded run now includes [43 evidence obligations](results/OBLIGATIONS.md).
-Read [the mathematical qualifications](MATHEMATICAL_SCOPE.md) before treating
-any condition as a completeness theorem. Principal Jacobian checks reject
-repeated-root presentations; section inverse, transverse-minor and nonzero-weight
-evidence are distinct from symbolic residual identities. Identity checking can
-return `unknown`, and vertical fields with fixed graphs have a separate status.
-Closure and Jacobi are replayed for every instantiated algebra.
-
-The selected c=-7 annular saddle has two exact BB disk certificates. Coefficients
-are in Q(sqrt(141)); integer-squaring-verified rational enclosures and triangle
-majorants bound the **complex polydisks**. Original r, H, speed and desingularized
-leading factors are checked as well as the simplified Psi denominator. These
-bounds prove a particular local analytic branch; they do not complete the
-classification of singularities. The earlier N3 `picard_rhs: null` remains correct
-for the singular H equation, even after its BB certificate has been established.
-
-For the CPU-only Taylor/DOP853 reference experiment, install the optional
-`requirements-experiment.txt` in a separate environment, then run:
+Run from the repository root using the single general reducer [`delivery/reduce_pde.py`](../reduce_pde.py):
 
 ```sh
-PYTHONPATH=delivery python -B -m lie_reduce.run --catalogue --reference-experiment --stage-seconds 15
+python delivery/reduce_pde.py --model <path-to-model-file/sympy-compiled-PDEs> --output <path-to-experiment-log>
 ```
 
-The BB stage has at least a 30-second limit; the optional reference experiment
-has a 60-second limit. The latter records exact coefficients through degree 40,
-exact undivided residual coefficients, continuous Cauchy tail bounds at degrees
-5/10/20/40, and 401-point high-precision residual diagnostics. DOP853 starts from
-series-derived data away from the singular point; it checks an independent
-integration algorithm, not an independently defined solution. Scaled remainder
-errors are reported so the small physical interval cannot hide diagnostic error.
-No neural training occurs. Numerical dependencies are loaded only for that
-optional experiment. Successful symbolic execution still sets `complete: false`.
-
-## Degenerate presentations and vertical fixed graphs
-
-`presentation.square_free_presentation(spec)` is an explicit opt-in operation.
-It returns the original and normalized specifications, exact polynomial
-factorization identities, original denominator exclusions, and a capped list of
-factor components. It does not mutate the input or silently choose a component.
-For `(u_t)**2=0`, the regularized equation is `u_t=0`; its finite point-symmetry
-kernel is independently compared with the regular reference. For
-`(u_t)**2*(u_x)**3=0`, both factors remain. A component's own symmetry algebra
-need not equal that of their union. Intersections and smooth branch switching
-are not classified.
-
-The supported presentation operation is square-free factorization over rational
-coefficients, **not** a real-radical or general differential-ideal solver. Thus
-`(u_t)**2+(u_x)**2=0` is not automatically replaced by two real constraints.
-Unknown parameter factors are kept; only factors proved nonzero on the declared
-chart may be dropped. `PDESpec.domain_exclusions` retains additional original
-holes. If an expression was already cancelled before construction of `PDESpec`,
-the caller must supply its lost denominator restrictions explicitly.
-
-`fixed.vertical_fixed_graphs(spec, field)` first checks the full point-symmetry
-identity on the regular PDE chart. It then solves polynomial fixed-locus
-constraints and differentiates each candidate graph into every original PDE:
-
-- `u*d/du` for `u_t=0` gives the verified graph `u=0`; it is excluded on `u>0`.
-- `d/du` has no fixed graph.
-- `u*(u-1)*d/du` for `u_t=0` gives two checked fixed graphs.
-- Fixing only one component of a vector field can leave a constrained **PDE**.
-- A nonsymmetry is rejected before any Lie-reduction claim is made.
-
-These graphs have base orbit rank zero and do not reduce the number of
-independent variables. Parametric candidate enumeration is not asserted complete;
-unknown parameter strata, realness, smoothness and domain restrictions remain
-explicit. The main JSON exports `presentation_and_fixed_graph_checks`, and the
-negative controls are in `test_presentations.py`.
+### Concrete Commands
 
 ```sh
-PYTHONPATH=delivery python -B -m unittest lie_reduce.test_pipeline lie_reduce.test_presentations
+# 1+1D Eulerian SVE (E1) with parameter strata, smooth-to-affine check, and in-memory ML handoff
+python delivery/reduce_pde.py \
+  --model delivery/lie_reduce/models.py:euler_spec \
+  --strata --smooth-check --ml \
+  --output delivery/logs/reduce_E1.json
+
+# 2+1D Cartesian planar SVE (E2) rank-2 rotational bed-drift subalgebra (preserves 9 parameters)
+python delivery/reduce_pde.py \
+  --model delivery/lie_reduce/models.py:planar_e2_spec \
+  --subalgebra "X5 ; X1 + alpha_1*X4" \
+  --output delivery/logs/reduce_E2.json
+
+# Arbitrary C^2 bedload flux Q(u) and multi-dimensional random PDE -> ML regression suite
+PYTHONPATH=delivery python -B -m lie_reduce.bed --flux 'Q(u)' > delivery/logs/bed_Q_u__.json
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/check_multid.py > delivery/logs/check_multid.json
 ```
+
+Any external `.py` file defining `SPEC = PDESpec(...)` (or `build_spec() -> PDESpec`) can be passed directly to `--model path/to/file.py[:callable_or_attr]`.
+
+---
+
+## 3. Experiment Logs
+
+- [`../logs/reduce_E1.json`](../logs/reduce_E1.json) and [`../logs/reduce_E2.json`](../logs/reduce_E2.json): Complete discovery, subalgebra reduction, first-integral elimination, and ML handoff logs emitted by `delivery/reduce_pde.py`.
+- [`../logs/check_multid.json`](../logs/check_multid.json): Symbolic $m$-strata (`E1: {0,3}`, `P: {0,1,3}`, `M: {0,3}`), polar vs. Cartesian $E_2$ scalar ODE equivalence (`0` residual difference), coupled rotational flow check, and `8/8` seeded $(1\text{--}3)+1\text{D}$ random PDEs passed directly in-memory to `_profile_learning.compare`.
+- [`../logs/bed_kappa_u__3_.json`](../logs/bed_kappa_u__3_.json) and [`../logs/bed_Q_u__.json`](../logs/bed_Q_u__.json): Bed-shift reductions for cubic and general symbolic flux $Q(u)$.
+- [`../logs/experiment_lie_E1.json`](../logs/experiment_lie_E1.json), [`P`](../logs/experiment_lie_P.json), [`M`](../logs/experiment_lie_M.json), [`E2`](../logs/experiment_lie_E2.json): Per-model symbolic verification receipts.
+
+---
+
+## 4. Boundaries and Limits
+
+- **Ansatz class**: Default discovery solves the polynomial point-symmetry system of degree `--degree` (default `1`, affine). All-real-$m$ smooth maximality is proved automatically via `--smooth-check` for $E_1$, $P$, and $M$; planar $E_2$ and general user PDEs are classified strictly within their declared polynomial point-field search class. Contact, nonlocal, and conditional symmetries are excluded.
+- **Principal chart**: Requires exact SymPy expressions (no `Float`), a square explicitly solvable principal derivative block, and nonvanishing on-shell principal Jacobian. Overdetermined systems require prior completion to involution.
+- **Orbit quotient & elimination**: Automatic matrix-exponential orbit charts require affine point generators on $(x, u)$, a transverse slice of rank $d-1$, and $\det\mathsf{M}(z,\mathbf{v}) \not\equiv 0$. Automatic quadrature covers variational balances with integrating factors $\{1, z, z^{-1}, z^2\}$; non-exact multi-component ODE quotients remain coupled systems.
+- **Downstream `--ml` handoff**: Restricted to verified regular scalar ODEs of order $1 \le r \le 3$ away from singular loci ($\Delta_c \neq 0$). Singular transcritical crossings ($\Delta_c = N = 0$) require separate Briot–Bouquet and interval-barrier analysis (`../planar/certify.py`).

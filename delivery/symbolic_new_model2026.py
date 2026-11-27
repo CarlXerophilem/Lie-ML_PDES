@@ -1,94 +1,104 @@
-"""Final exact pullbacks for the rotating exchange tank and separate cubic E2."""
+"""Deterministic complete-JetSpace discovery and reduction for planar E2 and rotating exchange."""
 import json
-import sympy as s
+import sympy as sp
 
-t, th = s.symbols("t theta", real=True)
-r, g, K, G = s.symbols("r g K G", positive=True)
-omega, f, kd, ke, Cb, Da = s.symbols("Omega f k_d k_e c D_a", real=True)
-ct, st = s.cos(th), s.sin(th)
-er, ea = s.Matrix([ct,st]), s.Matrix([-st,ct])
+from lie_reduce.models import discover_and_enumerate, exchange_spec, planar_e2_spec
+from lie_reduce.multid import reduce_nd
 
 
-def clean(expr):
-    return s.factor(s.trigsimp(s.expand(expr)))
+def _require(condition, stage):
+    if not condition:
+        raise ArithmeticError(stage)
 
 
-def grad(a):
-    return er*a.diff(r)+ea*a.diff(th)/r
+def discover_planar_e2(exponent=None):
+    """Discover the 5D Cartesian E2 algebra and reduce <R, d_t + c d_B> to the scalar ODE."""
+    m = sp.Symbol('m', real=True) if exponent is None else sp.sympify(exponent)
+    spec = planar_e2_spec(m)
+    exp_sym = m if isinstance(m, sp.Symbol) else None
+    _, basis, subalgebras = discover_and_enumerate(spec, degree=1, exponent=exp_sym)
+    c = sp.Symbol('c', real=True)
+    alpha_1 = sp.Symbol('alpha_1', real=True)
+    chosen = next(s for s in subalgebras if 'X5' in s['id'] and 'X1 + alpha_1*X4' in s['id'])
+    gens = [tuple(sp.sympify(comp).subs(alpha_1, c) for comp in g_vec) for g_vec in chosen['generators']]
+    red = reduce_nd(spec, gens)
+    _require(red.status == 'verified' and len(red.reduced_equations) == 1,
+             'Cartesian E2 reduces deterministically via 3 first integrals to 1 scalar ODE')
+    return spec, basis, subalgebras, red
 
 
-def div(w):
-    return clean(sum(grad(w[i])[i] for i in range(2)))
+def discover_exchange():
+    """Discover the 2D polar exchange point algebra and reduce <d_t, d_theta>."""
+    spec, basis, subalgebras = discover_and_enumerate(exchange_spec(), degree=1)
+    chosen = next(s for s in subalgebras if s['id'] == 'X1 ; X2')
+    red = reduce_nd(spec, chosen['generators'])
+    _require(red.status == 'verified' and len(red.first_integrals) == 3,
+             'Polar exchange reduces deterministically via 3 first integrals')
+    return spec, basis, subalgebras, red
 
 
-def residual(H,V,W,B,A=None):
-    velocity=V*er+W*ea
-    speed=clean(velocity.dot(velocity))
-    flux=speed*(K*velocity-G*grad(B))
-    exchange=A is not None
-    spin=2*omega if exchange else f
-    mom=velocity.diff(t)+s.Matrix([velocity.dot(grad(c)) for c in velocity])
-    mom+=g*grad(H+B)+spin*s.Matrix([-velocity[1],velocity[0]])
-    if exchange:
-        mom-=omega**2*r*er
-    result=s.Matrix([H.diff(t)+div(H*velocity),clean(mom.dot(er)),
-                     clean(mom.dot(ea)),B.diff(t)+div(flux)])
-    if exchange:
-        J=kd*A-ke*B
-        result[3]-=J
-        result=result.col_join(s.Matrix([A.diff(t)+div(A*velocity-Da*H*grad(A/H))+J]))
-    return result.applyfunc(clean)
+def discover_exchange_swirl_ode():
+    """Evaluate the polar exchange JetSpace equations on the swirl invariant submanifold."""
+    spec = exchange_spec()
+    j = spec.jets
+    t, r, th = j.independent
+    h, V, W, B, A = j.dependent
+    g, K, G, omega, kd, ke, Da = spec.parameters
+    b_fn = sp.Function('b')(t)
+    bed = sp.Rational(1, 10) / r**2
+    lifts = (
+        1 + sp.Rational(25, 72) * r**2 - bed,
+        sp.S.Zero,
+        r / sp.Integer(2),
+        bed + b_fn,
+        bed / sp.Integer(2) + sp.Rational(9, 20) - b_fn,
+    )
+    pars = {g: 1, K: 1, G: 1, omega: sp.Rational(1, 3), kd: 2, ke: 1, Da: 0}
+    jmap = j.pullback(lifts)
+    pulled = [sp.simplify(eq.xreplace(jmap).subs(pars).doit()) for eq in spec.equations]
+    _require(pulled[0] == 0 and pulled[1] == 0 and pulled[2] == 0, 'hydrodynamic swirl balances')
+    _require(sp.simplify(pulled[3] + pulled[4]) == 0, 'total sediment conservation on swirl')
+    return spec, b_fn, t, r, pulled[3], lifts, pars
 
 
-def run():
-    H,V,W,B,A = (s.Function(n)(t,r) for n in ("H","V","W","B","a"))
-    E=residual(H,V,W,B,A)
-    Q=(V**2+W**2)*(K*V-G*B.diff(r))
-    J=kd*A-ke*B
-    expected=s.Matrix([H.diff(t)+(r*H*V).diff(r)/r,
-        V.diff(t)+V*V.diff(r)-W**2/r+g*(H+B).diff(r)-2*omega*W-omega**2*r,
-        W.diff(t)+V*W.diff(r)+V*W/r+2*omega*V,
-        B.diff(t)+(r*Q).diff(r)/r-J,
-        A.diff(t)+(r*(A*V-Da*H*(A/H).diff(r))).diff(r)/r+J])
-    assert (E-expected).applyfunc(s.simplify) == s.zeros(5,1)
-    c1,c2,c3=s.symbols("C1 C2 C3",real=True,nonzero=True)
-    h,v,w,z=[s.Function(n)(r) for n in ("H","V","W","Z")]
-    e2_rotation=residual(H,V,W,B)
-    e2=residual(h,v,w,z+Cb*t)
-    e2_expected=e2_rotation.subs({H:h,V:v,W:w,B:z+Cb*t}).doit()
-    assert (e2-e2_expected).applyfunc(s.simplify)==s.zeros(4,1)
-    vs=c1/(r*h)
-    ws=c2/r-f*r/2
-    q0=c3/r-Cb*r/2
-    S=vs**2+ws**2
-    pz=(K*vs-q0/S)/G
-    D=g*h-vs**2
-    N=h*(S/r+f*ws-g*pz)
-    reduced=e2.subs({v:vs,w:ws}).doit().subs(
-        {z.diff(r,2):pz.diff(r),z.diff(r):pz})
-    assert (reduced-s.Matrix([0,(D*h.diff(r)-N)/h,0,0])).applyfunc(s.factor)==s.zeros(4,1)
-    p=s.Symbol("p", real=True)
-    b=s.Rational(3,10)+(p-s.Rational(3,10))*s.exp(-3*t)
-    bed=s.Rational(1,10)/r**2
-    controls={H:1+s.Rational(25,72)*r**2-bed,V:0,W:r/2,
-              B:bed+b,A:bed/2+s.Rational(9,20)-b}
-    pars={g:1,K:1,G:1,omega:s.Rational(1,3),kd:2,ke:1,Da:0}
-    check=E.xreplace(controls).subs(pars).doit().applyfunc(s.simplify)
-    assert check==s.zeros(5,1)
-    assert s.simplify((r*Q).xreplace(controls).subs(pars).doit())==s.Rational(1,20)
+def run(e2_bundle=None):
+    e2_spec, e2_basis, e2_subs, e2_red = e2_bundle or discover_planar_e2()
+    ex_spec, ex_basis, ex_subs, ex_red = discover_exchange()
+    _, b_fn, t_sym, r_sym, swirl_ode, _, pars = discover_exchange_swirl_ode()
+
+    p_sym = sp.Symbol('p', real=True)
+    b_sol = sp.Rational(3, 10) + (p_sym - sp.Rational(3, 10)) * sp.exp(-3 * t_sym)
+    swirl_check = sp.simplify(swirl_ode.subs(b_fn, b_sol).doit())
+    _require(swirl_check == 0, 'swirl decay residual')
+
+    # Verify r * Q_r == 1/20 on the swirl control
+    V_s, W_s, B_r = sp.S.Zero, r_sym / 2, sp.diff(sp.Rational(1, 10) / r_sym**2, r_sym)
+    r_Qr = sp.simplify(r_sym * (V_s**2 + W_s**2) * (1 * V_s - 1 * B_r))
+    _require(r_Qr == sp.Rational(1, 20), 'swirl radial bedload throughput')
+
     return {
-        "tank_rotation_generator":"-y*dx+x*dy-v*du+u*dv",
-        "rank_1_rotation_quotient_variables":["t","r"],
-        "rank_1_exchange_residuals": list(map(str,expected)),
-        "swirl_b":str(b),"swirl_residuals":list(map(str,check)),
-        "swirl_r_Qr":"1/20",
-        "wholly_separate_E2_rotation_residuals":list(map(str,e2_rotation)),
-        "E2_rotation_plus_bed_drift_residuals":list(map(str,e2)),
-        "E2_slope_equation":"D*dH/dr=N; dZ/dr=P_Z",
-        "E2_profiles":{"V":str(vs),"W":str(ws),"D":str(D),"N":str(N),"P_Z":str(pz)},
-        "scope":"Exact quotients and selected branch tests. No maximal planar point-symmetry classification."
+        'E2_planar': {
+            'discovered_basis': {k: list(map(str, v)) for k, v in e2_basis.items()},
+            'enumerated_rank2_subalgebras': len(e2_subs),
+            'first_integrals_count': len(e2_red.first_integrals),
+            'eliminated_profiles': {str(k): str(v) for k, v in e2_red.eliminated.items()},
+            'scalar_ode': str(e2_red.reduced_equations[0]) + ' = 0',
+            'preserved_parameters': [str(p) for p in e2_red.preserved_parameters],
+        },
+        'E_exch': {
+            'discovered_basis': {k: list(map(str, v)) for k, v in ex_basis.items()},
+            'enumerated_rank2_subalgebras': len(ex_subs),
+            'first_integrals_count': len(ex_red.first_integrals),
+            'reduced_equations': [str(eq) + ' = 0' for eq in ex_red.reduced_equations],
+            'preserved_parameters': [str(p) for p in ex_red.preserved_parameters],
+        },
+        'swirl_ode': str(swirl_ode) + ' = 0',
+        'swirl_b': str(b_sol),
+        'swirl_residuals': ['0', '0', '0', str(swirl_check), str(-swirl_check)],
+        'swirl_r_Qr': str(r_Qr),
+        'scope': 'Complete-JetSpace point discovery, combination subalgebra enumeration, and exact multi-integral quotients.',
     }
 
 
-if __name__ == "__main__":
-    print(json.dumps(run(),indent=2,sort_keys=True))
+if __name__ == '__main__':
+    print(json.dumps(run(), indent=2, sort_keys=True))

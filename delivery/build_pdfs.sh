@@ -6,6 +6,9 @@ build="$(realpath -m "${1:-$root/build/delivery}")"
 mkdir -p "$build/figures" "$build/draft"
 export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1795392000}"
 export FORCE_SOURCE_DATE=1
+if ! command -v pdflatex >/dev/null 2>&1 && [ -d "$HOME/.local/share/.TinyTeX/bin/x86_64-linux" ]; then
+    export PATH="$HOME/.local/share/.TinyTeX/bin/x86_64-linux:$PATH"
+fi
 
 cd "$root/draft/figures/final-delivery"
 for name in contribution_workflow ml_workflow; do

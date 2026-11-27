@@ -3,7 +3,7 @@
   "record": {
     "case": "2026 M to E1 at m=2",
     "fit": {
-      "elapsed_seconds": 3.014320065965876,
+      "elapsed_seconds": 1.0192114170640707,
       "interpretation": "fixed-budget approximation; no convergence claim",
       "nfev": 150,
       "optimizer_status": 0,
@@ -11,27 +11,28 @@
       "sample_train_rms": 2.500007097739364e-07,
       "status": "budget_exhausted"
     },
+    "handoff_mode": "direct_symbolic_ast_lambdify (symbolic_dsolve_ast)",
     "method_display_name": "adapted gated cell",
     "metrics": {
       "Chebyshev": {
         "field_maximum": 4.440892098500626e-16,
-        "field_rms": 8.599452706934262e-17,
-        "original_residual_maximum": 3.191891195797325e-16,
-        "setup_and_prediction_seconds_all_traces": 0.01240284601226449,
+        "field_rms": 8.700138434926761e-17,
+        "original_residual_maximum": 3.157196726277789e-16,
+        "setup_and_prediction_seconds_all_traces": 0.008783060358837247,
         "trace_error_maximum": 0.0
       },
       "LNN-PINN": {
         "field_maximum": 7.640522659002613e-08,
-        "field_rms": 2.449115677673698e-08,
-        "original_residual_maximum": 3.575170613029366e-07,
-        "setup_and_prediction_seconds_all_traces": 0.001285836799070239,
+        "field_rms": 2.4491156777237324e-08,
+        "original_residual_maximum": 3.5751706129946714e-07,
+        "setup_and_prediction_seconds_all_traces": 0.0011038151569664478,
         "trace_error_maximum": 0.0
       },
       "Taylor": {
         "field_maximum": 4.440892098500626e-16,
-        "field_rms": 9.687799744527783e-17,
-        "original_residual_maximum": 0.0,
-        "setup_and_prediction_seconds_all_traces": 0.0010897566098719835,
+        "field_rms": 9.560042948023923e-17,
+        "original_residual_maximum": 3.469446951953614e-18,
+        "setup_and_prediction_seconds_all_traces": 0.0030176560394465923,
         "trace_error_maximum": 0.0
       }
     },
@@ -60,6 +61,7 @@
       "train_coordinates": 24,
       "width": 6
     },
+    "symbolic_ode": "Derivative(Y(z), z) - 1/5 = 0",
     "test_traces": [
       1.05,
       1.15,

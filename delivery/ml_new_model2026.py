@@ -1,32 +1,38 @@
-"""Depth-averaged rotating exchange tank on its exact swirl family."""
-from math import factorial
-import numpy as np
+"""Depth-averaged rotating exchange tank ML benchmark via direct unparsed symbolic ODE handoff."""
+from types import SimpleNamespace
+import sympy as sp
+
 from _profile_learning import Case, cli
+from symbolic_new_model2026 import discover_exchange_swirl_ode
 
 
-def exact(t,p):
-    y=(p-.3)*np.exp(-3*t)
-    return .3+y,-3*y,9*y,-27*y
+def _build_case():
+    _, b_fn, t_sym, r_sym, swirl_ode, lifts, pars = discover_exchange_swirl_ode()
+    p_sym = sp.Symbol('p', real=True)
+    # Nonzero physical fields (H, W, B, A) on the swirl invariant family
+    physical_lifts = (lifts[0], lifts[2], lifts[3], lifts[4])
+    red_stub = SimpleNamespace(
+        graph=SimpleNamespace(z=t_sym, profiles=(b_fn,), lifts=physical_lifts),
+        reduced_equations=(-swirl_ode,),
+        equations=(-swirl_ode,),
+        integrated_ode=None,
+        target_profile=b_fn,
+        reconstructed_lifts=physical_lifts,
+    )
+    return Case.from_reduction(
+        '2026 rotating tank',
+        red_stub,
+        left=0.0,
+        trace_interval=(0.08, 0.20),
+        trace_exprs=(p_sym,),
+        parameter_symbol=p_sym,
+        parameter_values=pars,
+        section_values={r_sym: sp.Rational(5, 4)},
+        positive_jet_guards=(lifts[3], lifts[4]),
+    )
 
 
-def taylor(n,p,z0,trace):
-    return [trace[0]]+[(trace[0]-.3)*(-3)**k/factorial(k) for k in range(1,n+1)]
+CASE = _build_case()
 
-
-def fields(t,jets):
-    r=1.25
-    bed=.1/r**2
-    b=jets[0]
-    B=bed+b
-    A=bed/2+.45-b
-    if np.any(B<=0) or np.any(A<=0):
-        raise ValueError("Require positive bed and areal load on this test")
-    return np.stack((np.full_like(t,1+25*r*r/72-bed),np.full_like(t,r/2),B,A))
-
-
-CASE=Case("2026 rotating tank",0.,(.08,.20),1,(3.,1.),
-          lambda z,p:.9,lambda p:(p,),taylor,exact,fields,
-          lambda z,jets,p:jets[1]+3*jets[0]-.9)
-
-if __name__=="__main__":
+if __name__ == '__main__':
     cli((CASE,))

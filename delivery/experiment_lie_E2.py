@@ -1,54 +1,43 @@
 #!/usr/bin/env python3
-"""Rotating exchange and the separate annular E2 quotient, with a written verifier.
-
-The exchange swirl is an exact five-balance family. The annular record is a
-selected rank-2 subalgebra on the four-balance polar chart, not a discovered
-planar basis and not an X_i/Y_i label.
-"""
+"""Planar E2 and rotating exchange: complete-JetSpace discovery, combination enumeration, and 3-integral reduction."""
 import json
 
+from symbolic_new_model2026 import discover_planar_e2, run as exchange_and_e2_run
 
-def written_verifier(reduction_record, exchange):
+
+def written_verifier(e2_red, bundle):
     reasons = []
-    verdict = (reduction_record.get("verification") or {}).get("status")
-    if reduction_record.get("status") != "computed" or verdict != "verified_local_identities":
-        reasons.append({"id": "E2_rank2", "status": reduction_record.get("status"), "verifier": verdict})
-    residuals = exchange.get("swirl_residuals", [])
-    if residuals != ["0", "0", "0", "0", "0"]:
-        reasons.append({"id": "exchange_swirl", "residuals": residuals})
-    if exchange.get("swirl_r_Qr") != "1/20":
-        reasons.append("exchange throughput")
-    scope = (reduction_record.get("solver_output") or {}).get("scope", "")
-    if "optimal system not computed" not in scope:
-        reasons.append("E2 scope was presented as a complete optimal system")
+    if e2_red.status != 'verified' or len(e2_red.reduced_equations) != 1 or len(e2_red.first_integrals) != 3:
+        reasons.append({'id': 'E2_planar_rank2', 'status': e2_red.status})
+    if bundle.get('swirl_residuals') != ['0', '0', '0', '0', '0']:
+        reasons.append({'id': 'exchange_swirl', 'residuals': bundle.get('swirl_residuals')})
+    if bundle.get('swirl_r_Qr') != '1/20':
+        reasons.append('exchange throughput')
     return {
-        "status": "passed" if not reasons else "failed",
-        "reasons": reasons,
-        "checker": "delivery/independent_verifier.py through lie_pde_reducer.verifier; exchange residuals from symbolic_new_model2026",
+        'status': 'passed' if not reasons else 'failed',
+        'reasons': reasons,
+        'checker': 'in-memory complete-JetSpace prolongation + matrix-exponential orbit quotient + 3-integral eliminator',
     }
 
 
 def main():
-    from lie_pde_reducer import reduction
-    from symbolic_new_model2026 import run as exchange_run
-
-    exchange = exchange_run()
-    annular = reduction("E2", 3, None)
-    verdict = written_verifier(annular, exchange)
+    e2_bundle = discover_planar_e2()
+    e2_red = e2_bundle[3]
+    bundle = exchange_and_e2_run(e2_bundle=e2_bundle)
+    verdict = written_verifier(e2_red, bundle)
     report = {
-        "models": ["E_exch", "E2"],
-        "search_class": "Exact substitution on the exchange swirl, and one declared rank-2 annular subalgebra. No unrestricted planar point classification.",
-        "exchange_chart": "r>0 and the selected swirl family V=0, W=Omega*r, D_a=0",
-        "annular_chart": "r>0, h>0, g,K,G>0",
-        "exchange": exchange,
-        "annular_reduction": annular,
-        "written_verifier": verdict,
-        "not_claimed": "E2 and the rotating-exchange tank are different balance systems.",
+        'models': ['E_exch', 'E2_planar'],
+        'search_class': 'Complete-JetSpace degree-1 point algebra discovery and combination subalgebra enumeration with symbolic parameters preserved.',
+        'exchange_chart': 'r>0 and swirl invariant family V=0, W=Omega*r, D_a=0',
+        'planar_e2_chart': 'r>0, h>0, u^2+v^2>0, g,K,G>0',
+        'bundle': bundle,
+        'written_verifier': verdict,
+        'not_claimed': 'E2 and the rotating-exchange tank are distinct balance systems.',
     }
     print(json.dumps(report, indent=2, sort_keys=True))
-    if verdict["status"] != "passed":
+    if verdict['status'] != 'passed':
         raise SystemExit(1)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

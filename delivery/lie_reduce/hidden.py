@@ -1,11 +1,7 @@
-"""Parameter strata of the degree-d determining system.
+"""Parameter strata of the degree-d determining system on a complete JetSpace.
 
-The general generator X has unknown polynomial coefficients of degree <= d. Its
-prolonged action on the shell is split in the free jets; a symbolic exponent m is
-split generically, b**(a*m + k) -> W_b**a * b**k. The determining matrix then has
-entries polynomial in the parameters, and its kernel dimension jumps only on the
-zero set of the pivot minor or where two split monomials of the same jet coincide
-(the resonances). Every candidate is decided by exact specialization.
+Symbolic exponents (including half-integer/rational multiples on composite bases such as
+(u**2 + v**2)**((m - 1)/2)) and all other symbolic PDE parameters are preserved exactly.
 """
 from itertools import combinations
 import sympy as sp
@@ -13,36 +9,67 @@ from sympy.polys.matrices import DomainMatrix
 from .spec import PDESpec
 
 
-def _split(expr, parameter, store):
+def normalize_powers(expr, parameter=None, store=None, roots=None, seen=None):
+    """Replace symbolic-exponent and fractional powers by independent positive symbols times integer powers."""
+    if store is None:
+        store = {}
+    if roots is None:
+        roots = {}
+    if seen is None:
+        seen = {}
+
+    if parameter is None:
+        exp_syms = sorted(
+            {s for p in expr.atoms(sp.Pow) if p.base.free_symbols and not p.exp.is_Integer for s in p.exp.free_symbols},
+            key=sp.default_sort_key,
+        )
+        if len(exp_syms) == 1:
+            parameter = exp_syms[0]
+
+    def match(e):
+        if not (e.is_Pow and e.base.free_symbols):
+            return False
+        if parameter is not None and e.exp.has(parameter):
+            return True
+        return e.exp.is_Rational and not e.exp.is_Integer
+
     def rule(e):
         base, ex = e.as_base_exp()
-        poly = sp.Poly(sp.expand(ex), parameter)
-        if poly.degree() != 1:
-            raise ValueError(f'exponent {ex} is not affine in {parameter}')
-        a, k = poly.all_coeffs()
-        if not (a.is_Integer and a > 0):
-            raise ValueError(f'exponent {ex} needs a positive integer multiple of {parameter}')
-        W = store.setdefault(base, sp.Symbol(f'W_{base}', positive=True))
-        return W**a*base**k
-    return expr.replace(lambda e: e.is_Pow and e.exp.has(parameter), rule)
+        if parameter is not None and ex.has(parameter):
+            poly = sp.Poly(sp.expand(ex), parameter)
+            if poly.degree() != 1:
+                raise ValueError(f'exponent {ex} is not affine in {parameter}')
+            a, k = poly.all_coeffs()
+            a, k = sp.sympify(a), sp.sympify(k)
+            if not (a.is_Rational and a != 0 and k.is_Rational):
+                raise ValueError(f'exponent {ex} needs nonzero rational slope and rational offset')
+        else:
+            a, k = sp.Integer(0), sp.sympify(ex)
+        seen.setdefault(base, set()).add((a, k))
+        n = sp.floor(k)
+        frac = k - n
+        factor = sp.S.One
+        if a != 0:
+            qa = a.q
+            pa = a.p
+            W = store.setdefault((base, qa), sp.Symbol(f'W{qa}_{len(store)}', positive=True))
+            factor *= W**pa
+        if frac != 0:
+            R = roots.setdefault((base, frac.q), sp.Symbol(f'R{frac.q}_{len(roots)}', positive=True))
+            factor *= R**frac.p
+        return factor * base**n
+
+    replaced = expr.replace(match, rule)
+    numerator = sp.expand(sp.numer(sp.together(replaced)))
+    for (base, q), R in roots.items():
+        numerator = sp.expand(numerator).replace(
+            lambda e, R=R, q=q: e.is_Pow and e.base == R and e.exp.is_Integer and e.exp >= q,
+            lambda e, base=base, R=R, q=q: R**(e.exp % q) * base**(e.exp // q),
+        )
+    return numerator, store, roots, seen
 
 
-def _split_fraction(expr, store):
-    """b**(n + i/q) -> R**i * b**n with R = b**(1/q), 0 < i < q; then reduce R**q = b."""
-    def rule(e):
-        base, ex = e.as_base_exp()
-        n = sp.floor(ex)
-        frac = ex - n
-        R = store.setdefault((base, frac.q), sp.Symbol(f'R{frac.q}_{base}', positive=True))
-        return R**frac.p*base**n
-    expr = expr.replace(lambda e: e.is_Pow and e.exp.is_Rational and not e.exp.is_Integer and e.base.free_symbols, rule)
-    for (base, q), R in store.items():
-        expr = sp.expand(expr).replace(lambda e: e.is_Pow and e.base == R and e.exp.is_Integer and e.exp >= q,
-                                       lambda e: R**(e.exp % q)*base**(e.exp//q))
-    return expr
-
-
-def determining(spec, parameters, degree=1, exponent=None):
+def determining(spec, parameters=(), degree=1, exponent=None):
     j = spec.jets
     base = j.independent + j.dependent
     monomials = sorted(sp.itermonomials(base, degree), key=sp.default_sort_key)
@@ -51,25 +78,31 @@ def determining(spec, parameters, degree=1, exponent=None):
                   for i in range(len(base)))
     shell, _ = spec.shell()
     free = tuple(v for v in j.jets.values() if v not in shell and v not in j.dependent)
-    store, roots, rows, resonant = {}, {}, [], set()
+    store, roots, seen, rows, resonant = {}, {}, {}, [], set()
     for eq in spec.equations:
         tangent = sp.expand(j.act(eq, field).subs(shell, simultaneous=True))
-        if exponent is not None:
-            tangent = _split(tangent, exponent, store)
-        numerator = _split_fraction(sp.numer(sp.together(tangent)), roots)
+        numerator, _, _, _ = normalize_powers(tangent, exponent, store, roots, seen)
         gens = free + base + tuple(store.values()) + tuple(roots.values())
         poly = sp.Poly(sp.expand(numerator), *gens)
         rows.extend(poly.coeffs())
-        index = {b: (gens.index(b), gens.index(W)) for b, W in store.items()}
-        for b, (ib, iw) in index.items():
-            groups = {}
-            for mono in poly.monoms():
-                rest = tuple(e for q, e in enumerate(mono) if q not in (ib, iw))
-                groups.setdefault(rest, set()).add((mono[iw], mono[ib]))
-            for pairs in groups.values():
-                for (a1, k1), (a2, k2) in combinations(pairs, 2):
-                    if a1 != a2:
-                        resonant.add(sp.Rational(k2 - k1, a1 - a2))
+        if exponent is not None:
+            for b, qa in list(store):
+                W = store[b, qa]
+                if b in gens:
+                    ib, iw = gens.index(b), gens.index(W)
+                    groups = {}
+                    for mono in poly.monoms():
+                        rest = tuple(e for q, e in enumerate(mono) if q not in (ib, iw))
+                        groups.setdefault(rest, set()).add((sp.Rational(mono[iw], qa), mono[ib]))
+                    for pairs in groups.values():
+                        for (a1, k1), (a2, k2) in combinations(pairs, 2):
+                            if a1 != a2:
+                                resonant.add(sp.Rational(k2 - k1, a1 - a2))
+                else:
+                    for a1, k1 in seen.get(b, ()):
+                        if a1 != 0:
+                            for shift in range(4):
+                                resonant.add(sp.Rational(shift - k1, a1))
     matrix, rhs = sp.linear_eq_to_matrix(rows, constants)
     if rhs != sp.zeros(matrix.rows, 1):
         raise ValueError('inhomogeneous determining equations')
@@ -90,16 +123,22 @@ def _candidates(minor, parameters, positive):
     return out
 
 
-def special_kernel(spec, degree=1):
-    """Exact kernel at a fixed parameter value; rational powers are split over b**(1/q)."""
+def special_kernel(spec, degree=1, exponent=None):
+    """Exact kernel on complete JetSpace, preserving symbolic parameters."""
     from .identities import require_zero
-    matrix, field, constants, _ = determining(spec, (), degree)
-    basis = [tuple(sp.expand(v.subs(dict(zip(constants, k)))) for v in field) for k in matrix.nullspace()]
+    matrix, field, constants, _ = determining(spec, spec.parameters, degree, exponent=exponent)
+    dM = DomainMatrix.from_Matrix(matrix)
+    dM = dM.convert_to(dM.domain.get_field())
+    rank = len(dM.rref()[1])
+    kernel = dM.nullspace().to_Matrix() if rank < len(constants) else sp.zeros(0, len(constants))
+    coords = spec.jets.independent + spec.jets.dependent
+    basis = [_normalize(tuple(sp.expand(v.subs(dict(zip(constants, kernel.row(i))))) for v in field), coords)
+             for i in range(kernel.rows)]
     shell, _ = spec.shell()
     for X in basis:
         for eq in spec.equations:
             require_zero(spec.jets.act(eq, X).subs(shell, simultaneous=True), 'full prolongation sufficiency')
-    return {'basis': basis}
+    return {'basis': basis, 'rank': rank, 'dimension': len(basis)}
 
 
 def specialize(spec, values):
@@ -110,22 +149,29 @@ def specialize(spec, values):
 
 
 def strata(spec, parameter, degree=1, exponent=False):
-    matrix, field, constants, resonant = determining(spec, (parameter,), degree, parameter if exponent else None)
+    matrix, field, constants, resonant = determining(spec, spec.parameters or (parameter,), degree,
+                                                     parameter if exponent else None)
     dM = DomainMatrix.from_Matrix(matrix)
     dM = dM.convert_to(dM.domain.get_field())
     _, cols = dM.rref()
     _, rows = dM.transpose().rref()
     rank = len(cols)
-    minor = sp.factor(dM.extract(list(rows), list(cols)).to_Matrix().det(method='berkowitz'))
+    minor = sp.factor(dM.extract(list(rows), list(cols)).to_Matrix().det(method='berkowitz')) if rank else sp.S.One
     kernel = dM.nullspace().to_Matrix() if rank < len(constants) else sp.zeros(0, len(constants))
     coords = spec.jets.independent + spec.jets.dependent
     generic = [_normalize(tuple(sp.expand(v.subs(dict(zip(constants, kernel.row(i))))) for v in field), coords)
                for i in range(kernel.rows)]
     found = _candidates(minor, (parameter,), spec.positive).get(parameter, set())
-    out = {'parameter': str(parameter), 'generic_kernel_dimension': len(constants) - rank,
-           'generic_basis': generic, 'pivot_minor_factors': [str(f) for f, _ in sp.factor_list(minor)[1]],
-           'minor_roots': sorted(found, key=sp.default_sort_key),
-           'resonances': sorted(resonant, key=sp.default_sort_key), 'strata': []}
+    out = {
+        'parameter': str(parameter),
+        'preserved_parameters': [str(p) for p in spec.parameters],
+        'generic_kernel_dimension': len(constants) - rank,
+        'generic_basis': generic,
+        'pivot_minor_factors': [str(f) for f, _ in sp.factor_list(minor)[1]],
+        'minor_roots': sorted(found, key=sp.default_sort_key),
+        'resonances': sorted(resonant, key=sp.default_sort_key),
+        'strata': [],
+    }
     for value in sorted(found | resonant, key=sp.default_sort_key):
         try:
             special = special_kernel(specialize(spec, {parameter: value}), degree)
@@ -135,15 +181,19 @@ def strata(spec, parameter, degree=1, exponent=False):
         dim = len(special['basis'])
         limit = [_limit(X, parameter, value) for X in generic]
         extra = _complement(limit, special['basis'], coords)
-        out['strata'].append({'value': value, 'status': 'decided', 'kernel_dimension': dim,
-                              'jump': dim - out['generic_kernel_dimension'], 'extra': extra,
-                              'basis': special['basis'],
-                              'source': 'pivot minor' if value in found else 'power resonance'})
+        out['strata'].append({
+            'value': value,
+            'status': 'decided',
+            'kernel_dimension': dim,
+            'jump': dim - out['generic_kernel_dimension'],
+            'extra': extra,
+            'basis': special['basis'],
+            'source': 'pivot minor' if value in found else 'power resonance',
+        })
     return out
 
 
 def _limit(X, parameter, value):
-    """Leading nonzero term of the generic generator as the parameter tends to the stratum."""
     for k in (0, 1, 2, 3, -1, -2, -3):
         Y = tuple(sp.cancel(c*(parameter - value)**k).subs(parameter, value) for c in X)
         if not any(v.has(sp.zoo, sp.nan, sp.oo) for v in Y) and any(v != 0 for v in Y):
@@ -157,7 +207,6 @@ def _normalize(X, coords):
 
 
 def _complement(generic, special, coords):
-    """Special generators that enlarge the span of the specialized generic kernel."""
     span = list(generic)
     extra = []
     for X in special:

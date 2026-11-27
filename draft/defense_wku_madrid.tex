@@ -1223,6 +1223,89 @@ fa8d36bd014d9fffd9>}
 \normalsize\lead{Research question} \enspace Can symmetry give exact reference flows for nearby problems?
 \end{frame}
 
+\begin{frame}[t]{Overall workflow: jet-space PDE to certified profile}
+\vspace{.5mm}
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  sbox/.style={draw=teal!80!ink,fill=teal!7,rounded corners=2pt,align=center,inner sep=2.2pt,minimum height=13.5mm},
+  rbox/.style={draw=ink!65,fill=paper,rounded corners=2pt,align=center,inner sep=2.2pt,minimum height=12.0mm},
+  cbox/.style={draw=clay!85,fill=clay!7,rounded corners=2pt,align=center,inner sep=2.2pt,minimum height=12.0mm},
+  farr/.style={-{Latex[length=1.8mm]},line width=.75pt,draw=ink},
+  tarr/.style={-{Latex[length=1.8mm]},line width=.75pt,draw=teal},
+  carr/.style={-{Latex[length=1.8mm]},line width=.75pt,draw=clay}
+]
+  % Row 1: Exact Symbolic Reduction on JetSpace
+  \node[sbox,text width=34.2mm] (s1)
+    {\textbf{1.\ Jet-Space PDE}\\[1pt]
+     $\Delta(x,u^{(k)};\mu)=0\text{ on }J^k$\\
+     $\mathcal E_1,\mathcal E_P,\mathcal E_L,\mathcal E_2,\mathcal E_{\mathrm{exch}}$};
+  \node[sbox,text width=35.2mm,right=3.2mm of s1] (s2)
+    {\textbf{2.\ Prolongation \& Strata}\\[1pt]
+     $\pr^{(k)}\!X(\Delta)\big|_{\Delta=0}=0$\\
+     $\mathsf A(\mu)a=0,\ \det\mathsf A_\star(\mu)=0$};
+  \node[sbox,text width=36.2mm,right=3.2mm of s2] (s3)
+    {\textbf{3.\ Subalgebra Quotient}\\[1pt]
+     $[\mathfrak h,\mathfrak h]\subset\mathfrak h,\ Q_{\mathfrak h}[U]=0$\\
+     $\Delta=\mathsf M(z,v)\,\mathcal E[F](z),\ \det\mathsf M\neq 0$};
+  \node[sbox,text width=35.2mm,right=3.2mm of s3] (s4)
+    {\textbf{4.\ First Integrals}\\[1pt]
+     $\mathsf E_a(\mu_\ell\mathcal E)=0\Rightarrow \mathcal I_\ell=C_\ell$\\
+     $\Delta_c(z,F;\mu,C)F'=N(z,F)$};
+
+  \draw[tarr] (s1)--(s2);
+  \draw[tarr] (s2)--(s3);
+  \draw[tarr] (s3)--(s4);
+
+  % Row 2: Unparsed AST Handoff, Branch Gate & Certification
+  \node[rbox,text width=30.0mm,below=8.8mm of s1.south west,anchor=north west,minimum height=26.6mm] (gate)
+    {\textbf{5.\ AST Branch Gate}\\[1.5pt]
+     In-memory AST\\
+     $\mathcal E(z,F,\dots,F^{(r)})=0$\\[2pt]
+     $\Delta_c\neq 0$ (regular)\\
+     vs.\ $\Delta_c=N=0$};
+
+  \node[rbox,text width=44.0mm,above right=0mm and 3.4mm of gate.east,anchor=north west] (reg1)
+    {\textbf{Regular Solvers ($\Delta_c\neq 0$)}\\[1pt]
+     $\widehat F=T_r(z;p)+(z-z_0)^r m_\theta(z,p)$\\
+     $a_{n+r}=\Phi_n(a)\ \big|\ \mathcal E(\widehat F_N)(z_j)=0\ \big|\ \text{LNN}$};
+  \node[rbox,text width=35.2mm,right=3.2mm of reg1] (reg2)
+    {\textbf{Governing-Balance Gate}\\[1pt]
+     $|\widehat F^{(k)}(z_0)-p_k|\le 10^{-8}$\\
+     $\|\Delta(\Phi(\widehat F))\|_\infty\le 10^{-6}$};
+
+  \node[cbox,text width=44.0mm,below right=0mm and 3.4mm of gate.east,anchor=south west] (crit1)
+    {\textbf{Saddle Germ ($\Delta_c=N=0$)}\\[1pt]
+     $\det DF(r_*,H_*)<0\implies s_\pm$\\
+     $rw'=\lambda w+g(r,w)\text{ (Briot--Bouquet)}$};
+  \node[cbox,text width=35.2mm,right=3.2mm of crit1] (crit2)
+    {\textbf{Interval Barrier}\\[1pt]
+     $|\mathcal R(H_\theta)|\le Lu+\delta$\\
+     $u'\ge Lu+\delta\Rightarrow |H-H_\theta|\le u$};
+
+  \node[sbox,text width=27.2mm,right=3.2mm of reg2.north east,anchor=north west,minimum height=26.6mm] (out)
+    {\textbf{6.\ Lift \& Solution}\\[2pt]
+     $u=\Phi\big(z,v,\widehat F(z)\big)$\\[3pt]
+     $\Delta(x,u^{(k)};\mu)=0$};
+
+  % Connector routing from Step 4 to Step 5
+  \draw[farr] (s4.south) -- ++(0,-3.6mm) -| (gate.north);
+  \node[font=\scriptsize,fill=white,inner sep=1pt,text=muted] at ($(s2.south)!0.5!(s3.south)+(0,-3.6mm)$)
+    {live SymPy AST (all $\mu,C_\ell$ symbolic, zero string parsing)};
+
+  % Branch arrows
+  \draw[tarr] ([yshift=6.8mm]gate.east) -- (reg1.west);
+  \draw[tarr] (reg1.east) -- (reg2.west);
+  \draw[tarr] (reg2.east) -- ([yshift=6.8mm]out.west);
+
+  \draw[carr] ([yshift=-6.8mm]gate.east) -- (crit1.west);
+  \draw[carr] (crit1.east) -- (crit2.west);
+  \draw[carr] (crit2.east) -- ([yshift=-6.8mm]out.west);
+\end{tikzpicture}
+\par\vspace{1mm}
+\raggedright\smallnote{Parameters $\mu=(g,K,\kappa,G,f,c,m)$ and constants $C_\ell$ stay symbolic through Step~4; compiled AST callables drive Step~5.}
+\end{frame}
+
 \begin{frame}[t]{Two published equations for reproduction}
 \vspace{1mm}
 \begin{columns}[T,onlytextwidth]
@@ -1283,8 +1366,8 @@ $E_L$ & $0,\ldots,4$ & $m=3$ & $Y_5$ (no boost)\\\bottomrule
 \end{frame}
 
 \begin{frame}[t]{The semi-analytical reduction workflow}
-\centering\includegraphics[width=\textwidth]{figures/final-delivery/contribution_workflow.pdf}\par
-\vspace{1mm}
+\centering\includegraphics[width=.98\textwidth,height=.19\textheight,keepaspectratio]{figures/final-delivery/contribution_workflow.pdf}\par
+\vspace{.3mm}
 \begin{columns}[T,onlytextwidth]
 \column{.46\textwidth}
 \lead{A slice meets each orbit once locally}\par

@@ -1,6 +1,6 @@
 # Cited literature and source notes
 
-This flat directory indexes sources cited in the [compact manuscript](../draft/dissertation_wku_compact.tex) and [Madrid defense](../draft/defense_wku_madrid.tex). The PDF filenames use full titles. Publisher links retain citation coverage where a bundled copy is unavailable. The [literature verification record](Literature%20Verification%20and%20Source%20Boundaries.md) gives the checks and limits of attribution.
+This flat directory indexes sources cited in the [compact manuscript](../draft/dissertation_wku_compact.tex), [Madrid defense](../draft/defense_wku_madrid.tex), and [`@delivery` user manual](../delivery/README.md). The PDF filenames use full titles. Publisher links retain citation coverage where a bundled copy is unavailable. The [literature verification record](Literature%20Verification%20and%20Source%20Boundaries.md) gives the checks and limits of attribution.
 
 | Key | Full title and source | Repository access |
 |---|---|---|

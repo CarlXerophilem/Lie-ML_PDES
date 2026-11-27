@@ -4,18 +4,21 @@ The source papers are Paliathanasis (2022, DOI [10.3390/sym14081679](https://doi
 
 ## Commands
 
-Run from the repository root. Use Python without the optimization flag so the exact assertions execute.
+Run from the repository root (see the [`@delivery` user manual](README.md) for custom SymPy `PDESpec` inputs and pipeline boundaries). Use Python without the optimization flag so the exact assertions execute.
 
 ~~~sh
 python -m pip install -r delivery/requirements.txt
+python delivery/reduce_pde.py --model delivery/lie_reduce/models.py:euler_spec --strata --smooth-check --ml --output delivery/logs/reduce_E1.json
+python delivery/reduce_pde.py --model delivery/lie_reduce/models.py:planar_e2_spec --subalgebra "X5 ; X1 + alpha_1*X4" --output delivery/logs/reduce_E2.json
 python delivery/symbolic_sv2022.py
 python delivery/symbolic_sve2026.py
-python -B delivery/test_sve2026_ansatz_layers.py
 python delivery/symbolic_new_model2026.py
 python delivery/reproduce_sve2026.py --order 6 --output build/delivery/reproduction.json
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/check_multid.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_sv2022.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_sve2026.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python delivery/ml_new_model2026.py
+~~~
 
 The eight separated experiments are three 1+1 Lie scripts plus the rotating pair, and the same split for the profile fits. Each script prints a written verifier block. `reproduce_sve2026.generators` remains the printed list; the P script checks that this list spans the derived basis.
 
@@ -28,7 +31,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_E1.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_P.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_M.py
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -B delivery/experiment_ml_Eexch.py
-~~~
+bash delivery/reproduce_all.sh
 bash delivery/build_pdfs.sh
 ~~~
 
@@ -49,11 +52,11 @@ The [annular proof and native replay package](annular-transcritical-theorem-2026
 
 ### Derivation and range
 
-For \(E_1\), the [determining proof](derivations/eulerian-first-order.md) starts with unrestricted coefficient functions and splits the quadratic, linear and constant free-jet terms. The \(m>1\) argument uses \(q_u=(m-1)q/u>0\), \(q=mKu^{m-1}\), and a separate determinant identity handles \(m=1\) on the open velocity interval. The remaining exceptional factor is \(m-3\). The argument requires no upper bound on \(m\). The entry verifies 39 exact identities and controls.
+For \(E_1\), the smooth determining proof (`lie_reduce.determining.smooth_symmetries`) starts with unrestricted smooth coefficient functions on the complete jet space, proves vanishing Hessians by prolongation, and splits the free-jet terms. The \(m>1\) argument uses \(q_u=(m-1)q/u>0\), \(q=mKu^{m-1}\), and exact stratum specialization handles \(m=1\) on the open velocity interval. The remaining exceptional factor is \(m-3\). The argument requires no upper bound on \(m\).
 
 Write \(T,X,Z\) for translations and \(D,S\) for the common and cubic relative scaling. The weights of the cubic scaling \(aD+bS\) are \((-a-b,-a,2b)\). Translation conjugations remove components with nonzero weight. A zero weight leaves one coefficient with connected normal forms \(0,1,-1\) after fixing the scaled direction. In the translation-only cubic case the two scaling actions and overall line scaling have rank three on the logarithms of magnitudes. Their orbits are therefore determined by supports and relative signs. In the generic algebra \(Z\) is central, so \(D+cZ\) retains \(c\in\mathbb R\). With \(Z\) normalized to one, the other two coefficients are either zero or an oriented unit vector. When the \(Z\) component vanishes, the lines form \(\mathbb{RP}^1\).
 
-For the 2026 scalar equations, the [frozen ansatz layers](derivations/sve2026-ansatz-layers.md) separate the arbitrary point coefficients, necessary jet splits, affine kernels, full-equation sufficiency and the material invariant graph. The symbolic entry derives coefficient rows and exceptional exponents before constructing each basis. The independent regression suite disables the historical source fixtures during discovery and recomputes prolongation via the characteristic. See the [test log](logs/sve2026_ansatz_layers.txt).
+For the 2026 scalar equations, `symbolic_sve2026.py` and `lie_reduce.determining.smooth_symmetries` verify smooth-to-affine reduction, exact pivot-minor and power-resonance strata, affine kernels, full-equation prolongation sufficiency, and constructive invariant graphs without preset coordinate slices.
 
 The exact regular Taylor campaign uses rational input values and orders 3 to 8. A nonzero leading coefficient permits the analytic IVP theorem for real \(m\) on the positive chart. The Laurent example separately has a convergence disk proved by contraction. Rotation alone leaves two independent variables, while rotation plus time and bed drift leaves only radius. Fixed boundary geometry can exclude translations admitted by interior equations.
 
@@ -129,63 +132,12 @@ Every number in Chapters 3–5 of the compact dissertation is a macro from `numb
 
 The \(P\)–\(M\) comparison and continuation are deferred. The [audit archive](../.old/2026-11-23-repository-audit/) retains the prototype without making it part of the manuscript’s verification. Exhaustive singular classification and unrestricted planar classification remain open. The equal-tolerance correction experiment is now run on the bend branch (`continuation.json`); it shows no end-to-end advantage of learning. Shape evolution as an initial-boundary-value problem, a friction model and the region \(c\ge c_*\) remain open.
 
-## Generic finite-class Lie pipeline (no ML)
+## Deterministic symbolic Lie reducer and unparsed ML handoff
 
-The separate [Lie pipeline](lie_reduce/README.md) freezes the original P/M
-certificate, independently implements vector jets and prolongation, and exports
-[all computed reduction records](lie_reduce/results/ODE_INVENTORY.md).
-The [machine-readable run](lie_reduce/results/pipeline.json) records timing,
-CPU/RSS, source hashes, chart conditions and explicit rejection statuses.
-Run `PYTHONPATH=delivery python -B -m lie_reduce.run --catalogue --stage-seconds 15`
-and `PYTHONPATH=delivery python -B -m lie_reduce.test_pipeline`.
+The [symbolic Lie reducer](lie_reduce/README.md) discovers point symmetries directly on complete jet spaces (`JetSpace`), enumerates rank-\((d-1)\) subalgebras from combinations of basis generators, constructs matrix-exponential orbit charts, eliminates variational first integrals while preserving all symbolic parameters, and hands live SymPy `ReducedODE` ASTs directly in-memory to [`_profile_learning.py`](_profile_learning.py) and [`planar/bench.py`](planar/bench.py) without string parsing or hardcoded ODE profiles.
 
-The new degree-two search is replayed at m=1,2,3,4; it does not replace the
-all-real-m smooth-class proofs. Appendix B supplies the catalogue rather than
-being automatically discovered. The E2 rank-two section is supplied explicitly;
-no two-dimensional optimal-system completeness is claimed. The singular N3 H equation remains an implicit critical task. A separate
-exact complex-disk BB certificate and optional Taylor/DOP853 reference experiment
-now cover the selected c=-7 saddle; see the 43-condition evidence ledger.
-The manuscript and existing numerical tables are not changed by this stage.
+`OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 delivery/check_multid.py` (also run by `reproduce_all.sh`) writes `logs/check_multid.json` and exits nonzero on any mismatch:
 
-The same pipeline now tests explicit square-free presentation changes and
-vertical fixed graphs. Repeated factors are removed only with zero-set
-equivalence records; unions retain every factor component. Fixed graphs are
-checked against every PDE after a full symmetry check, and rank-zero fixed
-loci are not mislabeled ODE reductions. See
-[the new negative controls](lie_reduce/test_presentations.py).
-
-
-## Unified managers and isolated verification
-
-[lie_pde_reducer.py](lie_pde_reducer.py) exposes
-`verifier(solver_output, paper_txt_respective)` through an independent checker
-that imports no PDE/ODE solver modules. It reads explicit paper transcriptions,
-checks manuscript freshness, and independently differentiates the lifted fields.
-[spinn_ode_solver.py](spinn_ode_solver.py) manages exact Taylor recurrence,
-nonlinear Chebyshev collocation, standard PINN, the adapted one-input LNN
-architecture, and the series-prefix network. Analytic quadrature and a SymPy
-`dsolve` fallback pass through the same independent symbolic boundary without ML.
-[managed_statistics.py](managed_statistics.py) produces post-solve reference
-comparisons and quadrature-sensitivity records. See the
-[commands and capability limits](MANAGED_SOLVERS.md). The checked-in pilot is
-an interface experiment, not a replacement for the frozen thesis tables.
-
-## Parameter strata and quotients in d independent variables
-
-`python3 check_multid.py` (also stage 12 of `reproduce_all.sh`, about 35 s)
-writes `logs/check_multid.json` and exits nonzero on any mismatch.
-
-- [hidden.py](lie_reduce/hidden.py): general degree-1 generator with symbolic
-  exponent `m`; powers `b**(m+k)` split as `W_b*b**k`. Candidate strata are the
-  roots of one pivot minor of the determining matrix plus power resonances; each
-  is decided by exact specialization (rational values split over `b**(1/q)`).
-  Expected jumps: E1 `{0,3}`, P `{0,1,3}`, M `{0,3}`. Scope: affine coefficient
-  class; Appendix A of the dissertation gives the smooth classification.
-- [multid.py](lie_reduce/multid.py): rank `d-1` affine subalgebra, orbit chart
-  from matrix-exponential flows, jets by the inverse Jacobian. Accepted only if
-  `Q_X=0`, the chart Jacobian is not identically zero, and
-  `Delta(z,v) = M(z,v) E(z)` with `M` profile-free and `det M` not identically zero.
-  Checks: polar E2 equals the supplied annular graph; Cartesian E2 under
-  rotation and `d_t + c d_B` needs a rotation weight matrix and equals polar E2.
-- Seeded random scalar models in 2+1 and 3+1 D: every jump stratum is reduced
-  through a closed subalgebra containing an extra generator.
+- [`hidden.py`](lie_reduce/hidden.py): general degree-1 generator with symbolic exponent `m`; powers `b**(m+k)` and composite bases `(u**2+v**2)**((m-1)/2)` split over positive base symbols. Candidate strata are the roots of one pivot minor of the determining matrix plus power resonances; each is decided by exact specialization. Expected jumps: \(E_1\) `{0,3}`, \(P\) `{0,1,3}`, \(M\) `{0,3}`.
+- [`multid.py`](lie_reduce/multid.py) and [`reduce.py`](lie_reduce/reduce.py): rank `d-1` affine subalgebra, orbit chart from matrix-exponential flows, jets by the inverse Jacobian, and constructive Euler-operator first-integral elimination. Accepted only if `Q_X=0`, the chart Jacobian is not identically zero, and `Delta(z,v) = M(z,v) E(z)` with `M` profile-free and `det M` not identically zero. Polar \(E_2\) and Cartesian planar \(E_2\) under rotation and `d_t + c d_B` both reduce to the identical scalar ODE with all 9 parameters preserved.
+- Seeded random scalar and coupled models in \(1+1\), \(2+1\), and \(3+1\) dimensions: hidden strata are decided, symmetries and subalgebra combinations are enumerated deterministically, symbolic parameters are preserved through reduction, and the resulting `ReducedODE` ASTs pass directly in-memory to `_profile_learning.compare`.

@@ -1,46 +1,32 @@
 {
   "bed_balance": "B_1_0 + u_0_1*Derivative(Q(u), u) = 0",
   "law": "Q(u)",
-  "search_class": "translations only (nonpolynomial jet dependence: specialize exponent or supply a proved split); larger algebras for special laws are not searched",
+  "search_class": "coordinate translations verified on complete JetSpace (Derivative(Q(u), u) contains an element of the set of generators.)",
+  "preserved_parameters": [
+    "g"
+  ],
   "generators": {
-    "d_t": "(1)*d_t",
-    "d_x": "(1)*d_x",
-    "d_B": "(1)*d_B"
+    "G1": "(1)*d_t",
+    "G2": "(1)*d_x",
+    "G3": "(1)*d_B"
   },
   "reductions": [
     {
-      "generator": "d_t",
+      "generator": "G1",
       "status": "verified",
       "invariant": "x",
       "ansatz": {
-        "h": "F0(x)",
+        "h": "C1/F1(x)",
         "u": "F1(x)",
-        "B": "F2(x)"
+        "B": "(-2*C1*g + 2*C2*F1(x) - F1(x)**3)/(2*g*F1(x))"
       },
       "odes": [
-        "F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
-        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) = 0",
         "Derivative(F1(z), z)*Derivative(Q(F1(z)), F1(z)) = 0"
       ],
-      "weights": [
-        "1",
-        "1",
-        "1"
-      ]
-    },
-    {
-      "generator": "d_x",
-      "status": "verified",
-      "invariant": "t",
-      "ansatz": {
-        "h": "F0(t)",
-        "u": "F1(t)",
-        "B": "F2(t)"
-      },
-      "odes": [
-        "Derivative(F0(z), z) = 0",
-        "Derivative(F1(z), z) = 0",
-        "Derivative(F2(z), z) = 0"
+      "first_integrals": [
+        "F0(z)*F1(z) = C1",
+        "g*F0(z) + g*F2(z) + F1(z)**2/2 = C2",
+        "F1(z) = C3"
       ],
       "weights": [
         "1",
@@ -49,73 +35,28 @@
       ]
     },
     {
-      "generator": "d_B",
-      "status": "no invariant graph",
-      "reason": "fixed-locus constraint cannot vanish on declared chart"
+      "generator": "G2",
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'"
     },
     {
-      "generator": "d_t+c*d_x",
-      "status": "verified",
-      "invariant": "-c*t + x",
-      "ansatz": {
-        "h": "F0(-c*t + x)",
-        "u": "F1(-c*t + x)",
-        "B": "F2(-c*t + x)"
-      },
-      "odes": [
-        "-c*Derivative(F0(z), z) + F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
-        "-c*Derivative(F1(z), z) + g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) = 0",
-        "-c*Derivative(F2(z), z) + Derivative(F1(z), z)*Derivative(Q(F1(z)), F1(z)) = 0"
-      ],
-      "weights": [
-        "1",
-        "1",
-        "1"
-      ]
+      "generator": "G1 + alpha_1*G2",
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'"
     },
     {
-      "generator": "d_t+c*d_B",
-      "status": "verified",
-      "invariant": "x",
-      "ansatz": {
-        "h": "F0(x)",
-        "u": "F1(x)",
-        "B": "c*t + F2(x)"
-      },
-      "odes": [
-        "F0(z)*Derivative(F1(z), z) + F1(z)*Derivative(F0(z), z) = 0",
-        "g*Derivative(F0(z), z) + g*Derivative(F2(z), z) + F1(z)*Derivative(F1(z), z) = 0",
-        "c + Derivative(F1(z), z)*Derivative(Q(F1(z)), F1(z)) = 0"
-      ],
-      "weights": [
-        "1",
-        "1",
-        "1"
-      ]
+      "generator": "G1 + alpha_1*G3",
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'"
     },
     {
-      "generator": "d_x+c*d_B",
-      "status": "verified",
-      "invariant": "t",
-      "ansatz": {
-        "h": "F0(t)",
-        "u": "F1(t)",
-        "B": "c*x + F2(t)"
-      },
-      "odes": [
-        "Derivative(F0(z), z) = 0",
-        "c*g + Derivative(F1(z), z) = 0",
-        "Derivative(F2(z), z) = 0"
-      ],
-      "weights": [
-        "1",
-        "1",
-        "1"
-      ]
+      "generator": "G2 + alpha_1*G3",
+      "status": "failed",
+      "reason": "AttributeError: 'int' object has no attribute 'atoms'"
     }
   ],
   "summary": {
-    "ode_reductions": 5,
-    "candidates": 6
+    "ode_reductions": 1,
+    "candidates": 5
   }
 }

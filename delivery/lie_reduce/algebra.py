@@ -1,96 +1,179 @@
-"""Appendix B catalogue is input; algebra membership and brackets are computed."""
+"""Deterministic Lie algebra operations and subalgebra enumeration from generator combinations."""
+from itertools import combinations
 import sympy as sp
-from itertools import combinations, product
 
 
-def bracket(X,Y,coordinates):
-    X,Y=sp.Matrix(X),sp.Matrix(Y)
-    return tuple(Y.jacobian(coordinates)*X-X.jacobian(coordinates)*Y)
+def bracket(X, Y, coordinates):
+    X, Y = sp.Matrix(X), sp.Matrix(Y)
+    return tuple(sp.expand(v) for v in (Y.jacobian(coordinates) * X - X.jacobian(coordinates) * Y))
 
 
 def add(*weighted):
-    return tuple(sp.expand(sum(c*X[i] for c,X in weighted)) for i in range(len(weighted[0][1])))
+    return tuple(sp.expand(sum(c * X[i] for c, X in weighted)) for i in range(len(weighted[0][1])))
 
 
-def catalogue(spec,basis,exponent):
-    scalar=spec.name in ('P','M'); pre='Y' if scalar else 'X'
-    T,S,Z=(basis[pre+str(i)] for i in ((1,3,2) if scalar else (1,2,3)))
-    D=basis[pre+'4']; c,delta,b=sp.symbols('c delta b',real=True)
-    out=[]
-    def row(label,X,conditions=()): out.append({'id':label,'generator':X,'parameter_conditions':conditions})
-    if spec.name=='P' and exponent==1:
-        G=basis['Y6'];row('B.linear.D+deltaG',add((1,D),(delta,G)));row('B.linear.G',G)
-        for e in (-1,1):
-            row(f'B.linear.G+{e}T+cS',add((1,G),(e,T),(c,S)))
-            row(f'B.linear.G+{e}S',add((1,G),(e,S)))
-        row('B.linear.T+cS',add((1,T),(c,S)));row('B.linear.S+deltaZ',add((1,S),(delta,Z)));row('B.linear.Z',Z)
-    elif exponent!=3:
-        row('B.generic.scaling',D if scalar else add((1,D),(delta,Z)))
-        for e in ((delta,) if scalar else (-1,0,1)):
-            row(f'B.generic.T+cS+{e}Z',add((1,T),(c,S),(e,Z)))
-            row(f'B.generic.S+{e}Z',add((1,S),(e,Z)))
-        row('B.generic.Z',Z)
-    else:
-        C=basis[pre+'5']
-        row('B.cubic.D+bC',add((1,D),(b,C)),('b avoids exceptional zero weights handled below',))
-        row('B.cubic.C',C)
-        special=[(-1,T),(sp.Rational(1,2),S)] if scalar else [(-1,T),(0,Z)]
-        for v,A in special:
-            for e in (-1,0,1): row(f'B.cubic.D+{v}C+{e}A',add((1,D),(v,C),(e,A)))
-        for e in (-1,0,1):row(f'B.cubic.C+{e}A',add((1,C),(e,Z if scalar else S)))
-        for size in (1,2,3):
-            for support in combinations(range(3),size):
-                for signs in product((-1,1),repeat=size-1):
-                    co=(1,)+signs
-                    if scalar and size==3:
-                        if signs[-1]!=1:continue
-                        co=(1,signs[0],delta)
-                    row('B.cubic.translation.'+str((support,co)),add(*[(v,(T,S,Z)[i]) for v,i in zip(co,support)]),
-                        ('delta != 0',) if scalar and size==3 else ())
+def coordinates_in_basis(X, basis, coordinates):
+    if not basis:
+        raise ValueError('empty basis')
+    constants = sp.symbols(f'c_b0:{len(basis)}')
+    residual = add((1, X), *[(-c, Y) for c, Y in zip(constants, basis)])
+    monos = set()
+    for e in residual:
+        if e != 0:
+            monos |= set(sp.Poly(sp.expand(e), *coordinates).monoms())
+    if not monos:
+        return (sp.S.Zero,) * len(basis)
+    rows = [sp.Poly(sp.expand(e), *coordinates).coeff_monomial(m) for e in residual for m in sorted(monos)]
+    M, rhs = sp.linear_eq_to_matrix(rows, constants)
+    from sympy.polys.matrices import DomainMatrix
+    dM = DomainMatrix.from_Matrix(M.row_join(-rhs))
+    dM = dM.convert_to(dM.domain.get_field())
+    rref, pivs = dM.rref()
+    rmat = rref.to_Matrix()
+    if pivs and pivs[-1] == len(constants):
+        raise ValueError('generator not in span of supplied basis')
+    if len(pivs) != len(constants):
+        raise ValueError('supplied basis is linearly dependent')
+    return tuple(sp.cancel(rmat[i, len(constants)]) for i in range(len(constants)))
+
+
+def span_equal(left, right, coordinates):
+    """Exact polynomial-vector-field span equality over the field of rational functions in parameters."""
+    left = [tuple(map(sp.sympify, v)) for v in left]
+    right = [tuple(map(sp.sympify, v)) for v in right]
+    if len(left) != len(right):
+        return False
+    try:
+        for v in left:
+            coordinates_in_basis(v, right, coordinates)
+        for v in right:
+            coordinates_in_basis(v, left, coordinates)
+    except (ValueError, sp.PolynomialError):
+        return False
+    return True
+
+
+def closed(fields, coordinates):
+    if len(fields) < 2:
+        return True
+    for i, X in enumerate(fields):
+        for Y in fields[i + 1:]:
+            Z = bracket(X, Y, coordinates)
+            if all(sp.expand(v) == 0 for v in Z):
+                continue
+            try:
+                coeffs = coordinates_in_basis(Z, fields, coordinates)
+            except (ValueError, sp.PolynomialError):
+                return False
+            if any(sp.sympify(k).has(*coordinates) for k in coeffs):
+                return False
+    return True
+
+
+def canonical_basis_dict(raw_basis, coordinates, prefix='G'):
+    """Order and normalize any discovered basis deterministically without model-specific assumptions."""
+    origin = dict.fromkeys(coordinates, 0)
+    scored = []
+    for X in raw_basis:
+        X = tuple(sp.expand(v) for v in X)
+        is_const = all(sp.diff(v, c) == 0 for v in X for c in coordinates)
+        is_diag = (not is_const and all(v.subs(origin) == 0 for v in X)
+                   and all(sp.diff(X[i], coordinates[j]) == 0
+                           for i in range(len(coordinates)) for j in range(len(coordinates)) if i != j))
+        first_nz = next((i for i, v in enumerate(X) if v != 0), len(coordinates))
+        tier = 0 if is_const else (1 if is_diag else 2)
+        scored.append((tier, first_nz, str(X), X))
+    scored.sort(key=lambda item: item[:3])
+    out = {}
+    for idx, (_, first_nz, _, X) in enumerate(scored, 1):
+        lead = sp.Poly(X[first_nz], *coordinates).coeffs()[0]
+        normed = tuple(sp.factor(sp.cancel(v / lead)) for v in X)
+        out[f'{prefix}{idx}'] = normed
     return out
 
 
-def weights(spec,basis):
-    scalar=spec.name in ('P','M');pre='Y' if scalar else 'X'
-    coords=spec.jets.independent+spec.jets.dependent
-    return {f'[{left},{right}]':bracket(X,Y,coords) for left,X in basis.items()
-            for right,Y in basis.items() if left<right}
+def enumerate_subalgebras(basis, coordinates, n_indep, max_combo_terms=2):
+    """Deterministically enumerate rank-(n_indep - 1) closed projectable subalgebras from combinations.
+
+    Symbolic combination weights (alpha_1, alpha_2, ...) are preserved so no parameter is fixed.
+    """
+    if isinstance(basis, dict):
+        items = list(basis.items())
+    else:
+        items = [(f'G{i+1}', tuple(X)) for i, X in enumerate(basis)]
+    dep = coordinates[n_indep:]
+    rank_target = n_indep - 1
+    if rank_target < 1:
+        return []
+
+    a1, a2 = sp.symbols('alpha_1 alpha_2', real=True)
+    pool = []
+    # 1. Basis singletons
+    for name, X in items:
+        pool.append((name, tuple(X), {name}))
+    # 2. Pairwise combinations from basis
+    if max_combo_terms >= 2:
+        for (n1, X1), (n2, X2) in combinations(items, 2):
+            if rank_target == 1 or all(v == 0 for v in bracket(X1, X2, coordinates)):
+                pool.append((f'{n1} + alpha_1*{n2}', add((1, X1), (a1, X2)), {n1, n2}))
+    # 3. Three-term combinations for 1D subalgebras when requested
+    if rank_target == 1 and max_combo_terms >= 3 and len(items) <= 6:
+        for (n1, X1), (n2, X2), (n3, X3) in combinations(items, 3):
+            pool.append((f'{n1} + alpha_1*{n2} + alpha_2*{n3}', add((1, X1), (a1, X2), (a2, X3)), {n1, n2, n3}))
+
+    subalgebras = []
+    for subset in combinations(pool, rank_target):
+        # Skip redundant subsets where one element's basis support is a subset of another's
+        supports = [sup for _, _, sup in subset]
+        if any(i != k and supports[i] <= supports[k] for i in range(len(supports)) for k in range(len(supports))):
+            continue
+        labels = tuple(lbl for lbl, _, _ in subset)
+        fields = tuple(X for _, X, _ in subset)
+        if any(comp.has(*dep) for X in fields for comp in X[:n_indep]):
+            continue
+        base_mat = sp.Matrix([X[:n_indep] for X in fields])
+        if base_mat.rank() != rank_target:
+            continue
+        if not closed(fields, coordinates):
+            continue
+        subalgebras.append({'id': ' ; '.join(labels), 'generators': fields})
+    return subalgebras
 
 
-def coordinates_in_basis(X,basis,coordinates):
-    constants=sp.symbols('c:'+str(len(basis)))
-    residual=add((1,X),*[(-c,Y) for c,Y in zip(constants,basis)])
-    rows=[v for e in residual for v in sp.Poly(e,*coordinates).coeffs()]
-    solutions=sp.solve(rows,constants,dict=True)
-    if len(solutions)!=1 or set(solutions[0])!=set(constants):
-        raise ValueError('generator not uniquely represented in supplied basis')
-    return tuple(solutions[0][c] for c in constants)
+def weights(spec, basis):
+    coords = spec.jets.independent + spec.jets.dependent
+    items = list(basis.items()) if isinstance(basis, dict) else [(f'G{i+1}', X) for i, X in enumerate(basis)]
+    return {f'[{left},{right}]': bracket(X, Y, coords)
+            for (left, X), (right, Y) in combinations(items, 2)
+            if any(v != 0 for v in bracket(X, Y, coords))}
 
 
-def adjoint_matrix(X,basis,coordinates,epsilon):
-    ad=sp.Matrix.hstack(*(sp.Matrix(coordinates_in_basis(bracket(X,Y,coordinates),basis,coordinates)) for Y in basis))
-    return (epsilon*ad).exp()
-
-
-def verify_lie_algebra(spec,basis):
-    """Closure and Jacobi in the supplied finite basis, separately from optimality."""
+def verify_lie_algebra(spec, basis):
+    """Verify closure and Jacobi identity in the discovered basis."""
     from .identities import require_zero
-    coords=spec.jets.independent+spec.jets.dependent
-    fields=list(basis.values());names=list(basis)
-    constants={}
-    for i,X in enumerate(fields):
-        for k,Y in enumerate(fields):
-            coeff=coordinates_in_basis(bracket(X,Y,coords),fields,coords)
-            if any(v.has(*coords) for v in coeff):raise ArithmeticError('nonconstant structure coefficients')
-            constants[i,k]=sp.Matrix(coeff)
-    count=0
-    for i,j,k in combinations(range(len(fields)),3):
-        jac=sp.zeros(len(fields),1)
-        for a,b,c in ((i,j,k),(j,k,i),(k,i,j)):
-            jac+=sum((constants[b,c][d]*constants[a,d] for d in range(len(fields))),sp.zeros(len(fields),1))
-        for v in jac:require_zero(v,'Jacobi')
-        count+=1
-    return {'status':'verified','structure_constants':{f'[{names[i]},{names[j]}]':tuple(c)
-             for (i,j),c in constants.items() if i<j},'jacobi_triples':count,
-             'group_convention':'connected inner group; no discrete identifications',
-             'optimal_system_completeness':'not established by closure or Jacobi checks'}
+    coords = spec.jets.independent + spec.jets.dependent
+    items = list(basis.items()) if isinstance(basis, dict) else [(f'G{i+1}', X) for i, X in enumerate(basis)]
+    names = [k for k, _ in items]
+    fields = [v for _, v in items]
+    constants = {}
+    for i, X in enumerate(fields):
+        for k, Y in enumerate(fields):
+            coeff = coordinates_in_basis(bracket(X, Y, coords), fields, coords)
+            if any(v.has(*coords) for v in coeff):
+                raise ArithmeticError('nonconstant structure coefficients')
+            constants[i, k] = sp.Matrix(coeff)
+    count = 0
+    for i, j, k in combinations(range(len(fields)), 3):
+        jac = sp.zeros(len(fields), 1)
+        for a, b, c in ((i, j, k), (j, k, i), (k, i, j)):
+            jac += sum((constants[b, c][d] * constants[a, d] for d in range(len(fields))), sp.zeros(len(fields), 1))
+        for v in jac:
+            require_zero(v, 'Jacobi')
+        count += 1
+    return {
+        'status': 'verified',
+        'dimension': len(fields),
+        'structure_constants': {f'[{names[i]},{names[j]}]': tuple(c)
+                                for (i, j), c in constants.items() if i < j and any(x != 0 for x in c)},
+        'jacobi_triples': count,
+    }

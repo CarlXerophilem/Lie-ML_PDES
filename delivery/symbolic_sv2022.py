@@ -1,7 +1,11 @@
-"""Final expressions for 1+1 Eulerian Grass SVE, g,K,h,u>0 and real m>=1."""
+"""Deterministic complete-JetSpace Lie classification and quotient for 1+1 Eulerian Grass SVE E1."""
 import json
-from _eulerian_first_order import (branch_generators, flux_matrix, run_verification,
-                                  s, t, x, h, u, B, K, m, g)
+import sympy as sp
+
+from lie_reduce.algebra import bracket, canonical_basis_dict
+from lie_reduce.determining import smooth_symmetries
+from lie_reduce.models import discover_and_enumerate, euler_spec
+from lie_reduce.reduce import reduce
 
 
 def _require(condition, stage):
@@ -9,39 +13,65 @@ def _require(condition, stage):
         raise ArithmeticError(stage)
 
 
+def discover_reduction(exponent=None):
+    """Discover point algebra on complete JetSpace, enumerate combinations, and reduce bed-drift."""
+    m = sp.Symbol('m', real=True) if exponent is None else sp.sympify(exponent)
+    spec = euler_spec(m)
+    exp_sym = m if isinstance(m, sp.Symbol) else None
+    _, basis, subalgebras = discover_and_enumerate(spec, degree=1, exponent=exp_sym)
+    slope = sp.Symbol('b', real=True)
+    alpha_1 = sp.Symbol('alpha_1', real=True)
+    target_sub = next(s for s in subalgebras if s['id'] == 'X1 + alpha_1*X3')
+    gen = tuple(sp.sympify(c).subs(alpha_1, slope) for c in target_sub['generators'][0])
+    red = reduce(spec, (gen,))
+    _require(red.status == 'verified', 'E1 bed-drift reduction verified')
+    _require(len(red.reduced_equations) == 1, 'E1 bed-drift reduces to a single scalar ODE')
+    return spec, basis, subalgebras, red
+
+
 def run():
-    proof = run_verification()
-    coordinates = (t, x, h, u, B)
+    m = sp.Symbol('m', real=True)
+    spec = euler_spec(m)
+    smooth = smooth_symmetries(spec, exponent=m)
+    _require(smooth['smooth_to_affine_proved'], 'unrestricted smooth-to-affine proof on E1')
+
+    coords = spec.jets.independent + spec.jets.dependent
+    strata_info = smooth['strata_classification']
+    jumps = [row['value'] for row in strata_info['strata'] if row.get('jump') and row['value'] >= 1]
+    _require(jumps == [sp.Integer(3)], 'cubic exceptional stratum m=3 on E1')
+
+    generic_basis = canonical_basis_dict(strata_info['generic_basis'], coords, prefix='X')
+    cubic_row = next(row for row in strata_info['strata'] if row['value'] == 3)
+    cubic_basis = canonical_basis_dict(cubic_row['basis'], coords, prefix='X')
+
     results = {}
-    for stratum in ("positive_generic", "positive_cubic"):
-        basis = branch_generators(stratum)
-        bracket = {}
+    for label, basis in (('positive_generic', generic_basis), ('positive_cubic', cubic_basis)):
+        b_map = {}
         for left, v in basis.items():
             for right, w in basis.items():
-                value = w.jacobian(coordinates)*v - v.jacobian(coordinates)*w
-                if value != s.zeros(5, 1):
-                    bracket[f"[{left},{right}]"] = list(map(str, value))
-        results[stratum] = {"basis": proof["generators"][stratum], "brackets": bracket}
-    f = s.Function("Y")(x)
-    slope = s.Symbol("b", real=True)
-    profile = (1/s.sqrt(f), s.sqrt(f), slope*t+2-f/2-1/s.sqrt(f))
-    residual = s.Matrix(profile).diff(t)+flux_matrix(2*K*s.sqrt(f)).subs(
-        {h:profile[0],u:profile[1]})*s.Matrix(profile).diff(x)
-    reduced = residual.subs(g, 1).applyfunc(s.simplify)
-    _require(reduced[0] == 0 and reduced[1] == 0, "Cartesian bed-drift substitution")
-    _require(not reduced[2].has(t), "bed-drift quotient is autonomous")
-    weights = s.Matrix([[-1,-1,1],[-1,0,1],[0,2,1]])
-    _require(weights.det() != 0, "cubic determining weights")
+                val = bracket(v, w, coords)
+                if any(c != 0 for c in val):
+                    b_map[f'[{left},{right}]'] = list(map(str, val))
+        results[label] = {
+            'basis': {k: list(map(str, vec)) for k, vec in basis.items()},
+            'brackets': b_map,
+        }
+
+    _, _, _, red = discover_reduction(m)
+    dep_names = tuple(map(str, spec.jets.dependent))
+    lifted_profiles = {name: str(expr) for name, expr in zip(dep_names, red.reconstructed_lifts)}
+
     return {
-        "scope": "Local smooth point symmetries, all real m>=1, K,g,h,u>0",
-        "verified_proof_identities": proof["check_count"],
-        "coordinate_order": list(map(str, coordinates)),
-        "strata": results,
-        "m2_bed_drift_profile": {"h": str(profile[0]), "u": str(profile[1]), "B": str(profile[2]), "g": "1"},
-        "m2_bed_drift_quotient": str(reduced[2]) + " = 0",
-        "classification_proof": "delivery/derivations/eulerian-first-order.md; range extension and orbits in delivery/VERIFICATION.md",
+        'scope': 'Local smooth point symmetries on complete JetSpace, all real m>=1, K,g,h,u>0',
+        'smooth_to_affine_proved': smooth['smooth_to_affine_proved'],
+        'stratum_hessian_checks': smooth['stratum_hessian_checks'],
+        'coordinate_order': list(map(str, coords)),
+        'strata': results,
+        'bed_drift_reconstructed_lifts': lifted_profiles,
+        'bed_drift_reduced_ode': str(red.reduced_equations[0]) + ' = 0',
+        'preserved_parameters': [str(p) for p in red.preserved_parameters],
     }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(json.dumps(run(), indent=2, sort_keys=True))

@@ -1,0 +1,187 @@
+{
+  "model": {
+    "target": "delivery/lie_reduce/models.py:planar_e2_spec",
+    "name": "E2_planar",
+    "independent_variables": [
+      "t",
+      "x",
+      "y"
+    ],
+    "dependent_variables": [
+      "h",
+      "u",
+      "v",
+      "B"
+    ],
+    "jet_order": 2,
+    "equations_count": 4,
+    "symbolic_parameters": [
+      "g",
+      "K",
+      "G",
+      "f",
+      "m"
+    ],
+    "detected_symbolic_exponent": "m",
+    "domain_conditions": [
+      "h>0",
+      "u^2+v^2>0",
+      "g,K,G>0"
+    ]
+  },
+  "discovery": {
+    "search_degree": 1,
+    "basis_dimension": 5,
+    "basis": {
+      "X1": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "X2": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "X3": [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "X4": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "X5": [
+        "0",
+        "y",
+        "-x",
+        "0",
+        "v",
+        "-u",
+        "0"
+      ]
+    },
+    "enumerated_rank_d_minus_1_subalgebras": 33,
+    "smooth_classification": null,
+    "parameter_strata": null
+  },
+  "reductions": [
+    {
+      "subalgebra_id": "X5 ; X1 + alpha_1*X4",
+      "generators": [
+        [
+          "0",
+          "y",
+          "-x",
+          "0",
+          "v",
+          "-u",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "alpha_1"
+        ]
+      ],
+      "status": "verified",
+      "reason": "",
+      "wall_seconds": 9.2715,
+      "quotient_coordinate": "z",
+      "target_profile": "F0(z)",
+      "preserved_parameters": [
+        "C1",
+        "C2",
+        "C3",
+        "G",
+        "K",
+        "alpha_1",
+        "f",
+        "g",
+        "m"
+      ],
+      "first_integrals": [
+        {
+          "constant": "C1",
+          "flux": "z*F0(z)*F1(z)",
+          "multiplier": "z",
+          "status": "verified"
+        },
+        {
+          "constant": "C2",
+          "flux": "z*(f*z + 2*F2(z))/2",
+          "multiplier": "z",
+          "status": "verified"
+        },
+        {
+          "constant": "C3",
+          "flux": "z*(-2*G*(F1(z)**2 + F2(z)**2)**(m/2 - 1/2)*Derivative(F3(z), z) + 2*K*(F1(z)**2 + F2(z)**2)**(m/2 - 1/2)*F1(z) + alpha_1*z)/2",
+          "multiplier": "z",
+          "status": "verified"
+        }
+      ],
+      "eliminated_profiles": {
+        "F1(z)": "C1/(z*F0(z))",
+        "F2(z)": "(2*C2 - f*z**2)/(2*z)",
+        "Derivative(F3(z), z)": "(2*C1*K - 2*C3*((4*C1**2 + 4*C2**2*F0(z)**2 - 4*C2*f*z**2*F0(z)**2 + f**2*z**4*F0(z)**2)/(4*z**2*F0(z)**2))**(1/2 - m/2)*F0(z) + alpha_1*z**2*((4*C1**2 + 4*C2**2*F0(z)**2 - 4*C2*f*z**2*F0(z)**2 + f**2*z**4*F0(z)**2)/(4*z**2*F0(z)**2))**(1/2 - m/2)*F0(z))/(2*G*z*F0(z))"
+      },
+      "reduced_equations": [
+        "(-4*C1**2*G*z*Derivative(F0(z), z) - 4*C1**2*G*F0(z) + 4*C1*K*g*z**2*F0(z)**2 - 4*C2**2*G*F0(z)**3 - 4*C3*g*z**2*((4*C1**2 + 4*C2**2*F0(z)**2 - 4*C2*f*z**2*F0(z)**2 + f**2*z**4*F0(z)**2)/(4*z**2*F0(z)**2))**(1/2 - m/2)*F0(z)**3 + G*f**2*z**4*F0(z)**3 + 4*G*g*z**3*F0(z)**3*Derivative(F0(z), z) + 2*alpha_1*g*z**4*((4*C1**2 + 4*C2**2*F0(z)**2 - 4*C2*f*z**2*F0(z)**2 + f**2*z**4*F0(z)**2)/(4*z**2*F0(z)**2))**(1/2 - m/2)*F0(z)**3)/(4*G*z**3*F0(z)**3) = 0"
+      ],
+      "integrated_ode": null,
+      "reconstructed_lifts": [
+        "F0(z)",
+        "(2*C1*cos(v1) + 2*C2*F0(z)*sin(v1) - f*z**2*F0(z)*sin(v1))/(2*z*F0(z))",
+        "(-2*C1*sin(v1) + 2*C2*F0(z)*cos(v1) - f*z**2*F0(z)*cos(v1))/(2*z*F0(z))",
+        "alpha_1*v2 + F3(z)"
+      ],
+      "checks": {
+        "base_orbit_rank": 2,
+        "subalgebra": true,
+        "on_shell": true,
+        "invariant_surface": true,
+        "chart_jacobian": {
+          "status": "conditional",
+          "expression": "-z",
+          "required_condition": "Ne(-z, 0)",
+          "reason": "nonvanishing not established on the whole chart"
+        },
+        "weight_kind": "matrix",
+        "weight_determinant": {
+          "status": "proved_nonzero",
+          "expression": "1",
+          "method": "exact signs and declared positive symbols"
+        },
+        "pullback_identity": "Delta(z,v) = M(z,v) E(z) exactly"
+      }
+    }
+  ],
+  "ml_handoff": null,
+  "summary": {
+    "evaluated_subalgebras": 1,
+    "verified_quotients": 1,
+    "scalar_ode_quotients": 1
+  }
+}
