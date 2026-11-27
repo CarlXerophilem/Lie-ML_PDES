@@ -1,5 +1,5 @@
 % Compact WKU Undergraduate Dissertation (MATH 4890), 27 November 2026.
-% Format: 12pt single spacing, WKU margins, Roman front matter, Arabic body, unsigned declaration.
+% Format: 12pt single spacing, WKU margins, Roman front matter, Arabic body, author-supplied signature.
 % Prose in black; key equations highlighted with \keyeq; numbers imported from figures/planar/numbers.tex.
 \documentclass[12pt,a4paper,oneside]{report}
 \usepackage[T1]{fontenc}
@@ -126,13 +126,13 @@ Undergraduate Dissertation (MATH 4890)
 I, the undersigned, hereby declare that this submission is entirely my own work, in my own words, and that all sources used in researching it are fully acknowledged and all quotations properly identified. It has not been submitted, in whole or in part, by me or another person, for the purpose of obtaining any other credit/grade. I have a citation to AI system used to generate the text if I used AI-generated text. I understand the ethical implications of my research, and this work meets the requirements of College of Science, Mathematics and Technology.
 
 \vfill
-\noindent\textbf{Date:} \rule[-8pt]{11.5cm}{0.1em}
+\noindent\textbf{Date:} \underline{\makebox[11.5cm][l]{November 27, 2026}}
 
 \bigskip
-\noindent\textbf{Name (printed letters):} \rule[-8pt]{7.8cm}{0.1em}
+\noindent\textbf{Name (printed letters):} \underline{\makebox[7.8cm][l]{Yihong Xiao}}
 
 \bigskip
-\noindent\textbf{Signature:} \rule[-8pt]{10.55cm}{0.1em}
+\noindent\textbf{Signature:} \makebox[10.55cm][l]{\rlap{\rule[-8pt]{10.55cm}{0.1em}}\hspace{.35cm}\raisebox{-5pt}{\includegraphics[height=1.2cm]{figures/author_signature.png}}}
 
 \clearpage
 \chapter*{Abstract}
@@ -185,7 +185,7 @@ Two distinct mathematical objects govern invariant solutions of parameterized no
 
 Our physical setting is morphodynamic sediment transport governed by the Saint--Venant--Exner (SVE) equations, which couple shallow-water hydrodynamics to mobile-bed aggradation and scour through Exner's sediment conservation law. Paliathanasis~\cite{sve2022} and Paliathanasis, Leon, and Leach~\cite{sve2026} studied $(1+1)$D Eulerian and Lagrangian SVE models with Grass power-law bedload flux $q_b=\kappa u^m$ via classical Lie point symmetries~\cite{olver,oliveri}. Checking their mass-coordinate transformation directly on jet space uncovers an omitted bed-advection term between the printed scalar $\mathcal E_P$ and the physically compatible Lagrangian scalar $\mathcal E_L$ required to reconstruct single-valued Eulerian water and bed profiles.
 
-In real toilet draining or river engineering, we need to model many aspects such as reservoir sediment flushing, dam removal, and navigation-channel dredging, while bed evolution depends not only on streamwise shear transport ($m\ge1$) but also on downslope gravitational bed-slope diffusion, see demos from the U.S.\ Army Corps of Engineers (USACE) Hydrologic Engineering Center's \texttt{HEC-RAS} two-dimensional sediment transport system~\cite[Sec.~2.9]{hecras2019} and physics-based sloping-bed SVE solvers~\cite{fernandez2017,burger2025} . These facts motivate extending our reduction workflow to a $(2+1)$D planar SVE family $\mathcal E_2$ with sediment flux $\mathbf Q=|\mathbf w|^{m-1}(K\mathbf w-G\nabla B)$ and exploring realistic dimensionless exponent and \textit{transport-to-slope} ranges ($m\in[1.5,3.5]$, $k=K/G\in[2,10]$). We would tend to discover the box in grey with Lie symmetry.
+In sediment-transport engineering, reservoir flushing, dam removal and navigation-channel dredging motivate models of bed evolution. The USACE Hydrologic Engineering Center's \texttt{HEC-RAS} 2D sediment transport framework~\cite[Sec.~2.9]{hecras2019} and sloping-bed SVE models~\cite{fernandez2017,burger2025} include gravitational bed-slope effects. These motivate our idealized $(2+1)$D family $\mathcal E_2$ with flux $\mathbf Q=|\mathbf w|^{m-1}(K\mathbf w-G\nabla B)$, and an exploratory parameter box $m\in[1.5,3.5]$, $k=K/G\in[2,10]$.
 
 \paragraph{Contribution and semi-analytical workflow.}
 This thesis builds an end-to-end parameter-dependent semi-analytical workflow (Figure~\ref{fig:workflow}): start from a physically compatible PDE chart, compute admitted point symmetries $\ker\mathscr D_\mu$ before choosing a regular invariant graph, reduce to ODEs, extract exact symbolic first integrals, apply regular or singular (Briot--Bouquet and Laurent) solvability tests, and extend profiles across admissible domains via classical Chebyshev collocation and continuation with analytical error bounds to reconstruct both water depth and sediment-bed elevation. Modern Lie-group analysis is used constructively with orbit rank and enumerating concrete solution regimes computations 
@@ -260,9 +260,16 @@ We work in dimensionless variables on positive depth ($h>0$) and positive veloci
  \kappa_i=\frac{A_{g,i,\rm d}U_0^{m-1}}{(1-\epsilon_{\rm bed})H_0},\qquad
  q_{b,i}(u)=\kappa_i u^m \quad (m\ge 1),
 \end{equation}
-where $u^m=\exp(m\log u)$ is smooth on $u>0$ for every real $m\ge1$ (empirical sediment-transport formulas typically span $1\le m\le4$, excluding decoupled $m=0$ and stagnation $u=0$). Neglecting fluid viscosity and bed shear drag are distinct idealizations~\cite{fernandez2017}.
+where $u^m=\exp(m\log u)$ is smooth on $u>0$ for every real $m\ge1$. Paliathanasis~\cite{sve2022} reports $1\le m\le4$ as an empirical range for this power-law closure; the mathematical domain here is $m\ge1$, excluding $m=0$ and stagnation. Neglecting fluid viscosity and bed shear drag are distinct idealizations~\cite{fernandez2017}.
 
-Equations~(1)--(4) of Paliathanasis~\cite{sve2022} define the $(1+1)$D Eulerian SVE system coupling water mass, shallow-water momentum, and Exner bedload conservation:
+The two parts of the SVE system have different historical origins. The water balances are modern depth-averaged forms of Saint-Venant's 1871 unsteady open-channel theory~\cite{saintvenant1871}. In his original study of water and movable river beds, Felix M.\ Exner~\cite[p.~167, Eq.~(1)]{exner1925} wrote $\eta_t=-a\,v_x$, where $\eta$ is bed elevation, $v$ is mean flow velocity and $a$ is a constant; the simplified relation neglects the velocity threshold for erosion. In modern notation, conservation of bed sediment with constant porosity $\epsilon_{\rm bed}$ and no exchange with suspended load gives~\cite{paola2005,berthon2012}
+\[
+ (1-\epsilon_{\rm bed})\partial_{t_{\rm d}} B_{\rm d}
+ +\partial_{x_{\rm d}}q_{s,\rm d}=0,
+\]
+where $q_{s,\rm d}$ is the volumetric solid bedload flux per unit channel width. An increasing downstream flux removes sediment, while a decreasing flux deposits it. Exner's linear relation is the special case of an effective flux proportional to velocity. The empirical Grass closure $q_{s,\rm d}=A_{g,1,\rm d}u_{\rm d}^m$ is a later modelling choice, not Exner's original equation. Absorbing porosity and scaling as above yields the third balance below.
+
+Equations~(1)--(4) of Paliathanasis~\cite{sve2022} give the direct source of our $(1+1)$D system. Subtracting $u$ times water continuity from the conservative momentum equation and dividing by $h>0$ gives its equivalent primitive form:
 \begin{equation}\label{eq:E}
  \mathcal E_1:\quad
  \begin{cases}
@@ -475,7 +482,7 @@ Now it's time to exploit on our pure-analytic layer just built with benchmarks m
 \end{align}
 Here $\mathbf w=(u,v)$, and $\mathcal J(u,v)=(-v,u)$ is a $90^\circ$ \emph{quarter-turn} (not to be confused with the critical-point Jacobian $\mathbf J_*$ below). The sediment flux $\mathbf Q$ combines streamwise advective bedload transport $K|\mathbf w|^{m-1}\mathbf w$ with downslope gravity-driven sediment diffusion $-G|\mathbf w|^{m-1}\nabla B$. When $G=f=0$ in one dimension,~\eqref{eq:planar} reduces to $\mathcal E_1$ at $K=\kappa$; for $G>0$, Exner bed diffusion makes $\mathcal E_2$ mixed hyperbolic--parabolic rather than purely hyperbolic~\cite{fernandez2017,burger2025}.
 
-In engineering sediment modeling, notably I found and decides to use the USACE \texttt{HEC-RAS} 2D Sediment Transport Technical Reference Manual~\cite[Sec.~2.9, Eqs.~(2-46)--(2-48)]{hecras2019} and field/flume morphodynamic solvers for reservoir flushing, dam removal, channel dredging, and curved-reach scour~\cite{fernandez2017,burger2025}---effective bedload capacity powers span $m\in[1.5,3.5]$ (covering Meyer-Peter--M\"uller threshold transport near $1.5$--$3$ and Grass cubic transport at $m=3$), while gravitational bed-slope dispersion acts with $0<G<K$. These applications motivate our constitutive law and exploratory transport-to-slope ratio $k=K/G\in[2,10]$, without calibrating $K,G$ to a specific frictional river reach.
+The USACE \texttt{HEC-RAS} technical reference~\cite[Sec.~2.9, Eqs.~(2-46)--(2-48)]{hecras2019} describes downslope bed transport using a grain-class coefficient whose empirical base value $\kappa_{b0}$ is approximately $0.1$--$0.5$; the effective coefficient also depends on shear stress. Sloping-bed SVE studies~\cite{fernandez2017,burger2025} provide additional physical motivation. The simplified constitutive law in~\eqref{eq:planar} is introduced here: it is neither Exner's original erosion equation nor the full HEC-RAS transport model. We use $m\in[1.5,3.5]$ and $k=K/G\in[2,10]$ as exploratory dimensionless ranges inspired by these references, without identifying $G/K$ with the HEC-RAS coefficient or calibrating the model to a specific river.
 
 For every $(m,K,G,f,g,c)$, $\mathcal E_2$ admits horizontal rotation and uniform time--bed drift:
 \begin{equation}\label{eq:planar-symmetries}
@@ -599,7 +606,7 @@ with rigorous \footnote{Suggested by Claude-Opus-5.5 model.} tail bound $|F-F^{[
 
 \section{Classical computation and continuous error bounds}\label{sec:classical}
 
-On the anchored $f=0$ planar crossing $(r_*,H_*)=(1,1)$ ($\ell_+$, $\rho=r-1$, $H=1+\rho(\ell_++w(\rho))$), the divided equation is $\rho w'=\mathfrak f(\rho,w)=n(\rho,w)/d(\rho,w)-\ell_+-w$ with $a=\lambda_-/\lambda_+-1<-1$. Motivated by the USACE \texttt{HEC-RAS} bedload exponent and bed-slope dispersion ranges~\cite{hecras2019}, we sample $\NumTotalTuples$ tuples ($\NumTrainTuples$ train seed $27$, $\NumTestTuples$ held-out test seed $29$) from
+On the anchored $f=0$ planar crossing $(r_*,H_*)=(1,1)$ ($\ell_+$, $\rho=r-1$, $H=1+\rho(\ell_++w(\rho))$), the divided equation is $\rho w'=\mathfrak f(\rho,w)=n(\rho,w)/d(\rho,w)-\ell_+-w$ with $a=\lambda_-/\lambda_+-1<-1$. With the exploratory parameter ranges motivated by Section~\ref{sec:annular-model}, we sample $\NumTotalTuples$ tuples ($\NumTrainTuples$ train seed $27$, $\NumTestTuples$ held-out test seed $29$) from
 \[
  \nu=(m,k,\delta)\in[1.5,3.5]\times[2,10]\times[1,3],\qquad \gamma=\gamma_*(m,k)-\delta.
 \]
@@ -662,7 +669,7 @@ Parameters determine which Lie symmetries a PDE admits; selected symmetries fix 
 In $(1+1)$D mass coordinates on $\phi_s,\phi_t>0$, Exner's fixed-position sediment balance requires the advection correction $-D_s((\phi_t/\phi_s)\mathcal A)$, separating the physically compatible scalar $\mathcal E_L$---whose closed one-form $\omega_{\mathcal E_L}$ reconstructs water depth, velocity, and bed elevation---from the printed scalar $\mathcal E_P$. For all real $m\ge1$, free-jet splitting reduces smooth point symmetries to linear matrices $\mathfrak g_{i,\mu}\simeq\ker A_i(m)$, proving that affine power-law exponents jump only at $m=3$ (scaling) and, for $\mathcal E_P$ alone, at $m=1$ (boost). Symbolic total-derivative detection yields direct first integrals ($LF''=I_0$), and time--bed drift $T_\alpha$ gives exact profiles for any monotone $C^2$ velocity flux $Q(u)$. In $(2+1)$D sloping-bed sediment transport $\mathcal E_2$, rotation and bed drift give three radial first integrals for water discharge, circulation, and sediment throughput, reducing the PDEs to $\Delta_c(r,H)H'=N(r,H)$ with $Z'=P_Z(r,H)$. Here $\Delta_c=0$ marks a unit-Froude hydraulic crossing ($\mathrm{Fr}_r=1$) with two real-analytic Briot--Bouquet crossing germs whenever $\Delta_c=N=0$ and $\det\mathbf J_*<0$ ($\delta>0$), complemented at $m=3,g\kappa=1/4$ by a convergent Laurent branch.
 
 \paragraph{What is observed computationally.}
-Across $\NumTotalTuples$ tuples in the USACE \texttt{HEC-RAS}-motivated sediment-transport box $m\in[1.5,3.5]$, $k=K/G\in[2,10]$, $\delta\in[1,3]$, order-$16$ Taylor germs resolve the $0/0$ crossing to $\NumTayNearMed$ median error near $r=1$ but diverge on $r\in[0.85,2.0]$. Adaptive \code{DOP853} continuation verifies smoothness across $r\in[0.85,2.0]$ on all $\NumTotalTuples/\NumTotalTuples$ tuples and detects inward sonic limits ($\Delta_c\to0$) below $r=\NumMaxSonicStopR$ on $\NumSonicStopsTotal$ tuples. Per-tuple 1D Chebyshev collocation reconstructs held-out water depth to $\NumChebDiffMed$ and mobile bed elevation to $\NumChebZMed$ median error in $\NumChebMs$\,ms without training. Tested afterward, the crossing-exact \texttt{LNN-PINN} remainder surrogate reaches $\NumLNNHMed$ depth error and $\NumLNNZMed$ bed error after $\NumLNNTrainSec$\,s of CPU training, showing no overall accuracy or end-to-end cost advantage over Chebyshev.
+Across $\NumTotalTuples$ tuples in the exploratory sediment-transport box $m\in[1.5,3.5]$, $k=K/G\in[2,10]$, $\delta\in[1,3]$, order-$16$ Taylor germs resolve the $0/0$ crossing to $\NumTayNearMed$ median error near $r=1$ but diverge on $r\in[0.85,2.0]$. Adaptive \code{DOP853} continuation verifies smoothness across $r\in[0.85,2.0]$ on all $\NumTotalTuples/\NumTotalTuples$ tuples and detects inward sonic limits ($\Delta_c\to0$) below $r=\NumMaxSonicStopR$ on $\NumSonicStopsTotal$ tuples. Per-tuple 1D Chebyshev collocation reconstructs held-out water depth to $\NumChebDiffMed$ and mobile bed elevation to $\NumChebZMed$ median error in $\NumChebMs$\,ms without training. Tested afterward, the crossing-exact \texttt{LNN-PINN} remainder surrogate reaches $\NumLNNHMed$ depth error and $\NumLNNZMed$ bed error after $\NumLNNTrainSec$\,s of CPU training, showing no overall accuracy or end-to-end cost advantage over Chebyshev.
 
 \paragraph{What remains open.}
 Our invariant profiles describe open annular throughflow with uniform vertical bed drift $B=Z(r)+ct$ and do not treat general IBVPs, shocks, suspended-load exchange, bed shear drag, site-calibrated \texttt{HEC-RAS} channels, critical folds ($\delta\le0$), or $\mathcal E_P$--$\mathcal E_L$ continuation. Two computational extensions follow directly from our \texttt{SymPy} pipeline: (i) \emph{CPU-only symbolic-ML search} to propose integrating factors or coordinate charts when non-power sediment closures ($u^{bm-\exp(a-m)}$) defeat standard symbolic reducers, and (ii) \emph{higher-dimensional ($\ge4$D) problems}, extending invariant reduction and parameter surrogates to $(3+1)$D morphodynamics and $\NumPreservedParams+$ preserved symbolic parameters where tensor spectral grids scale exponentially.
@@ -675,43 +682,43 @@ I thank my supervisor, Dr.\ Puneet Rana, for guidance throughout this dissertati
 \addcontentsline{toc}{chapter}{References}
 
 \bibitem[Paliathanasis(2022)]{sve2022}
-Andronikos Paliathanasis. Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model. \emph{Symmetry}, 14:1679, 2022. \doi{10.3390/sym14081679}.
+Andronikos Paliathanasis. Lie Symmetry Analysis of the One-Dimensional Saint-Venant-Exner Model. \emph{Symmetry}, 14:1679, 2022. \href{https://www.mdpi.com/2073-8994/14/8/1679}{doi: 10.3390/sym14081679}.
 
 \bibitem[Paliathanasis et~al.(2026)Paliathanasis, Leon, and Leach]{sve2026}
-Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach. Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables. \emph{Mathematics}, 14:433, 2026. \doi{10.3390/math14030433}.
+Andronikos Paliathanasis, Genly Leon, and Peter G.~L. Leach. Lie Symmetries and Similarity Solutions for a Shallow-Water Model with Bed Elevation in Lagrange Variables. \emph{Mathematics}, 14:433, 2026. \href{https://www.mdpi.com/2227-7390/14/3/433}{doi: 10.3390/math14030433}.
 
 \bibitem[Olver(1993)]{olver}
-Peter~J. Olver. \emph{Applications of Lie Groups to Differential Equations}. Springer, 2nd edition, 1993. \doi{10.1007/978-1-4612-4350-2}.
+Peter~J. Olver. \emph{Applications of Lie Groups to Differential Equations}. Springer, 2nd edition, 1993. \href{https://link.springer.com/book/10.1007/978-1-4612-4350-2}{doi: 10.1007/978-1-4612-4350-2}.
 
 \bibitem[Oliveri(2026)]{oliveri}
-Francesco Oliveri. \emph{Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation}. Birkh\"auser, Cham, 2026. \doi{10.1007/978-3-032-12791-4}.
+Francesco Oliveri. \emph{Lie Symmetries of Differential Equations: Theory, Applications, and Symbolic Computation}. Birkh\"auser, Cham, 2026. \href{https://link.springer.com/book/10.1007/978-3-032-12791-4}{doi: 10.1007/978-3-032-12791-4}.
 
 \bibitem[Fern\'andez-Nieto et~al.(2017)]{fernandez2017}
-Enrique D. Fern\'andez-Nieto, Tom\'as Morales de Luna, Gladys Narbona-Reina, and Jean de Dieu Zabsonr\'e. Formal deduction of the Saint--Venant--Exner model including arbitrarily sloping sediment beds and associated energy. \emph{ESAIM: M2AN}, 51(1):115--145, 2017. \doi{10.1051/m2an/2016018}.
+Enrique D. Fern\'andez-Nieto, Tom\'as Morales de Luna, Gladys Narbona-Reina, and Jean de Dieu Zabsonr\'e. Formal deduction of the Saint--Venant--Exner model including arbitrarily sloping sediment beds and associated energy. \emph{ESAIM: M2AN}, 51(1):115--145, 2017. doi: \nolinkurl{10.1051/m2an/2016018}; \href{https://www.numdam.org/item/M2AN_2017__51_1_115_0/}{Open archive}.
 
 \bibitem[B\"urger et~al.(2025)B\"urger, Fern\'andez-Nieto, Garres-D\'iaz, and Moya]{burger2025}
-Raimund B\"urger, Enrique D. Fern\'andez-Nieto, Jose Garres-D\'iaz, and Jorge Moya. Well-balanced physics-based finite volume schemes for Saint-Venant--Exner-type models of sediment transport. \emph{Advances in Water Resources}, 206:105178, 2025. \doi{10.1016/j.advwatres.2025.105178}.
+Raimund B\"urger, Enrique D. Fern\'andez-Nieto, Jose Garres-D\'iaz, and Jorge Moya. Well-balanced physics-based finite volume schemes for Saint-Venant--Exner-type models of sediment transport. \emph{Advances in Water Resources}, 206:105178, 2025. doi: \nolinkurl{10.1016/j.advwatres.2025.105178}; \href{https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2025/pp25-18.pdf}{Author preprint}.
 
 \bibitem[USACE HEC(2019)]{hecras2019}
 U.S. Army Corps of Engineers, Hydrologic Engineering Center. \emph{HEC-RAS Two-Dimensional Sediment Transport Technical Reference Manual}. Beta Release Draft, October 2019, Sec.~2.9, Eqs.~(2-46)--(2-48). \href{https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_(BetaReleaseDraft).pdf}{Technical reference manual}.
 
 \bibitem[Anderson et~al.(2000)Anderson, Fels, and Torre]{anderson2000}
-Ian M. Anderson, Mark E. Fels, and Charles G. Torre. Group Invariant Solutions without Transversality. \emph{Communications in Mathematical Physics}, 212:653--686, 2000. \doi{10.1007/s002200000215}.
+Ian M. Anderson, Mark E. Fels, and Charles G. Torre. Group Invariant Solutions without Transversality. \emph{Communications in Mathematical Physics}, 212:653--686, 2000. doi: \nolinkurl{10.1007/s002200000215}; \href{https://arxiv.org/abs/math-ph/9910015}{Open preprint}.
 
 \bibitem[Berthon et~al.(2012)]{berthon2012}
-Christophe Berthon, St\'ephane Cordier, Olivier Delestre, and Minh Hoang Le. An analytical solution of the shallow water system coupled to the Exner equation. \emph{Comptes Rendus Math\'ematique}, 350:183--186, 2012. \doi{10.1016/j.crma.2012.01.007}.
+Christophe Berthon, St\'ephane Cordier, Olivier Delestre, and Minh Hoang Le. An analytical solution of the shallow water system coupled to the Exner equation. \emph{Comptes Rendus Math\'ematique}, 350:183--186, 2012. doi: \nolinkurl{10.1016/j.crma.2012.01.007}; \href{https://www.numdam.org/item/10.1016/j.crma.2012.01.007.pdf}{Open article}.
 
 \bibitem[Zeng et~al.(2008)Zeng, Constantinescu, Blanckaert, and Weber]{zeng2008}
 Jie Zeng, George Constantinescu, Koen Blanckaert, and Larry Weber. Flow and bathymetry in sharp open-channel bends: Experiments and predictions. \emph{Water Resources Research}, 44(9):W09401, 2008. \doi{10.1029/2007WR006303}.
 
 \bibitem[Rong(2013)]{rong2013}
-Feng Rong. The Briot--Bouquet systems and the center families for holomorphic dynamical systems. \emph{Advances in Mathematics}, 245:237--249, 2013. \doi{10.1016/j.aim.2013.06.021}.
+Feng Rong. The Briot--Bouquet systems and the center families for holomorphic dynamical systems. \emph{Advances in Mathematics}, 245:237--249, 2013. doi: \nolinkurl{10.1016/j.aim.2013.06.021}; \href{https://arxiv.org/pdf/1307.3823}{Open preprint}.
 
 \bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993}
 Ernst Hairer, Syvert P. N{\o}rsett, and Gerhard Wanner. \emph{Solving Ordinary Differential Equations I: Nonstiff Problems}. Springer, 2nd edition, 1993. \doi{10.1007/978-3-540-78862-1}.
 
 \bibitem[Teschl(2012)]{teschl2012}
-Gerald Teschl. \emph{Ordinary Differential Equations and Dynamical Systems}, GSM 140. American Mathematical Society, 2012. \url{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf}.
+Gerald Teschl. \emph{Ordinary Differential Equations and Dynamical Systems}, GSM 140. American Mathematical Society, 2012. \href{https://www.mat.univie.ac.at/~gerald/ftp/book-ode/}{Author's book page and PDF}.
 
 \bibitem[Trefethen(2000)]{trefethen}
 Lloyd N. Trefethen. \emph{Spectral Methods in MATLAB}. SIAM, Philadelphia, 2000. \doi{10.1137/1.9780898719598}.
@@ -723,7 +730,17 @@ Shivam Arora, Alex Bihlo, and Francis Valiquette. Invariant Physics-Informed Neu
 Chandra Kanth Nagesh, Sriram Sankaranarayanan, Ramneet Kaur, Tuhin Sahai, and Susmit Jha. Taylor-Model Physics-Informed Neural Networks (PINNs) for Ordinary Differential Equations. \emph{Proceedings of Machine Learning Research}, 288:621--642, 2025. \url{https://proceedings.mlr.press/v288/nagesh25a.html}.
 
 \bibitem[Tao et~al.(2026)Tao, Wang, and Liu]{tao2026}
-Ze Tao, Hanxuan Wang, and Fujun Liu. LNN-PINN: A Unified Physics-Only Training Framework with Liquid Residual Blocks. \emph{Computer Physics Communications}, 326:110237, 2026. \doi{10.1016/j.cpc.2026.110237}.
+Ze Tao, Hanxuan Wang, and Fujun Liu. LNN-PINN: A Unified Physics-Only Training Framework with Liquid Residual Blocks. \emph{Computer Physics Communications}, 326:110237, 2026. doi: \nolinkurl{10.1016/j.cpc.2026.110237}; \href{https://arxiv.org/abs/2508.08935}{Open preprint}.
+
+
+\bibitem[Saint-Venant(1871)]{saintvenant1871}
+Adh\'emar-Jean-Claude Barr\'e de Saint-Venant. Th\'eorie du mouvement non permanent des eaux, avec application aux crues des rivi\`eres et \`a l'introduction des mar\'ees dans leur lit. \emph{Comptes rendus de l'Acad\'emie des sciences}, 73:147--154, 237--240, 1871. \href{https://belinrae.inrae.fr/index.php?id=226630\&lvl=notice_display}{INRAE catalogue}.
+
+\bibitem[Exner(1925)]{exner1925}
+Felix M.\ Exner. \"Uber die Wechselwirkung zwischen Wasser und Geschiebe in Fl\"ussen. \emph{Sitzungsberichte der Akademie der Wissenschaften in Wien, Mathematisch-naturwissenschaftliche Klasse, Abt.\ IIa}, 134:165--203, 1925. \href{https://www.zobodat.at/pdf/SBAWW_134_2a_0165-0203.pdf}{Original scan}; \href{https://github.com/CarlXerophilem/Lie-ML_PDES/blob/ccfa023408e5b748d0231960aeb7f52e21075808/ref/main/Felix\%20M.\%20Exner\%20Uber\%20die\%20Wechselwirkung\%20zwischen\%20Wasser\%20und\%20Geschiebe\%20in\%20Flussen.pdf}{repository copy}; \href{https://books.google.de/books?id=7bjqZwEACAAJ}{catalogue}.
+
+\bibitem[Paola and Voller(2005)]{paola2005}
+Chris Paola and Vaughan R.\ Voller. A generalized Exner equation for sediment mass balance. \emph{Journal of Geophysical Research: Earth Surface}, 110:F04014, 2005. doi: \nolinkurl{10.1029/2004JF000274}; \href{https://geoweb.uwyo.edu/geol5330/PaolaandVoller2005_JGR_GenExnerEquation.pdf}{Open article}.
 
 \end{thebibliography}
 

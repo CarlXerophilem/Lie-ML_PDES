@@ -20,3 +20,37 @@ Checked during the 23 November 2026 audit. AlphaXiv supplied extracted source te
 | [Flow and Bathymetry in Sharp Open-Channel Bends: Experiments and Predictions](https://doi.org/10.1029/2007WR006303), §2 (checked 27 November 2026) | EPFL flume: 193° bend, centreline radius \(R=1.7\) m, width \(B=1.3\) m, vertical banks, \(d_{50}\approx2\) mm. In units of \(R\) the banks lie at \(r\approx0.62\) and \(1.38\), inside the stage-B slice \([0.5,2]\). | Scale only. The flume has secondary circulation, friction and a non-free-vortex inflow; the free-vortex E2 bend does not model it. |
 
 The published rotating experiment photographs shown in the defense are credited to [Dave Rubin and the U.S. Geological Survey](https://www.usgs.gov/media/images/bedforms-produced-three-experiments).
+
+## Final compact dissertation bibliography audit — 27 November 2026
+
+Baseline manuscript: Git commit [ccfa023](https://github.com/CarlXerophilem/Lie-ML_PDES/commit/ccfa023408e5b748d0231960aeb7f52e21075808), the author's updated compact dissertation. This audit concerns its 17 existing bibliography entries and the three historical/conservation references added here, not every historical source in the repository. DOI metadata is retained even when a direct publisher redirect is blocked; the bibliography now points to a checked publisher, open author version, archive or catalogue. A working landing page is not a guarantee of unrestricted full-text access. Access observations are specific to the verification date.
+
+| Final key | Checked access route | Access / verification outcome |
+|---|---|---|
+| sve2022 | [MDPI](https://www.mdpi.com/2073-8994/14/8/1679) | Open article; DOI redirect failed but publisher page opened. Bundled paper also inspected. |
+| sve2026 | [MDPI](https://www.mdpi.com/2227-7390/14/3/433) | Open article; DOI resolved to publisher; bundled v3 copy retained. |
+| olver | [Springer book](https://link.springer.com/book/10.1007/978-1-4612-4350-2) | Publisher metadata and contents opened; DOI redirect failed. Full-book access may require subscription. |
+| oliveri | [Springer book](https://link.springer.com/book/10.1007/978-3-032-12791-4) | Publisher metadata and contents opened; DOI redirect failed. Full-book access may require subscription. |
+| fernandez2017 | [Numdam article](https://www.numdam.org/item/M2AN_2017__51_1_115_0/) | Open archive page verified; DOI redirect failed. |
+| burger2025 | [University of Concepción preprint](https://www.ci2ma.udec.cl/pdf/pre-publicaciones2/2025/pp25-18.pdf) | Full preprint opened; publication title, volume, article number and DOI verified separately; publisher redirect was blocked. |
+| hecras2019 | [USACE technical reference PDF](https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_2DSedimentTechnicalReference_%28BetaReleaseDraft%29.pdf) | Full 124-page PDF opened. Sec. 2.9, Eqs. (2-46)–(2-48) checked. |
+| anderson2000 | [arXiv:math-ph/9910015](https://arxiv.org/abs/math-ph/9910015) | Open preprint page verified; publisher DOI redirect was blocked. |
+| berthon2012 | [Numdam article PDF](https://www.numdam.org/item/10.1016/j.crma.2012.01.007.pdf) | Full four-page published article opened; DOI/publisher route was blocked. |
+| zeng2008 | [Wiley DOI](https://doi.org/10.1029/2007WR006303) | Publisher page opened; supports geometry only, not a calibrated annular-throughflow model. |
+| rong2013 | [arXiv PDF](https://arxiv.org/pdf/1307.3823) | Full 13-page preprint opened; journal metadata checked separately; DOI redirect and abstract-page retrieval failed. Nonresonance result is Proposition 2.1. |
+| hairer1993 | [Springer DOI](https://doi.org/10.1007/978-3-540-78862-1) | Book page opened; full-book access may require subscription. |
+| teschl2012 | [Author book page](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/) | Author page with book PDF link opened; direct PDF timed out during the audit. |
+| trefethen | [SIAM DOI](https://doi.org/10.1137/1.9780898719598) | Publisher book page opened; full-book access may require subscription. |
+| arora2023 | [JMLR](https://jmlr.org/papers/v25/23-1511.html) | Open article page verified. |
+| nagesh2025 | [PMLR](https://proceedings.mlr.press/v288/nagesh25a.html) | Open proceedings page verified; pages 621–642. |
+| tao2026 | [arXiv:2508.08935](https://arxiv.org/abs/2508.08935) | Open preprint page verified; CPC 326 (2026), 110237 and DOI verified separately; publisher redirect failed. |
+| saintvenant1871 | [INRAE catalogue](https://belinrae.inrae.fr/index.php?id=226630&lvl=notice_display) | Original 1871 publication's bibliographic record opened. Gallica scan retrieval failed; no claim of having read that original scan in this audit. |
+| exner1925 | [Repository scan](main/Felix%20M.%20Exner%20Uber%20die%20Wechselwirkung%20zwischen%20Wasser%20und%20Geschiebe%20in%20Flussen.pdf), [public archive](https://www.zobodat.at/pdf/SBAWW_134_2a_0165-0203.pdf), [catalogue](https://books.google.de/books?id=7bjqZwEACAAJ) | Repository scan rendered and Eq. (1), printed p. 167 (scan page 3), visually verified. Public scan indexed but returned HTTP 403 to the retrieval tool; catalogue opened. Repository copy requires repository access. |
+| paola2005 | [University-hosted published article](https://geoweb.uwyo.edu/geol5330/PaolaandVoller2005_JGR_GenExnerEquation.pdf) | Full eight-page published article opened; historical form of Exner's equation and mass-conservation interpretation verified. |
+
+### Equation provenance
+
+- **Saint-Venant (1871):** unsteady open-channel water motion. The dissertation uses the modern hydrostatic depth-averaged water mass and momentum balances; historical terminology is not a claim that the present coupled model appeared verbatim in 1871.
+- **Exner (1925), printed p. 167, Eq. (1):** eta_t = -a v_x. Eta denotes bed elevation, v the mean flow velocity, a the assumed constant coefficient. Exner explicitly sets aside the erosion threshold in this simplification. The modern constant-porosity sediment balance is (1-epsilon) B_t + div(q_s) = 0, where q_s is solid volumetric flux per unit width in one dimension. It follows from conservation of sediment. Paola and Voller (2005) place the historical form in the broader mass-balance framework.
+- **Grass power law:** q_s = A_g u^m is a later empirical closure, adopted from the explicit equations (1)–(4) of Paliathanasis (2022) and the parent equations of Paliathanasis, Leon and Leach (2026). The porosity factor is absorbed in the dimensionless coefficient. The compatible material scalar is the dissertation's coordinate-consistent derivation.
+- **Planar extension:** the dissertation introduces its own advective and downslope flux closure. The HEC-RAS manual's empirical base coefficient in Eq. (2-48) is approximately 0.1–0.5, with an additional shear-stress factor. It is not directly equal to G/K. The dissertation's ranges m in [1.5,3.5] and K/G in [2,10] are exploratory, not calibrated site data; the citations motivate the physical structure only.
