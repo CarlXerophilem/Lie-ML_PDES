@@ -1,0 +1,41 @@
+{
+  "$comment": "Field guide for build/cartan-dec-miae/<run-id>/ledger.json. The checker in .agent/checks/validate_workflow.py enforces the required keys on the template and on policy decisions.",
+  "required": [
+    "run_id",
+    "case_id",
+    "tier",
+    "compute_authorization",
+    "contract_sha256",
+    "stage",
+    "stages",
+    "observations",
+    "claims",
+    "decisions"
+  ],
+  "tier_enum": ["quote", "smoke", "paper"],
+  "authorization_enum": ["smoke-only", "paper-authorized"],
+  "stage_enum": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "state_enum": [
+    "queued",
+    "running",
+    "evidence-ready",
+    "blocked",
+    "failed",
+    "review",
+    "accepted",
+    "qualified",
+    "rejected"
+  ],
+  "claim_kind_enum": ["measurement", "quotation", "mechanism"],
+  "observation_required": [
+    "id",
+    "tier",
+    "metric",
+    "value",
+    "unit",
+    "source",
+    "command",
+    "seed"
+  ],
+  "claim_required": ["id", "kind", "tier", "statement", "observation_ids"]
+}
