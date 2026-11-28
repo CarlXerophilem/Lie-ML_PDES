@@ -1,0 +1,23 @@
+{
+  "run_id": "",
+  "case_id": "health_cartan_dec_miae",
+  "tier": "smoke",
+  "compute_authorization": "smoke-only",
+  "contract_sha256": "",
+  "stage": "S0",
+  "stages": {
+    "S0": {"state": "queued", "artifacts": []},
+    "S1": {"state": "queued", "artifacts": []},
+    "S2": {"state": "queued", "artifacts": []},
+    "S3": {"state": "queued", "artifacts": []},
+    "S4": {"state": "queued", "artifacts": []},
+    "S5": {"state": "queued", "artifacts": []},
+    "S6": {"state": "queued", "artifacts": []},
+    "S7": {"state": "queued", "artifacts": []},
+    "S8": {"state": "queued", "artifacts": []},
+    "S9": {"state": "queued", "artifacts": []}
+  },
+  "observations": [],
+  "claims": [],
+  "decisions": []
+}

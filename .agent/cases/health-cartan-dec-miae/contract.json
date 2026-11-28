@@ -1,0 +1,341 @@
+{
+  "case_id": "health_cartan_dec_miae",
+  "title": "Cartan moving frames and discrete exterior calculus for self-supervised protein structure representation",
+  "domain": "health / structural biology",
+  "source_page": "https://scientist-two.github.io/#applications/Health%20(Cartan-DEC-MiAE)",
+  "accessed": "2026-11-28",
+  "citation_status": "ScientistTwo gallery manuscript. The PDF header says the text is under review for ICLR 2025 and the authors are anonymous. Cite the gallery PDF. Do not cite it as an accepted ICLR paper.",
+  "firewall": {
+    "dissertation_paths": [
+      "draft/dissertation_wku.tex",
+      "draft/main.tex",
+      "draft/dissertation.tex"
+    ],
+    "output_root": "build/cartan-dec-miae",
+    "frame_meaning": "E_i is the residue frame in SO(3) built from backbone N, C-alpha, and C. This case leaves the dissertation's Lie-point symmetries and Saint-Venant-Exner systems on their own pages."
+  },
+  "sources": [
+    {
+      "id": "gallery-pdf",
+      "title": "Health (Cartan-DEC-MiAE) gallery PDF",
+      "url": "https://github.com/scientist-two/scientist-two.github.io/blob/aaf25a7f5eca646bcc45c5dea1d885ff8bf6bf22/generated-papers/applications/Health_Cartan-DEC-MiAE.pdf",
+      "commit": "aaf25a7f5eca646bcc45c5dea1d885ff8bf6bf22",
+      "git_blob_sha1": "9f44ab8bac7702a62757f01d715b74c2566a92f8",
+      "sha256": "f172a003aec8f1b75c4a1ae5599c1598acf6a7b2cceab8396cfb5659c8b81418",
+      "pages": 11,
+      "pdf_creation_utc": "2026-08-17T14:11:18Z"
+    },
+    {
+      "id": "scientisttwo",
+      "title": "ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI",
+      "url": "https://arxiv.org/abs/2609.19644",
+      "project": "https://scientist-two.github.io/"
+    },
+    {
+      "id": "independent-impl",
+      "title": "l1Ha/cartan-dec-miae",
+      "url": "https://github.com/l1Ha/cartan-dec-miae",
+      "commit": "720cea1217423968a70ac9046558f60a11ed1af6",
+      "role": "Independent reimplementation. Method notes document fidelity limits."
+    },
+    {
+      "id": "scientist3-health",
+      "title": "l1Ha/scientist3 health_cartan_dec_miae case",
+      "url": "https://github.com/l1Ha/scientist3",
+      "commit": "c930f843f9510a048749695943c0c0d20a403f02",
+      "role": "Smoke-scale closed loop used as the executable budget in the smoke tier."
+    },
+    {
+      "id": "tedbench-code",
+      "title": "BorgwardtLab/TEDBench",
+      "url": "https://github.com/BorgwardtLab/TEDBench",
+      "commit": "ad3c208db13e5e0e124719300ec19fffab4c33e1",
+      "role": "Upstream data and MiAE ecosystem named by the independent implementation. License was not re-audited here."
+    }
+  ],
+  "tiers": {
+    "quote": {
+      "measures": "nothing",
+      "primary_metric": null,
+      "rule": "Quote printed gallery numbers with observation kind quotation. A quote-tier run writes a reading memo and does not train."
+    },
+    "smoke": {
+      "measures": "synthetic helix, sheet, coil, and globule backbones of 60 to 90 residues",
+      "primary_metric": "reconstruction.integrated_position_rmse",
+      "primary_direction": "min",
+      "secondary_metrics": [
+        "reconstruction.position_rmse",
+        "probe.accuracy"
+      ],
+      "forbidden_primary": ["probe.accuracy"],
+      "rule": "Probe accuracy saturates on these four families. Integrated position RMSE is the endpoint that reads the transport mechanism."
+    },
+    "paper": {
+      "measures": "TEDBench-train, 369740 structures; TEDBench test, 46218 structures; external CATH 4.4, 27638 structures; 965 CATH-T classes",
+      "primary_metric": "macro_f1",
+      "primary_direction": "max",
+      "secondary_metrics": ["top1_accuracy"],
+      "splits_required": ["tedbench_test", "cath44"],
+      "matched_factors": ["encoder", "data", "steps", "probe"],
+      "rule": "The paper's scientific claim is the matched from-scratch delta against vanilla MAE. Absolute accuracy below the public MiAE-B row is the printed comparison, and it stays in the ledger."
+    }
+  },
+  "equations": [
+    {
+      "id": "eq-frame",
+      "source": "gallery PDF §3.1 and independent method notes",
+      "statement": "t_i = C-alpha_i. e1 = normalize(C_i - C-alpha_i), e2 = normalize((N_i - C-alpha_i) - ((N_i - C-alpha_i) · e1) e1), e3 = e1 × e2, E_i = [e1 e2 e3] in SO(3)."
+    },
+    {
+      "id": "eq-connection",
+      "source": "gallery PDF equation (1)",
+      "statement": "omega_ij = log(E_i^T E_j) in so(3). theta_i = E_i^T (t_j - t_i) is the local soldering form on a contact edge."
+    },
+    {
+      "id": "eq-curvature",
+      "source": "gallery PDF equation (2)",
+      "statement": "For a contact triangle f = (i, j, k), Omega_f = omega_ij + omega_jk + omega_ki + (1/2)[omega_ij, omega_jk] in so(3). In the rotation-vector representation the bracket is the cross product."
+    },
+    {
+      "id": "eq-heat",
+      "source": "gallery PDF equation (3) and independent method notes",
+      "statement": "Attention logits add W_conn * RBF(D_DEC(i, j)) and W_curv * Tr(Omega_i Omega_j^T). D_DEC(i, j) = ||(exp(-tau L_1))_ij||_F, with L_1 the normalised connection Laplacian."
+    },
+    {
+      "id": "eq-integration",
+      "source": "gallery PDF equation (4)",
+      "statement": "E_hat_m = E_a exp(sum_{e in path(a -> m)} omega_hat_e). t_hat_m = t_a + sum_{e = (u, v) in path} E_hat_u theta_hat_e. The anchor a(m) is a visible residue."
+    },
+    {
+      "id": "eq-loss",
+      "source": "gallery PDF equation (5)",
+      "statement": "L = L_theta + L_pos + L_rot + L_omega + L_Omega, summed on masked residues. The independent implementation also exposes a separate integration weight. A run names which list it trains."
+    }
+  ],
+  "locked_readings": [
+    {
+      "id": "N1",
+      "statement": "On the gallery fold-classification endpoint, contiguous span masking at mask ratio 0.50 is the strongest masking condition in Table 6. Hard holonomy top-k is the weakest holonomy variant. Soft holonomy sampling moves toward uniform masking as temperature rises and stays at or below that uniform limit."
+    },
+    {
+      "id": "N2",
+      "statement": "In gallery Table 5, multi-hop MST integration has masked-residue C-alpha RMSD 2.61 angstrom and CATH top-1 41.95. K-shortest integration has RMSD 3.82 angstrom and CATH top-1 46.40. Lower reconstruction RMSD is a separate observation from higher transfer."
+    },
+    {
+      "id": "N3",
+      "statement": "In gallery Table 3 the curvature-only attention bias changes top-1 by -0.33 on TEDBench and -2.15 on CATH relative to the no-bias encoder. The combined heat-plus-curvature bias changes top-1 by +5.75 and +6.33."
+    },
+    {
+      "id": "N4",
+      "statement": "The from-scratch curvature-biased encoder in Table 1 prints 60.18 / 39.30 on TEDBench and 64.12 / 37.93 on CATH. The same table's public MiAE-B probe row prints 74.20 / 57.79 and 86.09 / 66.73. The matched delta against vanilla MAE is the paper claim."
+    },
+    {
+      "id": "N5",
+      "statement": "On frame-exact coordinates the group holonomy of a closed frame loop is the identity, as recorded in gallery Appendix A and in the independent method notes. The operative defect used for masking and curvature features is the curvature energy built from Omega, which keeps the non-abelian bracket term."
+    }
+  ],
+  "open_readings": [
+    {
+      "id": "O1",
+      "statement": "Table 3 prints mean attention entropy 3.61 for the no-bias encoder and 3.04 for the combined bias. Section 4.3 says the no-bias encoder collapses to low entropy in deep layers and that the combined bias maintains 3.04 nats. A mechanism claim about collapse needs a per-layer entropy observation. Until that observation exists, the accuracy deltas in Table 3 stay quotation claims."
+    },
+    {
+      "id": "O2",
+      "statement": "Section 3.2 defines a per-residue holonomy defect by summing ||H(gamma) - I||. Appendix A states that this group holonomy vanishes on frame-exact coordinates. Implementations use ||Omega_i|| as the defect score and say so in the method section."
+    },
+    {
+      "id": "O3",
+      "statement": "Several printed deltas differ by 0.01 from the difference of the printed cells. CATH macro F1 for the DEC objective is printed as +11.03 while 34.94 - 23.90 = 11.04. The holonomy-masking CATH top-1 gain is printed as +13.36 while 64.45 - 51.10 = 13.35. MST versus 1-hop is printed as -3.12 while 41.95 - 45.08 = -3.13. K-shortest versus 1-hop is printed as +1.33 while 46.40 - 45.08 = 1.32. The 6 angstrom graph versus 8 angstrom is printed as -2.12 while 42.54 - 44.67 = -2.13. Quote the cell and the printed delta as separate observations."
+    },
+    {
+      "id": "O4",
+      "statement": "Appendix A runs the component ablations for 10 epochs on 50K and 20K subsets. Table 1 uses 5 epochs on 369740 training structures. Absolute accuracies from Tables 4 to 6 stay inside their own protocol."
+    }
+  ],
+  "quoted_table1": [
+    {"condition": "random_init", "ted_acc": 40.13, "ted_f1": 9.69, "cath_acc": 30.49, "cath_f1": 10.24},
+    {"condition": "vanilla_mae", "ted_acc": 56.91, "ted_f1": 32.23, "cath_acc": 51.10, "cath_f1": 23.90},
+    {"condition": "cartan_dec", "ted_acc": 59.30, "ted_f1": 37.73, "cath_acc": 61.79, "cath_f1": 34.94},
+    {"condition": "curvature_attention", "ted_acc": 60.18, "ted_f1": 39.30, "cath_acc": 64.12, "cath_f1": 37.93},
+    {"condition": "holonomy_masking", "ted_acc": 57.58, "ted_f1": 30.13, "cath_acc": 64.45, "cath_f1": 34.18},
+    {"condition": "miae_b_probe", "ted_acc": 74.20, "ted_f1": 57.79, "cath_acc": 86.09, "cath_f1": 66.73},
+    {"condition": "miae_b_published", "ted_acc": 72.94, "ted_f1": 58.52, "cath_acc": 85.31, "cath_f1": 66.18}
+  ],
+  "quoted_deltas_versus_vanilla": [
+    {"condition": "cartan_dec", "ted_acc": 2.39, "ted_f1": 5.50, "cath_acc": 10.69, "cath_f1": 11.03},
+    {"condition": "curvature_attention", "ted_acc": 3.27, "ted_f1": 7.07, "cath_acc": 13.02, "cath_f1": 14.03}
+  ],
+  "quoted_table3_attention": [
+    {"bias": "none", "delta_ted_acc": null, "delta_cath_acc": null, "entropy": 3.61},
+    {"bias": "rbf_distance", "delta_ted_acc": 1.88, "delta_cath_acc": 3.43, "entropy": 2.67},
+    {"bias": "heat_tau_0.5", "delta_ted_acc": 1.65, "delta_cath_acc": 2.08, "entropy": 2.69},
+    {"bias": "curvature_only", "delta_ted_acc": -0.33, "delta_cath_acc": -2.15, "entropy": 3.48},
+    {"bias": "combined", "delta_ted_acc": 5.75, "delta_cath_acc": 6.33, "entropy": 3.04}
+  ],
+  "quoted_table5_decoder": [
+    {"path": "direct", "cath_acc": 45.82, "cath_f1": 11.04, "rmsd_angstrom": 18.70},
+    {"path": "one_hop", "cath_acc": 45.08, "cath_f1": 9.93, "rmsd_angstrom": 4.49},
+    {"path": "mst", "cath_acc": 41.95, "cath_f1": 8.02, "rmsd_angstrom": 2.61},
+    {"path": "k_shortest", "cath_acc": 46.40, "cath_f1": 10.87, "rmsd_angstrom": 3.82}
+  ],
+  "quoted_table6_masking_highlights": [
+    {"condition": "uniform_p0.50", "mask_p": 0.50, "span": 1.98, "ted_acc": 45.37, "ted_f1": 10.46, "cath_acc": 46.67, "cath_f1": 11.34},
+    {"condition": "span_p0.50", "mask_p": 0.50, "span": 9.54, "ted_acc": 47.41, "ted_f1": 11.22, "cath_acc": 50.56, "cath_f1": 13.44},
+    {"condition": "hard_holonomy", "mask_p": 0.50, "span": 3.13, "ted_acc": 38.60, "ted_f1": 5.52, "cath_acc": 38.47, "cath_f1": 6.14},
+    {"condition": "soft_holonomy_T2", "mask_p": 0.50, "span": 2.09, "ted_acc": 43.84, "ted_f1": 8.42, "cath_acc": 44.67, "cath_f1": 9.26}
+  ],
+  "smoke_budget": {
+    "seeds": [0, 1],
+    "subset_samples": 96,
+    "full_samples": 160,
+    "test_samples": 64,
+    "subset_epochs": 8,
+    "full_epochs": 15,
+    "d_model": 128,
+    "depth": 4,
+    "decoder_dim": 128,
+    "decoder_depth": 2,
+    "min_length": 60,
+    "max_synthetic_length": 90,
+    "max_exact_heat_residues": 96,
+    "probe_epochs": 20,
+    "top_ideas": 3,
+    "max_screening_rounds": 1,
+    "max_evo_rounds": 1,
+    "max_review_rounds": 2,
+    "review_threshold": 9.0,
+    "min_relative_gain": 0.05,
+    "ablation_min_gain": 0.03,
+    "ablation_clean_fraction": 0.75,
+    "timeout_seconds": 900,
+    "mask_seed": 1234,
+    "test_seed_offset": 10000
+  },
+  "protected_paths": [
+    "code/cartan_dec/data.py",
+    "code/cartan_dec/geometry_eval.py",
+    "code/cartan_dec/masking.py",
+    "code/cartan_dec/probe.py",
+    "problem.md"
+  ],
+  "baseline": {
+    "id": "B0",
+    "name": "vanilla masked backbone autoencoder",
+    "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --no-curvature-bias --no-heat-bias --lambda-omega 0 --lambda-curvature 0 --lambda-integration 0 --out {out}"
+  },
+  "limitations": [
+    {
+      "id": "L1",
+      "mechanism": true,
+      "text": "A vanilla masked backbone autoencoder supervises per-residue coordinate, rotation, and local-frame heads. The gap between direct position RMSE and integrated position RMSE on held-out chains is the observable of inconsistent transport.",
+      "test": "Compare direct-position RMSE with integrated-position RMSE with and without the integration objective."
+    },
+    {
+      "id": "L2",
+      "mechanism": true,
+      "text": "Equal weights across the Cartan terms let local reconstruction dominate the gradient that reaches the integrated endpoint.",
+      "test": "Raise the integration and connection-form weights by 4 and compare integrated position RMSE with the equal-weight model."
+    },
+    {
+      "id": "L3",
+      "mechanism": true,
+      "text": "Uniform span masking samples regions independently of curvature energy. This is a smoke-tier hypothesis. Gallery locked reading N1 already records that holonomy-targeted masking loses to contiguous spans on fold-classification transfer.",
+      "test": "At smoke scale, compare geometry masking with span masking on integrated position RMSE. A smoke win on RMSE stays a smoke observation and leaves N1 in force on the paper endpoint."
+    },
+    {
+      "id": "L4",
+      "mechanism": false,
+      "text": "Development chains have 60 to 90 residues. Length extrapolation and a second mask distribution are untested inside the smoke budget.",
+      "test": "Run the two supplementary commands after a model is selected."
+    }
+  ],
+  "ideas": [
+    {
+      "id": "I1",
+      "name": "full Cartan-DEC self-supervision",
+      "targets": ["L1"],
+      "risk": "Geometry biases can be weak at smoke width. The transport losses remain the part this idea is entitled to claim.",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --out {out}"
+    },
+    {
+      "id": "I2",
+      "name": "transport-weighted training",
+      "targets": ["L2"],
+      "risk": "A 4x transport weight can raise local reconstruction error. Screening rejects that regression.",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 4 --out {out}"
+    },
+    {
+      "id": "I3",
+      "name": "curvature-guided masking",
+      "targets": ["L3"],
+      "risk": "Gallery reading N1 says defect-guided masking loses on transfer. This idea may be run only as a smoke RMSE comparison, with N1 left locked.",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --mask-strategy geometry --out {out}"
+    }
+  ],
+  "evolved_ideas": [
+    {
+      "id": "I4",
+      "name": "curvature-stabilised transport",
+      "targets": ["L1", "L2"],
+      "parent": "I2",
+      "risk": "Extra curvature weight can over-constrain coil regions. That shows up as a worse primary RMSE.",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 4 --lambda-curvature 2 --out {out}"
+    }
+  ],
+  "ablations": [
+    {
+      "id": "A1",
+      "component": "transport integration loss",
+      "direction": "drop",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-omega 4 --lambda-integration 0 --out {out}"
+    },
+    {
+      "id": "A2",
+      "component": "connection-form supervision",
+      "direction": "drop",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 0 --out {out}"
+    },
+    {
+      "id": "A3",
+      "component": "curvature supervision",
+      "direction": "drop",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 4 --lambda-curvature 0 --out {out}"
+    },
+    {
+      "id": "A4",
+      "component": "transport loss rebalancing",
+      "direction": "drop",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 1 --lambda-omega 1 --lambda-curvature 1 --out {out}"
+    }
+  ],
+  "supplementary": [
+    {
+      "id": "R1",
+      "question": "Does the selected model keep its primary-metric gain on chains of 80 to 140 residues?",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 80 --max-synthetic-length 140 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 4 --out {out}"
+    },
+    {
+      "id": "R2",
+      "question": "Does the selected gain remain under random masking at the same mask ratio?",
+      "command": "{python} -m cartan_dec.train --dataset synthetic --samples {samples} --test-samples {test_samples} --epochs {epochs} --d-model 128 --depth 4 --decoder-dim 128 --decoder-depth 2 --min-length 60 --max-synthetic-length 90 --max-exact-heat-residues 96 --probe-epochs 20 --seed {seed} --lambda-integration 4 --lambda-omega 4 --mask-strategy random --out {out}"
+    }
+  ],
+  "stages": [
+    {"id": "S0", "name": "Contract", "gate": "contract hash stored, tier chosen, compute authorization stored"},
+    {"id": "S1", "name": "Limitations", "gate": "each limitation has a test aimed at one endpoint"},
+    {"id": "S2", "name": "Ideation", "gate": "each idea targets limitation ids and names one command template"},
+    {"id": "S3", "name": "Subset screening", "gate": "promote only through the primary metric and agreeing seeds"},
+    {"id": "S4", "name": "Full grid", "gate": "one evolved idea at most, selected by the primary metric"},
+    {"id": "S5", "name": "Ablation", "gate": "one component removed per run; clean requires the contract fraction"},
+    {"id": "S6", "name": "Manuscript", "gate": "every decimal in the draft is an observation value"},
+    {"id": "S7", "name": "Review and rebuttal", "gate": "a results objection is closed only by a supplementary run"},
+    {"id": "S8", "name": "Meta-review", "gate": "accept only at or above review_threshold with an ablation status"},
+    {"id": "S9", "name": "Integrity", "gate": "score re-execution, specification compliance, references, method-code alignment"}
+  ],
+  "integrity_checks": [
+    {"id": "score", "pass": "Re-running the selected command reproduces every reported number in the manuscript."},
+    {"id": "specification", "pass": "Protected paths are unchanged and the run stayed inside its tier budget."},
+    {"id": "references", "pass": "Every citation resolves to an entry in sources or to a reference checked in the run ledger."},
+    {"id": "method_code", "pass": "The method section names the trained loss list, mask strategy, anchor path, and the holonomy convention from locked reading N5."}
+  ]
+}
